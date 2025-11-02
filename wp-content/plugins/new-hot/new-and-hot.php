@@ -263,71 +263,148 @@ function newandhot_get($key = 'newAndHot-1', $size = 'full')
         return '';
     return PL_New_And_Hot::get_url_by_key($key, $size);
 }
-// Elementor dynamic tag: New & Hot Image
+
+// === Elementor Dynamic Tags: New & Hot (Image + URL) ===
 add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
-    if (!class_exists('\Elementor\Core\DynamicTags\Tag'))
+    // Ensure Elementor dynamic tag base exists (prevents fatal if Elementor/Pro is inactive or not loaded yet)
+    if (!class_exists('\Elementor\Core\DynamicTags\Tag') || !class_exists('\Elementor\Modules\DynamicTags\Module')) {
         return;
+    }
 
-    class PL_NewAndHot_Image_Tag extends \Elementor\Core\DynamicTags\Tag
-    {
-        public function get_name()
+    // ----- IMAGE TAG -----
+    if (!class_exists('PL_NewAndHot_Image_Tag')) {
+        class PL_NewAndHot_Image_Tag extends \Elementor\Core\DynamicTags\Tag
         {
-            return 'pl_newandhot_image';
-        }
-        public function get_title()
-        {
-            return __('New & Hot Image', 'new-and-hot');
-        }
-        public function get_group()
-        {
-            return 'site';
-        }
-        public function get_categories()
-        {
-            return [\Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY];
-        }
+            public function get_name()
+            {
+                return 'pl_newandhot_image';
+            }
+            public function get_title()
+            {
+                return __('New & Hot Image', 'new-and-hot');
+            }
+            public function get_group()
+            {
+                return 'site';
+            }
+            public function get_categories()
+            {
+                return [\Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY];
+            }
 
-        protected function register_controls()
-        {
-            $this->add_control('key', [
-                'label' => __('Select Image', 'new-and-hot'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    'newAndHot-1' => 'New & Hot 1',
-                    'newAndHot-2' => 'New & Hot 2',
-                    'newAndHot-3' => 'New & Hot 3',
-                    'newAndHot-4' => 'New & Hot 4',
-                ],
-                'default' => 'newAndHot-1',
-            ]);
-            $this->add_control('size', [
-                'label' => __('Size', 'new-and-hot'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    'thumbnail' => 'Thumbnail',
-                    'medium' => 'Medium',
-                    'large' => 'Large',
-                    'full' => 'Full',
-                ],
-                'default' => 'large',
-            ]);
-        }
+            protected function register_controls()
+            {
+                $this->add_control('key', [
+                    'label' => __('Select Image', 'new-and-hot'),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'options' => [
+                        'newAndHot-1' => 'New & Hot 1',
+                        'newAndHot-2' => 'New & Hot 2',
+                        'newAndHot-3' => 'New & Hot 3',
+                        'newAndHot-4' => 'New & Hot 4',
+                    ],
+                    'default' => 'newAndHot-1',
+                ]);
+                $this->add_control('size', [
+                    'label' => __('Size', 'new-and-hot'),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'options' => [
+                        'thumbnail' => 'Thumbnail',
+                        'medium' => 'Medium',
+                        'large' => 'Large',
+                        'full' => 'Full',
+                    ],
+                    'default' => 'large',
+                ]);
+            }
 
-        public function render()
-        {
-            $key = $this->get_settings('key');
-            $size = $this->get_settings('size');
-            $url = newandhot_get($key, $size);
+            public function render()
+            {
+                // Defensive reads
+                $key = $this->get_settings('key') ?: 'newAndHot-1';
+                $size = $this->get_settings('size') ?: 'full';
 
-            if ($url) {
+                // Ensure helper exists (prevents fatal if plugin class not loaded yet)
+                if (!function_exists('newandhot_get')) {
+                    echo wp_json_encode([]); // return empty so Elementor doesn't choke
+                    return;
+                }
+
+                $url = newandhot_get($key, $size);
+                if (empty($url)) {
+                    echo wp_json_encode([]); // no image set yet
+                    return;
+                }
+
+                // Elementor expects an image array-ish JSON for IMAGE_CATEGORY tags
                 echo wp_json_encode([
-                    'id' => 0,            // Elementor wants an array-like image object
+                    'id' => 0,                   // attachment ID not needed; URL is enough
                     'url' => esc_url_raw($url),
                     'size' => $size,
                 ]);
             }
         }
     }
-
     $dynamic_tags->register_tag('PL_NewAndHot_Image_Tag');
-});
+
+    // ----- URL TAG (optional but handy) -----
+    if (!class_exists('PL_NewAndHot_URL_Tag')) {
+        class PL_NewAndHot_URL_Tag extends \Elementor\Core\DynamicTags\Tag
+        {
+            public function get_name()
+            {
+                return 'pl_newandhot_url';
+            }
+            public function get_title()
+            {
+                return __('New & Hot Image URL', 'new-and-hot');
+            }
+            public function get_group()
+            {
+                return 'site';
+            }
+            public function get_categories()
+            {
+                return [\Elementor\Modules\DynamicTags\Module::URL_CATEGORY];
+            }
+
+            protected function register_controls()
+            {
+                $this->add_control('key', [
+                    'label' => __('Select Image', 'new-and-hot'),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'options' => [
+                        'newAndHot-1' => 'New & Hot 1',
+                        'newAndHot-2' => 'New & Hot 2',
+                        'newAndHot-3' => 'New & Hot 3',
+                        'newAndHot-4' => 'New & Hot 4',
+                    ],
+                    'default' => 'newAndHot-1',
+                ]);
+                $this->add_control('size', [
+                    'label' => __('Size', 'new-and-hot'),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'options' => [
+                        'thumbnail' => 'Thumbnail',
+                        'medium' => 'Medium',
+                        'large' => 'Large',
+                        'full' => 'Full',
+                    ],
+                    'default' => 'full',
+                ]);
+            }
+
+            public function render()
+            {
+                $key = $this->get_settings('key') ?: 'newAndHot-1';
+                $size = $this->get_settings('size') ?: 'full';
+                if (!function_exists('newandhot_get')) {
+                    echo '';
+                    return;
+                }
+                echo esc_url(newandhot_get($key, $size));
+            }
+        }
+    }
+    $dynamic_tags->register_tag('PL_NewAndHot_URL_Tag');
+}, 20); // priority ensures Elementor is ready
