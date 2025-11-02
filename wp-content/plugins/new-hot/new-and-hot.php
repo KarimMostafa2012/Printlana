@@ -323,22 +323,31 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 $key = $this->get_settings('key') ?: 'newAndHot-1';
                 $size = $this->get_settings('size') ?: 'full';
 
-                if (!function_exists('newandhot_get')) {
+                if (!function_exists('newandhot_get'))
                     return [];
-                }
+
+                // get the stored attachment ID
+                $map = [
+                    'newAndHot-1' => 'newandhot_1',
+                    'newAndHot-2' => 'newandhot_2',
+                    'newAndHot-3' => 'newandhot_3',
+                    'newAndHot-4' => 'newandhot_4',
+                ];
+                $option = isset($map[$key]) ? $map[$key] : 'newandhot_1';
+                $id = (int) get_option($option, 0);
 
                 $url = newandhot_get($key, $size);
-                if (empty($url)) {
+                if (empty($url))
                     return [];
-                }
 
-                // Return a real array (not JSON)
+                // ✅ Return real ID so Elementor treats it as an image
                 return [
-                    'id' => 0,
+                    'id' => $id,
                     'url' => esc_url_raw($url),
                     'size' => $size,
                 ];
             }
+
 
         }
     }
