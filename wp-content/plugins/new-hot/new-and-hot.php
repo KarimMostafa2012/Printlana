@@ -279,16 +279,20 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
             {
                 return 'pl_newandhot_image';
             }
+
             public function get_title()
             {
                 return __('New & Hot Image', 'new-and-hot');
             }
+
             public function get_group()
             {
                 return 'site';
             }
+
             public function get_categories()
             {
+                // IMAGE_CATEGORY is for <img> and backgrounds
                 return [\Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY];
             }
 
@@ -305,8 +309,9 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                     ],
                     'default' => 'newAndHot-1',
                 ]);
+
                 $this->add_control('size', [
-                    'label' => __('Size', 'new-and-hot'),
+                    'label' => __('Image Size', 'new-and-hot'),
                     'type' => \Elementor\Controls_Manager::SELECT,
                     'options' => [
                         'thumbnail' => 'Thumbnail',
@@ -323,35 +328,47 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 $key = $this->get_settings('key') ?: 'newAndHot-1';
                 $size = $this->get_settings('size') ?: 'full';
 
-                if (!function_exists('newandhot_get'))
+                if (!function_exists('newandhot_get')) {
                     return [];
+                }
 
+                // Map key -> option name
                 $map = [
                     'newAndHot-1' => 'newandhot_1',
                     'newAndHot-2' => 'newandhot_2',
                     'newAndHot-3' => 'newandhot_3',
                     'newAndHot-4' => 'newandhot_4',
                 ];
-                $option = isset($map[$key]) ? $map[$key] : 'newandhot_1';
-                $id = (int) get_option($option, 0);
+                $opt = $map[$key] ?? 'newandhot_1';
+                $id = (int) get_option($opt, 0);
 
-                // Elementor sometimes needs the full image object; try wp_get_attachment_image_src
+                if (!$id) {
+                    return [];
+                }
+
                 $src = wp_get_attachment_image_src($id, $size);
                 if (!$src || empty($src[0])) {
                     return [];
                 }
 
+                // ✅ Return full object — Elementor expects this exact structure
                 return [
                     'id' => $id,
                     'url' => esc_url_raw($src[0]),
+                    'sizes' => [
+                        $size => [
+                            'url' => esc_url_raw($src[0]),
+                            'width' => isset($src[1]) ? (int) $src[1] : null,
+                            'height' => isset($src[2]) ? (int) $src[2] : null,
+                            'id' => $id,
+                        ],
+                    ],
                     'size' => $size,
                 ];
             }
-
-
-
         }
     }
+
     $dynamic_tags->register_tag('PL_NewAndHot_Image_Tag');
 
     // ----- URL TAG (optional but handy) -----
