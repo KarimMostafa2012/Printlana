@@ -369,6 +369,7 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
         }
     }
 
+
     $dynamic_tags->register_tag('PL_NewAndHot_Image_Tag');
 
     // ----- URL TAG (optional but handy) -----
