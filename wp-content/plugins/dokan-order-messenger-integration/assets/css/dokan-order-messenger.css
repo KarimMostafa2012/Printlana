@@ -1,0 +1,113 @@
+.dokan-order-messenger {
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--Stroke-Blue, #C0D2FF);
+    background: #FFF;
+}
+
+.dokan-order-messenger h3 {
+    margin-top: 0;
+    font-size: 18px;
+    display: none;
+}
+
+.dokan-order-messenger .order-messenger {
+    padding: 15px;
+}
+
+.order-message--admin .order-message__content, .order-message.order-message--scheduled_message .order-message__content{
+    border-radius: 5px;
+    background: rgba(192, 210, 255, 0.50);
+    width: fit-content;
+}
+
+.order-message--admin .order-message__content::after, .order-message.order-message--scheduled_message .order-message__content::after {
+    display: none;
+    content: ;
+}
+
+.order-message .order-message--customer{
+    border-radius: 5px;
+    background: rgba(229, 229, 229, 0.20);
+}
+
+.order-message .order-message--customer::after {
+    display: none;
+    content: ;
+}
+
+.dokan-order-messenger .order-messenger__messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.dokan-order-messenger .order-messenger__form {
+    margin-top: 15px;
+
+    hr{
+        display: none;
+    }
+}
+
+
+.dokan-order-messenger .order-messenger__form-input textarea {
+    width: 100%;
+    resize: vertical;
+    border-radius: 5px;
+    border: 1px solid var(--Grey-Main, #808089);
+    height: 101px;
+}
+
+.dokan-order-messenger .order-messenger__footer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .button{
+        width: 200px;
+        height: 48px;
+        padding: 8px 16px;
+        border-radius: 100px;
+    }
+}
+
+.dokan-order-messenger .order-messenger-attachment {
+    margin-right: 10px;
+}
+
+.order-messenger__error{
+    display: none!important;
+}
+
+.dokan-order-messenger .dokan-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dokan-order-messenger .dokan-table th,
+.dokan-order-messenger .dokan-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.dokan-order-messenger .dokan-btn {
+    background-color: #0073aa;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.dokan-order-messenger .dokan-btn:hover {
+    background-color: #005177;
+}
+
+.dokan-order-messenger .om-unread-messages-count {
+    background-color: #d54e21;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 12px;
+}

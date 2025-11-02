@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "title": "Woo Min Control Demo",
+  "description": "Live preview for the Min Max Control plugin.",
+  "themes": [
+    {
+      "slug": "storefront"
+    }
+  ],
+  "plugins": [
+    {
+      "slug": "woocommerce"
+    },
+    {
+      "slug": "woo-min-max-quantity-step-control-single"
+    }
+  ],
+  "site": {
+    "options": {
+      "blogname": "Min-Max Control Test Site"
+    }
+  },
+  "content": {
+    "posts": [
+      {
+        "post_type": "product",
+        "post_title": "Product 1",
+        "post_status": "publish",
+        "post_content": "Sample product 1 with min/max step.",
+        "meta_input": {
+          "_regular_price": "50",
+          "_price": "50",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+1"
+      },
+      {
+        "post_type": "product",
+        "post_title": "Product 2",
+        "post_status": "publish",
+        "post_content": "Sample product 2 with min/max step.",
+        "meta_input": {
+          "_regular_price": "75",
+          "_price": "75",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+2"
+      },
+      {
+        "post_type": "product",
+        "post_title": "Product 3",
+        "post_status": "publish",
+        "post_content": "Sample product 3 with min/max step.",
+        "meta_input": {
+          "_regular_price": "100",
+          "_price": "100",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+3"
+      },
+      {
+        "post_type": "product",
+        "post_title": "Product 4",
+        "post_status": "publish",
+        "post_content": "Sample product 4 with min/max step.",
+        "meta_input": {
+          "_regular_price": "120",
+          "_price": "120",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+4"
+      },
+      {
+        "post_type": "product",
+        "post_title": "Product 5",
+        "post_status": "publish",
+        "post_content": "Sample product 5 with min/max step.",
+        "meta_input": {
+          "_regular_price": "150",
+          "_price": "150",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+5"
+      },
+      {
+        "post_type": "product",
+        "post_title": "Product 6",
+        "post_status": "publish",
+        "post_content": "Sample product 6 with min/max step.",
+        "meta_input": {
+          "_regular_price": "200",
+          "_price": "200",
+          "_stock_status": "instock",
+          "_manage_stock": "yes",
+          "_stock": "100",
+          "_wcmmq_min_quantity": "5",
+          "_wcmmq_max_quantity": "100",
+          "_wcmmq_product_step": "5"
+        },
+        "featured_media_url": "https://via.placeholder.com/600x600.png?text=Product+6"
+      }
+    ]
+  }
+}

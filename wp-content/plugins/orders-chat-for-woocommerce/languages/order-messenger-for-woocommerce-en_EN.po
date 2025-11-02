@@ -1,0 +1,386 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-02-11 23:36+0200\n"
+"PO-Revision-Date: 2021-02-11 23:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_n;_x;esc_attr_e;esc_html_e;esc_html__;esc_attr__;"
+"_e\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: views\n"
+
+#: src/API/REST/MessagesREST.php:130 src/API/REST/MessagesREST.php:190
+msgid "You don't have enough permission to send a message to this order."
+msgstr ""
+
+#: src/API/REST/MessagesREST.php:156 src/API/REST/MessagesREST.php:199
+#: src/API/REST/MessagesREST.php:255
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: src/API/REST/MessagesREST.php:236
+msgid "You don't have enough permission to send a message."
+msgstr ""
+
+#: src/API/REST/MessagesREST.php:243
+msgid "Attachment does not exists."
+msgstr ""
+
+#: src/Admin/Admin.php:50
+msgid "Orders"
+msgstr ""
+
+#: src/Admin/ModalOrderMessenger.php:30 src/Frontend/AccountManager.php:36
+msgid "Messenger"
+msgstr ""
+
+#: src/Admin/ModalOrderMessenger.php:61
+#: views/frontend/my-account/dialogs.php:68
+msgid "View"
+msgstr ""
+
+#: src/Email/AdminMessagesNotificationEmail.php:28
+msgid "Admin messenger notification"
+msgstr ""
+
+#: src/Email/AdminMessagesNotificationEmail.php:29
+msgid "The email is sent when you have new messages from customers"
+msgstr ""
+
+#: src/Email/AdminMessagesNotificationEmail.php:53
+#: src/Email/AdminMessagesNotificationEmail.php:63
+msgid "You have new messages related to order #{order_number}"
+msgstr ""
+
+#: src/Email/AdminMessagesNotificationEmail.php:148
+#: src/Email/CustomerMessagesNotification.php:146
+msgid "Thanks for using {site_url}!"
+msgstr ""
+
+#: src/Email/CustomerMessagesNotification.php:23
+msgid "Customer messenger notification"
+msgstr ""
+
+#: src/Email/CustomerMessagesNotification.php:24
+msgid "The email is sent to customers when they have new messages from you."
+msgstr ""
+
+#: src/Email/CustomerMessagesNotification.php:47
+#: src/Email/CustomerMessagesNotification.php:57
+msgid "You have new messages at {site_title}"
+msgstr ""
+
+#: src/Entity/Message.php:274
+msgid "User"
+msgstr ""
+
+#: src/Entity/Message.php:276
+msgid "Admin"
+msgstr ""
+
+#: src/Frontend/AccountManager.php:26 src/Frontend/AccountManager.php:168
+msgid "Messages"
+msgstr ""
+
+#: src/Frontend/AccountManager.php:53
+msgid "You have no enough access"
+msgstr ""
+
+#: src/Frontend/AccountManager.php:55 src/Frontend/AccountManager.php:82
+#: src/Frontend/AccountManager.php:102
+msgid "My account"
+msgstr ""
+
+#: src/Frontend/AccountManager.php:80
+msgid "Invalid order."
+msgstr ""
+
+#: src/Frontend/AccountManager.php:100
+msgid "You don't have any messages yet."
+msgstr ""
+
+#: src/ProductManager.php:45
+msgid "Send purchasing message"
+msgstr ""
+
+#: src/ProductManager.php:121 src/Settings/Settings.php:153
+msgid "Order Messenger"
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:52
+msgid "Allowed file types"
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:72
+msgid "Maximum allowed file size"
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:87
+msgid ""
+"Please note that the largest filesize that can be uploaded to your WordPress "
+"installation is"
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:89
+msgid "Contact your hosting provider to increase this value if needed."
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:137
+msgid "Allow sending files"
+msgstr ""
+
+#: src/Settings/AllowSendingFilesOption.php:141
+msgid "Allow users to attach a file."
+msgstr ""
+
+#: src/Settings/PurchasingMessageOption.php:54
+msgid "Send message when"
+msgstr ""
+
+#: src/Settings/PurchasingMessageOption.php:80
+msgid "Order placed"
+msgstr ""
+
+#: src/Settings/PurchasingMessageOption.php:81
+msgid "Payment success"
+msgstr ""
+
+#: src/Settings/PurchasingMessageOption.php:87
+#: views/admin/product/order-messenger-tab.php:20
+msgid "Purchasing message"
+msgstr ""
+
+#: src/Settings/PurchasingMessageOption.php:91
+msgid ""
+"Enable sending purchase message functionality. You can set a message per "
+"product at the \"Order Messenger\" tab."
+msgstr ""
+
+#: src/Settings/Settings.php:66
+msgid "Order Messenger settings"
+msgstr ""
+
+#: src/Settings/Settings.php:67
+msgid "This controls look and feel of Order Messenger at your store."
+msgstr ""
+
+#: src/Settings/Settings.php:73
+msgid "Messenger color theme"
+msgstr ""
+
+#: src/Settings/Settings.php:77
+msgid "Colors will be applied at user's interface."
+msgstr ""
+
+#: src/Settings/Settings.php:82
+msgid "Order status changing messages"
+msgstr ""
+
+#: src/Settings/Settings.php:86
+msgid "Show messages about changing orders status."
+msgstr ""
+
+#: src/Settings/Settings.php:91
+msgid "Custom \"From\" label for admin messages"
+msgstr ""
+
+#: src/Settings/Settings.php:96
+msgid ""
+"By default users see your name as message signature. You can set it to any "
+"string. For example \"The best flower shop\", etc."
+msgstr ""
+
+#: src/Settings/Settings.php:104
+msgid "Preloaded messages count"
+msgstr ""
+
+#: src/Settings/Settings.php:112
+msgid "Set how many messages should be preloaded."
+msgstr ""
+
+#: src/Settings/Settings.php:116
+msgid "Order messenger link in order actions"
+msgstr ""
+
+#: src/Settings/Settings.php:120
+msgid "Show link to the messenger in \"order actions\" column at my-account."
+msgstr ""
+
+#: src/Settings/ShowSystemOrderNotesOption.php:86
+msgid "Disable WooCommerce customer system notes emails"
+msgstr ""
+
+#: src/Settings/ShowSystemOrderNotesOption.php:88
+msgid ""
+"By default WooCommerce sends emails with system notes to customers. Check "
+"this if you don't want to duplicate emails and keep only messages "
+"notifications."
+msgstr ""
+
+#: src/Settings/ShowSystemOrderNotesOption.php:95
+msgid "System order notes as service messages"
+msgstr ""
+
+#: src/Settings/ShowSystemOrderNotesOption.php:99
+msgid ""
+"Duplicate system order notes as service messages. Might be useful with "
+"external plugins that push information such as shipping info, payment "
+"status, etc., to order notes."
+msgstr ""
+
+#: views/admin/message/message-attachment.php:20
+#: views/frontend/message/message-attachment.php:31
+msgid "File is unavailable"
+msgstr ""
+
+#: views/admin/message/message-types/admin-message.php:31
+#: views/admin/message/message-types/customer-message.php:31
+#: views/admin/message/message-types/order-status-message.php:27
+#: views/admin/message/message-types/service-message.php:31
+#, php-format
+msgid "Sent on %1$s at %2$s"
+msgstr ""
+
+#: views/admin/message/message-types/admin-message.php:43
+#: views/admin/message/message-types/customer-message.php:42
+#: views/admin/message/message-types/service-message.php:41
+msgid "Delete message"
+msgstr ""
+
+#: views/admin/message/message-types/order-status-message.php:19
+#: views/frontend/message/message-types/order-status-message.php:23
+#, php-format
+msgid " — Order status was changed to %s —"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:28
+#: views/frontend/my-account/messenger.php:30
+msgid "There are no messages yet. Your message would be the first one."
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:43
+msgid "New message"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:44
+msgid ""
+"Send a new message to customer of this order (the user will be notified)."
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:54
+msgid "Order message"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:64
+#: views/admin/product/order-messenger-tab.php:59
+msgid "Delete image"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:65
+#: views/admin/product/order-messenger-tab.php:60
+msgid "Delete"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:80
+msgid "Attach a file"
+msgstr ""
+
+#: views/admin/order/messenger-metabox.php:85
+#: views/frontend/my-account/messenger.php:74
+msgid "Send"
+msgstr ""
+
+#: views/admin/product/order-messenger-tab.php:34
+#: views/frontend/my-account/messenger.php:62
+msgid "Attach file"
+msgstr ""
+
+#: views/admin/product/order-messenger-tab.php:66
+msgid ""
+"Message will be automatically sent once user purchase the product. Might be "
+"useful for instructions/guides/virtual products."
+msgstr ""
+
+#: views/emails/admin-messenger-notification.php:25
+#: views/emails/customer-messenger-notification.php:25
+#: views/emails/plain/admin-messenger-notification.php:20
+#: views/emails/plain/customer-messenger-notification.php:20
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#: views/emails/admin-messenger-notification.php:27
+#: views/emails/customer-messenger-notification.php:27
+msgid "You have"
+msgstr ""
+
+#: views/emails/admin-messenger-notification.php:31
+#, php-format
+msgid "new %s from your customer related to the following order"
+msgstr ""
+
+#: views/emails/customer-messenger-notification.php:31
+#, php-format
+msgid "new %s"
+msgstr ""
+
+#: views/emails/customer-messenger-notification.php:35
+msgid "View it"
+msgstr ""
+
+#: views/frontend/message/message-types/admin-message.php:27
+#: views/frontend/message/message-types/customer-message.php:28
+#, php-format
+msgid "Sent on %1$s at %2$s "
+msgstr ""
+
+#: views/frontend/message/message-types/customer-message.php:35
+msgid "by you"
+msgstr ""
+
+#: views/frontend/message/message-types/order-status-message.php:33
+#: views/frontend/message/message-types/service-message.php:30
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: views/frontend/message/message-types/service-message.php:21
+#, php-format
+msgid " — %s —"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:21
+msgid "Order"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:25
+msgid "Last message"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:28
+msgid "Date"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:45
+msgid "You"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:48
+msgid "Order status changed"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:84
+msgid "Previous"
+msgstr ""
+
+#: views/frontend/my-account/dialogs.php:89
+msgid "Next"
+msgstr ""

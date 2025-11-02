@@ -1,0 +1,148 @@
+
+@keyframes wcmmq-gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+li#toplevel_page_wcmmq-min-max-control .wp-menu-name {
+    /* font-size: 97%; */
+    background: linear-gradient(90deg, #515c4a2f, #2271b11e, #4caf4f1e);
+    background-size: 200% 200%; /* Ensure the gradient can animate smoothly */
+    animation: wcmmq-gradient-animation 2s ease infinite; /* Applies the animation */
+}
+
+li#toplevel_page_wcmmq-min-max-control.wp-has-current-submenu .wp-menu-name {
+    background: linear-gradient(90deg, #b2ff7e4d, #ff758c0f, #ffffff5c);
+    background-size: 200% 200%; /* Ensure the gradient can animate smoothly */
+    animation: wcmmq-gradient-animation 5s ease infinite; /* Applies the animation */
+}
+
+.wcmmq-renew-license-notice>div {
+    background: white;
+    padding: 10px 15px;
+    display: block !important;
+    clear: both;
+    border-left: 5px solid #d00;
+    margin: 13px 0 0 0;
+    box-sizing: border-box;
+    height: max-content;
+    line-height: 30px;
+}
+
+.wcmmq-renew-license-notice {
+    display: block;
+    clear: both;
+    height: max-content;
+    background: transparent;
+}
+.error.wcmmq-renew-license-notice {
+    border: 0 none !important;
+    padding: 0;
+}
+
+.wcmmq-renew-license-notice a {
+    background: #E91E63;
+    border-color: #E91E63;
+    text-transform: uppercase !important;
+    padding: 6px 10px !important;
+    border-left: 27px solid #7a052d;
+    position: relative;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.wcmmq-renew-license-notice a:hover {
+    
+    background: #4caf50;
+    border-color: #38823b;
+    text-transform: uppercase !important;
+    padding: 6px 10px !important;
+    border-left: 27px solid #38823b;
+    position: relative;
+}
+.wcmmq-renew-license-notice a::before {
+    content: "☀";
+    position: absolute;
+    top: -2px;
+    left: -20px;
+    color: rgb(255, 255, 255);
+}
+img.wcmmq-license-brand-logo {
+    width: 25px;
+    height: auto;
+    display: inline-block;
+    margin-bottom: -8px;
+}
+.wcmmq-renew-license-notice {
+    display: block;
+    clear: both;
+    height: max-content;
+    background: transparent;
+}
+.error.wcmmq-renew-license-notice {
+    border: 0 none !important;
+    padding: 0;
+}
+
+.wcmmq-renew-license-notice a {
+    background: #E91E63;
+    border-color: #E91E63;
+    text-transform: uppercase !important;
+    padding: 6px 10px !important;
+    border-left: 27px solid #7a052d;
+    position: relative;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.wcmmq-renew-license-notice a:hover {
+    
+    background: #4caf50;
+    border-color: #38823b;
+    text-transform: uppercase !important;
+    padding: 6px 10px !important;
+    border-left: 27px solid #38823b;
+    position: relative;
+}
+.wcmmq-renew-license-notice a::before {
+    content: "☀";
+    position: absolute;
+    top: -2px;
+    left: -20px;
+    color: rgb(255, 255, 255);
+}
+img.wcmmq-license-brand-logo {
+    width: 25px;
+    height: auto;
+    display: inline-block;
+    margin-bottom: -8px;
+}
+a.wcmmq-wp-plugin-list-link {
+    color: red;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+a.wcmmq-wp-plugin-list-link:hover {
+    color: black;
+}
+
+
+li#toplevel_page_wcmmq-min-max-control ul.wp-submenu li a[href='https://codeastrology.com/min-max-quantity/pricing'] {
+    background: #FFEB3B;
+    color: black !important;
+    font-weight: 900;
+}
+li#toplevel_page_wcmmq-min-max-control ul.wp-submenu li:hover a[href='https://codeastrology.com/min-max-quantity/pricing'] {
+    background: #E91E63;
+    color: #ffffff !important;
+}
+.notice.wcmmq-discount-notice {padding: 5px 7px;background: white;border-top: 0 none;border-bottom: 0;border-right: 0 none;}
+.notice.wcmmq-discount-notice img {max-height: 25px;max-width: 25px;}
+.wcmmq-discount-notice a {text-decoration: none;padding: 0 5px;font-weight: 500;}

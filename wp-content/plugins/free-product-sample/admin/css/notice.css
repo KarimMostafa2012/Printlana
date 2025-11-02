@@ -1,0 +1,25 @@
+.notice.editorsDsProductSample-notice{border-left-color:#272c51!important;padding:20px!important;}
+.rtl .notice.editorsDsProductSample-notice{border-right-color:#272c51!important;}
+.notice.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner{display:table;width:100%;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-notice-icon,.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-notice-content,.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-install-now{display:table-cell;vertical-align:middle;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-icon{color:#509ed2;font-size:13px;width:60px;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-icon img{width:64px;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-content{padding:0 40px 0 20px;}
+.notice.editorsDsProductSample-notice p{padding:0;margin:0;}
+.notice.editorsDsProductSample-notice h3{margin:0 0 5px;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-install-now{text-align:center;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-install-now .editorsDsProductSample-install-button{padding:6px 50px;height:auto;line-height:20px;background:#32396a;border-color:#272c51 #0f153e #040823;-webkit-box-shadow:0 1px 0 #0d1f82;box-shadow:0 1px 0 #0d1f82;text-shadow:0 -1px 1px #272c51,1px 0 1px #171b3e,0 1px 1px #0a1035,-1px 0 1px #040721;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-install-now .editorsDsProductSample-install-button:hover{background:#272c51;}
+.notice.editorsDsProductSample-notice a.no-thanks{display:block;margin-top:10px;color:#72777c;text-decoration:none;}
+.notice.editorsDsProductSample-notice a.no-thanks:hover{color:#444;}
+@media (max-width:767px){
+  .notice.notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner{display:block;}
+  .notice.editorsDsProductSample-notice{padding:20px!important;}
+  .notice.editorsDsProductSample-noticee .editorsDsProductSample-notice-inner{display:block;}
+  .notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-notice-content{display:block;padding:0;}
+  .notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-notice-icon{display:none;}
+  .notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .editorsDsProductSample-install-now{margin-top:20px;display:block;text-align:left;}
+  .notice.editorsDsProductSample-notice .editorsDsProductSample-notice-inner .no-thanks{display:inline-block;margin-left:15px;}
+}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-install-now{float:right;}
+.notice.editorsDsProductSample-notice .editorsDsProductSample-install-now .editorsDsProductSample-install-button{padding:6px 0!important;width:200px;}

@@ -1,0 +1,183 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ .select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: var(--dark) !important;
+    border: 1px solid var(--dark) !important;
+    padding: 10px 15px !important;
+    color: #fff !important;
+    font-weight:bold !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+ color: #fff !important;
+ font-weight:bold !important;
+}
+
+.bootstrap-wrapper .plugin-card{
+    width: 100%;
+}
+
+.pisol-pro-feature-list li{
+    padding:10px;
+}
+
+
+.bg-dark, .bg-dark2{
+    & .dashicons{
+        color:#fff !important;
+    }
+}
+
+/* NEW NAVIGATION BAR */
+#pisol-navbar .navbar-nav{
+    background:transparent !important;
+    display:flex;
+    gap:10px;
+}
+
+#pisol-navbar a{
+    background:#fff !important;
+    color:var(--dark) !important;
+    border-radius:60px !important;
+    font-weight:600;
+    letter-spacing:1px;
+    transition: all 0.3s ease;
+    padding:7px 15px !important;
+}
+
+#pisol-navbar a .dashicons{
+    margin-right:4px;
+    color:var(--dark) !important;
+}
+
+#pisol-navbar a.bg-primary .dashicons{
+    color:var(--primary) !important;
+}
+
+.pi-sticky{
+    position: sticky !important;
+    top:60px;
+}
+
+#pisol-navbar a.bg-primary, #pisol-navbar a:hover{
+    background:#fff !important;
+    color:var(--primary) !important;
+    text-decoration:none;
+}
+
+@media(max-width:1400px){
+    #pisol-navbar a{
+        letter-spacing:inherit;
+        padding:7px 7px !important;
+    }
+}
+
+@media(max-width:1000px){
+    #pisol-navbar .navbar-nav{
+        flex-direction:row;
+    }
+}
+
+@media(max-width:900px){
+    #pisol-navbar a{
+        letter-spacing:inherit;
+        padding:7px 7px !important;
+    }
+}
+
+@media(max-width:700px){
+   @media(max-width:1000px){
+    #pisol-navbar .navbar-nav{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        grid-gap:10px;
+        & a{
+            width:100%;
+        }
+    }
+}
+}
+
+@media(max-width:576px){
+    #pisol-navbar{
+        margin-left:auto !important;
+        margin-right:auto !important;
+    }
+    
+    #pisol-navbar .container-fluid{
+        width:100% !important;
+    }
+
+    #pi-logo{
+        width:90%;
+    }
+}
+
+
+.afrsm-head{
+    background-color: var(--dark) !important;
+    color:#FFF;
+    position:sticky;
+    top:32px;
+    z-index:10000
+}
+
+.pisol-form-element-row small{
+	color:var(--dark2);
+	margin-top:10px;
+	display:block;
+    font-style:italic;
+    font-size:0.8rem !important;
+}
+
+.bootstrap-wrapper a.pi-used-rule.text-light{
+    font-weight:bold !important;
+    color:#ccc !important;
+}
+
+.bootstrap-wrapper a.pi-used-rule.text-light.pi-active-tab{
+    color:#fff !important;
+}
+
+
+#pi-promotion-banner{
+	max-width:70%;
+	margin:auto;
+	display:block;
+}
+
+h2#pi-banner-tagline{
+padding:10px;
+color:#fff !important;
+font-size:1.2rem !important;
+text-align:center;
+}
+
+.pisol-pro-feature-list li{
+	list-style-type: none;
+	padding:7px 15px;
+    font-size:1rem !important
+}
+
+.bootstrap-wrapper .pi-shadow{
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	position:relative;
+	background: linear-gradient(135deg, #1a4562 0%, #2c6a89 50%, #163f59 100%);
+	z-index:1;
+}
+
+.bootstrap-wrapper .pi-shadow li, .bootstrap-wrapper .pi-shadow h6, .bootstrap-wrapper .pi-shadow h4{
+	color:#fff !important;
+}
+
+.bootstrap-wrapper .pi-shadow hr{
+	border-color:#1a4562 !important;
+}
+
+h4.pi-bottom-banner{
+	font-size: 18px !important;
+	margin-bottom:15px;
+	text-align: center;
+}

@@ -1,0 +1,31 @@
+.inspiration-fav-btn{
+    color: #0000FF;
+    background-color: #fff;
+    border: 2px solid #0000FF !important;
+    border-radius: 50%;
+    padding: 12px;
+    font-size: 18px;
+    line-height: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.inspiration-fav-btn:hover{
+    color: #0000FF;
+    background-color: #eee;
+}
+
+.inspiration-fav-btn.active{
+    background-color: #fff;
+}
+
+.inspiration-fav-btn.active:hover{
+    background-color: #eee;
+}
+
+.inspiration-fav-btn:focus,
+.inspiration-fav-btn:focus-visible,
+.inspiration-fav-btn:focus-within {
+    background-color: unset !important;
+    color: #0000FF !important;
+}

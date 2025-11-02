@@ -1,0 +1,35 @@
+/*************************************************Contact Us Page****************************************************/
+
+@media screen and (max-width: 768px){
+    .e-n-tabs .e-n-tabs-heading{
+        display: flex !important;
+        margin-bottom: 40px;
+        padding: 0 10px;
+    }
+
+    #e-n-tab-title-1760976401,
+    #e-n-tab-title-1760976402{
+        margin: 0 !important;
+        flex: 1;
+    }
+}
+/*************************************************Inspiration Single Page****************************************************/
+@media screen and (max-width: 768px){
+    #my-inspiration-img img{
+        max-height: 360px;
+    }
+}
+/*************************************************Inspiration Single Page POPUP****************************************************/
+
+@media screen and (max-width: 1024px) {
+    body.admin-bar .dialog-type-lightbox {
+        position: fixed !important;
+    }
+}
+
+@media screen and (max-width: 768px){
+    #elementor-popup-modal-832 .dialog-message{
+        padding: 46px 20px !important;
+        width: 90vw !important;
+    }
+}

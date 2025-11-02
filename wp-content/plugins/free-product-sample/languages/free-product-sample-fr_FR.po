@@ -1,0 +1,2014 @@
+# Copyright (C) 2022 theDotstore
+# This file is distributed under the same license as the Product Sample for WooCommerce package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Product Sample for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://www.multidots.com/contact/\n"
+"POT-Creation-Date: 2022-09-30 12:25:31+00:00\n"
+"PO-Revision-Date: 2024-09-23 11:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.8; wp-5.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: public/class-free-product-sample-for-woocommer-public.php:2147
+msgid " - Sample"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:77
+msgid ""
+" There are 50 samples available for the Red, Green, and Blue hoodies, while "
+"the remaining sample stock is limited to just 10."
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:50
+msgid " to view license and terms of use."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:2726
+msgid "#000"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:2725
+msgid "#fff"
+msgstr ""
+
+#: free-product-sample.php:285
+msgid "%1$s requires %2$s to be installed & activated!"
+msgstr ""
+
+#. translators: %s: product name
+#: public/class-free-product-sample-for-woocommer-public.php:2172
+msgid "%s has been added to your cart."
+msgid_plural "%s have been added to your cart."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Attribute name.
+#: public/class-free-product-sample-for-woocommer-public.php:1175
+msgid "%s is a required field"
+msgid_plural "%s are required fields"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/partials/dsfps-admin-settings-page.php:405
+#: admin/partials/dsfps-admin-settings-page.php:409
+#: admin/partials/dsfps-admin-settings-page.php:413
+#: admin/partials/dsfps-admin-settings-page.php:417
+#: admin/partials/dsfps-admin-settings-page.php:424
+#: admin/partials/dsfps-admin-settings-page.php:428
+#: admin/partials/dsfps-admin-settings-page.php:432
+#: admin/partials/dsfps-admin-settings-page.php:436
+msgid "0"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:646
+#: admin/partials/dsfps-admin-settings-page.php:810
+#: admin/partials/dsfps-admin-settings-page.php:829
+#: admin/partials/dsfps-admin-settings-page.php:834
+#: admin/partials/dsfps-admin-settings-page.php:841
+msgid "0.00"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:251
+#: admin/partials/dsfps-admin-settings-page.php:262
+#: admin/partials/dsfps-admin-settings-page.php:1064
+msgid "1"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:223
+msgid "1 site"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1533
+#: admin/partials/dsfps-admin-settings-page.php:1537
+#: admin/partials/dsfps-admin-settings-page.php:1542
+msgid "10"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:296
+#: admin/partials/dsfps-admin-settings-page.php:317
+msgid "100"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:233
+msgid "14-Day money-back guarantee"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:236
+msgid "14-Day Satisfaction Guarantee"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:355
+#: admin/partials/dsfps-admin-settings-page.php:359
+#: admin/partials/dsfps-admin-settings-page.php:374
+#: admin/partials/dsfps-admin-settings-page.php:378
+msgid "15"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:291
+#: admin/partials/dsfps-admin-settings-page.php:312
+msgid "18"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:297
+msgid "200"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:298
+msgid "300"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:299
+msgid "400"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:932
+#: admin/partials/dsfps-admin-settings-page.php:952
+msgid "5"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:300
+msgid "500"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:301
+msgid "600"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:302
+msgid "700"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:347
+#: admin/partials/dsfps-admin-settings-page.php:351
+#: admin/partials/dsfps-admin-settings-page.php:366
+#: admin/partials/dsfps-admin-settings-page.php:370
+msgid "8"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:303
+msgid "800"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:304
+msgid "900"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1508
+msgid ""
+"<a href=\"%1$s\" target=\"_blank\">Click here</a> to configure the format "
+"and content of the follow-up email for sample orders."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:254
+msgid ""
+"<strong>We need your support</strong> to keep updating and improving the "
+"plugin. Please <a href=\"%1$s\" target=\"_blank\">help us by leaving a good "
+"review</a> :) Thanks!"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1462
+#: admin/partials/dsfps-admin-settings-page.php:1469
+#: admin/partials/dsfps-admin-settings-page.php:1477
+msgid "_blank"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1461
+#: admin/partials/dsfps-admin-settings-page.php:1468
+#: admin/partials/dsfps-admin-settings-page.php:1476
+#: public/class-free-product-sample-for-woocommer-public.php:2734
+msgid "_self"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
+msgid "Action"
+msgstr ""
+
+#: free-product-sample.php:158
+msgid "Activate Plugin"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:805
+msgid "Add Flat Price"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:815
+msgid "Add Percentage Price"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:197
+#: admin/partials/class-dsfps-product-block-editor-settings.php:198
+#: admin/partials/class-dsfps-product-block-editor-settings.php:220
+msgid "Add your attachment url here."
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:219
+msgid "Add your variation attachment url here."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:99
+msgid ""
+"Additionally, choose a tax class to apply custom taxes for samples, ensuring "
+"accurate tax calculations for these products."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:116
+msgid ""
+"Adjust sample weights and dimensions to accurately reflect the physical "
+"characteristics of each product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:149
+#: admin/partials/dsfps-admin-settings-page.php:157
+#: admin/partials/dsfps-admin-settings-page.php:167
+msgid "After Add To Cart"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:640
+msgid "Ajax Add To Cart"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:674
+#: admin/partials/class-dsfps-product-block-editor-settings.php:245
+msgid "Allow Max Quantity"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:95
+msgid ""
+"Allow the application of a sample's custom shipping class and tax to manage "
+"minimal costs for sample products."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:108
+msgid ""
+"Allows you to set product-specific sample settings such as sample price, "
+"stock, weight, dimensions, and more for tailored samples."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:111
+msgid ""
+"Allows you to specify sample settings for individual products, including "
+"price, stock, weight, dimensions, and more."
+msgstr ""
+
+#: follow-up-email/class-free-product-sample-email__premium_only.php:25
+msgid ""
+"An email sent to the customer for sample product's order follow up.<p>"
+"Additional Available placeholders: {customer_name}, {sample_product_list}</p>"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:102
+msgid "Assign the free shipping class to all sample products."
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:92
+msgid "Astra"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:660
+#: admin/class-free-product-sample-for-woocommer-admin.php:983
+#: admin/partials/class-dsfps-product-block-editor-settings.php:160
+#: admin/partials/class-dsfps-product-block-editor-settings.php:177
+msgid ""
+"Attach custom file for sample orders. Customers will receive this attached "
+"file in order emails and on my account page."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:190
+#: admin/partials/dsfps-admin-settings-page.php:1390
+#: admin/partials/dsfps-admin-settings-page.php:1401
+#: admin/partials/dsfps-admin-settings-page.php:1413
+msgid "Background"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:96
+msgid "Basic Configuration"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:102
+msgid "Be our friend on"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:150
+#: admin/partials/dsfps-admin-settings-page.php:158
+#: admin/partials/dsfps-admin-settings-page.php:168
+msgid "Before Add To Cart"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:246
+#: admin/partials/dsfps-admin-settings-page.php:257
+msgid "Border Color"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:250
+#: admin/partials/dsfps-admin-settings-page.php:261
+msgid "Border Width (px)"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:350
+#: admin/partials/dsfps-admin-settings-page.php:369
+#: admin/partials/dsfps-admin-settings-page.php:408
+#: admin/partials/dsfps-admin-settings-page.php:427
+msgid "Bottom"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:230
+msgid "Button Border"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:274
+msgid "Button Font Style"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:123
+#: admin/partials/dsfps-admin-settings-page.php:685
+msgid "Button Label"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:389
+msgid "Button Margin (px)"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:330
+msgid "Button Padding (px)"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:57
+msgid "Buy Now"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:72
+msgid "Buy Now - "
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:713
+msgid "Category Wise"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:90
+msgid ""
+"Category wise feature is only available on Premium version. Please upgrade "
+"to use it."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1182
+msgid "Choose a shipping class to apply to sample products."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:782
+#: admin/class-free-product-sample-for-woocommer-admin.php:968
+#: admin/partials/class-dsfps-product-block-editor-settings.php:596
+#: admin/partials/class-dsfps-product-block-editor-settings.php:597
+#: admin/partials/class-dsfps-product-block-editor-settings.php:632
+#: admin/partials/class-dsfps-product-block-editor-settings.php:633
+msgid ""
+"Choose a tax class for this product. Tax classes are used to apply different "
+"tax rates specific to certain types of product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1237
+msgid "Choose a tax class to apply to sample products."
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:59
+msgid "Choose custom shipping and tax classes for samples."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:915
+msgid "Choose the maximum quantity type for your sample products."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:140
+msgid "Choose the position of your sample button on the product detail page."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1452
+msgid "Choose the target for your sample promo button link."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:453
+msgid ""
+"Choose the title format for your sample products. For instance, if you "
+"select the prefix option and set the title as \"Sample\", it will display as "
+"\"Sample - Your Product Name\" on the cart page."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1117
+msgid ""
+"Choose your desired user roles if you want to enable the sample button for "
+"specific user roles."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1095
+msgid ""
+"Choose your desired users if you want to enable the sample button for "
+"specific users."
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:50
+msgid "Click here"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:166
+msgid "Close"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:186
+#: admin/partials/dsfps-admin-settings-page.php:1386
+#: admin/partials/dsfps-admin-settings-page.php:1397
+#: admin/partials/dsfps-admin-settings-page.php:1409
+msgid "Color"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:29
+#: admin/partials/dots-plugin-setup-wizard.php:57
+#: admin/partials/dots-plugin-setup-wizard.php:70
+#: admin/partials/dots-plugin-setup-wizard.php:115
+msgid "Continue"
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:60
+msgid "Convert sample orders to original orders with one click."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:967
+msgid "Convert Samples to Orders on Re-order"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:250
+msgid "Customer Profile Image"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:179
+msgid "Customize the colors of your sample \"Add to Cart\" button."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1375
+msgid "Customize the colors of your sample promo button."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:686
+msgid ""
+"Customize the message displayed in the AJAX dialog box after adding a sample "
+"to the cart."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:94
+msgid "Customized Shipping & Tax"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1805
+#: admin/partials/dsfps-admin-settings-page.php:1555
+#: admin/partials/dsfps-admin-settings-page.php:1565
+#: admin/partials/dsfps-admin-settings-page.php:1576
+msgid "Days"
+msgstr ""
+
+#. translators: placeholder is {blogname}, a variable that will be substituted
+#. when email is sent out
+#: follow-up-email/class-free-product-sample-email__premium_only.php:30
+msgctxt "default email subject for cancelled emails sent to the customer"
+msgid "[%s] How did you like our samples?"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:497
+msgid ""
+"Define a prefix title for your sample products. For example, you can set it "
+"as \"Sample\"."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:531
+msgid ""
+"Define a suffix title for your sample products. For example, you can set it "
+"as \"Sample\"."
+msgstr ""
+
+#. translators: WooCommerce dimension unit
+#: admin/class-free-product-sample-for-woocommer-admin.php:724
+msgid "Dimensions (%s)"
+msgstr ""
+
+#. translators: WooCommerce dimension unit
+#: admin/class-free-product-sample-for-woocommer-admin.php:912
+msgid "Dimensions (L×W×H) (%s)"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:3138
+#: public/class-free-product-sample-for-woocommer-public.php:3146
+#: public/class-free-product-sample-for-woocommer-public.php:3150
+msgid "Dimensions - [Sample]"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:153
+msgid "Discover Our Top Key Features"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:90
+msgid "Do the Woo"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:277
+msgid "Do you offer support for the plugin? What’s it like?"
+msgstr ""
+
+#: includes/class-free-product-sample-for-woocommerce.php:274
+msgid "Docs"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:119
+msgid "Done"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:690
+#: public/class-free-product-sample-for-woocommer-public.php:2942
+msgid "Done!"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:148
+msgid "Dotstore Plugins"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:81
+msgid "Dynamic Sample Pricing"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:69
+msgid ""
+"Easily track and update stock levels to ensure that you always have samples "
+"for your customers, which leads to better customer satisfaction."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:73
+msgid ""
+"Easily track and update stock levels, ensuring you always have samples for "
+"your customers."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:241
+msgid "Easy to control product samples"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:670
+msgid ""
+"Enable a success message or dialog box to display after adding a sample to "
+"the cart using AJAX."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:647
+msgid "Enable Ajax Add to Cart"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:653
+msgid ""
+"Enable AJAX add to cart for samples on the single product page. Please "
+"ensure that the \"<a href=\"%1$s\" target=\"_blank\">Enable AJAX add to cart "
+"buttons on archives</a>\" feature is enabled to utilize this functionality."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:669
+msgid "Enable Ajax Dialog"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:638
+#: admin/partials/class-dsfps-product-block-editor-settings.php:83
+msgid "Enable sample"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1011
+msgid "Enable Sample Order Limit"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:63
+msgid "Enable sample purchases at a 2% cost exclusively for shop managers."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:89
+msgid "Enable shop managers to purchase samples at a nominal cost of 2%."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:128
+msgid ""
+"Enable the display of a promotional button on the shop page and product "
+"detail page."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:205
+msgid ""
+"Enable this option for more advanced styling options for the sample button, "
+"such as border font size, etc."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1314
+msgid ""
+"Enable this option to add a promotional button on all pages for effective "
+"sample product promotion."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:598
+msgid ""
+"Enable this option to prevent customers from adding both sample products and "
+"actual products to the same cart. They will be unable to add sample products "
+"if actual products are already in the cart, and vice versa."
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:101
+msgid "Enable this to manage sample for this variation."
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:265
+msgid "Enable this to manage stock for this product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:973
+msgid ""
+"Enable to allow customers to convert their sample orders with regular price "
+"orders on the My Account page Re-order actions."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:706
+msgid "Enable Type"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:110
+#: admin/partials/dsfps-admin-settings-page.php:1313
+msgid "Enable/Disable"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:26
+msgid ""
+"Enhance consumer satisfaction, promote products effectively, boost market "
+"position, and drive increased sales performance by offering free product "
+"samples!"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:938
+msgid ""
+"Enter a custom message for the per-sample quantity limitation. Use {PRODUCT} "
+"to show the product name and {QTY} to show the maximum quantity."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1426
+msgid ""
+"Enter the link for your sample promo button. It will redirect to provided "
+"link when any user clicks on this promo button."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1070
+msgid ""
+"Enter your custom message here to display for order limitations. Use "
+"{MAX_ORDER_LIMIT} to represent the maximum sample order limit allowed and "
+"{PRODUCT_NAME} to display the product name."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:958
+msgid ""
+"Enter your custom message here to display quantity limitations per order. "
+"Use {MAX_QTY} to represent the maximum quantity allowed and {CART_QTY} to "
+"display the current quantity in the cart."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1357
+#: admin/partials/dsfps-admin-settings-page.php:1361
+#: admin/partials/dsfps-admin-settings-page.php:1366
+#: public/class-free-product-sample-for-woocommer-public.php:2724
+msgid "Exclusive Offers"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:273
+msgid "FAQs"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:850
+msgid "Fixed Price Per Product"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:798
+msgid "Flat"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1521
+msgid "Follow Up Email After"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1797
+msgid "Follow Up Email After :-"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:290
+#: admin/partials/dsfps-admin-settings-page.php:311
+msgid "Font Size (px)"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:294
+#: admin/partials/dsfps-admin-settings-page.php:315
+msgid "Font Weight"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:16
+#: admin/partials/header/plugin-header.php:20
+msgid "Free"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:21
+#: admin/partials/dsfps-information-page.php:24
+msgid "Free Version"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:65
+msgid "German, French, Polish, Spanish"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:40
+msgid ""
+"Get improved features and faster fixes by sharing non-sensitive data via "
+"usage-tracking. This will help us make the plugin more compatible with your "
+"site. No personal data is tracked or stored."
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:101
+msgid "Get Premium"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:227
+#: admin/partials/dots-upgrade-dashboard.php:327
+msgid "Get The Premium Version"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:170
+msgid "Getting Started"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:85
+msgid ""
+"Give your customers free to experience sample products or set a nominal "
+"price."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:224
+msgid "Great for website owners with a single WooCommerce Store"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:57
+msgid "Guide Documentation"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:728
+#: admin/partials/class-dsfps-product-block-editor-settings.php:464
+msgid "Height"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:466
+#: admin/partials/class-dsfps-product-block-editor-settings.php:467
+#: admin/partials/class-dsfps-product-block-editor-settings.php:482
+#: admin/partials/class-dsfps-product-block-editor-settings.php:483
+msgid "Height in decimal format"
+msgstr ""
+
+#: follow-up-email/class-free-product-sample-email__premium_only.php:91
+msgid ""
+"Hello {customer_name},\n"
+"\n"
+"I hope you are doing well and sample products purchased from our store are "
+"helpful to you.\n"
+"\n"
+"To utilize the full version of the products, click on the below product list."
+"\n"
+"\n"
+"{sample_product_list}\n"
+"\n"
+"Thanks for shopping with us.\n"
+"\n"
+"Regards,\n"
+"{site_title}"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:58
+msgid "Help"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:53
+msgid "Help & Support"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:39
+msgid "Help us build a better \"Product Sample\" Plugin!"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:560
+msgid "Hide on Categories Page"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:544
+msgid "Hide on Shop Page"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:561
+msgid ""
+"Hide the sample button from the categories page by enabling this option."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:545
+msgid "Hide the sample button from the shop page by enabling this option."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:121
+msgid ""
+"Highlight your sample products with an eye-catching quick link promo button "
+"on your website to drive visibility and attract customer attention."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:124
+msgid ""
+"Highlight your sample products with an eye-catching quick link promo button "
+"on your website. Drive visibility, attract customer attention, and boost "
+"sample product engagement."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1804
+#: admin/partials/dsfps-admin-settings-page.php:1554
+#: admin/partials/dsfps-admin-settings-page.php:1564
+#: admin/partials/dsfps-admin-settings-page.php:1575
+msgid "Hours"
+msgstr ""
+
+#: follow-up-email/class-free-product-sample-email__premium_only.php:28
+msgid "How did you like our samples?"
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:20
+msgid "How to Get Started"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1434
+#: admin/partials/dsfps-admin-settings-page.php:1438
+#: admin/partials/dsfps-admin-settings-page.php:1443
+msgid "https://www.google.com/"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:310
+msgid "I have more questions…"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:741
+msgid ""
+"If you want to add a sample button to the specific categories, select the "
+"desired categories. Leave empty to enable samples for the entire store."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:720
+msgid ""
+"If you want to add a sample button to the specific products, select the "
+"desired products. Leave empty to enable samples for the entire store."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:103
+msgid "Implement the DHL shipping tax for all sample products."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:576
+msgid "Include on Store Menu"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:45
+msgid "Installed Version"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:90
+msgid "Introduce a 10% sample cost applicable to all guest users."
+msgstr ""
+
+#. translators: %s: Attribute name.
+#: public/class-free-product-sample-for-woocommer-public.php:1167
+msgid "Invalid value posted for %s"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:2142
+#: public/class-free-product-sample-for-woocommer-public.php:2150
+#: public/class-free-product-sample-for-woocommer-public.php:2154
+#: public/class-free-product-sample-for-woocommer-public.php:2159
+#: public/class-free-product-sample-for-woocommer-public.php:2164
+msgctxt "Item name in quotes"
+msgid "&ldquo;%s&rdquo;"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:284
+msgid "knowledge base"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:87
+msgid "LearnWoo"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:354
+#: admin/partials/dsfps-admin-settings-page.php:373
+#: admin/partials/dsfps-admin-settings-page.php:412
+#: admin/partials/dsfps-admin-settings-page.php:431
+msgid "Left"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:726
+#: admin/partials/class-dsfps-product-block-editor-settings.php:371
+msgid "Length"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:373
+#: admin/partials/class-dsfps-product-block-editor-settings.php:374
+#: admin/partials/class-dsfps-product-block-editor-settings.php:389
+#: admin/partials/class-dsfps-product-block-editor-settings.php:390
+msgid "Length in decimal form"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:82
+msgid ""
+"Let customers experience sample products for free or set a nominal price to "
+"choose a regular product rate at a discounted price while still covering "
+"costs."
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:49
+msgid "License & Terms of use"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:92
+msgid "Licenses"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:64
+msgid "Localization"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:730
+#: admin/class-free-product-sample-for-woocommer-admin.php:913
+msgid "LxWxH in decimal form"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:125
+msgid ""
+"Make it easy for customers to discover and explore your samples, increasing "
+"the chances of conversions and product sales."
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:32
+msgid "Manage Product Sample"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:107
+msgid "Manage Product-Specific Samples"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:86
+msgid "Manage Sample"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:68
+msgid "Manage Sample Stock"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:100
+msgid "Manage Sample?"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:802
+msgid "Manage sample?"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:687
+#: admin/partials/class-dsfps-product-block-editor-settings.php:264
+msgid "Manage stock?"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:862
+msgid "Manage the sample products stock quantity at the variation level."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:696
+#: admin/partials/class-dsfps-product-block-editor-settings.php:280
+#: admin/partials/class-dsfps-product-block-editor-settings.php:281
+#: admin/partials/class-dsfps-product-block-editor-settings.php:296
+#: admin/partials/class-dsfps-product-block-editor-settings.php:297
+msgid "Manage the sample products stock quantity."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:937
+#: admin/partials/dsfps-admin-settings-page.php:957
+msgid "Maximum Quantity Message"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:914
+msgid "Maximum Quantity Type"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:94
+msgid "Medium"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1803
+#: admin/partials/dsfps-admin-settings-page.php:1553
+#: admin/partials/dsfps-admin-settings-page.php:1563
+#: admin/partials/dsfps-admin-settings-page.php:1574
+msgid "Minutes"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:218
+msgid "month"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1807
+#: admin/partials/dsfps-admin-settings-page.php:1557
+#: admin/partials/dsfps-admin-settings-page.php:1567
+#: admin/partials/dsfps-admin-settings-page.php:1578
+msgid "Months"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:65
+msgid "My Account"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:47
+msgid "Never miss an important update"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:316
+msgid "No problem, we’re happy to help! Please reach out at %s."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:3536
+#: public/class-free-product-sample-for-woocommer-public.php:3544
+msgid "No product matching your criteria."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1207
+#: admin/partials/dsfps-admin-settings-page.php:1217
+#: admin/partials/dsfps-admin-settings-page.php:1226
+msgid "No Shipping Class"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1197
+msgid "No shipping class"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1263
+#: admin/partials/dsfps-admin-settings-page.php:1268
+#: admin/partials/dsfps-admin-settings-page.php:1278
+#: admin/partials/dsfps-admin-settings-page.php:1287
+msgid "No Tax Class"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1128
+msgid "Normal"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:64
+msgid ""
+"Offer complimentary samples of newly launched products exclusively for "
+"company staff."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:56
+msgid ""
+"Offer sample products to a specific user group for your store, such as shop "
+"managers, retailers, internal staff, etc."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:59
+msgid ""
+"Offer samples to a specific set of users according to which section gets you "
+"the most traction."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:1802
+msgid ""
+"Oops! It seems that you've added both samples and actual products to your "
+"cart. To proceed with your checkout, please remove either the samples or the "
+"actual products from your cart."
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:48
+msgid ""
+"Opt-in to get email notifications for security & feature updates and to "
+"share some important WooCommerce updates. This will help us make the plugin "
+"more compatible with your version and better at doing what you need it to. "
+"No personal data is tracked or stored."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:72
+#: public/class-free-product-sample-for-woocommer-public.php:117
+#: public/class-free-product-sample-for-woocommer-public.php:258
+msgid "Order a Sample"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:128
+msgid "Order a Sample: {PRICE}"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1069
+msgid "Order Limit Message"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:907
+msgid "Order Restrictions"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1092
+msgid "Order Type"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:95
+msgid "Others"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:219
+msgid "Pay $%s today. Renews in 12 months."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:921
+#: admin/partials/dsfps-admin-settings-page.php:947
+msgid "Per Order Quantity"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:920
+#: admin/partials/dsfps-admin-settings-page.php:927
+msgid "Per Sample Quantity"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:799
+msgid "Percentage"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:91
+msgid ""
+"Percentage price feature is only available on Premium version. Please "
+"upgrade to use it."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1832
+msgid "Permission Denied"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:212
+msgid "Personal"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:210
+msgid "Personal Plan"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:1136
+msgid "Please choose product options&hellip;"
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:37
+msgid "Plugin Tour"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:462
+#: admin/partials/dsfps-admin-settings-page.php:470
+#: admin/partials/dsfps-admin-settings-page.php:480
+msgid "Prefix"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:491
+msgid "Prefix Title"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:19
+msgid "Premium Version"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:592
+msgid "Prevent Sample & Real Products to Ordered"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
+msgid "Price"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:69
+msgid "Price - "
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:785
+msgid "Price Adjustment"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:792
+msgid "Price Type"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:13
+msgid "Pro"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:41
+#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
+msgid "Product Name"
+msgstr ""
+
+#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:66
+msgid "Product Name - "
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:159
+msgid "Product Sample"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:37
+msgid "Product Type"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:712
+msgid "Product Wise"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1374
+msgid "Promo Button Color"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1348
+msgid "Promo Button Label"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1425
+msgid "Promo Button URL"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1451
+msgid "Promo Link Target"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:120
+msgid "Promote Samples with Sticky Button"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:140
+msgid ""
+"Promptly follow up on free sample orders within 3 days to encourage "
+"conversion to full product purchases."
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:202
+#: admin/partials/class-dsfps-product-block-editor-settings.php:224
+msgid "Provided url is not valid."
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:33
+msgid "Quick info"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:56
+msgid "Quick Start"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:64
+#: admin/partials/dots-plugin-setup-wizard.php:66
+msgid "Quick Tour"
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:33
+msgid "Read the Setup Guide"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:253
+msgid "Richard Berkel"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:358
+#: admin/partials/dsfps-admin-settings-page.php:377
+#: admin/partials/dsfps-admin-settings-page.php:416
+#: admin/partials/dsfps-admin-settings-page.php:435
+msgid "Right"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:534
+msgid "Same as a parent"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:740
+#: admin/class-free-product-sample-for-woocommer-admin.php:770
+#: admin/partials/class-dsfps-product-block-editor-settings.php:501
+#: admin/partials/class-dsfps-product-block-editor-settings.php:573
+msgid "Same as a sample settings page"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:927
+#: admin/class-free-product-sample-for-woocommer-admin.php:956
+#: admin/partials/class-dsfps-product-block-editor-settings.php:611
+msgid "Same as parent"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1126
+#: admin/partials/dsfps-admin-settings-page.php:505
+#: admin/partials/dsfps-admin-settings-page.php:510
+#: admin/partials/dsfps-admin-settings-page.php:517
+#: admin/partials/dsfps-admin-settings-page.php:535
+msgid "Sample"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:2139
+#: public/class-free-product-sample-for-woocommer-public.php:2152
+#: public/class-free-product-sample-for-woocommer-public.php:2157
+#: public/class-free-product-sample-for-woocommer-public.php:2162
+msgid "Sample - "
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:300
+#: public/class-free-product-sample-for-woocommer-public.php:306
+#: public/class-free-product-sample-for-woocommer-public.php:309
+#: public/class-free-product-sample-for-woocommer-public.php:570
+#: public/class-free-product-sample-for-woocommer-public.php:576
+#: public/class-free-product-sample-for-woocommer-public.php:579
+#: public/class-free-product-sample-for-woocommer-public.php:2843
+#: public/class-free-product-sample-for-woocommer-public.php:2849
+#: public/class-free-product-sample-for-woocommer-public.php:2852
+msgid "Sample - Out of stock"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:659
+#: admin/class-free-product-sample-for-woocommer-admin.php:982
+#: admin/partials/class-dsfps-product-block-editor-settings.php:159
+#: admin/partials/class-dsfps-product-block-editor-settings.php:176
+msgid "Sample Attachment"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:199
+msgid "Sample Button Advanced Styles"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:178
+msgid "Sample Button Color"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:134
+msgid "Sample Button Position"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1491
+#: follow-up-email/class-free-product-sample-email__premium_only.php:24
+msgid "Sample Follow Up Email"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1059
+msgid "Sample Order Limit"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:114
+msgid "Sample Price"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:602
+#: admin/partials/class-dsfps-product-block-editor-settings.php:57
+#: admin/partials/class-dsfps-product-block-editor-settings.php:70
+msgid "Sample Product"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:87
+msgid "Sample product settings have been successfully saved!"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:447
+msgid "Sample Product Type Title"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:2502
+msgid "Sample Products"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1302
+msgid "Sample Promo"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:699
+msgid "Sample Specific"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:55
+msgid "Samples for User Groups"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:102
+#: admin/partials/dsfps-admin-settings-page.php:1597
+msgid "Save Changes"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1903
+msgid "Saved successfully"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:86
+msgid "Search Engine"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:762
+#: admin/partials/dsfps-admin-settings-page.php:771
+msgid "Select a Category"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:749
+msgid "Select a category"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:624
+#: admin/class-free-product-sample-for-woocommer-admin.php:830
+msgid "Select a file"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:724
+msgid "Select a product"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1099
+msgid "Select a user"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1146
+#: admin/partials/dsfps-admin-settings-page.php:1155
+msgid "Select a User Role"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1125
+msgid "Select a user role"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:735
+msgid "Select Categories"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:84
+msgid "Select One"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:719
+msgid "Select Products"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:707
+msgid ""
+"Select the enable type option to specify whether you want to enable samples "
+"for specific products or categories."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:793
+msgid "Select the price type option for the sample products."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:640
+#: admin/partials/class-dsfps-product-block-editor-settings.php:84
+msgid "Select to enable sample for this product to available for the users."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:115
+msgid "Set a $5.50 sample price for special products."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1349
+msgid "Set a custom text for your sample promo button here."
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:58
+msgid "Set dynamic sample charges by category."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:395
+msgid "Set margin for sample button."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1060
+msgid "Set maximum order limit for samples."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1017
+msgid ""
+"Set order limits for samples to restrict multiple sample orders from same "
+"customer. For instance, if the limit is set to 1, A customer can only submit "
+"a sample order once."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:336
+msgid "Set padding for sample button."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:236
+msgid "Set sample button border color and width. "
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:280
+msgid "Set sample button font size and font weight."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:883
+msgid "Set sample price for this variation."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:124
+msgid ""
+"Set your custom label for the sample \"Add to Cart\" button. Use {PRICE} to "
+"dynamically display the sample price."
+msgstr ""
+
+#: includes/class-free-product-sample-for-woocommerce.php:273
+msgid "Settings"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1170
+msgid "Shipping & Tax Class Specific"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1181
+msgid "Shipping Class"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:749
+#: admin/class-free-product-sample-for-woocommer-admin.php:935
+#: admin/partials/class-dsfps-product-block-editor-settings.php:518
+msgid "Shipping class"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:751
+#: admin/class-free-product-sample-for-woocommer-admin.php:936
+#: admin/partials/class-dsfps-product-block-editor-settings.php:520
+#: admin/partials/class-dsfps-product-block-editor-settings.php:521
+#: admin/partials/class-dsfps-product-block-editor-settings.php:552
+#: admin/partials/class-dsfps-product-block-editor-settings.php:553
+msgid ""
+"Shipping classes are used by certain shipping methods to group similar "
+"products."
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:85
+msgid "Social Media"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:942
+#: public/class-free-product-sample-for-woocommer-public.php:1427
+#: public/class-free-product-sample-for-woocommer-public.php:1616
+msgid "Sorry! you reached maximum sample limit for this product!"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:806
+msgid "Specify the flat or fixed price for your sample product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:948
+msgid ""
+"Specify the maximum quantity allowed for each sample product order. Leave it "
+"empty if you don't want to set any maximum limit."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:928
+msgid ""
+"Specify the maximum quantity for each sample product. Leave it empty if you "
+"don't want to set a maximum limit."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:676
+#: admin/partials/class-dsfps-product-block-editor-settings.php:246
+#: admin/partials/class-dsfps-product-block-editor-settings.php:247
+msgid "Specify the maximum quantity for this sample product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:821
+msgid "Specify the percentage price for your sample product."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1522
+msgid "Specify the timing for the follow-up email."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:761
+#: admin/class-free-product-sample-for-woocommer-admin.php:947
+#: admin/partials/class-dsfps-product-block-editor-settings.php:577
+#: admin/partials/class-dsfps-product-block-editor-settings.php:615
+#: admin/partials/dsfps-admin-settings-page.php:1253
+msgid "Standard"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:72
+msgid ""
+"Stay in control of your sample product inventory with the sample inventory "
+"management feature."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:694
+#: admin/class-free-product-sample-for-woocommer-admin.php:860
+#: admin/partials/class-dsfps-product-block-editor-settings.php:279
+msgid "Stock quantity"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:463
+#: admin/partials/dsfps-admin-settings-page.php:471
+#: admin/partials/dsfps-admin-settings-page.php:481
+msgid "Suffix"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:530
+msgid "Suffix Title"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:55
+msgid "Suggest"
+msgstr ""
+
+#: admin/partials/header/plugin-header.php:52
+#: includes/class-free-product-sample-for-woocommerce.php:275
+msgid "Support"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:59
+msgid "Support Forum"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:285
+msgid "support ticket"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:98
+msgid ""
+"Tailor your sample product experience by selecting a specific shipping class "
+"to manage shipping costs for sample orders."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1236
+msgid "Tax Class"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:779
+#: admin/class-free-product-sample-for-woocommer-admin.php:965
+#: admin/partials/class-dsfps-product-block-editor-settings.php:594
+msgid "Tax class"
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:22
+msgid ""
+"Thank you for choosing our top-rated WooCommerce Product Sample plugin. Our "
+"user-friendly interface makes enabling samples for any products simple. "
+"Sample, sell, succeed."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:243
+msgid ""
+"The ability to control <strong>how many samples users can purchase</strong> "
+"is fantastic. Managing samples for multiple users is seamless, and adding "
+"specific products as <strong>samples with minimal charges is "
+"incredible</strong>."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:1704
+msgid ""
+"The maximum allows order quantity is %s for sample product and you have %s "
+"in your cart."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:962
+msgid ""
+"The maximum allows order quantity is {MAX_QTY} for sample product and you "
+"have {CART_QTY} in your cart."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:1496
+#: public/class-free-product-sample-for-woocommer-public.php:1783
+msgid ""
+"The maximum order limit for the \"%s\" sample is %s and you have already "
+"ordered it."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1074
+msgid ""
+"The maximum order limit for the {PRODUCT_NAME} sample is {MAX_ORDER_LIMIT} "
+"and you have already ordered it."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:648
+#: admin/partials/class-dsfps-product-block-editor-settings.php:116
+#: admin/partials/class-dsfps-product-block-editor-settings.php:117
+#: admin/partials/class-dsfps-product-block-editor-settings.php:137
+#: admin/partials/class-dsfps-product-block-editor-settings.php:138
+msgid "The price of sample product for this product in currency format."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:112
+msgid ""
+"This option enables you to tailor sample settings for individual products, "
+"ensuring precise control over pricing, stock, and specifications, which "
+"enhances customer satisfaction."
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:26
+msgid ""
+"To help you get started, watch the quick tour video on the right. For more "
+"help, explore our help documents or visit our %s for detailed video "
+"tutorials."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:346
+#: admin/partials/dsfps-admin-settings-page.php:365
+#: admin/partials/dsfps-admin-settings-page.php:404
+#: admin/partials/dsfps-admin-settings-page.php:423
+msgid "Top"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:228
+msgid "Trusted by 100,000+ store owners and WP experts!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:133
+msgid ""
+"Turn sample customers into paying customers by following up to purchase "
+"original products for sample orders at specific times."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:136
+msgid ""
+"Turn sample customers into paying customers with follow-up emails. Increase "
+"engagement, promote full product purchases, and drive conversions with "
+"personalized messages."
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:56
+msgid ""
+"Unlock a world of possibilities for your WooCommerce store with our Premium "
+"Product Sample plugin!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:61
+msgid ""
+"Unlock advanced features like order limits, auto follow-up emails, and more."
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:52
+msgid "Unlock Premium Features Today!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:48
+msgid "Unlock Premium Features with a %s%% Discount!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:137
+msgid ""
+"Unlock the potential of your sample program and maximize your sales with "
+"strategic email marketing."
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:65
+#: admin/partials/header/plugin-header.php:69
+#: admin/partials/header/plugin-header.php:74
+msgid "Upgrade Now"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:149
+msgid ""
+"Upgrade to premium to access advanced features, boost consumer satisfaction, "
+"and effectively sell samples!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-popup.php:41
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:148
+msgid "Upgrade to Unlock Premium Features"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:627
+#: admin/class-free-product-sample-for-woocommer-admin.php:629
+#: admin/class-free-product-sample-for-woocommer-admin.php:832
+#: admin/class-free-product-sample-for-woocommer-admin.php:834
+msgid "Uploaded file:"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:111
+msgid ""
+"Use this toggle to enable or disable product samples (Customers will only be "
+"able to see the sample button while it is enabled)."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1094
+msgid "User Based"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1111
+msgid "User Role Based"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:1087
+msgid "User Specific"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:480
+msgid "Variation Height"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:387
+msgid "Variation Length"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:135
+msgid "Variation Sample Price"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:550
+msgid "Variation Shipping class"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:295
+msgid "Variation Stock quantity"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:630
+msgid "Variation Tax class"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:332
+msgid "Variation Weight (kg)"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:433
+msgid "Variation Width"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:264
+msgid "Verified Customer"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:78
+#: public/class-free-product-sample-for-woocommer-public.php:100
+#: public/class-free-product-sample-for-woocommer-public.php:124
+#: public/class-free-product-sample-for-woocommer-public.php:2175
+msgid "View cart"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:305
+msgid "We have a 14-day money-back guarantee."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:1806
+#: admin/partials/dsfps-admin-settings-page.php:1556
+#: admin/partials/dsfps-admin-settings-page.php:1566
+#: admin/partials/dsfps-admin-settings-page.php:1577
+msgid "Weeks"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:710
+#: admin/class-free-product-sample-for-woocommer-admin.php:895
+#: admin/class-free-product-sample-for-woocommer-admin.php:896
+msgid "Weight"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:316
+msgid "Weight (kg)"
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:3137
+#: public/class-free-product-sample-for-woocommer-public.php:3145
+#: public/class-free-product-sample-for-woocommer-public.php:3149
+msgid "Weight - [Sample]"
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:713
+#: admin/class-free-product-sample-for-woocommer-admin.php:898
+#: admin/partials/class-dsfps-product-block-editor-settings.php:317
+#: admin/partials/class-dsfps-product-block-editor-settings.php:318
+#: admin/partials/class-dsfps-product-block-editor-settings.php:333
+#: admin/partials/class-dsfps-product-block-editor-settings.php:334
+msgid "Weight in decimal form"
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:21
+msgid "Welcome to Product Sample Plugin"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:24
+msgid "Welcome! 🤗"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:294
+msgid "What payment methods do you accept?"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:302
+msgid "What’s your refund policy?"
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:577
+msgid ""
+"When enabled, the new menu item \"Sample Products\" will be added to the "
+"primary menu, and a list of all sample products will be showcased."
+msgstr ""
+
+#: admin/partials/dsfps-admin-settings-page.php:861
+msgid ""
+"When enabled, the product price remains fixed, no matter how many quantities "
+"are added to the cart. The total cost will always equal the sample price, "
+"multiplied by one. For example, if the sample price is $1 and you add 2 "
+"quantities of a sample product, the subtotal will still be $1 instead of $2."
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:958
+msgid "Whether a product was added via at checkout bump."
+msgstr ""
+
+#: admin/class-free-product-sample-for-woocommer-admin.php:727
+#: admin/partials/class-dsfps-product-block-editor-settings.php:417
+msgid "Width"
+msgstr ""
+
+#: admin/partials/class-dsfps-product-block-editor-settings.php:419
+#: admin/partials/class-dsfps-product-block-editor-settings.php:420
+#: admin/partials/class-dsfps-product-block-editor-settings.php:435
+#: admin/partials/class-dsfps-product-block-editor-settings.php:436
+msgid "Width in decimal form"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:132
+msgid "Winning Order Auto Follow-Up Emails"
+msgstr ""
+
+#: free-product-sample.php:280
+msgid "WooCommerce"
+msgstr ""
+
+#: admin/partials/dsfps-information-page.php:38
+msgid "WooCommerce Plugin"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:82
+msgid "Would you mind telling how did you hear about us?"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:91
+msgid "WP Mayor"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:89
+msgid "WPBeginner"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:93
+msgid "WPExplorer"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:88
+msgid "WPLift"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:283
+msgid ""
+"Yes! You can read our %s or submit a %s. We are very responsive and strive "
+"to do our best to help you."
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:42
+#: admin/partials/dots-plugin-setup-wizard.php:50
+msgid "Yes, count me in!"
+msgstr ""
+
+#: admin/partials/dots-plugin-setup-wizard.php:77
+msgid "You are all set, almost!"
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:237
+msgid ""
+"You are fully protected by our 100% Satisfaction Guarantee. If over the next "
+"14 days you are unhappy with our plugin or have an issue that we are unable "
+"to resolve, we'll happily consider offering a 100% refund of your money."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:86
+msgid ""
+"You can charge a percentage of the regular product rate, allowing you to "
+"offer samples at a discounted price while still covering costs."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:60
+msgid ""
+"You can offer sample products to everyone who visits your website or select "
+"for access by user role types, such as shop manager, customer, etc."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:297
+msgid ""
+"You can pay with your credit card using Stripe checkout. Or your PayPal "
+"account."
+msgstr ""
+
+#: admin/partials/dots-upgrade-dashboard.php:76
+msgid ""
+"You have 100 original products, but only 30 samples are available for sale. "
+"Once the samples are sold out, the sample products will be out of stock."
+msgstr ""
+
+#: admin/partials/dsfps-get-started-page.php:27
+msgid "YouTube channel"
+msgstr ""

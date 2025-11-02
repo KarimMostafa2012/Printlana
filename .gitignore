@@ -1,0 +1,79 @@
+# ==========================================
+# WordPress .gitignore (keep only plugins, themes, mu-plugins)
+# ==========================================
+
+# Core WordPress files
+wp-admin/
+wp-includes/
+license.txt
+readme.html
+
+# Ignore all wp-content contents except plugins, themes, and mu-plugins
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+!wp-content/mu-plugins/
+
+# Inside wp-content, ignore everything else
+wp-content/advanced-cache.php
+wp-content/ai1wm-backups/
+wp-content/autoptimize_404_handler.php
+wp-content/cache/
+wp-content/debug.log
+wp-content/index.php
+wp-content/languages/
+wp-content/litespeed/
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/uploads/
+wp-content/uploads-webpc/
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node & Build Tools
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# Composer dependencies
+vendor/
+composer.lock
+
+# Logs & temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+
+# Env and sensitive config
+.env
+.env.*
+wp-config.php
+
+# Misc build artifacts
+*.map
+dist/
+build/
+.cache/
+coverage/
+
+# cPanel or hosting specific
+error_log
+logs/
+tmp/
+cgi-bin/

@@ -1,0 +1,86 @@
+{
+   "domain": "moyasar",
+   "locale_data": {
+      "moyasar": {
+         "": {
+            "domain": "moyasar",
+            "lang": "ar"
+         },
+         "Moyasar Payment Gateway": [
+            "ميسر لخدمات الدفع"
+         ],
+         "Card Name": [
+            "أسم حامل البطاقة"
+         ],
+         "Name on card": [
+            "الاسم على البطاقة"
+         ],
+         "Card Number": [
+            "رقم البطاقة"
+         ],
+         "Expiration": [
+            "تاريخ الانتهاء"
+         ],
+         "Please enter the card number.": [
+            "الرجاء إدخال رقم البطاقة."
+         ],
+         "Please enter a valid card number.": [
+            "الرجاء إدخال رقم بطاقة صالح."
+         ],
+         "Please enter the card name.": [
+            "الرجاء إدخال اسم حامل البطاقة."
+         ],
+         "Please enter a valid card name.": [
+            "الرجاء إدخال اسم حامل البطاقة صحيح."
+         ],
+         "Please enter the expiry date.": [
+            "الرجاء إدخال تاريخ الانتهاء."
+         ],
+         "Please enter a valid expiry date.": [
+            "الرجاء إدخال تاريخ انتهاء صحيح."
+         ],
+         "Please enter the cvc.": [
+            "الرجاء إدخال رمز التحقق."
+         ],
+         "Phone Number": [
+            "رقم الجوال"
+         ],
+         "OTP": [
+            "رمز التحقق"
+         ],
+         "Submit": [
+             "إتمام الطلب"
+         ],
+         "OTP Sent Successfully. Please enter the OTP code you received.": [
+             "تم إرسال رمز التحقق بنجاح. الرجاء إدخال رمز التحقق الذي تلقيته."
+         ],
+         "Send OTP": [
+             "إرسال رمز التحقق"
+         ],
+         "Please enter your mobile number and press 'Send OTP'. You will receive an SMS code required to complete the payment process.": [
+            "الرجاء إدخال رقم الجوال والضغط على 'اتمام الطلب'. ستصلك رسالة نصية تحتوي على الرمز الذي يجب إدخاله لإتمام عملية الدفع."
+         ],
+         "OTP has been sent.": [
+            "تم إرسال رمز التحقق."
+         ],
+         "Phone number must start with 05.": [
+            "رقم الجوال يجب أن يبدأ بـ 05."
+         ],
+         "Please enter the phone number.": [
+            "الرجاء إدخال رقم الجوال."
+         ],
+         "Please enter a valid phone number.": [
+            "الرجاء إدخال رقم جوال صحيح."
+         ],
+         "Please enter the OTP.": [
+            "الرجاء إدخال رمز التحقق."
+         ],
+         "Pay with": [
+            "ادفع بواسطة"
+         ],
+         "Pay %s %s": [
+            "ادفع %s %s"
+         ]
+      }
+   }
+}

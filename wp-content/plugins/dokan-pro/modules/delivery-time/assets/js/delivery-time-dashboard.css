@@ -1,0 +1,895 @@
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*:where(.dokan-layout,.dokan-layout *),
+:where(.dokan-layout,.dokan-layout *)::before,
+:where(.dokan-layout,.dokan-layout *)::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+:where(.dokan-layout,.dokan-layout *)::before,
+:where(.dokan-layout,.dokan-layout *)::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+.dokan-layout {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+.dokan-layout {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr:where(.dokan-layout,.dokan-layout *) {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]):where(.dokan-layout,.dokan-layout *) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1:where(.dokan-layout,.dokan-layout *),
+h2:where(.dokan-layout,.dokan-layout *),
+h3:where(.dokan-layout,.dokan-layout *),
+h4:where(.dokan-layout,.dokan-layout *),
+h5:where(.dokan-layout,.dokan-layout *),
+h6:where(.dokan-layout,.dokan-layout *) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a:where(.dokan-layout,.dokan-layout *) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b:where(.dokan-layout,.dokan-layout *),
+strong:where(.dokan-layout,.dokan-layout *) {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code:where(.dokan-layout,.dokan-layout *),
+kbd:where(.dokan-layout,.dokan-layout *),
+samp:where(.dokan-layout,.dokan-layout *),
+pre:where(.dokan-layout,.dokan-layout *) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small:where(.dokan-layout,.dokan-layout *) {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub:where(.dokan-layout,.dokan-layout *),
+sup:where(.dokan-layout,.dokan-layout *) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub:where(.dokan-layout,.dokan-layout *) {
+  bottom: -0.25em;
+}
+
+sup:where(.dokan-layout,.dokan-layout *) {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table:where(.dokan-layout,.dokan-layout *) {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+input:where(.dokan-layout,.dokan-layout *),
+optgroup:where(.dokan-layout,.dokan-layout *),
+select:where(.dokan-layout,.dokan-layout *),
+textarea:where(.dokan-layout,.dokan-layout *) {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+select:where(.dokan-layout,.dokan-layout *) {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+input:where([type='button']):where(.dokan-layout,.dokan-layout *),
+input:where([type='reset']):where(.dokan-layout,.dokan-layout *),
+input:where([type='submit']):where(.dokan-layout,.dokan-layout *) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring:where(.dokan-layout,.dokan-layout *) {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid:where(.dokan-layout,.dokan-layout *) {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress:where(.dokan-layout,.dokan-layout *) {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-inner-spin-button,
+:where(.dokan-layout,.dokan-layout *) ::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search']:where(.dokan-layout,.dokan-layout *) {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary:where(.dokan-layout,.dokan-layout *) {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote:where(.dokan-layout,.dokan-layout *),
+dl:where(.dokan-layout,.dokan-layout *),
+dd:where(.dokan-layout,.dokan-layout *),
+h1:where(.dokan-layout,.dokan-layout *),
+h2:where(.dokan-layout,.dokan-layout *),
+h3:where(.dokan-layout,.dokan-layout *),
+h4:where(.dokan-layout,.dokan-layout *),
+h5:where(.dokan-layout,.dokan-layout *),
+h6:where(.dokan-layout,.dokan-layout *),
+hr:where(.dokan-layout,.dokan-layout *),
+figure:where(.dokan-layout,.dokan-layout *),
+p:where(.dokan-layout,.dokan-layout *),
+pre:where(.dokan-layout,.dokan-layout *) {
+  margin: 0;
+}
+
+fieldset:where(.dokan-layout,.dokan-layout *) {
+  margin: 0;
+  padding: 0;
+}
+
+legend:where(.dokan-layout,.dokan-layout *) {
+  padding: 0;
+}
+
+ol:where(.dokan-layout,.dokan-layout *),
+ul:where(.dokan-layout,.dokan-layout *),
+menu:where(.dokan-layout,.dokan-layout *) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog:where(.dokan-layout,.dokan-layout *) {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea:where(.dokan-layout,.dokan-layout *) {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+:where(.dokan-layout,.dokan-layout *) input::-moz-placeholder, :where(.dokan-layout,.dokan-layout *) textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+:where(.dokan-layout,.dokan-layout *) input::placeholder,
+:where(.dokan-layout,.dokan-layout *) textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+[role="button"]:where(.dokan-layout,.dokan-layout *) {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled:where(.dokan-layout,.dokan-layout *) {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img:where(.dokan-layout,.dokan-layout *),
+svg:where(.dokan-layout,.dokan-layout *),
+video:where(.dokan-layout,.dokan-layout *),
+canvas:where(.dokan-layout,.dokan-layout *),
+audio:where(.dokan-layout,.dokan-layout *),
+iframe:where(.dokan-layout,.dokan-layout *),
+embed:where(.dokan-layout,.dokan-layout *),
+object:where(.dokan-layout,.dokan-layout *) {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img:where(.dokan-layout,.dokan-layout *),
+video:where(.dokan-layout,.dokan-layout *) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])):where(.dokan-layout,.dokan-layout *) {
+  display: none;
+}
+
+[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+  border-radius: 0px;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-shadow: 0 0 #0000;
+}
+
+[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #2563eb;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  border-color: #2563eb;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+input::placeholder,textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+::-webkit-date-and-time-value {
+  min-height: 1.5em;
+  text-align: inherit;
+}
+
+::-webkit-datetime-edit {
+  display: inline-flex;
+}
+
+::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+}
+
+[multiple],[size]:where(select:not([size="1"])) {
+  background-image: initial;
+  background-position: initial;
+  background-repeat: unset;
+  background-size: initial;
+  padding-right: 0.75rem;
+  -webkit-print-color-adjust: unset;
+          print-color-adjust: unset;
+}
+
+[type='checkbox'],[type='radio'] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0;
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+  color: #2563eb;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+  --tw-shadow: 0 0 #0000;
+}
+
+[type='checkbox'] {
+  border-radius: 0px;
+}
+
+[type='radio'] {
+  border-radius: 100%;
+}
+
+[type='checkbox']:focus,[type='radio']:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 2px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #2563eb;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+
+[type='checkbox']:checked,[type='radio']:checked {
+  border-color: transparent;
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[type='checkbox']:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e");
+}
+
+@media (forced-colors: active)  {
+
+  [type='checkbox']:checked {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='radio']:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e");
+}
+
+@media (forced-colors: active)  {
+
+  [type='radio']:checked {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+[type='checkbox']:indeterminate {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 16 16%27%3e%3cpath stroke=%27white%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27M4 8h8%27/%3e%3c/svg%3e");
+  border-color: transparent;
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (forced-colors: active)  {
+
+  [type='checkbox']:indeterminate {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+[type='file'] {
+  background: unset;
+  border-color: inherit;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: unset;
+  line-height: inherit;
+}
+
+[type='file']:focus {
+  outline: 1px solid ButtonText;
+  outline: 1px auto -webkit-focus-ring-color;
+}.dokan-layout table:not(.dataviews-view-table),.dokan-layout table:not(.dataviews-view-table) th,.dokan-layout table:not(.dataviews-view-table) td{margin:0;padding:0;border:0;border-spacing:0;border-collapse:collapse;font-size:inherit;font-weight:inherit;text-align:inherit;vertical-align:inherit;box-sizing:border-box}.container {
+  width: 100%;
+}@media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}@media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}@media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}@media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}.dokan-layout .visible {
+  visibility: visible;
+}.dokan-layout .static {
+  position: static;
+}.dokan-layout .fixed {
+  position: fixed;
+}.dokan-layout .absolute {
+  position: absolute;
+}.dokan-layout .relative {
+  position: relative;
+}.dokan-layout .inset-0 {
+  inset: 0px;
+}.dokan-layout .z-50 {
+  z-index: 50;
+}.dokan-layout .col-span-3 {
+  grid-column: span 3 / span 3;
+}.dokan-layout .mb-1 {
+  margin-bottom: 0.25rem;
+}.dokan-layout .mb-2 {
+  margin-bottom: 0.5rem;
+}.dokan-layout .ml-2 {
+  margin-left: 0.5rem;
+}.dokan-layout .mr-16 {
+  margin-right: 4rem;
+}.dokan-layout .block {
+  display: block;
+}.dokan-layout .inline {
+  display: inline;
+}.dokan-layout .flex {
+  display: flex;
+}.dokan-layout .table {
+  display: table;
+}.dokan-layout .grid {
+  display: grid;
+}.dokan-layout .list-item {
+  display: list-item;
+}.dokan-layout .hidden {
+  display: none;
+}.dokan-layout .h-10 {
+  height: 2.5rem;
+}.dokan-layout .h-3 {
+  height: 0.75rem;
+}.dokan-layout .h-4 {
+  height: 1rem;
+}.dokan-layout .h-6 {
+  height: 1.5rem;
+}.dokan-layout .h-8 {
+  height: 2rem;
+}.dokan-layout .h-full {
+  height: 100%;
+}.dokan-layout .w-12 {
+  width: 3rem;
+}.dokan-layout .w-2\/3 {
+  width: 66.666667%;
+}.dokan-layout .w-24 {
+  width: 6rem;
+}.dokan-layout .w-28 {
+  width: 7rem;
+}.dokan-layout .w-32 {
+  width: 8rem;
+}.dokan-layout .w-4 {
+  width: 1rem;
+}.dokan-layout .w-48 {
+  width: 12rem;
+}.dokan-layout .w-6 {
+  width: 1.5rem;
+}.dokan-layout .w-8 {
+  width: 2rem;
+}.dokan-layout .w-full {
+  width: 100%;
+}.dokan-layout .shrink {
+  flex-shrink: 1;
+}.dokan-layout .transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}.dokan-layout .resize {
+  resize: both;
+}.dokan-layout .grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}.dokan-layout .flex-col {
+  flex-direction: column;
+}.dokan-layout .items-center {
+  align-items: center;
+}.dokan-layout .justify-end {
+  justify-content: flex-end;
+}.dokan-layout .justify-center {
+  justify-content: center;
+}.dokan-layout .gap-2 {
+  gap: 0.5rem;
+}.dokan-layout .gap-3 {
+  gap: 0.75rem;
+}.dokan-layout .gap-4 {
+  gap: 1rem;
+}.dokan-layout :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}.dokan-layout :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}.dokan-layout .rounded {
+  border-radius: 0.25rem;
+}.dokan-layout .rounded-\[3px\] {
+  border-radius: 3px;
+}.dokan-layout .rounded-full {
+  border-radius: 9999px;
+}.dokan-layout .border {
+  border-width: 1px;
+}.dokan-layout .border-\[1px\] {
+  border-width: 1px;
+}.dokan-layout .border-solid {
+  border-style: solid;
+}.dokan-layout .border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
+}.dokan-layout .bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}.dokan-layout .\!p-2 {
+  padding: 0.5rem !important;
+}.dokan-layout .p-2 {
+  padding: 0.5rem;
+}.dokan-layout .text-center {
+  text-align: center;
+}.dokan-layout .text-right {
+  text-align: right;
+}.dokan-layout .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}.dokan-layout .font-bold {
+  font-weight: 700;
+}.dokan-layout .font-medium {
+  font-weight: 500;
+}.dokan-layout .lowercase {
+  text-transform: lowercase;
+}.dokan-layout .ordinal {
+  --tw-ordinal: ordinal;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}.dokan-layout .\!text-gray-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}.dokan-layout .underline {
+  text-decoration-line: underline;
+}.dokan-layout .overline {
+  text-decoration-line: overline;
+}.dokan-layout .blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}.dokan-layout .filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}.dokan-layout .backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}.dokan-layout .transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}.dokan-layout .fc-popover{z-index:999 !important}.dokan-layout .fc-daygrid-event-harness .dokan-delivery-time-event-item-content div{display:flex;align-items:center}.dokan-layout .dokan-delivery-time-dashboard-calendar tbody[role=presentation] td{border:1px solid #d6d6d6 !important}.dokan-layout .dokan-delivery-time-dashboard-calendar thead[role=presentation] th{border:1px solid #d6d6d6 !important;border-bottom:0 !important;text-align:center}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc-button-primary:not(.fc-button-active):not(:disabled):hover{color:#fff;border-color:var(--dokan-button-hover-background-color, #502BBF);background-color:var(--dokan-button-hover-background-color, #7047EB)}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc-daygrid-event-harness{z-index:0 !important}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-button-primary:not(:disabled).fc-button-active,.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-button-primary:not(:disabled):active{background-color:#fff !important;border:1px solid #d6d6d6;color:#6d6d6d}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-button-primary{background-color:#eee;color:#6d6d6d;border:1px solid #d6d6d6}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-button-primary:disabled{background-color:#f3f3f3;color:#a7a7a7;border:1px solid #a7a7a7}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-view-harness .fc-col-header-cell a,.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-view-harness .fc-scroller-harness .fc-daygrid-day-number,.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-view-harness .fc-scroller-harness .fc-daygrid-event{color:#6d6d6d;transition:.2s linear}.dokan-layout .dokan-delivery-time-dashboard-calendar .fc .fc-view-harness .fc-scroller-harness .fc-daygrid-event:hover{color:var(--dokan-button-background-color, #502BBF)}.dokan-layout .dokan-delivery-time-dashboard-calendar div.fc-timegrid-slots td.fc-timegrid-slot{border:1px solid #d6d6d6 !important}.dokan-layout .hover\:\!bg-red-50:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .hover\:\!text-red-500:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1)) !important;
+}

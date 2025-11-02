@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+/* CSS Document */
+@media screen and (max-width:980px){
+	.dots-header-right .logo-detail strong{font-size:28PX;}
+	.under-table table.table-outer tr td.ur-2 a{margin-bottom:20px;}
+	.under-table table.table-outer tr td.ur-2 a{margin-bottom:20px;}
+	.set h2{margin-top:0;}
+	.set-right{width:100%;float:left;text-align:left;margin-top:20px;}
+	.search{float:none;}
+	table#tbl_ap_product_method td select[multiple]{width:95%!important;padding:0;margin:0 auto;text-align:center;display:block;margin-top:20px;}
+	a#fee-delete-field{display:block;text-align:center;}
+}
+@media screen and (max-width:782px){
+	.fps-section-left table.form-table tr td,.fps-section-left table.form-table tr th{display:revert;width:auto;}
+	.fps-section-left table.form-table tr th{width:35%;}
+	.fps-section-left table.form-table tr td select,.fps-section-left table.form-table tr td textarea,.fps-section-left table.form-table tr td input:not(input[type="checkbox"]):not(.wp-color-picker):not(.wp-picker-clear){width:100%;display:inline-block;}
+	.fps-section-left table.form-table tr td .select2-container{width:100%!important;}
+	.wp-core-ui .dots-settings-inner-main input:not([type=checkbox]):not([type=radio]):not(.wp-picker-input-wrap .button):not(.wp-picker-container input), .wp-core-ui .dots-settings-inner-main select, .wp-core-ui .dots-settings-inner-main textarea:not(.select2-selection textarea){line-height:1.625;}
+}
+@media screen and (max-width:768px){
+	.logo-main{display:block;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;}
+	.dots-header-right .logo-detail{width:100%;margin-bottom:20px;}
+	.dots-header-right .update-blog{float:left;margin-left:20px;}
+	.menu-main ul li a{padding-left:17px;padding-right:17px;}
+	.under-table table.table-outer tr td.ur-2 p.block.bl{margin-left:26px;}
+	.under-table table.table-outer tr td.ur-2 input#submit{width:27%!important;}
+	.foot-rihgt{float:left;margin-top:20px;width:100%;}
+	.under-table table.table-outer tr td.ur-2 select{width:100%;}
+	.set input#submit{width:24%!important;}
+}
+@media screen and (max-width:559px){
+	.dots-header-right .logo-detail strong{font-size:24PX;}
+	.menu-main ul li{width:100%!important;margin:0 auto;text-align:center;}
+	.tap{width:100%;overflow:auto;}
+
+	/*.tap table.table-outer.tap-cas {min-width: 640px;}*/
+	.search{margin-top:20px;}
+	.under-table table.table-outer tr td.ur-1{width:85%;border-bottom:none;}
+	.under-table table.table-outer tr td{width:85%;display:block;}
+	.under-table table.table-outer tr td.ur-2{border-top:none;}
+	.shipping-method-rules a#fee-add-field{margin-top:10px;margin-left:20px;display:block;width:100px;}
+	.fps-section-left table.form-table tr td,.fps-section-left table.form-table tr th{display:block;width:100%;}
+	.fps-section-left table.form-table tr th{width:100%;}
+}
+
+/*03-05-2019*/
+@media screen and (max-width:1300px){
+	header.dots-header .dots-header-right .button-group img{max-height:40px;}
+	header.dots-header .dots-header-right .button-group .button-dots-left{margin-right:10px;}
+	header.dots-header .dots-header-right .logo-detail,header.dots-header .dots-header-right .logo-detail .button-group{width:100%;}
+	header.dots-header .dots-header-right .logo-detail{margin-bottom:15px;padding-left:0;text-align:center;}
+	header.dots-header .dots-logo-main{float:none;-webkit-box-sizing:border-box;box-sizing:border-box;text-align:center;}
+}
+@media screen and (max-width:650px){
+	.dotstore_plugin_sidebar,header.dots-header .dots-header-right{width:100%!important;}
+	header.dots-header .dots-header-right .button-group img{max-height:27px;}
+	#dotsstoremain .button-dots{margin-right:0;}
+	header.dots-header .dots-header-right .button-dots span.support_dotstore_image:last-child{margin:0!important;}
+	.fps-main-table.res-cl form div h2{display:block;margin-bottom:10px;}
+	.advance_rule_condition_match_type{display:block;margin:10px 0;padding-left:10px;}
+	#profile-page .form-table textarea,.form-table span.description,.form-table td input[type=email],.form-table td input[type=password],.form-table td input[type=text],.form-table td select,.form-table td textarea{width:85%;}
+	div#apm_wrap .ap_title label.switch{left:15px;top:3px;}
+}

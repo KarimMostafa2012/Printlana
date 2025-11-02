@@ -1,0 +1,600 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Min Max Quantity & Step Control for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-03 06:09+0000\n"
+"PO-Revision-Date: 2025-05-15 06:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1\n"
+"X-Domain: wcmmq"
+
+#: admin/page-loader.php:98
+msgid " Pro"
+msgstr ""
+
+#: admin/page-loader.php:328
+msgid " Renew it to get latest update."
+msgstr ""
+
+#. 1: Plugin name 2: WooCommerce with link
+#: wcmmq.php:381
+#, php-format
+msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
+msgstr ""
+
+#. 1: Plugin name
+#: framework/recommeded.php:46
+#, php-format
+msgid ""
+"%s Product Table plugin helps you to display your WooCommerce products in a "
+"searchable table layout with filters. Add a table on any page or post via a "
+"shortcode. You can create tables as many as you want."
+msgstr ""
+
+#: admin/set_menu_and_fac.php:151 admin/set_menu_and_fac.php:169
+#: admin/page/main-page/universal-settings.php:114
+#: admin/page/main-page/universal-settings.php:142
+msgid "(Optional)"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"[Min Max Quantity & Step Control for WooCommerce] offers to display specific "
+"products with minimum, maximum quantity. As well as by this plugin you will "
+"be able to set the increment or decrement step as much as you want. In a "
+"word: Minimum Quantity, Maximum Quantity and Step can be controlled. for any "
+"issue: codersaiful@gmail.com"
+msgstr ""
+
+#: admin/includes/terms_condition.php:34
+msgid "Add"
+msgstr ""
+
+#. $s: term name
+#: admin/includes/terms_condition.php:49
+#, php-format
+msgid "Add your %s, you able to add one more."
+msgstr ""
+
+#: admin/set_menu_and_fac.php:482 admin/page/main-page.php:156
+msgid "Already Quantity Validation Message"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:185
+#: admin/page/main-page/universal-settings.php:169
+msgid "Archive Quantity Box"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:479 admin/page/main-page.php:153
+msgid ""
+"Available shortcode [current_quantity][min_quantity],[max_quantity],"
+"[product_name],[step_quantity],[inputed_quantity],[variation_name]"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:483 admin/page/main-page.php:157
+msgid ""
+"Available shortcode [current_quantity][min_quantity],[max_quantity],"
+"[product_name],[step_quantity],[variation_name]"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:474 admin/page/main-page.php:148
+msgid ""
+"Available shortcode [min_quantity],[max_quantity],[product_name],"
+"[step_quantity],[inputed_quantity],[variation_name]"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:487 admin/page/main-page.php:161
+msgid ""
+"Available shortcode [min_quantity],[max_quantity],[product_name],"
+"[step_quantity],[variation_name]"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:491 admin/page/main-page.php:165
+msgid ""
+"Available shortcode [should_min],[should_next],[product_name],"
+"[variation_name],[quantity],[min_quantity],[step_quantity]"
+msgstr ""
+
+#: admin/page/main-page/universal-settings.php:6
+msgid "Basic"
+msgstr ""
+
+#. $s: term name
+#: admin/includes/terms_condition.php:9
+#, php-format
+msgid "Choose a %s"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:295
+msgid "Choose Terms"
+msgstr ""
+
+#: framework/ca-framework/app/notice.php:98
+msgid "Click here"
+msgstr ""
+
+#. Author of the plugin
+msgid "CodeAstrology Team"
+msgstr ""
+
+#. %s: term name
+#: admin/includes/terms_condition.php:149
+#, php-format
+msgid "Configure min,max,step for %s"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:151 admin/set_menu_and_fac.php:424
+#: admin/includes/terms_condition.php:123
+#: admin/page/main-page/edit-terms.php:100
+#: admin/page/main-page/universal-settings.php:113
+msgid "Default Quantity"
+msgstr ""
+
+#: admin/add_options_admin.php:52
+msgid "Default Quantity (Optional)"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:401
+msgid "Delete"
+msgstr ""
+
+#: admin/adm-inc/settings/wc-tab.php:81
+msgid "Description"
+msgstr ""
+
+#: framework/recommeded.php:21
+msgid ""
+"Easily manage and synchronize your WooCommerce product stock with the power "
+"of Google Sheets using our plugin – Product Stock Sync with Google Sheet for "
+"WooCommerce. This intuitive solution empowers you to streamline your "
+"inventory management effortlessly."
+msgstr ""
+
+#: admin/set_menu_and_fac.php:400
+msgid "Edit"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:325
+msgid "Edit Terms"
+msgstr ""
+
+#: admin/add_options_admin.php:67
+msgid "Enter Maximum Quantity for this Product"
+msgstr ""
+
+#: admin/add_options_admin.php:44
+msgid "Enter Minimum Quantity for this Product"
+msgstr ""
+
+#: admin/add_options_admin.php:80
+msgid "Enter quantity Step"
+msgstr ""
+
+#: framework/ca-framework/form/inc/field.php:14
+msgid "Fields args Should be an array!"
+msgstr ""
+
+#: modules/module-controller.php:67
+msgid "For Gutenberg block shop page loop, Enable disable."
+msgstr ""
+
+#: admin/set_menu_and_fac.php:313
+msgid "For Mulitple Terms,"
+msgstr ""
+
+#: admin/page/main-page/supported-terms.php:162
+msgid ""
+"For Mulitple Terms, Such: Category, Tag, Color, Size or any other taxonomy. "
+"Need Pro version. "
+msgstr ""
+
+#: framework/ca-framework/form/inc/field-base.php:30
+msgid "Form Label"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://codeastrology.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://codeastrology.com/min-max-quantity/"
+msgstr ""
+
+#: admin/functions.php:229
+msgid ""
+"I have found an issue with your Min Max and Step Control plugin. I will "
+"explain here with screenshot.Issues And Screenshots:"
+msgstr ""
+
+#: framework/recommeded.php:68
+msgid ""
+"If you want to set plus minus button for your Quantity Box, you can Install "
+"this plugin. If already by your theme, ignore it."
+msgstr ""
+
+#: admin/page/main-page/live-support.php:55
+msgid "Important Link"
+msgstr ""
+
+#: admin/add_options_admin.php:21 admin/add_options_admin.php:106
+msgid "Important:"
+msgstr ""
+
+#: admin/add_options_admin.php:56
+msgid ""
+"It is an optional Number, If do not set, Product default quantity will come "
+"from Minimum Quantity"
+msgstr ""
+
+#: admin/page-loader.php:124
+msgid "License"
+msgstr ""
+
+#: admin/page/main-page/live-support.php:31
+msgid "Live Support"
+msgstr ""
+
+#: admin/page-loader.php:31 admin/page/topbar.php:31
+msgid "Manage and Settings"
+msgstr ""
+
+#: admin/page-loader.php:54
+msgid "Manage Module"
+msgstr ""
+
+#: includes/features/syncronize-google-sheet.php:26
+msgid "Max Qty"
+msgstr ""
+
+#: admin/add_options_admin.php:63 admin/set_menu_and_fac.php:128
+#: admin/set_menu_and_fac.php:410 admin/includes/terms_condition.php:100
+#: admin/page/main-page/edit-terms.php:86
+#: admin/page/main-page/universal-settings.php:39
+msgid "Maximum Quantity"
+msgstr ""
+
+#: wcmmq.php:81
+msgid "Maximum quantity should [max_quantity] of \"[product_name]\""
+msgstr ""
+"Максимальное количество должно быть [min_quantity] от \"[product_name]\""
+
+#: admin/set_menu_and_fac.php:478 admin/page/main-page.php:152
+msgid "Maximum Quantity Validation Message"
+msgstr ""
+
+#: wcmmq.php:91
+msgid ""
+"Maximum variation count total of \"[product_name]\" should be or less then "
+"[vari_count_total]"
+msgstr ""
+"Максимальное общее количество вариаций для \"[product_name]\" должно быть "
+"или меньше [vari_count_total]."
+
+#: wcmmq.php:89
+msgid ""
+"Maximum variation quantity total of \"[product_name]\" should be or less "
+"then [vari_total_max_qty]"
+msgstr ""
+"Максимальное общее количество вариаций для \"[product_name]\" должно быть "
+"или меньше [vari_total_max_qty]"
+
+#: admin/product_panel.php:21
+msgid "Min Max & Step"
+msgstr ""
+
+#: admin/page-loader.php:114
+msgid "Min Max Bulk Edit"
+msgstr ""
+
+#: wcmmq.php:382 framework/recommeded.php:14 framework/recommeded.php:37
+#: admin/page/topbar.php:44
+msgid "Min Max Control"
+msgstr ""
+
+#. Name of the plugin
+msgid "Min Max Control - Min Max Quantity & Step Control for WooCommerce"
+msgstr ""
+
+#: admin/page-loader.php:124
+msgid "Min Max Control License"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:104
+msgid "Min Max Quantity & Step Control for WooCommerce by CodeAstrology"
+msgstr ""
+
+#: admin/page-loader.php:72
+msgid "Min Max Quick Edit"
+msgstr ""
+
+#: admin/adm-inc/settings/menu-control.php:14
+#: admin/adm-inc/settings/wc-tab.php:34
+msgid "Min Max Step"
+msgstr ""
+
+#: modules/module-controller.php:66
+msgid "Min Max Step in Guttenberg Block"
+msgstr ""
+
+#: includes/features/syncronize-google-sheet.php:22
+msgid "Min Qty"
+msgstr ""
+
+#: wcmmq.php:83
+msgid "Minimum qty is"
+msgstr "Установлено минимальное кол-во"
+
+#: admin/add_options_admin.php:40 admin/set_menu_and_fac.php:119
+#: admin/set_menu_and_fac.php:406 admin/includes/terms_condition.php:90
+#: admin/page/main-page/edit-terms.php:82
+#: admin/page/main-page/universal-settings.php:21
+msgid "Minimum Quantity"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:486 admin/page/main-page.php:160
+msgid "Minimum Quantity message for shop page"
+msgstr ""
+
+#: wcmmq.php:80
+msgid "Minimum quantity should [min_quantity] of \"[product_name]\""
+msgstr ""
+"Минимальное количество должно быть [min_quantity] от \"[product_name]\"."
+
+#: admin/set_menu_and_fac.php:473 admin/page/main-page.php:147
+msgid "Minimum Quantity Validation Message"
+msgstr ""
+
+#: wcmmq.php:90
+msgid ""
+"Minimum variation quantity total of \"[product_name]\" should be or greater "
+"then [vari_total_min_qty]"
+msgstr ""
+"Минимальное общее количество вариаций для \"[product_name]\" должно быть или "
+"превышать [vari_total_min_qty]."
+
+#: modules/module-controller.php:61
+msgid "Module On/Off"
+msgstr ""
+
+#: modules/module-page.php:40
+msgid "Module Switcher"
+msgstr ""
+
+#. $s: term name here actually
+#: admin/includes/terms_condition.php:39
+#, php-format
+msgid "No terms for %s"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:191 admin/set_menu_and_fac.php:211
+#: modules/module-page.php:76 admin/page/main-page/live-support.php:38
+#: admin/page/main-page/live-support.php:110
+#: admin/page/main-page/universal-settings.php:176
+#: admin/page/main-page/universal-settings.php:208
+msgid "OFF"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:191 admin/set_menu_and_fac.php:211
+#: modules/module-page.php:76 admin/page/main-page/live-support.php:38
+#: admin/page/main-page/live-support.php:110
+#: admin/page/main-page/universal-settings.php:176
+#: admin/page/main-page/universal-settings.php:208
+msgid "ON"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:205
+#: admin/page/main-page/universal-settings.php:201
+msgid "Order Page (Condition)"
+msgstr ""
+
+#: wcmmq.php:79
+msgid ""
+"Please enter a valid value. The two nearest valid values are [should_min] "
+"and [should_next]"
+msgstr ""
+"Пожалуйста, введите действительное значение. Два ближайших допустимых "
+"значения - [should_min] и [should_next]."
+
+#: wcmmq.php:88
+msgid ""
+"Please enter a valid value. Value should be multiplier of [step_quantity]"
+msgstr ""
+
+#: admin/adm-inc/plugin-deactive/deactive-form.php:189
+msgid "Please let us know why you are deactivating. (All Optional)"
+msgstr ""
+
+#: includes/features/syncronize-google-sheet.php:30
+msgid "Product Step"
+msgstr ""
+
+#: framework/recommeded.php:18
+msgid "Product Stock Sync with Google Sheet for WooCommerce"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:169
+#: admin/page/main-page/universal-settings.php:141
+msgid "Quantity Decimal Separator"
+msgstr ""
+
+#: admin/add_options_admin.php:76 admin/set_menu_and_fac.php:137
+#: admin/page/main-page/universal-settings.php:58
+msgid "Quantity Step"
+msgstr ""
+
+#: admin/page/main-page.php:215
+msgid "Recommendation Area"
+msgstr ""
+
+#: framework/ca-framework/app/require-control.php:355
+msgid "Recommended by"
+msgstr ""
+
+#: admin/page-loader.php:326
+msgid "Renew License"
+msgstr ""
+
+#: framework/ca-framework/app/require-control.php:355
+msgid "Required for"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:507
+msgid "Reset Default"
+msgstr ""
+
+#: admin/page/main-page.php:200
+msgid "Reset Settings"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:230 admin/set_menu_and_fac.php:373
+msgid "Save All"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:506 modules/module-page.php:102
+#: admin/page/main-page.php:193
+msgid "Save Change"
+msgstr ""
+
+#: admin/adm-inc/settings/wc-tab.php:69
+msgid "Section Title"
+msgstr ""
+
+#: admin/page/main-page/supported-terms.php:138
+msgid "Select Terms for Condition"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:115
+msgid "Settings (Universal)"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:414 admin/includes/terms_condition.php:110
+#: admin/page/main-page/edit-terms.php:90
+msgid "Step Quantity"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:490 admin/page/main-page.php:164
+msgid "Step validation error message"
+msgstr ""
+
+#: admin/page/main-page/live-support.php:6
+msgid "Support & Tracker"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:260
+msgid "Supported Terms"
+msgstr ""
+
+#: admin/page/main-page/supported-terms.php:124
+msgid "Terms"
+msgstr ""
+
+#. 1: link to review, 2: Showing review stars
+#: admin/page-loader.php:251
+#, php-format
+msgid ""
+"Thank you for using Min Max Control. <a href=\"%1$s\" target=\"_blank\">"
+"%2$sPlease review us</a>."
+msgstr ""
+
+#: framework/recommeded.php:85
+msgid ""
+"There are many WooCommerce Widget available at UltraAddons. You can Try it. "
+"Just Recommended"
+msgstr ""
+
+#: admin/adm-inc/settings/wc-tab.php:83
+msgid ""
+"This is a paragraph describing the setting. Lorem ipsum yadda yadda yadda. "
+"Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum "
+"yadda yadda yadda."
+msgstr ""
+
+#: admin/adm-inc/settings/wc-tab.php:77
+msgid "This is some helper text"
+msgstr ""
+
+#: admin/adm-inc/settings/wc-tab.php:75
+msgid "Title"
+msgstr ""
+
+#: framework/ca-framework/app/require-control.php:330
+msgid "to be Activated."
+msgstr ""
+
+#: framework/ca-framework/app/require-control.php:329
+msgid "to be Install and Activated."
+msgstr ""
+
+#: framework/ca-framework/app/require-control.php:331
+msgid "to be Upgrade Version."
+msgstr ""
+
+#: admin/page/main-page/live-support.php:102
+msgid "Tracker"
+msgstr ""
+
+#: framework/ca-framework/form/fields/select.php:31
+msgid "Undefined"
+msgstr ""
+
+#: admin/set_menu_and_fac.php:313 admin/page/main-page/supported-terms.php:162
+msgid "Upgrade to PRO"
+msgstr ""
+
+#: wcmmq.php:383
+msgid "WooCommerce"
+msgstr ""
+
+#: admin/functions.php:85
+msgid "WPML Translate Area"
+msgstr ""
+
+#. 1: Plugin name
+#: admin/tracker.php:365
+#, php-format
+msgid "You are just one step away - %1$s"
+msgstr ""
+
+#: wcmmq.php:82
+msgid "You have already [current_quantity] item of \"[product_name]\""
+msgstr ""
+"У вас уже есть количество [current_quantity] товара \"[product_name]\".\n"
+
+#: admin/add_options_admin.php:14
+msgid ""
+"You have to input Min max and step value in your default language product."
+msgstr ""
+
+#: wcmmq.php:87
+msgid ""
+"Your cart item's total quantity must be equal to or less than "
+"[cart_max_quantity]"
+msgstr ""
+"Общее количество элементов вашей корзины должно быть равно или меньше, чем "
+"[cart_max_quantity]."
+
+#: wcmmq.php:86
+msgid ""
+"Your cart item's total quantity must be equal to or more than "
+"[cart_min_quantity]"
+msgstr ""
+"Общее количество товара в вашей корзине должно быть равно или больше, чем "
+"[cart_min_quantity]"
+
+#: wcmmq.php:85
+msgid "Your cart total amount must be equal to or less than [cart_max_price]"
+msgstr ""
+"Общая сумма вашей корзины должна быть равна или меньше [cart_max_price]."
+
+#: wcmmq.php:84
+msgid "Your cart total amount must be equal to or more of [cart_min_price]"
+msgstr ""
+"Общая сумма вашей корзины должна быть равна или больше [cart_min_price]."

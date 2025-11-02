@@ -1,0 +1,131 @@
+/* Free User Upgrade Dashboard CSS */
+.dots-header .dots_get_premium{position:relative;}
+.dots-header .dots_get_premium::before{content:"";width:16px;height:16px;background-image:url("../images/premium-upgrade-img/pro-feature-icon.svg");background-repeat:no-repeat;display:inline-block;vertical-align:middle;margin:-2px 6px 0 0;}
+.dotstore-upgrade-dashboard{padding:50px 40px;text-align:center;-webkit-box-shadow:0px 5px 20px rgb(0 0 0 / 5%);box-shadow:0px 5px 20px rgb(0 0 0 / 5%);background-color:#fff;border-radius:5px;margin-bottom:30px;}
+.dotstore-upgrade-dashboard,.dotstore-upgrade-dashboard *{-webkit-box-sizing:border-box;box-sizing:border-box;}
+.dots-settings-inner-main .dotstore-upgrade-dashboard h2{font-size:25px;font-weight:600;color:#000;line-height:28px;padding:0;margin-top:0;}
+.dotstore-upgrade-dashboard .premium-benefits-section p{font-size:18px;font-weight:400;color:#000;line-height:22px;margin:25px 0;}
+.dotstore-upgrade-dashboard .unlock-premium-features p span{position:relative;padding-right:20px;}
+.dotstore-upgrade-dashboard .unlock-premium-features p span::after{content:"";position:absolute;top:50%;right:0;display:inline-block;width:14px;height:13px;background-image:url("../images/pro-plugin-icon.svg");-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);}
+.dotstore-upgrade-dashboard .feature-explanation-popup-main{position:fixed;z-index:99999;top:0;left:0;height:100%;background-color:hsl(0deg 0% 0% / 75%);overflow:auto;padding:50px 20px;display:inline-block;width:100%;display:none;}
+.feature-explanation-popup-visible .feature-explanation-popup-main{display:block;}
+.dotstore-upgrade-dashboard .feature-explanation-popup-outer{width:100%;height:100%;display:table;}
+.dotstore-upgrade-dashboard .feature-explanation-popup-inner{display:table-cell;vertical-align:middle;}
+.dotstore-upgrade-dashboard .feature-explanation-popup{cursor:auto;max-width:1150px;z-index:999999;padding:40px 30px;background-color:#fff;border-radius:30px;-webkit-box-shadow:0 4px 10px rgb(0 0 0 / 8%);box-shadow:0 4px 10px rgb(0 0 0 / 8%);display:none;position:relative;margin:0 auto;}
+.feature-explanation-popup-visible .feature-explanation-popup{display:block;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .popup-close-btn{position:absolute;top:12px;right:12px;color:#000;font-size:28px;display:inline-block;line-height:33px;cursor:pointer;width:32px;height:32px;border-radius:15px;-webkit-transition:0.5s ease all;-o-transition:0.5s ease all;transition:0.5s ease all}
+.dotstore-upgrade-dashboard .feature-explanation-popup .popup-close-btn:hover{background-color:rgb(221 221 221 / 70%);}
+.dotstore-upgrade-dashboard .feature-explanation-popup .popup-body-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;text-align:left;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-image{width:54%;padding:20px 0 20px 15px;position:relative;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-image::before{content:"";position:absolute;top:20px;left:10px;width:100%;display:inline-block;height:30px;background-image:url("../images/premium-upgrade-img/admin-bar-dots.svg");background-position:20px;background-repeat:no-repeat;background-size:40px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-image::after{content:"";display:inline-block;width:60px;height:18px;background-image:url("../images/premium-upgrade-img/feature-dots.svg");background-size:cover;background-repeat:no-repeat;position:absolute;left:16px;bottom:-8px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content{width:46%;padding-right:12px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content h4{margin:0 0 30px;font-size:26px;line-height:30px;font-weight:600;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content p{margin-bottom:18px;font-size:16px;line-height:28px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup img{width:100%;height:auto;-webkit-box-shadow:0px 10px 40px rgba(111,137,163,.2);box-shadow:0px 10px 40px rgba(111,137,163,.2);border-radius:10px;background-color:#fff;padding:15px;border-top:30px solid #d5d7dd;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul{margin:28px 0 0;padding-left:16px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul li{list-style-type:disc;position:relative;margin-bottom:15px;padding:0;font-size:16px;line-height:28px;color:#000;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul li::marker{color:var(--dotstore-primary);font-size:22px;}
+.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul li::before{display:none;}
+.dotstore-upgrade-dashboard .upgrade-to-premium-btn a.upgrade-now{position:relative;font-size:22px;line-height:28px;font-weight:400;padding:14px 24px 15px;text-decoration:none;margin-top:40px;display:inline-block;color:#000;background-color:var(--dotstore-secondary);border-radius:12px;border:2px solid var(--dotstore-secondary);-webkit-transition:all .3s linear;-o-transition:all .3s linear;transition:all .3s linear;}
+.dotstore-upgrade-dashboard .upgrade-to-premium-btn a.upgrade-now:hover{background-color:transparent;}
+.dotstore-upgrade-dashboard .upgrade-to-premium-btn a svg{margin-bottom:-2px;margin-left:10px;}
+
+/* Upgrade page new design */
+.dotstore-upgrade-dashboard .premium-satisfaction-guarantee{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;border:3px solid var(--dotstore-primary);border-radius:20px;background-color:#f0fcf5;padding:20px;max-width:100%;width:100%;margin:40px auto 60px;gap:15px;}
+.dotstore-upgrade-dashboard .money-back-img{width:115px;}
+.dotstore-upgrade-dashboard .money-back-img img{width:100%;max-width:100%;height:auto;}
+.dotstore-upgrade-dashboard .money-back-content{width:calc(100% - 130px);padding-left:0;text-align:left;}
+.dotstore-upgrade-dashboard .money-back-content h2{font-size:19px;line-height:28px;margin:0;color:#000000;}
+.dotstore-upgrade-dashboard .money-back-content p{font-size:15px;line-height:26px;margin:8px 0 0;color:#1f2b24;}
+.dotstore-upgrade-dashboard .premium-plugin-details{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%;margin:55px 0 0;}
+.dotstore-upgrade-dashboard .premium-key-fetures{width:50%;padding:25px 30px 25px 0;text-align:left;}
+.dotstore-upgrade-dashboard .premium-plugin-buy{width:50%;padding:25px 0 25px 30px;text-align:left;border-left:1px solid #c3c4c7;}
+.dotstore-upgrade-dashboard .premium-key-fetures h3{margin:0;font-size:22px;line-height:32px;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul{margin:32px 0 0 10px;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul li{font-size:18px;line-height:30px;margin-bottom:30px;padding-left:26px;position:relative;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul li::before{content:"";height:10px;width:10px;background-color:#209150;border-radius:100%;display:inline-block;position:absolute;left:0;top:7px;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul li:last-child{margin-bottom:0;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul h4{margin:0 0 14px;font-size:20px;line-height:24px;font-weight:500;color:#000;position:relative;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul h4 span{background-image:url("../images/premium-upgrade-img/tooltip-icon-new.svg");font-weight:600;position:relative;left:8px;top:1px;display:inline-block;width:16px;height:16px;line-height:13px;text-align:center;cursor:pointer;background-size:contain;background-repeat:no-repeat;}
+.dotstore-upgrade-dashboard .premium-key-fetures ul p{margin:0;font-size:15px;line-height:26px;color:#000;}
+.dotstore-upgrade-dashboard .premium-buy-price-box{-webkit-box-shadow:0px 10px 40px rgba(111,137,163,.2);box-shadow:0px 10px 40px rgba(111,137,163,.2);border-radius:20px;padding:40px;background:#fff;text-align:center;position:relative;z-index:1;width:100%;max-width:480px;margin:0 auto;}
+.dotstore-upgrade-dashboard .price-box-top{display:-webkit-box;display:-ms-flexbox;display:flex;gap:20px;width:-moz-max-content;width:-webkit-max-content;width:max-content;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:0 auto 30px;-ms-flex-pack:distribute;justify-content:space-around;}
+.dotstore-upgrade-dashboard .pricing-icon{display:inline-block;width:70px;height:70px;text-align:center;background:#f0fcf5;border-radius:50%;max-width:70px;}
+.dotstore-upgrade-dashboard .pricing-icon img{-webkit-transform:translate(0%,40%);-ms-transform:translate(0%,40%);transform:translate(0%,40%);width:40px;height:auto;}
+.dotstore-upgrade-dashboard .price-box-top h4{font-size:22px;line-height:34px;text-transform:uppercase;color:#000;margin:0;}
+.dotstore-upgrade-dashboard .price-box-middle{display:inline-block;width:100%;border-top:1px solid #e8e9e8;padding-top:25px;}
+.dotstore-upgrade-dashboard .monthly-price-wrap{display:-webkit-box;display:-ms-flexbox;display:flex;margin:0 auto 20px;text-align:center;-webkit-box-align:baseline;-ms-flex-align:baseline;align-items:baseline;width:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-weight:600;line-height:50px;font-size:36px;color:#000;}
+.dotstore-upgrade-dashboard .monthly-price-wrap span:not(.seprater){color:#707070;font-weight:600;font-size:22px;line-height:45px;}
+.dotstore-upgrade-dashboard .monthly-price-wrap span.seprater{color:#707070;font-weight:200;}
+.dotstore-upgrade-dashboard .yearly-price-wrap{font-size:18px;line-height:30px;margin-bottom:15px;}
+.dotstore-upgrade-dashboard .for-site{color:#000;font-size:20px;line-height:28px;font-weight:500;margin:0 0 15px;display:inline-block;width:100%;}
+.dotstore-upgrade-dashboard .price-desc{font-size:18px;line-height:30px;margin:0;color:#000;}
+.dotstore-upgrade-dashboard .price-box-bottom{display:inline-block;width:100%;padding-top:25px;}
+.dotstore-upgrade-dashboard .price-box-bottom a{border:2px solid var(--dotstore-secondary);border-radius:10px;padding:12px 30px;line-height:30px;font-weight:500;display:inline-block;text-decoration:none;font-size:18px;background-color:var(--dotstore-secondary);color:#1f2b24;-webkit-transition:all .3s linear;-o-transition:all .3s linear;transition:all .3s linear;}
+.dotstore-upgrade-dashboard .price-box-bottom a:hover{background-color:transparent;}
+.dotstore-upgrade-dashboard .price-box-bottom p{font-size:16px;line-height:26px;margin:24px 0 0;}
+
+.dotstore-upgrade-dashboard .plugin-customer-review{padding:35px 30px 30px;background:#fff;-webkit-box-shadow:0px 10px 40px rgba(111,137,163,.2);box-shadow:0px 10px 40px rgba(111,137,163,.2);border-radius:15px;position:relative;width:100%;display:inline-block;max-width:100%;text-align:left;}
+.dotstore-upgrade-dashboard .plugin-customer-review::before{content:"";display:inline-block;width:48px;height:40px;position:absolute;top:-22px;right:60px;background-image:url("../images/premium-upgrade-img/quote-icon.svg");background-size:cover;background-repeat:no-repeat;}
+.dotstore-upgrade-dashboard .plugin-customer-review h3{font-size:20px;line-height:34px;color:rgba(39,174,96,.9019607843);font-weight:600;margin:0 0 20px;}
+.dotstore-upgrade-dashboard .plugin-customer-review p{font-size:18px;line-height:30px;color:#686868;font-weight:400;margin:0 0 20px;}
+.dotstore-upgrade-dashboard .plugin-customer-review span{color:#1f2b24;font-size:18px;font-weight:500;line-height:27px;}
+.dotstore-upgrade-dashboard .plugin-customer-review .review-customer{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;}
+.dotstore-upgrade-dashboard .plugin-customer-review .customer-img{width:65px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}
+.dotstore-upgrade-dashboard .plugin-customer-review .customer-img img{width:100%;height:auto;max-width:100%;border-radius:50%;border:2px solid var(--dotstore-primary);}
+.dotstore-upgrade-dashboard .plugin-customer-review .customer-name{width:calc(100% - 65px);padding-left:15px;}
+.dotstore-upgrade-dashboard .customer-rating-bottom{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;margin-top:5px;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:10px;}
+.dotstore-upgrade-dashboard .customer-rating-bottom span{color:var(--dotstore-secondary);font-size:20px;line-height:20px;}
+.dotstore-upgrade-dashboard .verified-customer{padding:5px 10px;font-size:16px;line-height:19px;background:#f1f1f1;border-radius:5px;}
+.dotstore-upgrade-dashboard .verified-customer span{color:#2f760b;font-size:19px;}
+
+/* FAQs section style */
+.dotstore-upgrade-dashboard .upgrade-to-pro-faqs{margin-top:60px;}
+.dotstore-upgrade-dashboard .upgrade-faqs-main{margin-top:20px;text-align:left;display:inline-block;width:100%;max-width:1000px;}
+.dotstore-upgrade-dashboard .upgrade-faqs-list{padding-bottom:15px;margin-bottom:5px;}
+.dotstore-upgrade-dashboard .upgrade-faqs-header{padding:10px 0;position:relative;}
+.dotstore-upgrade-dashboard .upgrade-faqs-header h3{font-size:19px;line-height:25px;margin:0;}
+.dotstore-upgrade-dashboard .upgrade-faqs-body{padding:4px 0 2px;}
+.dotstore-upgrade-dashboard .upgrade-faqs-body p{color:#000;font-size:16px;line-height:24px;margin:0;}
+
+@media screen and (max-width:1180px){
+    .dotstore-upgrade-dashboard{padding:30px;}
+    .dotstore-upgrade-dashboard .premium-benefits-section a{font-size:16px;line-height:20px;}
+    .dotstore-upgrade-dashboard .premium-benefits-section p{font-size:16px;line-height:20px;margin:15px 0;}
+}
+@media screen and (max-width:1080px){
+    .dotstore-upgrade-dashboard .premium-plugin-details{margin:40px 0 0;}
+    .dotstore-upgrade-dashboard .premium-key-fetures{width:100%;padding:0}
+    .dotstore-upgrade-dashboard .premium-plugin-buy{width:100%;padding:40px 0 0;border:none}
+    .dotstore-upgrade-dashboard .upgrade-to-pro-faqs{margin-top:45px;}
+    .dotstore-upgrade-dashboard .upgrade-faqs-main{margin-top:0}
+    .dotstore-upgrade-dashboard .upgrade-to-premium-btn a.upgrade-now{margin-top:20px}
+}
+@media screen and (max-width:767px){
+    .dotstore-upgrade-dashboard .feature-explanation-popup{padding:50px 20px 30px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-image,.dotstore-upgrade-dashboard .feature-explanation-popup .feature-content{width:100%;padding:0;margin:10px 0;}
+    .dotstore-upgrade-dashboard .upgrade-to-premium-btn a svg{margin-left:8px;width:20px;height:18px;}
+    .dotstore-upgrade-dashboard{padding:20px;}
+    .dots-settings-inner-main .dotstore-upgrade-dashboard h2{font-size:20px;line-height:30px;}
+    .dotstore-upgrade-dashboard .premium-plugin-details{margin:30px 0 0;}
+    .dotstore-upgrade-dashboard .premium-key-fetures h3{margin:10px 0 0;font-size:18px;line-height:26px;}
+    .dotstore-upgrade-dashboard .premium-key-fetures ul{margin:24px 0 0 8px;}
+    .dotstore-upgrade-dashboard .premium-key-fetures ul li::before{height:8px;width:8px;}
+    .dotstore-upgrade-dashboard .premium-key-fetures ul li{margin-bottom:20px;padding-left:22px;}
+    .dotstore-upgrade-dashboard .premium-key-fetures ul h4{margin:0 0 12px;font-size:18px;line-height:22px;}
+    .dotstore-upgrade-dashboard .premium-key-fetures ul h4 span{width:14px;height:14px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-content h4{margin:0 0 16px;font-size:22px;line-height:26px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-content p{margin-bottom:12px;font-size:15px;line-height:26px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup{padding:25px 20px 20px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul{margin:15px 0 0;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-content ul li{margin-bottom:8px;font-size:15px;line-height:26px;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-image::after{display:none;}
+    .dotstore-upgrade-dashboard .feature-explanation-popup .feature-image::before{top:0;left:0;}
+    .dotstore-upgrade-dashboard .premium-buy-price-box{padding:20px;}
+    .dotstore-upgrade-dashboard .price-box-top{margin:0 auto 20px;}
+    .dotstore-upgrade-dashboard .premium-satisfaction-guarantee{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;}
+    .dotstore-upgrade-dashboard .money-back-content{width:100%;padding-left:0;text-align:center;}
+    .dotstore-upgrade-dashboard .upgrade-to-premium-btn a.upgrade-now{padding:12px 18px;font-size:18px;line-height:22px;}
+    .dotstore-upgrade-dashboard .price-box-bottom a{padding:10px 20px;}
+}
