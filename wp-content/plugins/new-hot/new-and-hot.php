@@ -318,31 +318,28 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 ]);
             }
 
-            public function render()
+            public function get_value(array $options = [])
             {
-                // Defensive reads
                 $key = $this->get_settings('key') ?: 'newAndHot-1';
                 $size = $this->get_settings('size') ?: 'full';
 
-                // Ensure helper exists (prevents fatal if plugin class not loaded yet)
                 if (!function_exists('newandhot_get')) {
-                    echo wp_json_encode([]); // return empty so Elementor doesn't choke
-                    return;
+                    return [];
                 }
 
                 $url = newandhot_get($key, $size);
                 if (empty($url)) {
-                    echo wp_json_encode([]); // no image set yet
-                    return;
+                    return [];
                 }
 
-                // Elementor expects an image array-ish JSON for IMAGE_CATEGORY tags
-                echo wp_json_encode([
-                    'id' => 0,                   // attachment ID not needed; URL is enough
+                // Return a real array (not JSON)
+                return [
+                    'id' => 0,
                     'url' => esc_url_raw($url),
                     'size' => $size,
-                ]);
+                ];
             }
+
         }
     }
     $dynamic_tags->register_tag('PL_NewAndHot_Image_Tag');
