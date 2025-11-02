@@ -326,7 +326,6 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 if (!function_exists('newandhot_get'))
                     return [];
 
-                // get the stored attachment ID
                 $map = [
                     'newAndHot-1' => 'newandhot_1',
                     'newAndHot-2' => 'newandhot_2',
@@ -336,17 +335,19 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 $option = isset($map[$key]) ? $map[$key] : 'newandhot_1';
                 $id = (int) get_option($option, 0);
 
-                $url = newandhot_get($key, $size);
-                if (empty($url))
+                // Elementor sometimes needs the full image object; try wp_get_attachment_image_src
+                $src = wp_get_attachment_image_src($id, $size);
+                if (!$src || empty($src[0])) {
                     return [];
+                }
 
-                // ✅ Return real ID so Elementor treats it as an image
                 return [
                     'id' => $id,
-                    'url' => esc_url_raw($url),
+                    'url' => esc_url_raw($src[0]),
                     'size' => $size,
                 ];
             }
+
 
 
         }
