@@ -263,3 +263,71 @@ function newandhot_get($key = 'newAndHot-1', $size = 'full')
         return '';
     return PL_New_And_Hot::get_url_by_key($key, $size);
 }
+// Elementor dynamic tag: New & Hot Image
+add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
+    if (!class_exists('\Elementor\Core\DynamicTags\Tag'))
+        return;
+
+    class PL_NewAndHot_Image_Tag extends \Elementor\Core\DynamicTags\Tag
+    {
+        public function get_name()
+        {
+            return 'pl_newandhot_image';
+        }
+        public function get_title()
+        {
+            return __('New & Hot Image', 'new-and-hot');
+        }
+        public function get_group()
+        {
+            return 'site';
+        }
+        public function get_categories()
+        {
+            return [\Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY];
+        }
+
+        protected function register_controls()
+        {
+            $this->add_control('key', [
+                'label' => __('Select Image', 'new-and-hot'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'newAndHot-1' => 'New & Hot 1',
+                    'newAndHot-2' => 'New & Hot 2',
+                    'newAndHot-3' => 'New & Hot 3',
+                    'newAndHot-4' => 'New & Hot 4',
+                ],
+                'default' => 'newAndHot-1',
+            ]);
+            $this->add_control('size', [
+                'label' => __('Size', 'new-and-hot'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'thumbnail' => 'Thumbnail',
+                    'medium' => 'Medium',
+                    'large' => 'Large',
+                    'full' => 'Full',
+                ],
+                'default' => 'large',
+            ]);
+        }
+
+        public function render()
+        {
+            $key = $this->get_settings('key');
+            $size = $this->get_settings('size');
+            $url = newandhot_get($key, $size);
+
+            if ($url) {
+                echo wp_json_encode([
+                    'id' => 0,            // Elementor wants an array-like image object
+                    'url' => esc_url_raw($url),
+                    'size' => $size,
+                ]);
+            }
+        }
+    }
+
+    $dynamic_tags->register_tag('PL_NewAndHot_Image_Tag');
+});
