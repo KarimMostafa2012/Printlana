@@ -365,7 +365,7 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
 
                 return [
                     'id' => $id,
-                    'url' => esc_url_raw($src[0]),
+                    'url' => esc_url_raw(newandhot_get('newAndHot-1', 'full')),
                     'sizes' => $sizes_obj,   // <- important for backgrounds
                     'size' => $size,
                 ];
