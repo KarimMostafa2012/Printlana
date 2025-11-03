@@ -328,11 +328,10 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 $key = $this->get_settings('key') ?: 'newAndHot-1';
                 $size = $this->get_settings('size') ?: 'full';
 
-                if (!function_exists('newandhot_get')) {
+                if (!function_exists('newandhot_get'))
                     return [];
-                }
 
-                // Map key -> option name
+                // Map key -> option name, then get attachment ID
                 $map = [
                     'newAndHot-1' => 'newandhot_1',
                     'newAndHot-2' => 'newandhot_2',
@@ -341,31 +340,37 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                 ];
                 $opt = $map[$key] ?? 'newandhot_1';
                 $id = (int) get_option($opt, 0);
-
-                if (!$id) {
+                if (!$id)
                     return [];
-                }
 
+                // Get the requested size URL + dims
                 $src = wp_get_attachment_image_src($id, $size);
-                if (!$src || empty($src[0])) {
+                if (!$src || empty($src[0]))
                     return [];
+
+                // Also fetch common sizes to help Elementor pick variants if needed
+                $sizes = ['thumbnail', 'medium', 'large', 'full'];
+                $sizes_obj = [];
+                foreach ($sizes as $s) {
+                    $info = wp_get_attachment_image_src($id, $s);
+                    if ($info && !empty($info[0])) {
+                        $sizes_obj[$s] = [
+                            'url' => esc_url_raw($info[0]),
+                            'width' => isset($info[1]) ? (int) $info[1] : null,
+                            'height' => isset($info[2]) ? (int) $info[2] : null,
+                            'id' => $id,
+                        ];
+                    }
                 }
 
-                // ✅ Return full object — Elementor expects this exact structure
                 return [
                     'id' => $id,
                     'url' => esc_url_raw($src[0]),
-                    'sizes' => [
-                        $size => [
-                            'url' => esc_url_raw($src[0]),
-                            'width' => isset($src[1]) ? (int) $src[1] : null,
-                            'height' => isset($src[2]) ? (int) $src[2] : null,
-                            'id' => $id,
-                        ],
-                    ],
+                    'sizes' => $sizes_obj,   // <- important for backgrounds
                     'size' => $size,
                 ];
             }
+
         }
     }
 
