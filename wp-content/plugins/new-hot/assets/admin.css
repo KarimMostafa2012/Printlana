@@ -1,8 +1,4 @@
-.pl-nh-wrap {
-  max-width: 900px;
-}
-
-.pl-nh-grid {
+/* .pl-nh-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
@@ -76,13 +72,11 @@ form {
   height: 100%;
   width: 100%;
   grid-column: span 2;
-  aspect-ratio: 2 / 1;
   order: 1;
 }
 .preview4 {
   height: 100%;
   width: 100%;
   grid-column: span 2;
-  aspect-ratio: 1 / 1;
   grid-row: span 2;
-}
+} */
