@@ -269,7 +269,7 @@
                             );
 
                             echo '<ul class="pagination"><li>';
-                            echo implode( "</li>\n\t<li>", $page_links ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped,WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo implode( "</li>hahahahah\n\t<li>", $page_links ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped,WordPress.Security.EscapeOutput.OutputNotEscaped
                             echo "</li>\n</ul>\n";
                             echo '</div>';
                         }
