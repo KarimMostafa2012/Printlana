@@ -154,7 +154,11 @@ class PL_New_And_Hot
     {
         $i = (int) $args['index'];
         $opt_key = self::OPTS[$i - 1];
+        $opt_key_title = self::TITLES[$i - 1];
+        $opt_key_text = self::DESCS[$i - 1];
         $attachment_id = (int) get_option($opt_key, 0);
+        $val = get_option($opt_key_text, '');
+        $val_title = get_option($opt_key_title, '');
         $url = $attachment_id ? wp_get_attachment_image_url($attachment_id, 'medium') : '';
 
         ?>
@@ -162,8 +166,15 @@ class PL_New_And_Hot
             <div>
                 image number <?php echo $i ?>
             </div>
+            <textarea class="large-text" rows="3"
+                name="<?php echo esc_attr($opt_key_title); ?>"><?php echo esc_textarea($val); ?></textarea>
+
+            <input type="text" class="regular-text" name="<?php echo esc_attr($opt_key_title); ?>"
+                value="<?php echo esc_attr($val_title); ?>" />
+
             <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key); ?>"
                 value="<?php echo esc_attr($attachment_id); ?>">
+
             <button type="button" class="button pl-nh-upload"
                 data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
             <button type="button" class="button button-secondary pl-nh-remove"
