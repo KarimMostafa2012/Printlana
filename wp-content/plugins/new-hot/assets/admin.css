@@ -1,10 +1,6 @@
-.pl-nh-wrap {
-  max-width: 900px;
-}
-
 .pl-nh-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
   margin-top: 20px;
 }
@@ -54,9 +50,9 @@
   flex-direction: column;
   gap: 12px;
   text-align: center;
-  border: 1px solid rgba(120,120,120);
+  border: 1px solid rgba(120, 120, 120, 0.3);
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -90,7 +86,11 @@ form {
   grid-row: span 2;
 }
 
-.pl-nh-inline-preview{
+.pl-nh-inline-preview {
   height: 120px;
   border: 1px solid black;
+  width: fit-content;
+}
+.pl-nh-inline-preview img {
+  height: 100%;
 }
