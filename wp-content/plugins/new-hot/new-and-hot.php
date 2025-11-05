@@ -154,18 +154,21 @@ class PL_New_And_Hot
             <label for="pl_newandhot_<?php echo $i; ?>"><strong>Image <?php echo $i; ?></strong></label>
             <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key_image); ?>"
                 value="<?php echo esc_attr($attachment_id); ?>" />
-
-            <button type="button" class="button pl-nh-upload"
-                data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
-            <button type="button" class="button button-secondary pl-nh-remove"
-                data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
-
             <?php if ($url): ?>
                 <div class="pl-nh-inline-preview" style="margin-top:8px;">
                     <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>"
                         style="max-width:150px;height:auto;border:1px solid #eee;padding:2px;border-radius:4px;" />
                 </div>
             <?php endif; ?>
+            <?php if ($url): ?>
+                <button type="button" class="button pl-nh-upload"
+                    data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
+            <?php endif; ?>
+            <?php if (!$url): ?>
+                <button type="button" class="button button-secondary pl-nh-remove"
+                    data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
+            <?php endif; ?>
+
         </div>
         <?php
     }
