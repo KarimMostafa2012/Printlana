@@ -90,6 +90,7 @@ form {
   height: 120px;
   border: 1px solid black;
   width: fit-content;
+  margin: auto;
 }
 .pl-nh-inline-preview img {
   height: 100%;

@@ -156,13 +156,11 @@ class PL_New_And_Hot
                 value="<?php echo esc_attr($attachment_id); ?>" />
             <?php if ($url): ?>
                 <div class="pl-nh-inline-preview" style="margin-top:8px;">
-                    <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>"
-                        style="max-width:150px;height:auto;border:1px solid #eee;padding:2px;border-radius:4px;" />
+                    <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>" />
                 </div>
             <?php else: ?>
                 <div class="pl-nh-inline-preview" style="margin-top:8px;">
-                    <img src="https://printlana.com/wp-content/uploads/2025/09/placeholder-3.png" alt="Preview <?php echo esc_attr($i); ?>"
-                        style="max-width:150px;height:auto;border:1px solid #eee;padding:2px;border-radius:4px;" />
+                    <img src="https://printlana.com/wp-content/uploads/2025/09/placeholder-3.png" alt="Preview <?php echo esc_attr($i); ?>" />
                 </div>
             <?php endif; ?>
             <?php if (!$url): ?>
