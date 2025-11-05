@@ -479,8 +479,8 @@ function pl_render_related_tags_dashboard()
             wp_nonce_field('pl_rt_dashboard_actions', 'pl_rt_nonce');
             echo '<input type="hidden" name="pl_action" value="add_exclude" />';
             echo '<input type="hidden" name="term_id" value="' . $cat_id . '" />';
-            echo '<input type="text" name="values" placeholder="IDs / slugs / names, comma-separated" style="min-width:260px" />';
-            submit_button('Add to Exclude', 'secondary mt-2', '', false);
+            echo '<input type="text" name="values" placeholder="IDs / slugs / names, comma-separated" style="min-width:260px;margin-bottom:12px;" />';
+            submit_button('Add to Exclude', 'secondary', '', false);
             echo '</form>';
             echo '</div>';
 
@@ -627,3 +627,118 @@ function pl_normalize_tag_identifiers_to_ids(array $parts)
     }
     return array_values(array_unique(array_filter(array_map('intval', $ids))));
 }
+
+
+
+/**
+ * Render related tags for a given product_cat (respects excludes + cache).
+ *
+ * @param int   $cat_id  product_cat term_id
+ * @param array $args    [
+ *   'max'        => 0,            // 0 = all
+ *   'show_icons' => false,        // if you store tag icons (thumbnail_id / pl_tag_icon), set true
+ *   'icon_meta'  => ['thumbnail_id','pl_tag_icon'], // order to check
+ *   'class'      => 'pl-related-tags', // wrapper class
+ *   'as'         => 'list',       // 'list' = <ul>, 'inline' = span pills
+ * ]
+ * @return string HTML
+ */
+function pl_render_related_tags_for_cat($cat_id, $args = [])
+{
+    $cat_id = (int) $cat_id;
+    if ($cat_id <= 0)
+        return '';
+
+    $a = wp_parse_args($args, [
+        'max' => 0,
+        'show_icons' => false,
+        'icon_meta' => ['thumbnail_id', 'pl_tag_icon'],
+        'class' => 'pl-related-tags',
+        'as' => 'list', // list|inline
+    ]);
+
+    // get cached tags (these are already cleaned by excludes on rebuild)
+    $tags = pl_get_related_product_tags($cat_id, true);
+
+    // double-safety: subtract excludes again (in case someone changed excludes but hasn’t rebuilt yet)
+    if ($tags) {
+        $ex = pl_get_excluded_tag_ids_for_cat($cat_id);
+        if ($ex) {
+            $tags = array_values(array_filter($tags, fn($t) => !in_array((int) $t->term_id, $ex, true)));
+        }
+    }
+    if ($a['max'] > 0 && $tags) {
+        $tags = array_slice($tags, 0, (int) $a['max']);
+    }
+    if (empty($tags))
+        return '';
+
+    // optional icon getter
+    $get_icon = function ($tag_id) use ($a) {
+        if (empty($a['show_icons']))
+            return '';
+        foreach ((array) $a['icon_meta'] as $key) {
+            if ($key === 'thumbnail_id') {
+                $att_id = (int) get_term_meta($tag_id, 'thumbnail_id', true);
+                if ($att_id) {
+                    $url = wp_get_attachment_image_url($att_id, 'thumbnail');
+                    if ($url)
+                        return esc_url($url);
+                }
+            } else {
+                $url = get_term_meta($tag_id, $key, true);
+                if (is_string($url) && $url !== '')
+                    return esc_url($url);
+            }
+        }
+        return '';
+    };
+
+    ob_start();
+    $wrap_open = $a['as'] === 'inline' ? '<div class="' . esc_attr($a['class']) . '">' : '<ul class="' . esc_attr($a['class']) . '">';
+    $wrap_close = $a['as'] === 'inline' ? '</div>' : '</ul>';
+    echo $wrap_open;
+
+    foreach ($tags as $t) {
+        $icon = $get_icon((int) $t->term_id);
+        if ($a['as'] === 'inline') {
+            echo '<a class="pl-tag-pill" href="' . esc_url(get_term_link($t)) . '">';
+            if ($icon)
+                echo '<span class="pl-tag-ico"><img src="' . $icon . '" alt=""></span>';
+            echo '<span class="pl-tag-txt">' . esc_html($t->name) . '</span>';
+            echo '</a>';
+        } else {
+            echo '<li><a href="' . esc_url(get_term_link($t)) . '">';
+            if ($icon)
+                echo '<span class="pl-tag-ico"><img src="' . $icon . '" alt=""></span> ';
+            echo esc_html($t->name) . '</a></li>';
+        }
+    }
+
+    echo $wrap_close;
+    return ob_get_clean();
+}
+add_shortcode('pl_cat_tags', function ($atts) {
+    $a = shortcode_atts([
+        'max' => 10,
+        'as' => 'inline',
+        'show_icons' => 'no',
+        'class' => 'pl-pills',
+    ], $atts, 'pl_cat_tags');
+
+    // Elementor automatically exposes the current term in loop templates:
+    $term = get_queried_object();
+    if (!$term || empty($term->term_id)) {
+        return '';
+    }
+
+    return pl_render_related_tags_for_cat(
+        $term->term_id,
+        [
+            'max' => (int) $a['max'],
+            'as' => $a['as'],
+            'show_icons' => ($a['show_icons'] === 'yes'),
+            'class' => $a['class'],
+        ]
+    );
+});
