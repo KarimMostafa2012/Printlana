@@ -57,29 +57,6 @@ jQuery(function ($) {
     }
   }
 
-  // 🌀 Reversible loop logic
-  function enableReversibleLoop(video) {
-    let reverse = false;
-    let reverseTimer = null;
-    video.play();
-    video.addEventListener("ended", () => {
-      if (!reverse) {
-        reverse = true;
-        video.pause();
-        reverseTimer = setInterval(() => {
-          if (video.currentTime > 0.03) {
-            video.currentTime -= 0.03; // ~30 FPS reverse
-          } else {
-            clearInterval(reverseTimer);
-            reverse = false;
-            video.currentTime = 0;
-            video.play();
-          }
-        }, 30);
-      }
-    });
-  }
-
   // Get 1..4 index from the hidden input id: pl_newandhot_1,2,3,4
   function indexFromInput($input) {
     const m = ($input.attr("id") || "").match(/pl_newandhot_(\d+)/);
@@ -191,7 +168,28 @@ jQuery(function ($) {
       }
     });
   });
-
+  // 🌀 Reversible loop logic
+  function enableReversibleLoop(video) {
+    let reverse = false;
+    let reverseTimer = null;
+    video.play();
+    video.addEventListener("ended", () => {
+      if (!reverse) {
+        reverse = true;
+        video.pause();
+        reverseTimer = setInterval(() => {
+          if (video.currentTime > 0.03) {
+            video.currentTime -= 0.03; // ~30 FPS reverse
+          } else {
+            clearInterval(reverseTimer);
+            reverse = false;
+            video.currentTime = 0;
+            video.play();
+          }
+        }, 30);
+      }
+    });
+  }
   // Click on GRID preview (image/placeholder) to upload
   $(document).on(
     "click",
