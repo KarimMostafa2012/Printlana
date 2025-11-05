@@ -156,24 +156,14 @@ class PL_New_And_Hot
                     <?php echo $i; ?></strong></label>
             <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key_image); ?>"
                 value="<?php echo esc_attr($attachment_id); ?>" />
-            <?php if ($url): ?>
-                <div class="pl-nh-inline-preview" data-target="#pl_newandhot_<?php echo $i; ?>">
-                    <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
-                        alt="Preview <?php echo esc_attr($i); ?>" />
-                </div>
-            <?php else: ?>
-                <div class="pl-nh-inline-preview" data-target="#pl_newandhot_<?php echo $i; ?>">
-                    <img src="https://printlana.com/wp-content/uploads/2025/09/placeholder-3.png"
-                        alt="Preview <?php echo esc_attr($i); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" />
-                </div>
-            <?php endif; ?>
-            <?php if ($url): ?>
-                <button type="button" class="button button-secondary pl-nh-remove"
-                    data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
-            <?php else: ?>
-                <button type="button" class="button pl-nh-upload"
-                    data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
-            <?php endif; ?>
+            <div class="pl-nh-inline-preview" data-target="#pl_newandhot_<?php echo $i; ?>">
+                <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
+                    alt="Preview <?php echo esc_attr($i); ?>" />
+            </div>
+            <button type="button" class="button button-secondary pl-nh-remove"
+                data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
+            <button type="button" class="button button-secondary pl-nh-upload"
+                data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
 
         </div>
         <?php
