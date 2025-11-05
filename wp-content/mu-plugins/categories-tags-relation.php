@@ -406,11 +406,7 @@ function pl_render_related_tags_dashboard()
             $ex_ids = pl_get_excluded_tag_ids_for_cat($cat_id);
             if ($mode === 'all_minus_excludes') {
                 // get ALL product_tag terms, then subtract excludes
-                $all_terms = get_terms([
-                    'taxonomy' => 'product_tag',
-                    'hide_empty' => false,
-                    'fields' => 'all',
-                ]);
+                $all_terms = pl_get_related_product_tags($cat_id, true);
 
                 $related = [];
                 if (!is_wp_error($all_terms) && !empty($all_terms)) {
