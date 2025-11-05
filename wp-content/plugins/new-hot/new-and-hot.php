@@ -181,16 +181,17 @@ class PL_New_And_Hot
         ?>
         <div class="pl-nh-item <?php echo 'preview' . $i ?>" data-target="#pl_newandhot_<?php echo $i; ?>"
             data-index="<?php echo esc_attr($i); ?>">
-            <div class="pl-nh-preview" data-target="#pl_newandhot_<?php echo $i; ?>">
+            <div class="pl-nh-preview" style="position:relative;" data-target="#pl_newandhot_<?php echo $i; ?>">
                 <?php if ($url): ?>
                     <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
                         alt="Preview <?php echo esc_attr($i); ?>" />
                 <?php else: ?>
                     <div class="pl-nh-placeholder">No image <?php echo $i ?></div>
                 <?php endif; ?>
-                <?php if ($title): ?><strong><?php echo esc_html($title); ?></strong><?php endif; ?>
-                <?php if ($desc): ?>
-                    <div class="description"><?php echo esc_html(wp_strip_all_tags($desc)); ?></div><?php endif; ?>
+                <div style="position: absolute;padding:20px;top:0;right:0;">
+                    <strong><?php echo esc_html($title); ?></strong>
+                    <div class="description"><?php echo esc_html(wp_strip_all_tags($desc)); ?></div>
+                </div>
             </div>
         </div>
         <?php
