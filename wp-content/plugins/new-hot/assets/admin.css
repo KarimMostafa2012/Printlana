@@ -89,3 +89,8 @@ form {
   aspect-ratio: 1 / 1;
   grid-row: span 2;
 }
+
+.pl-nh-inline-preview{
+  height: 120px;
+  border: 1px solid black;
+}
