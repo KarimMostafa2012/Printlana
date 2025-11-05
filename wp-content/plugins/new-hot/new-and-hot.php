@@ -25,6 +25,7 @@ class PL_New_And_Hot
         add_shortcode('newandhot', [$this, 'sc_img']);
         add_shortcode('newandhot_url', [$this, 'sc_url']);
         add_action('rest_api_init', [$this, 'register_rest']);
+
     }
 
     /** ---------------- Admin ---------------- */
@@ -63,6 +64,20 @@ class PL_New_And_Hot
                 'default' => 0,
             ]);
         }
+        // Register title/description options
+        for ($i = 0; $i < 4; $i++) {
+            register_setting('pl_newandhot_group', self::TITLES[$i], [
+                'type' => 'string',
+                'sanitize_callback' => 'sanitize_text_field',
+                'default' => '',
+            ]);
+            register_setting('pl_newandhot_group', self::DESCS[$i], [
+                'type' => 'string',
+                'sanitize_callback' => 'wp_kses_post', // allow basic markup if needed
+                'default' => '',
+            ]);
+        }
+
 
         add_settings_section('pl_newandhot_section', 'New & Hot Images', function () {
             echo '<p>Upload up to four images. Each field shows a live preview.</p>';
@@ -78,6 +93,26 @@ class PL_New_And_Hot
                 ['index' => $i]
             );
         }
+        // Text fields: Title + Description per image
+        for ($i = 1; $i <= 4; $i++) {
+            add_settings_field(
+                'pl_newandhot_title_' . $i,
+                'Title ' . $i,
+                [$this, 'field_text'],
+                'pl-new-and-hot',
+                'pl_newandhot_section',
+                ['index' => $i, 'type' => 'title']
+            );
+            add_settings_field(
+                'pl_newandhot_desc_' . $i,
+                'Description ' . $i,
+                [$this, 'field_textarea'],
+                'pl-new-and-hot',
+                'pl_newandhot_section',
+                ['index' => $i]
+            );
+        }
+
     }
 
     public function admin_assets($hook)
@@ -88,6 +123,29 @@ class PL_New_And_Hot
         wp_enqueue_style('pl-newhot-admin', plugin_dir_url(__FILE__) . 'assets/admin.css', [], '1.0.0');
         wp_enqueue_script('pl-newhot-admin', plugin_dir_url(__FILE__) . 'assets/admin.js', ['jquery'], '1.0.0', true);
     }
+
+    public function field_text($args)
+    {
+        $i = (int) $args['index'];
+        $opt_key = self::TITLES[$i - 1];
+        $val = get_option($opt_key, '');
+        ?>
+        <input type="text" class="regular-text" name="<?php echo esc_attr($opt_key); ?>"
+            value="<?php echo esc_attr($val); ?>" />
+        <?php
+    }
+
+    public function field_textarea($args)
+    {
+        $i = (int) $args['index'];
+        $opt_key = self::DESCS[$i - 1];
+        $val = get_option($opt_key, '');
+        ?>
+        <textarea class="large-text" rows="3"
+            name="<?php echo esc_attr($opt_key); ?>"><?php echo esc_textarea($val); ?></textarea>
+        <?php
+    }
+
 
 
     public function field_uploader($args)
@@ -118,6 +176,8 @@ class PL_New_And_Hot
         $opt_key = self::OPTS[$i - 1];
         $attachment_id = (int) get_option($opt_key, 0);
         $url = $attachment_id ? wp_get_attachment_image_url($attachment_id, 'medium') : '';
+        $title = get_option(self::TITLES[$i - 1], '');
+        $desc = get_option(self::DESCS[$i - 1], '');
 
         ?>
         <div class="pl-nh-item <?php echo 'preview' . $i ?>" data-index="<?php echo esc_attr($i); ?>">
@@ -127,6 +187,9 @@ class PL_New_And_Hot
                 <?php else: ?>
                     <div class="pl-nh-placeholder">No image <?php echo $i ?></div>
                 <?php endif; ?>
+                <?php if ($title): ?><strong><?php echo esc_html($title); ?></strong><?php endif; ?>
+                <?php if ($desc): ?>
+                    <div class="description"><?php echo esc_html(wp_strip_all_tags($desc)); ?></div><?php endif; ?>
             </div>
         </div>
         <?php
@@ -236,17 +299,29 @@ class PL_New_And_Hot
                 $key = $req->get_param('key') ?: 'newAndHot-1';
                 $size = $req->get_param('size') ?: 'full';
                 $url = self::get_url_by_key($key, $size);
+
+                // Map key -> index (1..4)
+                $idx = array_search($key, self::KEYS, true);
+                if ($idx === false) {
+                    $idx = 0;
+                } // default to first
+    
+                $title = get_option(self::TITLES[$idx], '');
+                $desc = get_option(self::DESCS[$idx], '');
+
                 return rest_ensure_response([
                     'key' => $key,
                     'size' => $size,
                     'url' => $url,
+                    'title' => $title,
+                    'description' => wpautop($desc), // format nicely for consumers
                 ]);
             },
-            'permission_callback' => '__return_true',
             'args' => [
                 'key' => ['type' => 'string', 'required' => false],
                 'size' => ['type' => 'string', 'required' => false],
             ],
+
         ]);
     }
 }
@@ -363,13 +438,27 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
                     }
                 }
 
+                // ➕ Add title/description + correct main URL
+                $idx = array_search($key, PL_New_And_Hot::KEYS, true);
+                if ($idx === false) {
+                    $idx = 0;
+                }
+
+                $title = get_option(PL_New_And_Hot::TITLES[$idx], '');
+                $desc = get_option(PL_New_And_Hot::DESCS[$idx], '');
+
+                $main = wp_get_attachment_image_src($id, $size);
+
                 return [
                     'id' => $id,
-                    'url' => esc_url(newandhot_get('newAndHot-1', 'full')),
-                    'sizes' => $sizes_obj,   // <- important for backgrounds
+                    'url' => esc_url_raw($main ? $main[0] : ''),
+                    'sizes' => $sizes_obj,
                     'size' => $size,
+                    'title' => $title,
+                    'description' => $desc,
                 ];
             }
+
 
         }
     }
@@ -438,3 +527,22 @@ add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
     }
     $dynamic_tags->register_tag('PL_NewAndHot_URL_Tag');
 }, 20); // priority ensures Elementor is ready
+// === Shortcodes for Title and Description ===
+add_shortcode('newandhot_title', function ($atts) {
+    $a = shortcode_atts(['key' => 'newAndHot-1'], $atts, 'newandhot_title');
+    $idx = array_search($a['key'], PL_New_And_Hot::KEYS, true);
+    if ($idx === false) {
+        return '';
+    }
+    return esc_html(get_option(PL_New_And_Hot::TITLES[$idx], ''));
+});
+
+add_shortcode('newandhot_desc', function ($atts) {
+    $a = shortcode_atts(['key' => 'newAndHot-1'], $atts, 'newandhot_desc');
+    $idx = array_search($a['key'], PL_New_And_Hot::KEYS, true);
+    if ($idx === false) {
+        return '';
+    }
+    // allow basic formatting
+    return wpautop(wp_kses_post(get_option(PL_New_And_Hot::DESCS[$idx], '')));
+});
