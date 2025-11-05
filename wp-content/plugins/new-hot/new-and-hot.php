@@ -126,62 +126,46 @@ class PL_New_And_Hot
         wp_enqueue_script('pl-newhot-admin', plugin_dir_url(__FILE__) . 'assets/admin.js', ['jquery'], '1.0.0', true);
     }
 
-    public function field_text($args)
-    {
-        $i = (int) $args['index'];
-        $opt_key = self::TITLES[$i - 1];
-        $val = get_option($opt_key, '');
-        ?>
-        <input type="text" class="regular-text" name="<?php echo esc_attr($opt_key); ?>"
-            value="<?php echo esc_attr($val); ?>" />
-        <?php
-    }
-
-    public function field_textarea($args)
-    {
-        $i = (int) $args['index'];
-        $opt_key = self::DESCS[$i - 1];
-        $val = get_option($opt_key, '');
-        ?>
-        <textarea class="large-text" rows="3"
-            name="<?php echo esc_attr($opt_key); ?>"><?php echo esc_textarea($val); ?></textarea>
-        <?php
-    }
-
-
 
     public function field_uploader($args)
     {
         $i = (int) $args['index'];
-        $opt_key = self::OPTS[$i - 1];
-        $opt_key_title = self::TITLES[$i - 1];
-        $opt_key_text = self::DESCS[$i - 1];
-        $attachment_id = (int) get_option($opt_key, 0);
-        $val = get_option($opt_key_text, '');
-        $val_title = get_option($opt_key_title, '');
+        $opt_key_image = self::OPTS[$i - 1];    // newandhot_#
+        $opt_key_title = self::TITLES[$i - 1];  // newandhot_title_#
+        $opt_key_desc = self::DESCS[$i - 1];   // newandhot_desc_#
+
+        $attachment_id = (int) get_option($opt_key_image, 0);
+        $title_val = get_option($opt_key_title, '');
+        $desc_val = get_option($opt_key_desc, '');
         $url = $attachment_id ? wp_get_attachment_image_url($attachment_id, 'medium') : '';
 
         ?>
         <div class="pl-nh-controls">
-            <label for="title-<?php echo $i; ?>">Title Number <?php echo $i; ?></label>
-            <input type="text" name="title-<?php echo $i; ?>" id="title-<?php echo $i; ?>" class="regular-text"
-                style="width:100%;" name="<?php echo esc_attr($opt_key_title); ?>"
-                value="<?php echo esc_attr($val_title); ?>" />
+            <label for="pl_nh_title_<?php echo $i; ?>"><strong>Title <?php echo $i; ?></strong></label>
+            <input type="text" id="pl_nh_title_<?php echo $i; ?>" class="regular-text"
+                name="<?php echo esc_attr($opt_key_title); ?>" value="<?php echo esc_attr($title_val); ?>"
+                style="width:100%;" />
 
-            <label for="desc-<?php echo $i; ?>">Description Number <?php echo $i; ?></label>
-            <textarea name="desc-<?php echo $i; ?>" id="desc-<?php echo $i; ?>" style="resize: none;" class="large-text"
-                rows="3" name="<?php echo esc_attr($opt_key_title); ?>"><?php echo esc_textarea($val); ?></textarea>
+            <label for="pl_nh_desc_<?php echo $i; ?>"><strong>Description <?php echo $i; ?></strong></label>
+            <textarea id="pl_nh_desc_<?php echo $i; ?>" class="large-text" rows="3"
+                name="<?php echo esc_attr($opt_key_desc); ?>"
+                style="resize:none;"><?php echo esc_textarea($desc_val); ?></textarea>
 
-            <label for="pl_newandhot_<?php echo $i; ?>">
-                Image Number <?php echo $i ?>
-            </label>
-            <input name="pl_newandhot_<?php echo $i; ?>" type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key); ?>"
-                value="<?php echo esc_attr($attachment_id); ?>">
+            <label for="pl_newandhot_<?php echo $i; ?>"><strong>Image <?php echo $i; ?></strong></label>
+            <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key_image); ?>"
+                value="<?php echo esc_attr($attachment_id); ?>" />
 
             <button type="button" class="button pl-nh-upload"
                 data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
             <button type="button" class="button button-secondary pl-nh-remove"
                 data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
+
+            <?php if ($url): ?>
+                <div class="pl-nh-inline-preview" style="margin-top:8px;">
+                    <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>"
+                        style="max-width:150px;height:auto;border:1px solid #eee;padding:2px;border-radius:4px;" />
+                </div>
+            <?php endif; ?>
         </div>
         <?php
     }
