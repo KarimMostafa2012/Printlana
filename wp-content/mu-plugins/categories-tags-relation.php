@@ -27,46 +27,10 @@ function pl_get_related_product_tags($product_cat_id, $as_terms = true)
         'taxonomy' => 'product_tag',
         'include' => $tag_ids,
         'hide_empty' => false,
+        'orderby' => 'include',
     ]);
 
     return is_wp_error($terms) ? [] : $terms;
-}
-
-/**
- * Rebuild and store related product_tag IDs for one product_cat.
- *
- * @param int $product_cat_id
- * @return int[] Related tag IDs stored
- */
-function pl_rebuild_related_product_tags($product_cat_id)
-{
-    global $wpdb;
-
-    $product_cat_id = (int) $product_cat_id;
-    if ($product_cat_id <= 0) {
-        return [];
-    } // One efficient SQL join to collect distinct product_tag term IDs for products in the given category 
-    $sql = "
-        SELECT DISTINCT t2.term_id
-        FROM {$wpdb->term_relationships} tr1
-        INNER JOIN {$wpdb->term_taxonomy} tt1 ON tr1.term_taxonomy_id = tt1.term_taxonomy_id
-        INNER JOIN {$wpdb->posts} p ON p.ID = tr1.object_id
-        INNER JOIN {$wpdb->term_relationships} tr2 ON tr2.object_id = p.ID
-        INNER JOIN {$wpdb->term_taxonomy} tt2 ON tr2.term_taxonomy_id = tt2.term_taxonomy_id
-        INNER JOIN {$wpdb->terms} t2 ON t2.term_id = tt2.term_id
-        WHERE tt1.taxonomy = 'product_cat'
-          AND tt1.term_id = %d
-          AND tt2.taxonomy = 'product_tag'
-          AND p.post_status = 'publish'
-          AND p.post_type = 'product'
-    ";
-    $tag_ids = $wpdb->get_col($wpdb->prepare($sql, $product_cat_id));
-    $tag_ids = array_values(array_unique(array_map('intval', (array) $tag_ids)));
-
-    // Store as term meta (atomic update)
-    update_term_meta($product_cat_id, '_pl_related_product_tags', $tag_ids);
-
-    return $tag_ids;
 }
 
 /**
@@ -120,9 +84,213 @@ add_action('save_post_product', function ($post_id, $post, $update) {
 }, 10, 3);
 
 
-/**
- * Rebuild for all product categories (e.g., run once via WP-CLI or admin tool).
- */
+// === Shortcode: list categories with their related tags ===
+add_shortcode('pl_categories_with_related_tags', function ($atts) {
+    $a = shortcode_atts([
+        'parent' => 0,        // only direct children of this cat id (0 = all top-level)
+        'hide_empty' => 'no',     // 'yes' or 'no'
+        'columns' => 3,        // CSS class helper only
+        'max_tags' => 0,        // 0 = show all
+        'exclude' => '',       // extra tag IDs to exclude, comma-separated
+        'orderby' => 'name',
+        'order' => 'ASC',
+    ], $atts, 'pl_categories_with_related_tags');
+
+    $parent = (int) $a['parent'];
+    $hide_empty = $a['hide_empty'] === 'yes';
+    $columns = max(1, (int) $a['columns']);
+    $max_tags = max(0, (int) $a['max_tags']);
+
+    // Fetch product categories
+    $cats = get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => $hide_empty,
+        'parent' => $parent,
+        'orderby' => $a['include'],
+        'order' => $a['order'],
+    ]);
+    if (is_wp_error($cats) || empty($cats)) {
+        return '';
+    }
+
+    // Extra excludes passed to shortcode (IDs only)
+    $extra_exclude = array_filter(array_map('intval', array_map('trim', explode(',', (string) $a['exclude']))));
+
+    ob_start();
+    echo '<div class="pl-cat-grid pl-cols-' . esc_attr($columns) . '">';
+
+    foreach ($cats as $cat) {
+        $cat_id = (int) $cat->term_id;
+
+        // Read cached tags for this category (WP_Term[])
+        $terms = pl_get_related_product_tags($cat_id, true);
+
+        // Remove per-category excludes (set below) + extra excludes from shortcode
+        if ($terms) {
+            $ex = pl_get_excluded_tag_ids_for_cat($cat_id); // defined later
+            $ex = array_unique(array_merge($ex, $extra_exclude));
+            if ($ex) {
+                $terms = array_values(array_filter($terms, function ($t) use ($ex) {
+                    return !in_array((int) $t->term_id, $ex, true);
+                }));
+            }
+        }
+
+        // Cut to max
+        if ($max_tags > 0 && $terms) {
+            $terms = array_slice($terms, 0, $max_tags);
+        }
+
+        // Render one category card
+        echo '<div class="pl-cat-card">';
+        echo '<h3 class="pl-cat-name"><a href="' . esc_url(get_term_link($cat)) . '">' . esc_html($cat->name) . '</a></h3>';
+
+        if (!empty($terms)) {
+            echo '<ul class="pl-cat-related-tags">';
+            foreach ($terms as $t) {
+                echo '<li><a href="' . esc_url(get_term_link($t)) . '">' . esc_html($t->name) . '</a></li>';
+            }
+            echo '</ul>';
+        } else {
+            echo '<div class="pl-no-tags">—</div>';
+        }
+
+        echo '</div>';
+    }
+
+    echo '</div>';
+    return ob_get_clean();
+});
+
+// === Term meta: Exclude tags per product_cat ===
+add_action('product_cat_add_form_fields', function () {
+    ?>
+    <div class="form-field">
+        <label for="pl_related_tags_exclude">Exclude product tags</label>
+        <input type="text" name="pl_related_tags_exclude" id="pl_related_tags_exclude"
+            placeholder="IDs or slugs, comma-separated">
+        <p class="description">Enter product_tag IDs or slugs to exclude for this category. Comma-separated.</p>
+    </div>
+    <?php
+});
+
+add_action('product_cat_edit_form_fields', function ($term) {
+    $stored = get_term_meta($term->term_id, '_pl_related_tags_exclude', true);
+    $as_list = '';
+    if (is_array($stored) && $stored) {
+        $as_list = implode(', ', array_map('strval', $stored));
+    }
+    ?>
+    <tr class="form-field">
+        <th scope="row"><label for="pl_related_tags_exclude">Exclude product tags</label></th>
+        <td>
+            <input type="text" name="pl_related_tags_exclude" id="pl_related_tags_exclude"
+                value="<?php echo esc_attr($as_list); ?>" placeholder="IDs or slugs, comma-separated" />
+            <p class="description">Enter product_tag IDs or slugs to exclude for this category. Comma-separated.</p>
+        </td>
+    </tr>
+    <?php
+});
+
+// Save handler
+add_action('created_product_cat', 'pl_save_product_cat_excludes');
+add_action('edited_product_cat', 'pl_save_product_cat_excludes');
+function pl_save_product_cat_excludes($term_id)
+{
+    if (!isset($_POST['pl_related_tags_exclude'])) {
+        return;
+    }
+    $raw = (string) $_POST['pl_related_tags_exclude'];
+    $parts = array_filter(array_map('trim', explode(',', $raw)));
+    $ids = [];
+
+    foreach ($parts as $p) {
+        if (is_numeric($p)) {
+            $ids[] = (int) $p;
+        } else {
+            $tag = get_term_by('slug', $p, 'product_tag');
+            if (!$tag) {
+                $tag = get_term_by('name', $p, 'product_tag'); // allow names too
+            }
+            if ($tag && !is_wp_error($tag)) {
+                $ids[] = (int) $tag->term_id;
+            }
+        }
+    }
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+    update_term_meta($term_id, '_pl_related_tags_exclude', $ids);
+}
+
+function pl_get_excluded_tag_ids_for_cat($product_cat_id)
+{
+    $ids = get_term_meta((int) $product_cat_id, '_pl_related_tags_exclude', true);
+    if (!is_array($ids))
+        return [];
+    return array_values(array_unique(array_map('intval', $ids)));
+}
+
+function pl_rebuild_related_product_tags($product_cat_id)
+{
+    global $wpdb;
+
+    $product_cat_id = (int) $product_cat_id;
+    if ($product_cat_id <= 0) {
+        return [];
+    }
+
+    $sql = "
+        SELECT DISTINCT t2.term_id
+        FROM {$wpdb->term_relationships} tr1
+        INNER JOIN {$wpdb->term_taxonomy} tt1 ON tr1.term_taxonomy_id = tt1.term_taxonomy_id
+        INNER JOIN {$wpdb->posts} p ON p.ID = tr1.object_id
+        INNER JOIN {$wpdb->term_relationships} tr2 ON tr2.object_id = p.ID
+        INNER JOIN {$wpdb->term_taxonomy} tt2 ON tr2.term_taxonomy_id = tt2.term_taxonomy_id
+        INNER JOIN {$wpdb->terms} t2 ON t2.term_id = tt2.term_id
+        WHERE tt1.taxonomy = 'product_cat'
+          AND tt1.term_id = %d
+          AND tt2.taxonomy = 'product_tag'
+          AND p.post_status = 'publish'
+          AND p.post_type = 'product'
+    ";
+    $tag_ids = $wpdb->get_col($wpdb->prepare($sql, $product_cat_id));
+    $tag_ids = array_values(array_unique(array_map('intval', (array) $tag_ids)));
+
+    // Subtract per-category excludes
+    $excludes = pl_get_excluded_tag_ids_for_cat($product_cat_id);
+    if ($excludes) {
+        $tag_ids = array_values(array_diff($tag_ids, $excludes));
+    }
+
+    update_term_meta($product_cat_id, '_pl_related_product_tags', $tag_ids);
+
+    return $tag_ids;
+}
+add_action('admin_menu', function () {
+    add_management_page(
+        'Rebuild Related Tags',
+        'Rebuild Related Tags',
+        'manage_options',
+        'pl-rebuild-related-tags',
+        function () {
+            if (!current_user_can('manage_options')) {
+                wp_die(esc_html__('You do not have permission to access this page.', 'pl'));
+            }
+            if (isset($_POST['pl_rebuild_all']) && check_admin_referer('pl_rebuild_all_nonce')) {
+                $count = pl_rebuild_all_product_cat_relations();
+                echo '<div class="updated"><p>Rebuilt related tags for ' . intval($count) . ' product categories.</p></div>';
+            }
+            echo '<div class="wrap"><h1>Rebuild Related Product Tags</h1>';
+            echo '<p>This regenerates the cached related <code>product_tag</code> IDs for each <code>product_cat</code>. Per-category excludes are respected.</p>';
+            echo '<form method="post">';
+            wp_nonce_field('pl_rebuild_all_nonce');
+            submit_button('Rebuild All Now', 'primary', 'pl_rebuild_all');
+            echo '</form></div>';
+        }
+    );
+});
+
+
+// Return how many cats rebuilt
 function pl_rebuild_all_product_cat_relations()
 {
     $cats = get_terms([
@@ -132,9 +300,12 @@ function pl_rebuild_all_product_cat_relations()
     ]);
 
     if (is_wp_error($cats) || empty($cats))
-        return;
+        return 0;
 
+    $n = 0;
     foreach ($cats as $cat_id) {
         pl_rebuild_related_product_tags((int) $cat_id);
+        $n++;
     }
+    return $n;
 }
