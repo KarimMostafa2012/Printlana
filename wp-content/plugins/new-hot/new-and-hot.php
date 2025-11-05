@@ -151,16 +151,19 @@ class PL_New_And_Hot
                 name="<?php echo esc_attr($opt_key_desc); ?>"
                 style="resize:none;"><?php echo esc_textarea($desc_val); ?></textarea>
 
-            <label for="pl_newandhot_<?php echo $i; ?>"><strong>Image <?php echo $i; ?></strong></label>
+            <label for="pl_newandhot_<?php echo $i; ?>" data-target="#pl_newandhot_<?php echo $i; ?>"
+                style="cursor:pointer;"><strong>Image <?php echo $i; ?></strong></label>
             <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key_image); ?>"
                 value="<?php echo esc_attr($attachment_id); ?>" />
             <?php if ($url): ?>
                 <div class="pl-nh-inline-preview">
-                    <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>" />
+                    <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
+                        alt="Preview <?php echo esc_attr($i); ?>" />
                 </div>
             <?php else: ?>
                 <div class="pl-nh-inline-preview">
-                    <img src="https://printlana.com/wp-content/uploads/2025/09/placeholder-3.png" alt="Preview <?php echo esc_attr($i); ?>" />
+                    <img src="https://printlana.com/wp-content/uploads/2025/09/placeholder-3.png"
+                        alt="Preview <?php echo esc_attr($i); ?>" />
                 </div>
             <?php endif; ?>
             <?php if (!$url): ?>
@@ -189,7 +192,8 @@ class PL_New_And_Hot
         <div class="pl-nh-item <?php echo 'preview' . $i ?>" data-index="<?php echo esc_attr($i); ?>">
             <div class="pl-nh-preview">
                 <?php if ($url): ?>
-                    <img src="<?php echo esc_url($url); ?>" alt="Preview <?php echo esc_attr($i); ?>" />
+                    <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
+                        alt="Preview <?php echo esc_attr($i); ?>" />
                 <?php else: ?>
                     <div class="pl-nh-placeholder">No image <?php echo $i ?></div>
                 <?php endif; ?>
