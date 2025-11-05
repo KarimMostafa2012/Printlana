@@ -480,7 +480,7 @@ function pl_render_related_tags_dashboard()
             echo '<input type="hidden" name="pl_action" value="add_exclude" />';
             echo '<input type="hidden" name="term_id" value="' . $cat_id . '" />';
             echo '<input type="text" name="values" placeholder="IDs / slugs / names, comma-separated" style="min-width:260px" />';
-            submit_button('Add to Exclude', 'secondary', '', false);
+            submit_button('Add to Exclude', 'secondary mt-2', '', false);
             echo '</form>';
             echo '</div>';
 
