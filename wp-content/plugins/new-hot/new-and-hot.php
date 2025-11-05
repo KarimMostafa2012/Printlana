@@ -164,12 +164,14 @@ class PL_New_And_Hot
         ?>
         <div class="pl-nh-controls">
             <div>
-                image number <?php echo $i ?>
+                Image Number <?php echo $i ?>
             </div>
-            <input type="text" class="regular-text" style="width:100%;" name="<?php echo esc_attr($opt_key_title); ?>"
-                value="<?php echo esc_attr($val_title); ?>" />
-
-            <textarea style="resize: none;" class="large-text" rows="3"
+            <label for="title-<?php echo $i; ?>">Title Number <?php echo $i; ?></label>
+            <input type="text" name="title-<?php echo $i; ?>" class="regular-text" style="width:100%;" name="<?php echo esc_attr($opt_key_title); ?>"
+            value="<?php echo esc_attr($val_title); ?>" />
+            
+            <label for="desc-<?php echo $i; ?>">Description Number <?php echo $i; ?></label>
+            <textarea name="desc-<?php echo $i; ?>" style="resize: none;" class="large-text" rows="3"
                 name="<?php echo esc_attr($opt_key_title); ?>"><?php echo esc_textarea($val); ?></textarea>
 
             <input type="hidden" id="pl_newandhot_<?php echo $i; ?>" name="<?php echo esc_attr($opt_key); ?>"
