@@ -412,7 +412,7 @@ function pl_render_related_tags_dashboard()
             // Category cell
             echo '<td>';
             echo '<strong><a href="' . esc_url(get_edit_term_link($cat_id, 'product_cat')) . '">' . esc_html($cat->name) . '</a></strong>';
-            echo '<br><span class="description">ID: ' . $cat_id . ' — Slug: ' . esc_html($cat->slug) . '</span>';
+            echo '<br><span class="description">ID: ' . $cat_id . '</span>';
             echo '</td>';
 
             // Related tags cell
