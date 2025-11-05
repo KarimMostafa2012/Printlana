@@ -160,11 +160,11 @@ class PL_New_And_Hot
                         style="max-width:150px;height:auto;border:1px solid #eee;padding:2px;border-radius:4px;" />
                 </div>
             <?php endif; ?>
-            <?php if ($url): ?>
-                <button type="button" class="button pl-nh-upload"
+            <?php if (!$url): ?>
+            <button type="button" class="button pl-nh-upload"
                     data-target="#pl_newandhot_<?php echo $i; ?>">Upload/Choose</button>
             <?php endif; ?>
-            <?php if (!$url): ?>
+            <?php if ($url): ?>
                 <button type="button" class="button button-secondary pl-nh-remove"
                     data-target="#pl_newandhot_<?php echo $i; ?>">Remove</button>
             <?php endif; ?>
