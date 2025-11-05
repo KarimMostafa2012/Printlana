@@ -309,3 +309,295 @@ function pl_rebuild_all_product_cat_relations()
     }
     return $n;
 }
+
+
+/**
+ * Admin: Related Tags Dashboard (table view + inline excludes manager)
+ */
+add_action('admin_menu', function () {
+    add_management_page(
+        'Related Tags Dashboard',
+        'Related Tags',
+        'manage_options',
+        'pl-related-tags-dashboard',
+        'pl_render_related_tags_dashboard'
+    );
+});
+
+function pl_render_related_tags_dashboard()
+{
+    if (!current_user_can('manage_options')) {
+        wp_die(esc_html__('You do not have permission to access this page.', 'pl'));
+    }
+
+    // Handle actions: add_exclude, remove_exclude, rebuild_cat, rebuild_all
+    pl_related_tags_handle_actions();
+
+    // Filters / search / pagination
+    $per_page = 20;
+    $paged = max(1, isset($_GET['paged']) ? (int) $_GET['paged'] : 1);
+    $search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
+    $parent = isset($_GET['parent']) ? (int) $_GET['parent'] : 0;
+
+    $args = [
+        'taxonomy' => 'product_cat',
+        'hide_empty' => false,
+        'fields' => 'all',
+        'number' => $per_page,
+        'offset' => ($paged - 1) * $per_page,
+    ];
+    if ($search !== '') {
+        // term name/slug search
+        $args['search'] = '*' . $search . '*';
+        $args['search_columns'] = ['name', 'slug'];
+    }
+    if ($parent > 0) {
+        $args['parent'] = $parent;
+    }
+
+    // Get total count for pagination
+    $count_args = $args;
+    $count_args['number'] = 0;
+    $count_args['offset'] = 0;
+    $count_args['fields'] = 'count';
+    $total = (int) get_terms($count_args);
+    $cats = get_terms($args);
+
+    echo '<div class="wrap">';
+    echo '<h1 class="wp-heading-inline">Related Product Tags</h1>';
+
+    echo '<form method="get" style="margin:12px 0;">';
+    echo '<input type="hidden" name="page" value="pl-related-tags-dashboard" />';
+    echo '<input type="search" name="s" value="' . esc_attr($search) . '" placeholder="Search categories by name or slug" />';
+    echo '&nbsp;<label>Parent: ';
+    wp_dropdown_categories([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => false,
+        'name' => 'parent',
+        'orderby' => 'name',
+        'show_option_all' => __('All', 'pl'),
+        'selected' => $parent,
+    ]);
+    echo '</label>&nbsp;';
+    submit_button(__('Filter'), 'secondary', '', false);
+    echo '&nbsp;';
+    submit_button(__('Rebuild All'), 'secondary', 'pl_rebuild_all', false);
+    wp_nonce_field('pl_rt_dashboard_actions', 'pl_rt_nonce');
+    echo '</form>';
+
+    // Table
+    echo '<table class="widefat striped fixed">';
+    echo '<thead><tr>';
+    echo '<th style="width:24%">Category</th>';
+    echo '<th style="width:36%">Related Tags (cached)</th>';
+    echo '<th style="width:26%">Excluded Tags</th>';
+    echo '<th style="width:14%">Actions</th>';
+    echo '</tr></thead><tbody>';
+
+    if (is_wp_error($cats) || empty($cats)) {
+        echo '<tr><td colspan="4">No categories found.</td></tr>';
+    } else {
+        foreach ($cats as $cat) {
+            $cat_id = (int) $cat->term_id;
+            $related = pl_get_related_product_tags($cat_id, true); // WP_Term[] (already excludes applied by rebuild)
+            $ex_ids = pl_get_excluded_tag_ids_for_cat($cat_id);
+            $ex_terms = !empty($ex_ids) ? get_terms([
+                'taxonomy' => 'product_tag',
+                'include' => $ex_ids,
+                'hide_empty' => false,
+                'orderby' => 'include',
+            ]) : [];
+
+            echo '<tr>';
+            // Category cell
+            echo '<td>';
+            echo '<strong><a href="' . esc_url(get_edit_term_link($cat_id, 'product_cat')) . '">' . esc_html($cat->name) . '</a></strong>';
+            echo '<br><span class="description">ID: ' . $cat_id . ' — Slug: ' . esc_html($cat->slug) . '</span>';
+            echo '</td>';
+
+            // Related tags cell
+            echo '<td>';
+            if (!empty($related)) {
+                echo '<div class="pl-chipwrap">';
+                foreach ($related as $t) {
+                    echo '<span class="pl-chip" title="ID: ' . (int) $t->term_id . '">#' . esc_html($t->name) . '</span> ';
+                }
+                echo '</div>';
+            } else {
+                echo '<em>— None —</em>';
+            }
+            echo '</td>';
+
+            // Excluded tags cell (with remove buttons)
+            echo '<td>';
+            if (!empty($ex_terms)) {
+                echo '<div class="pl-chipwrap">';
+                foreach ($ex_terms as $t) {
+                    echo '<form method="post" style="display:inline-block; margin:2px;">';
+                    wp_nonce_field('pl_rt_dashboard_actions', 'pl_rt_nonce');
+                    echo '<input type="hidden" name="pl_action" value="remove_exclude" />';
+                    echo '<input type="hidden" name="term_id" value="' . $cat_id . '" />';
+                    echo '<input type="hidden" name="tag_id" value="' . (int) $t->term_id . '" />';
+                    echo '<span class="pl-chip pl-chip--danger" title="ID: ' . (int) $t->term_id . '">#' . esc_html($t->name) . '</span> ';
+                    submit_button('×', 'delete small', '', false, ['title' => 'Remove from exclude']);
+                    echo '</form>';
+                }
+                echo '</div>';
+            } else {
+                echo '<em>— None —</em>';
+            }
+
+            // Add exclude inline form
+            echo '<div style="margin-top:8px;">';
+            echo '<form method="post" class="pl-inline">';
+            wp_nonce_field('pl_rt_dashboard_actions', 'pl_rt_nonce');
+            echo '<input type="hidden" name="pl_action" value="add_exclude" />';
+            echo '<input type="hidden" name="term_id" value="' . $cat_id . '" />';
+            echo '<input type="text" name="values" placeholder="IDs / slugs / names, comma-separated" style="min-width:260px" />';
+            submit_button('Add to Exclude', 'secondary', '', false);
+            echo '</form>';
+            echo '</div>';
+
+            echo '</td>';
+
+            // Actions cell
+            echo '<td>';
+            echo '<form method="post" style="display:inline-block">';
+            wp_nonce_field('pl_rt_dashboard_actions', 'pl_rt_nonce');
+            echo '<input type="hidden" name="pl_action" value="rebuild_cat" />';
+            echo '<input type="hidden" name="term_id" value="' . $cat_id . '" />';
+            submit_button('Rebuild', 'primary small', '', false);
+            echo '</form>';
+            echo '</td>';
+
+            echo '</tr>';
+        }
+    }
+
+    echo '</tbody></table>';
+
+    // Pagination
+    $page_links = paginate_links([
+        'base' => add_query_arg(['paged' => '%#%']),
+        'format' => '',
+        'prev_text' => __('«'),
+        'next_text' => __('»'),
+        'total' => max(1, ceil($total / $per_page)),
+        'current' => $paged,
+    ]);
+    if ($page_links) {
+        echo '<div class="tablenav"><div class="tablenav-pages">' . $page_links . '</div></div>';
+    }
+
+    // Some lightweight styles
+    echo '<style>
+    .pl-chipwrap{display:flex;flex-wrap:wrap;gap:6px}
+    .pl-chip{display:inline-block;padding:4px 8px;border:1px solid #ccd0d4;border-radius:999px;background:#fff}
+    .pl-chip--danger{border-color:#dc3232;background:#fff5f5}
+    .pl-inline input[type=text]{margin-right:6px}
+    </style>';
+
+    echo '</div>';
+}
+
+/**
+ * Handle dashboard actions: add_exclude, remove_exclude, rebuild_cat, rebuild_all
+ */
+function pl_related_tags_handle_actions()
+{
+    if (empty($_POST) && empty($_GET['pl_rebuild_all'])) {
+        return;
+    }
+    // Nonce check
+    $nonce_ok = isset($_POST['pl_rt_nonce']) && wp_verify_nonce($_POST['pl_rt_nonce'], 'pl_rt_dashboard_actions');
+    // For GET rebuild_all button we set nonce in the filter form
+    if (isset($_GET['pl_rebuild_all'])) {
+        $nonce_ok = isset($_GET['pl_rt_nonce']) && wp_verify_nonce($_GET['pl_rt_nonce'], 'pl_rt_dashboard_actions');
+    }
+    if (!$nonce_ok) {
+        return;
+    }
+
+    // Rebuild all (from filter form submit button)
+    if (isset($_GET['pl_rebuild_all'])) {
+        $count = pl_rebuild_all_product_cat_relations();
+        add_action('admin_notices', function () use ($count) {
+            echo '<div class="updated"><p>Rebuilt related tags for ' . intval($count) . ' product categories.</p></div>';
+        });
+        return;
+    }
+
+    $action = isset($_POST['pl_action']) ? sanitize_key($_POST['pl_action']) : '';
+    $term_id = isset($_POST['term_id']) ? (int) $_POST['term_id'] : 0;
+    if ($term_id <= 0) {
+        return;
+    }
+
+    if ($action === 'rebuild_cat') {
+        pl_rebuild_related_product_tags($term_id);
+        add_action('admin_notices', function () use ($term_id) {
+            echo '<div class="updated"><p>Rebuilt related tags for category ID ' . intval($term_id) . '.</p></div>';
+        });
+        return;
+    }
+
+    if ($action === 'add_exclude') {
+        $raw = isset($_POST['values']) ? (string) wp_unslash($_POST['values']) : '';
+        $parts = array_filter(array_map('trim', explode(',', $raw)));
+
+        $ids = pl_normalize_tag_identifiers_to_ids($parts); // helper below
+
+        if ($ids) {
+            $current = pl_get_excluded_tag_ids_for_cat($term_id);
+            $merged = array_values(array_unique(array_merge($current, $ids)));
+            update_term_meta($term_id, '_pl_related_tags_exclude', $merged);
+            // Rebuild this cat now
+            pl_rebuild_related_product_tags($term_id);
+            add_action('admin_notices', function () use ($term_id) {
+                echo '<div class="updated"><p>Excluded tags updated and category rebuilt (ID ' . intval($term_id) . ').</p></div>';
+            });
+        }
+        return;
+    }
+
+    if ($action === 'remove_exclude') {
+        $tag_id = isset($_POST['tag_id']) ? (int) $_POST['tag_id'] : 0;
+        if ($tag_id > 0) {
+            $current = pl_get_excluded_tag_ids_for_cat($term_id);
+            $new = array_values(array_diff($current, [$tag_id]));
+            update_term_meta($term_id, '_pl_related_tags_exclude', $new);
+            // Rebuild this cat now
+            pl_rebuild_related_product_tags($term_id);
+            add_action('admin_notices', function () use ($term_id) {
+                echo '<div class="updated"><p>Removed tag from excludes and rebuilt (Category ID ' . intval($term_id) . ').</p></div>';
+            });
+        }
+        return;
+    }
+}
+
+/**
+ * Helper: Normalize array of identifiers (IDs, slugs, names) into tag IDs
+ */
+function pl_normalize_tag_identifiers_to_ids(array $parts)
+{
+    $ids = [];
+    foreach ($parts as $p) {
+        if ($p === '')
+            continue;
+        if (is_numeric($p)) {
+            $ids[] = (int) $p;
+            continue;
+        }
+        $p = sanitize_title($p); // try slug first (fast)
+        $tag = get_term_by('slug', $p, 'product_tag');
+        if (!$tag || is_wp_error($tag)) {
+            // fallback to name (slower)
+            $tag = get_term_by('name', $p, 'product_tag');
+        }
+        if ($tag && !is_wp_error($tag)) {
+            $ids[] = (int) $tag->term_id;
+        }
+    }
+    return array_values(array_unique(array_filter(array_map('intval', $ids))));
+}
