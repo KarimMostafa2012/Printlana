@@ -190,8 +190,9 @@ class PL_New_And_Hot
         $desc = get_option(self::DESCS[$i - 1], '');
 
         ?>
-        <div class="pl-nh-item <?php echo 'preview' . $i ?>" data-index="<?php echo esc_attr($i); ?>">
-            <div class="pl-nh-preview">
+        <div class="pl-nh-item <?php echo 'preview' . $i ?>" data-target="#pl_newandhot_<?php echo $i; ?>"
+            data-index="<?php echo esc_attr($i); ?>">
+            <div class="pl-nh-preview" data-target="#pl_newandhot_<?php echo $i; ?>">
                 <?php if ($url): ?>
                     <img src="<?php echo esc_url($url); ?>" data-target="#pl_newandhot_<?php echo $i; ?>" style="cursor:pointer;"
                         alt="Preview <?php echo esc_attr($i); ?>" />
