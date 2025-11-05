@@ -203,6 +203,18 @@ class PL_New_And_Hot
         <div class="wrap pl-nh-wrap">
             <h1>New & Hot</h1>
             <form class="pl-nh-form" action="options.php" method="post">
+                <div>
+                    first image: 1/1 ratio.
+                </div>
+                <div>
+                    second image: 1/1 ratio.
+                </div>
+                <div>
+                    third image: 2/1 ratio.
+                </div>
+                <div>
+                    fourth image: 1/1 ratio.
+                </div>
                 <?php
                 settings_fields('pl_newandhot_group');
                 ?>
