@@ -362,12 +362,16 @@ function pl_render_related_tags_dashboard()
     $count_args['fields'] = 'count';
     $total = (int) get_terms($count_args);
     $cats = get_terms($args);
+    $mode = isset($_GET['mode']) && $_GET['mode'] === 'all_minus_excludes' ? 'all_minus_excludes' : 'cached';
 
     echo '<div class="wrap">';
     echo '<h1 class="wp-heading-inline">Related Product Tags</h1>';
 
     echo '<form method="get" style="margin:12px 0;">';
     echo '<input type="hidden" name="page" value="pl-related-tags-dashboard" />';
+    // In the filter form (near search/parent filters)
+    echo '&nbsp;<label><input type="checkbox" name="mode" value="all_minus_excludes" ' . checked($mode, 'all_minus_excludes', false) . '> Show ALL tags minus excludes</label>';
+
     echo '<input type="search" name="s" value="' . esc_attr($search) . '" placeholder="Search categories by name or slug" />';
     echo '&nbsp;<label>Parent: ';
     wp_dropdown_categories([
@@ -399,8 +403,34 @@ function pl_render_related_tags_dashboard()
     } else {
         foreach ($cats as $cat) {
             $cat_id = (int) $cat->term_id;
-            $related = pl_get_related_product_tags($cat_id, true); // WP_Term[] (already excludes applied by rebuild)
             $ex_ids = pl_get_excluded_tag_ids_for_cat($cat_id);
+            if ($mode === 'all_minus_excludes') {
+                // get ALL product_tag terms, then subtract excludes
+                $all_terms = get_terms([
+                    'taxonomy' => 'product_tag',
+                    'hide_empty' => false,
+                    'fields' => 'all',
+                ]);
+
+                $related = [];
+                if (!is_wp_error($all_terms) && !empty($all_terms)) {
+                    if (!empty($ex_ids)) {
+                        // keep only terms NOT in excludes
+                        foreach ($all_terms as $t) {
+                            if (!in_array((int) $t->term_id, $ex_ids, true)) {
+                                $related[] = $t;
+                            }
+                        }
+                    } else {
+                        $related = $all_terms;
+                    }
+                }
+            } else {
+                // default: use the cached related tags
+                $related = pl_get_related_product_tags($cat_id, true);
+            }
+
+
             $ex_terms = !empty($ex_ids) ? get_terms([
                 'taxonomy' => 'product_tag',
                 'include' => $ex_ids,
