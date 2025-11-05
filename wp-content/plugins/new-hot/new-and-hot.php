@@ -14,6 +14,8 @@ class PL_New_And_Hot
 {
     const KEYS = ['newAndHot-1', 'newAndHot-2', 'newAndHot-3', 'newAndHot-4'];
     const OPTS = ['newandhot_1', 'newandhot_2', 'newandhot_3', 'newandhot_4'];
+    const TITLES = ['newandhot_title_1', 'newandhot_title_2', 'newandhot_title_3', 'newandhot_title_4'];
+    const DESCS = ['newandhot_desc_1', 'newandhot_desc_2', 'newandhot_desc_3', 'newandhot_desc_4'];
 
     public function __construct()
     {
