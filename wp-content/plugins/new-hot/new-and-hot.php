@@ -188,9 +188,9 @@ class PL_New_And_Hot
                 <?php else: ?>
                     <div class="pl-nh-placeholder">No image <?php echo $i ?></div>
                 <?php endif; ?>
-                <div style="position: absolute;padding:20px;top:0;right:0;">
-                    <strong><?php echo esc_html($title); ?></strong>
-                    <div class="description"><?php echo esc_html(wp_strip_all_tags($desc)); ?></div>
+                <div style="position: absolute;padding:20px;top:0;right:0;text-align:left;color:white;">
+                    <strong style="font-size: 24px;"><?php echo esc_html($title); ?></strong>
+                    <div style="font-size: 18px;" class="description"><?php echo esc_html(wp_strip_all_tags($desc)); ?></div>
                 </div>
             </div>
         </div>
