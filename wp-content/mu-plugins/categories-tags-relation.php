@@ -904,6 +904,7 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
     if ($term_id == null || $term_id == '') {
         return;
     }
+    print_r($term_id);
     return pl_render_related_tags_for_cat($term_id, [
         'max' => (int) $a['max'],
         'as' => $a['as'],
