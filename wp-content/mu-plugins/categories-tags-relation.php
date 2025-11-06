@@ -719,57 +719,6 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     return ob_get_clean();
 }
 
-// Use in Elementor taxonomy Loop Item: [pl_cat_tags_auto max="10" as="inline" show_icons="no" class="pl-pills"]
-add_shortcode('pl_cat_tags_auto', function ($atts) {
-    $a = shortcode_atts([
-        'max' => 10,
-        'as' => 'inline',
-        'show_icons' => 'no',
-        'class' => 'pl-pills',
-    ], $atts, 'pl_cat_tags_auto');
-
-    $term_id = 0;
-
-    // 1) Most loops: queried object is the current term
-    $qo = get_queried_object();
-    if ($qo && !empty($qo->term_id)) {
-        $term_id = (int) $qo->term_id;
-    }
-
-    // 2) Elementor sometimes sets $GLOBALS['wp_query']->queried_object
-    if (!$term_id && isset($GLOBALS['wp_query']) && is_object($GLOBALS['wp_query'])) {
-        $qobj = $GLOBALS['wp_query']->get_queried_object();
-        if ($qobj && !empty($qobj->term_id)) {
-            $term_id = (int) $qobj->term_id;
-        }
-    }
-
-    // 3) Some builds pass `elementor_loop` query var with term_id
-    if (!$term_id && isset($GLOBALS['wp_query']->query) && is_array($GLOBALS['wp_query']->query)) {
-        if (!empty($GLOBALS['wp_query']->query['term_id'])) {
-            $term_id = (int) $GLOBALS['wp_query']->query['term_id'];
-        }
-    }
-
-    // 4) Fallback: detect from global $post if loop unexpectedly runs in a post context with a single term
-    if (!$term_id && isset($GLOBALS['post']->ID)) {
-        $terms = get_the_terms((int) $GLOBALS['post']->ID, 'product_cat');
-        if ($terms && !is_wp_error($terms) && count($terms) === 1) {
-            $term_id = (int) $terms[0]->term_id;
-        }
-    }
-
-    if (!$term_id) {
-        return ''; // we couldn't detect the term in this context
-    }
-
-    return pl_render_related_tags_for_cat($term_id, [
-        'max' => (int) $a['max'],
-        'as' => $a['as'],
-        'show_icons' => ($a['show_icons'] === 'yes'),
-        'class' => $a['class'],
-    ]);
-});
 // Register a minimal Elementor widget to render related tags for the current term
 add_action('elementor/widgets/register', function ($widgets_manager) {
     if (!class_exists('\Elementor\Widget_Base'))
@@ -909,55 +858,51 @@ $GLOBALS['pl_current_loop_term_id'] = 0;
  * When Elementor Pro builds taxonomy loops, it uses a WP_Term_Query internally.
  * We hook before each item render and set a global "current term id".
  */
-add_action('elementor/frontend/loop_start', function( $query ){
+add_action('elementor/frontend/loop_start', function ($query) {
     // reset at start
     $GLOBALS['pl_current_loop_term_id'] = 0;
 }, 10, 1);
 
-add_action('elementor/frontend/loop_item', function( $item ){
+add_action('elementor/frontend/loop_item', function ($item) {
     // $item might be WP_Term or WP_Post depending on loop type
-    if ( is_object($item) && isset($item->term_id) ) {
+    if (is_object($item) && isset($item->term_id)) {
         $GLOBALS['pl_current_loop_term_id'] = (int) $item->term_id;
     } else {
         // Some builds pass array
-        if ( is_array($item) && !empty($item['term_id']) ) {
+        if (is_array($item) && !empty($item['term_id'])) {
             $GLOBALS['pl_current_loop_term_id'] = (int) $item['term_id'];
         }
     }
 }, 10, 1);
 
-add_action('elementor/frontend/loop_end', function( $query ){
+add_action('elementor/frontend/loop_end', function ($query) {
     // clear after loop
     $GLOBALS['pl_current_loop_term_id'] = 0;
 }, 10, 1);
 
 
-// [pl_cat_tags_auto max="10" as="inline" show_icons="no" class="pl-pills"]
-add_shortcode('pl_cat_tags_auto', function($atts){
+// Works automatically inside Elementor taxonomy loops
+add_shortcode('pl_cat_tags_auto', function ($atts) {
     $a = shortcode_atts([
-        'max'        => 10,
-        'as'         => 'inline',
+        'max' => 10,
+        'as' => 'inline',
         'show_icons' => 'no',
-        'class'      => 'pl-pills',
+        'class' => 'pl-pills',
     ], $atts, 'pl_cat_tags_auto');
 
-    $term_id = isset($GLOBALS['pl_current_loop_term_id']) ? (int)$GLOBALS['pl_current_loop_term_id'] : 0;
-
-    // Fallbacks if hook didn't set it (depends on Elementor version)
-    if (!$term_id) {
-        $qo = get_queried_object();
-        if ($qo && !empty($qo->term_id)) {
-            $term_id = (int)$qo->term_id;
-        }
+    $qo = get_queried_object();
+    if (!$qo || empty($qo->term_id) || $qo->taxonomy !== 'product_cat') {
+        return ''; // not inside a product category loop
     }
 
-    if (!$term_id) return '';
+    $term_id = (int) $qo->term_id;
 
     return pl_render_related_tags_for_cat($term_id, [
-        'max'        => (int)$a['max'],
-        'as'         => $a['as'],
+        'max' => (int) $a['max'],
+        'as' => $a['as'],
         'show_icons' => ($a['show_icons'] === 'yes'),
-        'class'      => $a['class'],
+        'class' => $a['class'],
     ]);
 });
+
 
