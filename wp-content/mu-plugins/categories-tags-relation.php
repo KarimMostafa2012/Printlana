@@ -891,12 +891,12 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
     ], $atts, 'pl_cat_tags_auto');
 
     $qo = get_queried_object();
-    if (!$qo || empty($qo->term_id) || $qo->taxonomy !== 'product_cat') {
-        return ''; // not inside a product category loop
-    }
+
 
     $term_id = (int) $qo->term_id;
-
+    if ($term_id == null || $term_id == '') {
+        return;
+    }
     return pl_render_related_tags_for_cat($term_id, [
         'max' => (int) $a['max'],
         'as' => $a['as'],
