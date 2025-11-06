@@ -862,3 +862,102 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
     $widgets_manager->register(new PL_Related_Tags_Widget());
 });
 
+// [pl_term_debug] — prints what the loop "thinks" is current
+add_shortcode('pl_term_debug', function () {
+    ob_start();
+    echo '<pre style="font:12px/1.4 monospace; white-space:pre-wrap; background:#fff; padding:8px; border:1px solid #ddd">';
+    $out = [];
+
+    $qo = get_queried_object();
+    $out['get_queried_object'] = $qo ? [
+        'type' => is_object($qo) ? get_class($qo) : gettype($qo),
+        'term_id' => isset($qo->term_id) ? (int) $qo->term_id : null,
+        'name' => isset($qo->name) ? $qo->name : null,
+        'slug' => isset($qo->slug) ? $qo->slug : null,
+        'taxonomy' => isset($qo->taxonomy) ? $qo->taxonomy : null,
+    ] : null;
+
+    global $wp_query, $post;
+    if ($wp_query) {
+        $qobj = $wp_query->get_queried_object();
+        $out['wp_query->queried_object'] = $qobj ? [
+            'term_id' => isset($qobj->term_id) ? (int) $qobj->term_id : null,
+            'name' => isset($qobj->name) ? $qobj->name : null,
+            'slug' => isset($qobj->slug) ? $qobj->slug : null,
+            'taxonomy' => isset($qobj->taxonomy) ? $qobj->taxonomy : null,
+        ] : null;
+        $out['wp_query->query'] = $wp_query->query;
+    }
+
+    if ($post) {
+        $out['global $post'] = ['ID' => (int) $post->ID, 'post_type' => get_post_type($post)];
+        $out['terms of $post (product_cat)'] = get_the_terms((int) $post->ID, 'product_cat');
+    }
+
+    print_r($out);
+    echo '</pre>';
+    return ob_get_clean();
+});
+
+
+/**
+ * Global holder for the term currently rendered in Elementor taxonomy loop.
+ */
+$GLOBALS['pl_current_loop_term_id'] = 0;
+
+/**
+ * When Elementor Pro builds taxonomy loops, it uses a WP_Term_Query internally.
+ * We hook before each item render and set a global "current term id".
+ */
+add_action('elementor/frontend/loop_start', function( $query ){
+    // reset at start
+    $GLOBALS['pl_current_loop_term_id'] = 0;
+}, 10, 1);
+
+add_action('elementor/frontend/loop_item', function( $item ){
+    // $item might be WP_Term or WP_Post depending on loop type
+    if ( is_object($item) && isset($item->term_id) ) {
+        $GLOBALS['pl_current_loop_term_id'] = (int) $item->term_id;
+    } else {
+        // Some builds pass array
+        if ( is_array($item) && !empty($item['term_id']) ) {
+            $GLOBALS['pl_current_loop_term_id'] = (int) $item['term_id'];
+        }
+    }
+}, 10, 1);
+
+add_action('elementor/frontend/loop_end', function( $query ){
+    // clear after loop
+    $GLOBALS['pl_current_loop_term_id'] = 0;
+}, 10, 1);
+
+
+// [pl_cat_tags_auto max="10" as="inline" show_icons="no" class="pl-pills"]
+add_shortcode('pl_cat_tags_auto', function($atts){
+    $a = shortcode_atts([
+        'max'        => 10,
+        'as'         => 'inline',
+        'show_icons' => 'no',
+        'class'      => 'pl-pills',
+    ], $atts, 'pl_cat_tags_auto');
+
+    $term_id = isset($GLOBALS['pl_current_loop_term_id']) ? (int)$GLOBALS['pl_current_loop_term_id'] : 0;
+
+    // Fallbacks if hook didn't set it (depends on Elementor version)
+    if (!$term_id) {
+        $qo = get_queried_object();
+        if ($qo && !empty($qo->term_id)) {
+            $term_id = (int)$qo->term_id;
+        }
+    }
+
+    if (!$term_id) return '';
+
+    return pl_render_related_tags_for_cat($term_id, [
+        'max'        => (int)$a['max'],
+        'as'         => $a['as'],
+        'show_icons' => ($a['show_icons'] === 'yes'),
+        'class'      => $a['class'],
+    ]);
+});
+
