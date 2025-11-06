@@ -719,10 +719,30 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     return ob_get_clean();
 }
 
-// [pl_current_term_id] -> echoes the current loop term_id (works in Elementor taxonomy Loop Item)
-add_shortcode('pl_current_term_id', function () {
-    $term = get_queried_object();
-    return ($term && !empty($term->term_id)) ? (int) $term->term_id : 0;
+// [pl_cat_tags_by_slug slug="pizza-boxes" max="10" as="inline" show_icons="no" class="pl-pills"]
+add_shortcode('pl_cat_tags_by_slug', function ($atts) {
+    $a = shortcode_atts([
+        'slug' => '',
+        'max' => 10,
+        'as' => 'inline',
+        'show_icons' => 'no',
+        'class' => 'pl-pills',
+    ], $atts, 'pl_cat_tags_by_slug');
+
+    $slug = sanitize_title((string) $a['slug']);
+    if ($slug === '')
+        return '';
+
+    $term = get_term_by('slug', $slug, 'product_cat');
+    if (!$term || is_wp_error($term))
+        return '';
+
+    return pl_render_related_tags_for_cat((int) $term->term_id, [
+        'max' => (int) $a['max'],
+        'as' => $a['as'],
+        'show_icons' => ($a['show_icons'] === 'yes'),
+        'class' => $a['class'],
+    ]);
 });
 
 
