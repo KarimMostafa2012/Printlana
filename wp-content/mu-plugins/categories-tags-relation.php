@@ -719,25 +719,51 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     return ob_get_clean();
 }
 
-// [pl_cat_tags_by_slug slug="pizza-boxes" max="10" as="inline" show_icons="no" class="pl-pills"]
-add_shortcode('pl_cat_tags_by_slug', function ($atts) {
+// Use in Elementor taxonomy Loop Item: [pl_cat_tags_auto max="10" as="inline" show_icons="no" class="pl-pills"]
+add_shortcode('pl_cat_tags_auto', function ($atts) {
     $a = shortcode_atts([
-        'slug' => '',
         'max' => 10,
         'as' => 'inline',
         'show_icons' => 'no',
         'class' => 'pl-pills',
-    ], $atts, 'pl_cat_tags_by_slug');
+    ], $atts, 'pl_cat_tags_auto');
 
-    $slug = sanitize_title((string) $a['slug']);
-    if ($slug === '')
-        return '';
+    $term_id = 0;
 
-    $term = get_term_by('slug', $slug, 'product_cat');
-    if (!$term || is_wp_error($term))
-        return '';
+    // 1) Most loops: queried object is the current term
+    $qo = get_queried_object();
+    if ($qo && !empty($qo->term_id)) {
+        $term_id = (int) $qo->term_id;
+    }
 
-    return pl_render_related_tags_for_cat((int) $term->term_id, [
+    // 2) Elementor sometimes sets $GLOBALS['wp_query']->queried_object
+    if (!$term_id && isset($GLOBALS['wp_query']) && is_object($GLOBALS['wp_query'])) {
+        $qobj = $GLOBALS['wp_query']->get_queried_object();
+        if ($qobj && !empty($qobj->term_id)) {
+            $term_id = (int) $qobj->term_id;
+        }
+    }
+
+    // 3) Some builds pass `elementor_loop` query var with term_id
+    if (!$term_id && isset($GLOBALS['wp_query']->query) && is_array($GLOBALS['wp_query']->query)) {
+        if (!empty($GLOBALS['wp_query']->query['term_id'])) {
+            $term_id = (int) $GLOBALS['wp_query']->query['term_id'];
+        }
+    }
+
+    // 4) Fallback: detect from global $post if loop unexpectedly runs in a post context with a single term
+    if (!$term_id && isset($GLOBALS['post']->ID)) {
+        $terms = get_the_terms((int) $GLOBALS['post']->ID, 'product_cat');
+        if ($terms && !is_wp_error($terms) && count($terms) === 1) {
+            $term_id = (int) $terms[0]->term_id;
+        }
+    }
+
+    if (!$term_id) {
+        return ''; // we couldn't detect the term in this context
+    }
+
+    return pl_render_related_tags_for_cat($term_id, [
         'max' => (int) $a['max'],
         'as' => $a['as'],
         'show_icons' => ($a['show_icons'] === 'yes'),
@@ -745,32 +771,3 @@ add_shortcode('pl_cat_tags_by_slug', function ($atts) {
     ]);
 });
 
-
-add_shortcode('pl_cat_tags', function ($atts) {
-    $a = shortcode_atts([
-        'cat_id' => 0,      // <— NEW: allow explicit term_id
-        'max' => 10,
-        'as' => 'inline',
-        'show_icons' => 'no',
-        'class' => 'pl-pills',
-    ], $atts, 'pl_cat_tags');
-
-    $cat_id = (int) $a['cat_id'];
-    if (!$cat_id) {
-        // fallback if no cat_id passed (works in true taxonomy templates, but not always in Loop)
-        $term = get_queried_object();
-        $cat_id = ($term && !empty($term->term_id)) ? (int) $term->term_id : 0;
-    }
-    if (!$cat_id)
-        return '';
-
-    return pl_render_related_tags_for_cat(
-        $cat_id,
-        [
-            'max' => (int) $a['max'],
-            'as' => $a['as'],
-            'show_icons' => ($a['show_icons'] === 'yes'),
-            'class' => $a['class'],
-        ]
-    );
-});
