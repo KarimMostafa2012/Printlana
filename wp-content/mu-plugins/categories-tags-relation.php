@@ -892,7 +892,14 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
 
     $qo = get_queried_object();
 
-
+    $out['get_queried_object'] = $qo ? [
+        'type' => is_object($qo) ? get_class($qo) : gettype($qo),
+        'term_id' => isset($qo->term_id) ? (int) $qo->term_id : null,
+        'name' => isset($qo->name) ? $qo->name : null,
+        'slug' => isset($qo->slug) ? $qo->slug : null,
+        'taxonomy' => isset($qo->taxonomy) ? $qo->taxonomy : null,
+    ] : null;
+    print_r($out);
     $term_id = (int) $qo->term_id;
     if ($term_id == null || $term_id == '') {
         return;
