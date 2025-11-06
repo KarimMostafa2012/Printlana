@@ -719,30 +719,66 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     return ob_get_clean();
 }
 
-add_shortcode('pl_cat_tags', function($atts){
+// Register an Elementor Dynamic Tag: "Current Term ID"
+add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
+    if (!class_exists('\Elementor\Core\DynamicTags\Tag'))
+        return;
+
+    class PL_Current_Term_ID_Tag extends \Elementor\Core\DynamicTags\Tag
+    {
+        public function get_name()
+        {
+            return 'pl-current-term-id';
+        }
+        public function get_title()
+        {
+            return __('Current Term ID (PL)', 'pl');
+        }
+        public function get_group()
+        {
+            return 'site';
+        }              // show in "Site" group
+        public function get_categories()
+        {
+            return [\Elementor\Modules\DynamicTags\Module::TEXT_CATEGORY];
+        }
+
+        public function render()
+        {
+            $term = get_queried_object();
+            echo ($term && !empty($term->term_id)) ? (int) $term->term_id : '';
+        }
+    }
+
+    $dynamic_tags->register_tag(new PL_Current_Term_ID_Tag());
+});
+
+
+add_shortcode('pl_cat_tags', function ($atts) {
     $a = shortcode_atts([
-        'cat_id'     => 0,      // <— NEW: allow explicit term_id
-        'max'        => 10,
-        'as'         => 'inline',
+        'cat_id' => 0,      // <— NEW: allow explicit term_id
+        'max' => 10,
+        'as' => 'inline',
         'show_icons' => 'no',
-        'class'      => 'pl-pills',
+        'class' => 'pl-pills',
     ], $atts, 'pl_cat_tags');
 
     $cat_id = (int) $a['cat_id'];
-    if ( ! $cat_id ) {
+    if (!$cat_id) {
         // fallback if no cat_id passed (works in true taxonomy templates, but not always in Loop)
         $term = get_queried_object();
-        $cat_id = ($term && !empty($term->term_id)) ? (int)$term->term_id : 0;
+        $cat_id = ($term && !empty($term->term_id)) ? (int) $term->term_id : 0;
     }
-    if ( ! $cat_id ) return '';
+    if (!$cat_id)
+        return '';
 
     return pl_render_related_tags_for_cat(
         $cat_id,
         [
-            'max'        => (int)$a['max'],
-            'as'         => $a['as'],
+            'max' => (int) $a['max'],
+            'as' => $a['as'],
             'show_icons' => ($a['show_icons'] === 'yes'),
-            'class'      => $a['class'],
+            'class' => $a['class'],
         ]
     );
 });
