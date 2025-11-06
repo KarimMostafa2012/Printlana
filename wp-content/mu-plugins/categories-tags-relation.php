@@ -106,7 +106,7 @@ add_shortcode('pl_categories_with_related_tags', function ($atts) {
         'taxonomy' => 'product_cat',
         'hide_empty' => $hide_empty,
         'parent' => $parent,
-        'orderby' => $a['include'],
+        'orderby' => $a['orderby'],
         'order' => $a['order'],
     ]);
     if (is_wp_error($cats) || empty($cats)) {
@@ -881,7 +881,7 @@ add_action('elementor/frontend/loop_end', function ($query) {
 }, 10, 1);
 
 
-// Works automatically inside Elementor taxonomy loops
+// Works automatically inside Elementor taxonomy loops (post category OR product_cat)
 add_shortcode('pl_cat_tags_auto', function ($atts) {
     $a = shortcode_atts([
         'max' => 10,
@@ -891,18 +891,37 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
     ], $atts, 'pl_cat_tags_auto');
 
     $qo = get_queried_object();
-
-    $term_id = (int) $qo->term_id;
-
-    if ($term_id == null || $term_id == '') {
-        return;
+    if (!$qo || empty($qo->term_id)) {
+        return '';
     }
-    print_r(pl_render_related_tags_for_cat($term_id, [
-        'max' => (int) $a['max'],
-        'as' => $a['as'],
-        'show_icons' => ($a['show_icons'] === 'yes'),
-        'class' => $a['class'],
-    ]));
+
+    $term_id = 0;
+
+    if (isset($qo->taxonomy) && $qo->taxonomy === 'product_cat') {
+        // already a product category
+        $term_id = (int) $qo->term_id;
+
+    } else {
+        // Elementor is looping default "category". Try to find matching product_cat by slug, then by name.
+        $slug = isset($qo->slug) ? (string) $qo->slug : '';
+        if ($slug !== '') {
+            $pc = get_term_by('slug', $slug, 'product_cat');
+            if ($pc && !is_wp_error($pc)) {
+                $term_id = (int) $pc->term_id;
+            }
+        }
+        if (!$term_id && !empty($qo->name)) {
+            $pc = get_term_by('name', (string) $qo->name, 'product_cat');
+            if ($pc && !is_wp_error($pc)) {
+                $term_id = (int) $pc->term_id;
+            }
+        }
+    }
+
+    if (!$term_id) {
+        return ''; // no matching product_cat → nothing to render
+    }
+
     return pl_render_related_tags_for_cat($term_id, [
         'max' => (int) $a['max'],
         'as' => $a['as'],
@@ -910,5 +929,6 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
         'class' => $a['class'],
     ]);
 });
+
 
 
