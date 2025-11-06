@@ -718,27 +718,31 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     echo $wrap_close;
     return ob_get_clean();
 }
-add_shortcode('pl_cat_tags', function ($atts) {
+
+add_shortcode('pl_cat_tags', function($atts){
     $a = shortcode_atts([
-        'max' => 10,
-        'as' => 'inline',
+        'cat_id'     => 0,      // <— NEW: allow explicit term_id
+        'max'        => 10,
+        'as'         => 'inline',
         'show_icons' => 'no',
-        'class' => 'pl-pills',
+        'class'      => 'pl-pills',
     ], $atts, 'pl_cat_tags');
 
-    // Elementor automatically exposes the current term in loop templates:
-    $term = get_queried_object();
-    if (!$term || empty($term->term_id)) {
-        return '';
+    $cat_id = (int) $a['cat_id'];
+    if ( ! $cat_id ) {
+        // fallback if no cat_id passed (works in true taxonomy templates, but not always in Loop)
+        $term = get_queried_object();
+        $cat_id = ($term && !empty($term->term_id)) ? (int)$term->term_id : 0;
     }
+    if ( ! $cat_id ) return '';
 
     return pl_render_related_tags_for_cat(
-        $term->term_id,
+        $cat_id,
         [
-            'max' => (int) $a['max'],
-            'as' => $a['as'],
+            'max'        => (int)$a['max'],
+            'as'         => $a['as'],
             'show_icons' => ($a['show_icons'] === 'yes'),
-            'class' => $a['class'],
+            'class'      => $a['class'],
         ]
     );
 });
