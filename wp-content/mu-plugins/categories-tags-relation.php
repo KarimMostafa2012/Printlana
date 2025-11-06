@@ -770,4 +770,95 @@ add_shortcode('pl_cat_tags_auto', function ($atts) {
         'class' => $a['class'],
     ]);
 });
+// Register a minimal Elementor widget to render related tags for the current term
+add_action('elementor/widgets/register', function ($widgets_manager) {
+    if (!class_exists('\Elementor\Widget_Base'))
+        return;
+
+    class PL_Related_Tags_Widget extends \Elementor\Widget_Base
+    {
+        public function get_name()
+        {
+            return 'pl-related-tags';
+        }
+        public function get_title()
+        {
+            return __('PL Related Tags', 'pl');
+        }
+        public function get_icon()
+        {
+            return 'eicon-tags';
+        }
+        public function get_categories()
+        {
+            return ['general'];
+        } // put in "General"; adjust if you have a custom category
+
+        protected function register_controls()
+        {
+            $this->start_controls_section('section_settings', ['label' => __('Settings', 'pl')]);
+            $this->add_control('max', [
+                'label' => __('Max tags', 'pl'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'default' => 10,
+                'min' => 0,
+                'description' => '0 = show all'
+            ]);
+            $this->add_control('as', [
+                'label' => __('Layout', 'pl'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'inline',
+                'options' => [
+                    'inline' => __('Inline pills', 'pl'),
+                    'list' => __('List (<ul>)', 'pl'),
+                ]
+            ]);
+            $this->add_control('show_icons', [
+                'label' => __('Show icons', 'pl'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]);
+            $this->add_control('class', [
+                'label' => __('Wrapper CSS class', 'pl'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => 'pl-pills',
+            ]);
+            $this->end_controls_section();
+        }
+
+        protected function render()
+        {
+            // Try to detect current term (similar to shortcode)
+            $term_id = 0;
+            $qo = get_queried_object();
+            if ($qo && !empty($qo->term_id)) {
+                $term_id = (int) $qo->term_id;
+            }
+            if (!$term_id && isset($GLOBALS['wp_query'])) {
+                $qobj = $GLOBALS['wp_query']->get_queried_object();
+                if ($qobj && !empty($qobj->term_id)) {
+                    $term_id = (int) $qobj->term_id;
+                }
+            }
+            if (!$term_id && isset($GLOBALS['wp_query']->query['term_id'])) {
+                $term_id = (int) $GLOBALS['wp_query']->query['term_id'];
+            }
+            if (!$term_id) {
+                echo ''; // nothing we can do
+                return;
+            }
+
+            $settings = $this->get_settings_for_display();
+            echo pl_render_related_tags_for_cat($term_id, [
+                'max' => (int) ($settings['max'] ?? 10),
+                'as' => ($settings['as'] ?? 'inline'),
+                'show_icons' => (($settings['show_icons'] ?? 'no') === 'yes'),
+                'class' => ($settings['class'] ?? 'pl-pills'),
+            ]);
+        }
+    }
+
+    $widgets_manager->register(new PL_Related_Tags_Widget());
+});
 
