@@ -719,38 +719,10 @@ function pl_render_related_tags_for_cat($cat_id, $args = [])
     return ob_get_clean();
 }
 
-// Register an Elementor Dynamic Tag: "Current Term ID"
-add_action('elementor/dynamic_tags/register', function ($dynamic_tags) {
-    if (!class_exists('\Elementor\Core\DynamicTags\Tag'))
-        return;
-
-    class PL_Current_Term_ID_Tag extends \Elementor\Core\DynamicTags\Tag
-    {
-        public function get_name()
-        {
-            return 'pl-current-term-id';
-        }
-        public function get_title()
-        {
-            return __('Current Term ID (PL)', 'pl');
-        }
-        public function get_group()
-        {
-            return 'site';
-        }              // show in "Site" group
-        public function get_categories()
-        {
-            return [\Elementor\Modules\DynamicTags\Module::TEXT_CATEGORY];
-        }
-
-        public function render()
-        {
-            $term = get_queried_object();
-            echo ($term && !empty($term->term_id)) ? (int) $term->term_id : '';
-        }
-    }
-
-    $dynamic_tags->register_tag(new PL_Current_Term_ID_Tag());
+// [pl_current_term_id] -> echoes the current loop term_id (works in Elementor taxonomy Loop Item)
+add_shortcode('pl_current_term_id', function () {
+    $term = get_queried_object();
+    return ($term && !empty($term->term_id)) ? (int) $term->term_id : 0;
 });
 
 
