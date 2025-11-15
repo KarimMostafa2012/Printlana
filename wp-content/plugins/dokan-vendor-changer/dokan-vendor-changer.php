@@ -265,6 +265,10 @@ class Printlana_Order_Assigner
 
     private function create_per_product_suborders(WC_Order $parent, int $assign_vendor_id): array
     {
+        if ($parent->get_meta('_pl_per_product_children_done')) {
+            return [];
+        }
+        
         $created = [];
         $item_map = []; // parent line_item_id => child_order_id
 
