@@ -26,8 +26,6 @@ class Printlana_Order_Assigner
     // ----------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-
         // Add the UI to the WooCommerce order edit page (HPOS compatible)
         add_action('woocommerce_admin_order_data_after_order_details', array($this, 'add_vendor_change_section'));
 
@@ -36,23 +34,6 @@ class Printlana_Order_Assigner
 
         add_action('woocommerce_payment_complete', [$this, 'handle_payment_complete'], 20);
         add_action('woocommerce_order_status_processing', [$this, 'handle_order_processing'], 20);
-    }
-    public function enqueue_admin_assets($hook)
-    {
-        // Load only on WooCommerce order edit page
-        if ($hook === 'post.php' && isset($_GET['post'])) {
-
-            $screen = get_current_screen();
-            if ($screen && $screen->post_type === 'shop_order') {
-
-                wp_enqueue_style(
-                    'printlana-order-assigner-admin',
-                    plugin_dir_url(__FILE__) . 'assets/admin.css',
-                    array(),
-                    '1.0'
-                );
-            }
-        }
     }
 
 
@@ -175,6 +156,7 @@ class Printlana_Order_Assigner
 
         if ($order->get_parent_id()) {
             echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
+            echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
             echo '<h3>' . esc_html__('Assign Order for Fulfillment', 'printlana-order-assigner') . '</h3>';
             $this->render_vendor_assignment_content($order);
             echo '</div>';
