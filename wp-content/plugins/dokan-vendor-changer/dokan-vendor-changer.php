@@ -156,7 +156,6 @@ class Printlana_Order_Assigner
 
         if ($order->get_parent_id()) {
             echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
-            echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
             echo '<h3>' . esc_html__('Assign Order for Fulfillment', 'printlana-order-assigner') . '</h3>';
             $this->render_vendor_assignment_content($order);
             echo '</div>';
@@ -169,6 +168,7 @@ class Printlana_Order_Assigner
             $this->render_suborders_panel($order);
             echo '</div>';
         }
+        echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
     }
 
     private function render_suborders_panel(WC_Order $parent): void
