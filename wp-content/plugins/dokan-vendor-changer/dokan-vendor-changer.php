@@ -220,9 +220,23 @@ class Printlana_Order_Assigner
             }
             $items_txt = $items_summary ? esc_html(implode(', ', $items_summary)) : '—';
 
+            // Get first product in this child order (each child has only one item)
+            $view_link = '';
+            $items = $child->get_items('line_item');
+
+            if (!empty($items)) {
+                $first_item = reset($items);
+                if ($first_item) {
+                    $product = $first_item->get_product();
+                    if ($product) {
+                        $view_link = get_permalink($product->get_id());
+                    }
+                }
+            }
+
+
             // Links
             $edit_link = get_edit_post_link($cid);
-            $view_link = $child->get_view_order_url();
 
             echo '<tr>';
             echo '<td><a href="' . esc_url($edit_link) . '">#' . (int) $cid . '</a></td>';
@@ -233,7 +247,7 @@ class Printlana_Order_Assigner
             echo '<td>' . esc_html($date) . '</td>';
             echo '<td style="text-align:right;">';
             echo '<a class="button" href="' . esc_url($edit_link) . '">' . esc_html__('Edit', 'printlana-order-assigner') . '</a> ';
-            echo '<a class="button" href="' . esc_url($view_link) . '" target="_blank">' . esc_html__('View', 'printlana-order-assigner') . '</a>';
+            echo '<a class="button" href="' . esc_url($view_link) . '" target="_blank">' . esc_html__('View Product', 'printlana-order-assigner') . '</a>';
             echo '</td>';
             echo '</tr>';
         }
