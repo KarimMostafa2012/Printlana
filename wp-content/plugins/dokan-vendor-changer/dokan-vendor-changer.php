@@ -41,6 +41,10 @@ class Printlana_Order_Assigner
         $order = wc_get_order($order_id);
         if (!$order)
             return;
+
+        if ($order->get_parent_id()) {
+            return;
+        }
         $assigner = isset($GLOBALS['pl_assigner_singleton']) ? $GLOBALS['pl_assigner_singleton'] : $this;
         if (!$assigner->has_per_product_children($order)) {
             $default_vendor = (int) get_post_field('post_author', $order_id);
@@ -54,6 +58,11 @@ class Printlana_Order_Assigner
         $order = wc_get_order($order_id);
         if (!$order)
             return;
+
+        if ($order->get_parent_id()) {
+            return;
+        }
+
         $assigner = isset($GLOBALS['pl_assigner_singleton']) ? $GLOBALS['pl_assigner_singleton'] : $this;
         if (!$assigner->has_per_product_children($order)) {
             $default_vendor = (int) get_post_field('post_author', $order_id);
