@@ -5,9 +5,9 @@
 // ------------------------------
 
 // functions.php
-add_filter('wp_get_attachment_image_attributes', function($attr, $att, $size){
+add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     // Replace 12345 with your hero/LCP attachment ID
-    if ((int)$att->ID === 12345) {
+    if ((int) $att->ID === 12345) {
         $attr['fetchpriority'] = 'high';
         $attr['loading'] = 'eager';
         $attr['decoding'] = 'async';
@@ -24,7 +24,8 @@ add_filter('wp_get_attachment_image_attributes', function($attr, $att, $size){
 
 // Include parent styles
 add_action('wp_enqueue_scripts', 'hello_elementor_child_enqueue_styles');
-function hello_elementor_child_enqueue_styles() {
+function hello_elementor_child_enqueue_styles()
+{
     // Include parent theme style
     wp_enqueue_style('hello-elementor-style', get_template_directory_uri() . '/style.css');
 
@@ -87,7 +88,8 @@ require get_stylesheet_directory() . '/inc/hooks/dokan-wishlist-inspiration.php'
  */
 
 // Add profile image field
-function action_woocommerce_edit_account_form_start() {
+function action_woocommerce_edit_account_form_start()
+{
     $user_id = get_current_user_id();
     $attachment_id = get_user_meta($user_id, 'profile_image', true);
     $upload_error = get_user_meta($user_id, 'profile_image_error', true);
@@ -100,13 +102,13 @@ function action_woocommerce_edit_account_form_start() {
     ?>
     <div class="profile-picture-section">
         <div class="profile-image-container" id="profile-image-container">
-            <?php if ($attachment_id && wp_attachment_is_image($attachment_id)) : ?>
+            <?php if ($attachment_id && wp_attachment_is_image($attachment_id)): ?>
                 <?php echo wp_get_attachment_image($attachment_id, 'thumbnail', false, array(
                     'class' => 'profile-picture',
                     'id' => 'profile-picture',
                     'alt' => 'Profile Picture'
                 )); ?>
-            <?php else : ?>
+            <?php else: ?>
                 <div class="profile-image-placeholder" id="profile-image-placeholder">
                     <span class="image-icon">Upload Image</span>
                 </div>
@@ -126,7 +128,8 @@ function action_woocommerce_edit_account_form_start() {
 add_action('woocommerce_edit_account_form_start', 'action_woocommerce_edit_account_form_start');
 
 // Add enctype to form
-function add_enctype_to_account_form($form) {
+function add_enctype_to_account_form($form)
+{
     if (strpos($form, 'enctype="multipart/form-data"') === false) {
         $form = str_replace('<form', '<form enctype="multipart/form-data"', $form);
     }
@@ -135,7 +138,8 @@ function add_enctype_to_account_form($form) {
 add_filter('woocommerce_edit_account_form', 'add_enctype_to_account_form');
 
 // Validate image upload
-function action_woocommerce_save_account_details_errors($errors) {
+function action_woocommerce_save_account_details_errors($errors)
+{
     if (isset($_FILES['profile_image']) && !empty($_FILES['profile_image']['name'])) {
         // Debug: Log $_FILES to check if file is received
         error_log('$_FILES: ' . print_r($_FILES, true));
@@ -163,7 +167,8 @@ function action_woocommerce_save_account_details_errors($errors) {
 add_action('woocommerce_save_account_details_errors', 'action_woocommerce_save_account_details_errors', 10, 1);
 
 // Save image
-function action_woocommerce_save_account_details($user_id) {
+function action_woocommerce_save_account_details($user_id)
+{
     if (isset($_FILES['profile_image']) && !empty($_FILES['profile_image']['name'])) {
         // Debug: Log save attempt
         error_log('Attempting to save profile image for user ' . $user_id);
@@ -205,7 +210,8 @@ add_action('woocommerce_save_account_details', 'action_woocommerce_save_account_
 
 // Add notification badge to Elementor icon
 add_action('wp_footer', 'add_message_notification_to_elementor_icon');
-function add_message_notification_to_elementor_icon() {
+function add_message_notification_to_elementor_icon()
+{
     if (!is_user_logged_in()) {
         return;
     }
@@ -230,22 +236,23 @@ function add_message_notification_to_elementor_icon() {
 
     ?>
     <script>
-    jQuery(document).ready(function($) {
-        var $icon = $('<?php echo esc_js($icon_selector); ?>');
+        jQuery(document).ready(function ($) {
+            var $icon = $('<?php echo esc_js($icon_selector); ?>');
 
-        if ($icon.length) {
-            $icon.find('.elementor-message-notification').remove();
+            if ($icon.length) {
+                $icon.find('.elementor-message-notification').remove();
 
-            $icon.append('<span class="elementor-message-notification"><?php echo esc_js($unread_messages_count); ?></span>');
-        }
-    });
+                $icon.append('<span class="elementor-message-notification"><?php echo esc_js($unread_messages_count); ?></span>');
+            }
+        });
     </script>
     <?php
 }
 
 // Ajax handler for updating unread message count in real-time
 add_action('wp_ajax_update_message_notification_count', 'update_message_notification_count');
-function update_message_notification_count() {
+function update_message_notification_count()
+{
     // Verify nonce for security (optional but recommended)
     check_ajax_referer('message_notification_nonce', 'nonce');
 
@@ -271,26 +278,26 @@ function update_message_notification_count() {
  */
 
 // Hook into Elementor query for custom price filter
-add_action( 'elementor/query/custom_price_filter', function( $query ) {
-    if ( isset( $_GET['min_price'] ) && isset( $_GET['max_price'] ) ) {
-        $min_price = floatval( $_GET['min_price'] );
-        $max_price = floatval( $_GET['max_price'] );
+add_action('elementor/query/custom_price_filter', function ($query) {
+    if (isset($_GET['min_price']) && isset($_GET['max_price'])) {
+        $min_price = floatval($_GET['min_price']);
+        $max_price = floatval($_GET['max_price']);
 
-        $meta_query = $query->get( 'meta_query' ) ?: [];
+        $meta_query = $query->get('meta_query') ?: [];
 
         $meta_query[] = [
-            'key'     => '_price',
-            'value'   => [ $min_price, $max_price ],
+            'key' => '_price',
+            'value' => [$min_price, $max_price],
             'compare' => 'BETWEEN',
-            'type'    => 'NUMERIC'
+            'type' => 'NUMERIC'
         ];
 
-        $query->set( 'meta_query', $meta_query );
+        $query->set('meta_query', $meta_query);
     }
 });
 
 
-add_filter('wpc_posts_query_args', function($args) {
+add_filter('wpc_posts_query_args', function ($args) {
     // Apply the same price filter logic that Elementor uses
     if (isset($_GET['min_price']) && isset($_GET['max_price'])) {
         $min_price = floatval($_GET['min_price']);
@@ -303,10 +310,10 @@ add_filter('wpc_posts_query_args', function($args) {
 
         // Add the same price filter logic
         $args['meta_query'][] = [
-            'key'     => '_price',
-            'value'   => [$min_price, $max_price],
+            'key' => '_price',
+            'value' => [$min_price, $max_price],
             'compare' => 'BETWEEN',
-            'type'    => 'NUMERIC'
+            'type' => 'NUMERIC'
         ];
 
         // Ensure we're dealing with the right post type
@@ -317,9 +324,10 @@ add_filter('wpc_posts_query_args', function($args) {
 });
 
 
-add_filter( 'woocommerce_currency_symbol', 'sar_currency_inline_from_media', 20, 2 );
-function sar_currency_inline_from_media( $currency_symbol, $currency ) {
-    if ( $currency === 'SAR' && !is_admin() && !is_page(11) && !is_page(4119)) {
+add_filter('woocommerce_currency_symbol', 'sar_currency_inline_from_media', 20, 2);
+function sar_currency_inline_from_media($currency_symbol, $currency)
+{
+    if ($currency === 'SAR' && !is_admin() && !is_page(11) && !is_page(4119)) {
         // Return inline SVG with appropriate styling
         $svg = '<span class="sar-currency-svg" style="display: inline-block; width: 1em; height: 1.2em; vertical-align: middle; margin-right: 0.2em;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39" style="width: 100%; height: 100%;">
@@ -334,9 +342,10 @@ function sar_currency_inline_from_media( $currency_symbol, $currency ) {
 /**
  * Adjust price format for SAR currency
  */
-add_filter( 'woocommerce_price_format', 'sar_price_format', 20, 2 );
-function sar_price_format( $format, $currency ) {
-    if ( $currency === 'SAR' && !is_admin() && !is_page(11) && !is_page(4119)) {
+add_filter('woocommerce_price_format', 'sar_price_format', 20, 2);
+function sar_price_format($format, $currency)
+{
+    if ($currency === 'SAR' && !is_admin() && !is_page(11) && !is_page(4119)) {
         return '%2$s%1$s'; // Symbol before price (e.g., [SVG]100)
         // Use '%1$s%2$s' for symbol after price (e.g., 100[SVG])
     }
@@ -347,19 +356,20 @@ function sar_price_format( $format, $currency ) {
  * My Account Custom Navigation Order
  */
 
-add_filter( 'woocommerce_account_menu_items', 'custom_reorder_my_account_menu' );
+add_filter('woocommerce_account_menu_items', 'custom_reorder_my_account_menu');
 
-function custom_reorder_my_account_menu( $items ) {
+function custom_reorder_my_account_menu($items)
+{
     // echo '<pre>'; print_r( $items ); echo '</pre>';
 
     // Define your custom order
     return array(
-        'dashboard'       => __( 'Dashboard', 'woocommerce' ),
-  		'my-wish-list'	  => __( 'Favorites', 'woocommerce' ),
-        'edit-account'    => __( 'Account', 'woocommerce' ),
-        'orders'          => __( 'Orders', 'woocommerce' ),
-        'payment-methods' => __( 'Payment Information', 'woocommerce' ),
-        'edit-address'    => __( 'Addresses', 'woocommerce' ),
+        'dashboard' => __('Dashboard', 'woocommerce'),
+        'my-wish-list' => __('Favorites', 'woocommerce'),
+        'edit-account' => __('Account', 'woocommerce'),
+        'orders' => __('Orders', 'woocommerce'),
+        'payment-methods' => __('Payment Information', 'woocommerce'),
+        'edit-address' => __('Addresses', 'woocommerce'),
     );
 }
 
@@ -367,10 +377,11 @@ function custom_reorder_my_account_menu( $items ) {
 /**
  * Shortcode for WooCommerce registration form
  */
-function custom_woocommerce_register_form_shortcode() {
+function custom_woocommerce_register_form_shortcode()
+{
     // Check if WooCommerce is active
-    if ( ! class_exists( 'WooCommerce' ) ) {
-        return '<p>' . esc_html__( 'WooCommerce is not active.', 'woocommerce' ) . '</p>';
+    if (!class_exists('WooCommerce')) {
+        return '<p>' . esc_html__('WooCommerce is not active.', 'woocommerce') . '</p>';
     }
 
     // Start output buffering
@@ -379,203 +390,168 @@ function custom_woocommerce_register_form_shortcode() {
 
     <div class="woocommerce-register-form" id="account_registration-form">
 
-        <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+        <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>
 
-            <?php do_action( 'woocommerce_register_form_start' ); ?>
+            <?php do_action('woocommerce_register_form_start'); ?>
 
-            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+            <?php if ('no' === get_option('woocommerce_registration_generate_username')): ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="reg_username">
-                        <?php esc_html_e( 'Username', 'woocommerce' ); ?>
+                        <?php esc_html_e('Username', 'woocommerce'); ?>
                         <span class="required" aria-hidden="true">*</span>
-                        <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                        <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
                     </label>
-                    <input type="text"
-                        class="woocommerce-Input woocommerce-Input--text input-text"
-                        name="username"
-                        id="reg_username"
-                        autocomplete="username"
-                        value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>"
-                        required
-                        aria-required="true"
-                    />
+                    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username"
+                        id="reg_username" autocomplete="username"
+                        value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>"
+                        required aria-required="true" />
                 </p>
             <?php endif; ?>
 
             <!-- First Name -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
+                style="max-width: calc(50% - 20px);">
                 <label for="reg_first_name">
-                    <?php esc_html_e( 'First Name', 'woocommerce' ); ?>
+                    <?php esc_html_e('First Name', 'woocommerce'); ?>
                     <span class="required" aria-hidden="true">*</span>
-                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                    <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
                 </label>
-                <input type="text"
-                    class="woocommerce-Input woocommerce-Input--text input-text"
-                    name="first_name"
-                    id="reg_first_name"
-                    autocomplete="given-name"
-                    value="<?php echo ( ! empty( $_POST['first_name'] ) ) ? esc_attr( wp_unslash( $_POST['first_name'] ) ) : ''; ?>"
-                    required
-                    aria-required="true"
-                />
+                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="first_name"
+                    id="reg_first_name" autocomplete="given-name"
+                    value="<?php echo (!empty($_POST['first_name'])) ? esc_attr(wp_unslash($_POST['first_name'])) : ''; ?>"
+                    required aria-required="true" />
             </p>
 
             <!-- Family Name -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
+                style="max-width: calc(50% - 20px);">
                 <label for="reg_last_name">
-                    <?php esc_html_e( 'Family Name', 'woocommerce' ); ?>
+                    <?php esc_html_e('Family Name', 'woocommerce'); ?>
                     <span class="required" aria-hidden="true">*</span>
-                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                    <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
                 </label>
-                <input type="text"
-                    class="woocommerce-Input woocommerce-Input--text input-text"
-                    name="last_name"
-                    id="reg_last_name"
-                    autocomplete="family-name"
-                    value="<?php echo ( ! empty( $_POST['last_name'] ) ) ? esc_attr( wp_unslash( $_POST['last_name'] ) ) : ''; ?>"
-                    required
-                    aria-required="true"
-                />
+                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="last_name"
+                    id="reg_last_name" autocomplete="family-name"
+                    value="<?php echo (!empty($_POST['last_name'])) ? esc_attr(wp_unslash($_POST['last_name'])) : ''; ?>"
+                    required aria-required="true" />
             </p>
 
             <!-- Account Type (Radio) -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label><?php esc_html_e( 'Account Type', 'woocommerce' ); ?> <span class="required" aria-hidden="true">*</span></label>
+                <label><?php esc_html_e('Account Type', 'woocommerce'); ?> <span class="required"
+                        aria-hidden="true">*</span></label>
                 <?php
-                $account_type = ! empty( $_POST['account_type'] ) ? sanitize_text_field( wp_unslash( $_POST['account_type'] ) ) : 'individual';
+                $account_type = !empty($_POST['account_type']) ? sanitize_text_field(wp_unslash($_POST['account_type'])) : 'individual';
                 ?>
                 <label class="woocommerce-form__label woocommerce-form__label-for-radio">
-                    <input type="radio"
-                        name="account_type"
-                        value="individual"
-                        <?php checked( $account_type, 'individual' ); ?>
-                    />
-                    <span><?php esc_html_e( 'Individual', 'woocommerce' ); ?></span>
+                    <input type="radio" name="account_type" value="individual" <?php checked($account_type, 'individual'); ?> />
+                    <span><?php esc_html_e('Individual', 'woocommerce'); ?></span>
                 </label>
-                <label class="woocommerce-form__label woocommerce-form__label-for-radio" style="margin-left: 1rem;">
-                    <input type="radio"
-                        name="account_type"
-                        value="company"
-                        <?php checked( $account_type, 'company' ); ?>
-                    />
-                    <span><?php esc_html_e( 'Company', 'woocommerce' ); ?></span>
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio"
+                    style="margin-left: 1rem; margin-right: 1rem;">
+                    <input type="radio" name="account_type" value="company" <?php checked($account_type, 'company'); ?> />
+                    <span><?php esc_html_e('Company', 'woocommerce'); ?></span>
                 </label>
-            </p>
-
-            <!-- Company Name (optional / required for company) -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label for="reg_company_name">
-                    <?php esc_html_e( 'Company Name', 'woocommerce' ); ?>
-                </label>
-                <input type="text"
-                    class="woocommerce-Input woocommerce-Input--text input-text"
-                    name="company_name"
-                    id="reg_company_name"
-                    value="<?php echo ( ! empty( $_POST['company_name'] ) ) ? esc_attr( wp_unslash( $_POST['company_name'] ) ) : ''; ?>"
-                    placeholder="<?php esc_attr_e( 'Enter company name', 'woocommerce' ); ?>"
-                />
             </p>
 
             <!-- Sector (Dropdown) -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
+                style="max-width: calc(50% - 20px);">
                 <label for="reg_sector">
-                    <?php esc_html_e( 'Sector', 'woocommerce' ); ?>
+                    <?php esc_html_e('Sector', 'woocommerce'); ?>
                 </label>
                 <?php
-                $sector = ! empty( $_POST['sector'] ) ? sanitize_text_field( wp_unslash( $_POST['sector'] ) ) : '';
+                $sector = !empty($_POST['sector']) ? sanitize_text_field(wp_unslash($_POST['sector'])) : '';
                 ?>
-                <select
-                    name="sector"
-                    id="reg_sector"
-                    class="woocommerce-Input woocommerce-Input--select input-select"
-                >
-                    <option value=""><?php esc_html_e( 'Select sector', 'woocommerce' ); ?></option>
-                    <option value="restaurant_cafe" <?php selected( $sector, 'restaurant_cafe' ); ?>><?php esc_html_e( 'Restaurant / Café', 'woocommerce' ); ?></option>
-                    <option value="bakery_sweets" <?php selected( $sector, 'bakery_sweets' ); ?>><?php esc_html_e( 'Bakery / Sweets', 'woocommerce' ); ?></option>
-                    <option value="hotel_catering" <?php selected( $sector, 'hotel_catering' ); ?>><?php esc_html_e( 'Hotel / Catering', 'woocommerce' ); ?></option>
-                    <option value="corporate" <?php selected( $sector, 'corporate' ); ?>><?php esc_html_e( 'Corporate / Office', 'woocommerce' ); ?></option>
-                    <option value="other" <?php selected( $sector, 'other' ); ?>><?php esc_html_e( 'Other', 'woocommerce' ); ?></option>
+                <select name="sector" id="reg_sector" class="woocommerce-Input woocommerce-Input--select input-select">
+                    <option value=""><?php esc_html_e('Select sector', 'woocommerce'); ?></option>
+                    <option value="restaurant_cafe" <?php selected($sector, 'restaurant_cafe'); ?>>
+                        <?php esc_html_e('Restaurant / Café', 'woocommerce'); ?>
+                    </option>
+                    <option value="bakery_sweets" <?php selected($sector, 'bakery_sweets'); ?>>
+                        <?php esc_html_e('Bakery / Sweets', 'woocommerce'); ?>
+                    </option>
+                    <option value="hotel_catering" <?php selected($sector, 'hotel_catering'); ?>>
+                        <?php esc_html_e('Hotel / Catering', 'woocommerce'); ?>
+                    </option>
+                    <option value="corporate" <?php selected($sector, 'corporate'); ?>>
+                        <?php esc_html_e('Corporate / Office', 'woocommerce'); ?>
+                    </option>
+                    <option value="other" <?php selected($sector, 'other'); ?>>
+                        <?php esc_html_e('Other', 'woocommerce'); ?>
+                    </option>
                 </select>
             </p>
 
-            <!-- Phone Number -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label for="reg_phone">
-                    <?php esc_html_e( 'Phone Number', 'woocommerce' ); ?>
-                    <span class="required" aria-hidden="true">*</span>
-                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+            <!-- Company Name (optional / required for company) -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
+                style="max-width: calc(50% - 20px);">
+                <label for="reg_company_name">
+                    <?php esc_html_e('Company Name', 'woocommerce'); ?>
                 </label>
-                <input type="tel"
-                    class="woocommerce-Input woocommerce-Input--text input-text"
-                    name="phone"
-                    id="reg_phone"
-                    autocomplete="tel"
-                    value="<?php echo ( ! empty( $_POST['phone'] ) ) ? esc_attr( wp_unslash( $_POST['phone'] ) ) : ''; ?>"
-                    placeholder="<?php esc_attr_e( 'Enter your phone number', 'woocommerce' ); ?>"
-                    required
-                    aria-required="true"
-                />
+                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="company_name"
+                    id="reg_company_name"
+                    value="<?php echo (!empty($_POST['company_name'])) ? esc_attr(wp_unslash($_POST['company_name'])) : ''; ?>"
+                    placeholder="<?php esc_attr_e('Enter company name', 'woocommerce'); ?>" />
             </p>
 
             <!-- Email -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label for="reg_email">
-                    <?php esc_html_e( 'Email address', 'woocommerce' ); ?>
+                    <?php esc_html_e('Email address', 'woocommerce'); ?>
                     <span class="required" aria-hidden="true">*</span>
-                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                    <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
                 </label>
-                <input type="email"
-                    class="woocommerce-Input woocommerce-Input--text input-text"
-                    name="email"
-                    id="reg_email"
+                <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email"
                     autocomplete="email"
-                    value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>"
-                    required
-                    aria-required="true"
-                />
+                    value="<?php echo (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : ''; ?>" required
+                    aria-required="true" />
             </p>
 
-            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+            <!-- Phone Number -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_phone">
+                    <?php esc_html_e('Phone Number', 'woocommerce'); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                    <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
+                </label>
+                <input type="tel" class="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="reg_phone"
+                    autocomplete="tel"
+                    value="<?php echo (!empty($_POST['phone'])) ? esc_attr(wp_unslash($_POST['phone'])) : ''; ?>"
+                    placeholder="<?php esc_attr_e('Enter your phone number', 'woocommerce'); ?>" required
+                    aria-required="true" />
+            </p>
+
+            <?php if ('no' === get_option('woocommerce_registration_generate_password')): ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="reg_password">
-                        <?php esc_html_e( 'Create Password', 'woocommerce' ); ?>
+                        <?php esc_html_e('Create Password', 'woocommerce'); ?>
                         <span class="required" aria-hidden="true">*</span>
-                        <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                        <span class="screen-reader-text"><?php esc_html_e('Required', 'woocommerce'); ?></span>
                     </label>
-                    <input type="password"
-                        class="woocommerce-Input woocommerce-Input--text input-text"
-                        name="password"
-                        id="reg_password"
-                        autocomplete="new-password"
-                        required
-                        aria-required="true"
-                        placeholder="<?php esc_attr_e( 'Enter password', 'woocommerce' ); ?>"
-                    />
+                    <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password"
+                        id="reg_password" autocomplete="new-password" required aria-required="true"
+                        placeholder="<?php esc_attr_e('Enter password', 'woocommerce'); ?>" />
                 </p>
-            <?php else : ?>
-                <p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
+            <?php else: ?>
+                <p><?php esc_html_e('A link to set a new password will be sent to your email address.', 'woocommerce'); ?></p>
             <?php endif; ?>
 
             <!-- Terms & Conditions -->
             <p class="woocommerce-form-row form-row">
                 <?php
-                $terms_checked = ! empty( $_POST['terms'] );
-                $terms_page_id = wc_get_page_id( 'terms' );
-                $terms_url     = $terms_page_id > 0 ? get_permalink( $terms_page_id ) : '#';
+                $terms_checked = !empty($_POST['terms']);
+                $terms_page_id = wc_get_page_id('terms');
+                $terms_url = $terms_page_id > 0 ? get_permalink($terms_page_id) : '#';
                 ?>
                 <label class="woocommerce-form__label woocommerce-form__label-for-checkbox">
-                    <input type="checkbox"
-                        class="woocommerce-form__input woocommerce-form__input-checkbox"
-                        name="terms"
-                        id="reg_terms"
-                        value="1"
-                        <?php checked( $terms_checked, true ); ?>
-                    />
+                    <input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox" name="terms"
+                        id="reg_terms" value="1" <?php checked($terms_checked, true); ?> />
                     <span>
-                        <?php esc_html_e( 'I agree to the terms and conditions', 'woocommerce' ); ?>
-                        <?php if ( $terms_page_id > 0 ) : ?>
-                            (<a href="<?php echo esc_url( $terms_url ); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php esc_html_e( 'View terms', 'woocommerce' ); ?>
+                        <?php esc_html_e('I agree to the terms and conditions', 'woocommerce'); ?>
+                        <?php if ($terms_page_id > 0): ?>
+                            (<a href="<?php echo esc_url($terms_url); ?>" target="_blank" rel="noopener noreferrer">
+                                <?php esc_html_e('View terms', 'woocommerce'); ?>
                             </a>)
                         <?php endif; ?>
                     </span>
@@ -585,13 +561,15 @@ function custom_woocommerce_register_form_shortcode() {
 
 
             <p class="woocommerce-form-row form-row">
-                <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-                <button type="submit" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>">
-                    <?php esc_html_e( 'Register', 'woocommerce' ); ?>
+                <?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
+                <button type="submit"
+                    class="woocommerce-Button woocommerce-button button<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?> woocommerce-form-register__submit"
+                    name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>">
+                    <?php esc_html_e('Register', 'woocommerce'); ?>
                 </button>
             </p>
 
-            <?php do_action( 'woocommerce_register_form_end' ); ?>
+            <?php do_action('woocommerce_register_form_end'); ?>
 
         </form>
     </div>
@@ -600,45 +578,46 @@ function custom_woocommerce_register_form_shortcode() {
     return ob_get_clean();
 }
 
-add_shortcode( 'custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode' );
+add_shortcode('custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode');
 
 
 
 // Move Checkout payment section under Billing Adress Form
 
-remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
-add_action( 'woocommerce_checkout_after_customer_details', 'woocommerce_checkout_payment', 10 );
+remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+add_action('woocommerce_checkout_after_customer_details', 'woocommerce_checkout_payment', 10);
 
 /**
  *  Override Elementor Pro cart fragments
  */
 
 add_filter('woocommerce_add_to_cart_fragments', 'update_cart_count_fragment');
-function update_cart_count_fragment($fragments) {
+function update_cart_count_fragment($fragments)
+{
     if (class_exists('WooCommerce') && WC()->cart) {
         $unique_count = count(WC()->cart->get_cart());
-        
+
         // Override the default cart count fragment
         $fragments['.elementor-button-icon-qty'] = '<span class="elementor-button-icon-qty" data-counter="' . $unique_count . '">' . $unique_count . '</span>';
-        
+
         // Also target common cart counter selectors
         $fragments['.cart-count'] = '<span class="cart-count">' . $unique_count . '</span>';
         $fragments['.elementor-menu-cart__toggle .elementor-button-text'] = '<span class="elementor-button-text">' . $unique_count . '</span>';
     }
-    
+
     return $fragments;
 }
 
 // Initial load script (simplified)
-add_action('wp_footer', function() {
+add_action('wp_footer', function () {
     if (class_exists('WooCommerce') && WC()->cart) {
         $unique_count = count(WC()->cart->get_cart());
         ?>
         <script>
-        jQuery(document).ready(function($) {
-            // Set initial count
-            $('.elementor-button-icon-qty').attr('data-counter', '<?php echo $unique_count; ?>').text('<?php echo $unique_count; ?>');
-        });
+            jQuery(document).ready(function ($) {
+                // Set initial count
+                $('.elementor-button-icon-qty').attr('data-counter', '<?php echo $unique_count; ?>').text('<?php echo $unique_count; ?>');
+            });
         </script>
         <?php
     }
@@ -646,36 +625,38 @@ add_action('wp_footer', function() {
 
 
 
-function custom_dokan_dashboard_logo() {
+function custom_dokan_dashboard_logo()
+{
     ?>
     <div class="dokan-dashboard-logo">
-        <a href="<?php echo esc_url( home_url() ); ?>">
-            <?php 
-            if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
+        <a href="<?php echo esc_url(home_url()); ?>">
+            <?php
+            if (function_exists('the_custom_logo') && has_custom_logo()) {
                 the_custom_logo(); // Use WP custom logo if set
             } else {
                 // fallback to site title
-                bloginfo( 'name' );
+                bloginfo('name');
             }
             ?>
         </a>
     </div>
     <?php
 }
-add_action( 'dokan_dashboard_sidebar_start', 'custom_dokan_dashboard_logo', 5 );
+add_action('dokan_dashboard_sidebar_start', 'custom_dokan_dashboard_logo', 5);
 
 /**
  * Redirect users after login based on their role
  */
 add_filter('login_redirect', 'custom_redirect_vendors_after_login', 10, 3);
 
-function custom_redirect_vendors_after_login($redirect_to, $request, $user) {
+function custom_redirect_vendors_after_login($redirect_to, $request, $user)
+{
     if (isset($user->roles) && is_array($user->roles)) {
         // Check if user is a Dokan vendor
-        $is_vendor = in_array('seller', $user->roles) || 
-                     in_array('vendor', $user->roles) || 
-                     user_can($user->ID, 'dokandar') || 
-                     get_user_meta($user->ID, 'dokan_enable_selling', true) === 'yes';
+        $is_vendor = in_array('seller', $user->roles) ||
+            in_array('vendor', $user->roles) ||
+            user_can($user->ID, 'dokandar') ||
+            get_user_meta($user->ID, 'dokan_enable_selling', true) === 'yes';
 
         if ($is_vendor && class_exists('WeDevs_Dokan')) {
             // Redirect vendors to the Dokan dashboard
@@ -695,7 +676,8 @@ function custom_redirect_vendors_after_login($redirect_to, $request, $user) {
  */
 add_action('template_redirect', 'custom_redirect_vendors_from_my_account');
 
-function custom_redirect_vendors_from_my_account() {
+function custom_redirect_vendors_from_my_account()
+{
     // Only proceed if user is logged in
     if (!is_user_logged_in()) {
         return;
@@ -705,10 +687,10 @@ function custom_redirect_vendors_from_my_account() {
     $user = wp_get_current_user();
 
     // Check if user is a Dokan vendor
-    $is_vendor = in_array('seller', $user->roles) || 
-                 in_array('vendor', $user->roles) || 
-                 user_can($user->ID, 'dokandar') || 
-                 get_user_meta($user->ID, 'dokan_enable_selling', true) === 'yes';
+    $is_vendor = in_array('seller', $user->roles) ||
+        in_array('vendor', $user->roles) ||
+        user_can($user->ID, 'dokandar') ||
+        get_user_meta($user->ID, 'dokan_enable_selling', true) === 'yes';
 
     if (!$is_vendor) {
         return; // Non-vendors can access the My Account page
@@ -737,179 +719,187 @@ function custom_redirect_vendors_from_my_account() {
  */
 
 // Main validation class
-class Simple_Login_Validator {
-    
-    public function __construct() {
-        add_action( 'init', [ $this, 'init_hooks' ] );
+class Simple_Login_Validator
+{
+
+    public function __construct()
+    {
+        add_action('init', [$this, 'init_hooks']);
     }
-    
-    public function init_hooks() {
+
+    public function init_hooks()
+    {
         // Hook into WordPress login validation
-        add_filter( 'authenticate', [ $this, 'validate_login_form' ], 30, 3 );
-        
+        add_filter('authenticate', [$this, 'validate_login_form'], 30, 3);
+
         // Add JavaScript to identify form type
-        add_action( 'wp_footer', [ $this, 'add_form_detection_script' ] );
-        
+        add_action('wp_footer', [$this, 'add_form_detection_script']);
+
         // Handle login errors
-        add_action( 'wp_login_failed', [ $this, 'handle_login_error' ] );
-        
+        add_action('wp_login_failed', [$this, 'handle_login_error']);
+
         // Display error messages
-        add_action( 'wp_footer', [ $this, 'display_error_messages' ] );
+        add_action('wp_footer', [$this, 'display_error_messages']);
     }
-    
+
     /**
      * Main validation function - checks user type during login
      */
-    public function validate_login_form( $user, $username, $password ) {
+    public function validate_login_form($user, $username, $password)
+    {
         // Skip if already error or empty credentials
-        if ( is_wp_error( $user ) || empty( $username ) || empty( $password ) ) {
+        if (is_wp_error($user) || empty($username) || empty($password)) {
             return $user;
         }
-        
+
         // Check if form type is specified (added by our JavaScript)
-        if ( ! isset( $_POST['form_type'] ) ) {
+        if (!isset($_POST['form_type'])) {
             return $user; // No form type = allow normal login
         }
-        
-        $form_type = sanitize_text_field( $_POST['form_type'] );
-        
+
+        $form_type = sanitize_text_field($_POST['form_type']);
+
         // Get user by username or email
-        $user_obj = get_user_by( 'login', $username );
-        if ( ! $user_obj ) {
-            $user_obj = get_user_by( 'email', $username );
+        $user_obj = get_user_by('login', $username);
+        if (!$user_obj) {
+            $user_obj = get_user_by('email', $username);
         }
-        
-        if ( ! $user_obj ) {
+
+        if (!$user_obj) {
             return $user; // Let WordPress handle invalid user
         }
-        
+
         // Check if user type matches form
-        $is_vendor = $this->is_vendor( $user_obj );
-        
-        if ( $form_type === 'vendor' && ! $is_vendor ) {
-            return new WP_Error( 
-                'wrong_form_type', 
-                'This login form is for vendors only. Please use the customer login form.' 
+        $is_vendor = $this->is_vendor($user_obj);
+
+        if ($form_type === 'vendor' && !$is_vendor) {
+            return new WP_Error(
+                'wrong_form_type',
+                'This login form is for vendors only. Please use the customer login form.'
             );
         }
-        
-        if ( $form_type === 'customer' && $is_vendor ) {
-            return new WP_Error( 
-                'wrong_form_type', 
-                'This login form is for customers only. Please use the vendor login form.' 
+
+        if ($form_type === 'customer' && $is_vendor) {
+            return new WP_Error(
+                'wrong_form_type',
+                'This login form is for customers only. Please use the vendor login form.'
             );
         }
-        
+
         return $user;
     }
-    
+
     /**
      * Check if user is a vendor
      */
-    private function is_vendor( $user ) {
+    private function is_vendor($user)
+    {
         // Check user roles
-        $vendor_roles = [ 'vendor', 'shop_manager', 'administrator' ];
-        if ( array_intersect( $vendor_roles, $user->roles ) ) {
+        $vendor_roles = ['vendor', 'shop_manager', 'administrator'];
+        if (array_intersect($vendor_roles, $user->roles)) {
             return true;
         }
-        
+
         // Check user meta
-        if ( get_user_meta( $user->ID, 'is_vendor', true ) ) {
+        if (get_user_meta($user->ID, 'is_vendor', true)) {
             return true;
         }
-        
+
         // WooCommerce vendor plugins compatibility
-        if ( function_exists( 'dokan_is_user_vendor' ) && dokan_is_user_vendor( $user->ID ) ) {
+        if (function_exists('dokan_is_user_vendor') && dokan_is_user_vendor($user->ID)) {
             return true;
         }
-        
-        if ( class_exists( 'WCMp' ) && function_exists( 'is_user_mvx_vendor' ) && is_user_mvx_vendor( $user->ID ) ) {
+
+        if (class_exists('WCMp') && function_exists('is_user_mvx_vendor') && is_user_mvx_vendor($user->ID)) {
             return true;
         }
-        
-        if ( function_exists( 'wcfm_is_vendor' ) && wcfm_is_vendor( $user->ID ) ) {
+
+        if (function_exists('wcfm_is_vendor') && wcfm_is_vendor($user->ID)) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Add JavaScript to detect form type based on CSS classes
      */
-    public function add_form_detection_script() {
+    public function add_form_detection_script()
+    {
         ?>
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Find all Elementor login forms
-            var loginForms = document.querySelectorAll('.elementor-login form');
-            
-            loginForms.forEach(function(form) {
-                var formType = '';
-                
-                // Check if form is in vendor container
-                if (form.closest('.supplier-login') || form.closest('.vendor-login')) {
-                    formType = 'vendor';
-                }
-                // Check if form is in customer container  
-                else if (form.closest('.customer-login')) {
-                    formType = 'customer';
-                }
-                
-                // Add hidden field if form type detected
-                if (formType) {
-                    var hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = 'form_type';
-                    hiddenField.value = formType;
-                    form.appendChild(hiddenField);
-                }
+            document.addEventListener('DOMContentLoaded', function () {
+                // Find all Elementor login forms
+                var loginForms = document.querySelectorAll('.elementor-login form');
+
+                loginForms.forEach(function (form) {
+                    var formType = '';
+
+                    // Check if form is in vendor container
+                    if (form.closest('.supplier-login') || form.closest('.vendor-login')) {
+                        formType = 'vendor';
+                    }
+                    // Check if form is in customer container  
+                    else if (form.closest('.customer-login')) {
+                        formType = 'customer';
+                    }
+
+                    // Add hidden field if form type detected
+                    if (formType) {
+                        var hiddenField = document.createElement('input');
+                        hiddenField.type = 'hidden';
+                        hiddenField.name = 'form_type';
+                        hiddenField.value = formType;
+                        form.appendChild(hiddenField);
+                    }
+                });
             });
-        });
         </script>
         <?php
     }
-    
+
     /**
      * Handle login errors and redirect with error message
      */
-    public function handle_login_error( $username ) {
+    public function handle_login_error($username)
+    {
         $referrer = wp_get_referer();
-        
-        if ( $referrer && ! strstr( $referrer, 'wp-login' ) && ! strstr( $referrer, 'wp-admin' ) ) {
-            wp_redirect( add_query_arg( 'login_error', '1', $referrer ) );
+
+        if ($referrer && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin')) {
+            wp_redirect(add_query_arg('login_error', '1', $referrer));
             exit;
         }
     }
-    
+
     /**
      * Display error messages on the page
      */
-    public function display_error_messages() {
-        if ( ! isset( $_GET['login_error'] ) ) {
+    public function display_error_messages()
+    {
+        if (!isset($_GET['login_error'])) {
             return;
         }
         ?>
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var loginForms = document.querySelectorAll('.elementor-login form');
-            
-            loginForms.forEach(function(form) {
-                var errorDiv = document.createElement('div');
-                errorDiv.className = 'login-error-message';
-                errorDiv.innerHTML = 'Please check your credentials and ensure you\'re using the correct login form for your account type.';
-                errorDiv.style.cssText = 'background:#f8d7da;color:#721c24;padding:12px;margin-bottom:15px;border:1px solid #f5c6cb;border-radius:4px;font-size:14px;';
-                
-                form.insertBefore(errorDiv, form.firstChild);
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginForms = document.querySelectorAll('.elementor-login form');
+
+                loginForms.forEach(function (form) {
+                    var errorDiv = document.createElement('div');
+                    errorDiv.className = 'login-error-message';
+                    errorDiv.innerHTML = 'Please check your credentials and ensure you\'re using the correct login form for your account type.';
+                    errorDiv.style.cssText = 'background:#f8d7da;color:#721c24;padding:12px;margin-bottom:15px;border:1px solid #f5c6cb;border-radius:4px;font-size:14px;';
+
+                    form.insertBefore(errorDiv, form.firstChild);
+                });
+
+                // Remove error parameter from URL
+                if (window.history && window.history.replaceState) {
+                    var url = new URL(window.location);
+                    url.searchParams.delete('login_error');
+                    window.history.replaceState({}, document.title, url);
+                }
             });
-            
-            // Remove error parameter from URL
-            if (window.history && window.history.replaceState) {
-                var url = new URL(window.location);
-                url.searchParams.delete('login_error');
-                window.history.replaceState({}, document.title, url);
-            }
-        });
         </script>
         <?php
     }
