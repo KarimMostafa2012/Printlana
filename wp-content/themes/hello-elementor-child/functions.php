@@ -410,7 +410,7 @@ function custom_woocommerce_register_form_shortcode()
 
             <!-- First Name -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
-                style="max-width: calc(50% - 20px);">
+                style="flex: calc(50% - 20px);min-width: 220px;">
                 <label for="reg_first_name">
                     <?php esc_html_e('First Name', 'woocommerce'); ?>
                     <span class="required" aria-hidden="true">*</span>
@@ -424,7 +424,7 @@ function custom_woocommerce_register_form_shortcode()
 
             <!-- Family Name -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
-                style="max-width: calc(50% - 20px);">
+                style="flex: calc(50% - 20px);min-width: 220px;">
                 <label for="reg_last_name">
                     <?php esc_html_e('Family Name', 'woocommerce'); ?>
                     <span class="required" aria-hidden="true">*</span>
@@ -456,7 +456,7 @@ function custom_woocommerce_register_form_shortcode()
 
             <!-- Sector (Dropdown) -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
-                style="max-width: calc(50% - 20px);">
+                style="flex: calc(50% - 20px);min-width: 220px;">
                 <label for="reg_sector">
                     <?php esc_html_e('Sector', 'woocommerce'); ?>
                 </label>
@@ -485,7 +485,7 @@ function custom_woocommerce_register_form_shortcode()
 
             <!-- Company Name (optional / required for company) -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
-                style="max-width: calc(50% - 20px);">
+                style="flex: calc(50% - 20px);min-width: 220px;">
                 <label for="reg_company_name">
                     <?php esc_html_e('Company Name', 'woocommerce'); ?>
                 </label>
