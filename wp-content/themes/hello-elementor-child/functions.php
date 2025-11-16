@@ -445,11 +445,13 @@ function custom_woocommerce_register_form_shortcode()
                 ?>
                 <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio">
                     <input type="radio" name="account_type" value="individual" <?php checked($account_type, 'individual'); ?> />
+                    <span class="wapf-custom"></span>
                     <span><?php esc_html_e('Individual', 'woocommerce'); ?></span>
                 </label>
                 <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio"
                     style="margin-left: 1rem; margin-right: 1rem;">
                     <input type="radio" name="account_type" value="company" <?php checked($account_type, 'company'); ?> />
+                    <span class="wapf-custom"></span>
                     <span><?php esc_html_e('Company', 'woocommerce'); ?></span>
                 </label>
             </p>
