@@ -385,30 +385,211 @@ function custom_woocommerce_register_form_shortcode() {
 
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?> <span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
-                    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" required aria-required="true" />
+                    <label for="reg_username">
+                        <?php esc_html_e( 'Username', 'woocommerce' ); ?>
+                        <span class="required" aria-hidden="true">*</span>
+                        <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                    </label>
+                    <input type="text"
+                        class="woocommerce-Input woocommerce-Input--text input-text"
+                        name="username"
+                        id="reg_username"
+                        autocomplete="username"
+                        value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>"
+                        required
+                        aria-required="true"
+                    />
                 </p>
             <?php endif; ?>
 
+            <!-- First Name -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?> <span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
-                <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required aria-required="true" />
+                <label for="reg_first_name">
+                    <?php esc_html_e( 'First Name', 'woocommerce' ); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                </label>
+                <input type="text"
+                    class="woocommerce-Input woocommerce-Input--text input-text"
+                    name="first_name"
+                    id="reg_first_name"
+                    autocomplete="given-name"
+                    value="<?php echo ( ! empty( $_POST['first_name'] ) ) ? esc_attr( wp_unslash( $_POST['first_name'] ) ) : ''; ?>"
+                    required
+                    aria-required="true"
+                />
+            </p>
+
+            <!-- Family Name -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_last_name">
+                    <?php esc_html_e( 'Family Name', 'woocommerce' ); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                </label>
+                <input type="text"
+                    class="woocommerce-Input woocommerce-Input--text input-text"
+                    name="last_name"
+                    id="reg_last_name"
+                    autocomplete="family-name"
+                    value="<?php echo ( ! empty( $_POST['last_name'] ) ) ? esc_attr( wp_unslash( $_POST['last_name'] ) ) : ''; ?>"
+                    required
+                    aria-required="true"
+                />
+            </p>
+
+            <!-- Account Type (Radio) -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label><?php esc_html_e( 'Account Type', 'woocommerce' ); ?> <span class="required" aria-hidden="true">*</span></label>
+                <?php
+                $account_type = ! empty( $_POST['account_type'] ) ? sanitize_text_field( wp_unslash( $_POST['account_type'] ) ) : 'individual';
+                ?>
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio">
+                    <input type="radio"
+                        name="account_type"
+                        value="individual"
+                        <?php checked( $account_type, 'individual' ); ?>
+                    />
+                    <span><?php esc_html_e( 'Individual', 'woocommerce' ); ?></span>
+                </label>
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio" style="margin-left: 1rem;">
+                    <input type="radio"
+                        name="account_type"
+                        value="company"
+                        <?php checked( $account_type, 'company' ); ?>
+                    />
+                    <span><?php esc_html_e( 'Company', 'woocommerce' ); ?></span>
+                </label>
+            </p>
+
+            <!-- Company Name (optional / required for company) -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_company_name">
+                    <?php esc_html_e( 'Company Name', 'woocommerce' ); ?>
+                </label>
+                <input type="text"
+                    class="woocommerce-Input woocommerce-Input--text input-text"
+                    name="company_name"
+                    id="reg_company_name"
+                    value="<?php echo ( ! empty( $_POST['company_name'] ) ) ? esc_attr( wp_unslash( $_POST['company_name'] ) ) : ''; ?>"
+                    placeholder="<?php esc_attr_e( 'Enter company name', 'woocommerce' ); ?>"
+                />
+            </p>
+
+            <!-- Sector (Dropdown) -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_sector">
+                    <?php esc_html_e( 'Sector', 'woocommerce' ); ?>
+                </label>
+                <?php
+                $sector = ! empty( $_POST['sector'] ) ? sanitize_text_field( wp_unslash( $_POST['sector'] ) ) : '';
+                ?>
+                <select
+                    name="sector"
+                    id="reg_sector"
+                    class="woocommerce-Input woocommerce-Input--select input-select"
+                >
+                    <option value=""><?php esc_html_e( 'Select sector', 'woocommerce' ); ?></option>
+                    <option value="restaurant_cafe" <?php selected( $sector, 'restaurant_cafe' ); ?>><?php esc_html_e( 'Restaurant / Café', 'woocommerce' ); ?></option>
+                    <option value="bakery_sweets" <?php selected( $sector, 'bakery_sweets' ); ?>><?php esc_html_e( 'Bakery / Sweets', 'woocommerce' ); ?></option>
+                    <option value="hotel_catering" <?php selected( $sector, 'hotel_catering' ); ?>><?php esc_html_e( 'Hotel / Catering', 'woocommerce' ); ?></option>
+                    <option value="corporate" <?php selected( $sector, 'corporate' ); ?>><?php esc_html_e( 'Corporate / Office', 'woocommerce' ); ?></option>
+                    <option value="other" <?php selected( $sector, 'other' ); ?>><?php esc_html_e( 'Other', 'woocommerce' ); ?></option>
+                </select>
+            </p>
+
+            <!-- Phone Number -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_phone">
+                    <?php esc_html_e( 'Phone Number', 'woocommerce' ); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                </label>
+                <input type="tel"
+                    class="woocommerce-Input woocommerce-Input--text input-text"
+                    name="phone"
+                    id="reg_phone"
+                    autocomplete="tel"
+                    value="<?php echo ( ! empty( $_POST['phone'] ) ) ? esc_attr( wp_unslash( $_POST['phone'] ) ) : ''; ?>"
+                    placeholder="<?php esc_attr_e( 'Enter your phone number', 'woocommerce' ); ?>"
+                    required
+                    aria-required="true"
+                />
+            </p>
+
+            <!-- Email -->
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_email">
+                    <?php esc_html_e( 'Email address', 'woocommerce' ); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                    <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                </label>
+                <input type="email"
+                    class="woocommerce-Input woocommerce-Input--text input-text"
+                    name="email"
+                    id="reg_email"
+                    autocomplete="email"
+                    value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>"
+                    required
+                    aria-required="true"
+                />
             </p>
 
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?> <span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
-                    <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" required aria-required="true" />
+                    <label for="reg_password">
+                        <?php esc_html_e( 'Create Password', 'woocommerce' ); ?>
+                        <span class="required" aria-hidden="true">*</span>
+                        <span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span>
+                    </label>
+                    <input type="password"
+                        class="woocommerce-Input woocommerce-Input--text input-text"
+                        name="password"
+                        id="reg_password"
+                        autocomplete="new-password"
+                        required
+                        aria-required="true"
+                        placeholder="<?php esc_attr_e( 'Enter password', 'woocommerce' ); ?>"
+                    />
                 </p>
             <?php else : ?>
                 <p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
             <?php endif; ?>
 
+            <!-- Terms & Conditions -->
+            <p class="woocommerce-form-row form-row">
+                <?php
+                $terms_checked = ! empty( $_POST['terms'] );
+                $terms_page_id = wc_get_page_id( 'terms' );
+                $terms_url     = $terms_page_id > 0 ? get_permalink( $terms_page_id ) : '#';
+                ?>
+                <label class="woocommerce-form__label woocommerce-form__label-for-checkbox">
+                    <input type="checkbox"
+                        class="woocommerce-form__input woocommerce-form__input-checkbox"
+                        name="terms"
+                        id="reg_terms"
+                        value="1"
+                        <?php checked( $terms_checked, true ); ?>
+                    />
+                    <span>
+                        <?php esc_html_e( 'I agree to the terms and conditions', 'woocommerce' ); ?>
+                        <?php if ( $terms_page_id > 0 ) : ?>
+                            (<a href="<?php echo esc_url( $terms_url ); ?>" target="_blank" rel="noopener noreferrer">
+                                <?php esc_html_e( 'View terms', 'woocommerce' ); ?>
+                            </a>)
+                        <?php endif; ?>
+                    </span>
+                    <span class="required" aria-hidden="true">*</span>
+                </label>
+            </p>
+
             <?php do_action( 'woocommerce_register_form' ); ?>
 
             <p class="woocommerce-form-row form-row">
                 <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-                <button type="submit" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
+                <button type="submit" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>">
+                    <?php esc_html_e( 'Register', 'woocommerce' ); ?>
+                </button>
             </p>
 
             <?php do_action( 'woocommerce_register_form_end' ); ?>
@@ -419,6 +600,7 @@ function custom_woocommerce_register_form_shortcode() {
     <?php
     return ob_get_clean();
 }
+
 add_shortcode( 'custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode' );
 
 
