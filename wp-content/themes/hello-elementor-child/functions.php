@@ -438,23 +438,29 @@ function custom_woocommerce_register_form_shortcode()
 
             <!-- Account Type (Radio) -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label><?php esc_html_e('Account Type', 'woocommerce'); ?> <span class="required"
-                        aria-hidden="true">*</span></label>
+                <label>
+                    <?php esc_html_e('Account Type', 'woocommerce'); ?>
+                    <span class="required" aria-hidden="true">*</span>
+                </label>
+
                 <?php
                 $account_type = !empty($_POST['account_type']) ? sanitize_text_field(wp_unslash($_POST['account_type'])) : 'individual';
                 ?>
-                <label class="woocommerce-form__label woocommerce-form__label-for-radio register-radio">
+
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio">
                     <input type="radio" name="account_type" value="individual" <?php checked($account_type, 'individual'); ?> />
-                    <div class="register-radio-custom"></div>
+                    <div class="wapf-custom"></div>
                     <span><?php esc_html_e('Individual', 'woocommerce'); ?></span>
                 </label>
-                <label class="woocommerce-form__label woocommerce-form__label-for-radio register-radio"
+
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio"
                     style="margin-left: 1rem; margin-right: 1rem;">
                     <input type="radio" name="account_type" value="company" <?php checked($account_type, 'company'); ?> />
-                    <div class="register-radio-custom"></div>
+                    <div class="wapf-custom"></div>
                     <span><?php esc_html_e('Company', 'woocommerce'); ?></span>
                 </label>
             </p>
+
 
             <!-- Sector (Dropdown) -->
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
