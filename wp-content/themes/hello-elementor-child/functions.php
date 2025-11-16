@@ -583,7 +583,6 @@ function custom_woocommerce_register_form_shortcode() {
                 </label>
             </p>
 
-            <?php do_action( 'woocommerce_register_form' ); ?>
 
             <p class="woocommerce-form-row form-row">
                 <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
