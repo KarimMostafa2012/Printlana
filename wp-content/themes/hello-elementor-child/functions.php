@@ -437,19 +437,19 @@ function custom_woocommerce_register_form_shortcode()
             </p>
 
             <!-- Account Type (Radio) -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide" style="display: flex;flex-wrap: wrap;">
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide" style="display: flex;flex-wrap: wrap;    column-gap: 40px;">
                 <label style="flex:100%;"><?php esc_html_e('Account Type', 'woocommerce'); ?> <span class="required"
                         aria-hidden="true">*</span></label>
                 <?php
                 $account_type = !empty($_POST['account_type']) ? sanitize_text_field(wp_unslash($_POST['account_type'])) : 'individual';
                 ?>
-                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio" style="gap: 4px;flex: 50%;display: flex !important;align-items: center;">
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio" style="gap: 4px;flex: calc(50% - 20px);display: flex !important;align-items: center;">
                     <input type="radio" name="account_type" value="individual" <?php checked($account_type, 'individual'); ?> />
                     <span class="wapf-custom"></span>
                     <span><?php esc_html_e('Individual', 'woocommerce'); ?></span>
                 </label>
                 <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio"
-                    style="gap: 4px;flex: 50%;display: flex !important;align-items: center;">
+                    style="gap: 4px;flex: calc(50% - 20px);display: flex !important;align-items: center;">
                     <input type="radio" name="account_type" value="company" <?php checked($account_type, 'company'); ?> />
                     <span class="wapf-custom"></span>
                     <span><?php esc_html_e('Company', 'woocommerce'); ?></span>
