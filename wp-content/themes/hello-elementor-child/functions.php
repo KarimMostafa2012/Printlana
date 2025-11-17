@@ -27,11 +27,11 @@ add_filter('get_terms_args', function ($args, $taxonomies) {
     // Your custom category order (IDs)
     $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
     $args['orderby'] = 'include';
-
+    $args['hide_empty'] = false;
 
     return $args;
 
-}, 10, 2);
+}, 50, 2);
 
 
 
