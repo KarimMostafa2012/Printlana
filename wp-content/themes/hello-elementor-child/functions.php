@@ -31,7 +31,7 @@ add_filter('get_terms_args', function ($args, $taxonomies) {
     if ($query_id === 'home_categories') {
 
         // Your custom category order (IDs)
-        $args['include'] = [25, 10, 7, 18];
+        $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
         $args['orderby'] = 'include';
     }
 
