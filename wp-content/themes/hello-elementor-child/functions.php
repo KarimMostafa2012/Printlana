@@ -17,6 +17,29 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
+add_filter('get_terms_args', function ($args, $taxonomies) {
+
+    // Only target WooCommerce product categories
+    if (!in_array('product_cat', (array) $taxonomies)) {
+        return $args;
+    }
+
+    // Check if Elementor sent the Query ID
+    $query_id = isset($_POST['query_id']) ? sanitize_text_field($_POST['query_id']) : '';
+
+    // Apply ONLY to this specific Loop Grid
+    if ($query_id === 'home_categories') {
+
+        // Your custom category order (IDs)
+        $args['include'] = [25, 10, 7, 18];
+        $args['orderby'] = 'include';
+    }
+
+    return $args;
+
+}, 10, 2);
+
+
 
 // ------------------------------
 
@@ -437,13 +460,15 @@ function custom_woocommerce_register_form_shortcode()
             </p>
 
             <!-- Account Type (Radio) -->
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide" style="display: flex;flex-wrap: wrap;    column-gap: 40px;">
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide"
+                style="display: flex;flex-wrap: wrap;    column-gap: 40px;">
                 <label style="flex:100%;"><?php esc_html_e('Account Type', 'woocommerce'); ?> <span class="required"
                         aria-hidden="true">*</span></label>
                 <?php
                 $account_type = !empty($_POST['account_type']) ? sanitize_text_field(wp_unslash($_POST['account_type'])) : 'individual';
                 ?>
-                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio" style="gap: 4px;flex: calc(50% - 20px);display: flex !important;align-items: center;">
+                <label class="woocommerce-form__label woocommerce-form__label-for-radio wapf-radio"
+                    style="gap: 4px;flex: calc(50% - 20px);display: flex !important;align-items: center;">
                     <input type="radio" name="account_type" value="individual" <?php checked($account_type, 'individual'); ?> />
                     <span class="wapf-custom"></span>
                     <span><?php esc_html_e('Individual', 'woocommerce'); ?></span>
@@ -872,6 +897,7 @@ class Simple_Login_Validator
             exit;
         }
     }
+
 
     /**
      * Display error messages on the page
