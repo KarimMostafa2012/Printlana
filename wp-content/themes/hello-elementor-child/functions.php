@@ -25,6 +25,11 @@ add_filter(
     'elementor/loop_taxonomy/args',
     function ($args, $taxonomy, $settings) {
 
+        // Only for product categories
+        if ('product_cat' !== $taxonomy) {
+            return $args;
+        }
+
         // Custom order
         $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
         $args['orderby'] = 'include';
