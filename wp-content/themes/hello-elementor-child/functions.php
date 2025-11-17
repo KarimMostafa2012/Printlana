@@ -17,21 +17,38 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
-add_filter('get_terms_args', function ($args, $taxonomies) {
+/**
+ * Re-order product categories for the Loop Grid widget with Query ID = home_categories
+ * (Elementor Source: Product categories).
+ */
+add_filter(
+    'elementor/loop_taxonomy/args',
+    function ($args, $taxonomy, $settings) {
 
-    // Only target WooCommerce product categories
-    if (!in_array('product_cat', (array) $taxonomies)) {
+        // Only touch our specific widget
+        if (empty($settings['query_id']) || 'home_categories' !== $settings['query_id']) {
+            return $args;
+        }
+
+        // Only for product categories
+        if ('product_cat' !== $taxonomy) {
+            return $args;
+        }
+
+        // Custom order
+        $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
+        $args['orderby'] = 'include';
+        $args['hide_empty'] = false;
+
+        // Elementor may add parent/child_of which conflict with include
+        unset($args['parent'], $args['child_of']);
+
         return $args;
-    }
+    },
+    10,
+    3
+);
 
-    // Your custom category order (IDs)
-    $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
-    $args['orderby'] = 'include';
-    $args['hide_empty'] = false;
-
-    return $args;
-
-}, 50, 2);
 
 
 
