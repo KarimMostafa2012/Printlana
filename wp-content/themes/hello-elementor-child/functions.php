@@ -26,7 +26,7 @@ add_filter(
     function ($args, $taxonomy, $settings) {
 
         // Custom order
-        $args['include'] = [20, 19, 21, 32, 30, 31, 24, 26, 34, 27, 25, 427];
+        $args['include'] = [20, 19, 21, 32, 30, 316, 24, 26, 34, 27, 25, 427, 215, 227, 230, 226, 217, 317, 223, 218, 222, 228, 221, 426];
         $args['orderby'] = 'include';
         $args['hide_empty'] = false;
 
