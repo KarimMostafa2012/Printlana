@@ -103,7 +103,7 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                 }
 
                 // Compose item info
-                list($product_label, $product_url) = self::primary_product_for_suborder($order);
+                list($product_label) = self::primary_product_for_suborder($order);
                 $order_number = $order->get_order_number();
                 error_log('Debug Data: ' . print_r($order, true));
                 // Resolve emails
@@ -117,7 +117,10 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                 $item = reset($items); // get the first item
 
                 $product_name = $item->get_name();
+                $product_id = $item->get_product_id();
+                $product    = wc_get_product($product_id);
                 $qty = $item->get_quantity();
+                $product_url = $product->get_permalink();
 
                 $body_new = sprintf(
                     '<p>Hello,</p>
