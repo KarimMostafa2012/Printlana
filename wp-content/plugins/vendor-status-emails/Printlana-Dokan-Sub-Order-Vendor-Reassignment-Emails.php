@@ -113,6 +113,12 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                 $headers = ['Content-Type: text/html; charset=UTF-8'];
 
                 $subject_new = sprintf('You received sub-order #%s', $order_number);
+                if ($order) {
+                    $items = $order->get_items();
+                    $item = reset($items); // get the first item
+
+                    $product_name = $item->get_name();
+                }
                 $body_new = sprintf(
                     '<p>Hello,</p>
                     <p>test order: %s</p>
@@ -122,7 +128,7 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                     <strong>Order Total:</strong> %s
                  </p>
                  <p><a href="%s">View sub-order</a></p>',
-                    esc_html($order),
+                    esc_html($item),
                     esc_html($order_number),
                     esc_html($product_label),
                     $product_url ? ' — <a href="' . esc_url($product_url) . '">View product</a>' : '',
