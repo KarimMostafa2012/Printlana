@@ -134,8 +134,7 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                     esc_html($product_name),
                     $product_url ? ' — <a href="' . esc_url($product_url) . '">View product</a>' : '',
                     (int) $qty,
-                    wp_kses_post($order->get_formatted_order_total()),
-                    esc_url(admin_url('post.php?post=' . $order->get_id() . '&action=edit'))
+                    wp_kses_post(wc_price($item->get_total()))
                 );
 
                 $subject_old = sprintf('Sub-order #%s reassigned — %s', $order_number, $product_label);
