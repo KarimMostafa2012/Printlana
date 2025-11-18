@@ -161,14 +161,14 @@ class Printlana_Order_Assigner
             echo '</div>';
         }
 
-        // if (!$order->get_parent_id()) {
-        //     // NEW: Sub-orders panel
-        //     echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
-        //     echo '<h3>' . esc_html__('Sub-Orders (Per Product)', 'printlana-order-assigner') . '</h3>';
-        //     $this->render_suborders_panel($order);
-        //     echo '</div>';
-        // }
-        // echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
+        if (!$order->get_parent_id()) {
+            // NEW: Sub-orders panel
+            echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
+            echo '<h3>' . esc_html__('Sub-Orders (Per Product)', 'printlana-order-assigner') . '</h3>';
+            $this->render_suborders_panel($order);
+            echo '</div>';
+        }
+        echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
     }
 
     private function render_suborders_panel(WC_Order $parent): void
