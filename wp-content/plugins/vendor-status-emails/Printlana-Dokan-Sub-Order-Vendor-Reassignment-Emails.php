@@ -103,6 +103,7 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                 }
 
                 // Compose item info
+                list($product_label, $product_url, $qty) = self::primary_product_for_suborder($order);
                 $order_number = $order->get_order_number();
                 error_log('Debug Data: ' . print_r($order, true));
                 // Resolve emails
@@ -117,9 +118,6 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                     $item = reset($items); // get the first item
 
                     $product_name = $item->get_name();
-                    $qty = $item->get_quantity();
-                    $product_url = $item->get_permalink();
-                    $price = wc_price($item->get_total());
                 }
                 $body_new = sprintf(
                     '<p>Hello,</p>
@@ -130,19 +128,20 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                  </p>
                  <p><a href="%s">View sub-order</a></p>',
                     esc_html($order_number),
-                    esc_html($product_name),
+                    esc_html($item->get_name()),
                     $product_url ? ' — <a href="' . esc_url($product_url) . '">View product</a>' : '',
                     (int) $qty,
-                    wp_kses_post($price)
+                    wp_kses_post($order->get_formatted_order_total()),
+                    esc_url(admin_url('post.php?post=' . $order->get_id() . '&action=edit'))
                 );
 
-                $subject_old = sprintf('order #%s reassigned — %s', $order_number, $product_name);
+                $subject_old = sprintf('Sub-order #%s reassigned — %s', $order_number, $product_label);
                 $body_old = sprintf(
                     '<p>Hello,</p>
-                 <p>We reassigned <strong>order #%s — %s</strong> to another vendor.</p>
+                 <p>We reassigned <strong>sub-order #%s — %s</strong> to another vendor.</p>
                  <p>Thank you for your understanding.</p>',
                     esc_html($order_number),
-                    esc_html($product_name)
+                    esc_html($product_label)
                 );
 
                 if ($new_email) {
