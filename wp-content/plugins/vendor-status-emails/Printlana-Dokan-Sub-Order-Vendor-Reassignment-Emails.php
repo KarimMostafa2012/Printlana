@@ -121,6 +121,7 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                 $product    = wc_get_product($product_id);
                 $qty = $item->get_quantity();
                 $product_url = $product->get_permalink();
+                $price = wc_price($item->get_total());
 
                 $body_new = sprintf(
                     '<p>Hello,</p>
@@ -134,7 +135,8 @@ if (!class_exists('Printlana_DokanVendorReassign_Emails')) {
                     esc_html($product_name),
                     $product_url ? ' — <a href="' . esc_url($product_url) . '">View product</a>' : '',
                     (int) $qty,
-                    wc_price($item->get_total())
+                    $price,
+                    esc_url(admin_url('post.php?post=' . $order->get_id() . '&action=edit'))
                 );
 
                 $subject_old = sprintf('Sub-order #%s reassigned — %s', $order_number, $product_label);
