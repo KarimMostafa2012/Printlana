@@ -232,6 +232,69 @@ add_action('woocommerce_save_account_details', 'action_woocommerce_save_account_
  * Works with "Orders Chat for WooCommerce" plugin
  */
 
+add_action('woocommerce_order_status_processing', 'printlana_send_order_to_oto', 10, 1);
+
+function printlana_send_order_to_oto($order_id)
+{
+    $order = wc_get_order($order_id);
+    if (!$order) {
+        return;
+    }
+
+    // 🔐 Your OTO API endpoint + key – replace with real data
+    $api_url = 'https://api.oto.com/v1/shipments'; // example
+    $api_key = 'YOUR_OTO_API_KEY';
+
+    // Build payload for OTO (very simplified example)
+    $payload = [
+        'order_id' => $order->get_id(),
+        'reference' => $order->get_order_number(),
+        'recipient' => [
+            'name' => $order->get_formatted_billing_full_name(),
+            'phone' => $order->get_billing_phone(),
+            'email' => $order->get_billing_email(),
+            'address' => $order->get_billing_address_1(),
+            // add city, country, etc...
+        ],
+        // items, COD, etc...
+    ];
+
+    $response = wp_remote_post($api_url, [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $api_key,
+        ],
+        'body' => wp_json_encode($payload),
+        'timeout' => 30,
+    ]);
+
+    if (is_wp_error($response)) {
+        $order->add_order_note('OTO API error: ' . $response->get_error_message());
+        return;
+    }
+
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+
+    // 👇 THIS is the part where we "replace sample data with real response"
+    //   You need to match these keys to OTO's actual API response fields.
+    //   Use error_log(print_r($body, true)); to see the real structure.
+    $tracking_number = isset($body['tracking_number']) ? sanitize_text_field($body['tracking_number']) : '';
+    $tracking_link = isset($body['tracking_url']) ? esc_url_raw($body['tracking_url']) : '';
+
+    if ($tracking_number && $tracking_link) {
+        $order->update_meta_data('_oto_tracking_number', $tracking_number);
+        $order->update_meta_data('_oto_tracking_link', $tracking_link);
+        $order->save();
+
+        $order->add_order_note('OTO shipment created. Tracking: ' . $tracking_link);
+    } else {
+        $order->add_order_note('OTO API: no tracking info returned. Raw response saved in log.');
+        error_log('OTO API response (no tracking): ' . print_r($body, true));
+    }
+}
+
+
+
 // Add notification badge to Elementor icon
 add_action('wp_footer', 'add_message_notification_to_elementor_icon');
 function add_message_notification_to_elementor_icon()

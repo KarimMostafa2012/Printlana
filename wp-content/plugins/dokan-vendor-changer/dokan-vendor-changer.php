@@ -218,7 +218,16 @@ class Printlana_Order_Assigner
             // One-line items summary
             $items_summary = [];
             foreach ($child->get_items('line_item') as $li) {
-                $items_summary[] = sprintf('%s × %d', $li->get_name(), (int) $li->get_quantity());
+                $product_id = $li->get_product_id(); // Get product ID
+                $product_name = $li->get_name();       // Get product title
+                $edit_link = get_edit_post_link($product_id); // Admin edit link
+
+                $items_summary[] = sprintf(
+                    "<a href='%s' target='_blank'>%s × %d</a>",
+                    esc_url($edit_link),
+                    esc_html($product_name),
+                    (int) $li->get_quantity()
+                );
             }
             $items_txt = $items_summary ? esc_html(implode(', ', $items_summary)) : '—';
 
