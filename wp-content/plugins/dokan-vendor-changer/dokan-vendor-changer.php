@@ -229,7 +229,14 @@ class Printlana_Order_Assigner
                     (int) $li->get_quantity()
                 );
             }
-            $items_txt = $items_summary ? esc_html(implode(', ', $items_summary)) : '—';
+            $items_txt = $items_summary
+                ? wp_kses(implode(', ', $items_summary), [
+                    'a' => [
+                        'href' => [],
+                        'target' => [],
+                    ]
+                ])
+                : '—';
 
             // Get first product in this child order (each child has only one item)
             $view_link = '';
