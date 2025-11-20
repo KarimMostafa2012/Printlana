@@ -442,7 +442,7 @@ class Printlana_Order_Assigner
                 <?php
                 $assigned_vendor_id = (int) $order->get_meta('_pl_fulfillment_vendor_id');
                 $assigned_vendor = $assigned_vendor_id ? get_user_by('id', $assigned_vendor_id) : null;
-                echo '<strong>' . esc_html__('Current Assigned Vendor test:', 'printlana-order-assigner') . "</strong><br>";
+                echo '<strong>' . esc_html__('Current Assigned Vendor:', 'printlana-order-assigner') . "</strong><br>";
                 if ($assigned_vendor) {
                     echo esc_html($assigned_vendor->display_name) . ' (ID: ' . (int) $assigned_vendor_id . ')';
                 } else {
@@ -723,6 +723,7 @@ class Printlana_Order_Assigner
             if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pl_assign_order_vendor_nonce')) {
                 wp_send_json_error(['message' => __('Security check failed.', 'printlana-order-assigner')]);
             }
+
             if (!current_user_can('manage_woocommerce')) {
                 wp_send_json_error(['message' => __('You do not have permission.', 'printlana-order-assigner')]);
             }
@@ -730,25 +731,86 @@ class Printlana_Order_Assigner
             // 2) Inputs
             $order_id = isset($_POST['order_id']) ? (int) $_POST['order_id'] : 0;
             $new_vendor_id = isset($_POST['new_vendor_id']) ? (int) $_POST['new_vendor_id'] : 0;
+
             if (!$order_id || !$new_vendor_id) {
                 wp_send_json_error(['message' => __('Invalid order or vendor ID.', 'printlana-order-assigner')]);
             }
 
-            // 3) Load order
+            // 3) Load order (this may be a sub-order or a parent)
             $order = wc_get_order($order_id);
             if (!$order) {
                 wp_send_json_error(['message' => __('Order not found.', 'printlana-order-assigner')]);
             }
-            $order_id = $order->get_id(); // normalized
 
-            // 4) Ensure children exist (create once if missing)
-            if (!$this->has_per_product_children($order)) {
-                $this->create_per_product_suborders($order, $new_vendor_id);
+            $parent_id = $order->get_parent_id();
+
+            /**
+             * ================================================================
+             * MODE 1: SUB-ORDER ONLY (DESIRED BEHAVIOUR)
+             * ================================================================
+             * If the order has a parent, we treat it as a sub-order and only
+             * update THIS sub-order's vendor. We do NOT create any new orders.
+             */
+            if ($parent_id) {
+                $child = $order;
+                $child_id = $child->get_id();
+                $parent = wc_get_order($parent_id);
+
+                // Update vendor on THIS sub-order only
+                $this->update_child_vendor($child_id, $new_vendor_id);
+
+                // Optional: add a note on the parent order for traceability
+                $new_vendor = get_user_by('id', $new_vendor_id);
+                if ($parent) {
+                    $parent->add_order_note(sprintf(
+                        /* translators: 1: sub-order id, 2: vendor display name or #id, 3: vendor id */
+                        __('Sub-order #%1$d assigned to vendor %2$s (user #%3$d).', 'printlana-order-assigner'),
+                        $child_id,
+                        $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
+                        $new_vendor_id
+                    ));
+                    $parent->save();
+                }
+
+                wp_send_json_success([
+                    'message' => __('Vendor updated on this sub-order.', 'printlana-order-assigner'),
+                    'child_ids' => [$child_id],
+                ]);
             }
 
-            // 5) Update vendor on ALL child orders (no recreation)
+            /**
+             * ================================================================
+             * MODE 2: (OPTIONAL) PARENT ORDER FALLBACK
+             * ================================================================
+             * If you truly want this to work ONLY on sub-orders, you can simply
+             * return an error here instead of touching parent orders.
+             *
+             * If you still like the old behaviour on parents (update all children),
+             * we keep a trimmed version of the original logic.
+             */
+
+            // If you want to DISALLOW using this on parents, UNCOMMENT this block:
+            /*
+            wp_send_json_error([
+                'message' => __('This action can only be used on sub-orders.', 'printlana-order-assigner'),
+            ]);
+            */
+
+            // --- Old parent behaviour (kept as fallback) ---
+
+            // From here on, $order has NO parent → it's a top-level parent order.
+            $parent = $order;
+            $parent_id = $parent->get_id();
+            $new_vendor = get_user_by('id', $new_vendor_id);
+
+            // Ensure children exist (create once if missing) - parent only
+            if (!$this->has_per_product_children($parent)) {
+                $this->create_per_product_suborders($parent, $new_vendor_id);
+            }
+
+            // Update vendor on ALL child orders of this parent
             $children = wc_get_orders([
-                'parent' => $order_id,
+                'parent' => $parent_id,
                 'type' => 'shop_order',
                 'limit' => -1,
                 'return' => 'ids',
@@ -760,19 +822,16 @@ class Printlana_Order_Assigner
             }
 
             // Optional: store selection on parent for UI
-            $order->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
-            $this->flag_parent_has_children($order);
-            $order->save();
-
-            // 6) Note on parent
-            $new_vendor = get_user_by('id', $new_vendor_id);
-            $order->add_order_note(sprintf(
-                __('Per-product suborders assigned to %s (user #%d).', 'printlana-order-assigner'),
+            $parent->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
+            $this->flag_parent_has_children($parent);
+            $parent->add_order_note(sprintf(
+                /* translators: 1: vendor display name or #id, 2: vendor id */
+                __('Per-product sub-orders assigned to %1$s (user #%2$d).', 'printlana-order-assigner'),
                 $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
                 $new_vendor_id
             ));
+            $parent->save();
 
-            // 7) Respond
             wp_send_json_success([
                 'message' => __('Vendor updated on existing sub-orders.', 'printlana-order-assigner'),
                 'child_ids' => $children,
@@ -784,6 +843,7 @@ class Printlana_Order_Assigner
             ], 500);
         }
     }
+
 
 }
 
