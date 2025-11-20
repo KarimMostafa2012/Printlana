@@ -94,7 +94,13 @@ class Printlana_Order_Assigner
      */
     private function dokan_sync_order(int $order_id): void
     {
-        // Prefer Dokan’s own sync if available
+        // Preferred: official Dokan sync helper (exists in Dokan Lite/Pro)
+        if (function_exists('dokan_sync_insert_order')) {
+            dokan_sync_insert_order($order_id);
+            return;
+        }
+
+        // Fallback to older internal API if present
         if (function_exists('dokan') && isset(dokan()->order)) {
             if (isset(dokan()->order->sync_table) && method_exists(dokan()->order->sync_table, 'sync')) {
                 dokan()->order->sync_table->sync($order_id);
@@ -102,13 +108,14 @@ class Printlana_Order_Assigner
             }
         }
 
-        // Fallback: fire Woo actions with the correct signature
+        // Last resort: fire Woo hooks that Dokan might be listening to
         $order = wc_get_order($order_id);
         if ($order) {
-            do_action('woocommerce_new_order', $order_id, $order);    // pass BOTH
-            do_action('woocommerce_update_order', $order_id, $order); // pass BOTH
+            do_action('woocommerce_new_order', $order_id, $order);
+            do_action('woocommerce_update_order', $order_id, $order);
         }
     }
+
 
     /**
      * Update a child order's vendor (post_author + Dokan meta) and sync Dokan tables.
@@ -570,7 +577,7 @@ class Printlana_Order_Assigner
 
                     console.log('Disabling button and showing processing message...');
                     $('#pl_assign_vendor_btn').prop('disabled', true);
-                    $('#vendor_change_message').html('<span style="color: blue;">⏳ Processing...</span>');
+                    $('#pl_vendor_assign_message').html('<span style="color: blue;">⏳ Processing...</span>');
 
                     console.log('=== Sending AJAX Request ===');
                     console.log('AJAX URL:', ajaxurl);
@@ -618,7 +625,7 @@ class Printlana_Order_Assigner
                                     message += '<br><br><strong>Debug Info:</strong><br>';
                                     message += '<pre style="font-size: 11px; background: #fff; padding: 5px;">' + response.data.debug_info + '</pre>';
                                 }
-                                $('#vendor_change_message').html(message);
+                                $('#pl_vendor_assign_message').html(message);
 
                                 console.log('Reloading page now...');
                                 location.reload();
@@ -631,7 +638,7 @@ class Printlana_Order_Assigner
                                     errorMsg += '<br><br><strong>Debug Info:</strong><br>';
                                     errorMsg += '<pre style="font-size: 11px; background: #fff; padding: 5px;">' + response.data.debug_info + '</pre>';
                                 }
-                                $('#vendor_change_message').html(errorMsg);
+                                $('#pl_vendor_assign_message').html(errorMsg);
                                 $('#pl_assign_vendor_btn').prop('disabled', false);
                             }
                         },
@@ -643,7 +650,7 @@ class Printlana_Order_Assigner
                             console.error('Response Text:', xhr.responseText);
                             console.error('Full XHR Object:', xhr);
 
-                            $('#vendor_change_message').html('<span style="color: red;">✗ Ajax error: ' + error + '<br>Check console for details.</span>');
+                            $('#pl_vendor_assign_message').html('<span style="color: red;">✗ Ajax error: ' + error + '<br>Check console for details.</span>');
                             $('#pl_assign_vendor_btn').prop('disabled', false);
                         },
                         complete: function (xhr, status) {
@@ -720,7 +727,7 @@ class Printlana_Order_Assigner
     {
         try {
             // 1) Security & capability
-            if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pl_assign_order_vendor_nonce')) {
+            if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'pl_assign_order_vendor_nonce')) {
                 wp_send_json_error(['message' => __('Security check failed.', 'printlana-order-assigner')]);
             }
 
@@ -736,105 +743,40 @@ class Printlana_Order_Assigner
                 wp_send_json_error(['message' => __('Invalid order or vendor ID.', 'printlana-order-assigner')]);
             }
 
-            // 3) Load order (this may be a sub-order or a parent)
+            // 3) Load THIS order (we treat it as the sub-order to be updated)
             $order = wc_get_order($order_id);
             if (!$order) {
                 wp_send_json_error(['message' => __('Order not found.', 'printlana-order-assigner')]);
             }
 
+            // 4) Update vendor on THIS order only
+            $this->update_child_vendor($order_id, $new_vendor_id);
+
+            // 5) Also store fulfillment vendor meta on THIS order (for your "Current Assigned Vendor" UI)
+            $order->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
+            $order->save();
+
+            // 6) Optional: add a note on the parent for traceability
             $parent_id = $order->get_parent_id();
+            $new_vendor = get_user_by('id', $new_vendor_id);
 
-            /**
-             * ================================================================
-             * MODE 1: SUB-ORDER ONLY (DESIRED BEHAVIOUR)
-             * ================================================================
-             * If the order has a parent, we treat it as a sub-order and only
-             * update THIS sub-order's vendor. We do NOT create any new orders.
-             */
             if ($parent_id) {
-                $child = $order;
-                $child_id = $child->get_id();
                 $parent = wc_get_order($parent_id);
-
-                // Update vendor on THIS sub-order only
-                $this->update_child_vendor($child_id, $new_vendor_id);
-
-                // Optional: add a note on the parent order for traceability
-                $new_vendor = get_user_by('id', $new_vendor_id);
                 if ($parent) {
                     $parent->add_order_note(sprintf(
-                        /* translators: 1: sub-order id, 2: vendor display name or #id, 3: vendor id */
+                        /* translators: 1: sub-order ID, 2: vendor name or #id, 3: vendor id */
                         __('Sub-order #%1$d assigned to vendor %2$s (user #%3$d).', 'printlana-order-assigner'),
-                        $child_id,
+                        $order_id,
                         $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
                         $new_vendor_id
                     ));
                     $parent->save();
                 }
-
-                wp_send_json_success([
-                    'message' => __('Vendor updated on this sub-order.', 'printlana-order-assigner'),
-                    'child_ids' => [$child_id],
-                ]);
             }
-
-            /**
-             * ================================================================
-             * MODE 2: (OPTIONAL) PARENT ORDER FALLBACK
-             * ================================================================
-             * If you truly want this to work ONLY on sub-orders, you can simply
-             * return an error here instead of touching parent orders.
-             *
-             * If you still like the old behaviour on parents (update all children),
-             * we keep a trimmed version of the original logic.
-             */
-
-            // If you want to DISALLOW using this on parents, UNCOMMENT this block:
-            /*
-            wp_send_json_error([
-                'message' => __('This action can only be used on sub-orders.', 'printlana-order-assigner'),
-            ]);
-            */
-
-            // --- Old parent behaviour (kept as fallback) ---
-
-            // From here on, $order has NO parent → it's a top-level parent order.
-            $parent = $order;
-            $parent_id = $parent->get_id();
-            $new_vendor = get_user_by('id', $new_vendor_id);
-
-            // Ensure children exist (create once if missing) - parent only
-            if (!$this->has_per_product_children($parent)) {
-                $this->create_per_product_suborders($parent, $new_vendor_id);
-            }
-
-            // Update vendor on ALL child orders of this parent
-            $children = wc_get_orders([
-                'parent' => $parent_id,
-                'type' => 'shop_order',
-                'limit' => -1,
-                'return' => 'ids',
-                'status' => array_keys(wc_get_order_statuses()),
-            ]);
-
-            foreach ($children as $child_id) {
-                $this->update_child_vendor($child_id, $new_vendor_id);
-            }
-
-            // Optional: store selection on parent for UI
-            $parent->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
-            $this->flag_parent_has_children($parent);
-            $parent->add_order_note(sprintf(
-                /* translators: 1: vendor display name or #id, 2: vendor id */
-                __('Per-product sub-orders assigned to %1$s (user #%2$d).', 'printlana-order-assigner'),
-                $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
-                $new_vendor_id
-            ));
-            $parent->save();
 
             wp_send_json_success([
-                'message' => __('Vendor updated on existing sub-orders.', 'printlana-order-assigner'),
-                'child_ids' => $children,
+                'message' => __('Vendor updated on this sub-order.', 'printlana-order-assigner'),
+                'child_ids' => [$order_id],
             ]);
 
         } catch (\Throwable $e) {
@@ -843,6 +785,7 @@ class Printlana_Order_Assigner
             ], 500);
         }
     }
+
 
 
 }
