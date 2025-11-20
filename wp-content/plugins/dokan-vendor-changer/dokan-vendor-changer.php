@@ -218,9 +218,17 @@ class Printlana_Order_Assigner
             // One-line items summary
             $items_summary = [];
             foreach ($child->get_items('line_item') as $li) {
-                $product_id = $li->get_product_id(); // Get product ID
-                $product_name = $li->get_name();       // Get product title
-                $edit_link = get_edit_post_link($product_id); // Admin edit link
+
+                $product_id = $li->get_product_id();
+                $product_name = $li->get_name();
+
+                // Get normal edit link
+                $edit_link = get_edit_post_link($product_id);
+
+                // Force WPML Arabic version (change 'ar' if needed)
+                if ($edit_link) {
+                    $edit_link .= '&lang=ar';
+                }
 
                 $items_summary[] = sprintf(
                     "<a href='%s' target='_blank'>%s × %d</a>",
@@ -229,6 +237,7 @@ class Printlana_Order_Assigner
                     (int) $li->get_quantity()
                 );
             }
+
             $items_txt = $items_summary
                 ? wp_kses(implode(', ', $items_summary), [
                     'a' => [
