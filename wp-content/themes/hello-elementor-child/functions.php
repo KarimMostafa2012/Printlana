@@ -32,33 +32,34 @@ function get_last_added_product()
 
 add_action('save_post_product', function ($post_id, $post, $update) {
     if ($update)
-        return; // Only run for new products
+        return; // Only for new products
 
-    // Get WC_Product object
     $product = wc_get_product($post_id);
     if (!$product)
         return;
 
-    $last_product = get_last_added_product();
     $prefix = 'P126';
+    $last_product = get_last_added_product();
 
     if ($last_product) {
         $last_sku = $last_product->get_sku();
-        // Extract numeric part
-        preg_match('/(\d+)$/', $last_sku, $matches);
-        $last_number = $matches ? intval($matches[1]) : 0;
-        $new_number = $last_number + 1;
 
-        // Format with leading zeros (like P12600121)
-        $new_sku = $prefix . str_pad($new_number, 5, '0', STR_PAD_LEFT);
+        // Remove the prefix to get the numeric part
+        $number_part = str_replace($prefix, '', $last_sku);
+
+        // Increment the number
+        $new_number = intval($number_part) + 1;
+
+        // Format with leading zeros (to match the original length)
+        $new_sku = $prefix . str_pad($new_number, strlen($number_part), '0', STR_PAD_LEFT);
     } else {
-        // First product SKU
-        $new_sku = $prefix . '00001';
+        $new_sku = $prefix . '00001'; // first product
     }
 
     $product->set_sku($new_sku);
     $product->save();
 }, 10, 3);
+
 
 
 
