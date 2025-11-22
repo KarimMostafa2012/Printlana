@@ -19,7 +19,7 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
 
 function my_run_once_function()
 {
-    if (get_option('my_run_once_ran')) {
+    if (get_option('my_run_once')) {
         return; // Already ran
     }
 
@@ -53,7 +53,7 @@ function my_run_once_function()
 
 
     // Mark as executed
-    update_option('my_run_once_ran', true);
+    update_option('my_run_once', true);
 }
 
 add_action('init', 'my_run_once_function');
