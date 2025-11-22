@@ -17,6 +17,53 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
+
+function get_last_added_product()
+{
+    $products = wc_get_products([
+        'limit' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'return' => 'objects',
+    ]);
+
+    return $products ? $products[0] : null;
+}
+
+add_action('save_post_product', function ($post_id, $post, $update) {
+    if ($update)
+        return; // Only for new products
+
+    $product = wc_get_product($post_id);
+    if (!$product)
+        return;
+
+    $prefix = 'P126';
+    $number_length = 5; // Always keep 5 digits
+    $last_product = get_last_added_product();
+
+    if ($last_product) {
+        $last_sku = $last_product->get_sku();
+
+        // Remove the prefix to get numeric part
+        $number_part = str_replace($prefix, '', strtoupper($last_sku));
+
+        // Increment the number
+        $new_number = intval($number_part) + 1;
+
+        // Format with leading zeros to fixed width
+        $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+    }
+
+    $product->set_sku($new_sku);
+    $product->save();
+}, 10, 3);
+
+
+
+
+
+
 /**
  * Re-order product categories for the Loop Grid widget with Query ID = home_categories
  * (Elementor Source: Product categories).
