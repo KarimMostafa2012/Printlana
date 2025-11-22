@@ -17,45 +17,6 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
-function my_run_once_function()
-{
-    if (get_option('my_run_once_ran')) {
-        return; // Already ran
-    }
-
-    // Your code here
-    error_log("Function ran once!");
-
-    // 1. Get all products
-    $products = wc_get_products([
-        'limit' => -1,
-        'return' => 'ids'
-    ]);
-
-    $prefix = 'p126';
-
-    $max_counter = 0;
-
-    // 3. Generate SKUs for products that have no SKU
-    foreach ($products as $id) {
-        $product = wc_get_product($id);
-
-        $max_counter++;
-        $new_sku = $prefix . str_pad($max_counter, 5, '0', STR_PAD_LEFT); // 5 digits
-
-        $product->set_sku($new_sku);
-        $product->save();
-
-    }
-
-
-    // Mark as executed
-    update_option('my_run_once_ran', true);
-}
-
-add_action('init', 'my_run_once_function');
-
-
 function get_last_added_product()
 {
     $products = wc_get_products([
