@@ -39,26 +39,26 @@ add_action('save_post_product', function ($post_id, $post, $update) {
         return;
 
     $prefix = 'P126';
+    $number_length = 5; // Always keep 5 digits
     $last_product = get_last_added_product();
 
     if ($last_product) {
         $last_sku = $last_product->get_sku();
 
-        // Remove the prefix to get the numeric part
-        $number_part = str_replace($prefix, '', $last_sku);
+        // Remove the prefix to get numeric part
+        $number_part = str_replace($prefix, '', strtoupper($last_sku));
 
         // Increment the number
         $new_number = intval($number_part) + 1;
 
-        // Format with leading zeros (to match the original length)
-        $new_sku = $prefix . str_pad($new_number, strlen($number_part), '0', STR_PAD_LEFT);
-    } else {
-        $new_sku = $prefix . '00001'; // first product
+        // Format with leading zeros to fixed width
+        $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
     }
 
     $product->set_sku($new_sku);
     $product->save();
 }, 10, 3);
+
 
 
 
