@@ -34,6 +34,16 @@ function my_run_once_function()
         'order' => 'ASC'
     ]);
 
+    foreach ($products as $id) {
+        $product = wc_get_product($id);
+
+        $new_sku = ""; // 5 digits
+
+        $product->set_sku($new_sku);
+        $product->save();
+
+    }
+
 
     $prefix = 'p126';
 
