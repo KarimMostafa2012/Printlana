@@ -91,7 +91,7 @@ class Printlana_Show_Suborders_Only {
             ];
         }
 
-        $this->log( 'Sub-order results (vendor ' . $seller_id . ')', $formatted );
+        $this->log( 'Sub-order results (vendor ' . $seller_id . ')', $order );
 
         // IMPORTANT: return orders so Dokan can continue using them
         return $orders;
