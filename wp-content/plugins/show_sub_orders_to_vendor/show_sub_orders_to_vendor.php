@@ -1,70 +1,78 @@
 <?php
 /**
  * Plugin Name: Show Only Sub Orders to Vendor (Printlana)
- * Description: Filters Dokan vendor orders to show ONLY sub-orders. Adds debug logging.
- * Version: 1.0
+ * Description: Filters Dokan vendor orders to show ONLY sub-orders. Logs output order results (clean arrays).
+ * Version: 2.0
  * Author: Printlana
  */
 
 if (!defined('ABSPATH'))
-    exit; // Prevent direct access
+    exit;
 
 class Printlana_Show_Suborders_Only
 {
 
     public function __construct()
     {
-        // Filter the vendor order query arguments
         add_filter('dokan_get_vendor_orders_args', [$this, 'filter_vendor_orders'], 999, 2);
+
+        /**
+         * AFTER Dokan fetches orders, log them (clean formatted arrays)
+         * Hook: dokan_after_get_vendor_orders
+         */
+        add_action('dokan_after_get_vendor_orders', [$this, 'log_vendor_orders'], 10, 2);
     }
 
-    /**
-     * Debug logger helper
-     */
-    private function log($msg)
+    /** Simple debug logger */
+    private function log($label, $value = null)
     {
-        if (is_array($msg) || is_object($msg)) {
-            error_log('[ShowSubOrders] ' . print_r($msg, true));
+        $prefix = '[ShowSubOrders] ' . $label;
+        if ($value === null) {
+            error_log($prefix);
         } else {
-            error_log('[ShowSubOrders] ' . $msg);
+            error_log($prefix . ' => ' . print_r($value, true));
         }
     }
 
     /**
-     * Filter orders shown to vendor -> Only sub-orders (orders that have a parent)
+     * Modify the query: show ONLY sub-orders
      */
-    public function filter_vendor_orders($args, $vendor_id)
+    public function filter_vendor_orders($args, $second_param)
     {
-
-        // Log original args
-        $this->log('Original Query Args:');
-        $this->log($args);
-        $this->log('Vendor ID: ' . $vendor_id);
-
-        // Remove any default Dokan filters that would show parent orders
-        unset($args['seller_id']);
-        unset($args['author']);
-
-        // Force ONLY orders that are children
-        $args['post_parent__not_in'] = [0];  // Exclude parent orders
-        $args['post_parent__not_in'][] = 0;    // Double protect
-        $args['post_parent__not_in'] = array_unique($args['post_parent__not_in']);
-
-        // The magic line: ONLY return orders where `_dokan_vendor_id` matches this vendor
-        $args['meta_query'][] = [
-            'key' => '_dokan_vendor_id',
-            'value' => (int) $vendor_id,
-            'compare' => '=',
-            'type' => 'NUMERIC'
-        ];
-
-        // Log modified args
-        $this->log('Modified Query Args (sub-orders only):');
-        $this->log($args);
+        // add parent_exclude => [0] to exclude parent orders
+        if (empty($args['parent_exclude']) || !is_array($args['parent_exclude'])) {
+            $args['parent_exclude'] = [0];
+        } else {
+            $args['parent_exclude'][] = 0;
+            $args['parent_exclude'] = array_values(array_unique(array_map('intval', $args['parent_exclude'])));
+        }
 
         return $args;
     }
 
+    /**
+     * Log sub-order results (NOT the query) as clean readable arrays
+     *
+     * @param array  $orders      Array of WC_Order objects
+     * @param string $context     Dokan context information (unused)
+     */
+    public function log_vendor_orders($orders, $context)
+    {
+        $formatted = [];
+
+        foreach ($orders as $order) {
+            $formatted[] = [
+                'id' => $order->get_id(),
+                'parent_id' => $order->get_parent_id(),
+                'vendor_id' => (int) $order->get_meta('_dokan_vendor_id'),
+                'status' => $order->get_status(),
+                'total' => $order->get_total(),
+                'items' => wp_list_pluck($order->get_items(), 'name'), // only product names
+            ];
+        }
+
+        $this->log('Sub-order results (Clean Array)', $formatted);
+    }
 }
 
 new Printlana_Show_Suborders_Only();
