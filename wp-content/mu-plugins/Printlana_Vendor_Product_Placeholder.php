@@ -31,7 +31,7 @@ class Printlana_Vendor_Product_Placeholder {
         add_action('wp', [$this, 'hide_placeholder_row']);
         
         // TEMP: Re-check on every request (remove later)
-        add_action('init', [$this, 'refresh_check_every_request']);
+        // add_action('init', [$this, 'refresh_check_every_request']);
 
     }
     
@@ -40,28 +40,28 @@ class Printlana_Vendor_Product_Placeholder {
      * TEMP: On every request, if a logged-in Dokan vendor exists, ensure the placeholder is in place.
      * Remove this method and its `add_action('init', ...)` hook once verified.
      */
-    public function refresh_check_every_request() {
-        // Skip cron and ajax to avoid unnecessary work
-        if ( defined('DOING_CRON') && DOING_CRON ) return;
-        if ( defined('DOING_AJAX') && DOING_AJAX ) return;
+    // public function refresh_check_every_request() {
+    //     // Skip cron and ajax to avoid unnecessary work
+    //     if ( defined('DOING_CRON') && DOING_CRON ) return;
+    //     if ( defined('DOING_AJAX') && DOING_AJAX ) return;
     
-        // Must be logged in
-        if ( ! is_user_logged_in() ) return;
+    //     // Must be logged in
+    //     if ( ! is_user_logged_in() ) return;
     
-        $vendor_id = get_current_user_id();
+    //     $vendor_id = get_current_user_id();
     
-        // Make sure this user is a Dokan seller (enabled)
-        // dokan_is_user_seller($user_id) returns true for sellers (even if pending in some setups).
-        // If you want *enabled only*, use dokan()->vendor->get($vendor_id)->is_enabled()
-        if ( function_exists('dokan_is_user_seller') && dokan_is_user_seller( $vendor_id ) ) {
-            // Optional: ensure vendor is enabled; uncomment if you need stricter check
-            // $vendor = function_exists('dokan') ? dokan()->vendor->get($vendor_id) : null;
-            // if ( $vendor && method_exists($vendor, 'is_enabled') && ! $vendor->is_enabled() ) return;
+    //     // Make sure this user is a Dokan seller (enabled)
+    //     // dokan_is_user_seller($user_id) returns true for sellers (even if pending in some setups).
+    //     // If you want *enabled only*, use dokan()->vendor->get($vendor_id)->is_enabled()
+    //     if ( function_exists('dokan_is_user_seller') && dokan_is_user_seller( $vendor_id ) ) {
+    //         // Optional: ensure vendor is enabled; uncomment if you need stricter check
+    //         // $vendor = function_exists('dokan') ? dokan()->vendor->get($vendor_id) : null;
+    //         // if ( $vendor && method_exists($vendor, 'is_enabled') && ! $vendor->is_enabled() ) return;
     
-            // Ensure placeholder exists (or gets cleaned up if products now exist)
-            $this->check_and_create_placeholder_for_vendor( $vendor_id );
-        }
-    }
+    //         // Ensure placeholder exists (or gets cleaned up if products now exist)
+    //         $this->check_and_create_placeholder_for_vendor( $vendor_id );
+    //     }
+    // }
 
 
     /**
@@ -88,11 +88,6 @@ class Printlana_Vendor_Product_Placeholder {
 
         // If they have products, we don't need to do anything.
         if ( $product_query->have_posts() ) {
-            // If they have products, but we had an old placeholder, let's delete it.
-            if ($existing_placeholder_id) {
-                wp_delete_post($existing_placeholder_id, true); // true = force delete
-                delete_user_meta($vendor_id, self::VENDOR_PLACEHOLDER_META_KEY);
-            }
             return null;
         }
 

@@ -547,21 +547,21 @@ JS;
     }
 }
 
-add_action('admin_init', function () {
-    if ( ! current_user_can('manage_woocommerce') ) return;
+// add_action('admin_init', function () {
+//     if ( ! current_user_can('manage_woocommerce') ) return;
 
-    $product_id = 19075; // ⬅️ put a product that SHOULD be assigned to vendor 1
-    $key = '_assigned_vendor_ids';
+//     $product_id = 19075; // ⬅️ put a product that SHOULD be assigned to vendor 1
+//     $key = '_assigned_vendor_ids';
 
-    global $wpdb;
-    $raw = $wpdb->get_var( $wpdb->prepare(
-        "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key=%s LIMIT 1",
-        $product_id, $key
-    ) );
+//     global $wpdb;
+//     $raw = $wpdb->get_var( $wpdb->prepare(
+//         "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key=%s LIMIT 1",
+//         $product_id, $key
+//     ) );
 
-    error_log('[PL Dump] raw meta_value: ' . (is_string($raw) ? $raw : var_export($raw, true)));
-    error_log('[PL Dump] get_post_meta(true): ' . var_export(get_post_meta($product_id, $key, true), true));
-});
+//     error_log('[PL Dump] raw meta_value: ' . (is_string($raw) ? $raw : var_export($raw, true)));
+//     error_log('[PL Dump] get_post_meta(true): ' . var_export(get_post_meta($product_id, $key, true), true));
+// });
 
 
 // This filter can stay as it is for admin "view as vendor" functionality
