@@ -95,7 +95,7 @@ class Printlana_Show_Suborders_Only
         //         'items'     => wp_list_pluck( $order->get_items(), 'name' ),
         //     ];
         // }
-
+        log("testing log");
         $this->log('Sub-order results (vendor ' . $seller_id . ')', $orders);
 
         // IMPORTANT: return orders so Dokan can continue using them
