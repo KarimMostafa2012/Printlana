@@ -123,6 +123,7 @@ class Printlana_Order_Assigner
     private function update_child_vendor(int $child_id, int $vendor_id): void
     {
         if ($vendor_id > 0) {
+            error_log('showing vendor ID:',3, $vendor_id);
             update_post_meta($child_id, '_dokan_vendor_id', $vendor_id);
             wp_update_post([
                 'ID' => $child_id,
