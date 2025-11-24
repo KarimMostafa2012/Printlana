@@ -207,6 +207,11 @@ class Printlana_Order_Assigner
             var_export($after_pl, true),
             var_export($after_author, true)
         ));
+        error_log(
+    '[MetaCompare] get_post_meta _pl_fulfillment_vendor_id = ' .
+    var_export(get_post_meta($child_id, '_pl_fulfillment_vendor_id', true), true)
+);
+
 
         // --- Sync Dokan order tables ---------------------------------
         $this->dokan_sync_order($child_id);
