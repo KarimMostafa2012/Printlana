@@ -123,7 +123,7 @@ class Printlana_Order_Assigner
     private function update_child_vendor(int $child_id, int $vendor_id): void
     {
         if ($vendor_id > 0) {
-            error_log('showing vendor ID:',3, $vendor_id);
+            error_log('showing vendor ID:', 3, $vendor_id);
             update_post_meta($child_id, '_dokan_vendor_id', $vendor_id);
             wp_update_post([
                 'ID' => $child_id,
@@ -751,6 +751,7 @@ class Printlana_Order_Assigner
             }
 
             // 4) Update vendor on THIS order only
+            error_log('[UpdateVendor] ' . $order_id . ' => ' . print_r($new_vendor_id, true));
             $this->update_child_vendor($order_id, $new_vendor_id);
 
             // 5) Also store fulfillment vendor meta on THIS order (for your "Current Assigned Vendor" UI)
