@@ -1,8 +1,10 @@
 <?php
 /**
  * Plugin Name: Order Access Edit (Printlana)
- * Description: Extends Dokan order view permission using custom product meta `_assigned_vendor_ids`.
- * Version: 1.0
+ * Description: Extends Dokan order view permission using custom meta:
+ *              - Order meta `_pl_fulfillment_vendor_id`
+ *              - Product meta `_assigned_vendor_ids` (fallback).
+ * Version: 1.1
  * Author: Printlana
  */
 
@@ -17,7 +19,6 @@ class Printlana_Order_Access_Edit
     {
         /**
          * Dokan helper dokan_is_seller_has_order( $seller_id, $order_id )
-         * We hook into its filter so we can ADD access when our custom meta matches.
          *
          * Expected filter signature in Dokan:
          *   apply_filters( 'dokan_is_seller_has_order', $has_access, $seller_id, $order_id );
@@ -38,7 +39,9 @@ class Printlana_Order_Access_Edit
     }
 
     /**
-     * Extend Dokan "has order" permission with `_assigned_vendor_ids` meta.
+     * Extend Dokan "has order" permission with:
+     *  1) Order meta `_pl_fulfillment_vendor_id` (primary)
+     *  2) Product meta `_assigned_vendor_ids` (fallback)
      *
      * @param bool $has_access  Result from Dokan's own logic.
      * @param int  $seller_id   Vendor user ID.
@@ -75,7 +78,31 @@ class Printlana_Order_Access_Edit
             return $has_access;
         }
 
-        // Check each product line item for _assigned_vendor_ids including this seller
+        /**
+         * 1) PRIMARY: check order-level fulfillment meta
+         *    _pl_fulfillment_vendor_id is set by Printlana Order Fulfillment Assigner
+         */
+        $assigned_vendor_id = (int) $order->get_meta('_pl_fulfillment_vendor_id');
+
+        $this->log('Order-level _pl_fulfillment_vendor_id', [
+            'order_id' => $order_id,
+            'stored_vendor_id' => $assigned_vendor_id,
+            'current_seller_id' => $seller_id,
+        ]);
+
+        if ($assigned_vendor_id && $assigned_vendor_id === $seller_id) {
+            $this->log('Access granted via order meta _pl_fulfillment_vendor_id', [
+                'order_id' => $order_id,
+                'seller_id' => $seller_id,
+            ]);
+
+            return true;
+        }
+
+        /**
+         * 2) FALLBACK: Check each product line item for _assigned_vendor_ids including this seller.
+         *    This keeps compatibility with product-based assignment if you still rely on it.
+         */
         foreach ($order->get_items('line_item') as $item_id => $item) {
 
             $product_id = $item->get_product_id();
@@ -103,7 +130,7 @@ class Printlana_Order_Access_Edit
 
             if (in_array($seller_id, $assigned, true)) {
 
-                $this->log('Access granted via _assigned_vendor_ids', [
+                $this->log('Access granted via product meta _assigned_vendor_ids', [
                     'order_id' => $order_id,
                     'seller_id' => $seller_id,
                     'product_id' => $product_id,
@@ -115,8 +142,8 @@ class Printlana_Order_Access_Edit
             }
         }
 
-        // Still false after our custom check
-        $this->log('Access still denied after _assigned_vendor_ids check', [
+        // Still false after our custom checks
+        $this->log('Access still denied after custom meta checks', [
             'order_id' => $order_id,
             'seller_id' => $seller_id,
         ]);
