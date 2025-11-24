@@ -120,44 +120,98 @@ class Printlana_Order_Assigner
     /**
      * Update a child order's vendor (post_author + Dokan meta) and sync Dokan tables.
      */
-    private function update_child_vendor(int $child_id, int $vendor_id): void
+    /**
+     * Update a child order's vendor (post_author + Dokan meta + custom meta)
+     * and sync Dokan tables. HPOS-safe: uses WooCommerce CRUD for order meta.
+     */
+    private function update_child_vendor(int $child_id, int $vendor_id, bool $update_products = false): void
     {
-        error_log('[UpdateVendorOuter] ' . $child_id . ' => ' . print_r($vendor_id, true));
+        error_log('[UpdateVendorOuter] child=' . $child_id . ' new_vendor=' . $vendor_id);
 
-        if ($vendor_id > 0) {
-            error_log('[UpdateVendorInner] ' . $child_id . ' => ' . print_r($vendor_id, true));
-            $child_order = wc_get_order($child_id);
+        if ($vendor_id <= 0) {
+            error_log('[UpdateVendorOuter] invalid vendor id, skipping');
+            return;
+        }
 
-            if ($child_order) {
-                error_log(
-                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
-                );
-            }
+        $child_order = wc_get_order($child_id);
 
-            update_post_meta($child_id, '_dokan_vendor_id', $vendor_id);
-            $child_order = wc_get_order($child_id);
+        if (!$child_order) {
+            error_log('[UpdateVendorOuter] child order not found: ' . $child_id);
+            return;
+        }
 
-            if ($child_order) {
-                error_log(
-                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
-                );
-            }
+        // --- BEFORE state (for debugging) -----------------------------
+        $before_dokan = $child_order->get_meta('_dokan_vendor_id', true);
+        $before_pl = $child_order->get_meta('_pl_fulfillment_vendor_id', true);
+        $before_author = get_post_field('post_author', $child_id);
 
+        error_log(sprintf(
+            '[UpdateVendor][BEFORE] child=%d _dokan_vendor_id=%s _pl_fulfillment_vendor_id=%s post_author=%s',
+            $child_id,
+            var_export($before_dokan, true),
+            var_export($before_pl, true),
+            var_export($before_author, true)
+        ));
 
-            wp_update_post([
-                'ID' => $child_id,
-                'post_author' => $vendor_id,
-            ]);
-            $child_order = wc_get_order($child_id);
+        // --- Order meta (HPOS-safe via CRUD) --------------------------
+        $child_order->update_meta_data('_dokan_vendor_id', (int) $vendor_id);
+        $child_order->update_meta_data('_pl_fulfillment_vendor_id', (int) $vendor_id);
+        $child_order->save(); // important for HPOS / object cache
 
-            if ($child_order) {
-                error_log(
-                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
-                );
+        // --- Order post_author (for Dokan) ----------------------------
+        wp_update_post([
+            'ID' => $child_id,
+            'post_author' => (int) $vendor_id,
+        ]);
+
+        // --- Optionally update products' vendor -----------------------
+        if ($update_products) {
+            foreach ($child_order->get_items('line_item') as $item) {
+                $product_id = $item->get_product_id();
+                if (!$product_id) {
+                    continue;
+                }
+
+                // Change product author
+                wp_update_post([
+                    'ID' => $product_id,
+                    'post_author' => (int) $vendor_id,
+                ]);
+
+                // Optional: sync Dokan vendor meta on product
+                update_post_meta($product_id, '_dokan_vendor_id', (int) $vendor_id);
+
+                error_log(sprintf(
+                    '[UpdateVendor][Product] product_id=%d new_author=%d',
+                    $product_id,
+                    $vendor_id
+                ));
             }
         }
+
+        // --- Clear caches & reload for debugging ----------------------
+        clean_post_cache($child_id);
+        if (function_exists('wc_delete_shop_order_transients')) {
+            wc_delete_shop_order_transients($child_id);
+        }
+
+        $reloaded = wc_get_order($child_id);
+        $after_dokan = $reloaded->get_meta('_dokan_vendor_id', true);
+        $after_pl = $reloaded->get_meta('_pl_fulfillment_vendor_id', true);
+        $after_author = get_post_field('post_author', $child_id);
+
+        error_log(sprintf(
+            '[UpdateVendor][AFTER] child=%d _dokan_vendor_id=%s _pl_fulfillment_vendor_id=%s post_author=%s',
+            $child_id,
+            var_export($after_dokan, true),
+            var_export($after_pl, true),
+            var_export($after_author, true)
+        ));
+
+        // --- Sync Dokan order tables ---------------------------------
         $this->dokan_sync_order($child_id);
     }
+
 
     /**
      * Ensure parent shows it has sub orders (used by Dokan UI in some builds).
@@ -413,7 +467,8 @@ class Printlana_Order_Assigner
 
             // Tag vendor + author (visibility for Dokan)
             if ($assign_vendor_id > 0) {
-                $child->update_meta_data('_dokan_vendor_id', $assign_vendor_id);
+                $child->update_meta_data('_dokan_vendor_id', (int) $assign_vendor_id);
+                $child->update_meta_data('_pl_fulfillment_vendor_id', (int) $assign_vendor_id);
                 wp_update_post([
                     'ID' => $child->get_id(),
                     'post_author' => $assign_vendor_id,
@@ -765,6 +820,7 @@ class Printlana_Order_Assigner
             // 2) Inputs
             $order_id = isset($_POST['order_id']) ? (int) $_POST['order_id'] : 0;
             $new_vendor_id = isset($_POST['new_vendor_id']) ? (int) $_POST['new_vendor_id'] : 0;
+            $update_products = !empty($_POST['update_product']); // NEW
 
             if (!$order_id || !$new_vendor_id) {
                 wp_send_json_error(['message' => __('Invalid order or vendor ID.', 'printlana-order-assigner')]);
@@ -776,15 +832,11 @@ class Printlana_Order_Assigner
                 wp_send_json_error(['message' => __('Order not found.', 'printlana-order-assigner')]);
             }
 
-            // 4) Update vendor on THIS order only
+            // 4) Update vendor on THIS order only (and optionally its products)
             error_log('[UpdateVendor] ' . $order_id . ' => ' . print_r($new_vendor_id, true));
-            $this->update_child_vendor($order_id, $new_vendor_id);
+            $this->update_child_vendor($order_id, $new_vendor_id, $update_products);
 
-            // 5) Also store fulfillment vendor meta on THIS order (for your "Current Assigned Vendor" UI)
-            $order->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
-            $order->save();
-
-            // 6) Optional: add a note on the parent for traceability
+            // 5) Add a note on the parent for traceability
             $parent_id = $order->get_parent_id();
             $new_vendor = get_user_by('id', $new_vendor_id);
 
@@ -813,6 +865,7 @@ class Printlana_Order_Assigner
             ], 500);
         }
     }
+
 
 
 
