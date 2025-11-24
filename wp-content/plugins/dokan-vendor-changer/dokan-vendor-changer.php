@@ -123,14 +123,38 @@ class Printlana_Order_Assigner
     private function update_child_vendor(int $child_id, int $vendor_id): void
     {
         error_log('[UpdateVendorOuter] ' . $child_id . ' => ' . print_r($vendor_id, true));
-        
+
         if ($vendor_id > 0) {
             error_log('[UpdateVendorInner] ' . $child_id . ' => ' . print_r($vendor_id, true));
+            $child_order = wc_get_order($child_id);
+
+            if ($child_order) {
+                error_log(
+                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
+                );
+            }
+
             update_post_meta($child_id, '_dokan_vendor_id', $vendor_id);
+            $child_order = wc_get_order($child_id);
+
+            if ($child_order) {
+                error_log(
+                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
+                );
+            }
+
+
             wp_update_post([
                 'ID' => $child_id,
                 'post_author' => $vendor_id,
             ]);
+            $child_order = wc_get_order($child_id);
+
+            if ($child_order) {
+                error_log(
+                    '[ChildOrderDebug] ' . $child_id . ' => ' . print_r($child_order->get_data(), true)
+                );
+            }
         }
         $this->dokan_sync_order($child_id);
     }
