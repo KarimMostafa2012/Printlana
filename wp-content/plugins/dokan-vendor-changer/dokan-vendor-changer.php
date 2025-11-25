@@ -116,6 +116,62 @@ class Printlana_Order_Assigner
         }
     }
 
+    /**
+     * Force Dokan dokan_orders.seller_id to match our new vendor.
+     */
+    private function update_dokan_orders_vendor(int $order_id, int $vendor_id): void
+    {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'dokan_orders';
+
+        // Make sure the sync row exists first (Dokan will insert if missing)
+        $this->dokan_sync_order($order_id);
+
+        // Check current row
+        $row = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM {$table} WHERE order_id = %d LIMIT 1",
+                $order_id
+            ),
+            ARRAY_A
+        );
+
+        if (!$row) {
+            error_log('[UpdateDokanOrders] No dokan_orders row found for order_id=' . $order_id . ' after sync');
+            return;
+        }
+
+        $old_seller = (int) $row['seller_id'];
+
+        // Only update if it's actually different
+        if ($old_seller === (int) $vendor_id) {
+            error_log(sprintf(
+                '[UpdateDokanOrders] seller_id already %d for order_id=%d, nothing to do',
+                $vendor_id,
+                $order_id
+            ));
+            return;
+        }
+
+        $updated = $wpdb->update(
+            $table,
+            ['seller_id' => (int) $vendor_id],
+            ['order_id' => (int) $order_id],
+            ['%d'],
+            ['%d']
+        );
+
+        error_log(sprintf(
+            '[UpdateDokanOrders] Updated dokan_orders: order_id=%d old_seller=%d new_seller=%d rows=%d',
+            $order_id,
+            $old_seller,
+            $vendor_id,
+            $updated
+        ));
+    }
+
+
 
     /**
      * Update a child order's vendor (post_author + Dokan meta) and sync Dokan tables.
@@ -208,13 +264,17 @@ class Printlana_Order_Assigner
             var_export($after_author, true)
         ));
         error_log(
-    '[MetaCompare] get_post_meta _pl_fulfillment_vendor_id = ' .
-    var_export(get_post_meta($child_id, '_pl_fulfillment_vendor_id', true), true)
-);
+            '[MetaCompare] get_post_meta _pl_fulfillment_vendor_id = ' .
+            var_export(get_post_meta($child_id, '_pl_fulfillment_vendor_id', true), true)
+        );
 
 
         // --- Sync Dokan order tables ---------------------------------
         $this->dokan_sync_order($child_id);
+        
+        // --- Force Dokan dokan_orders.seller_id to match -------------
+        $this->update_dokan_orders_vendor($child_id, $vendor_id);
+
     }
 
 
