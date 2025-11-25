@@ -59,12 +59,12 @@ class Printlana_Show_Suborders_Only
         }
 
         // Remove Dokan's default meta_query on _dokan_vendor_id
-        if (isset($args['meta_query'])) {
-            $this->log('Original meta_query (will be unset)', $args['meta_query']);
-            unset($args['meta_query']);
-        }
+        // if (isset($args['meta_query'])) {
+        //     $this->log('Original meta_query (will be unset)', $args['meta_query']);
+        //     unset($args['meta_query']);
+        // }
 
-        $this->log('Query Args AFTER custom filter (sub-orders only, no vendor meta)', $args);
+        $this->log('Query Args AFTER custom filter (sub-orders only, no vendor meta) => test: disabled', $args);
 
         return $args;
     }
