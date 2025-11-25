@@ -81,47 +81,48 @@ class Printlana_Show_Suborders_Only
 
         $vendor_id = isset($args['seller_id']) ? (int) $args['seller_id'] : get_current_user_id();
 
-        $this->log('Raw orders count before _assigned_vendor_ids filter (vendor ' . $vendor_id . ')', count($orders));
+        $this->log('Raw orders count before _assigned_vendor_ids filter (vendor ' . $vendor_id . ') => test: disabled ', count($orders));
 
         $filtered_orders = [];
 
-        foreach ($orders as $order) {
+        // foreach ($orders as $order) {
 
-            // Hydrate IDs into WC_Order objects if needed
-            if (is_numeric($order)) {
-                $order = wc_get_order($order);
-            }
+        //     // Hydrate IDs into WC_Order objects if needed
+        //     if (is_numeric($order)) {
+        //         $order = wc_get_order($order);
+        //     }
 
-            if (!$order instanceof WC_Order) {
-                continue;
-            }
+        //     if (!$order instanceof WC_Order) {
+        //         continue;
+        //     }
 
-            if ($this->order_matches_assigned_vendor($order, $vendor_id)) {
-                $filtered_orders[] = $order;
-            }
-        }
+        //     if ($this->order_matches_assigned_vendor($order, $vendor_id)) {
+        //         $filtered_orders[] = $order;
+        //     }
+        // }
 
-        // Build a snapshot for debugging
-        $snapshot = [];
-        foreach ($filtered_orders as $order) {
+        // // Build a snapshot for debugging
+        // $snapshot = [];
+        // foreach ($filtered_orders as $order) {
 
-            $item_names = [];
-            foreach ($order->get_items() as $item) {
-                $item_names[] = $item->get_name();
-            }
+        //     $item_names = [];
+        //     foreach ($order->get_items() as $item) {
+        //         $item_names[] = $item->get_name();
+        //     }
 
-            $snapshot[] = [
-                'id' => $order->get_id(),
-                'parent_id' => $order->get_parent_id(),
-                'status' => $order->get_status(),
-                'total' => $order->get_total(),
-                'items' => $item_names,
-            ];
-        }
+        //     $snapshot[] = [
+        //         'id' => $order->get_id(),
+        //         'parent_id' => $order->get_parent_id(),
+        //         'status' => $order->get_status(),
+        //         'total' => $order->get_total(),
+        //         'items' => $item_names,
+        //     ];
+        // }
 
-        $this->log('Filtered sub-order results based on _assigned_vendor_ids (vendor ' . $vendor_id . ')', $snapshot);
+        // $this->log('Filtered sub-order results based on _assigned_vendor_ids (vendor ' . $vendor_id . ')', $snapshot);
 
-        return $filtered_orders;
+        // return $filtered_orders;
+        return $orders;
     }
 
     /**
@@ -131,42 +132,42 @@ class Printlana_Show_Suborders_Only
      * @param int      $vendor_id
      * @return bool
      */
-    private function order_matches_assigned_vendor(WC_Order $order, $vendor_id)
-    {
+    // private function order_matches_assigned_vendor(WC_Order $order, $vendor_id)
+    // {
 
-        foreach ($order->get_items('line_item') as $item) {
+    //     foreach ($order->get_items('line_item') as $item) {
 
-            $product_id = $item->get_product_id();
-            if (!$product_id) {
-                continue;
-            }
+    //         $product_id = $item->get_product_id();
+    //         if (!$product_id) {
+    //             continue;
+    //         }
 
-            $assigned = get_post_meta($product_id, '_assigned_vendor_ids', true);
+    //         $assigned = get_post_meta($product_id, '_assigned_vendor_ids', true);
 
-            if (empty($assigned)) {
-                continue;
-            }
+    //         if (empty($assigned)) {
+    //             continue;
+    //         }
 
-            // Normalize to array of integers (handles array or comma-separated string)
-            if (is_string($assigned)) {
-                // e.g. "12,34,56"
-                $parts = preg_split('/[,\s]+/', $assigned, -1, PREG_SPLIT_NO_EMPTY);
-                $assigned = array_map('intval', $parts);
-            } elseif (is_array($assigned)) {
-                $assigned = array_map('intval', $assigned);
-            } else {
-                // Single scalar value
-                $assigned = [(int) $assigned];
-            }
+    //         // Normalize to array of integers (handles array or comma-separated string)
+    //         if (is_string($assigned)) {
+    //             // e.g. "12,34,56"
+    //             $parts = preg_split('/[,\s]+/', $assigned, -1, PREG_SPLIT_NO_EMPTY);
+    //             $assigned = array_map('intval', $parts);
+    //         } elseif (is_array($assigned)) {
+    //             $assigned = array_map('intval', $assigned);
+    //         } else {
+    //             // Single scalar value
+    //             $assigned = [(int) $assigned];
+    //         }
 
-            if (in_array((int) $vendor_id, $assigned, true)) {
-                // This order has at least one product assigned to this vendor
-                return true;
-            }
-        }
+    //         if (in_array((int) $vendor_id, $assigned, true)) {
+    //             // This order has at least one product assigned to this vendor
+    //             return true;
+    //         }
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
 }
 
