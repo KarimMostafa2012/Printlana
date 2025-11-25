@@ -5,125 +5,128 @@
  * @package HelloElementor
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
-define( 'HELLO_ELEMENTOR_VERSION', '3.4.4' );
-define( 'EHP_THEME_SLUG', 'hello-elementor' );
+define('HELLO_ELEMENTOR_VERSION', '3.4.4');
+define('EHP_THEME_SLUG', 'hello-elementor');
 
-define( 'HELLO_THEME_PATH', get_template_directory() );
-define( 'HELLO_THEME_URL', get_template_directory_uri() );
-define( 'HELLO_THEME_ASSETS_PATH', HELLO_THEME_PATH . '/assets/' );
-define( 'HELLO_THEME_ASSETS_URL', HELLO_THEME_URL . '/assets/' );
-define( 'HELLO_THEME_SCRIPTS_PATH', HELLO_THEME_ASSETS_PATH . 'js/' );
-define( 'HELLO_THEME_SCRIPTS_URL', HELLO_THEME_ASSETS_URL . 'js/' );
-define( 'HELLO_THEME_STYLE_PATH', HELLO_THEME_ASSETS_PATH . 'css/' );
-define( 'HELLO_THEME_STYLE_URL', HELLO_THEME_ASSETS_URL . 'css/' );
-define( 'HELLO_THEME_IMAGES_PATH', HELLO_THEME_ASSETS_PATH . 'images/' );
-define( 'HELLO_THEME_IMAGES_URL', HELLO_THEME_ASSETS_URL . 'images/' );
+define('HELLO_THEME_PATH', get_template_directory());
+define('HELLO_THEME_URL', get_template_directory_uri());
+define('HELLO_THEME_ASSETS_PATH', HELLO_THEME_PATH . '/assets/');
+define('HELLO_THEME_ASSETS_URL', HELLO_THEME_URL . '/assets/');
+define('HELLO_THEME_SCRIPTS_PATH', HELLO_THEME_ASSETS_PATH . 'js/');
+define('HELLO_THEME_SCRIPTS_URL', HELLO_THEME_ASSETS_URL . 'js/');
+define('HELLO_THEME_STYLE_PATH', HELLO_THEME_ASSETS_PATH . 'css/');
+define('HELLO_THEME_STYLE_URL', HELLO_THEME_ASSETS_URL . 'css/');
+define('HELLO_THEME_IMAGES_PATH', HELLO_THEME_ASSETS_PATH . 'images/');
+define('HELLO_THEME_IMAGES_URL', HELLO_THEME_ASSETS_URL . 'images/');
 
 
-if ( ! isset( $content_width ) ) {
-	$content_width = 800; // Pixels.
+if (!isset($content_width)) {
+    $content_width = 800; // Pixels.
 }
 
-if ( ! function_exists( 'hello_elementor_setup' ) ) {
-	/**
-	 * Set up theme support.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_setup() {
-		if ( is_admin() ) {
-			hello_maybe_update_theme_version_in_db();
-		}
+if (!function_exists('hello_elementor_setup')) {
+    /**
+     * Set up theme support.
+     *
+     * @return void
+     */
+    function hello_elementor_setup()
+    {
+        if (is_admin()) {
+            hello_maybe_update_theme_version_in_db();
+        }
 
-		if ( apply_filters( 'hello_elementor_register_menus', true ) ) {
-			register_nav_menus( [ 'menu-1' => esc_html__( 'Header', 'hello-elementor' ) ] );
-			register_nav_menus( [ 'menu-2' => esc_html__( 'Footer', 'hello-elementor' ) ] );
-		}
+        if (apply_filters('hello_elementor_register_menus', true)) {
+            register_nav_menus(['menu-1' => esc_html__('Header', 'hello-elementor')]);
+            register_nav_menus(['menu-2' => esc_html__('Footer', 'hello-elementor')]);
+        }
 
-		if ( apply_filters( 'hello_elementor_post_type_support', true ) ) {
-			add_post_type_support( 'page', 'excerpt' );
-		}
+        if (apply_filters('hello_elementor_post_type_support', true)) {
+            add_post_type_support('page', 'excerpt');
+        }
 
-		if ( apply_filters( 'hello_elementor_add_theme_support', true ) ) {
-			add_theme_support( 'post-thumbnails' );
-			add_theme_support( 'automatic-feed-links' );
-			add_theme_support( 'title-tag' );
-			add_theme_support(
-				'html5',
-				[
-					'search-form',
-					'comment-form',
-					'comment-list',
-					'gallery',
-					'caption',
-					'script',
-					'style',
-					'navigation-widgets',
-				]
-			);
-			add_theme_support(
-				'custom-logo',
-				[
-					'height'      => 100,
-					'width'       => 350,
-					'flex-height' => true,
-					'flex-width'  => true,
-				]
-			);
-			add_theme_support( 'align-wide' );
-			add_theme_support( 'responsive-embeds' );
+        if (apply_filters('hello_elementor_add_theme_support', true)) {
+            add_theme_support('post-thumbnails');
+            add_theme_support('automatic-feed-links');
+            add_theme_support('title-tag');
+            add_theme_support(
+                'html5',
+                [
+                    'search-form',
+                    'comment-form',
+                    'comment-list',
+                    'gallery',
+                    'caption',
+                    'script',
+                    'style',
+                    'navigation-widgets',
+                ]
+            );
+            add_theme_support(
+                'custom-logo',
+                [
+                    'height' => 100,
+                    'width' => 350,
+                    'flex-height' => true,
+                    'flex-width' => true,
+                ]
+            );
+            add_theme_support('align-wide');
+            add_theme_support('responsive-embeds');
 
-			/*
-			 * Editor Styles
-			 */
-			add_theme_support( 'editor-styles' );
-			add_editor_style( 'editor-styles.css' );
+            /*
+             * Editor Styles
+             */
+            add_theme_support('editor-styles');
+            add_editor_style('editor-styles.css');
 
-			/*
-			 * WooCommerce.
-			 */
-			if ( apply_filters( 'hello_elementor_add_woocommerce_support', true ) ) {
-				// WooCommerce in general.
-				add_theme_support( 'woocommerce' );
-				// Enabling WooCommerce product gallery features (are off by default since WC 3.0.0).
-				// zoom.
-				add_theme_support( 'wc-product-gallery-zoom' );
-				// lightbox.
-				add_theme_support( 'wc-product-gallery-lightbox' );
-				// swipe.
-				add_theme_support( 'wc-product-gallery-slider' );
-			}
-		}
-	}
+            /*
+             * WooCommerce.
+             */
+            if (apply_filters('hello_elementor_add_woocommerce_support', true)) {
+                // WooCommerce in general.
+                add_theme_support('woocommerce');
+                // Enabling WooCommerce product gallery features (are off by default since WC 3.0.0).
+                // zoom.
+                add_theme_support('wc-product-gallery-zoom');
+                // lightbox.
+                add_theme_support('wc-product-gallery-lightbox');
+                // swipe.
+                add_theme_support('wc-product-gallery-slider');
+            }
+        }
+    }
 }
-add_action( 'after_setup_theme', 'hello_elementor_setup' );
+add_action('after_setup_theme', 'hello_elementor_setup');
 
-function hello_maybe_update_theme_version_in_db() {
-	$theme_version_option_name = 'hello_theme_version';
-	// The theme version saved in the database.
-	$hello_theme_db_version = get_option( $theme_version_option_name );
+function hello_maybe_update_theme_version_in_db()
+{
+    $theme_version_option_name = 'hello_theme_version';
+    // The theme version saved in the database.
+    $hello_theme_db_version = get_option($theme_version_option_name);
 
-	// If the 'hello_theme_version' option does not exist in the DB, or the version needs to be updated, do the update.
-	if ( ! $hello_theme_db_version || version_compare( $hello_theme_db_version, HELLO_ELEMENTOR_VERSION, '<' ) ) {
-		update_option( $theme_version_option_name, HELLO_ELEMENTOR_VERSION );
-	}
+    // If the 'hello_theme_version' option does not exist in the DB, or the version needs to be updated, do the update.
+    if (!$hello_theme_db_version || version_compare($hello_theme_db_version, HELLO_ELEMENTOR_VERSION, '<')) {
+        update_option($theme_version_option_name, HELLO_ELEMENTOR_VERSION);
+    }
 }
 
-if ( ! function_exists( 'hello_elementor_display_header_footer' ) ) {
-	/**
-	 * Check whether to display header footer.
-	 *
-	 * @return bool
-	 */
-	function hello_elementor_display_header_footer() {
-		$hello_elementor_header_footer = true;
+if (!function_exists('hello_elementor_display_header_footer')) {
+    /**
+     * Check whether to display header footer.
+     *
+     * @return bool
+     */
+    function hello_elementor_display_header_footer()
+    {
+        $hello_elementor_header_footer = true;
 
-		return apply_filters( 'hello_elementor_header_footer', $hello_elementor_header_footer );
-	}
+        return apply_filters('hello_elementor_header_footer', $hello_elementor_header_footer);
+    }
 }
 
 add_filter('elementor/widget/render_content', function ($content, $widget) {
@@ -150,26 +153,26 @@ add_filter('elementor/widget/render_content', function ($content, $widget) {
 
 // removed unused CSS Files
 
-add_action( 'wp_enqueue_scripts', function() {
+add_action('wp_enqueue_scripts', function () {
 
     // If the current user is NOT an admin, remove the Orders Chat CSS
-    if ( ! current_user_can( 'manage_options' ) ) {
-        wp_dequeue_style( 'dashicons' );
-        wp_deregister_style( 'dashicons' );
+    if (!current_user_can('manage_options')) {
+        wp_dequeue_style('dashicons');
+        wp_deregister_style('dashicons');
     }
-    wp_dequeue_style( 'dokan-pro-shipping-blocks' );
-    wp_deregister_style( 'dokan-pro-shipping-blocks' );
-    wp_dequeue_style( 'orders-chat-frontend' );
-    wp_deregister_style( 'orders-chat-frontend' );
-    
-}, 100 );
+    wp_dequeue_style('dokan-pro-shipping-blocks');
+    wp_deregister_style('dokan-pro-shipping-blocks');
+    wp_dequeue_style('orders-chat-frontend');
+    wp_deregister_style('orders-chat-frontend');
 
- /**--------------------------------------------**/
+}, 100);
+
+/**--------------------------------------------**/
 
 
-add_action( 'after_setup_theme', function() {
+add_action('after_setup_theme', function () {
     // Add a new custom image size
-    add_image_size( 'Hero Section', 480, 480, true ); 
+    add_image_size('Hero Section', 480, 480, true);
 });
 
 
@@ -177,24 +180,26 @@ add_action( 'after_setup_theme', function() {
  * Return [product_label, product_url] for a Dokan sub-order that has one product.
  * Label example: "Pizza Box — Size: Large — SKU: PZB-001 × 200"
  */
-function pl_suborder_primary_product(WC_Order $order){
-    foreach( $order->get_items('line_item') as $item ){
-        $name    = $item->get_name();                   // item name (includes parent product name)
-        $qty     = (int) $item->get_quantity();
-        $product = $item->get_product();
-        $sku     = $product ? $product->get_sku() : '';
+function pl_suborder_primary_product(WC_Order $order)
+{
 
-        // Variation attributes (from product or from item meta)
+    foreach ($order->get_items('line_item') as $item) {
+
+        $product = $item->get_product();
+        $name = $item->get_name();
+        $qty = (int) $item->get_quantity();
+        $sku = $product ? $product->get_sku() : '';
+
+        // Variation (only if available safely)
         $variation_text = '';
-        if ( $product && $product->is_type('variation') ) {
-            $variation_text = wc_get_formatted_variation( $product->get_attributes(), true );
-        } else {
-            $va = $item->get_variation_attributes();
-            if ( ! empty( $va ) ) {
-                $variation_text = wc_get_formatted_variation( $va, true );
-            }
+        if ($product && $product->is_type('variation')) {
+            $variation_text = wc_get_formatted_variation(
+                $product->get_variation_attributes(),
+                true
+            );
         }
 
+        // Build text
         $parts = array_filter([
             $name,
             $variation_text ?: null,
@@ -202,34 +207,37 @@ function pl_suborder_primary_product(WC_Order $order){
         ]);
 
         $label = implode(' — ', $parts) . ' × ' . $qty;
-        $url   = ($product && $product->get_id()) ? get_permalink( $product->get_id() ) : '';
+        $url = ($product && $product->get_id()) ? get_permalink($product->get_id()) : '';
 
-        return [$label, $url];
+        return [$label, $url];  // We only need one product, so return here
     }
-    return [__('(no product)','your-textdomain'), ''];
+
+    return [__('(no product)', 'your-textdomain'), ''];
 }
 
-add_filter( 'manage_edit-product_columns', 'add_vendor_id_product_column' );
-function add_vendor_id_product_column( $columns ) {
+add_filter('manage_edit-product_columns', 'add_vendor_id_product_column');
+function add_vendor_id_product_column($columns)
+{
     // We will add our new column right after the 'price' column for better visibility.
     $new_columns = [];
-    foreach ( $columns as $key => $value ) {
+    foreach ($columns as $key => $value) {
         $new_columns[$key] = $value;
-        if ( $key === 'price' ) {
+        if ($key === 'price') {
             // Add the 'Vendor ID' column
             // The key 'vendor_id' is a unique identifier for our column.
             // The value is the display text for the column header.
-            $new_columns['vendor_id'] = __( 'Vendor ID', 'your-text-domain' );
+            $new_columns['vendor_id'] = __('Vendor ID', 'your-text-domain');
         }
     }
     return $new_columns;
 }
 
 add_action('admin_head', 'custom_vendor_id_column_width');
-function custom_vendor_id_column_width() {
+function custom_vendor_id_column_width()
+{
     // We only want this CSS to apply on the WooCommerce product list page.
     $screen = get_current_screen();
-    if ( $screen && $screen->id === 'edit-product' ) {
+    if ($screen && $screen->id === 'edit-product') {
         echo '<style>
             .column-vendor_id {
                 width: 10% !important; /* Adjust the width as you need - e.g., 150px or 10% */
@@ -248,23 +256,24 @@ function custom_vendor_id_column_width() {
  * @param string $column  The key of the current column being displayed.
  * @param int    $post_id The ID of the product (post).
  */
-add_action( 'manage_product_posts_custom_column', 'display_vendor_id_column_data', 10, 2 );
-function display_vendor_id_column_data( $column, $post_id ) {
+add_action('manage_product_posts_custom_column', 'display_vendor_id_column_data', 10, 2);
+function display_vendor_id_column_data($column, $post_id)
+{
     // Check if it's our custom column by matching the key 'vendor_id'.
-    if ( $column === 'vendor_id' ) {
+    if ($column === 'vendor_id') {
         // Get the custom field value using the specified meta key.
-        $vendor_ids = get_post_meta( $post_id, '_assigned_vendor_ids', true );
+        $vendor_ids = get_post_meta($post_id, '_assigned_vendor_ids', true);
 
         // Check if the retrieved data is not empty.
-        if ( ! empty( $vendor_ids ) ) {
+        if (!empty($vendor_ids)) {
             // The meta value could be an array of IDs or a single ID.
             // We'll handle both cases to be safe.
-            if ( is_array( $vendor_ids ) ) {
+            if (is_array($vendor_ids)) {
                 // If it's an array, convert it to a comma-separated string.
-                echo esc_html( implode( ', ', $vendor_ids ) );
+                echo esc_html(implode(', ', $vendor_ids));
             } else {
                 // If it's a single value, just display it.
-                echo esc_html( $vendor_ids );
+                echo esc_html($vendor_ids);
             }
         } else {
             // Display a dash '—' if the meta field is empty or doesn't exist.
@@ -284,40 +293,43 @@ function display_vendor_id_column_data( $column, $post_id ) {
  *
  * Put in a small MU plugin or your child theme's functions.php.
  */
-add_action('woocommerce_order_status_changed', function( $order_id, $old_status, $new_status, $order ){
-    if ( ! $order instanceof WC_Order ) return;
+add_action('woocommerce_order_status_changed', function ($order_id, $old_status, $new_status, $order) {
+    if (!$order instanceof WC_Order)
+        return;
 
     // 🔒 Only act on Dokan SUB-ORDERS (child orders)
     // Works with HPOS and classic tables.
     $parent_id = (int) $order->get_parent_id();
-    if ( $parent_id <= 0 ) {
+    if ($parent_id <= 0) {
         return; // ignore parent orders and standalone orders
     }
-    
+
 
     // Who is acting now?
     $actor_id = get_current_user_id();
-    if ( ! $actor_id ) return; // ignore programmatic/cron/webhook changes
+    if (!$actor_id)
+        return; // ignore programmatic/cron/webhook changes
     $actor_user = get_user_by('id', $actor_id);
-    if ( ! $actor_user ) return;
+    if (!$actor_user)
+        return;
 
     // Helper: is vendor?
-    $is_vendor = function( $user ){
-        if ( function_exists('dokan_is_user_seller') ) {
-            return dokan_is_user_seller( $user->ID );
+    $is_vendor = function ($user) {
+        if (function_exists('dokan_is_user_seller')) {
+            return dokan_is_user_seller($user->ID);
         }
-        return in_array( 'seller', (array) $user->roles, true ) || in_array( 'vendor', (array) $user->roles, true );
+        return in_array('seller', (array) $user->roles, true) || in_array('vendor', (array) $user->roles, true);
     };
 
-    $order_number   = $order->get_order_number();
-    [$product_label, $product_url] = pl_suborder_primary_product( $order );
-    
-    $actor_is_vendor = $is_vendor( $actor_user );
-    $actor_is_admin  = user_can( $actor_user, 'manage_woocommerce' ) || user_can( $actor_user, 'administrator' );
+    $order_number = $order->get_order_number();
+    [$product_label, $product_url] = pl_suborder_primary_product($order);
+
+    $actor_is_vendor = $is_vendor($actor_user);
+    $actor_is_admin = user_can($actor_user, 'manage_woocommerce') || user_can($actor_user, 'administrator');
 
     // Common context
-    $order_number   = $order->get_order_number();
-    $order_link     = admin_url( 'post.php?post=' . $order_id . '&action=edit' );
+    $order_number = $order->get_order_number();
+    $order_link = admin_url('post.php?post=' . $order_id . '&action=edit');
     $customer_email = $order->get_billing_email();
 
     // 🛍️ Resolve the single vendor for this sub-order
@@ -325,45 +337,48 @@ add_action('woocommerce_order_status_changed', function( $order_id, $old_status,
 
     // Prefer Dokan's stored vendor ID on sub-order
     $vendor_id = (int) $order->get_meta('_dokan_vendor_id'); // HPOS-safe
-    if ( $vendor_id <= 0 ) {
+    if ($vendor_id <= 0) {
         // Fallback: derive from first line item product author
-        foreach ( $order->get_items('line_item') as $item ) {
+        foreach ($order->get_items('line_item') as $item) {
             $product = $item->get_product();
-            if ( $product ) {
-                $vendor_id = (int) get_post_field( 'post_author', $product->get_id() );
-                if ( $vendor_id > 0 ) break;
+            if ($product) {
+                $vendor_id = (int) get_post_field('post_author', $product->get_id());
+                if ($vendor_id > 0)
+                    break;
             }
         }
     }
 
-    if ( $vendor_id > 0 ) {
+    if ($vendor_id > 0) {
         $email = null;
-        if ( function_exists('dokan') ) {
-            $vendor = dokan()->vendor->get( $vendor_id );
-            if ( $vendor ) $email = $vendor->get_email(); // store email (falls back to user email)
+        if (function_exists('dokan')) {
+            $vendor = dokan()->vendor->get($vendor_id);
+            if ($vendor)
+                $email = $vendor->get_email(); // store email (falls back to user email)
         }
-        if ( ! $email ) {
+        if (!$email) {
             $u = get_user_by('id', $vendor_id);
-            if ( $u && ! empty( $u->user_email ) ) $email = $u->user_email;
+            if ($u && !empty($u->user_email))
+                $email = $u->user_email;
         }
-        if ( $email ) {
-            $vendor_emails[] = sanitize_email( $email );
+        if ($email) {
+            $vendor_emails[] = sanitize_email($email);
         }
     }
 
     // Admin recipients (from WooCommerce setting; fallback to site admin)
     $admin_recipients = [];
-    $wc_new_order_settings = get_option( 'woocommerce_new_order_settings' );
-    if ( is_array($wc_new_order_settings) && ! empty( $wc_new_order_settings['recipient'] ) ) {
-        $admin_recipients = array_map( 'trim', explode( ',', $wc_new_order_settings['recipient'] ) );
+    $wc_new_order_settings = get_option('woocommerce_new_order_settings');
+    if (is_array($wc_new_order_settings) && !empty($wc_new_order_settings['recipient'])) {
+        $admin_recipients = array_map('trim', explode(',', $wc_new_order_settings['recipient']));
     }
-    if ( empty( $admin_recipients ) ) {
+    if (empty($admin_recipients)) {
         $admin_recipients[] = get_option('admin_email');
     }
-    $admin_recipients = array_filter( array_unique( array_map( 'sanitize_email', $admin_recipients ) ) );
+    $admin_recipients = array_filter(array_unique(array_map('sanitize_email', $admin_recipients)));
 
     // Email content
-    $subject = sprintf( 'Product #%s status changed: %s → %s', $order_number, $old_status, $new_status );
+    $subject = sprintf('Product #%s status changed: %s → %s', $order_number, $old_status, $new_status);
     $subject = sprintf(
         'Sub-order #%s with %s status changed',
         $order_number,
@@ -380,87 +395,91 @@ add_action('woocommerce_order_status_changed', function( $order_id, $old_status,
         esc_html($product_label),
         esc_html($old_status),
         esc_html($new_status),
-        $product_url ? '<p><a href="'.esc_url($product_url).'">View product</a></p>' : '',
-        wp_kses_post( $order->get_formatted_order_total() ),
-        esc_html( $order->get_billing_first_name() ),
-        esc_html( $order->get_billing_last_name() )
+        $product_url ? '<p><a href="' . esc_url($product_url) . '">View product</a></p>' : '',
+        wp_kses_post($order->get_formatted_order_total()),
+        esc_html($order->get_billing_first_name()),
+        esc_html($order->get_billing_last_name())
     );
 
     // Send via Woo mailer (SMTP plugins apply)
-    $send = function( $to_list ) use ( $subject, $html_message ){
-        $to_list = array_filter( array_unique( array_map( 'sanitize_email', (array) $to_list ) ) );
-        foreach ( $to_list as $to ) {
-            wc_mail( $to, $subject, $html_message );
+    $send = function ($to_list) use ($subject, $html_message) {
+        $to_list = array_filter(array_unique(array_map('sanitize_email', (array) $to_list)));
+        foreach ($to_list as $to) {
+            wc_mail($to, $subject, $html_message);
         }
     };
 
     // Routing (sub-orders only)
-    if ( $actor_is_vendor ) {
+    if ($actor_is_vendor) {
         // Vendor changed → Customer + Admin
         $recipients = [];
-        if ( $customer_email ) $recipients[] = $customer_email;
-        $recipients = array_merge( $recipients, $admin_recipients );
-        $send( $recipients );
+        if ($customer_email)
+            $recipients[] = $customer_email;
+        $recipients = array_merge($recipients, $admin_recipients);
+        $send($recipients);
 
-    } elseif ( $actor_is_admin ) {
+    } elseif ($actor_is_admin) {
         // Admin changed → Customer + Vendor
         $recipients = [];
-        if ( $customer_email ) $recipients[] = $customer_email;
-        $recipients = array_merge( $recipients, $vendor_emails );
-        $send( $recipients );
+        if ($customer_email)
+            $recipients[] = $customer_email;
+        $recipients = array_merge($recipients, $vendor_emails);
+        $send($recipients);
     }
 
 }, 10, 4);
 
 
 // Add vendors as BCC on WooCommerce "New Order" email (admin email).
-add_filter('woocommerce_email_headers', function($headers, $email_id, $order) {
+add_filter('woocommerce_email_headers', function ($headers, $email_id, $order) {
 
-    if ($email_id !== 'new_order' || ! $order instanceof WC_Order) {
+    if ($email_id !== 'new_order' || !$order instanceof WC_Order) {
         return $headers;
     }
-    
-    if ( (int) $order->get_parent_id() > 0 ) {
+
+    if ((int) $order->get_parent_id() > 0) {
         return $headers;
     }
 
     // Collect vendor emails from items
     $vendor_emails = [];
 
-    foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
+    foreach ($order->get_items('line_item') as $item_id => $item) {
         $product = $item->get_product();
-        if ( ! $product ) continue;
+        if (!$product)
+            continue;
 
         $product_id = $product->get_id();
 
         // Get vendor/user ID (Dokan sets product author as vendor)
-        $vendor_id = (int) get_post_field( 'post_author', $product_id );
-        if ( ! $vendor_id ) continue;
+        $vendor_id = (int) get_post_field('post_author', $product_id);
+        if (!$vendor_id)
+            continue;
 
         // Prefer Dokan store email if set
-        if ( function_exists('dokan') ) {
-            $vendor = dokan()->vendor->get( $vendor_id );
-            if ( $vendor ) {
+        if (function_exists('dokan')) {
+            $vendor = dokan()->vendor->get($vendor_id);
+            if ($vendor) {
                 $store_email = $vendor->get_email(); // pulls store email, falls back to user email
-                if ( $store_email ) {
-                    $vendor_emails[] = sanitize_email( $store_email );
+                if ($store_email) {
+                    $vendor_emails[] = sanitize_email($store_email);
                     continue;
                 }
             }
         }
 
         // Fallback to WP user email
-        $user = get_user_by( 'id', $vendor_id );
-        if ( $user && ! empty( $user->user_email ) ) {
-            $vendor_emails[] = sanitize_email( $user->user_email );
+        $user = get_user_by('id', $vendor_id);
+        if ($user && !empty($user->user_email)) {
+            $vendor_emails[] = sanitize_email($user->user_email);
         }
     }
 
-    $vendor_emails = array_filter( array_unique( $vendor_emails ) );
+    $vendor_emails = array_filter(array_unique($vendor_emails));
 
-    if ( ! empty( $vendor_emails ) ) {
+    if (!empty($vendor_emails)) {
         // Append BCC header(s). WooCommerce accepts \r\n separated headers.
-        $bcc_line = 'Bcc: ' . implode( ',', $vendor_emails ) . "\r\n";
+        $bcc_line = 'Bcc: ' . implode(',', $vendor_emails) . "\r\n";
         $headers .= $bcc_line;
     }
 
@@ -469,95 +488,99 @@ add_filter('woocommerce_email_headers', function($headers, $email_id, $order) {
 
 
 
-if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
-	/**
-	 * Theme Scripts & Styles.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_scripts_styles() {
-		if ( apply_filters( 'hello_elementor_enqueue_style', true ) ) {
-			wp_enqueue_style(
-				'hello-elementor',
-				HELLO_THEME_STYLE_URL . 'reset.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
+if (!function_exists('hello_elementor_scripts_styles')) {
+    /**
+     * Theme Scripts & Styles.
+     *
+     * @return void
+     */
+    function hello_elementor_scripts_styles()
+    {
+        if (apply_filters('hello_elementor_enqueue_style', true)) {
+            wp_enqueue_style(
+                'hello-elementor',
+                HELLO_THEME_STYLE_URL . 'reset.css',
+                [],
+                HELLO_ELEMENTOR_VERSION
+            );
+        }
 
-		if ( apply_filters( 'hello_elementor_enqueue_theme_style', true ) ) {
-			wp_enqueue_style(
-				'hello-elementor-theme-style',
-				HELLO_THEME_STYLE_URL . 'theme.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
+        if (apply_filters('hello_elementor_enqueue_theme_style', true)) {
+            wp_enqueue_style(
+                'hello-elementor-theme-style',
+                HELLO_THEME_STYLE_URL . 'theme.css',
+                [],
+                HELLO_ELEMENTOR_VERSION
+            );
+        }
 
-		if ( hello_elementor_display_header_footer() ) {
-			wp_enqueue_style(
-				'hello-elementor-header-footer',
-				HELLO_THEME_STYLE_URL . 'header-footer.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
-	}
+        if (hello_elementor_display_header_footer()) {
+            wp_enqueue_style(
+                'hello-elementor-header-footer',
+                HELLO_THEME_STYLE_URL . 'header-footer.css',
+                [],
+                HELLO_ELEMENTOR_VERSION
+            );
+        }
+    }
 }
-add_action( 'wp_enqueue_scripts', 'hello_elementor_scripts_styles' );
+add_action('wp_enqueue_scripts', 'hello_elementor_scripts_styles');
 
-if ( ! function_exists( 'hello_elementor_register_elementor_locations' ) ) {
-	/**
-	 * Register Elementor Locations.
-	 *
-	 * @param ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $elementor_theme_manager theme manager.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_register_elementor_locations( $elementor_theme_manager ) {
-		if ( apply_filters( 'hello_elementor_register_elementor_locations', true ) ) {
-			$elementor_theme_manager->register_all_core_location();
-		}
-	}
+if (!function_exists('hello_elementor_register_elementor_locations')) {
+    /**
+     * Register Elementor Locations.
+     *
+     * @param ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $elementor_theme_manager theme manager.
+     *
+     * @return void
+     */
+    function hello_elementor_register_elementor_locations($elementor_theme_manager)
+    {
+        if (apply_filters('hello_elementor_register_elementor_locations', true)) {
+            $elementor_theme_manager->register_all_core_location();
+        }
+    }
 }
-add_action( 'elementor/theme/register_locations', 'hello_elementor_register_elementor_locations' );
+add_action('elementor/theme/register_locations', 'hello_elementor_register_elementor_locations');
 
-if ( ! function_exists( 'hello_elementor_content_width' ) ) {
-	/**
-	 * Set default content width.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_content_width() {
-		$GLOBALS['content_width'] = apply_filters( 'hello_elementor_content_width', 800 );
-	}
+if (!function_exists('hello_elementor_content_width')) {
+    /**
+     * Set default content width.
+     *
+     * @return void
+     */
+    function hello_elementor_content_width()
+    {
+        $GLOBALS['content_width'] = apply_filters('hello_elementor_content_width', 800);
+    }
 }
-add_action( 'after_setup_theme', 'hello_elementor_content_width', 0 );
+add_action('after_setup_theme', 'hello_elementor_content_width', 0);
 
-if ( ! function_exists( 'hello_elementor_add_description_meta_tag' ) ) {
-	/**
-	 * Add description meta tag with excerpt text.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_add_description_meta_tag() {
-		if ( ! apply_filters( 'hello_elementor_description_meta_tag', true ) ) {
-			return;
-		}
+if (!function_exists('hello_elementor_add_description_meta_tag')) {
+    /**
+     * Add description meta tag with excerpt text.
+     *
+     * @return void
+     */
+    function hello_elementor_add_description_meta_tag()
+    {
+        if (!apply_filters('hello_elementor_description_meta_tag', true)) {
+            return;
+        }
 
-		if ( ! is_singular() ) {
-			return;
-		}
+        if (!is_singular()) {
+            return;
+        }
 
-		$post = get_queried_object();
-		if ( empty( $post->post_excerpt ) ) {
-			return;
-		}
+        $post = get_queried_object();
+        if (empty($post->post_excerpt)) {
+            return;
+        }
 
-		echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags( $post->post_excerpt ) ) . '">' . "\n";
-	}
+        echo '<meta name="description" content="' . esc_attr(wp_strip_all_tags($post->post_excerpt)) . '">' . "\n";
+    }
 }
-add_action( 'wp_head', 'hello_elementor_add_description_meta_tag' );
+add_action('wp_head', 'hello_elementor_add_description_meta_tag');
 
 // Settings page
 require get_template_directory() . '/includes/settings-functions.php';
@@ -565,24 +588,26 @@ require get_template_directory() . '/includes/settings-functions.php';
 // Header & footer styling option, inside Elementor
 require get_template_directory() . '/includes/elementor-functions.php';
 
-if ( ! function_exists( 'hello_elementor_customizer' ) ) {
-	// Customizer controls
-	function hello_elementor_customizer() {
-		if ( ! is_customize_preview() ) {
-			return;
-		}
+if (!function_exists('hello_elementor_customizer')) {
+    // Customizer controls
+    function hello_elementor_customizer()
+    {
+        if (!is_customize_preview()) {
+            return;
+        }
 
-		if ( ! hello_elementor_display_header_footer() ) {
-			return;
-		}
+        if (!hello_elementor_display_header_footer()) {
+            return;
+        }
 
-		require get_template_directory() . '/includes/customizer-functions.php';
-	}
+        require get_template_directory() . '/includes/customizer-functions.php';
+    }
 }
 
 // Add a new meta box for extra product image
 add_action('add_meta_boxes', 'custom_product_extra_image_metabox');
-function custom_product_extra_image_metabox() {
+function custom_product_extra_image_metabox()
+{
     add_meta_box(
         'custom_product_extra_image',
         'Product Home Image',
@@ -593,51 +618,55 @@ function custom_product_extra_image_metabox() {
     );
 }
 
-function custom_product_extra_image_callback($post) {
+function custom_product_extra_image_callback($post)
+{
     wp_nonce_field('custom_product_extra_image_nonce', 'custom_product_extra_image_nonce');
 
-    $image_id  = (int) get_post_meta($post->ID, '_custom_product_extra_image', true);
+    $image_id = (int) get_post_meta($post->ID, '_custom_product_extra_image', true);
     $image_url = $image_id ? wp_get_attachment_url($image_id) : '';
     ?>
     <div>
-        <input type="hidden" id="custom_product_extra_image" name="custom_product_extra_image" value="<?php echo esc_attr($image_id); ?>" />
-        <img id="custom_product_extra_image_preview" src="<?php echo esc_url($image_url); ?>" style="max-width:100%; margin-bottom:10px; <?php echo $image_url ? '' : 'display:none;'; ?>" />
-        <br/>
+        <input type="hidden" id="custom_product_extra_image" name="custom_product_extra_image"
+            value="<?php echo esc_attr($image_id); ?>" />
+        <img id="custom_product_extra_image_preview" src="<?php echo esc_url($image_url); ?>"
+            style="max-width:100%; margin-bottom:10px; <?php echo $image_url ? '' : 'display:none;'; ?>" />
+        <br />
         <button type="button" class="button upload_image_button">Upload Image</button>
-        <button type="button" class="button remove_image_button" style="<?php echo $image_url ? '' : 'display:none;'; ?>">Remove Image</button>
+        <button type="button" class="button remove_image_button"
+            style="<?php echo $image_url ? '' : 'display:none;'; ?>">Remove Image</button>
     </div>
 
     <script>
-    jQuery(function($){
-        var frame;
-        $('.upload_image_button').on('click', function(e){
-            e.preventDefault();
-            if (frame) { frame.open(); return; }
-            frame = wp.media({
-                title: 'Select or Upload Image',
-                button: { text: 'Use this image' },
-                multiple: false
+        jQuery(function ($) {
+            var frame;
+            $('.upload_image_button').on('click', function (e) {
+                e.preventDefault();
+                if (frame) { frame.open(); return; }
+                frame = wp.media({
+                    title: 'Select or Upload Image',
+                    button: { text: 'Use this image' },
+                    multiple: false
+                });
+                frame.on('select', function () {
+                    var attachment = frame.state().get('selection').first().toJSON();
+                    $('#custom_product_extra_image').val(attachment.id);
+                    $('#custom_product_extra_image_preview').attr('src', attachment.url).show();
+                    $('.remove_image_button').show();
+                });
+                frame.open();
             });
-            frame.on('select', function(){
-                var attachment = frame.state().get('selection').first().toJSON();
-                $('#custom_product_extra_image').val(attachment.id);
-                $('#custom_product_extra_image_preview').attr('src', attachment.url).show();
-                $('.remove_image_button').show();
+            $('.remove_image_button').on('click', function () {
+                $('#custom_product_extra_image').val('');
+                $('#custom_product_extra_image_preview').hide().attr('src', '');
+                $(this).hide();
             });
-            frame.open();
         });
-        $('.remove_image_button').on('click', function(){
-            $('#custom_product_extra_image').val('');
-            $('#custom_product_extra_image_preview').hide().attr('src','');
-            $(this).hide();
-        });
-    });
     </script>
     <?php
 }
 
 // Enqueue the WP media frame on product edit screens
-add_action('admin_enqueue_scripts', function($hook){
+add_action('admin_enqueue_scripts', function ($hook) {
     if (($hook === 'post.php' || $hook === 'post-new.php') && get_post_type() === 'product') {
         wp_enqueue_media();
     }
@@ -645,12 +674,16 @@ add_action('admin_enqueue_scripts', function($hook){
 
 // Save meta
 add_action('save_post_product', function ($post_id) {
-    if (!isset($_POST['custom_product_extra_image_nonce']) ||
-        !wp_verify_nonce($_POST['custom_product_extra_image_nonce'], 'custom_product_extra_image_nonce')) {
+    if (
+        !isset($_POST['custom_product_extra_image_nonce']) ||
+        !wp_verify_nonce($_POST['custom_product_extra_image_nonce'], 'custom_product_extra_image_nonce')
+    ) {
         return;
     }
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!current_user_can('edit_post', $post_id)) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return;
+    if (!current_user_can('edit_post', $post_id))
+        return;
 
     if (isset($_POST['custom_product_extra_image'])) {
         update_post_meta($post_id, '_custom_product_extra_image', absint($_POST['custom_product_extra_image']));
@@ -658,7 +691,8 @@ add_action('save_post_product', function ($post_id) {
 });
 
 add_action('save_post', 'save_custom_product_extra_image');
-function save_custom_product_extra_image($post_id) {
+function save_custom_product_extra_image($post_id)
+{
     error_log('Nonce received: ' . (isset($_POST['custom_product_extra_image_nonce']) ? $_POST['custom_product_extra_image_nonce'] : 'NONE'));
 
     if (!isset($_POST['custom_product_extra_image_nonce']) || !wp_verify_nonce($_POST['custom_product_extra_image_nonce'], basename(__FILE__))) {
@@ -668,7 +702,8 @@ function save_custom_product_extra_image($post_id) {
         error_log('Nonce validation passed!');
     }
 
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return;
 
     // ✅ DEBUG: Check if the custom image field exists in POST
     if (isset($_POST['custom_product_extra_image'])) {
@@ -685,7 +720,8 @@ function save_custom_product_extra_image($post_id) {
 
 
 add_action('woocommerce_product_thumbnails', 'display_custom_image_under_main', 20);
-function display_custom_image_under_main() {
+function display_custom_image_under_main()
+{
     global $post;
 
     // Get custom image ID from post meta
@@ -708,33 +744,39 @@ add_filter('get_post_metadata', function ($value, $object_id, $meta_key, $single
     }
 
     $min_qty = (int) get_post_meta($object_id, 'min_quantity', true);
-    if ($min_qty <= 0) { $min_qty = 1; }
+    if ($min_qty <= 0) {
+        $min_qty = 1;
+    }
 
     $price = function_exists('wc_get_product') && ($p = wc_get_product($object_id))
         ? (float) $p->get_price()
         : (float) get_post_meta($object_id, '_price', true);
 
-    $total   = $price * $min_qty;
+    $total = $price * $min_qty;
 
     // Pull Woo formatting info
-    $symbol  = get_woocommerce_currency_symbol();
-    $dec     = wc_get_price_decimals();
-    $thou    = wc_get_price_thousand_separator();
-    $dot     = wc_get_price_decimal_separator();
-    $pos     = get_option('woocommerce_currency_pos', 'left');
+    $symbol = get_woocommerce_currency_symbol();
+    $dec = wc_get_price_decimals();
+    $thou = wc_get_price_thousand_separator();
+    $dot = wc_get_price_decimal_separator();
+    $pos = get_option('woocommerce_currency_pos', 'left');
 
-    $amount  = number_format($total, $dec, $dot, $thou);
+    $amount = number_format($total, $dec, $dot, $thou);
 
     // Respect Woo’s currency position
     switch ($pos) {
         case 'left':
-            $combo = $symbol . $amount; break;
+            $combo = $symbol . $amount;
+            break;
         case 'right':
-            $combo = $amount . $symbol; break;
+            $combo = $amount . $symbol;
+            break;
         case 'left_space':
-            $combo = $symbol . ' ' . $amount; break;
+            $combo = $symbol . ' ' . $amount;
+            break;
         case 'right_space':
-            $combo = $amount . ' ' . $symbol; break;
+            $combo = $amount . ' ' . $symbol;
+            break;
         default:
             $combo = $symbol . $amount;
     }
@@ -749,93 +791,104 @@ add_filter('get_post_metadata', function ($value, $object_id, $meta_key, $single
 /**
  * Register Custom Elementor Dynamic Tags
  */
-add_action( 'elementor/init', function() {
+add_action('elementor/init', function () {
     // Exit if Elementor is not active
-    if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+    if (!defined('ELEMENTOR_VERSION')) {
         return;
     }
 
     // Define and register the custom tag
-    add_action( 'elementor/dynamic_tags/register', function( $dynamic_tags_manager ) {
+    add_action('elementor/dynamic_tags/register', function ($dynamic_tags_manager) {
 
         // Ensure necessary Elementor classes are available
-        if ( ! class_exists('Elementor\Core\DynamicTags\Tag') || ! class_exists('Elementor\Modules\DynamicTags\Module') ) {
+        if (!class_exists('Elementor\Core\DynamicTags\Tag') || !class_exists('Elementor\Modules\DynamicTags\Module')) {
             return;
         }
 
-        class Custom_Product_Extra_Image_Tag extends \Elementor\Core\DynamicTags\Tag {
+        class Custom_Product_Extra_Image_Tag extends \Elementor\Core\DynamicTags\Tag
+        {
 
-            public function get_name() {
+            public function get_name()
+            {
                 return 'custom_product_extra_image';
             }
 
-            public function get_title() {
-                return __( 'Product Home Image', 'your-textdomain' );
+            public function get_title()
+            {
+                return __('Product Home Image', 'your-textdomain');
             }
 
-            public function get_group() {
+            public function get_group()
+            {
                 return 'woocommerce';
             }
 
-            public function get_categories() {
-                return [ \Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY ];
+            public function get_categories()
+            {
+                return [\Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY];
             }
 
-            public function get_value( array $options = [] ) {
+            public function get_value(array $options = [])
+            {
                 $post_id = get_the_ID();
-                if ( ! $post_id ) return [];
+                if (!$post_id)
+                    return [];
 
-                $image_id = (int) get_post_meta( $post_id, '_custom_product_extra_image', true );
-                if ( ! $image_id ) return [];
+                $image_id = (int) get_post_meta($post_id, '_custom_product_extra_image', true);
+                if (!$image_id)
+                    return [];
 
-                $url = wp_get_attachment_image_url( $image_id, 'full' );
-                if ( ! $url ) return [];
+                $url = wp_get_attachment_image_url($image_id, 'full');
+                if (!$url)
+                    return [];
 
                 return [
-                    'id'  => $image_id,
+                    'id' => $image_id,
                     'url' => $url,
                 ];
             }
         }
 
         // Register the tag
-        $dynamic_tags_manager->register( new Custom_Product_Extra_Image_Tag() );
+        $dynamic_tags_manager->register(new Custom_Product_Extra_Image_Tag());
     });
 });
 
 
 
-add_action( 'init', 'hello_elementor_customizer' );
+add_action('init', 'hello_elementor_customizer');
 
-if ( ! function_exists( 'hello_elementor_check_hide_title' ) ) {
-	/**
-	 * Check whether to display the page title.
-	 *
-	 * @param bool $val default value.
-	 *
-	 * @return bool
-	 */
-	function hello_elementor_check_hide_title( $val ) {
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			$current_doc = Elementor\Plugin::instance()->documents->get( get_the_ID() );
-			if ( $current_doc && 'yes' === $current_doc->get_settings( 'hide_title' ) ) {
-				$val = false;
-			}
-		}
-		return $val;
-	}
+if (!function_exists('hello_elementor_check_hide_title')) {
+    /**
+     * Check whether to display the page title.
+     *
+     * @param bool $val default value.
+     *
+     * @return bool
+     */
+    function hello_elementor_check_hide_title($val)
+    {
+        if (defined('ELEMENTOR_VERSION')) {
+            $current_doc = Elementor\Plugin::instance()->documents->get(get_the_ID());
+            if ($current_doc && 'yes' === $current_doc->get_settings('hide_title')) {
+                $val = false;
+            }
+        }
+        return $val;
+    }
 }
-add_filter( 'hello_elementor_page_title', 'hello_elementor_check_hide_title' );
+add_filter('hello_elementor_page_title', 'hello_elementor_check_hide_title');
 
 /**
  * BC:
  * In v2.7.0 the theme removed the `hello_elementor_body_open()` from `header.php` replacing it with `wp_body_open()`.
  * The following code prevents fatal errors in child themes that still use this function.
  */
-if ( ! function_exists( 'hello_elementor_body_open' ) ) {
-	function hello_elementor_body_open() {
-		wp_body_open();
-	}
+if (!function_exists('hello_elementor_body_open')) {
+    function hello_elementor_body_open()
+    {
+        wp_body_open();
+    }
 }
 
 require HELLO_THEME_PATH . '/theme.php';
