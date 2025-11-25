@@ -19,11 +19,11 @@ add_action('template_redirect', function () {
     // ============================================================
     // 1) Only in front-end + logged-in
     // ============================================================
-    if (!is_user_logged_in()) {
-        error_log('[OrderAccessEdit] EXIT: Not front-end or not logged in', [
+    if (is_admin() || !is_user_logged_in()) {
+        error_log('[OrderAccessEdit] EXIT: Not front-end or not logged in => ' . print_r([
             'is_admin' => is_admin(),
             'is_logged_in' => is_user_logged_in(),
-        ]);
+        ], true));
         return;
     }
 
@@ -31,10 +31,10 @@ add_action('template_redirect', function () {
     // 2) Only on Dokan dashboard pages
     // ============================================================
     if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
-        error_log('[OrderAccessEdit] EXIT: Not dokan seller dashboard', [
+        error_log('[OrderAccessEdit] EXIT: Not dokan seller dashboard => ' . print_r([
             'function_exists' => function_exists('dokan_is_seller_dashboard'),
             'is_dokan_dashboard' => function_exists('dokan_is_seller_dashboard') ? dokan_is_seller_dashboard() : 'N/A',
-        ]);
+        ], true));
         return;
     }
 
@@ -42,9 +42,7 @@ add_action('template_redirect', function () {
     // 3) We only care about the single order view ?order_id=xxxx
     // ============================================================
     if (empty($_GET['order_id'])) {
-        error_log('[OrderAccessEdit] EXIT: No order_id in GET', [
-            'GET' => $_GET,
-        ]);
+        error_log('[OrderAccessEdit] EXIT: No order_id in GET => ' . print_r($_GET, true));
         return;
     }
 
@@ -55,10 +53,10 @@ add_action('template_redirect', function () {
     $seller_id = get_current_user_id();
 
     if (!$order_id || !$seller_id) {
-        error_log('[OrderAccessEdit] EXIT: Invalid order_id or seller_id', [
+        error_log('[OrderAccessEdit] EXIT: Invalid order_id or seller_id => ' . print_r([
             'order_id' => $order_id,
             'seller_id' => $seller_id,
-        ]);
+        ], true));
         return;
     }
 
@@ -75,20 +73,20 @@ add_action('template_redirect', function () {
     // ============================================================
     $has_access = dokan_is_seller_has_order($seller_id, $order_id);
 
-    error_log('[OrderAccessEdit] template_redirect permission result', [
+    error_log('[OrderAccessEdit] template_redirect permission result => ' . print_r([
         'seller_id' => $seller_id,
         'order_id' => $order_id,
         'has_access' => $has_access,
-    ]);
+    ], true));
 
     // ============================================================
     // 7) Deny access if needed
     // ============================================================
     if (!$has_access) {
-        error_log('[OrderAccessEdit] DENY: Seller does NOT have access', [
+        error_log('[OrderAccessEdit] DENY: Seller does NOT have access => ' . print_r([
             'seller_id' => $seller_id,
             'order_id' => $order_id,
-        ]);
+        ], true));
 
         wp_die(
             esc_html__('You do not have permission to view this order.', 'printlana'),
@@ -100,12 +98,13 @@ add_action('template_redirect', function () {
     // ============================================================
     // 8) If here, access granted
     // ============================================================
-    error_log('[OrderAccessEdit] ALLOW: Seller has access to order', [
+    error_log('[OrderAccessEdit] ALLOW: Seller has access to order => ' . print_r([
         'seller_id' => $seller_id,
         'order_id' => $order_id,
-    ]);
+    ], true));
 
 });
+
 
 
 class Printlana_Order_Access_Edit
