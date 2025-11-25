@@ -451,13 +451,25 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
 
         // Send to customer
         if ($customer_email) {
-            wc_mail($customer_email, $subject_customer, $customer_html, $headers);
+            $sent_customer = wc_mail($customer_email, $subject_customer, $customer_html, $headers);
+
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('[pl_new_order_email] Customer mail result: ' . var_export($sent_customer, true) . ' to ' . $customer_email);
+            }
+        } else {
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('[pl_new_order_email] No customer email address found for order ' . $order_num);
+            }
         }
 
         // Send to admin(s)
         foreach ($admin_recipients as $admin_email) {
             if (!empty($admin_email)) {
-                wc_mail($admin_email, $subject_admin, $admin_html, $headers);
+                $sent_admin = wc_mail($admin_email, $subject_admin, $admin_html, $headers);
+
+                if (defined('WP_DEBUG') && WP_DEBUG) {
+                    error_log('[pl_new_order_email] Admin mail result: ' . var_export($sent_admin, true) . ' to ' . $admin_email);
+                }
             }
         }
 
@@ -465,6 +477,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         $order->update_meta_data('_pl_new_order_email_sent', 'yes');
         $order->save();
     }
+
 
     // Hook into the same *_notification actions as WC core new order email
     $pl_new_order_hooks = [
