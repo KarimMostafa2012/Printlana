@@ -17,7 +17,7 @@ if (!function_exists('pl_get_email_logo_url')) {
     function pl_get_email_logo_url(): string
     {
         $logo_url = '';
-        $logo_id  = get_theme_mod('custom_logo');
+        $logo_id = get_theme_mod('custom_logo');
         if ($logo_id) {
             $image = wp_get_attachment_image_src($logo_id, 'full');
             if (!empty($image[0])) {
@@ -36,7 +36,7 @@ if (!function_exists('pl_get_support_email')) {
     {
         $email = get_option('admin_email');
         if (!$email) {
-            $host  = wp_parse_url(home_url(), PHP_URL_HOST);
+            $host = wp_parse_url(home_url(), PHP_URL_HOST);
             $email = 'support@' . $host;
         }
         return sanitize_email($email);
@@ -49,8 +49,8 @@ if (!function_exists('pl_generate_order_items_table')) {
         $rows = '';
 
         foreach ($order->get_items('line_item') as $item) {
-            $name  = esc_html($item->get_name());
-            $qty   = (int) $item->get_quantity();
+            $name = esc_html($item->get_name());
+            $qty = (int) $item->get_quantity();
             $total = wc_price($item->get_total());
 
             $rows .= '<tr>';
@@ -62,8 +62,8 @@ if (!function_exists('pl_generate_order_items_table')) {
 
         if ($rows === '') {
             $rows = '<tr><td colspan="3" style="padding:8px 6px; font-size:13px; color:#6b7280;">'
-                  . esc_html__('No items found in this order.', 'printlana')
-                  . '</td></tr>';
+                . esc_html__('No items found in this order.', 'printlana')
+                . '</td></tr>';
         }
 
         $table = '
@@ -108,22 +108,22 @@ if (!function_exists('pl_build_new_order_email_html')) {
      */
     function pl_build_new_order_email_html(array $d): string
     {
-        $recipient_type        = $d['recipient_type']; // customer|admin
-        $logo_url              = esc_url($d['logo_url']);
-        $site_name             = esc_html($d['site_name']);
-        $order_number          = esc_html($d['order_number']);
-        $order_date            = esc_html($d['order_date']);
-        $order_items_html      = $d['order_items_html'];
-        $subtotal              = wp_kses_post($d['subtotal']);
-        $shipping_total        = wp_kses_post($d['shipping_total']);
-        $tax_total             = wp_kses_post($d['tax_total']);
-        $order_total           = wp_kses_post($d['order_total']);
-        $billing_address_html  = $d['billing_address_html'];  // already HTML
+        $recipient_type = $d['recipient_type']; // customer|admin
+        $logo_url = esc_url($d['logo_url']);
+        $site_name = esc_html($d['site_name']);
+        $order_number = esc_html($d['order_number']);
+        $order_date = esc_html($d['order_date']);
+        $order_items_html = $d['order_items_html'];
+        $subtotal = wp_kses_post($d['subtotal']);
+        $shipping_total = wp_kses_post($d['shipping_total']);
+        $tax_total = wp_kses_post($d['tax_total']);
+        $order_total = wp_kses_post($d['order_total']);
+        $billing_address_html = $d['billing_address_html'];  // already HTML
         $shipping_address_html = $d['shipping_address_html']; // already HTML
-        $customer_name         = esc_html($d['customer_name']);
-        $support_email         = esc_html($d['support_email']);
-        $signature_name        = esc_html($d['signature_name']);
-        $signature_title       = esc_html($d['signature_title']);
+        $customer_name = esc_html($d['customer_name']);
+        $support_email = esc_html($d['support_email']);
+        $signature_name = esc_html($d['signature_name']);
+        $signature_title = esc_html($d['signature_title']);
 
         $support_email_link = esc_attr($support_email);
 
@@ -153,9 +153,9 @@ if (!function_exists('pl_build_new_order_email_html')) {
         }
 
         $html_intro = '<p style="margin:0; font-size:14px; line-height:1.6; color:#4b5563;">'
-                    . $intro
-                    . '</p>'
-                    . $customer_extra;
+            . $intro
+            . '</p>'
+            . $customer_extra;
 
         $html = <<<HTML
 <!DOCTYPE html>
@@ -318,46 +318,82 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             return;
         }
 
-        $site_name   = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
-        $logo_url    = pl_get_email_logo_url();
-        $support     = pl_get_support_email();
-        $order_num   = $order->get_order_number();
-        $order_date  = $order->get_date_created()
+        $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+        $logo_url = pl_get_email_logo_url();
+        $support = pl_get_support_email();
+        $order_num = $order->get_order_number();
+        $order_date = $order->get_date_created()
             ? wc_format_datetime($order->get_date_created())
             : '';
         $customer_email = $order->get_billing_email();
-        $customer_name  = trim($order->get_billing_first_name() . ' ' . $order->get_billing_last_name());
+        $customer_name = trim($order->get_billing_first_name() . ' ' . $order->get_billing_last_name());
         if ($customer_name === '') {
             $customer_name = __('Customer', 'printlana');
         }
 
         // Totals
-        $subtotal       = wc_price($order->get_subtotal());
+        $subtotal = wc_price($order->get_subtotal());
         $shipping_total = wc_price($order->get_shipping_total());
-        $tax_total      = wc_price($order->get_total_tax());
-        $order_total    = wc_price($order->get_total());
+        $tax_total = wc_price($order->get_total_tax());
+        $order_total = wc_price($order->get_total());
 
         $order_items_html = pl_generate_order_items_table($order);
 
         // Formatted addresses (already HTML with <br/>)
-        $billing_address_html  = $order->get_formatted_billing_address();
+        $billing_address_html = $order->get_formatted_billing_address();
         $shipping_address_html = $order->get_formatted_shipping_address();
         if (!$shipping_address_html) {
             $shipping_address_html = $billing_address_html;
         }
 
-        // Admin recipients from Woo settings
-        $admin_recipients      = [];
-        $wc_new_order_settings = get_option('woocommerce_new_order_settings');
-        if (is_array($wc_new_order_settings) && !empty($wc_new_order_settings['recipient'])) {
-            $admin_recipients = array_map('trim', explode(',', $wc_new_order_settings['recipient']));
+        /**
+         * 🔍 Admin recipients
+         *
+         * 1) Try to get them from the WC_Email_New_Order object (same as core email).
+         * 2) Fallback: use woocommerce_new_order_settings['recipient'].
+         * 3) Fallback: use site admin_email.
+         */
+        $admin_recipients = [];
+
+        // 1) From WooCommerce mailer (preferred)
+        if (function_exists('WC')) {
+            $mailer = WC()->mailer();
+            if ($mailer && method_exists($mailer, 'get_emails')) {
+                $emails = $mailer->get_emails();
+                if (is_array($emails) && isset($emails['WC_Email_New_Order'])) {
+                    $new_order_email = $emails['WC_Email_New_Order'];
+                    if ($new_order_email instanceof WC_Email) {
+                        $raw_recipient = $new_order_email->get_recipient();
+                        if (!empty($raw_recipient)) {
+                            $admin_recipients = array_map('trim', explode(',', $raw_recipient));
+                        }
+                    }
+                }
+            }
         }
+
+        // 2) Fallback: read the option directly
+        if (empty($admin_recipients)) {
+            $wc_new_order_settings = get_option('woocommerce_new_order_settings');
+            if (is_array($wc_new_order_settings) && !empty($wc_new_order_settings['recipient'])) {
+                $admin_recipients = array_map('trim', explode(',', $wc_new_order_settings['recipient']));
+            }
+        }
+
+        // 3) Fallback: site admin email
         if (empty($admin_recipients)) {
             $admin_recipients[] = get_option('admin_email');
         }
+
+        // Sanitize and dedupe
         $admin_recipients = array_filter(array_unique(array_map('sanitize_email', $admin_recipients)));
 
-        $signature_name  = $site_name . ' Team';
+        // Debug log – you can remove this after confirming
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[pl_new_order_email] Admin recipients: ' . print_r($admin_recipients, true));
+        }
+
+        $signature_name = $site_name . ' Team';
         $signature_title = __('Customer Support', 'printlana');
 
         $headers = ['Content-Type: text/html; charset=UTF-8'];
@@ -375,42 +411,42 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
 
         // Build HTML for customer
         $customer_html = pl_build_new_order_email_html([
-            'recipient_type'        => 'customer',
-            'logo_url'              => $logo_url,
-            'site_name'             => $site_name,
-            'order_number'          => $order_num,
-            'order_date'            => $order_date,
-            'order_items_html'      => $order_items_html,
-            'subtotal'              => $subtotal,
-            'shipping_total'        => $shipping_total,
-            'tax_total'             => $tax_total,
-            'order_total'           => $order_total,
-            'billing_address_html'  => $billing_address_html,
+            'recipient_type' => 'customer',
+            'logo_url' => $logo_url,
+            'site_name' => $site_name,
+            'order_number' => $order_num,
+            'order_date' => $order_date,
+            'order_items_html' => $order_items_html,
+            'subtotal' => $subtotal,
+            'shipping_total' => $shipping_total,
+            'tax_total' => $tax_total,
+            'order_total' => $order_total,
+            'billing_address_html' => $billing_address_html,
             'shipping_address_html' => $shipping_address_html,
-            'customer_name'         => $customer_name,
-            'support_email'         => $support,
-            'signature_name'        => $signature_name,
-            'signature_title'       => $signature_title,
+            'customer_name' => $customer_name,
+            'support_email' => $support,
+            'signature_name' => $signature_name,
+            'signature_title' => $signature_title,
         ]);
 
         // Build HTML for admin
         $admin_html = pl_build_new_order_email_html([
-            'recipient_type'        => 'admin',
-            'logo_url'              => $logo_url,
-            'site_name'             => $site_name,
-            'order_number'          => $order_num,
-            'order_date'            => $order_date,
-            'order_items_html'      => $order_items_html,
-            'subtotal'              => $subtotal,
-            'shipping_total'        => $shipping_total,
-            'tax_total'             => $tax_total,
-            'order_total'           => $order_total,
-            'billing_address_html'  => $billing_address_html,
+            'recipient_type' => 'admin',
+            'logo_url' => $logo_url,
+            'site_name' => $site_name,
+            'order_number' => $order_num,
+            'order_date' => $order_date,
+            'order_items_html' => $order_items_html,
+            'subtotal' => $subtotal,
+            'shipping_total' => $shipping_total,
+            'tax_total' => $tax_total,
+            'order_total' => $order_total,
+            'billing_address_html' => $billing_address_html,
             'shipping_address_html' => $shipping_address_html,
-            'customer_name'         => $customer_name,
-            'support_email'         => $support,
-            'signature_name'        => $signature_name,
-            'signature_title'       => $signature_title,
+            'customer_name' => $customer_name,
+            'support_email' => $support,
+            'signature_name' => $signature_name,
+            'signature_title' => $signature_title,
         ]);
 
         // Send to customer
@@ -420,7 +456,9 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
 
         // Send to admin(s)
         foreach ($admin_recipients as $admin_email) {
-            wc_mail($admin_email, $subject_admin, $admin_html, $headers);
+            if (!empty($admin_email)) {
+                wc_mail($admin_email, $subject_admin, $admin_html, $headers);
+            }
         }
 
         // Mark as sent
@@ -446,3 +484,4 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         add_action($hook, 'pl_send_custom_new_order_emails', 20, 2);
     }
 }
+
