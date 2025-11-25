@@ -397,15 +397,20 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
 
         $headers = ['Content-Type: text/html; charset=UTF-8'];
 
-        // One unified subject & HTML for both customer + admin
-        $subject = sprintf(
-            __('We received order #%s', 'printlana'),
+        // Subjects
+        $subject_customer = sprintf(
+            __('We received your order #%s', 'printlana'),
             $order_num
         );
+        $subject_admin = sprintf(
+            __('New order #%1$s from %2$s', 'printlana'),
+            $order_num,
+            $customer_name
+        );
 
-        // Build HTML using "customer" variant (admin will see same layout, as requested)
-        $email_html = pl_build_new_order_email_html([
-            'recipient_type' => 'customer', // we want the “order received” wording
+        // Build HTML for customer
+        $customer_html = pl_build_new_order_email_html([
+            'recipient_type' => 'customer',
             'logo_url' => $logo_url,
             'site_name' => $site_name,
             'order_number' => $order_num,
@@ -423,7 +428,27 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             'signature_title' => $signature_title,
         ]);
 
-        // 📨 Build recipient list: customer + admin(s)
+        // Build HTML for admin (different intro text, no "we'll contact you" line)
+        $admin_html = pl_build_new_order_email_html([
+            'recipient_type' => 'admin',
+            'logo_url' => $logo_url,
+            'site_name' => $site_name,
+            'order_number' => $order_num,
+            'order_date' => $order_date,
+            'order_items_html' => $order_items_html,
+            'subtotal' => $subtotal,
+            'shipping_total' => $shipping_total,
+            'tax_total' => $tax_total,
+            'order_total' => $order_total,
+            'billing_address_html' => $billing_address_html,
+            'shipping_address_html' => $shipping_address_html,
+            'customer_name' => $customer_name,
+            'support_email' => $support,
+            'signature_name' => $signature_name,
+            'signature_title' => $signature_title,
+        ]);
+
+        // 📨 Build final list: customer + admins
         $all_recipients = [];
 
         if ($customer_email) {
@@ -436,12 +461,20 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             error_log('[pl_new_order_email] Final recipients: ' . print_r($all_recipients, true));
         }
 
-        // Send the same email to everyone
+        // One unified loop, but choose content per recipient
         foreach ($all_recipients as $to) {
-            $sent = wc_mail($to, $subject, $email_html, $headers);
-
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                error_log('[pl_new_order_email] Mail result: ' . var_export($sent, true) . ' to ' . $to);
+            if ($customer_email && strcasecmp($to, $customer_email) === 0) {
+                // Customer version
+                $sent = wc_mail($to, $subject_customer, $customer_html, $headers);
+                if (defined('WP_DEBUG') && WP_DEBUG) {
+                    error_log('[pl_new_order_email] Customer mail result: ' . var_export($sent, true) . ' to ' . $to);
+                }
+            } else {
+                // Admin version
+                $sent = wc_mail($to, $subject_admin, $admin_html, $headers);
+                if (defined('WP_DEBUG') && WP_DEBUG) {
+                    error_log('[pl_new_order_email] Admin mail result: ' . var_export($sent, true) . ' to ' . $to);
+                }
             }
         }
 
@@ -468,5 +501,6 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         add_action($hook, 'pl_send_custom_new_order_emails', 20, 2);
     }
 }
+
 
 
