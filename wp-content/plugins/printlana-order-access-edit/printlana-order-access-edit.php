@@ -24,6 +24,11 @@ class Printlana_Order_Access_Edit
          *   apply_filters( 'dokan_is_seller_has_order', $has_access, $seller_id, $order_id );
          */
         error_log('[OrderAccessEdit] Constructor running, adding filter'); // <--- add this
+        add_filter('dokan_is_seller_has_order', function ($has_access, $seller_id, $order_id) {
+            error_log('[OrderAccessEdit] TEST filter fired: seller=' . (int) $seller_id . ' order=' . (int) $order_id . ' has_access=' . var_export($has_access, true));
+            return $has_access;
+        }, 1, 3);
+
 
         add_filter('dokan_is_seller_has_order', [$this, 'maybe_allow_assigned_vendor'], 10, 3);
     }
