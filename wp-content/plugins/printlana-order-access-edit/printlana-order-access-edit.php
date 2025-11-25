@@ -72,10 +72,15 @@ add_action('template_redirect', function () {
     // 6) Trigger permissions + log result
     // ============================================================
     $has_access = dokan_is_seller_has_order($seller_id, $order_id);
+    $order = wc_get_order($order_id);
+    $vendor_dokan = $order->get_meta('_dokan_vendor_id', true);
+    $vendor_pl = $order->get_meta('_pl_fulfillment_vendor_id', true);
 
     error_log('[OrderAccessEdit] template_redirect permission result => ' . print_r([
         'seller_id' => $seller_id,
         'order_id' => $order_id,
+        'vendor_dokan' => $vendor_dokan,
+        'vendor_pl' => $vendor_pl,
         'has_access' => $has_access,
     ], true));
 
