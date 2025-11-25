@@ -183,23 +183,51 @@ add_action('after_setup_theme', function () {
 function pl_suborder_primary_product(WC_Order $order)
 {
 
-    foreach ($order->get_items('line_item') as $item) {
+    foreach ($order->get_items('line_item') as $item_id => $item) {
 
-        $product = $item->get_product();
-        $name = $item->get_name();
+        $name = $item->get_name();                   // item name (includes parent product name)
         $qty = (int) $item->get_quantity();
+        $product = $item->get_product();
         $sku = $product ? $product->get_sku() : '';
 
-        // Variation (only if available safely)
+        // ------------------------------------------------------------------
+        // Variation attributes
+        // ------------------------------------------------------------------
         $variation_text = '';
+
         if ($product && $product->is_type('variation')) {
+            // Case 1: we have the variation product object
             $variation_text = wc_get_formatted_variation(
                 $product->get_variation_attributes(),
                 true
             );
+
+        } else {
+            // Case 2: try to build variation attributes from order item meta
+            // (this avoids the fatal `get_variation_attributes()` call)
+            $meta_attributes = [];
+
+            foreach ($item->get_meta_data() as $meta) {
+                $data = $meta->get_data(); // ['id' => ..., 'key' => ..., 'value' => ...]
+                if (empty($data['key']) || strpos($data['key'], 'attribute_') !== 0) {
+                    continue;
+                }
+
+                // Remove the 'attribute_' prefix WooCommerce uses
+                $attr_name = substr($data['key'], 10);
+                $attr_value = $data['value'];
+
+                $meta_attributes[$attr_name] = $attr_value;
+            }
+
+            if (!empty($meta_attributes)) {
+                $variation_text = wc_get_formatted_variation($meta_attributes, true);
+            }
         }
 
-        // Build text
+        // ------------------------------------------------------------------
+        // Build label
+        // ------------------------------------------------------------------
         $parts = array_filter([
             $name,
             $variation_text ?: null,
@@ -209,11 +237,13 @@ function pl_suborder_primary_product(WC_Order $order)
         $label = implode(' — ', $parts) . ' × ' . $qty;
         $url = ($product && $product->get_id()) ? get_permalink($product->get_id()) : '';
 
-        return [$label, $url];  // We only need one product, so return here
+        // "Primary product" → just return the first line item
+        return [$label, $url];
     }
 
     return [__('(no product)', 'your-textdomain'), ''];
 }
+
 
 add_filter('manage_edit-product_columns', 'add_vendor_id_product_column');
 function add_vendor_id_product_column($columns)
