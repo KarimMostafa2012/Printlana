@@ -385,8 +385,8 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             $admin_recipients[] = get_option('admin_email');
         }
 
-        // Sanitize and dedupe
-        $admin_recipients = array_filter(array_unique(array_map('sanitize_email', $admin_recipients)));
+        // Sanitize (no dedupe here – we want both roles even if same address)
+        $admin_recipients = array_filter(array_map('sanitize_email', $admin_recipients));
 
         if (defined('WP_DEBUG') && WP_DEBUG) {
             error_log('[pl_new_order_email] Admin recipients: ' . print_r($admin_recipients, true));
@@ -408,7 +408,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             $customer_name
         );
 
-        // Build HTML for customer
+        // Build HTML for CUSTOMER
         $customer_html = pl_build_new_order_email_html([
             'recipient_type' => 'customer',
             'logo_url' => $logo_url,
@@ -428,7 +428,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             'signature_title' => $signature_title,
         ]);
 
-        // Build HTML for admin (different intro text, no "we'll contact you" line)
+        // Build HTML for ADMIN
         $admin_html = pl_build_new_order_email_html([
             'recipient_type' => 'admin',
             'logo_url' => $logo_url,
@@ -448,42 +448,36 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             'signature_title' => $signature_title,
         ]);
 
-        // 📨 Build final list: customer + admins
-        $all_recipients = [];
-
+        // 📨 Send to CUSTOMER
         if ($customer_email) {
-            $all_recipients[] = $customer_email;
-        }
-        $all_recipients = array_merge($all_recipients, $admin_recipients);
-        $all_recipients = array_filter(array_unique(array_map('sanitize_email', $all_recipients)));
+            $sent_customer = wc_mail($customer_email, $subject_customer, $customer_html, $headers);
 
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            error_log('[pl_new_order_email] Final recipients: ' . print_r($all_recipients, true));
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('[pl_new_order_email] Customer mail result: ' . var_export($sent_customer, true) . ' to ' . $customer_email);
+            }
+        } else {
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('[pl_new_order_email] No customer email address found for order ' . $order_num);
+            }
         }
 
-        // One unified loop, but choose content per recipient
-        foreach ($all_recipients as $to) {
-            if ($customer_email && strcasecmp($to, $customer_email) === 0) {
-                // Customer version
-                $sent = wc_mail($to, $subject_customer, $customer_html, $headers);
+        // 📨 Send to ADMIN(S)
+        foreach ($admin_recipients as $admin_email) {
+            if (!empty($admin_email)) {
+                $sent_admin = wc_mail($admin_email, $subject_admin, $admin_html, $headers);
+
                 if (defined('WP_DEBUG') && WP_DEBUG) {
-                    error_log('[pl_new_order_email] Customer mail result: ' . var_export($sent, true) . ' to ' . $to);
-                }
-            } else {
-                // Admin version
-                $sent = wc_mail($to, $subject_admin, $admin_html, $headers);
-                if (defined('WP_DEBUG') && WP_DEBUG) {
-                    error_log('[pl_new_order_email] Admin mail result: ' . var_export($sent, true) . ' to ' . $to);
+                    error_log('[pl_new_order_email] Admin mail result: ' . var_export($sent_admin, true) . ' to ' . $admin_email);
                 }
             }
         }
 
-        // Mark as sent for this parent order
+        // Mark as sent
         $order->update_meta_data('_pl_new_order_email_sent', 'yes');
         $order->save();
     }
 
-    // Hook into the same *_notification actions as WC core new order email
+    // Hooks (same as WC core new order email)
     $pl_new_order_hooks = [
         'woocommerce_order_status_pending_to_processing_notification',
         'woocommerce_order_status_pending_to_completed_notification',
@@ -497,10 +491,10 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
     ];
 
     foreach ($pl_new_order_hooks as $hook) {
-        // priority 20 so it runs after core, but you can change
         add_action($hook, 'pl_send_custom_new_order_emails', 20, 2);
     }
 }
+
 
 
 
