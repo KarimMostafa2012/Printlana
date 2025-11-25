@@ -388,7 +388,6 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         // Sanitize and dedupe
         $admin_recipients = array_filter(array_unique(array_map('sanitize_email', $admin_recipients)));
 
-        // Debug log – you can remove this after confirming
         if (defined('WP_DEBUG') && WP_DEBUG) {
             error_log('[pl_new_order_email] Admin recipients: ' . print_r($admin_recipients, true));
         }
@@ -398,20 +397,15 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
 
         $headers = ['Content-Type: text/html; charset=UTF-8'];
 
-        // Subjects
-        $subject_customer = sprintf(
-            __('We received your order #%s', 'printlana'),
+        // One unified subject & HTML for both customer + admin
+        $subject = sprintf(
+            __('We received order #%s', 'printlana'),
             $order_num
         );
-        $subject_admin = sprintf(
-            __('New order #%1$s from %2$s', 'printlana'),
-            $order_num,
-            $customer_name
-        );
 
-        // Build HTML for customer
-        $customer_html = pl_build_new_order_email_html([
-            'recipient_type' => 'customer',
+        // Build HTML using "customer" variant (admin will see same layout, as requested)
+        $email_html = pl_build_new_order_email_html([
+            'recipient_type' => 'customer', // we want the “order received” wording
             'logo_url' => $logo_url,
             'site_name' => $site_name,
             'order_number' => $order_num,
@@ -429,55 +423,32 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
             'signature_title' => $signature_title,
         ]);
 
-        // Build HTML for admin
-        $admin_html = pl_build_new_order_email_html([
-            'recipient_type' => 'admin',
-            'logo_url' => $logo_url,
-            'site_name' => $site_name,
-            'order_number' => $order_num,
-            'order_date' => $order_date,
-            'order_items_html' => $order_items_html,
-            'subtotal' => $subtotal,
-            'shipping_total' => $shipping_total,
-            'tax_total' => $tax_total,
-            'order_total' => $order_total,
-            'billing_address_html' => $billing_address_html,
-            'shipping_address_html' => $shipping_address_html,
-            'customer_name' => $customer_name,
-            'support_email' => $support,
-            'signature_name' => $signature_name,
-            'signature_title' => $signature_title,
-        ]);
+        // 📨 Build recipient list: customer + admin(s)
+        $all_recipients = [];
 
-        // Send to customer
         if ($customer_email) {
-            $sent_customer = wc_mail($customer_email, $subject_customer, $customer_html, $headers);
+            $all_recipients[] = $customer_email;
+        }
+        $all_recipients = array_merge($all_recipients, $admin_recipients);
+        $all_recipients = array_filter(array_unique(array_map('sanitize_email', $all_recipients)));
+
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[pl_new_order_email] Final recipients: ' . print_r($all_recipients, true));
+        }
+
+        // Send the same email to everyone
+        foreach ($all_recipients as $to) {
+            $sent = wc_mail($to, $subject, $email_html, $headers);
 
             if (defined('WP_DEBUG') && WP_DEBUG) {
-                error_log('[pl_new_order_email] Customer mail result: ' . var_export($sent_customer, true) . ' to ' . $customer_email);
-            }
-        } else {
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                error_log('[pl_new_order_email] No customer email address found for order ' . $order_num);
+                error_log('[pl_new_order_email] Mail result: ' . var_export($sent, true) . ' to ' . $to);
             }
         }
 
-        // Send to admin(s)
-        foreach ($admin_recipients as $admin_email) {
-            if (!empty($admin_email)) {
-                $sent_admin = wc_mail($admin_email, $subject_admin, $admin_html, $headers);
-
-                if (defined('WP_DEBUG') && WP_DEBUG) {
-                    error_log('[pl_new_order_email] Admin mail result: ' . var_export($sent_admin, true) . ' to ' . $admin_email);
-                }
-            }
-        }
-
-        // Mark as sent
+        // Mark as sent for this parent order
         $order->update_meta_data('_pl_new_order_email_sent', 'yes');
         $order->save();
     }
-
 
     // Hook into the same *_notification actions as WC core new order email
     $pl_new_order_hooks = [
@@ -497,4 +468,5 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         add_action($hook, 'pl_send_custom_new_order_emails', 20, 2);
     }
 }
+
 
