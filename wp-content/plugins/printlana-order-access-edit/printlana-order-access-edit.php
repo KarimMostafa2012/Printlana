@@ -23,6 +23,8 @@ class Printlana_Order_Access_Edit
          * Expected filter signature in Dokan:
          *   apply_filters( 'dokan_is_seller_has_order', $has_access, $seller_id, $order_id );
          */
+        error_log('[OrderAccessEdit] Constructor running, adding filter'); // <--- add this
+
         add_filter('dokan_is_seller_has_order', [$this, 'maybe_allow_assigned_vendor'], 10, 3);
     }
 
