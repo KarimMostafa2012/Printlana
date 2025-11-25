@@ -19,7 +19,7 @@ add_action('template_redirect', function () {
     // ============================================================
     // 1) Only in front-end + logged-in
     // ============================================================
-    if (is_admin() || !is_user_logged_in()) {
+    if (!is_user_logged_in()) {
         error_log('[OrderAccessEdit] EXIT: Not front-end or not logged in => ' . print_r([
             'is_admin' => is_admin(),
             'is_logged_in' => is_user_logged_in(),
