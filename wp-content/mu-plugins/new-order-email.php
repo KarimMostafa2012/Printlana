@@ -288,15 +288,17 @@ HTML;
  * MAIN SENDER – hook to the same *_notification actions as WC_Email_New_Order
  */
 if (!function_exists('pl_send_custom_new_order_emails')) {
-    function pl_send_custom_new_order_emails($order_id, $order = false)
+    function pl_send_custom_new_order_emails($order_id)
     {
-        if ($order_id && !is_a($order, 'WC_Order')) {
-            $order = wc_get_order($order_id);
+        if (!$order_id) {
+            return;
         }
 
+        $order = wc_get_order($order_id);
         if (!$order instanceof WC_Order) {
             return;
         }
+
 
         // ❌ Only parent orders (avoid Dokan sub-orders & duplicates)
         if ((int) $order->get_parent_id() > 0) {
