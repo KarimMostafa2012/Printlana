@@ -295,6 +295,10 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         }
 
         $order = wc_get_order($order_id);
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[pl_new_order_email] Triggered for order ' . $order_id);
+        }
+
         if (!$order instanceof WC_Order) {
             return;
         }
@@ -468,23 +472,8 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         $order->update_meta_data('_pl_new_order_email_sent', 'yes');
         $order->save();
     }
+    add_action('woocommerce_checkout_order_processed', 'pl_send_custom_new_order_emails', 20, 1);
 
-    // Hooks (same as WC core new order email)
-    $pl_new_order_hooks = [
-        'woocommerce_order_status_pending_to_processing_notification',
-        'woocommerce_order_status_pending_to_completed_notification',
-        'woocommerce_order_status_pending_to_on-hold_notification',
-        'woocommerce_order_status_failed_to_processing_notification',
-        'woocommerce_order_status_failed_to_completed_notification',
-        'woocommerce_order_status_failed_to_on-hold_notification',
-        'woocommerce_order_status_cancelled_to_processing_notification',
-        'woocommerce_order_status_cancelled_to_completed_notification',
-        'woocommerce_order_status_cancelled_to_on-hold_notification',
-    ];
-
-    foreach ($pl_new_order_hooks as $hook) {
-        add_action($hook, 'pl_send_custom_new_order_emails', 20, 2);
-    }
 }
 
 
