@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 if (!function_exists('pl_get_email_logo_url')) {
     function pl_get_email_logo_url(): string
     {
-        $logo_url = 'https://printlana.com/wp-content/uploads/2025/11/01-1.png';
+        $logo_url = 'https://printlana.com/wp-content/uploads/2025/11/header-04.png';
         return $logo_url;
     }
 }
@@ -162,8 +162,8 @@ if (!function_exists('pl_build_new_order_email_html')) {
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px; background-color:#ffffff; border-radius:8px; overflow:hidden;">
                     <!-- Header / Logo -->
                     <tr>
-                        <td align="center" style="background-color:#0044F1; padding:20px;">
-                            <img src="https://printlana.com/wp-content/uploads/2025/11/01-1.png" alt="{$site_name} Logo" style="max-width:160px; height:auto; display:block;">
+                        <td align="center">
+                            <img src="https://printlana.com/wp-content/uploads/2025/11/header-04.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block;">
                         </td>
                     </tr>
 
@@ -271,6 +271,11 @@ if (!function_exists('pl_build_new_order_email_html')) {
                             </p>
                         </td>
                     </tr>
+                    <tr>
+                        <td align="center">
+                            <img src="https://printlana.com/wp-content/uploads/2025/11/footer.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block;">
+                        </td>
+                    </tr>
 
                 </table>
             </td>
@@ -315,7 +320,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         }
 
         $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
-        $logo_url = 'https://printlana.com/wp-content/uploads/2025/11/01-1.png';
+        $logo_url = 'https://printlana.com/wp-content/uploads/2025/11/header-04.png';
         $support = pl_get_support_email();
         $order_num = $order->get_order_number();
         $order_date = $order->get_date_created()
@@ -407,7 +412,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         // Build HTML for CUSTOMER
         $customer_html = pl_build_new_order_email_html([
             'recipient_type' => 'customer',
-            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/11/01-1.png',
+            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/11/header-04.png',
             'site_name' => $site_name,
             'order_number' => $order_num,
             'order_date' => $order_date,
@@ -427,7 +432,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         // Build HTML for ADMIN
         $admin_html = pl_build_new_order_email_html([
             'recipient_type' => 'admin',
-            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/11/01-1.png',
+            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/11/header-04.png',
             'site_name' => $site_name,
             'order_number' => $order_num,
             'order_date' => $order_date,
