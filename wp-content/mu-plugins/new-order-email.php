@@ -16,17 +16,7 @@ if (!defined('ABSPATH')) {
 if (!function_exists('pl_get_email_logo_url')) {
     function pl_get_email_logo_url(): string
     {
-        $logo_url = '';
-        $logo_id = get_theme_mod('custom_logo');
-        if ($logo_id) {
-            $image = wp_get_attachment_image_src($logo_id, 'full');
-            if (!empty($image[0])) {
-                $logo_url = esc_url($image[0]);
-            }
-        }
-        if (!$logo_url) {
-            $logo_url = esc_url(home_url('/'));
-        }
+        $logo_url = 'https://printlana.com/wp-content/uploads/2025/06/01-1.svg';
         return $logo_url;
     }
 }
