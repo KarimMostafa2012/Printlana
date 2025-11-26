@@ -163,7 +163,7 @@ if (!function_exists('pl_build_new_order_email_html')) {
                     <!-- Header / Logo -->
                     <tr>
                         <td align="center">
-                            <img src="https://printlana.com/wp-content/uploads/2025/11/header-04.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block;">
+                            <img src="https://printlana.com/wp-content/uploads/2025/11/header-04.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block; margin-left:0 !importnant; margin-right:0 !importnant;">
                         </td>
                     </tr>
 
@@ -273,7 +273,7 @@ if (!function_exists('pl_build_new_order_email_html')) {
                     </tr>
                     <tr>
                         <td align="center">
-                            <img src="https://printlana.com/wp-content/uploads/2025/11/footer.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block;">
+                            <img src="https://printlana.com/wp-content/uploads/2025/11/footer.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block; margin-left:0 !importnant; margin-right:0 !importnant;">
                         </td>
                     </tr>
 
