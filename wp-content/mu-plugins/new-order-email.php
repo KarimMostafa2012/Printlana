@@ -48,12 +48,21 @@ if (!function_exists('pl_generate_order_items_table')) {
             $meta_html = wc_display_item_meta(
                 $item,
                 array(
-                    'before' => '<div style="margin-top:4px; font-size:11px; color:#6b7280;">',
+                    'before' => '<div class="pl-meta" style="margin-top:4px; font-size:11px; color:#6b7280;">',
                     'separator' => '<br>',
                     'after' => '</div>',
                     'echo' => false,
                 )
             );
+
+            // Clean up default <p> and <br> WordPress outputs
+            if ($meta_html) {
+                $meta_html = str_replace(
+                    ['<p>', '</p>'],
+                    ['<span>', '</span>'],
+                    $meta_html
+                );
+            }
 
             $rows .= '<tr>';
 
