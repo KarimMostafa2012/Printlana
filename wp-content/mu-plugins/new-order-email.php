@@ -69,19 +69,15 @@ if (!function_exists('pl_generate_order_items_table')) {
             // PRODUCT + CUSTOMIZATIONS
             $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827;">';
             $rows .= $name;
+            $rows .= '</td>';
 
+            // QTY
+            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:center;">';
             if (!empty($meta_html)) {
                 // meta_html will look like: "Color: Red<br>Size: L" etc.
                 $rows .= $meta_html;
             }
-
-            $rows .= '</td>';
-
-            // QTY
-            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:center;">' . $qty . '</td>';
-
-            // TOTAL
-            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:right;">' . $total . '</td>';
+            $rows .= '<strong>Quantity:</strong><span>' . $qty . '</span><br></br>' . '<strong>Total:</strong><span>' . $total . '</span><br></br>' . '</td>';
 
             $rows .= '</tr>';
         }
@@ -101,10 +97,7 @@ if (!function_exists('pl_generate_order_items_table')) {
             . esc_html__('Product', 'printlana') .
             '</th>
                         <th align="center" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">'
-            . esc_html__('Qty', 'printlana') .
-            '</th>
-                        <th align="right" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">'
-            . esc_html__('Total', 'printlana') .
+            . esc_html__('Details', 'printlana') .
             '</th>
                     </tr>
                 </thead>
