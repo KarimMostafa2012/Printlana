@@ -43,10 +43,37 @@ if (!function_exists('pl_generate_order_items_table')) {
             $qty = (int) $item->get_quantity();
             $total = wc_price($item->get_total());
 
+            // Get formatted item meta (customizations)
+            // This uses WooCommerce's built-in formatter and respects hidden meta
+            $meta_html = wc_display_item_meta(
+                $item,
+                array(
+                    'before' => '<div style="margin-top:4px; font-size:11px; color:#6b7280;">',
+                    'separator' => '<br>',
+                    'after' => '</div>',
+                    'echo' => false,
+                )
+            );
+
             $rows .= '<tr>';
-            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827;">' . $name . '</td>';
+
+            // PRODUCT + CUSTOMIZATIONS
+            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827;">';
+            $rows .= $name;
+
+            if (!empty($meta_html)) {
+                // meta_html will look like: "Color: Red<br>Size: L" etc.
+                $rows .= $meta_html;
+            }
+
+            $rows .= '</td>';
+
+            // QTY
             $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:center;">' . $qty . '</td>';
+
+            // TOTAL
             $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:right;">' . $total . '</td>';
+
             $rows .= '</tr>';
         }
 
@@ -56,13 +83,20 @@ if (!function_exists('pl_generate_order_items_table')) {
                 . '</td></tr>';
         }
 
+        // Clean header – no more static "key: value"
         $table = '
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                 <thead>
                     <tr>
-                        <th align="left" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">' . esc_html__('Product', 'printlana') . '</th>
-                        <th align="center" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">' . esc_html__('Qty', 'printlana') . '</th>
-                        <th align="right" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">' . esc_html__('Total', 'printlana') . '</th>
+                        <th align="left" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">'
+            . esc_html__('Product', 'printlana') .
+            '</th>
+                        <th align="center" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">'
+            . esc_html__('Qty', 'printlana') .
+            '</th>
+                        <th align="right" style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em;">'
+            . esc_html__('Total', 'printlana') .
+            '</th>
                     </tr>
                 </thead>
                 <tbody>' . $rows . '</tbody>
@@ -71,6 +105,7 @@ if (!function_exists('pl_generate_order_items_table')) {
         return $table;
     }
 }
+
 
 /**
  * Build the "Order received" HTML email (Template #1) for customer/admin
@@ -265,15 +300,15 @@ if (!function_exists('pl_build_new_order_email_html')) {
 
                     <!-- Footer -->
                     <tr>
+                        <td align="center">
+                            <img src="https://printlana.com/wp-content/uploads/2025/11/footer.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block; margin-left:0 !importnant; margin-right:0 !importnant;">
+                        </td>
+                    </tr>
+                    <tr>
                         <td align="center" style="background-color:#f9fafb; padding:14px;">
                             <p style="margin:0; font-size:11px; color:#9ca3af;">
                                 © {$site_name}. All rights reserved.
                             </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            <img src="https://printlana.com/wp-content/uploads/2025/11/footer.png" alt="{$site_name} Logo" style="max-width:100%; width:100%; height:auto; display:block; margin-left:0 !importnant; margin-right:0 !importnant;">
                         </td>
                     </tr>
 
