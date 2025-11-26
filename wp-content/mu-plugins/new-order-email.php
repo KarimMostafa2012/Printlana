@@ -163,7 +163,7 @@ if (!function_exists('pl_build_new_order_email_html')) {
                     <!-- Header / Logo -->
                     <tr>
                         <td align="center" style="background-color:#0044F1; padding:20px;">
-                            <img src="{$logo_url}" alt="{$site_name} Logo" style="max-width:160px; height:auto; display:block;">
+                            <img src="https://printlana.com/wp-content/uploads/2025/06/01-1.svg" alt="{$site_name} Logo" style="max-width:160px; height:auto; display:block;">
                         </td>
                     </tr>
 
@@ -309,7 +309,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         }
 
         $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
-        $logo_url = pl_get_email_logo_url();
+        $logo_url = 'https://printlana.com/wp-content/uploads/2025/06/01-1.svg';
         $support = pl_get_support_email();
         $order_num = $order->get_order_number();
         $order_date = $order->get_date_created()
@@ -401,7 +401,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         // Build HTML for CUSTOMER
         $customer_html = pl_build_new_order_email_html([
             'recipient_type' => 'customer',
-            'logo_url' => $logo_url,
+            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/06/01-1.svg',
             'site_name' => $site_name,
             'order_number' => $order_num,
             'order_date' => $order_date,
@@ -421,7 +421,7 @@ if (!function_exists('pl_send_custom_new_order_emails')) {
         // Build HTML for ADMIN
         $admin_html = pl_build_new_order_email_html([
             'recipient_type' => 'admin',
-            'logo_url' => $logo_url,
+            'logo_url' => 'https://printlana.com/wp-content/uploads/2025/06/01-1.svg',
             'site_name' => $site_name,
             'order_number' => $order_num,
             'order_date' => $order_date,
