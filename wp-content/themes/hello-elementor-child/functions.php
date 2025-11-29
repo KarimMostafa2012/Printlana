@@ -17,6 +17,17 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
+// implement length in Advanced Custom Fields
+
+add_action('save_post_product', function ($post_id) {
+    $product = wc_get_product($post_id);
+    if (!$product) return;
+
+    $length = floatval($product->get_length());
+
+    update_post_meta($post_id, 'pl_length', $length);
+});
+
 
 function get_last_added_product()
 {

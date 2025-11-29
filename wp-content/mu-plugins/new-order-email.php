@@ -72,12 +72,12 @@ if (!function_exists('pl_generate_order_items_table')) {
             $rows .= '</td>';
 
             // QTY
-            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:center;">';
+            $rows .= '<td style="padding:8px 6px; border-bottom:1px solid #e5e7eb; font-size:13px; color:#111827; text-align:right;">';
             if (!empty($meta_html)) {
                 // meta_html will look like: "Color: Red<br>Size: L" etc.
                 $rows .= $meta_html;
             }
-            $rows .= '<strong>Quantity:</strong><span>' . $qty . '</span><br></br>' . '<strong>Total:</strong><span>' . $total . '</span><br></br>' . '</td>';
+            $rows .= '<strong>Quantity: </strong><span>' . $qty . '</span><br></br>' . '<strong>Total: </strong><span>' . $total . '</span><br></br>' . '</td>';
 
             $rows .= '</tr>';
         }
