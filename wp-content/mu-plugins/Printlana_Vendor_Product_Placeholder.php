@@ -87,9 +87,9 @@ class Printlana_Vendor_Product_Placeholder {
         ]);
 
         // If they have products, we don't need to do anything.
-        if ( $product_query->have_posts() ) {
-            return null;
-        }
+        // if ( $product_query->have_posts() ) {
+        //     return null;
+        // }
 
         // If we reach here, the vendor has NO products. Let's create one for them.
         $placeholder_id = wp_insert_post([
