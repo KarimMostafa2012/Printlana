@@ -686,7 +686,9 @@ add_action('wp_footer', function () {
     }
     ?>
     <script>
+        console.log("test jquery")
         jQuery(function ($) {
+            console.log("jquery")
             var correctCount = <?php echo (int) $count; ?>;
 
             // TODO: adjust this selector to match your Dokan dashboard card
