@@ -325,60 +325,60 @@ function display_vendor_id_column_data($column, $post_id)
  */
 
 // Add vendors as BCC on WooCommerce "New Order" email (admin email).
-add_filter('woocommerce_email_headers', function ($headers, $email_id, $order) {
+// add_filter('woocommerce_email_headers', function ($headers, $email_id, $order) {
 
-    if ($email_id !== 'new_order' || !$order instanceof WC_Order) {
-        return $headers;
-    }
+//     if ($email_id !== 'new_order' || !$order instanceof WC_Order) {
+//         return $headers;
+//     }
 
-    if ((int) $order->get_parent_id() > 0) {
-        return $headers;
-    }
+//     if ((int) $order->get_parent_id() > 0) {
+//         return $headers;
+//     }
 
-    // Collect vendor emails from items
-    $vendor_emails = [];
+//     // Collect vendor emails from items
+//     $vendor_emails = [];
 
-    foreach ($order->get_items('line_item') as $item_id => $item) {
-        $product = $item->get_product();
-        if (!$product)
-            continue;
+//     foreach ($order->get_items('line_item') as $item_id => $item) {
+//         $product = $item->get_product();
+//         if (!$product)
+//             continue;
 
-        $product_id = $product->get_id();
+//         $product_id = $product->get_id();
 
-        // Get vendor/user ID (Dokan sets product author as vendor)
-        $vendor_id = (int) get_post_field('post_author', $product_id);
-        if (!$vendor_id)
-            continue;
+//         // Get vendor/user ID (Dokan sets product author as vendor)
+//         $vendor_id = (int) get_post_field('post_author', $product_id);
+//         if (!$vendor_id)
+//             continue;
 
-        // Prefer Dokan store email if set
-        if (function_exists('dokan')) {
-            $vendor = dokan()->vendor->get($vendor_id);
-            if ($vendor) {
-                $store_email = $vendor->get_email(); // pulls store email, falls back to user email
-                if ($store_email) {
-                    $vendor_emails[] = sanitize_email($store_email);
-                    continue;
-                }
-            }
-        }
+//         // Prefer Dokan store email if set
+//         if (function_exists('dokan')) {
+//             $vendor = dokan()->vendor->get($vendor_id);
+//             if ($vendor) {
+//                 $store_email = $vendor->get_email(); // pulls store email, falls back to user email
+//                 if ($store_email) {
+//                     $vendor_emails[] = sanitize_email($store_email);
+//                     continue;
+//                 }
+//             }
+//         }
 
-        // Fallback to WP user email
-        $user = get_user_by('id', $vendor_id);
-        if ($user && !empty($user->user_email)) {
-            $vendor_emails[] = sanitize_email($user->user_email);
-        }
-    }
+//         // Fallback to WP user email
+//         $user = get_user_by('id', $vendor_id);
+//         if ($user && !empty($user->user_email)) {
+//             $vendor_emails[] = sanitize_email($user->user_email);
+//         }
+//     }
 
-    $vendor_emails = array_filter(array_unique($vendor_emails));
+//     $vendor_emails = array_filter(array_unique($vendor_emails));
 
-    if (!empty($vendor_emails)) {
-        // Append BCC header(s). WooCommerce accepts \r\n separated headers.
-        $bcc_line = 'Bcc: ' . implode(',', $vendor_emails) . "\r\n";
-        $headers .= $bcc_line;
-    }
+//     if (!empty($vendor_emails)) {
+//         // Append BCC header(s). WooCommerce accepts \r\n separated headers.
+//         $bcc_line = 'Bcc: ' . implode(',', $vendor_emails) . "\r\n";
+//         $headers .= $bcc_line;
+//     }
 
-    return $headers;
-}, 10, 3);
+//     return $headers;
+// }, 10, 3);
 
 
 
