@@ -697,10 +697,11 @@ add_action('wp_footer', function () {
             //   '.dokan-dashboard .product-count .count'
             //   '.dokan-dashboard .dashboard-item.products .count'
             //
-            var $el = $('.dokan-dashboard .dokan-dashboard-content .dokan-product-listing-area .product-listing-top .dokan-listing-filter li');
-
+            var $el = $('.dokan-dashboard .dokan-dashboard-content .dokan-product-listing-area .product-listing-top .dokan-listing-filter .active a');
+            let oldArray = $el[0].textContent.split("(");
+            let newArray = [oldArray[0],`${correctCount})`].join("(")
             if ($el.length) {
-                $el.text(correctCount);
+                $el.text(newArray);
             }
         });
     </script>
