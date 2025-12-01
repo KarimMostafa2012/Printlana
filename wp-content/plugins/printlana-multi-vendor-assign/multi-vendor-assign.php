@@ -82,7 +82,7 @@ class Printlana_Vendor_Assign_Tool
      {$lang_sql}
      WHERE pm.meta_key = %s
        AND p.post_type = 'product'
-       AND p.post_status NOT IN ('trash', 'auto-draft')
+       AND p.post_status NOT IN ('trash', 'auto-draft', 'draft')
        AND (
              pm.meta_value REGEXP %s      /* i:1; */
           OR pm.meta_value REGEXP %s      /* s:1:\"1\" or s:2:\"30\" */
