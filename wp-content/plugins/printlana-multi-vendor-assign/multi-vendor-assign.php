@@ -716,32 +716,34 @@ add_action('wp_footer', function () {
     }
 
     $vendor_id = dokan_get_current_user_id();
-    $count = (int) get_user_meta($vendor_id, '_pl_assigned_product_count', true);
+    $raw = get_user_meta($vendor_id, '_pl_assigned_product_count', true);
 
-    // If we don't have a value yet, do nothing
-    if ($count <= 0) {
+    // If meta never set at all, you can choose to NOT override
+    if ($raw === '') {
         return;
     }
+
+    // Cast safely (0 is valid – we WANT to show 0)
+    $count = (int) $raw;
     ?>
     <script>
-        console.log("test jquery")
         jQuery(function ($) {
-            console.log("jquery")
             var correctCount = <?php echo (int) $count; ?>;
 
-            // TODO: adjust this selector to match your Dokan dashboard card
-            // Inspect the dashboard HTML and change ".pl-product-count" to the real selector.
-            // Examples you might try:
-            //   '.dokan-dashboard .product-count .count'
-            //   '.dokan-dashboard .dashboard-item.products .count'
-            //
             var $el = $('.dokan-dashboard .dokan-dashboard-content .dokan-product-listing-area .product-listing-top .dokan-listing-filter .active a');
-            let oldArray = $el[0].textContent.split("(");
-            let newArray = [oldArray[0], `${correctCount})`].join("(")
-            if ($el.length) {
-                $el.text(newArray);
+
+            if (!$el.length) {
+                return;
+            }
+
+            var oldText = $el[0].textContent;
+            var parts = oldText.split("(");
+            if (parts.length > 1) {
+                var newText = parts[0] + '(' + correctCount + ')';
+                $el.text(newText);
             }
         });
     </script>
     <?php
 });
+
