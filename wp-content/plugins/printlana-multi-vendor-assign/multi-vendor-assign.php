@@ -93,6 +93,26 @@ class Printlana_Vendor_Assign_Tool
 
         $ids = $wpdb->get_col($sql);
 
+        // 🔍 DEBUG: log status of each matched product
+        if (!empty($ids)) {
+            foreach ($ids as $pid) {
+                $status = get_post_status($pid);
+                error_log(sprintf(
+                    '[PL DEBUG] Vendor %d – product #%d has post_status="%s"',
+                    $vendor_id,
+                    $pid,
+                    $status
+                ));
+            }
+
+            error_log(sprintf(
+                '[PL DEBUG] Vendor %d – total matched products: %d (raw IDs: %s)',
+                $vendor_id,
+                count($ids),
+                implode(',', array_map('intval', $ids))
+            ));
+        }
+
         // Normalize & uniq for safety
         $ids = array_map('intval', $ids);
         $ids = array_values(array_unique($ids));
