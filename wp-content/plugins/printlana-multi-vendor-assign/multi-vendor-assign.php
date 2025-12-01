@@ -349,6 +349,43 @@ JS;
         }
     }
 
+    /**
+     * Get other translation IDs for a given product (WPML).
+     *
+     * @param int $product_id
+     * @return int[] Array of translated product IDs (excluding the original).
+     */
+    private function get_product_translation_ids(int $product_id): array
+    {
+        // If WPML is not active, do nothing.
+        if (!defined('ICL_SITEPRESS_VERSION')) {
+            return [];
+        }
+
+        // Get translation group ID (trid) for this product
+        $trid = apply_filters('wpml_element_trid', null, $product_id, 'post_product');
+        if (!$trid) {
+            return [];
+        }
+
+        // Get all translations in this group
+        $translations = apply_filters('wpml_get_element_translations', null, $trid, 'post_product');
+        if (empty($translations) || !is_array($translations)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($translations as $lang => $t) {
+            $translated_id = isset($t->element_id) ? (int) $t->element_id : 0;
+            if ($translated_id && $translated_id !== (int) $product_id) {
+                $ids[] = $translated_id;
+            }
+        }
+
+        return $ids;
+    }
+
+
     public function ajax_assign_vendors()
     {
         check_ajax_referer('pl_vendor_assign_nonce', 'nonce');
@@ -364,6 +401,7 @@ JS;
         }
 
         $count = 0;
+
         foreach ($product_ids as $pid) {
             $existing_vendors = get_post_meta($pid, self::META_KEY, true);
             if (!is_array($existing_vendors)) {
@@ -372,9 +410,30 @@ JS;
             $new_vendors = array_unique(array_merge($existing_vendors, $vendor_ids_to_add));
             update_post_meta($pid, self::META_KEY, $new_vendors);
             $count++;
+
+            $translation_ids = $this->get_product_translation_ids($pid);
+
+            if (!empty($translation_ids)) {
+                foreach ($translation_ids as $tid) {
+                    $existing_translation_vendors = get_post_meta($tid, self::META_KEY, true);
+
+                    if (!is_array($existing_translation_vendors)) {
+                        $existing_translation_vendors = [];
+                    }
+
+                    $new_translation_vendors = array_unique(array_merge($existing_translation_vendors, $vendor_ids_to_add));
+                    update_post_meta($tid, self::META_KEY, $new_translation_vendors);
+                }
+            }
         }
 
-        wp_send_json_success(['message' => sprintf('%d vendors assigned to %d products.', count($vendor_ids_to_add), $count)]);
+        wp_send_json_success([
+            'message' => sprintf(
+                '%d vendors assigned to %d products (including translations).',
+                count($vendor_ids_to_add),
+                $count
+            )
+        ]);
     }
 
     public function ajax_unlink_vendors()
