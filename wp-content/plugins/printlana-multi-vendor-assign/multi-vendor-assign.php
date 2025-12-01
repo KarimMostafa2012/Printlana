@@ -55,30 +55,48 @@ class Printlana_Vendor_Assign_Tool
 
         global $wpdb;
         $key = self::META_KEY; // '_assigned_vendor_ids'
-
-        // 1) Match common forms:
-        //    - serialized integers: i:1;
-        //    - serialized strings:  s:<n>:"1"
-        //    - common JSON:         "1" inside a ["..."] or {"vendors":[...]}
         $vid = (string) $vendor_id;
 
-        // NOTE: Use direct SQL REGEXP for maximum control (and observability).
+        // Default: no language filter
+        $lang_sql = '';
+        $lang_param = null;
+
+        // If WPML is active, restrict to current language
+        if (function_exists('icl_object_id') || defined('ICL_SITEPRESS_VERSION')) {
+            $current_lang = apply_filters('wpml_current_language', null);
+            if ($current_lang) {
+                $lang_sql = " INNER JOIN {$wpdb->prefix}icl_translations t 
+                        ON t.element_id = p.ID 
+                       AND t.element_type = 'post_product'
+                       AND t.language_code = %s ";
+                $lang_param = $current_lang;
+            }
+        }
+
+
+        // Get DISTINCT product IDs, from posts table, only real products
         $sql = $wpdb->prepare(
-            "SELECT pm.post_id
-         FROM {$wpdb->postmeta} pm
-         WHERE pm.meta_key = %s
-           AND (
-                 pm.meta_value REGEXP %s      /* i:1; */
-              OR pm.meta_value REGEXP %s      /* s:1:\"1\" or s:2:\"30\" */
-              OR pm.meta_value REGEXP %s      /* JSON arrays/objects: \"1\" */
-           )",
-            $key,
-            $wpdb->esc_like('i:' . $vid . ';'),
-            $wpdb->esc_like('s:[0-9]+:"' . $vid . '"'),
-            $wpdb->esc_like('"' . $vid . '"')
+            "SELECT DISTINCT p.ID
+     FROM {$wpdb->posts} p
+     INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+     {$lang_sql}
+     WHERE pm.meta_key = %s
+       AND p.post_type = 'product'
+       AND p.post_status NOT IN ('trash', 'auto-draft')
+       AND (
+             pm.meta_value REGEXP %s      /* i:1; */
+          OR pm.meta_value REGEXP %s      /* s:1:\"1\" or s:2:\"30\" */
+          OR pm.meta_value REGEXP %s      /* JSON arrays/objects: \"1\" */
+       )",
+            $lang_param ? [$lang_param, $key, '(^|;)i:' . $vid . '(;|$)', '(^|;)s:[0-9]+:"' . $vid . '";', '"' . $vid . '"'] : [$key, '(^|;)i:' . $vid . '(;|$)', '(^|;)s:[0-9]+:"' . $vid . '";', '"' . $vid . '"']
         );
 
         $ids = $wpdb->get_col($sql);
+
+        // Normalize & uniq for safety
+        $ids = array_map('intval', $ids);
+        $ids = array_values(array_unique($ids));
+
         error_log('[PL] matched product IDs for vendor ' . $vendor_id . ': ' . json_encode($ids));
 
         $assigned_count = count($ids);
@@ -699,7 +717,7 @@ add_action('wp_footer', function () {
             //
             var $el = $('.dokan-dashboard .dokan-dashboard-content .dokan-product-listing-area .product-listing-top .dokan-listing-filter .active a');
             let oldArray = $el[0].textContent.split("(");
-            let newArray = [oldArray[0],`${correctCount})`].join("(")
+            let newArray = [oldArray[0], `${correctCount})`].join("(")
             if ($el.length) {
                 $el.text(newArray);
             }
