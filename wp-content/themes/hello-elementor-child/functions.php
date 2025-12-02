@@ -298,6 +298,77 @@ function action_woocommerce_save_account_details($user_id)
 }
 add_action('woocommerce_save_account_details', 'action_woocommerce_save_account_details', 10, 1);
 
+add_action('wp_enqueue_scripts', 'pl_override_dokan_spmv_add_to_store_for_vendor', 30);
+function pl_override_dokan_spmv_add_to_store_for_vendor()
+{
+
+    // Only on Dokan seller dashboard (front-end)
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
+        return;
+    }
+
+    if (!is_user_logged_in()) {
+        return;
+    }
+
+    wp_enqueue_script('jquery');
+
+    $nonce = wp_create_nonce('pl_vendor_assign_nonce');
+    $ajaxurl = admin_url('admin-ajax.php');
+
+    $inline_js = "
+    jQuery(function($){
+
+        var plNonce   = '{$nonce}';
+        var plAjaxUrl = '{$ajaxurl}';
+
+        // Remove Dokan's original handler on the SPMV 'Add To Store' button
+        $(document).off('click', '.dokan-spmv-clone-product');
+
+        // Attach our handler: assign product to current vendor using pl_assign_vendors
+        $(document).on('click', '.dokan-spmv-clone-product', function(e){
+            e.preventDefault();
+
+            var \$btn      = $(this);
+            var productId  = \$btn.data('product');
+
+            if (!productId) {
+                return;
+            }
+
+            var originalText = \$btn.text();
+            \$btn.prop('disabled', true)
+                .text('" . esc_js(__('Assigning...', 'printlana')) . "');
+
+            $.post(plAjaxUrl, {
+                action: 'pl_assign_vendors',
+                nonce:  plNonce,
+                'product_ids[]': productId
+                // No vendor_ids needed; server uses current user for vendors
+            })
+            .done(function(resp){
+                if (resp && resp.success) {
+                    \$btn.text('" . esc_js(__('Assigned', 'printlana')) . "');
+                    \$btn.addClass('pl-assigned');
+                } else {
+                    var msg = (resp && resp.data && resp.data.message) ? resp.data.message : 'Error assigning.';
+                    alert(msg);
+                    \$btn.prop('disabled', false).text(originalText);
+                }
+            })
+            .fail(function(){
+                alert('Ajax request failed. Please try again.');
+                \$btn.prop('disabled', false).text(originalText);
+            });
+        });
+
+    });
+    ";
+
+    wp_add_inline_script('jquery', $inline_js);
+}
+
+
 /**
  * Add unread message count to Elementor icon
  * Works with "Orders Chat for WooCommerce" plugin

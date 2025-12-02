@@ -536,12 +536,37 @@ JS;
     public function ajax_assign_vendors()
     {
         check_ajax_referer('pl_vendor_assign_nonce', 'nonce');
-        if (!current_user_can('manage_woocommerce')) {
-            wp_send_json_error(['message' => 'Permission denied.'], 403);
+
+        $current_user_id = get_current_user_id();
+        $is_admin = current_user_can('manage_woocommerce');
+
+        /**
+         * Permissions:
+         * - Admins (manage_woocommerce) can assign ANY vendors (bulk tool in wp-admin).
+         * - Vendors can ONLY self-assign (their own user ID).
+         */
+        if (!$is_admin) {
+            // Require Dokan vendor/seller for front-end self-assign
+            if (function_exists('dokan_is_user_seller')) {
+                if (!dokan_is_user_seller($current_user_id)) {
+                    wp_send_json_error(['message' => 'Permission denied.'], 403);
+                }
+            } else {
+                // If Dokan helper is missing, block non-admins
+                wp_send_json_error(['message' => 'Permission denied.'], 403);
+            }
         }
 
+        // Common input
         $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
-        $vendor_ids_to_add = isset($_POST['vendor_ids']) ? array_map('absint', (array) $_POST['vendor_ids']) : [];
+
+        // For admins: keep the original behavior (vendor_ids[] from request)
+        if ($is_admin) {
+            $vendor_ids_to_add = isset($_POST['vendor_ids']) ? array_map('absint', (array) $_POST['vendor_ids']) : [];
+        } else {
+            // For vendors: ignore any posted vendor_ids, always use current user
+            $vendor_ids_to_add = [$current_user_id];
+        }
 
         if (empty($product_ids) || empty($vendor_ids_to_add)) {
             wp_send_json_error(['message' => 'Missing product or vendor IDs.'], 400);
@@ -553,17 +578,18 @@ JS;
         $count = 0;
 
         foreach ($product_ids as $pid) {
-            // meta for primary product
+            // --- META for main product ---
             $existing_vendors = get_post_meta($pid, self::META_KEY, true);
             if (!is_array($existing_vendors)) {
                 $existing_vendors = [];
             }
+
             $new_vendors = array_unique(array_merge($existing_vendors, $vendor_ids_to_add));
             $new_vendors = array_values(array_filter(array_map('absint', $new_vendors)));
             update_post_meta($pid, self::META_KEY, $new_vendors);
             $count++;
 
-            // sync mapping table for main product
+            // --- Mapping table for main product ---
             foreach ($vendor_ids_to_add as $vid) {
                 if ($vid <= 0) {
                     continue;
@@ -581,21 +607,22 @@ JS;
                 );
             }
 
-            // translations: keep behavior consistent with meta
+            // --- WPML translations: keep behavior consistent with meta ---
             $translation_ids = $this->get_product_translation_ids($pid);
 
             if (!empty($translation_ids)) {
                 foreach ($translation_ids as $tid) {
-                    // meta
+                    // META for translation
                     $existing_translation_vendors = get_post_meta($tid, self::META_KEY, true);
                     if (!is_array($existing_translation_vendors)) {
                         $existing_translation_vendors = [];
                     }
+
                     $new_translation_vendors = array_unique(array_merge($existing_translation_vendors, $vendor_ids_to_add));
                     $new_translation_vendors = array_values(array_filter(array_map('absint', $new_translation_vendors)));
                     update_post_meta($tid, self::META_KEY, $new_translation_vendors);
 
-                    // mapping table for translation product
+                    // Mapping table for translation product
                     foreach ($vendor_ids_to_add as $vid) {
                         if ($vid <= 0) {
                             continue;
@@ -624,6 +651,7 @@ JS;
             ),
         ]);
     }
+
 
     public function ajax_unlink_vendors()
     {
@@ -892,16 +920,16 @@ JS;
                                     (#<?php echo (int) $pid; ?>)
                                     <br>
                                     <code>
-                                                        Creator:
-                                                        <?php
-                                                        echo esc_html(
-                                                            get_the_author_meta(
-                                                                'display_name',
-                                                                get_post_field('post_author', $pid)
-                                                            )
-                                                        );
-                                                        ?>
-                                                    </code>
+                                                                        Creator:
+                                                                        <?php
+                                                                        echo esc_html(
+                                                                            get_the_author_meta(
+                                                                                'display_name',
+                                                                                get_post_field('post_author', $pid)
+                                                                            )
+                                                                        );
+                                                                        ?>
+                                                                    </code>
                                 </td>
                                 <td>
                                     <?php if (empty($assigned_user_ids)): ?>
