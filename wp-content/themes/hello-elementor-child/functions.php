@@ -298,60 +298,70 @@ function action_woocommerce_save_account_details($user_id)
 }
 add_action('woocommerce_save_account_details', 'action_woocommerce_save_account_details', 10, 1);
 
-add_action( 'wp_enqueue_scripts', 'pl_override_dokan_spmv_add_to_store_for_vendor', 30 );
-function pl_override_dokan_spmv_add_to_store_for_vendor() {
+add_action('wp_enqueue_scripts', 'pl_override_dokan_spmv_add_to_store_for_vendor', 30);
+function pl_override_dokan_spmv_add_to_store_for_vendor()
+{
 
     // Only on Dokan seller dashboard (front end)
-    if ( ! function_exists( 'dokan_is_seller_dashboard' ) || ! dokan_is_seller_dashboard() ) {
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
         return;
     }
 
-    if ( ! is_user_logged_in() ) {
+    if (!is_user_logged_in()) {
         return;
     }
 
-    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script('jquery');
 
-    $nonce   = wp_create_nonce( 'pl_vendor_assign_nonce' );
-    $ajaxurl = admin_url( 'admin-ajax.php' );
+    $nonce = wp_create_nonce('pl_vendor_assign_nonce');
+    $ajaxurl = admin_url('admin-ajax.php');
+    $user_id = get_current_user_id();
+    $is_admin = current_user_can('manage_woocommerce') ? '1' : '0';
 
     $inline_js = "
     jQuery(function($){
 
         var plNonce   = '{$nonce}';
         var plAjaxUrl = '{$ajaxurl}';
+        var plUserId  = {$user_id};
+        var plIsAdmin = {$is_admin} === 1; // bool
 
-        console.log('[PL-SPMV] Debug init: nonce=', plNonce, ' ajaxurl=', plAjaxUrl);
+        console.log('[PL-SPMV] init → nonce:', plNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
 
         // Remove Dokan's original handler on the SPMV 'Add To Store' button
         $(document).off('click', '.dokan-spmv-clone-product');
 
-        // Attach our handler: assign product to current vendor using pl_assign_vendors
+        // Attach our handler: call pl_assign_vendors
         $(document).on('click', '.dokan-spmv-clone-product', function(e){
             e.preventDefault();
 
-            var \$btn      = $(this);
-            var productId  = \$btn.data('product');
+            var \$btn     = $(this);
+            var productId = \$btn.data('product');
 
-            console.log('[PL-SPMV] Button clicked, productId=', productId);
+            console.log('[PL-SPMV] Button clicked → productId:', productId);
 
             if (!productId) {
-                console.error('[PL-SPMV] No data-product attribute on button.');
+                console.error('[PL-SPMV] No data-product attribute found.');
                 alert('Debug: Missing product ID on button.');
                 return;
             }
 
             var originalText = \$btn.text();
-            \$btn.prop('disabled', true)
-                .text('" . esc_js( __( 'Assigning...', 'printlana' ) ) . "');
+            \$btn.prop('disabled', true).text('Assigning...');
 
-            // IMPORTANT: send `product_ids` as an array, matching PHP: POST['product_ids']
+            // Base payload: always send product_ids
             var payload = {
                 action:      'pl_assign_vendors',
                 nonce:       plNonce,
-                product_ids: [ productId ]   // <--- this is the key change
-                // No vendor_ids for vendors – plugin uses current user
+                product_ids: [ productId ]
             };
+
+            // IMPORTANT:
+            // - For vendors: plugin ignores vendor_ids and uses current user.
+            // - For admins: plugin REQUIRES vendor_ids, so we send current admin ID.
+            if (plIsAdmin) {
+                payload.vendor_ids = [ plUserId ];
+            }
 
             console.log('[PL-SPMV] Sending AJAX payload:', payload);
 
@@ -361,19 +371,19 @@ function pl_override_dokan_spmv_add_to_store_for_vendor() {
                 data:     payload,
                 dataType: 'json'
             })
-            .done(function(resp, textStatus, jqXHR){
-                console.log('[PL-SPMV] AJAX success raw response:', resp);
+            .done(function(resp){
+                console.log('[PL-SPMV] AJAX success response:', resp);
 
                 if (resp && resp.success) {
-                    console.log('[PL-SPMV] Success message:', resp.data ? resp.data.message : '(no message)');
-                    \$btn.text('" . esc_js( __( 'Assigned', 'printlana' ) ) . "');
-                    \$btn.addClass('pl-assigned');
+                    var msg = resp.data && resp.data.message ? resp.data.message : 'Assigned successfully.';
+                    alert(msg);
+                    \$btn.text('Assigned').addClass('pl-assigned');
                 } else {
                     var msg = (resp && resp.data && resp.data.message)
                         ? resp.data.message
-                        : 'Unknown error (no success flag).';
+                        : 'Unknown logical failure.';
                     console.error('[PL-SPMV] Logical failure:', resp);
-                    alert('Logical error: ' + msg);
+                    alert('Error: ' + msg);
                     \$btn.prop('disabled', false).text(originalText);
                 }
             })
@@ -387,19 +397,22 @@ function pl_override_dokan_spmv_add_to_store_for_vendor() {
                 });
 
                 alert(
-                    'AJAX error: ' + jqXHR.status + ' ' + textStatus + '\\n' +
+                    'AJAX ERROR ' + jqXHR.status + '\\n' +
+                    'Status: ' + textStatus + '\\n' +
                     'Response: ' + jqXHR.responseText
                 );
 
                 \$btn.prop('disabled', false).text(originalText);
             });
+
         });
 
     });
     ";
 
-    wp_add_inline_script( 'jquery', $inline_js );
+    wp_add_inline_script('jquery', $inline_js);
 }
+
 
 
 
