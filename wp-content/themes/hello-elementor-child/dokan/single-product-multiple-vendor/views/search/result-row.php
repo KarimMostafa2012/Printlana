@@ -54,6 +54,7 @@ if (!empty($search_word)) {
     <td class="vendor-section" data-title="<?php esc_attr_e('Vendor', 'dokan'); ?>">
         <strong><?php echo $vendor->get_name(); ?></strong>
     </td>
+    <!-- edited code from Karim side -->
     <td class="action-section" data-title="<?php esc_attr_e('Actions', 'dokan'); ?>">
         <?php
         $current_vendor_id = dokan_get_current_user_id();
