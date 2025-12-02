@@ -1,6 +1,9 @@
 <?php // TEST FROM CHILD THEME ?>
 <div id="dokan-spmv-products-admin">
     <hr>
+    <script>
+        console.log('Loaded dokan-spmv-products-admin');
+    </script>
     <label><?php esc_html_e( 'Other Available Vendor', 'dokan' ); ?></label>
     <?php if ( empty( $clones ) ): ?>
         <em><?php esc_html_e( 'No vendor own this same product except mamamia.', 'dokan' ); ?></em>
