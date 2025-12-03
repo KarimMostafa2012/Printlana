@@ -425,12 +425,19 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
         // Run check on page load
         checkAssignedProducts();
 
-        // Remove Dokan's original handler on the SPMV 'Add To Store' button
-        $(document).off('click', '.dokan-spmv-clone-product');
+        // Remove Dokan's original handler and attach ours
+        // We do this with a slight delay to ensure Dokan's handlers are loaded first
+        setTimeout(function(){
+            // Remove all existing handlers on these buttons
+            $(document).off('click', '.dokan-spmv-clone-product');
 
-        // Attach our handler: call pl_assign_vendors
+            console.log('[PL-SPMV] Dokan handlers removed, attaching custom handler');
+        }, 100);
+
+        // Attach our handler: call pl_assign_vendors (with high priority by using 'on' directly)
         $(document).on('click', '.dokan-spmv-clone-product', function(e){
             e.preventDefault();
+            e.stopImmediatePropagation(); // Prevent Dokan's handler from running
 
             var \$btn     = $(this);
             var productId = \$btn.data('product');
