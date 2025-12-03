@@ -358,6 +358,9 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
         var plAjaxUrl = '{$ajaxurl}';
         var plUserId  = {$user_id};
         var plIsAdmin = {$is_admin} === 1; // bool
+        if(!window.location.href.includes('products-search')) {
+            return; // Skip on list page
+        }
 
         console.log('[PL-SPMV] init → nonce:', plNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
 
