@@ -394,6 +394,8 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                     var assignedProducts = resp.data.assigned_products;
                     console.log('[PL-SPMV] Assigned products:', assignedProducts);
 
+                    document.querySelector('#dokan-spmv-product-list-table').classList.add('pl-assignment-checking');
+
                     // Update buttons for assigned products
                     \$buttons.each(function(){
                         var \$btn = $(this);
@@ -407,6 +409,8 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                             console.log('[PL-SPMV] Product ' + productId + ' marked as Added');
                         }
                     });
+                    document.querySelector('#dokan-spmv-product-list-table').classList.remove('pl-assignment-checking');
+                    
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown){
