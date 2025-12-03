@@ -28,10 +28,23 @@ function pl_vendor_assign_tool_activate()
         product_id BIGINT(20) UNSIGNED NOT NULL,
         vendor_id  BIGINT(20) UNSIGNED NOT NULL,
         PRIMARY KEY  (product_id, vendor_id),
-        KEY vendor_id (vendor_id)
+        KEY vendor_id (vendor_id),
+        KEY vendor_product (vendor_id, product_id)
     ) {$charset_collate};";
 
     dbDelta($sql);
+
+    // Add composite index if table already exists (for existing installations)
+    $index_exists = $wpdb->get_var(
+        "SHOW INDEX FROM {$table_name} WHERE Key_name = 'vendor_product'"
+    );
+
+    if (!$index_exists) {
+        $wpdb->query(
+            "ALTER TABLE {$table_name}
+             ADD INDEX vendor_product (vendor_id, product_id)"
+        );
+    }
 
     // --- Simple migration from meta to mapping table (one-time, on activation) ---
     $meta_key = '_assigned_vendor_ids';
@@ -761,24 +774,51 @@ public function ajax_assign_vendors()
             wp_send_json_error(['message' => 'No product IDs provided.'], 400);
         }
 
+        // Limit to prevent abuse (max 50 products per request)
+        $product_ids = array_slice($product_ids, 0, 50);
+
         global $wpdb;
         $table = $this->get_mapping_table_name();
 
-        // Build query to check which products are assigned to this vendor
+        // DIAGNOSTIC: Log query start time
+        $start_time = microtime(true);
+
+        // Build query - removed USE INDEX hint to let MySQL choose
         $placeholders = implode(',', array_fill(0, count($product_ids), '%d'));
         $params = array_merge([$vendor_id], $product_ids);
 
+        // Simplified optimized query - let MySQL use the best index
         $assigned_product_ids = $wpdb->get_col(
             $wpdb->prepare(
-                "SELECT product_id FROM {$table}
+                "SELECT product_id
+                 FROM {$table}
                  WHERE vendor_id = %d
                  AND product_id IN ({$placeholders})",
                 $params
             )
         );
 
+        // DIAGNOSTIC: Log query execution time
+        $execution_time = (microtime(true) - $start_time) * 1000;
+        error_log(sprintf(
+            '[PL Debug] Query executed in %.2fms for vendor %d checking %d products (found %d)',
+            $execution_time,
+            $vendor_id,
+            count($product_ids),
+            count($assigned_product_ids)
+        ));
+
+        // DEBUG: Log if query is slow
+        if ($execution_time > 100) {
+            error_log('[PL Debug] SLOW QUERY DETECTED! Checking indexes...');
+            // Check indexes
+            $indexes = $wpdb->get_results("SHOW INDEX FROM {$table}");
+            error_log('[PL Debug] Available indexes: ' . print_r($indexes, true));
+        }
+
         wp_send_json_success([
-            'assigned_products' => array_map('intval', $assigned_product_ids)
+            'assigned_products' => array_map('intval', $assigned_product_ids),
+            'debug' => WP_DEBUG ? ['execution_ms' => round($execution_time, 2)] : null
         ]);
     }
 
@@ -1166,6 +1206,43 @@ add_filter('dokan_pre_product_listing_args', function ($args) {
 
 // Initialize the main plugin class
 new Printlana_Vendor_Assign_Tool();
+
+/**
+ * Helper function: Manually add database index for performance
+ * Run this once if you're experiencing slow query times
+ * You can call this via wp-cli: wp eval-file add-index.php
+ * Or add it to functions.php temporarily and visit any admin page once
+ */
+function pl_vendor_assign_add_index()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'pl_product_vendors';
+
+    $index_exists = $wpdb->get_var(
+        "SHOW INDEX FROM {$table_name} WHERE Key_name = 'vendor_product'"
+    );
+
+    if (!$index_exists) {
+        $result = $wpdb->query(
+            "ALTER TABLE {$table_name}
+             ADD INDEX vendor_product (vendor_id, product_id)"
+        );
+
+        if ($result === false) {
+            error_log('[PL Vendor Assign] Failed to create index: ' . $wpdb->last_error);
+            return false;
+        }
+
+        error_log('[PL Vendor Assign] Database index created successfully!');
+        return true;
+    }
+
+    error_log('[PL Vendor Assign] Database index already exists.');
+    return true;
+}
+
+// Uncomment the line below to run the index creation on next page load (then comment it back)
+// add_action('admin_init', 'pl_vendor_assign_add_index');
 
 /**
  * Override Dokan's product count badge using our _pl_assigned_product_count meta.
