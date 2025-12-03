@@ -352,20 +352,31 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
     $is_admin = current_user_can('manage_woocommerce') ? '1' : '0';
 
     $inline_js = "
-    jQuery(function($){
+    (function(){
+        if(!window.location.href.includes('products-search')) {
+            return; // Skip on list page
+        }
 
         var plNonce   = '{$nonce}';
         var plAjaxUrl = '{$ajaxurl}';
         var plUserId  = {$user_id};
         var plIsAdmin = {$is_admin} === 1; // bool
-        if(!window.location.href.includes('products-search')) {
-            return; // Skip on list page
-        }
 
+        console.log('[PL-SPMV] Script loaded immediately');
         console.log('[PL-SPMV] init → nonce:', plNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
 
-        // Remove Dokan's original handler immediately
-        $(document).off('click', '.dokan-spmv-clone-product');
+        // Wait for jQuery to be available
+        function initWhenReady() {
+            if (typeof jQuery === 'undefined') {
+                setTimeout(initWhenReady, 50);
+                return;
+            }
+
+            var $ = jQuery;
+            console.log('[PL-SPMV] jQuery ready, initializing...');
+
+            // Remove Dokan's original handler immediately
+            $(document).off('click', '.dokan-spmv-clone-product');
 
         /**
          * Check which products are already assigned and update button states
@@ -438,16 +449,21 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
             });
         }
 
-        // Run check on page load (with slight delay to ensure buttons are rendered)
-        // setTimeout(function(){
-            document.querySelector('#dokan-spmv-product-list-table').classList.add('pl-assignment-checking');
-            console.log('[PL-SPMV] Checking assigned products...');
-            console.log(document.querySelector('#dokan-spmv-product-list-table'));
-            checkAssignedProducts();
-            document.querySelector('#dokan-spmv-product-list-table').classList.remove('pl-assignment-checking');
-        // }, 50);
+        // Run check when buttons are available
+        function waitForButtonsAndCheck() {
+            var \$buttons = $('.dokan-spmv-clone-product');
+            if (\$buttons.length > 0) {
+                console.log('[PL-SPMV] Buttons found, checking assignments...');
+                checkAssignedProducts();
+            } else {
+                console.log('[PL-SPMV] Buttons not ready yet, waiting...');
+                setTimeout(waitForButtonsAndCheck, 100);
+            }
+        }
 
-        // Attach our handler: call pl_assign_vendors (with high priority by using 'on' directly)
+        waitForButtonsAndCheck();
+
+        // Attach our handler: call pl_assign_vendors
         $(document).on('click', '.dokan-spmv-clone-product', function(e){
             e.preventDefault();
             e.stopImmediatePropagation(); // Prevent Dokan's handler from running
@@ -530,7 +546,12 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
 
         });
 
-    });
+        } // End initWhenReady
+
+        // Start the initialization
+        initWhenReady();
+
+    })(); // End IIFE
     ";
 
     wp_add_inline_script('jquery', $inline_js);
