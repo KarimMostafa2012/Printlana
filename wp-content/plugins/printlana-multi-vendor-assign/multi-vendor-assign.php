@@ -97,6 +97,7 @@ class Printlana_Vendor_Assign_Tool
         // AJAX Hooks
         add_action('wp_ajax_pl_assign_vendors', [$this, 'ajax_assign_vendors']);
         add_action('wp_ajax_pl_unlink_vendors', [$this, 'ajax_unlink_vendors']);
+        add_action('wp_ajax_pl_check_assigned_products', [$this, 'ajax_check_assigned_products']);
 
         // Dokan Dashboard Hooks
         add_filter('dokan_pre_product_listing_args', [$this, 'show_assigned_products_in_vendor_dashboard'], 20);
@@ -738,6 +739,46 @@ public function ajax_assign_vendors()
                 count($vendor_ids_to_remove),
                 $count
             ),
+        ]);
+    }
+
+    /**
+     * AJAX handler: Check if products are assigned to the current vendor
+     * Used by front-end JavaScript to update button states
+     */
+    public function ajax_check_assigned_products()
+    {
+        check_ajax_referer('pl_vendor_assign_nonce', 'nonce');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => 'User not logged in.'], 403);
+        }
+
+        $vendor_id = get_current_user_id();
+        $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
+
+        if (empty($product_ids)) {
+            wp_send_json_error(['message' => 'No product IDs provided.'], 400);
+        }
+
+        global $wpdb;
+        $table = $this->get_mapping_table_name();
+
+        // Build query to check which products are assigned to this vendor
+        $placeholders = implode(',', array_fill(0, count($product_ids), '%d'));
+        $params = array_merge([$vendor_id], $product_ids);
+
+        $assigned_product_ids = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT product_id FROM {$table}
+                 WHERE vendor_id = %d
+                 AND product_id IN ({$placeholders})",
+                $params
+            )
+        );
+
+        wp_send_json_success([
+            'assigned_products' => array_map('intval', $assigned_product_ids)
         ]);
     }
 

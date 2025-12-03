@@ -298,6 +298,26 @@ function action_woocommerce_save_account_details($user_id)
 }
 add_action('woocommerce_save_account_details', 'action_woocommerce_save_account_details', 10, 1);
 
+/**
+ * Helper function: Check if a product is already assigned to a specific vendor
+ * Uses the wp_pl_product_vendors table
+ */
+function pl_is_product_assigned_to_vendor($product_id, $vendor_id)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'pl_product_vendors';
+
+    $count = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table_name} WHERE product_id = %d AND vendor_id = %d",
+            $product_id,
+            $vendor_id
+        )
+    );
+
+    return $count > 0;
+}
+
 add_action('wp_enqueue_scripts', 'pl_override_dokan_spmv_add_to_store_for_vendor', 30);
 function pl_override_dokan_spmv_add_to_store_for_vendor()
 {
@@ -328,6 +348,79 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
 
         console.log('[PL-SPMV] init → nonce:', plNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
 
+        /**
+         * Check which products are already assigned and update button states
+         */
+        function checkAssignedProducts() {
+            // Find all 'Add To Store' buttons (excluding 'Already Cloned' and 'Edit' buttons)
+            var \$buttons = $('.dokan-spmv-clone-product');
+
+            if (\$buttons.length === 0) {
+                console.log('[PL-SPMV] No Add To Store buttons found.');
+                return;
+            }
+
+            // Collect product IDs
+            var productIds = [];
+            \$buttons.each(function(){
+                var productId = $(this).data('product');
+                if (productId) {
+                    productIds.push(productId);
+                }
+            });
+
+            if (productIds.length === 0) {
+                console.log('[PL-SPMV] No product IDs found on buttons.');
+                return;
+            }
+
+            console.log('[PL-SPMV] Checking assignment status for products:', productIds);
+
+            // AJAX call to check which products are assigned
+            $.ajax({
+                url: plAjaxUrl,
+                method: 'POST',
+                data: {
+                    action: 'pl_check_assigned_products',
+                    nonce: plNonce,
+                    product_ids: productIds
+                },
+                dataType: 'json'
+            })
+            .done(function(resp){
+                console.log('[PL-SPMV] Check response:', resp);
+
+                if (resp && resp.success && resp.data && resp.data.assigned_products) {
+                    var assignedProducts = resp.data.assigned_products;
+                    console.log('[PL-SPMV] Assigned products:', assignedProducts);
+
+                    // Update buttons for assigned products
+                    \$buttons.each(function(){
+                        var \$btn = $(this);
+                        var productId = \$btn.data('product');
+
+                        if (assignedProducts.indexOf(productId) !== -1) {
+                            // Product is assigned - change button to 'Added'
+                            \$btn.text('Added')
+                                .addClass('pl-assigned')
+                                .prop('disabled', true);
+                            console.log('[PL-SPMV] Product ' + productId + ' marked as Added');
+                        }
+                    });
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown){
+                console.error('[PL-SPMV] Check AJAX error:', {
+                    status: jqXHR.status,
+                    statusText: jqXHR.statusText,
+                    responseText: jqXHR.responseText
+                });
+            });
+        }
+
+        // Run check on page load
+        checkAssignedProducts();
+
         // Remove Dokan's original handler on the SPMV 'Add To Store' button
         $(document).off('click', '.dokan-spmv-clone-product');
 
@@ -343,6 +436,12 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
             if (!productId) {
                 console.error('[PL-SPMV] No data-product attribute found.');
                 alert('Debug: Missing product ID on button.');
+                return;
+            }
+
+            // Check if already marked as added
+            if (\$btn.hasClass('pl-assigned')) {
+                console.log('[PL-SPMV] Product already assigned, ignoring click.');
                 return;
             }
 
@@ -377,7 +476,7 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                 if (resp && resp.success) {
                     var msg = resp.data && resp.data.message ? resp.data.message : 'Assigned successfully.';
                     alert(msg);
-                    \$btn.text('Assigned').addClass('pl-assigned');
+                    \$btn.text('Added').addClass('pl-assigned');
                 } else {
                     var msg = (resp && resp.data && resp.data.message)
                         ? resp.data.message
