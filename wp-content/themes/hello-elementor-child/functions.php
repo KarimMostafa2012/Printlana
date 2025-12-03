@@ -436,9 +436,11 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
         }
 
         // Run check on page load (with slight delay to ensure buttons are rendered)
-        setTimeout(function(){
+        // setTimeout(function(){
+            document.querySelector('#dokan-spmv-product-list-table').classList.add('pl-assignment-checking');
             checkAssignedProducts();
-        }, 50);
+            document.querySelector('#dokan-spmv-product-list-table').classList.remove('pl-assignment-checking');
+        // }, 50);
 
         // Attach our handler: call pl_assign_vendors (with high priority by using 'on' directly)
         $(document).on('click', '.dokan-spmv-clone-product', function(e){
