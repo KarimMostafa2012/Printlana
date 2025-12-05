@@ -203,6 +203,7 @@ class Printlana_Vendor_Assign_Tool
     /**
      * Dokan vendor dashboard filter:
      * Use the mapping table (product_id, vendor_id) to limit products.
+     * Also include products where the vendor is the author/creator.
      */
     public function show_assigned_products_in_vendor_dashboard($args)
     {
@@ -240,28 +241,28 @@ class Printlana_Vendor_Assign_Tool
             $sql = "
                 SELECT DISTINCT p.ID
                 FROM {$wpdb->posts} p
-                INNER JOIN {$table} pv
-                    ON p.ID = pv.product_id
+                LEFT JOIN {$table} pv
+                    ON p.ID = pv.product_id AND pv.vendor_id = %d
                 INNER JOIN {$translations_table} t
                     ON t.element_id   = p.ID
                    AND t.element_type = 'post_product'
                    AND t.language_code = %s
-                WHERE pv.vendor_id = %d
+                WHERE (pv.vendor_id = %d OR p.post_author = %d)
                   AND p.post_type = 'product'
                   AND p.post_status NOT IN ('trash', 'auto-draft', 'draft')
             ";
-            $params = [$current_lang, $vendor_id];
+            $params = [$vendor_id, $current_lang, $vendor_id, $vendor_id];
         } else {
             $sql = "
                 SELECT DISTINCT p.ID
                 FROM {$wpdb->posts} p
-                INNER JOIN {$table} pv
-                    ON p.ID = pv.product_id
-                WHERE pv.vendor_id = %d
+                LEFT JOIN {$table} pv
+                    ON p.ID = pv.product_id AND pv.vendor_id = %d
+                WHERE (pv.vendor_id = %d OR p.post_author = %d)
                   AND p.post_type = 'product'
                   AND p.post_status NOT IN ('trash', 'auto-draft', 'draft')
             ";
-            $params = [$vendor_id];
+            $params = [$vendor_id, $vendor_id, $vendor_id];
         }
 
         $prepared = $wpdb->prepare($sql, $params);
