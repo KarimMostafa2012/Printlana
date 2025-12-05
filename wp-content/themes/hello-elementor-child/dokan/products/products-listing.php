@@ -9,6 +9,8 @@ global $post;
  * @return float
  */
 function printlana_calculate_product_profit_from_suborders($product, $vendor_id = null) {
+    global $wpdb;
+
     if (!$vendor_id) {
         $vendor_id = dokan_get_current_user_id();
     }
@@ -16,25 +18,21 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
     $product_id = $product->get_id();
     $total_profit = 0;
 
-    // Get all sub-orders for this vendor (orders with parent_id != 0)
-    $args = array(
-        'limit' => -1,
-        'type' => 'shop_order',
-        'parent_exclude' => array(0), // Only sub-orders
-        'meta_query' => array(
-            array(
-                'key' => '_dokan_vendor_id',
-                'value' => $vendor_id,
-                'compare' => '='
-            )
+    // Get all sub-orders for this vendor from dokan_orders table
+    $dokan_orders = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT do.order_id, do.net_amount, do.order_total
+            FROM {$wpdb->prefix}dokan_orders AS do
+            WHERE do.seller_id = %d
+            AND do.order_status IN ('wc-completed', 'wc-processing')",
+            $vendor_id
         )
     );
 
-    $orders = wc_get_orders($args);
+    foreach ($dokan_orders as $dokan_order) {
+        $order = wc_get_order($dokan_order->order_id);
 
-    foreach ($orders as $order) {
-        // Only count completed and processing orders
-        if (!in_array($order->get_status(), array('completed', 'processing'))) {
+        if (!$order) {
             continue;
         }
 
@@ -47,9 +45,9 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
                 // Get item subtotal (revenue for this product in this order)
                 $item_subtotal = $item->get_subtotal();
 
-                // Get vendor earning from order meta
-                $vendor_earning = get_post_meta($order->get_id(), '_dokan_vendor_earning', true);
-                $order_total = $order->get_total();
+                // Get vendor earning from dokan_orders table
+                $vendor_earning = floatval($dokan_order->net_amount);
+                $order_total = floatval($dokan_order->order_total);
 
                 // Calculate profit ratio
                 if ($order_total > 0 && $vendor_earning > 0) {
