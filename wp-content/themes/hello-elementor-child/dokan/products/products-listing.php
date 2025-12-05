@@ -27,12 +27,12 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
     error_log("Vendor ID: {$vendor_id}");
 
     // Get all sub-orders for this vendor from dokan_orders table
+    // Let's check ALL statuses first to debug
     $dokan_orders = $wpdb->get_results(
         $wpdb->prepare(
-            "SELECT do.order_id, do.net_amount, do.order_total
+            "SELECT do.order_id, do.net_amount, do.order_total, do.order_status
             FROM {$wpdb->prefix}dokan_orders AS do
-            WHERE do.seller_id = %d
-            AND do.order_status IN ('wc-completed', 'wc-processing')",
+            WHERE do.seller_id = %d",
             $vendor_id
         )
     );
@@ -44,7 +44,7 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
     if ($order_count > 0) {
         error_log("--- Order Details ---");
         foreach ($dokan_orders as $idx => $dokan_order) {
-            error_log("Order #{$dokan_order->order_id}: Net Amount = {$dokan_order->net_amount}, Order Total = {$dokan_order->order_total}");
+            error_log("Order #{$dokan_order->order_id}: Status = {$dokan_order->order_status}, Net Amount = {$dokan_order->net_amount}, Order Total = {$dokan_order->order_total}");
         }
     }
 
@@ -58,6 +58,13 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
 
         // DEBUG 3: Earnings from this sub-order
         error_log("--- Processing Order #{$dokan_order->order_id} ---");
+
+        // Log all products in this order
+        $all_products = [];
+        foreach ($order->get_items() as $item) {
+            $all_products[] = "ID:" . $item->get_product_id() . " - " . $item->get_name();
+        }
+        error_log("Products in order: " . implode(", ", $all_products));
 
         // Loop through order items
         foreach ($order->get_items() as $item) {
