@@ -103,6 +103,9 @@ class Printlana_Vendor_Assign_Tool
 
     public function __construct()
     {
+        // Optimize AJAX: Run check early before other plugins load
+        add_action('init', [$this, 'maybe_handle_ajax_early'], 1);
+
         // Admin Page Hooks
         add_action('admin_menu', [$this, 'add_menu']);
         add_action('admin_enqueue_scripts', [$this, 'assets']);
@@ -122,6 +125,34 @@ class Printlana_Vendor_Assign_Tool
         add_action('add_meta_boxes', [$this, 'admin_product_meta_box_init']);
         add_action('save_post', [$this, 'admin_product_meta_box_save'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'assets_product_edit']);
+    }
+
+    /**
+     * Handle AJAX early to bypass unnecessary plugin loading
+     * This runs early in WordPress init to reduce overhead
+     */
+    public function maybe_handle_ajax_early()
+    {
+        // Only for AJAX requests
+        if (!defined('DOING_AJAX') || !DOING_AJAX) {
+            return;
+        }
+
+        $action = isset($_POST['action']) ? $_POST['action'] : '';
+        if ($action !== 'pl_check_assigned_products') {
+            return;
+        }
+
+        // Early optimization: Skip loading unnecessary plugins
+        // Add filter to prevent some heavy plugins from loading during this AJAX call
+        add_filter('option_active_plugins', function($plugins) {
+            // Remove heavy plugins that aren't needed for this check
+            $skip_plugins = [
+                'elementor/elementor.php',
+                'elementor-pro/elementor-pro.php',
+            ];
+            return array_diff($plugins, $skip_plugins);
+        }, 1);
     }
 
     /**
