@@ -88,30 +88,6 @@
                         <div class="dokan-dashboard-product-listing-wrapper">
 
                             <form id="product-filter" method="POST" class="dokan-form-inline">
-                                <div id="dokan-bulk-action-selector" class="dokan-form-group">
-                                    <label for="bulk-product-action-selector" class="screen-reader-text"><?php esc_html_e( 'Select bulk action', 'dokan-lite' ); ?></label>
-
-                                    <select name="status" id="bulk-product-action-selector" class="dokan-form-control chosen">
-                                        <?php foreach ( $bulk_statuses as $key => $bulk_status ) : ?>
-                                            <option class="bulk-product-status" value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $bulk_status ); ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <svg class="select-arrow-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M7.41 8.58002L12 13.17L16.59 8.58002L18 10L12 16L6 10L7.41 8.58002Z" fill="#0044F1"/>
-                                    </svg><!-- Add SVG -->
-                                </div>
-
-                                <div id="dokan-bulk-action-submit" class="dokan-form-group">
-                                    <?php wp_nonce_field( 'bulk_product_status_change', 'security' ); ?>
-                                    <input
-                                        type="submit"
-                                        name="bulk_product_status_change"
-                                        id="bulk-product-action"
-                                        class="dokan-btn dokan-btn-theme"
-                                        value="<?php esc_attr_e( 'Apply', 'dokan-lite' ); ?>"
-                                        onClick="dokan_bulk_delete_prompt( event, '<?php esc_attr_e( 'Are you sure?', 'dokan-lite' ); ?>', '#bulk-product-action-selector', '#product-filter' )"
-                                    />
-                                </div>
                                 <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
                                     <thead>
                                         <tr>
@@ -127,19 +103,14 @@
 
                                             <th><?php esc_html_e( 'SKU', 'dokan-lite' ); ?></th>
                                             <th><?php esc_html_e( 'Stock', 'dokan-lite' ); ?></th>
-                                            <th>test</th>
+                                            <th><?php esc_html_e( 'Price', 'dokan-lite' ); ?></th>
                                             <th><?php esc_html_e( 'Earning', 'dokan-lite' ); ?></th>
-                                            <th><?php esc_html_e( 'Type', 'dokan-lite' ); ?></th>
-                                            <th><?php esc_html_e( 'Views', 'dokan-lite' ); ?></th>
-                                            <th><?php esc_html_e( 'Date', 'dokan-lite' ); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php do_action( 'dokan_product_list_before_table_body_start' ); ?>
                                         <?php
                                         $post_statuses  = apply_filters( 'dokan_product_listing_post_statuses', [ 'publish', 'draft', 'pending', 'future' ] );
-                                        $stock_statuses = apply_filters( 'dokan_product_stock_statuses', [ 'instock', 'outofstock' ] );
-                                        $product_types  = apply_filters( 'dokan_product_types', [ 'simple' => esc_html__( 'Simple', 'dokan-lite' ) ] );
 
                                         $args = array(
                                             'posts_per_page' => 15,
@@ -161,10 +132,6 @@
                                                 $args['paged'] = absint( $_GET['pagenum'] );
                                             }
 
-                                            if ( isset( $_GET['post_status'] ) && in_array( $_GET['post_status'], $post_statuses, true ) ) {
-                                                $args['post_status'] = sanitize_text_field( wp_unslash( $_GET['post_status'] ) );
-                                            }
-
                                             if ( isset( $_GET['date'] ) && $_GET['date'] !== 0 ) {
                                                 $args['m'] = sanitize_text_field( wp_unslash( $_GET['date'] ) );
                                             }
@@ -176,25 +143,6 @@
                                                     'terms' => intval( $_GET['product_cat'] ),
                                                     'include_children' => false,
                                                 );
-                                            }
-                                            if ( isset( $_GET['product_brand'] ) && intval( $_GET['product_brand'] ) !== -1 ) {
-                                                $args['tax_query'][] = array(
-                                                    'taxonomy' => 'product_brand',
-                                                    'field' => 'id',
-                                                    'terms' => intval( $_GET['product_brand'] ),
-                                                    'include_children' => false,
-                                                );
-                                            }
-
-                                            if ( ! empty( $_GET['product_type'] ) ) {
-                                                $product_type = sanitize_text_field( wp_unslash( $_GET['product_type'] ) );
-                                                if ( array_key_exists( $product_type, $product_types ) ) {
-                                                    $args['tax_query'][] = [
-                                                        'taxonomy' => 'product_type',
-                                                        'field'    => 'slug',
-                                                        'terms'    => $product_type,
-                                                    ];
-                                                }
                                             }
 
                                             if ( ! empty( $_GET['product_search_name'] ) ) {
