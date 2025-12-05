@@ -77,7 +77,7 @@ class Printlana_Vendor_Product_Requests
         }
 
         add_submenu_page(
-            'dokan',
+            'Vendor Assignment',
             __('Vendor Product Requests', 'printlana'),
             $menu_title,
             'manage_woocommerce',
