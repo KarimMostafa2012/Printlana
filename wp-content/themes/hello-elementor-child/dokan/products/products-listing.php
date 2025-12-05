@@ -12,6 +12,7 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
     global $wpdb;
 
     error_log("=== Profit Calculation Function Called ===");
+    
     if (!$vendor_id) {
         $vendor_id = dokan_get_current_user_id();
     }
