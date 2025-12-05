@@ -18,6 +18,12 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
     $product_id = $product->get_id();
     $total_profit = 0;
 
+    // DEBUG 1: Function called
+    error_log("=== Profit Calculation Function Called ===");
+    error_log("Product ID: {$product_id}");
+    error_log("Product Name: {$product->get_name()}");
+    error_log("Vendor ID: {$vendor_id}");
+
     // Get all sub-orders for this vendor from dokan_orders table
     $dokan_orders = $wpdb->get_results(
         $wpdb->prepare(
@@ -29,16 +35,32 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
         )
     );
 
+    // DEBUG 2: Sub-orders found
+    $order_count = count($dokan_orders);
+    error_log("Sub-orders found: {$order_count}");
+
+    if ($order_count > 0) {
+        error_log("--- Order Details ---");
+        foreach ($dokan_orders as $idx => $dokan_order) {
+            error_log("Order #{$dokan_order->order_id}: Net Amount = {$dokan_order->net_amount}, Order Total = {$dokan_order->order_total}");
+        }
+    }
+
     foreach ($dokan_orders as $dokan_order) {
         $order = wc_get_order($dokan_order->order_id);
 
         if (!$order) {
+            error_log("Order #{$dokan_order->order_id} not found");
             continue;
         }
+
+        // DEBUG 3: Earnings from this sub-order
+        error_log("--- Processing Order #{$dokan_order->order_id} ---");
 
         // Loop through order items
         foreach ($order->get_items() as $item) {
             $item_product_id = $item->get_product_id();
+            $item_product_name = $item->get_name();
 
             // Check if this item is the product we're calculating for
             if ($item_product_id == $product_id) {
@@ -49,16 +71,31 @@ function printlana_calculate_product_profit_from_suborders($product, $vendor_id 
                 $vendor_earning = floatval($dokan_order->net_amount);
                 $order_total = floatval($dokan_order->order_total);
 
+                // DEBUG 4: Each product earning from the sub-order
+                error_log("MATCH FOUND! Product '{$item_product_name}' in Order #{$dokan_order->order_id}");
+                error_log("  - Item Subtotal: {$item_subtotal}");
+                error_log("  - Vendor Earning (net_amount): {$vendor_earning}");
+                error_log("  - Order Total: {$order_total}");
+
                 // Calculate profit ratio
                 if ($order_total > 0 && $vendor_earning > 0) {
                     // Calculate this item's share of the vendor earning
                     $profit_ratio = $vendor_earning / $order_total;
                     $item_profit = $item_subtotal * $profit_ratio;
                     $total_profit += $item_profit;
+
+                    error_log("  - Profit Ratio: {$profit_ratio}");
+                    error_log("  - Item Profit: {$item_profit}");
+                    error_log("  - Running Total Profit: {$total_profit}");
+                } else {
+                    error_log("  - SKIPPED: Order total or vendor earning is 0");
                 }
             }
         }
     }
+
+    error_log("=== FINAL TOTAL PROFIT for Product ID {$product_id}: {$total_profit} ===");
+    error_log("");
 
     return $total_profit;
 }
