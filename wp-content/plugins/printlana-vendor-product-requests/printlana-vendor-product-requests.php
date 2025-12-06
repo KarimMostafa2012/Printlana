@@ -153,8 +153,20 @@ class Printlana_Vendor_Product_Requests
             return $button;
         }
 
-        // Check if already requested
+        // Check if already assigned in the mapping table
         global $wpdb;
+        $mapping_table = $wpdb->prefix . 'pl_product_vendors';
+        $already_assigned = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$mapping_table} WHERE product_id = %d AND vendor_id = %d",
+            $product->get_id(),
+            $user_id
+        ));
+
+        if ($already_assigned) {
+            return '<button class="button pl-request-btn pl-approved" disabled>' . __('Already Assigned', 'printlana') . '</button>';
+        }
+
+        // Check if already requested
         $table = $wpdb->prefix . self::TABLE_NAME;
         $existing = $wpdb->get_row($wpdb->prepare(
             "SELECT status FROM {$table} WHERE product_id = %d AND vendor_id = %d",
@@ -194,8 +206,21 @@ class Printlana_Vendor_Product_Requests
             wp_send_json_error(['message' => __('Invalid product.', 'printlana')], 400);
         }
 
-        // Check if already requested
+        // Check if already assigned
         global $wpdb;
+        $mapping_table = $wpdb->prefix . 'pl_product_vendors';
+        $already_assigned = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$mapping_table} WHERE product_id = %d AND vendor_id = %d",
+            $product_id,
+            $user_id
+        ));
+
+        if ($already_assigned) {
+            error_log("[Product Request] Vendor {$user_id} tried to request product {$product_id} but is already assigned");
+            wp_send_json_error(['message' => __('You are already assigned to this product.', 'printlana')], 400);
+        }
+
+        // Check if already requested
         $table = $wpdb->prefix . self::TABLE_NAME;
         $existing = $wpdb->get_var($wpdb->prepare(
             "SELECT id FROM {$table} WHERE product_id = %d AND vendor_id = %d",
@@ -204,6 +229,7 @@ class Printlana_Vendor_Product_Requests
         ));
 
         if ($existing) {
+            error_log("[Product Request] Vendor {$user_id} tried to request product {$product_id} but already has a request");
             wp_send_json_error(['message' => __('You already requested this product.', 'printlana')], 400);
         }
 
@@ -220,9 +246,11 @@ class Printlana_Vendor_Product_Requests
         );
 
         if (!$inserted) {
+            error_log("[Product Request] Failed to insert request for vendor {$user_id} and product {$product_id}");
             wp_send_json_error(['message' => __('Failed to create request.', 'printlana')], 500);
         }
 
+        error_log("[Product Request] SUCCESS - Vendor {$user_id} requested product {$product_id}");
         wp_send_json_success(['message' => __('Request sent successfully!', 'printlana')]);
     }
 
