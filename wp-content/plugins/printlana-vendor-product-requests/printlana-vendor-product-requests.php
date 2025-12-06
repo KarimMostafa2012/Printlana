@@ -103,8 +103,8 @@ class Printlana_Vendor_Product_Requests
             return;
         }
 
-        wp_enqueue_style('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/admin.css', [], '1.0.0');
-        wp_enqueue_script('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/admin.js', ['jquery'], '1.0.0', true);
+        wp_enqueue_style('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/css/admin.css', [], '1.0.1');
+        wp_enqueue_script('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/js/admin.js', ['jquery'], '1.0.1', true);
 
         wp_localize_script('pl-product-requests-admin', 'plProductRequests', [
             'ajaxurl' => admin_url('admin-ajax.php'),
@@ -126,8 +126,8 @@ class Printlana_Vendor_Product_Requests
             return;
         }
 
-        wp_enqueue_style('pl-product-requests-frontend', plugin_dir_url(__FILE__) . 'assets/frontend.css', [], '1.0.0');
-        wp_enqueue_script('pl-product-requests-frontend', plugin_dir_url(__FILE__) . 'assets/frontend.js', ['jquery'], '1.0.0', true);
+        wp_enqueue_style('pl-product-requests-frontend', plugin_dir_url(__FILE__) . 'assets/css/frontend.css', [], '1.0.1');
+        wp_enqueue_script('pl-product-requests-frontend', plugin_dir_url(__FILE__) . 'assets/js/frontend.js', ['jquery'], '1.0.1', true);
 
         wp_localize_script('pl-product-requests-frontend', 'plVendorRequests', [
             'ajaxurl' => admin_url('admin-ajax.php'),
