@@ -586,6 +586,9 @@ public function ajax_assign_vendors()
     $current_user_id = get_current_user_id();
     $is_admin        = current_user_can('manage_woocommerce');
 
+    // Common input (needed for both permission checks and processing)
+    $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
+
     /**
      * Permissions:
      * - Admins (manage_woocommerce) can assign ANY vendors (bulk tool in wp-admin).
@@ -601,10 +604,34 @@ public function ajax_assign_vendors()
             // If Dokan helper is missing, block non-admins
             wp_send_json_error(['message' => 'Permission denied.'], 403);
         }
-    }
 
-    // Common input
-    $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
+        // Vendor path: ensure each product has an approved request before auto-assigning
+        if ( empty( $product_ids ) ) {
+            wp_send_json_error(['message' => 'Missing product IDs.'], 400);
+        }
+
+        global $wpdb;
+        $requests_table = $wpdb->prefix . 'pl_vendor_product_requests';
+
+        // Count approved requests for this vendor and the requested products
+        $placeholders = implode(',', array_fill(0, count($product_ids), '%d'));
+        $params       = array_merge( [ $current_user_id ], $product_ids );
+        $approved     = (int) $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM {$requests_table}
+                 WHERE vendor_id = %d
+                   AND status    = 'approved'
+                   AND product_id IN ({$placeholders})",
+                $params
+            )
+        );
+
+        if ( $approved < count( $product_ids ) ) {
+            wp_send_json_error([
+                'message' => 'You need an approved request before adding this product.',
+            ], 403);
+        }
+    }
 
     // For admins: keep the original behavior (vendor_ids[] from request)
     if ( $is_admin ) {
