@@ -37,7 +37,7 @@ class Printlana_Vendor_Product_Requests
         add_action('wp_ajax_pl_request_to_sell_product', [$this, 'ajax_vendor_request']);
 
         // Test endpoint to verify plugin is working
-        add_action('wp_ajax_pl_test_plugin', function() {
+        add_action('wp_ajax_pl_test_plugin', function () {
             wp_send_json_success(['message' => 'Plugin is active and AJAX is working!']);
         });
     }
@@ -151,6 +151,8 @@ class Printlana_Vendor_Product_Requests
         }
 
         $user_id = get_current_user_id();
+        error_log("[Product Request] Checking request button for user {$user_id} on product {$product->get_id()}");
+        error_log("[Product Request] User is " . (dokan_is_user_seller($user_id) ? "" : "not ") . "a vendor");
         if (!dokan_is_user_seller($user_id)) {
             return $button;
         }
@@ -205,6 +207,8 @@ class Printlana_Vendor_Product_Requests
         }
 
         $user_id = get_current_user_id();
+        error_log("[Product Request] Vendor {$user_id} is attempting to request a product");
+        error_log("[Product Request] User is " . (dokan_is_user_seller($user_id) ? "" : "not ") . "a vendor");
         if (!dokan_is_user_seller($user_id)) {
             wp_send_json_error(['message' => __('Only vendors can request products.', 'printlana')], 403);
         }
@@ -514,15 +518,18 @@ HTML;
             <h1><?php _e('Vendor Product Requests', 'printlana'); ?></h1>
 
             <ul class="subsubsub">
-                <li><a href="?page=pl-product-requests&status=pending" class="<?php echo $status_filter === 'pending' ? 'current' : ''; ?>">
-                    <?php _e('Pending', 'printlana'); ?> <span class="count">(<?php echo $pending_count; ?>)</span>
-                </a> |</li>
-                <li><a href="?page=pl-product-requests&status=approved" class="<?php echo $status_filter === 'approved' ? 'current' : ''; ?>">
-                    <?php _e('Approved', 'printlana'); ?> <span class="count">(<?php echo $approved_count; ?>)</span>
-                </a> |</li>
-                <li><a href="?page=pl-product-requests&status=rejected" class="<?php echo $status_filter === 'rejected' ? 'current' : ''; ?>">
-                    <?php _e('Rejected', 'printlana'); ?> <span class="count">(<?php echo $rejected_count; ?>)</span>
-                </a></li>
+                <li><a href="?page=pl-product-requests&status=pending"
+                        class="<?php echo $status_filter === 'pending' ? 'current' : ''; ?>">
+                        <?php _e('Pending', 'printlana'); ?> <span class="count">(<?php echo $pending_count; ?>)</span>
+                    </a> |</li>
+                <li><a href="?page=pl-product-requests&status=approved"
+                        class="<?php echo $status_filter === 'approved' ? 'current' : ''; ?>">
+                        <?php _e('Approved', 'printlana'); ?> <span class="count">(<?php echo $approved_count; ?>)</span>
+                    </a> |</li>
+                <li><a href="?page=pl-product-requests&status=rejected"
+                        class="<?php echo $status_filter === 'rejected' ? 'current' : ''; ?>">
+                        <?php _e('Rejected', 'printlana'); ?> <span class="count">(<?php echo $rejected_count; ?>)</span>
+                    </a></li>
             </ul>
 
             <table class="wp-list-table widefat fixed striped" style="margin-top:20px;">
@@ -544,53 +551,54 @@ HTML;
                                 <?php _e('No requests found.', 'printlana'); ?>
                             </td>
                         </tr>
-                    <?php else: foreach ($requests as $request):
-                        $product = wc_get_product($request->product_id);
-                        $vendor = get_user_by('id', $request->vendor_id);
-                    ?>
-                        <tr>
-                            <td>
-                                <?php if ($product): ?>
-                                    <strong><a href="<?php echo get_edit_post_link($request->product_id); ?>" target="_blank">
-                                        <?php echo esc_html($product->get_name()); ?>
-                                    </a></strong><br>
-                                    <small>ID: <?php echo $request->product_id; ?></small>
-                                <?php else: ?>
-                                    <em><?php _e('Product not found', 'printlana'); ?></em>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($vendor): ?>
-                                    <?php echo esc_html($vendor->display_name); ?><br>
-                                    <small><?php echo esc_html($vendor->user_email); ?></small>
-                                <?php else: ?>
-                                    <em><?php _e('Vendor not found', 'printlana'); ?></em>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($request->requested_at)); ?>
-                            </td>
-                            <?php if ($status_filter !== 'pending'): ?>
+                    <?php else:
+                        foreach ($requests as $request):
+                            $product = wc_get_product($request->product_id);
+                            $vendor = get_user_by('id', $request->vendor_id);
+                            ?>
+                            <tr>
                                 <td>
-                                    <?php echo $request->processed_at ? date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($request->processed_at)) : '-'; ?>
+                                    <?php if ($product): ?>
+                                        <strong><a href="<?php echo get_edit_post_link($request->product_id); ?>" target="_blank">
+                                                <?php echo esc_html($product->get_name()); ?>
+                                            </a></strong><br>
+                                        <small>ID: <?php echo $request->product_id; ?></small>
+                                    <?php else: ?>
+                                        <em><?php _e('Product not found', 'printlana'); ?></em>
+                                    <?php endif; ?>
                                 </td>
-                            <?php endif; ?>
-                            <td>
-                                <?php if ($request->status === 'pending'): ?>
-                                    <button class="button button-primary pl-approve-btn" data-request-id="<?php echo $request->id; ?>">
-                                        <?php _e('Approve', 'printlana'); ?>
-                                    </button>
-                                    <button class="button pl-reject-btn" data-request-id="<?php echo $request->id; ?>">
-                                        <?php _e('Reject', 'printlana'); ?>
-                                    </button>
-                                <?php else: ?>
-                                    <span class="pl-status-<?php echo esc_attr($request->status); ?>">
-                                        <?php echo ucfirst($request->status); ?>
-                                    </span>
+                                <td>
+                                    <?php if ($vendor): ?>
+                                        <?php echo esc_html($vendor->display_name); ?><br>
+                                        <small><?php echo esc_html($vendor->user_email); ?></small>
+                                    <?php else: ?>
+                                        <em><?php _e('Vendor not found', 'printlana'); ?></em>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($request->requested_at)); ?>
+                                </td>
+                                <?php if ($status_filter !== 'pending'): ?>
+                                    <td>
+                                        <?php echo $request->processed_at ? date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($request->processed_at)) : '-'; ?>
+                                    </td>
                                 <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; endif; ?>
+                                <td>
+                                    <?php if ($request->status === 'pending'): ?>
+                                        <button class="button button-primary pl-approve-btn" data-request-id="<?php echo $request->id; ?>">
+                                            <?php _e('Approve', 'printlana'); ?>
+                                        </button>
+                                        <button class="button pl-reject-btn" data-request-id="<?php echo $request->id; ?>">
+                                            <?php _e('Reject', 'printlana'); ?>
+                                        </button>
+                                    <?php else: ?>
+                                        <span class="pl-status-<?php echo esc_attr($request->status); ?>">
+                                            <?php echo ucfirst($request->status); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; endif; ?>
                 </tbody>
             </table>
         </div>
