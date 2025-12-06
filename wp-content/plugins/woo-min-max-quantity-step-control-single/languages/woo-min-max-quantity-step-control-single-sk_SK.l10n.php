@@ -1,0 +1,2 @@
+<?php
+return ['project-id-version'=>'Min Max Quantity & Step Control for WooCommerce','report-msgid-bugs-to'=>'','pot-creation-date'=>'2023-01-03 06:09+0000','po-revision-date'=>'2025-05-15 06:27+0000','last-translator'=>'','language-team'=>'Slovak','language'=>'sk_SK','plural-forms'=>'nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : 2;','mime-version'=>'1.0','content-type'=>'text/plain; charset=UTF-8','content-transfer-encoding'=>'8bit','x-generator'=>'Loco https://localise.biz/','x-loco-version'=>'2.6.3; wp-6.1.1','x-domain'=>'wcmmq','messages'=>[]];

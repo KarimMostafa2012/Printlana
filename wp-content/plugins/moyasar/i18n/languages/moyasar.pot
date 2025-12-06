@@ -1,0 +1,303 @@
+# Copyright (C) 2023 Moyasar Development Team
+# This file is distributed under the same license as the Moyasar Payment Gateway plugin.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Moyasar Payment Gateway 5.8.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/moyasar-payments\n"
+"POT-Creation-Date: 2024-06-02 20:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Domain: moyasar\n"
+
+#. Plugin Name of the plugin
+msgid "Moyasar Payment Gateway"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.moyasar.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Moyasar Payment Gateway, Adds credit card, Apple Pay, and STC Pay payment capabilities to Woocommerce."
+msgstr ""
+
+#. Author of the plugin
+msgid "Moyasar Development Team"
+msgstr ""
+
+#: controllers/class-wc-controller-moyasar-return.php:61
+msgid "Cannot retrieve saved invoice ID for order."
+msgstr ""
+
+#: controllers/class-wc-controller-moyasar-return.php:75
+msgid "Payment %s for order was not complete. Message: %s. Payment Status: %s"
+msgstr ""
+
+#: controllers/class-wc-controller-moyasar-return.php:81
+msgid "No payment attempts"
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:28
+msgid "Moyasar Payments"
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:29
+msgid "Moyasar Gateway Settings"
+msgstr ""
+
+#: gateways/class-wc-moyasar-credit-card-payment:34
+msgid "Moyasar Gateway Settings For Credit Card (Mada, Visa, Mastercard, and American Express"
+msgstr ""
+
+#: gateways/class-wc-moyasar-apple-pay-payment:30
+msgid "Moyasar Gateway Settings For ApplePay"
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:38
+msgid "Online Payments"
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:39
+msgid "Pay with your credit card."
+msgstr ""
+
+msgid "Pay with STC Pay."
+msgstr ""
+
+msgid "Pay with Apple Pay."
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:96
+msgid "Moyasar API keys are missing."
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:100
+msgid "Moyasar: At least one payment method is required."
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:104
+msgid "Moyasar: At least one network is required."
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:211
+msgid "Awaiting payment to complete"
+msgstr ""
+
+#: gateways/class-wc-moyasar-payment-form.php:300
+#: gateways/class-wc-moyasar-payment-form.php:310
+msgid "Cannot retrieve current order"
+msgstr ""
+
+#: moyasar.php:30
+msgid "Moyasar Payment Gateway requires WooCommerce to be installed and active. You can download %s here."
+msgstr ""
+
+#: moyasar.php:36
+msgid "Moyasar Payment Gateway is disabled. WooCommerce %2$s is not supported."
+msgstr ""
+
+#: moyasar.php:87
+msgid "Gateway Settings"
+msgstr ""
+
+#: utils/admin-settings.php:5
+msgid "Enable/Disable"
+msgstr ""
+
+#: utils/admin-settings.php:7
+msgid "Enable Moyasar Payment Gateway"
+msgstr ""
+
+#: utils/admin-settings.php:12
+msgid "Fixed Width"
+msgstr ""
+
+#: utils/admin-settings.php:14
+msgid "Set form max width to 340px"
+msgstr ""
+
+#: utils/admin-settings.php:19
+msgid "Secret Key"
+msgstr ""
+
+#: utils/admin-settings.php:21
+msgid "This key is used by the server to verify payments upon clients return."
+msgstr ""
+
+#: utils/admin-settings.php:24
+msgid "Publishable Key"
+msgstr ""
+
+#: utils/admin-settings.php:26
+msgid "This key is used by client's browser to create a new payment."
+msgstr ""
+
+#: utils/admin-settings.php:30
+msgid "Supported Networks"
+msgstr ""
+
+#: utils/admin-settings.php:32
+msgid "Supported networks by Credit Card method and Apple Pay."
+msgstr ""
+
+#: utils/admin-settings.php:34
+msgid "Mada"
+msgstr ""
+
+#: utils/admin-settings.php:35
+msgid "VISA"
+msgstr ""
+
+#: utils/admin-settings.php:36
+msgid "Mastercard"
+msgstr ""
+
+#: utils/admin-settings.php:37
+msgid "American Express"
+msgstr ""
+
+#: utils/admin-settings.php:47
+msgid "New Order Status"
+msgstr ""
+
+#: utils/admin-settings.php:51
+msgid "Processing"
+msgstr ""
+
+#: utils/admin-settings.php:52
+msgid "On Hold"
+msgstr ""
+
+#: utils/admin-settings.php:53
+msgid "Completed"
+msgstr ""
+
+#: utils/admin-settings.php:60
+msgid "Enable Webhook"
+msgstr ""
+
+#: utils/admin-settings.php:62
+msgid "Enable Webhook to receive payment updates in the logs file."
+msgstr ""
+
+#: utils/admin-settings.php:66
+msgid "Webhook URL"
+msgstr ""
+
+#: utils/admin-settings.php:70
+msgid "Copy URL and pasted into a webhook section in the Moyasar dashboard."
+msgstr ""
+
+#: utils/admin-settings.php:73
+msgid "Webhook Secret"
+msgstr ""
+
+#: utils/admin-settings.php:76
+msgid "Make sure use the same secret token in the Moyasar dashboard."
+msgstr ""
+
+msgid "Card Name"
+msgstr ""
+
+msgid "Name on card"
+msgstr ""
+
+msgid "Card Number"
+msgstr ""
+
+msgid "Expiration"
+msgstr ""
+
+msgid "Please enter your mobile number and press 'Send OTP'. You will receive an SMS code required to complete the payment process."
+msgstr ""
+
+msgid "OTP has been sent."
+msgstr ""
+
+msgid "Phone number must start with 05."
+msgstr ""
+
+msgid "Phone Number"
+msgstr ""
+
+msgid "OTP"
+msgstr ""
+
+msgid "Send OTP"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "OTP Sent Successfully. Please enter the OTP code you received."
+msgstr ""
+
+msgid "Please enter the card number."
+msgstr ""
+
+msgid "Please enter a valid card number."
+msgstr ""
+
+msgid "Please enter the card name."
+msgstr ""
+
+msgid "Please enter a valid card name."
+msgstr ""
+
+msgid "Please enter the expiry date."
+msgstr ""
+
+msgid "Please enter a valid expiry date."
+msgstr ""
+
+msgid "Please enter the cvc."
+msgstr ""
+
+msgid "Please enter the phone number."
+msgstr ""
+
+msgid "Phone number must start with 05."
+msgstr ""
+
+msgid "Please enter a valid phone number."
+msgstr ""
+
+msgid "Please enter the OTP."
+msgstr ""
+
+msgid "Supported Countries"
+msgstr ""
+
+msgid "Select the card types you want to enable Apple Pay for."
+msgstr ""
+
+msgid "Select the countries you want to enable Apple Pay for."
+msgstr ""
+
+msgid "Could not create payment, please contact the store administrator. (reference number: %s)"
+msgstr ""
+
+msgid "Please check the payment details and try again. %s"
+msgstr ""
+
+msgid "Authentication Error, please check your API keys."
+msgstr ""
+
+msgid "Could not create payment, the card is not supported."
+msgstr ""
+
+msgid "Something went wrong in the payment process"
+msgstr ""
+
+msgid "Pay with"
+msgstr ""
+
+msgid "Pay %s %s"
+msgstr ""

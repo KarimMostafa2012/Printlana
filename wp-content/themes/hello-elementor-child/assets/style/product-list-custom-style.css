@@ -1,0 +1,17 @@
+@media screen and (max-width: 768px){
+    .wpc-filters-open-button-container a.wpc-open-close-filters-button{
+        width: 100%;
+        border-radius: 40px !important;
+        border: none !important;
+    }
+
+    .wpc-filters-open-button-container a.wpc-open-close-filters-button .wpc-button-inner{
+        justify-content: center;
+    }
+
+    .wpc-filters-open-button-container a.wpc-open-close-filters-button,
+    .price_slider_amount button.button{
+        background-color: var(--e-global-color-89f1980) !important;
+        color: var(--e-global-color-61344fa) !important;
+    }
+}

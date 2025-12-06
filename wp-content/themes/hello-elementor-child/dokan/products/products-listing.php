@@ -1,0 +1,398 @@
+<?php
+global $post;
+
+/**
+ * Calculate total profit for this product from vendor's sub-orders
+ *
+ * @param WC_Product $product
+ * @param int $vendor_id
+ * @return float
+ */
+function printlana_calculate_product_profit_from_suborders($product, $vendor_id = null) {
+    global $wpdb;
+
+    error_log("=== Profit Calculation Function Called ===");
+    
+    if (!$vendor_id) {
+        $vendor_id = dokan_get_current_user_id();
+    }
+
+    $product_id = $product->get_id();
+    $total_profit = 0;
+
+    // DEBUG 1: Function called
+    error_log("=== Profit Calculation Function Called ===");
+    error_log("Product ID: {$product_id}");
+    error_log("Product Name: {$product->get_name()}");
+    error_log("Vendor ID: {$vendor_id}");
+
+    // Get all sub-orders for this vendor from dokan_orders table
+    // Let's check ALL statuses first to debug
+    $dokan_orders = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT do.order_id, do.net_amount, do.order_total, do.order_status
+            FROM {$wpdb->prefix}dokan_orders AS do
+            WHERE do.seller_id = %d",
+            $vendor_id
+        )
+    );
+
+    // DEBUG 2: Sub-orders found
+    $order_count = count($dokan_orders);
+    error_log("Sub-orders found: {$order_count}");
+
+    if ($order_count > 0) {
+        error_log("--- Order Details ---");
+        foreach ($dokan_orders as $idx => $dokan_order) {
+            error_log("Order #{$dokan_order->order_id}: Status = {$dokan_order->order_status}, Net Amount = {$dokan_order->net_amount}, Order Total = {$dokan_order->order_total}");
+        }
+    }
+
+    foreach ($dokan_orders as $dokan_order) {
+        $order = wc_get_order($dokan_order->order_id);
+
+        if (!$order) {
+            error_log("Order #{$dokan_order->order_id} not found");
+            continue;
+        }
+
+        // DEBUG 3: Earnings from this sub-order
+        error_log("--- Processing Order #{$dokan_order->order_id} ---");
+
+        // Log all products in this order
+        $all_products = [];
+        foreach ($order->get_items() as $item) {
+            $all_products[] = "ID:" . $item->get_product_id() . " - " . $item->get_name();
+        }
+        error_log("Products in order: " . implode(", ", $all_products));
+
+        // Loop through order items
+        foreach ($order->get_items() as $item) {
+            $item_product_id = $item->get_product_id();
+            $item_product_name = $item->get_name();
+
+            // Check if this item is the product we're calculating for
+            if ($item_product_id == $product_id) {
+                // Get item subtotal (revenue for this product in this order)
+                $item_subtotal = $item->get_subtotal();
+
+                // Get vendor earning from dokan_orders table
+                $vendor_earning = floatval($dokan_order->net_amount);
+                $order_total = floatval($dokan_order->order_total);
+
+                // DEBUG 4: Each product earning from the sub-order
+                error_log("MATCH FOUND! Product '{$item_product_name}' in Order #{$dokan_order->order_id}");
+                error_log("  - Item Subtotal: {$item_subtotal}");
+                error_log("  - Vendor Earning (net_amount): {$vendor_earning}");
+                error_log("  - Order Total: {$order_total}");
+
+                // Calculate profit ratio
+                if ($order_total > 0 && $vendor_earning > 0) {
+                    // Calculate this item's share of the vendor earning
+                    $profit_ratio = $vendor_earning / $order_total;
+                    $item_profit = $item_subtotal * $profit_ratio;
+                    $total_profit += $item_profit;
+
+                    error_log("  - Profit Ratio: {$profit_ratio}");
+                    error_log("  - Item Profit: {$item_profit}");
+                    error_log("  - Running Total Profit: {$total_profit}");
+                } else {
+                    error_log("  - SKIPPED: Order total or vendor earning is 0");
+                }
+            }
+        }
+    }
+
+    error_log("=== FINAL TOTAL PROFIT for Product ID {$product_id}: {$total_profit} ===");
+    error_log("");
+
+    return $total_profit;
+}
+?>
+
+<?php do_action('dokan_dashboard_wrap_start'); ?>
+
+<div class="dokan-dashboard-wrap">
+
+    <?php
+
+    /**
+     *  Adding dokan_dashboard_content_before hook
+     *
+     *  @hooked get_dashboard_side_navigation
+     *
+     *  @since 2.4
+     */
+    do_action('dokan_dashboard_content_before');
+    ?>
+
+    <div class="dokan-dashboard-content dokan-product-listing">
+
+        <?php
+
+        /**
+         *  Adding dokan_dashboard_content_before hook
+         *
+         *  @hooked get_dashboard_side_navigation
+         *
+         *  @since 2.4
+         */
+        do_action('dokan_dashboard_content_inside_before');
+        do_action('dokan_before_listing_product');
+        ?>
+
+        <article class="dokan-product-listing-area">
+            <?php
+            $one_step_product_create = 'on' === dokan_get_option('one_step_product_create', 'dokan_selling', 'on');
+            $disable_product_popup = $one_step_product_create || 'on' === dokan_get_option('disable_product_popup', 'dokan_selling', 'off');
+            $new_product_url = $one_step_product_create ? dokan_edit_product_url(0, true) : add_query_arg(
+                [
+                    '_dokan_add_product_nonce' => wp_create_nonce('dokan_add_product_nonce'),
+                ],
+                dokan_get_navigation_url('new-product')
+            );
+            $product_listing_args = [
+                'author' => dokan_get_current_user_id(),
+                'posts_per_page' => 1,
+                'post_status' => apply_filters(
+                    'dokan_product_listing_post_statuses',
+                    [
+                        'publish',
+                        'draft',
+                        'pending',
+                        'future',
+                    ]
+                ),
+            ];
+            $product_query = dokan()->product->all($product_listing_args);
+
+            if ($product_query->have_posts()) {
+                ?>
+
+                <div class="product-listing-top dokan-clearfix">
+                    <?php dokan_product_listing_status_filter(); ?>
+
+                    <?php if (dokan_is_seller_enabled(dokan_get_current_user_id())): ?>
+                        <span class="dokan-add-product-link"> <!-- Hide Add new Product -->
+                            <?php if (current_user_can('dokan_add_product')): ?>
+                                <a href="<?php echo esc_url($new_product_url); ?>"
+                                    class="dokan-btn dokan-btn-theme <?php echo $disable_product_popup ? '' : 'dokan-add-new-product'; ?>">
+                                    <i class="fas fa-briefcase">&nbsp;</i>
+                                    <?php esc_html_e('Add new product', 'dokan-lite'); ?>
+                                </a>
+                            <?php endif; ?>
+
+                            <?php
+                            do_action('dokan_after_add_product_btn');
+                            ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+                <?php dokan_product_dashboard_errors(); ?>
+
+                <div class="dokan-w12">
+                    <?php dokan_product_listing_filter(); ?>
+                </div>
+
+                <div class="dokan-dashboard-product-listing-wrapper">
+
+                    <form id="product-filter" method="POST" class="dokan-form-inline">
+                        <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table"
+                            id="dokan-product-list-table">
+                            <thead>
+                                <tr>
+                                    <th id="cb" class="manage-column column-cb check-column">
+                                        <label for="cb-select-all"></label>
+                                        <input id="cb-select-all" class="dokan-checkbox" type="checkbox">
+                                    </th>
+                                    <th><?php esc_html_e('Image', 'dokan-lite'); ?></th>
+                                    <th><?php esc_html_e('Name', 'dokan-lite'); ?></th>
+                                    <th><?php esc_html_e('Status', 'dokan-lite'); ?></th>
+
+                                    <?php do_action('dokan_product_list_table_after_status_table_header'); ?>
+
+                                    <th><?php esc_html_e('SKU', 'dokan-lite'); ?></th>
+                                    <th><?php esc_html_e('Stock', 'dokan-lite'); ?></th>
+                                    <th><?php esc_html_e('Price', 'dokan-lite'); ?></th>
+                                    <th><?php esc_html_e('Earning', 'dokan-lite'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php do_action('dokan_product_list_before_table_body_start'); ?>
+                                <?php
+                                $post_statuses = apply_filters('dokan_product_listing_post_statuses', ['publish', 'draft', 'pending', 'future']);
+                                $stock_statuses = apply_filters('dokan_product_stock_statuses', ['instock', 'outofstock']);
+
+
+                                $args = array(
+                                    'posts_per_page' => 15,
+                                    'paged' => 1,
+                                    'author' => dokan_get_current_user_id(),
+                                    'post_status' => $post_statuses,
+                                    'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+                                        array(
+                                            'taxonomy' => 'product_type',
+                                            'field' => 'slug',
+                                            'terms' => !dokan()->is_pro_exists() ? ['simple'] : apply_filters('dokan_product_listing_exclude_type', array()),
+                                            'operator' => !dokan()->is_pro_exists() ? 'IN' : 'NOT IN',
+                                        ),
+                                    ),
+                                );
+
+                                if (isset($_GET['_product_listing_filter_nonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_GET['_product_listing_filter_nonce'])), 'product_listing_filter')) {
+                                    if (isset($_GET['pagenum'])) {
+                                        $args['paged'] = absint($_GET['pagenum']);
+                                    }
+
+                                    if (isset($_GET['date']) && $_GET['date'] !== 0) {
+                                        $args['m'] = sanitize_text_field(wp_unslash($_GET['date']));
+                                    }
+
+                                    if (isset($_GET['product_cat']) && intval($_GET['product_cat']) !== -1) {
+                                        $args['tax_query'][] = array(
+                                            'taxonomy' => 'product_cat',
+                                            'field' => 'id',
+                                            'terms' => intval($_GET['product_cat']),
+                                            'include_children' => false,
+                                        );
+                                    }
+
+                                    if (!empty($_GET['product_search_name'])) {
+                                        $args['s'] = sanitize_text_field(wp_unslash($_GET['product_search_name']));
+                                    }
+
+                                    if (isset($_GET['post_status']) && in_array($_GET['post_status'], $stock_statuses, true)) {
+                                        $args['meta_query'][] = array(
+                                            'key' => '_stock_status',
+                                            'value' => sanitize_text_field(wp_unslash($_GET['post_status'])),
+                                            'compare' => '=',
+                                        );
+                                    }
+                                }
+
+                                $original_post = $post;
+                                $product_args = apply_filters('dokan_pre_product_listing_args', $args, []);
+                                $product_query = dokan()->product->all(apply_filters('dokan_product_listing_arg', $product_args));
+
+                                if ($product_query->have_posts()) {
+                                    while ($product_query->have_posts()) {
+                                        $product_query->the_post();
+
+                                        $row_actions = dokan_product_get_row_action($post);
+                                        $tr_class = ($post->post_status === 'pending') ? 'danger' : '';
+                                        $view_class = ($post->post_status === 'pending') ? 'dokan-hide' : '';
+                                        $product = wc_get_product($post->ID);
+
+                                        $row_args = array(
+                                            'post' => $post,
+                                            'product' => $product,
+                                            'tr_class' => $tr_class,
+                                            'row_actions' => $row_actions,
+                                        );
+
+                                        dokan_get_template_part('products/products-listing-row', '', $row_args);
+
+                                        do_action('dokan_product_list_table_after_row', $product, $post);
+                                    }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="11"><?php esc_html_e('No product found', 'dokan-lite'); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+
+                        </table>
+                    </form>
+                </div>
+                <?php
+                wp_reset_postdata();
+
+                $pagenum = isset($_GET['pagenum']) ? absint($_GET['pagenum']) : 1;
+                $base_url = dokan_get_navigation_url('products');
+
+                if ($product_query->max_num_pages > 1) {
+                    echo '<div class="pagination-wrap">';
+                    $page_links = paginate_links(
+                        array(
+                            'current' => $pagenum,
+                            'total' => $product_query->max_num_pages,
+                            'base' => $base_url . '%_%',
+                            'format' => '?pagenum=%#%',
+                            'add_args' => [
+                                '_product_listing_filter_nonce' => wp_create_nonce('product_listing_filter'),
+                            ],
+                            'type' => 'array',
+                            'prev_text' => esc_html__('&laquo; Previous', 'dokan-lite'),
+                            'next_text' => esc_html__('Next &raquo;', 'dokan-lite'),
+                        )
+                    );
+
+                    echo '<ul class="pagination"><li>';
+                    echo implode("</li>\n\t<li>", $page_links); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped,WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo "</li>\n</ul>\n";
+                    echo '</div>';
+                }
+                ?>
+                <?php
+            } else {
+                ?>
+                <div class="dokan-dashboard-product-listing-wrapper dokan-dashboard-not-product-found">
+                    <img src="<?php echo esc_url(plugins_url('assets/images/no-product-found.svg', DOKAN_FILE)); ?>"
+                        alt="dokan setup" class="no-product-found-icon">
+                    <h4 class="dokan-blank-product-message">
+                        <?php esc_html_e('No Products Found!', 'dokan-lite'); ?>
+                    </h4>
+
+                    <?php if (dokan_is_seller_enabled(dokan_get_current_user_id())): ?>
+                        <h2 class="dokan-blank-product-message">
+                            <?php esc_html_e('Ready to start selling something awesome?', 'dokan-lite'); ?>
+                        </h2>
+
+                        <span class="dokan-add-product-link">
+                            <?php if (current_user_can('dokan_add_product')): ?>
+                                <a href="<?php echo esc_url($new_product_url); ?>"
+                                    class="dokan-btn dokan-btn-theme <?php echo $disable_product_popup ? '' : 'dokan-add-new-product'; ?>">
+                                    <i class="fas fa-briefcase">&nbsp;</i>
+                                    <?php esc_html_e('Add new product', 'dokan-lite'); ?>
+                                </a>
+                            <?php endif ?>
+
+                            <?php
+                            do_action('dokan_after_add_product_btn');
+                            ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            <?php } ?>
+        </article>
+
+        <?php
+
+        /**
+         *  Adding dokan_dashboard_content_before hook
+         *
+         *  @hooked get_dashboard_side_navigation
+         *
+         *  @since 2.4
+         */
+        do_action('dokan_dashboard_content_inside_after');
+        do_action('dokan_after_listing_product');
+        ?>
+
+    </div><!-- #primary .content-area -->
+
+    <?php
+
+    /**
+     *  Adding dokan_dashboard_content_after hook
+     *
+     *  @since 2.4
+     */
+    do_action('dokan_dashboard_content_after');
+    ?>
+
+</div><!-- .dokan-dashboard-wrap -->
+
+<?php do_action('dokan_dashboard_wrap_end'); ?>

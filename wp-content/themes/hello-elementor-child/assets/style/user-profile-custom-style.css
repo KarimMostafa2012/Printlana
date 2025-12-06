@@ -1,0 +1,166 @@
+/*************************************************ACCOUNT****************************************************/
+@media screen and (max-width: 992px){
+    .woocommerce-MyAccount-content-wrapper{
+        padding: 0 5px !important;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .woocommerce-MyAccount-content-wrapper fieldset{
+        max-width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .woocommerce-MyAccount-content-wrapper p.woocommerce-form-row{
+        width: 100% !important;
+    }
+
+    .woocommerce-MyAccount-content-wrapper .profile-picture-section p.image-upload-field{
+        display: none !important;
+    }
+
+    .woocommerce-MyAccount-content-wrapper p .woocommerce-Button{
+        width: 100% !important;
+    }
+}
+
+/*************************************************ORDERS****************************************************/
+.e-my-account-tab__orders .woocommerce-MyAccount-content-wrapper .order-header div .order-date{
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 576px){
+    .e-my-account-tab__orders .woocommerce-MyAccount-content-wrapper .order-card .products-wrapper{
+        margin: 0px !important;
+    }
+
+    .e-my-account-tab__orders .woocommerce-MyAccount-content-wrapper .order-card .products-wrapper .products-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .e-my-account-tab__orders .woocommerce-MyAccount-content-wrapper .order-card .products-wrapper .order-actions{
+        width: 100%;
+        justify-content: space-between;
+        margin: 10px 0 0 0 !important;
+        padding: 0px !important;
+    }
+
+    .e-my-account-tab__orders .woocommerce-MyAccount-content-wrapper .order-card .products-wrapper .order-actions a.woocommerce-button{
+        margin-right: 0px !important;
+    }
+}
+
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content{
+    padding: 0 30px !important;
+}
+
+@media screen and (max-width: 992px){
+    .e-my-account-tab__view-order .woocommerce-MyAccount-content{
+        padding: 0 !important;
+    }
+}
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table{
+    border: 1px solid var(--e-global-color-4be708b);
+    border-radius: 10px;
+    margin-top: 36px;
+    padding: 0px;
+}
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table thead tr th,
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tbody tr td,
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tfoot tr th,
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tfoot tr td{
+    padding: 12px !important;
+}
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tbody tr td,
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tfoot tr th,
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tfoot tr td{
+    border-top: 1px solid var(--e-global-color-4be708b) !important;
+}
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-table tfoot tr td a.woocommerce-button{
+    border: 1px solid var(--e-global-color-4be708b) !important;
+}
+
+.e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-customer-details address{
+    padding: 12px 0px 0px 0px;
+}
+
+@media screen and (max-width: 576px){
+    .e-my-account-tab__view-order .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-customer-details{
+        margin-bottom: 0;
+    }
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .om-messenger{
+    padding: 0 30px;
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .om-messenger .om-messenger__footer button.button{
+    background-color: var(--e-global-color-89f6c54);
+    color: var(--e-global-color-61344fa);
+    padding: 12px 22px;
+    border-radius: 40px;
+    width: 140px;
+}
+
+@media screen and (max-width: 992px){
+    .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .om-messenger{
+        padding: 0px;
+    }
+}
+
+/*************************************************PAYMENT INFORMATION****************************************************/
+@media screen and (max-width: 992px){
+    .e-my-account-tab__add-payment-method .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper #add_payment_method #payment{
+        padding: 0px;
+    }
+}
+
+.e-my-account-tab__add-payment-method .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper #add_payment_method #payment #wc-stripe-upe-form{
+    border: 1px solid var(--e-global-color-4be708b);
+}
+
+/*************************************************My Account Messages****************************************************/
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders{
+    border: 1px solid var(--e-global-color-4be708b);
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders thead tr th,
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders tbody tr td{
+    border-top: 1px solid var(--e-global-color-4be708b) !important;
+    padding: 12px !important;
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders tbody tr td:first-child{
+    border-top: none !important;
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders tbody tr td:last-child{
+    border-bottom: 1px solid var(--e-global-color-4be708b) !important;
+}
+
+.woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .my_account_orders tbody tr td a.woocommerce-button{
+    border: 1px solid var(--e-global-color-4be708b) !important;
+}
+
+/*************************************************Address****************************************************/
+.e-my-account-tab__edit-address .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper{
+    padding: 0 30px !important;
+}
+
+@media screen and (max-width: 992px){
+    .e-my-account-tab__edit-address .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper{
+        padding: 0 !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .e-my-account-tab__edit-address .woocommerce-MyAccount-content .woocommerce-MyAccount-content-wrapper .woocommerce-address-fields{
+        padding: 16px 0px !important;
+    }
+}

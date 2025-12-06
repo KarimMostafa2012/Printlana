@@ -1,0 +1,117 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+return array(
+    'schemas' => array(
+      'title' => __('Schemas', 'moyasar'),
+        'description' => __('Select the card types you want to enable Apple Pay for.', 'moyasar'),
+        'type' => 'multiselect',
+        'options' => array(
+            'mada' => __('Mada', 'moyasar'),
+            'visa' => __('Visa', 'moyasar'),
+            'mastercard' => __('Mastercard', 'moyasar'),
+            'amex' => __('Amex', 'moyasar'),
+        ),
+        'default' => array('mada', 'visa', 'mastercard', 'amex'),
+    ),
+    'supportedCountries' => array(
+        'title' => __('Supported Countries', 'moyasar'),
+        'description' => __('Select the countries you want to enable Apple Pay for.', 'moyasar'),
+        'type' => 'multiselect',
+        'options' => array(
+            // Africa
+            'MA' => 'Morocco',
+            'ZA' => 'South Africa',
+
+            // Asia-Pacific
+            'AU' => 'Australia',
+            'CN' => 'China',
+            'HK' => 'Hong Kong',
+            'JP' => 'Japan',
+            'MO' => 'Macao',
+            'MY' => 'Malaysia',
+            'NZ' => 'New Zealand',
+            'SG' => 'Singapore',
+            'KR' => 'South Korea',
+            'TW' => 'Taiwan',
+            'VN' => 'Vietnam',
+
+            // Europe
+            'AM' => 'Armenia',
+            'AT' => 'Austria',
+            'AZ' => 'Azerbaijan',
+            'BY' => 'Belarus',
+            'BE' => 'Belgium',
+            'BG' => 'Bulgaria',
+            'HR' => 'Croatia',
+            'CY' => 'Cyprus',
+            'CZ' => 'Czechia',
+            'DK' => 'Denmark',
+            'EE' => 'Estonia',
+            'FO' => 'Faroe Islands',
+            'FI' => 'Finland',
+            'FR' => 'France',
+            'GE' => 'Georgia',
+            'DE' => 'Germany',
+            'GR' => 'Greece',
+            'GL' => 'Greenland',
+            'GG' => 'Guernsey',
+            'HU' => 'Hungary',
+            'IS' => 'Iceland',
+            'IE' => 'Ireland',
+            'IM' => 'Isle of Man',
+            'IT' => 'Italy',
+            'KZ' => 'Kazakhstan',
+            'JE' => 'Jersey',
+            'LV' => 'Latvia',
+            'LI' => 'Liechtenstein',
+            'LT' => 'Lithuania',
+            'LU' => 'Luxembourg',
+            'MT' => 'Malta',
+            'MD' => 'Moldova',
+            'MC' => 'Monaco',
+            'ME' => 'Montenegro',
+            'NL' => 'Netherlands',
+            'NO' => 'Norway',
+            'PL' => 'Poland',
+            'PT' => 'Portugal',
+            'RO' => 'Romania',
+            'SM' => 'San Marino',
+            'RS' => 'Serbia',
+            'SK' => 'Slovakia',
+            'SI' => 'Slovenia',
+            'ES' => 'Spain',
+            'SE' => 'Sweden',
+            'CH' => 'Switzerland',
+            'UA' => 'Ukraine',
+            'GB' => 'United Kingdom',
+            'VA' => 'Vatican City',
+
+            // Latin America and the Caribbean
+            'AR' => 'Argentina',
+            'BR' => 'Brazil',
+            'CL' => 'Chile',
+            'CO' => 'Colombia',
+            'CR' => 'Costa Rica',
+            'EC' => 'Ecuador',
+            'SV' => 'El Salvador',
+            'GT' => 'Guatemala',
+            'HN' => 'Honduras',
+            'MX' => 'Mexico',
+            'PA' => 'Panama',
+            'PE' => 'Peru',
+
+            //
+            'BH' => 'Bahrain',
+            'JO' => 'Jordan',
+            'KW' => 'Kuwait',
+            'QA' => 'Qatar',
+            'SA' => 'Saudi Arabia',
+            'AE' => 'United Arab Emirates',
+
+            // North America
+            'CA' => 'Canada',
+            'US' => 'United States'
+        ),
+        'default' => array('SA')
+    )
+);

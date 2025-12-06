@@ -1,0 +1,37 @@
+.om-new-messages-count {
+    display: inline-block;
+    padding: 3px 5px;
+    color: #118C00;
+    color: var(--om-primary-text-color);
+    line-height: 10px;
+    border-radius: 20px;
+    margin-left: 5px;
+    text-align: center;
+    background: #c6e1c6;
+    background: var(--om-primary-color);
+}
+
+.om-global-new-messages-count {
+    float: right;
+    text-align: right;
+    vertical-align: middle;
+    font-size: .7em;
+    padding: 3px 6px;
+    color: #118C00;
+    color: var(--om-primary-text-color);
+    border-radius: 20px;
+    background: #c6e1c6;
+    background: var(--om-primary-color);
+}
+
+.woocommerce-MyAccount-navigation-link--messages a::before {
+    content: "\f086" !important;
+}
+
+.om-dialogs-table__header-dialogs-last-message {
+    width: 33%;
+}
+
+.om-dialogs-table__cell-last-message {
+    word-break: break-all;
+}

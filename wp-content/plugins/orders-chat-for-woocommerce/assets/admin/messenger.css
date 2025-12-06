@@ -1,0 +1,233 @@
+.order-messenger-attachment-image {
+    width: 80px;
+    float: left;
+    border: 1px solid #d5d5d5;
+    background: #f7f7f7;
+    border-radius: 2px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.order-messenger__no-messages {
+    text-align: center;
+    opacity: .9;
+    font-size: .9em;
+}
+
+.order-messenger-attachment-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.order-messenger-attachment-image__actions {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 2px;
+    display: none;
+}
+
+.order-messenger-attachment-remove {
+    height: 1em;
+    width: 1em;
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
+.order-messenger-attachment-remove::before {
+    font-family: Dashicons;
+    speak: none;
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    text-indent: 0;
+    text-align: center;
+    content: "";
+    vertical-align: middle;
+    color: rgb(153, 153, 153);
+    height: 1em;
+    width: 1em;
+    line-height: 1em;
+    font-variant: normal;
+    margin: 0;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+}
+
+.order-messenger-attachment-image .order-messenger-attachment-remove {
+    display: block;
+    text-indent: -9999px;
+    position: relative;
+}
+
+.order-messenger-attachment-image .order-messenger-attachment-remove::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.order-messenger-attachment-image:hover .order-messenger-attachment-image__actions {
+    display: block;
+}
+
+.order-messenger-attachment-remove:hover::before {
+    color: #a00;
+}
+
+.order-messenger__messages {
+    margin-top: 15px;
+}
+
+.order-messenger textarea {
+    width: 100%;
+    height: 50px;
+}
+
+.order-messenger__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-message-meta {
+    padding: 10px;
+    color: #999;
+    margin: 0;
+    font-size: 11px;
+}
+
+.order-message__content {
+    padding: 10px;
+    background: #a7cedc;
+    position: relative;
+    word-break: break-word;
+}
+
+.order-message-attachment {
+    margin-top: 15px;
+}
+
+.order-message__content::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-width: 10px 10px 0 0;
+    border-style: solid;
+    border-color: #a7cedc transparent;
+}
+
+
+.order-message--scheduled_admin_message .order-message__content {
+    background: #f8dda7;
+}
+
+.order-message--scheduled_admin_message .order-message__content::after {
+    border-color: #f8dda7 transparent;
+    right: 20px;
+    left: unset;
+    border-width: 10px 0 0 10px;
+}
+
+.order-message--admin .order-message__content {
+    background: #efefef;
+}
+
+.order-message--admin .order-message__content::after {
+    border-color: #efefef transparent;
+    right: 20px;
+    left: unset;
+    border-width: 10px 0 0 10px;
+}
+
+.order-messenger__form-input, .order-messenger__form-buttons {
+    margin-top: 10px;
+}
+
+.order-messenger-attachment--file {
+    line-height: 1.4em;
+}
+
+.order-messenger-error {
+    display: none;
+    margin-top: 10px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    padding: 1px 12px;
+    border-left: 4px solid red;
+}
+
+.order-messenger-error p {
+    margin: .5em 0;
+    padding: 2px;
+}
+
+.order-message-meta__delete {
+    color: #a00;
+}
+
+.order-message-meta__delete:hover {
+    color: #960202;
+}
+
+.order-message {
+    margin-bottom: 10px;
+}
+
+
+.order-messenger__messages {
+    overflow: auto;
+    max-height: 800px;
+}
+
+.order-messenger--scrolled .order-messenger__messages {
+    padding-right: 10px;
+}
+
+.order-messenger__messages::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+.order-messenger__messages::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.order-messenger__messages::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9;
+}
+
+.order-message--order-status, .order-message--service {
+    text-align: center;
+    opacity: .8;
+    font-size: .8em;
+    justify-content: center;
+}
+
+.om-order-list-messenger .order-message--order-status {
+    font-size: .9em;
+}
+
+.order-message--order-status .order-message__content, .order-message--service .order-message__content {
+    padding: 0;
+    background: transparent;
+    position: relative;
+}
+
+.order-message--order-status .order-message__content::after, .order-message--service .order-message__content::after {
+    border: none;
+    right: 20px;
+    left: unset;
+}
+
+.order-message--order-status .order-message-meta, .order-message--service .order-message-meta {
+    padding: 3px 0 10px 0;
+    font-size: .85em;
+}
