@@ -18,6 +18,9 @@ class Printlana_Vendor_Product_Requests
     {
         register_activation_hook(__FILE__, [$this, 'activate']);
 
+        // Log that plugin is loaded
+        error_log("[PLUGIN LOADED] Printlana Vendor Product Requests plugin initialized");
+
         // Admin menu and page
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
@@ -32,6 +35,11 @@ class Printlana_Vendor_Product_Requests
 
         // AJAX handler for vendors
         add_action('wp_ajax_pl_request_to_sell_product', [$this, 'ajax_vendor_request']);
+
+        // Test endpoint to verify plugin is working
+        add_action('wp_ajax_pl_test_plugin', function() {
+            wp_send_json_success(['message' => 'Plugin is active and AJAX is working!']);
+        });
     }
 
     /**
