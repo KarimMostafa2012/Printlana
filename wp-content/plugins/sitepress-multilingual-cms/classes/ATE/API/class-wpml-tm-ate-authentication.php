@@ -12,6 +12,16 @@ class WPML_TM_ATE_Authentication {
 	/** @var string|null $site_id */
 	private $site_id = null;
 
+	/** @var WPML_Site_ID */
+	private $site_id_manager;
+
+	/**
+	 * @param WPML_Site_ID $site_id_manager
+	 */
+	public function __construct( WPML_Site_ID $site_id_manager = null ) {
+		$this->site_id_manager = $site_id_manager ?: new WPML_Site_ID();
+	}
+
 	public function get_signed_url_with_parameters( $verb, $url, $params = null ) {
 		if ( $this->has_keys() ) {
 			$url = $this->add_required_arguments_to_url( $verb, $url, $params );
@@ -167,5 +177,16 @@ class WPML_TM_ATE_Authentication {
 
 	public function get_site_id() {
 		return $this->site_id ? $this->site_id : wpml_get_site_id( WPML_TM_ATE::SITE_ID_SCOPE );
+	}
+
+	/**
+	 * Resets AMS authentication data by removing the stored credentials and site ID.
+	 *
+	 * @return void
+	 */
+	public function reset() {
+		delete_option( self::AMS_DATA_KEY );
+		$this->site_id_manager->reset( 'ate' );
+		$this->site_id = null;
 	}
 }

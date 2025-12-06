@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "WPML has detected changed or new MO files": [
             "WPML が変更または新しいMOファイルを検出しました。"

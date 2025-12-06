@@ -2,8 +2,6 @@
 
 namespace WCML\Media\Wrapper;
 
-use SitePress;
-use woocommerce_wpml;
 use wpdb;
 use WPML_Media_Attachments_Duplication_Factory;
 
@@ -12,8 +10,6 @@ class Translatable implements IMedia {
 	const META_KEY_THUMBNAIL_ID          = '_thumbnail_id';
 	const META_KEY_PRODUCT_IMAGE_GALLERY = '_product_image_gallery';
 
-	/** @var woocommerce_wpml */
-	private $woocommerce_wpml;
 	/** @var \SitePress */
 	private $sitepress;
 	/** @var wpdb */
@@ -25,10 +21,13 @@ class Translatable implements IMedia {
 	/** @var array */
 	private $products_being_synced = [];
 
-	public function __construct( $woocommerce_wpml, $sitepress, $wpdb ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->sitepress        = $sitepress;
-		$this->wpdb             = $wpdb;
+	/**
+	 * @param \SitePress $sitepress
+	 * @param \wpdb      $wpdb
+	 */
+	public function __construct( \SitePress $sitepress, $wpdb ) {
+		$this->sitepress = $sitepress;
+		$this->wpdb      = $wpdb;
 	}
 
 	public function add_hooks() {

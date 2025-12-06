@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);",
+            "lang": "ar"
          },
          "Preparing...": [
             "جارٍ التحضير..."
@@ -84,7 +86,11 @@
             "جاري التحقق من مهام الترجمة العالقة..."
          ],
          "Processing... %s stuck translation found so far": [
+            "Processing... %s stuck translations found so far",
             "جاري المعالجة... تم العثور على %s ترجمة عالقة حتى الآن",
+            "Processing... %s stuck translations found so far",
+            "Processing... %s stuck translations found so far",
+            "Processing... %s stuck translations found so far",
             "جاري المعالجة... تم العثور على %s ترجمة عالقة حتى الآن"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -94,7 +100,11 @@
             "لم يتم العثور على مهام ترجمة عالقة."
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
+            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
             "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة التقدم في لوحة التحكم بالترجمة.",
+            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
+            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
+            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
             "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة تقدمها في لوحة التحكم بالترجمة."
          ]
       }

@@ -45,7 +45,7 @@ class WCML_Currency_Switcher {
 
 		$wcml_settings = $woocommerce_wpml->get_settings();
 
-		return isset( $wcml_settings['currency_switchers'][ $switcher_id ] ) ? $wcml_settings['currency_switchers'][ $switcher_id ] : [];
+		return $wcml_settings['currency_switchers'][ $switcher_id ] ?? [];
 	}
 
 	public function currency_switcher_shortcode( $atts ) {
@@ -85,7 +85,7 @@ class WCML_Currency_Switcher {
 			! isset( $args['preview'] ) &&
 			! isset( $args['switcher_style'] )
 		) {
-			$args['switcher_style'] = isset( $currency_switcher_settings['switcher_style'] ) ? $currency_switcher_settings['switcher_style'] : $this->woocommerce_wpml->cs_templates->get_first_active();
+			$args['switcher_style'] = $currency_switcher_settings['switcher_style'] ?? $this->woocommerce_wpml->cs_templates->get_first_active();
 		}
 
 		if ( ! isset( $args['format'] ) ) {
@@ -97,7 +97,7 @@ class WCML_Currency_Switcher {
 		}
 
 		if ( ! isset( $args['color_scheme'] ) ) {
-			$args['color_scheme'] = isset( $currency_switcher_settings['color_scheme'] ) ? $currency_switcher_settings['color_scheme'] : [];
+			$args['color_scheme'] = $currency_switcher_settings['color_scheme'] ?? [];
 		}
 
 		$preview                = '';
@@ -179,7 +179,7 @@ class WCML_Currency_Switcher {
 
 		$css_classes = $this->get_css_classes( [ $args['switcher_style'], $args['switcher_id'], 'wcml_currency_switcher' ] );
 
-		$format = isset( $args['format'] ) ? $args['format'] : '%name% (%symbol%) - %code%';
+		$format = $args['format'] ?? '%name% (%symbol%) - %code%';
 
 		$model = [
 			'css_classes'       => esc_attr( $css_classes ),
@@ -350,7 +350,7 @@ class WCML_Currency_Switcher {
 			$currentProductId = get_the_ID();
 			$product          = wc_get_product( $currentProductId );
 
-			if ( $product && $product->is_type( 'grouped' ) ) {
+			if ( $product && $product->is_type( [ 'grouped', 'variable' ] ) ) {
 				foreach ( $product->get_children() as $child_id ) {
 					if ( ! $hasOriginalCustomPrices( $child_id ) ) {
 						return false;

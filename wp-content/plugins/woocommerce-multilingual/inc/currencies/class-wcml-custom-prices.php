@@ -4,7 +4,6 @@ use WCML\Utilities\DB;
 use WPML\FP\Fns;
 use WPML\FP\Maybe;
 use WPML\FP\Obj;
-use function WCML\functions\isStandAlone;
 use function WPML\FP\invoke;
 
 class WCML_Custom_Prices {
@@ -106,7 +105,7 @@ class WCML_Custom_Prices {
 		}
 
 		// detemine min/max variation prices.
-		if ( ! empty( $product_meta['_min_variation_price'] ) ) {
+		if ( ! empty( $product_meta['_min_variation_price'] ) && is_array( $product_meta['_min_variation_price'] ) && $product_meta['_min_variation_price'] !== [ '' ] ) {
 
 			static $product_min_max_prices = [];
 
@@ -540,8 +539,6 @@ class WCML_Custom_Prices {
 	}
 
 	public function update_custom_prices( $post_id, $custom_prices, $code ) {
-		$price = null;
-
 		$defaults = [
 			'_sale_price_dates_to'   => '',
 			'_sale_price_dates_from' => '',
@@ -561,7 +558,9 @@ class WCML_Custom_Prices {
 			$this->validate_and_update_sale_price_dates( $post_id, $code, $custom_prices );
 		}
 
-		update_post_meta( $post_id, '_price_' . $code, $price ? $price : null );
+		$price = $price ?: null;
+		update_post_meta( $post_id, '_price_' . $code, $price );
+		do_action( 'wcml_after_save_custom_prices', $post_id, $price, $custom_prices, $code );
 
 		return $price;
 	}
@@ -644,7 +643,8 @@ class WCML_Custom_Prices {
 							$code,
 							$product_id
 						);
-						$price         = $this->update_custom_prices( $product_id, $custom_prices, $code );
+
+						$this->update_custom_prices( $product_id, $custom_prices, $code );
 					}
 				}
 			}

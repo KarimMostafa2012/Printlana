@@ -4,7 +4,7 @@
  * Plugin URI: https://wpemaillog.com/
  * Description: Logs every email sent through WordPress
  * Author: WebFactory Ltd
- * Version: 2.61
+ * Version: 2.62
  * Author URI: https://www.webfactoryltd.com/
  * Text Domain: email-log
  * License: GPLv2 or later
@@ -15,11 +15,6 @@
 
 /**
  * Copyright 2025 WebFactory Ltd
- *
- * Sudar Muthu https://github.com/sudar
- * samuelaguilera https://github.com/samuelaguilera
- * ChuckMac https://github.com/ChuckMac
- * Maria Daniel Deepak https://github.com/mariadanieldeepak
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
@@ -33,57 +28,85 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
-defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+defined('ABSPATH') || exit; // Exit if accessed directly.
 
-// @Alex this is ancient think we can remove it
-// Include the stub of the old `EmailLog` class, so that old add-ons don't generate a fatal error.
-require_once plugin_dir_path( __FILE__ ) . 'include/compatibility/EmailLog.php';
+define('EMAIL_LOG_FILE', __FILE__);
+define('EMAIL_LOG_URL', trailingslashit(plugins_url('', __FILE__)));
+define('EMAIL_LOG_PATH', trailingslashit(plugin_dir_path(__FILE__)));
+define('EMAIL_LOG_URI', trailingslashit(plugin_dir_url(__FILE__)));
 
-if ( version_compare( PHP_VERSION, '5.6.0', '<' ) ) {
-	/**
-	 * Version 2.4.0 of the Email Log plugin dropped support for PHP 5.3 to PHP 5.5.
-	 *
-	 * Version 2.0 of the Email Log plugin dropped support for PHP 5.2.
-	 * If you are still struck with PHP 5.2 and can't update, then use v1.9.1 of the plugin.
-	 * But note that some add-ons may not work.
-	 *
-	 * @since 2.0
-	 */
-	function email_log_compatibility_notice() {
-		?>
-		<div class="error">
-			<p>
-				<?php
-				printf(
-					__( 'Email Log requires at least PHP 5.6 to function properly. Please upgrade PHP or use <a href="%s" target="_blank" rel="noopener">v1.9.1 of Email Log</a>.', 'email-log' ), // @codingStandardsIgnoreLine
-					'https://downloads.wordpress.org/plugin/email-log.1.9.1.zip'
-				);
-				?>
-			</p>
-		</div>
-		<?php
-	}
+require_once dirname(__FILE__) . '/wf-flyout/wf-flyout.php';
 
-	add_action( 'admin_notices', 'email_log_compatibility_notice' );
+function load_email_log($plugin_file)
+{
+    global $email_log;
 
-	/**
-	 * Deactivate Email Log.
-	 *
-	 * @since 2.0
-	 */
-	function email_log_deactivate() {
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-	}
+    $plugin_dir = plugin_dir_path($plugin_file);
 
-	add_action( 'admin_init', 'email_log_deactivate' );
+    if (is_admin()) {
+      new wf_flyout(__FILE__);
+    }
 
-	return;
+    // setup autoloader.
+    require_once 'include/EmailLogAutoloader.php';
+
+    $loader = new \EmailLog\EmailLogAutoloader();
+    $loader->add_namespace('EmailLog', $plugin_dir . 'include');
+    $loader->add_namespace('Sudar\\WPSystemInfo', $plugin_dir . 'vendor/sudar/wp-system-info/src/');
+
+    if (file_exists($plugin_dir . 'tests/')) {
+        // if tests are present, then add them.
+        $loader->add_namespace('EmailLog', $plugin_dir . 'tests/wp-tests');
+    }
+
+    $loader->add_file($plugin_dir . 'include/Util/helper.php');
+    $loader->add_file($plugin_dir . 'include/Addon/addon-helper.php');
+
+    $loader->register();
+
+    $email_log = new \EmailLog\Core\EmailLog($plugin_file, $loader, new \EmailLog\Core\DB\TableManager());
+
+    $email_log->add_loadie(new \EmailLog\Core\EmailLogger());
+
+    $email_log->add_loadie(new \EmailLog\Core\UI\UILoader(), true);
+
+    $email_log->add_loadie(new \EmailLog\Core\Request\NonceChecker());
+    $email_log->add_loadie(new \EmailLog\Core\Request\LogListAction());
+
+    $capability_giver = new \EmailLog\Core\AdminCapabilityGiver();
+    $email_log->add_loadie($capability_giver);
+
+    // `register_activation_hook` can't be called from inside any hook.
+    register_activation_hook($plugin_file, array($email_log->table_manager, 'on_activate'));
+    register_activation_hook($plugin_file, array($capability_giver, 'add_cap_to_admin'));
+
+    // Ideally the plugin should be loaded in a later event like `init` or `wp_loaded`.
+    // But some plugins like EDD are sending emails in `init` event itself,
+    // which won't be logged if the plugin is loaded in `wp_loaded` or `init`.
+    add_action('plugins_loaded', array($email_log, 'load'), 101);
 }
 
-// PHP is at least 5.6, so we can safely include namespace code.
-require_once 'load-email-log.php';
-load_email_log( __FILE__ );
+function email_log_plugin_version()
+{
+    $plugin_data = get_file_data(__FILE__, array('version' => 'Version'), 'plugin');
 
-// @Alex probably not needed anymore, it was a bug 5y ago
-// Fix compatibility issues with wpmandrill plugin.
-require_once plugin_dir_path( __FILE__ ) . 'include/compatibility/wpmandrill.php';
+    return $plugin_data['version'];
+} // get_plugin_version
+
+/**
+ * Return the global instance of Email Log plugin.
+ * Eventually the EmailLog class might become singleton.
+ *
+ * @since 2.0
+ *
+ * @global \EmailLog\Core\EmailLog $email_log
+ *
+ * @return \EmailLog\Core\EmailLog
+ */
+function email_log()
+{
+    global $email_log;
+    return $email_log;
+}
+
+load_email_log(__FILE__);

@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "รีเฟรชใบอนุญาต WPML แล้ว"
 msgid "Translate Everything Automatically is not active."
 msgstr "Translate Everything Automatically ไม่ได้เปิดใช้งานอยู่."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "ลองแปลอัตโนมัติที่ติดขัดใหม่"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,6 @@ msgstr "กำลังตรวจสอบงานแปลที่ติด
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "กำลังประมวลผล... พบงานแปลที่ติดขัด %s งานจนถึงตอนนี้"
-msgstr[1] "กำลังประมวลผล... พบงานแปลที่ติดขัด %s งานจนถึงตอนนี้"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -135,5 +136,4 @@ msgstr "ไม่พบงานแปลที่ติดขัด."
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "พบงานแปลที่ติดขัด %s งาน WPML จะแปลงานนี้โดยอัตโนมัติในพื้นหลัง\nคุณสามารถตรวจสอบความคืบหน้าได้ในแดชบอร์ดการแปล."
-msgstr[1] "พบงานแปลที่ติดขัด %s งาน WPML จะแปลงานเหล่านี้โดยอัตโนมัติในพื้นหลัง\nคุณสามารถตรวจสอบความคืบหน้าได้ในแดชบอร์ดการแปล."
+msgstr[0] "พบงานแปลที่ติดขัด %s งาน WPML จะแปลงานเหล่านี้โดยอัตโนมัติในพื้นหลัง\nคุณสามารถตรวจสอบความคืบหน้าได้ในแดชบอร์ดการแปล."

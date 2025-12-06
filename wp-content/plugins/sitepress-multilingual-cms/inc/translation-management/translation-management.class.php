@@ -1297,12 +1297,13 @@ class TranslationManagement {
 
 					$current_translation_status = $this->get_element_translation( $element->get_element_id(), $lang, $element_type );
 
-					if ( $current_translation_status ) {
-						if ( $current_translation_status->status == ICL_TM_IN_PROGRESS ) {
-							$this->cancel_previous_job_if_in_progress( $translation_id );
-						} else {
-							$this->cancel_previous_job_if_still_waiting( $translation_id, $current_translation_status->status );
-						}
+					if (
+						$current_translation_status && (
+							$current_translation_status->status == ICL_TM_IN_PROGRESS ||
+							$current_translation_status->status == ICL_TM_WAITING_FOR_TRANSLATOR
+						)
+					) {
+						$this->cancel_translation_request( $translation_id, false );
 					}
 
 					$_status = ICL_TM_WAITING_FOR_TRANSLATOR;
@@ -1451,35 +1452,6 @@ class TranslationManagement {
 		$data = $wpdb->get_results( $sql, ARRAY_A );
 
 		return isset( $data[0] ) ? $data[0] : array();
-	}
-
-	/**
-	 * @param string $translation_id
-	 * @param string $status
-	 */
-	private function cancel_previous_job_if_still_waiting( $translation_id, $status ) {
-		if ( ICL_TM_WAITING_FOR_TRANSLATOR === (int) $status ) {
-			$this->cancel_translation_request( $translation_id, false );
-		}
-	}
-
-	private function cancel_previous_job_if_in_progress( $translation_id ) {
-		global $wpdb;
-
-		$sql = "
-			SELECT j.job_id
-			FROM {$wpdb->prefix}icl_translate_job j
-			INNER JOIN {$wpdb->prefix}icl_translation_status ts ON ts.rid = j.rid
-			WHERE ts.translation_id = %d AND ts.status = %s
-			ORDER BY job_id DESC
-		";
-
-		$job_id = (int) $wpdb->get_var( $wpdb->prepare( $sql, $translation_id, ICL_TM_IN_PROGRESS ) );
-		if ( ! $job_id ) {
-			return;
-		}
-
-		$wpdb->update( $wpdb->prefix . 'icl_translate_job', array( 'translated' => 1 ), array( 'job_id' => $job_id ) );
 	}
 
 	function get_translation_jobs( $args = array() ) {
@@ -1853,7 +1825,6 @@ class TranslationManagement {
 				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translation_status WHERE translation_id=%d", $translation_id ) );
 			}
 
-			// delete record from icl_translations if element_id is null
 			if ( $remove_translation_record ) {
 				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translations WHERE translation_id=%d AND element_id IS NULL", $translation_id ) );
 			}

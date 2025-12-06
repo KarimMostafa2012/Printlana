@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ko_KR"
          },
          "From:": [
             "출발어:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "언어 쌍 삭제하기"
+         ],
+         "Loading AI Translation...": [
+            "AI 번역 로딩 중..."
          ],
          "%s file upload failed.": [
             "%s 파일 업로드 실패."

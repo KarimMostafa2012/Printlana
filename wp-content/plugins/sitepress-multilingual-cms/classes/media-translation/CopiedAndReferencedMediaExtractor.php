@@ -2,6 +2,8 @@
 
 namespace WPML\MediaTranslation;
 
+use WPML\LIB\WP\Attachment;
+
 class CopiedAndReferencedMediaExtractor {
 	const COPIED_MEDIA_SHORTCODES = array( 'et_pb_image' );
 
@@ -29,8 +31,9 @@ class CopiedAndReferencedMediaExtractor {
 
 	/**
 	 * @param array|\WP_Post $post
+	 * @param bool           $get_attachment_ids_from_urls
 	 */
-	public function extract( $post ) {
+	public function extract( $post, $get_attachment_ids_from_urls = true ) {
 		if ( is_array( $post ) ) {
 			$post = $post[0];
 		}
@@ -40,7 +43,7 @@ class CopiedAndReferencedMediaExtractor {
 		list( $pb_copied_media, $pb_referenced_media ) = $this->part_page_builder_media( $pb_media );
 
 		$copied_media_in_blocks = $this->media_parser->get_imgs_from_blocks( $post->post_content );
-		$all_media_in_tags      = $this->media_parser->get_from_img_tags( $post->post_content );
+		$all_media_in_tags      = $this->media_parser->get_from_img_tags( $post->post_content, $get_attachment_ids_from_urls );
 
 		$copied_media = array_merge(
 			$copied_media_in_blocks,
@@ -65,11 +68,11 @@ class CopiedAndReferencedMediaExtractor {
 
 		$classified_media_srcs = array();
 		foreach ( $classified_medias as $classified_media ) {
-			$classified_media_srcs[] = $this->extract_src( $classified_media );
+			$classified_media_srcs[] = Attachment::extractSrcFromAttributes( $classified_media );
 		}
 		$not_classified_media_in_tags = array();
 		foreach ( $all_media_in_tags as $media_in_tag ) {
-			if ( in_array( $this->extract_src( $media_in_tag ), $classified_media_srcs, true ) ) {
+			if ( in_array( Attachment::extractSrcFromAttributes( $media_in_tag ), $classified_media_srcs, true ) ) {
 				continue;
 			}
 
@@ -77,39 +80,23 @@ class CopiedAndReferencedMediaExtractor {
 		}
 
 		foreach ( $not_classified_media_in_tags as &$not_classified_media_in_tag ) {
-			$post_id = attachment_url_to_postid( $this->extract_src( $not_classified_media_in_tag ) );
-			if ( ! is_numeric( $post_id ) ) {
-				continue;
+			$not_classified_media_in_tag['attachment_id'] = null;
+
+			if ( $get_attachment_ids_from_urls ) {
+				$post_id = attachment_url_to_postid( Attachment::extractSrcFromAttributes( $not_classified_media_in_tag ) );
+				if ( ! is_numeric( $post_id ) ) {
+					continue;
+				}
+				$not_classified_media_in_tag['attachment_id'] = $post_id;
 			}
-			$not_classified_media_in_tag['attachment_id'] = $post_id;
-			$copied_media[]                               = $not_classified_media_in_tag;
+
+			$copied_media[] = $not_classified_media_in_tag;
 		}
 
 		return array(
 			$copied_media,
 			$referenced_media,
 		);
-	}
-
-	/**
-	 * @param array $data
-	 *
-	 * @return string
-	 */
-	private function extract_src( $data ) {
-		if ( ! array_key_exists( 'attributes', $data ) || ! array_key_exists( 'src', $data['attributes'] ) ) {
-			return '';
-		}
-
-		$src = $data['attributes']['src'];
-
-		if ( ! is_string( $src ) || strlen( $src ) === 0 ) {
-			return '';
-		}
-
-		$src = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif|webp|avif))/i', '', $src );
-
-		return $src;
 	}
 
 	/**
@@ -151,7 +138,9 @@ class CopiedAndReferencedMediaExtractor {
 		$copied     = array();
 		$referenced = array();
 		foreach ( $pb_media as $media ) {
-			if (
+			if ( empty( $media['attachment_id'] ) ) {
+				continue;
+			} elseif (
 				array_key_exists( 'shortcode', $media ) &&
 				in_array( $media['shortcode'], self::COPIED_MEDIA_SHORTCODES, true )
 			) {
@@ -182,7 +171,7 @@ class CopiedAndReferencedMediaExtractor {
 			array(
 				array(
 					'attributes'    => array(
-						'src'     => wp_get_attachment_url( $featured_image ),
+						'src'     => null,
 						'alt'     => '',
 						'caption' => '',
 					),
@@ -213,7 +202,7 @@ class CopiedAndReferencedMediaExtractor {
 				array(
 					array(
 						'attributes'    => array(
-							'src'     => wp_get_attachment_url( $woocommerce_gallery_image ),
+							'src'     => null,
 							'alt'     => '',
 							'caption' => '',
 						),

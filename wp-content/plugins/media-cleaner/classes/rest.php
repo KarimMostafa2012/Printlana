@@ -172,6 +172,11 @@ class Meow_WPMC_Rest
 				'permission_callback' => array( $this->core, 'can_access_features' ),
 				'callback' => array( $this, 'rest_clear_logs' )
 			) );
+			register_rest_route( $this->namespace, '/export', array(
+				'methods' => 'GET',
+				'permission_callback' => array( $this->core, 'can_access_features' ),
+				'callback' => array( $this, 'rest_export' )
+			) );
 		} 
 		catch (Exception $e) {
 			var_dump($e);
@@ -1195,5 +1200,49 @@ class Meow_WPMC_Rest
 	function rest_clear_progress() {
 		$this->core->clear_step_progress();
 		return new WP_REST_Response( [ 'success' => true, 'message' => 'Progress cleared.' ], 200 );
+	}
+
+	function rest_export() {
+		global $wpdb;
+		$table_scan = $wpdb->prefix . "mclean_scan";
+		$table_ref = $wpdb->prefix . "mclean_refs";
+
+		// Issues
+		$issues = $wpdb->get_results( "SELECT * FROM $table_scan WHERE ignored = 0 AND deleted = 0" );
+		// Ignored
+		$ignored = $wpdb->get_results( "SELECT * FROM $table_scan WHERE ignored = 1" );
+		// Trash
+		$trash = $wpdb->get_results( "SELECT * FROM $table_scan WHERE deleted = 1" );
+		// References
+		$references = $wpdb->get_results( "SELECT * FROM $table_ref" );
+
+		$csv_output = "Tab,ID,Path/Url,Size,Issue/Origin,Time,PostId,MediaId\n";
+
+		foreach ($issues as $row) {
+			$path = '"' . str_replace( '"', '""', $row->path ) . '"';
+			$issue = '"' . str_replace( '"', '""', $row->issue ) . '"';
+			$csv_output .= "Issues,{$row->id},{$path},{$row->size},{$issue},{$row->time},{$row->postId},\n";
+		}
+		foreach ($ignored as $row) {
+			$path = '"' . str_replace( '"', '""', $row->path ) . '"';
+			$issue = '"' . str_replace( '"', '""', $row->issue ) . '"';
+			$csv_output .= "Ignored,{$row->id},{$path},{$row->size},{$issue},{$row->time},{$row->postId},\n";
+		}
+		foreach ($trash as $row) {
+			$path = '"' . str_replace( '"', '""', $row->path ) . '"';
+			$issue = '"' . str_replace( '"', '""', $row->issue ) . '"';
+			$csv_output .= "Trash,{$row->id},{$path},{$row->size},{$issue},{$row->time},{$row->postId},\n";
+		}
+		foreach ($references as $row) {
+			$postId = '';
+			if (preg_match('/\[(\d+)\]/', $row->originType, $matches)) {
+				$postId = $matches[1];
+			}
+			$mediaUrl = '"' . str_replace( '"', '""', $row->mediaUrl ) . '"';
+			$originType = '"' . str_replace( '"', '""', $row->originType ) . '"';
+			$csv_output .= "Found In Use Medias,{$row->id},{$mediaUrl},,{$originType},,{$postId},{$row->mediaId}\n";
+		}
+
+		return new WP_REST_Response( [ 'success' => true, 'data' => $csv_output ], 200 );
 	}
 }

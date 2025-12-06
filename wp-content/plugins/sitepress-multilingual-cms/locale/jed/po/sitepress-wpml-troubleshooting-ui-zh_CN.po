@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "更新了 WPML 许可证"
 msgid "Translate Everything Automatically is not active."
 msgstr "自动翻译所有内容未激活。"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "重试卡住的自动翻译"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,6 @@ msgstr "正在检查卡住的翻译任务..."
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "处理中... 目前已发现 %s 个卡住的翻译"
-msgstr[1] "处理中... 目前已发现 %s 个卡住的翻译"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -135,5 +136,4 @@ msgstr "未发现卡住的翻译任务。"
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "发现 %s 个卡住的翻译任务。WPML 将在后台自动翻译它。\n你可以在翻译仪表板中查看进度。"
-msgstr[1] "发现 %s 个卡住的翻译任务。WPML 将在后台自动翻译它们。\n你可以在翻译仪表板中查看它们的进度。"
+msgstr[0] "发现 %s 个卡住的翻译任务。WPML 将在后台自动翻译它们。\n你可以在翻译仪表板中查看它们的进度。"

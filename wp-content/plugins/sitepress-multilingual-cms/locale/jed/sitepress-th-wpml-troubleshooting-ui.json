@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "Preparing...": [
             "กำลังเตรียมการ..."
@@ -84,7 +86,6 @@
             "กำลังตรวจสอบงานแปลที่ติดขัด..."
          ],
          "Processing... %s stuck translation found so far": [
-            "กำลังประมวลผล... พบงานแปลที่ติดขัด %s งานจนถึงตอนนี้",
             "กำลังประมวลผล... พบงานแปลที่ติดขัด %s งานจนถึงตอนนี้"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -94,7 +95,6 @@
             "ไม่พบงานแปลที่ติดขัด."
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
-            "พบงานแปลที่ติดขัด %s งาน WPML จะแปลงานนี้โดยอัตโนมัติในพื้นหลัง\nคุณสามารถตรวจสอบความคืบหน้าได้ในแดชบอร์ดการแปล.",
             "พบงานแปลที่ติดขัด %s งาน WPML จะแปลงานเหล่านี้โดยอัตโนมัติในพื้นหลัง\nคุณสามารถตรวจสอบความคืบหน้าได้ในแดชบอร์ดการแปล."
          ]
       }

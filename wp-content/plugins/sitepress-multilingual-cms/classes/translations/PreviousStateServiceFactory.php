@@ -2,23 +2,11 @@
 
 namespace WPML\Translation;
 
-use WPML\Core\Component\TranslationPreviousState\Application\Service\MigrationService;
-use WPML\Core\Component\TranslationPreviousState\Application\Service\PreviousStateService;
-use WPML\Core\Component\TranslationPreviousState\Domain\Migration\Processor;
-use WPML\Infrastructure\WordPress\Component\TranslationPreviousState\Domain\PreviousStateQuery;
-use WPML\Infrastructure\WordPress\Component\TranslationPreviousState\Domain\PreviousStateRepository;
-use WPML\Infrastructure\WordPress\Component\TranslationPreviousState\Domain\Migration\Query;
-use WPML\Infrastructure\WordPress\Component\TranslationPreviousState\Domain\NoCompressionDataCompress as DataCompress;
-use WPML\Infrastructure\WordPress\Port\Persistence\DatabaseWrite;
-use WPML\Infrastructure\WordPress\Port\Persistence\QueryHandler;
-use WPML\Infrastructure\WordPress\Port\Persistence\QueryPrepare;
+use WPML\Core\Component\Translation\Application\Service\PreviousState\PreviousStateService;
 
 class PreviousStateServiceFactory {
 	/** @var PreviousStateService|null */
 	private static $instance = null;
-
-	/** @var MigrationService|null */
-	private static $migrationService = null;
 
 	public static function create(): PreviousStateService {
 		// Check if the instance is already created
@@ -47,18 +35,8 @@ class PreviousStateServiceFactory {
 	 * @return PreviousStateService
 	 */
 	private static function createNewInstance(): PreviousStateService {
-		global $wpdb;
+		global $wpml_dic;
 
-		$dataCompress = new DataCompress();
-
-		$query = new PreviousStateQuery(
-			new QueryHandler( $wpdb ),
-			new QueryPrepare( $wpdb ),
-			$dataCompress
-		);
-
-		$repository = new PreviousStateRepository( new DatabaseWrite( $wpdb ), $dataCompress );
-
-		return new PreviousStateService( $query, $repository );
+		return $wpml_dic->make( PreviousStateService::class );
 	}
 }

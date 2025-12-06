@@ -52,8 +52,9 @@ class Pexlechris_Adminer extends Adminer\Adminer
     }
 
 	function navigation($missing) {
+        $this->print_sticky_urls();
 		parent::navigation($missing);
-		$this->print_dark_mode_switcher();
+        $this->print_dark_mode_switcher();
 	}
 
 	public function get_wp_locale()
@@ -74,9 +75,37 @@ class Pexlechris_Adminer extends Adminer\Adminer
 
 	public function print_dark_mode_switcher()
 	{
-		echo "<big style='position: fixed; bottom: .5em; right: .5em; cursor: pointer;'>☀</big>"
-			. Adminer\script("qsl('big').onclick = adminerDarkSwitch;") . "\n";
+		echo "<big style='position: fixed; bottom: .5em; right: .5em; cursor: pointer;'>☀</big>";
+		echo Adminer\script("qsl('big').onclick = adminerDarkSwitch;");
+        echo "\n";
 	}
+
+    public function print_sticky_urls(){
+        $sticky_links = [
+            [
+                'label' => __('WP Admin', 'pexlechris-adminer'),
+                'url'   => admin_url(),
+            ],
+            [
+                'label' => __('Home', 'pexlechris-adminer'),
+                'url'   => home_url(),
+            ],
+        ];
+        $sticky_links = apply_filters('pexlechris_adminer_sticky_links', $sticky_links);
+
+        if( !$sticky_links ){
+            return;
+        }
+        
+        $sticky_links_html = array_map(function ($sticky_link) {
+            $target = !empty($sticky_link['target']) ? ' target="' . esc_attr( $sticky_link['target'] ) . '"' : '';
+            return '<a href="' . esc_url( $sticky_link['url'] ) . '"' . $target .'>' . esc_html( $sticky_link['label'] ) . '</a>';
+        }, $sticky_links);
+
+        echo '<p style="position: sticky; top: 0; background: var(--dim); height: 2em; line-height: 1.8em; padding: 0 1em;">';
+        echo implode(' | ', $sticky_links_html);
+        echo '</p>';
+    }
 
 	/**
 	 * @since 4.1.0

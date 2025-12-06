@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "ru_RU"
          },
          "Start batch sync": [
             "Начать синхронизацию партии"
@@ -393,8 +395,7 @@
             "Синхронизация со службой профессионального перевода не удалась"
          ],
          "%d translation has been downloaded": [
-            "%d перевод был загружен",
-            "%d Переводы были загружены"
+            "%d перевод был загружен"
          ],
          "Batch sync finished successfully!": [
             "Синхронизация партии успешно завершена!"

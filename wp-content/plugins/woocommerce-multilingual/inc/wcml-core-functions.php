@@ -123,7 +123,7 @@ if ( ! function_exists( 'wcml_safe_redirect' ) ) {
 	 */
 	function wcml_safe_redirect( $location, $status = 302 ) {
 		return wp_safe_redirect( $location, $status, 'WCML' ) && exit;
-	};
+	}
 }
 
 /**
@@ -159,7 +159,7 @@ function wcml_register_script( $handle, $src, $deps = [], $args = [] ) {
 	global $wp_version;
 
 	if ( version_compare( $wp_version,'6.3', '<' ) ) {
-		$args = isset( $args['in_footer'] ) ? $args['in_footer'] : false;
+		$args = $args['in_footer'] ?? false;
 	}
 
 	return wp_register_script( $handle, WCML_PLUGIN_URL . '/' . $src, $deps, WCML_VERSION, $args );

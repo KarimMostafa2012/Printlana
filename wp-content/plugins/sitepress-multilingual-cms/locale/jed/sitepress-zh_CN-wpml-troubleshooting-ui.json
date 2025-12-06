@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
          },
          "Preparing...": [
             "准备..."
@@ -84,7 +86,6 @@
             "正在检查卡住的翻译任务..."
          ],
          "Processing... %s stuck translation found so far": [
-            "处理中... 目前已发现 %s 个卡住的翻译",
             "处理中... 目前已发现 %s 个卡住的翻译"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -94,7 +95,6 @@
             "未发现卡住的翻译任务。"
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
-            "发现 %s 个卡住的翻译任务。WPML 将在后台自动翻译它。\n你可以在翻译仪表板中查看进度。",
             "发现 %s 个卡住的翻译任务。WPML 将在后台自动翻译它们。\n你可以在翻译仪表板中查看它们的进度。"
          ]
       }

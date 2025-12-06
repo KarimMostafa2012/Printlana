@@ -527,7 +527,7 @@ namespace SW_WAPF_PRO\Includes\Controllers {
             $this->display_field_group_conditions(true);
             echo '</div>';
 
-            echo '<h4 class="wapf-product-admin-title">' .  __('Layout settings','sw-wapf') .' &mdash; <span style="opacity:.5;">'.__('Field group layout settings','sw-wapf').'</span>' . '</h4>';
+            echo '<h4 class="wapf-product-admin-title">' .  __('Layout & design settings','sw-wapf') . '</h4>';
             $this->display_field_group_layout(true);
 
 	        echo '<h4 class="wapf-product-admin-title"><a class="modal_help_icon" style="padding:5px;" href="#" onclick="javascript:event.preventDefault();jQuery(\'.wapf--varaible-help\').show();"><i class="dashicons-before dashicons-editor-help"></i></a>' .  __('Custom variables','sw-wapf') .' &mdash; <span style="opacity:.5;">'.__('Create dynamic variables to use with formula-based pricing','sw-wapf').'</span>' . '</h4>';
@@ -1132,7 +1132,7 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 
                 add_meta_box(
                     'wapf-field-group-layout',
-                    __('Layout','sw-wapf') .' &mdash; <span style="opacity:.5;">'.__('Field group layout settings','sw-wapf').'</span>',
+                    __('Layout & design','sw-wapf') .' &mdash; <span style="opacity:.5;">'.__('Field group layout settings','sw-wapf').'</span>',
                     [ $this, 'display_field_group_layout' ],
                     'wapf_product',
                     'normal',
@@ -1222,7 +1222,7 @@ namespace SW_WAPF_PRO\Includes\Controllers {
             return $model;
         }
 
-        private function create_conditions_model($for_product_admin = false) {
+        private function create_conditions_model( $for_product_admin = false ): array {
 
             $model = [
                 'condition_options' => Config::get_fieldgroup_visibility_conditions(),

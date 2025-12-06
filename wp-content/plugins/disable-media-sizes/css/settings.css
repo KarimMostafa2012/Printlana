@@ -1,0 +1,20 @@
+/* Disable Media Sizes */
+
+.wp-admin .notice code { line-height: 1; font-size: 12px; }
+.wp-admin .disable-media-sizes-dismiss-notice { float: right; }
+.wp-admin .disable-media-sizes-version { color: #c7c7c7; font-size: 90%; }
+
+.wp-admin .wrap form h2 { position: relative; padding: 0 0 0 24px; }
+.wp-admin .wrap form h2::before { position: absolute; top: 0; left: 0; font-family: FontAwesome; content: "\f138"; }
+
+.wp-admin .notice-lh p { line-height: 1.8; }
+.wp-admin .notice-custom { background-image: url(../img/sun-icon.png); background-repeat: no-repeat; background-position: left 5px center; background-size: 60px 40px; }
+.wp-admin .notice-custom p { margin: 15px 0; padding-left: 60px; line-height: 1.6; }
+.wp-admin .notice-link { display: inline-block; margin-right: 5px; }
+@media (max-width: 782px) {
+	.wp-admin .notice-custom p { margin: 10px 0; }
+}
+
+@media (max-width: 1100px) {
+	.wp-admin .disable-media-sizes-dismiss-notice { float: none; }
+}

@@ -10,6 +10,9 @@ class WCML_WC_Strings {
 	const DOMAIN_WORDPRESS              = 'WordPress';
 	/** @see \WPML_ST_Taxonomy_Strings::LEGACY_NAME_PREFIX_SINGULAR */
 	const TAXONOMY_SINGULAR_NAME_PREFIX = 'taxonomy singular name: ';
+	/** @see \WPML_ST_Taxonomy_Strings::LEGACY_NAME_PREFIX_GENERAL */
+	const TAXONOMY_GENERAL_NAME_PREFIX  = 'taxonomy general name: ';
+	const TAXONOMY_GENERAL_VALUE_PREFIX = 'Product ';
 
 	private $translations_from_mo_file = [];
 	private $mo_files                  = [];
@@ -179,7 +182,7 @@ class WCML_WC_Strings {
 		// backward compatibility for WCML < 3.6.1.
 		$trnsl_labels = get_option( 'wcml_custom_attr_translations' );
 
-		if ( isset( $trnsl_labels[ $lang ][ $name ] ) && ! empty( $trnsl_labels[ $lang ][ $name ] ) ) {
+		if ( ! empty( $trnsl_labels[ $lang ][ $name ] ) ) {
 			return $trnsl_labels[ $lang ][ $name ];
 		}
 
@@ -196,7 +199,7 @@ class WCML_WC_Strings {
 
 		if ( $values ) {
 
-			$product_id = $values['variation_id'] ? $values['variation_id'] : $values['product_id'];
+			$product_id = $values['variation_id'] ?: $values['product_id'];
 
 			$translated_product_id = apply_filters( 'wpml_object_id', $product_id, 'product', true );
 			$translated_product = wc_get_product( $translated_product_id );
@@ -310,7 +313,7 @@ class WCML_WC_Strings {
 
 		} else {
 
-			$string_id = icl_get_string_id( $value, $context, $name );
+			$string_id = icl_get_string_id( $value, $context );
 
 			if ( ! $string_id ) {
 				return 'en';
@@ -333,10 +336,8 @@ class WCML_WC_Strings {
 
 		$string_id = icl_get_string_id( $value, $context, $name );
 
-		$string_object   = new WPML_ST_String( $string_id, $this->wpdb );
-		$string_language = $string_object->set_language( $language );
-
-		return $string_language;
+		$string_object = new WPML_ST_String( $string_id, $this->wpdb );
+		$string_object->set_language( $language );
 	}
 
 
@@ -412,8 +413,6 @@ class WCML_WC_Strings {
 	public function notice_after_woocommerce_product_options_attributes() {
 
 		if ( isset( $_GET['post'] ) && $this->sitepress->get_default_language() != $this->sitepress->get_current_language() ) {
-			$original_product_id = apply_filters( 'wpml_object_id', $_GET['post'], 'product', true, $this->sitepress->get_default_language() );
-
 			//The message used to include a link to translate THIS product, not sure if this will be doable when linking to the TM dashboard
 			$pointerFactory = new WCML\PointerUi\Factory();
 			$pointerFactory
@@ -499,8 +498,8 @@ class WCML_WC_Strings {
 			$args['labels']['singular_name'] = $singular_label;
 		}
 
-		$label = sprintf( 'Product %s', $attribute_label );
-		$label = $this->get_translated_string_by_name_and_context( self::DOMAIN_WORDPRESS, 'taxonomy general name: ' . $label, null, $label );
+		$label = self::TAXONOMY_GENERAL_VALUE_PREFIX . $attribute_label;
+		$label = $this->get_translated_string_by_name_and_context( self::DOMAIN_WORDPRESS, self::TAXONOMY_GENERAL_NAME_PREFIX . $label, null, $label );
 		if ( $label ) {
 			$args['labels']['name'] = $label;
 		}

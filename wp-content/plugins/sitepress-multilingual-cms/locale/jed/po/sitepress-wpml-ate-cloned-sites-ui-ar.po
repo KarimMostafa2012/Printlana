@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
 
 #: src/js/ate-cloned-sites/components/CloseButton.js:15
 msgid "Close"
@@ -242,35 +244,35 @@ msgstr ""
 msgid "Site Moved or Copied - Action Required"
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+#: src/js/ate-cloned-sites/steps/RevertMove.js:36
 msgid "You or someone else moved this site to %s. Please keep in mind that:"
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+#: src/js/ate-cloned-sites/steps/RevertMove.js:50
 msgid "Translations that you do at %s will not appear on this site."
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+#: src/js/ate-cloned-sites/steps/RevertMove.js:56
 msgid "You cannot edit translations on this site."
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+#: src/js/ate-cloned-sites/steps/RevertMove.js:67
 msgid ""
 "The site at %s is using the same credits for automatic translation as this "
 "site."
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+#: src/js/ate-cloned-sites/steps/RevertMove.js:76
 msgid ""
 "If you didn't intend to move this site to %s, you can <a>indicate that this "
 "site should be at %s</a>."
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+#: src/js/ate-cloned-sites/steps/RevertMove.js:9
 msgid "This site has moved to a new location"
 msgstr ""
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+#: src/js/ate-cloned-sites/steps/RevertMove.js:96
 msgid ""
 "If you prefer not to move this site, you can <a>mark it as a copy</a> and "
 "enable automatic translation for it."
@@ -325,15 +327,15 @@ msgstr "إذا لم تغير نطاقك الرئيسي وقمت بتسجيل ا�
 msgid "Something went wrong"
 msgstr "حدث خطأ ما"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:38
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:39
 msgid "I just logged in from a secondary domain"
 msgstr "لقد قمت للتو بتسجيل الدخول من نطاق ثانوي"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:47
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:48
 msgid "You're all set!"
 msgstr "كل شيء جاهز!"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:52
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:53
 msgid ""
 "This domain is now registered as a secondary domain and WPML will recognize "
 "it correctly."

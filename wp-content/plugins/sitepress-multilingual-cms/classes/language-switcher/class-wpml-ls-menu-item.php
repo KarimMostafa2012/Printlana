@@ -50,13 +50,15 @@ class WPML_LS_Menu_Item {
 		$this->db_id            = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
 		$this->menu_item_parent = isset( $lang['menu_item_parent'] ) ? $lang['menu_item_parent'] : null;
 
-		$ls_menu_item_label     = __( 'Switch to ', 'sitepress' ) . ( $lang['display_name'] ?? $lang['native_name'] ?? '' );
-		$this->aria_label       = $ls_menu_item_label;
-		$this->attr_title       = $ls_menu_item_label;
+		$is_current_lang    = isset( $lang['is_current'] ) ? $lang['is_current'] : null;
+		$ls_menu_item_label = ! $is_current_lang ? $lang['menu_item_label'] : '';
 
-		$this->title            = $item_content;
-		$this->post_title       = $item_content;
-		$this->url              = isset( $lang['url'] ) ? $lang['url'] : null;
+		$this->aria_label = $ls_menu_item_label;
+		$this->attr_title = $ls_menu_item_label;
+
+		$this->title      = $item_content;
+		$this->post_title = $item_content;
+		$this->url        = isset( $lang['url'] ) ? $lang['url'] : null;
 
 		if ( isset( $lang['css_classes'] ) ) {
 			$this->classes = $lang['css_classes'];

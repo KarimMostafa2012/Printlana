@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Your pending automatic translations will be canceled.": [
             "保留中の自動翻訳はキャンセルされます。"

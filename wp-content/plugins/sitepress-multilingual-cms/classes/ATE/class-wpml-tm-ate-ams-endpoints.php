@@ -145,11 +145,11 @@ class WPML_TM_ATE_AMS_Endpoints {
 		}
 	}
 
-	private function get_AMS_base_url() {
+	public function get_AMS_base_url() {
 		return $this->get_service_base_url( self::SERVICE_AMS );
 	}
 
-	private function get_ATE_base_url() {
+	public function get_ATE_base_url() {
 		return $this->get_service_base_url( self::SERVICE_ATE );
 	}
 

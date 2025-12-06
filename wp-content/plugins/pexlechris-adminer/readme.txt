@@ -4,8 +4,8 @@ Plugin Name: Database Manager - WP Adminer
 Author: Pexle Chris
 Author URI: https://www.pexlechris.dev
 Tags: Adminer, Database, sql, mysql, mariadb
-Version: 4.1.3
-Stable tag: 4.1.3
+Version: 4.2.0
+Stable tag: 4.2.0
 Adminer version: 5.3.0
 Requires at least: 4.7.0
 Tested up to: 6.8.2
@@ -155,6 +155,12 @@ $dropdown_items = apply_filters('pexlechris_adminer_adminbar_dropdown_items', $d
 
 
 == Changelog ==
+= 4.2.0 =
+* [New]: Update Adminer version to 5.4.1 [See Adminer 5.4.1 Release Notes](https://github.com/vrana/adminer/releases/tag/v5.4.1)
+* [New]: Added quick access links at the top-left corner of the Adminer UI (WP Admin, Home).
+* [New]: Filter `pexlechris_adminer_sticky_links` introduced in order to filter the above quick access links.
+* [Bug Fix]: Fixed issue where Adminer URL would break when `home_url()` contained query parameters (e.g., WPML language parameter: https://example.com?lang=en)
+
 = 4.1.3 =
 * Tested up to: 6.8.2
 * [Bug Fix]: In rare cases, WP Adminer was loading without its CSS and JS assets. This issue is now resolved by clearing the output buffer before including the Adminer file.
@@ -162,7 +168,7 @@ Special thanks to Alexia Kaklamani and [Jakub Vrána](https://wordpress.org/supp
 
 = 4.1.2 =
 * Tested up to: 6.8.1
-* [New]: Update Adminer version to 5.3.0
+* [New]: Update Adminer version to 5.3.0 [See Adminer 5.3.0 Release Notes](https://github.com/vrana/adminer/releases/tag/v5.3.0)
 * [Enhancement]: A key has been added for permanent login.
 
 = 4.1.1 =

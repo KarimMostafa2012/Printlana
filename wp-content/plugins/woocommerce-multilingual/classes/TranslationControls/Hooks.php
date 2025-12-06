@@ -65,7 +65,7 @@ abstract class Hooks implements IWPML_Backend_Action, IWPML_DIC_Action, IWPML_RE
 	abstract protected function addAdminPageHooks();
 
 	public function loadAssets() {
-		wp_register_style( 'wcml_tc', WCML_PLUGIN_URL . '/res/css/translation-controls.css', null, WCML_VERSION );
+		wp_register_style( 'wcml_tc', WCML_PLUGIN_URL . '/res/css/translation-controls.css', [], WCML_VERSION );
 		wp_enqueue_style( 'wcml_tc' );
 	}
 

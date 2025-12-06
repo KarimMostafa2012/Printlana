@@ -62,6 +62,12 @@
 .wcmmq_icon-home:before { content: '\e83c'; } /* '' */
 .wcmmq_icon-user:before { content: '\e83d'; } /* '' */
 .wcmmq_icon-twitter:before { content: '\e83e'; } /* '' */
+.wcmmq_icon-bizzplugin:before { content: '\e930'; } /* '' */
+.wcmmq_icon-bizzplugin-text:before { content: '\e931'; } /* '' */
+.wcmmq_icon-bizzplugin-plug:before { content: '\e932'; } /* '' */
+.wcmmq_icon-bizzplugin-circle:before { content: '\e933'; } /* '' */
+.wcmmq_icon-bizzplugin-full:before { content: '\e934'; } /* '' */
+.wcmmq_icon-bizzplugin-full-2:before { content: '\e935'; } /* '' */
 .wcmmq_icon-globe-inv:before { content: '\f019'; } /* '' */
 .wcmmq_icon-linkedin:before { content: '\f05c'; } /* '' */
 .wcmmq_icon-github-circled:before { content: '\f09b'; } /* '' */

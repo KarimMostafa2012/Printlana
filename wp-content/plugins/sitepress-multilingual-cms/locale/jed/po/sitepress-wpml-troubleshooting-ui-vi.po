@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "Giấy phép WPML đã được làm mới"
 msgid "Translate Everything Automatically is not active."
 msgstr "Tính năng Tự động dịch mọi thứ không hoạt động."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "Thử lại các bản dịch tự động bị treo"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,6 @@ msgstr "Đang kiểm tra các công việc dịch thuật bị treo..."
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "Đang xử lý... Đã tìm thấy %s bản dịch bị treo cho đến nay"
-msgstr[1] "Đang xử lý... Đã tìm thấy %s bản dịch bị treo cho đến nay"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -135,5 +136,4 @@ msgstr "Không tìm thấy công việc dịch thuật nào bị treo."
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "Đã tìm thấy %s công việc dịch thuật bị treo. WPML sẽ tự động dịch nó trong nền.\nBạn có thể kiểm tra tiến độ trong Bảng điều khiển Dịch thuật."
-msgstr[1] "Đã tìm thấy %s công việc dịch thuật bị treo. WPML sẽ tự động dịch chúng trong nền.\nBạn có thể kiểm tra tiến độ của chúng trong Bảng điều khiển Dịch thuật."
+msgstr[0] "Đã tìm thấy %s công việc dịch thuật bị treo. WPML sẽ tự động dịch chúng trong nền.\nBạn có thể kiểm tra tiến độ của chúng trong Bảng điều khiển Dịch thuật."

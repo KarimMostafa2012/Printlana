@@ -64,7 +64,7 @@ class Quantiy_Archive
     public function wp_enqueue_scripts()
     {
         $ajax_cart = apply_filters('wcmmq_ajax_cart_single_page', false);
-        if(!$ajax_cart && is_single()) return;
+        if(!$ajax_cart || is_single()) return;
         wp_register_script( 'wcmmq-ajax-add-to-cart', WC_MMQ_BASE_URL . 'assets/js/ajax-add-to-cart.js', array( 'jquery' ), '1.0.0', true );
         wp_enqueue_script( 'wcmmq-ajax-add-to-cart' );
     }

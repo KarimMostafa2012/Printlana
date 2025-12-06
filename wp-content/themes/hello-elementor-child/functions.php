@@ -1333,3 +1333,16 @@ class Simple_Login_Validator
 
 // Initialize the validator
 new Simple_Login_Validator();
+
+
+//Yahya Remove thumbnails
+function remove_default_image_sizes( $sizes ) {
+    unset( $sizes['thumbnail'] );
+    unset( $sizes['medium'] );
+    unset( $sizes['medium_large'] );
+    unset( $sizes['large'] );
+    unset( $sizes['1536x1536'] ); // For WordPress 5.3+ large size
+    unset( $sizes['2048x2048'] ); // For WordPress 5.3+ large size
+    return $sizes;
+}
+add_filter( 'intermediate_image_sizes_advanced', 'remove_default_image_sizes' );

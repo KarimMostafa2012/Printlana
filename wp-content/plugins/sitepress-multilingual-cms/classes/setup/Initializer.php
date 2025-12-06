@@ -24,6 +24,7 @@ use WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE;
 use WPML\TM\ATE\TranslateEverything\TranslatableData\DataPreSetup;
 use WPML\TM\ATE\TranslateEverything\TranslatableData\View as TranslatableData;
 use WPML\TM\Menu\TranslationMethod\TranslationMethodSettings;
+use WPML\TM\ATE\ClonedSites\SetupMigration\Service as SetupMigrationService;
 use WPML\TranslationMode\Endpoint\SetTranslateEverything;
 use WPML\TranslationRoles\UI\Initializer as TranslationRolesInitializer;
 use WPML\UIPage;
@@ -44,6 +45,7 @@ class Initializer {
 		/** @var Dic $wpml_dic */
 		global $wpml_dic;
 		$currentStep = Option::getCurrentStep();
+		$currentStep = make( SetupMigrationService::class )->maybeMigrateCredentials( $currentStep );
 
 		if ( CurrentStep::STEP_HIGH_COSTS_WARNING === $currentStep ) {
 			// The user stopped the wizard on the high costs warning step.

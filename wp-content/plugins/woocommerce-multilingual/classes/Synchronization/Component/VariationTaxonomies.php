@@ -5,7 +5,6 @@ namespace WCML\Synchronization\Component;
 use WCML\Terms\SuspendWpmlFiltersFactory;
 use WCML\Utilities\DB;
 use WCML\Utilities\SyncHash;
-use WPML\FP\Fns;
 use WPML_Non_Persistent_Cache;
 
 class VariationTaxonomies extends Synchronizer {

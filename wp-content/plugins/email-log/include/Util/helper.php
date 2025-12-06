@@ -342,7 +342,6 @@ function get_column_label_map() {
 		'message'     => __( 'Message', 'email-log' ),
 		'attachments' => __( 'Attachment', 'email-log' ),
 		'sent_date'   => __( 'Sent at', 'email-log' ),
-		'from'        => __( 'From', 'email-log' ),
 		'cc'          => __( 'CC', 'email-log' ),
 		'bcc'         => __( 'BCC', 'email-log' ),
 		'reply_to'    => __( 'Reply To', 'email-log' ),

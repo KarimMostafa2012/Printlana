@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
@@ -545,7 +547,6 @@ msgstr "与专业翻译服务的同步失败"
 msgid "%d translation has been downloaded"
 msgid_plural "%d translations have been downloaded"
 msgstr[0] "已下载%d份翻译"
-msgstr[1] "已下载%d份翻译"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"

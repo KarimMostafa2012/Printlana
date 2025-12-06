@@ -1,5 +1,7 @@
 <?php
 
+use WCML\Utilities\AdminPages;
+
 class WCML_Adventure_Tours implements \IWPML_Action {
 
 	/**
@@ -367,7 +369,7 @@ class WCML_Adventure_Tours implements \IWPML_Action {
 
 	public function is_attributes_page( $is_attributes_page ) {
 
-		if ( isset( $_GET['page'] ) && 'product_attributes_extended' === $_GET['page'] && isset( $_GET['post_type'] ) && 'product' === $_GET['post_type'] ) {
+		if ( AdminPages::isPage( 'product_attributes_extended' ) && isset( $_GET['post_type'] ) && 'product' === $_GET['post_type'] ) {
 			$is_attributes_page = true;
 		}
 

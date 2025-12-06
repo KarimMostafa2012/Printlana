@@ -157,6 +157,7 @@ function wpml_tm_load( $sitepress = null ) {
 			'WPML_TM_Reset_Options_Filter_Factory',
 			\WPML\TM\User\Hooks::class,
 			\WPML\TM\Jobs\ExtraFieldDataInEditorFactory::class,
+			\WPML\TM\ATE\Sitekey\DirectSync::class,
 			\WPML\TM\ATE\Sitekey\Sync::class,
 			\WPML\TM\ATE\Review\ReviewCompletedNotice::class,
 			\WPML\TM\Settings\CustomFieldChangeDetector::class,

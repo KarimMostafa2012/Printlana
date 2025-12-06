@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
@@ -82,8 +84,7 @@ msgstr "자동 번역을 위한 크레딧이 부족합니다"
 #: src/js/ate/status-bar/components/constants.js:29
 msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
 msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgstr[0] "Wpml.org 계정에 <b>1</b>개의 선불 번역 크레딧이 있습니다. 자동 번역을 시작하려면 이 크레딧을 사이트에 할당하십시오"
-msgstr[1] "Wpml.org 계정에 <b>%s</b>개의 선불 번역 크레딧이 있습니다. 자동 번역을 시작하려면 이 크레딧을 사이트에 할당하십시오"
+msgstr[0] "Wpml.org 계정에 <b>%s</b>개의 선불 번역 크레딧이 있습니다. 자동 번역을 시작하려면 이 크레딧을 사이트에 할당하십시오"
 
 #: src/js/ate/status-bar/components/constants.js:41
 #: src/js/ate/status-bar/components/sending/index.js:10
@@ -116,8 +117,7 @@ msgstr "자동 번역을 사용하려면 기본 언어인 %s를 지원되는 언
 #. %s is replaced by the language(s) name.
 msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
 msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
-msgstr[0] "자동 번역을 사용하려면 당신의 언어, %s을(를) 지원되는 언어로 매핑해야 합니다."
-msgstr[1] "자동 번역을 사용하려면 귀하의 사이트에서 다음 언어를 지원되는 언어로 매핑해야 합니다: %s"
+msgstr[0] "자동 번역을 사용하려면 귀하의 사이트에서 다음 언어를 지원되는 언어로 매핑해야 합니다: %s"
 
 #: src/js/ate/status-bar/components/constants.js:68
 msgid ""
@@ -130,7 +130,6 @@ msgstr "해당 언어의 콘텐츠: %s는 기본 언어와 다른 언어로 매�
 msgid "%d translation waiting for review"
 msgid_plural "%d translations waiting for review"
 msgstr[0] "%d개의 번역이 검토 대기 중입니다"
-msgstr[1] "%d개의 번역이 검토 대기 중입니다"
 
 #: src/js/ate/status-bar/components/credit/index.js:100
 msgid "Account credits used"

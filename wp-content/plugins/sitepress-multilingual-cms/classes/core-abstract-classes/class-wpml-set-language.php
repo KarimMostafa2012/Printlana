@@ -257,6 +257,19 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 		if ( $el_id ) {
 			$new['element_id'] = $el_id;
 		}
+
+		// Check if there is already an entry for this trid + language_code combination.
+		$existing_id = $this->wpdb->get_var( $this->wpdb->prepare(
+			"SELECT translation_id FROM {$this->wpdb->prefix}icl_translations
+			WHERE trid = %d AND language_code = %s",
+			$trid,
+			$language_code
+		) );
+
+		if ( $existing_id ) {
+			return $existing_id;
+		}
+
 		$this->wpdb->insert( $this->wpdb->prefix . 'icl_translations', $new );
 		$translation_id = $this->wpdb->insert_id;
 

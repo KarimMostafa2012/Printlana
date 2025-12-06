@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "WPML 라이선스가 새로 고쳐졌습니다"
 msgid "Translate Everything Automatically is not active."
 msgstr "자동 번역 기능이 활성화되어 있지 않아."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "멈춘 자동 번역 다시 시도하기"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,6 @@ msgstr "멈춘 번역 작업 확인 중..."
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "처리 중... 지금까지 %s개의 멈춘 번역 발견됨"
-msgstr[1] "처리 중... 지금까지 %s개의 멈춘 번역 발견됨"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -136,4 +137,3 @@ msgstr "멈춘 번역 작업이 없어."
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
 msgstr[0] "%s개의 멈춘 번역 작업 발견됨. WPML이 백그라운드에서 자동으로 번역할 거야.\n번역 대시보드에서 진행 상황을 확인할 수 있어."
-msgstr[1] "%s개의 멈춘 번역 작업 발견됨. WPML이 백그라운드에서 자동으로 번역할 거야.\n번역 대시보드에서 진행 상황을 확인할 수 있어."

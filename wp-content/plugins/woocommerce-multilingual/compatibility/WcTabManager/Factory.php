@@ -15,7 +15,7 @@ class Factory extends ComponentFactory {
 	public function create() {
 		$hooks = [];
 
-		$hooks[] = new WCML_Tab_Manager( getSitePress(), self::getWooCommerce(), getWooCommerceWpml(), self::getWpdb(), self::getElementTranslationPackage() );
+		$hooks[] = new WCML_Tab_Manager( getSitePress(), getWooCommerceWpml(), self::getWpdb(), self::getElementTranslationPackage() );
 		$hooks[] = new TranslationEditor\GroupsAndLabels();
 
 		return $hooks;

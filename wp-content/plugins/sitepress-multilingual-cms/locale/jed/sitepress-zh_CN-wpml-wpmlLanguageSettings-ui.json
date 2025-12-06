@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
          },
          "Choose the image file type for flags": [
             "选择标志的图像文件类型"

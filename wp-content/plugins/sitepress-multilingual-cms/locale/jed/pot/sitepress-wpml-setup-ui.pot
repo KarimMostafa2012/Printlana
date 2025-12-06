@@ -158,6 +158,10 @@ msgstr ""
 msgid "Delete language pair(s)"
 msgstr ""
 
+#: src/js/setup/components/Steps/AITranslation.js:52
+msgid "Loading AI Translation..."
+msgstr ""
+
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
 msgstr ""

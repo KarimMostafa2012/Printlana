@@ -2,9 +2,6 @@
 
 class WPML_Elementor_Update_Media_Factory implements IWPML_PB_Media_Update_Factory {
 
-	/** @var IWPML_PB_Media_Find_And_Translate|null $media_translate */
-	private $media_translate;
-
 	public function create( $find_usage_instead_of_translate = false ) {
 		global $sitepress;
 
@@ -28,20 +25,17 @@ class WPML_Elementor_Update_Media_Factory implements IWPML_PB_Media_Update_Facto
 	private function get_media_translate( $find_usage_instead_of_translate ) {
 		global $sitepress;
 
-		if ( ! $this->media_translate ) {
-			$element_factory = new WPML_Translation_Element_Factory( $sitepress );
-			if ( $find_usage_instead_of_translate ) {
-				$this->media_translate = new WPML_Page_Builders_Media_Find_Usage();
-			} else {
-				$image_translate       = new WPML_Media_Image_Translate(
-					$sitepress,
-					new WPML_Media_Attachment_By_URL_Factory(),
-					new \WPML\Media\Factories\WPML_Media_Attachment_By_URL_Query_Factory()
-				);
-				$this->media_translate = new WPML_Page_Builders_Media_Translate( $element_factory, $image_translate );
-			}
+		$element_factory = new WPML_Translation_Element_Factory( $sitepress );
+		if ( $find_usage_instead_of_translate ) {
+			return new WPML_Page_Builders_Media_Find_Usage();
 		}
 
-		return $this->media_translate;
+		$image_translate = new WPML_Media_Image_Translate(
+			$sitepress,
+			new WPML_Media_Attachment_By_URL_Factory(),
+			new \WPML\Media\Factories\WPML_Media_Attachment_By_URL_Query_Factory()
+		);
+
+		return new WPML_Page_Builders_Media_Translate( $element_factory, $image_translate );
 	}
 }

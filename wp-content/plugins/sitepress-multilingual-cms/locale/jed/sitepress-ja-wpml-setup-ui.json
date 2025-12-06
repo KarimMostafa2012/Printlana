@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "From:": [
             "元言語:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "言語ペアを削除する"
+         ],
+         "Loading AI Translation...": [
+            "AI翻訳を読み込んでいます..."
          ],
          "%s file upload failed.": [
             "%sファイルのアップロードに失敗しました。"

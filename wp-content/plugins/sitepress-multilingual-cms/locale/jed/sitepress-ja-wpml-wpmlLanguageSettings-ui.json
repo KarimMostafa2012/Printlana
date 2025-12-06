@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Choose the image file type for flags": [
             "フラグ用の画像ファイルの種類を選択してください"

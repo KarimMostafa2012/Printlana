@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi_VN"
          },
          "Preparing...": [
             "Chuẩn bị..."
@@ -84,7 +86,6 @@
             "Đang kiểm tra các công việc dịch thuật bị treo..."
          ],
          "Processing... %s stuck translation found so far": [
-            "Đang xử lý... Đã tìm thấy %s bản dịch bị treo cho đến nay",
             "Đang xử lý... Đã tìm thấy %s bản dịch bị treo cho đến nay"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -94,7 +95,6 @@
             "Không tìm thấy công việc dịch thuật nào bị treo."
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
-            "Đã tìm thấy %s công việc dịch thuật bị treo. WPML sẽ tự động dịch nó trong nền.\nBạn có thể kiểm tra tiến độ trong Bảng điều khiển Dịch thuật.",
             "Đã tìm thấy %s công việc dịch thuật bị treo. WPML sẽ tự động dịch chúng trong nền.\nBạn có thể kiểm tra tiến độ của chúng trong Bảng điều khiển Dịch thuật."
          ]
       }

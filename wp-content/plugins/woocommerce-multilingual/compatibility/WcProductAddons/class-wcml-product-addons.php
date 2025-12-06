@@ -325,11 +325,11 @@ class WCML_Product_Addons implements IWPML_Action {
 				}
 			}
 
-			if ( $translation ) {
+			if ( is_object( $translation ) ) {
 				$translated_product_addons = SharedHooks::getProductAddons( $translation->ID );
 				if ( ! empty( $translated_product_addons ) ) {
-					foreach ( $translated_product_addons as $addon_id => $transalted_product_addon ) {
-						$translated_addon_data                                        = wpml_collect( $transalted_product_addon );
+					foreach ( $translated_product_addons as $addon_id => $translated_product_addon ) {
+						$translated_addon_data                                        = wpml_collect( $translated_product_addon );
 						$data[ self::ADDON_PREFIX . $addon_id . '_name' ]['translation']        = $translated_addon_data->get( 'name' );
 						$data[ self::ADDON_PREFIX . $addon_id . '_description' ]['translation'] = $translated_addon_data->get( 'description' );
 						$data[ self::ADDON_PREFIX . $addon_id . '_placeholder' ]['translation'] = $translated_addon_data->get( 'placeholder' );

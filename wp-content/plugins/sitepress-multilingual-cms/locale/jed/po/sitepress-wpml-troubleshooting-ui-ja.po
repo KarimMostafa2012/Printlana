@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "WPML ライセンスが最新の状態に更新されました"
 msgid "Translate Everything Automatically is not active."
 msgstr "自動翻訳機能は有効になっていません。"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "停止した自動翻訳をリトライする"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,6 @@ msgstr "停止した翻訳ジョブを確認中..."
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "処理中... これまでに%s件の停止した翻訳が見つかりました"
-msgstr[1] "処理中... これまでに%s件の停止した翻訳が見つかりました"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -136,4 +137,3 @@ msgstr "停止した翻訳ジョブは見つかりませんでした。"
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
 msgstr[0] "%s件の停止した翻訳ジョブが見つかりました。WPMLがバックグラウンドで自動的に翻訳します。\n翻訳ダッシュボードで進捗状況を確認できます。"
-msgstr[1] "%s件の停止した翻訳ジョブが見つかりました。WPMLがバックグラウンドで自動的に翻訳します。\n翻訳ダッシュボードで進捗状況を確認できます。"

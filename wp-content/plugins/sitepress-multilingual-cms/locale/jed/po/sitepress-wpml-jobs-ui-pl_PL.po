@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
@@ -543,9 +545,8 @@ msgstr "Synchronizacja z usługą tłumaczeń profesjonalnych nie powiodła się
 
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
-msgid_plural "%d translations have been downloaded"
+msgid_plural "%d translation has been downloadeds"
 msgstr[0] "%d tłumaczenie zostało pobrane"
-msgstr[1] "%d tłumaczenia zostały pobrane"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"

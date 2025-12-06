@@ -27,8 +27,8 @@ namespace SW_WAPF_PRO\Includes\Controllers {
                     add_filter( 'wapf/field_types',                             [ $this, 'add_products_field_type' ] );
                     add_filter( 'wapf/field_options',                           [ $this, 'add_products_field_options' ] );
                     add_filter( 'wapf/field_visibility_conditions',             [ $this, 'add_field_visibility_conditions' ] );
-                    add_action( 'wp_ajax_wapf_product_picker',                  [ $this, 'product_picker_ajax' ] );
-                    add_action( 'wapf/admin/sanitize_field',                    [ $this, 'sanitize_field_data'], 10, 2);
+                    add_action( 'wp_ajax_wapf_product_picker',       [ $this, 'product_picker_ajax' ] );
+                    add_action( 'wapf/admin/sanitize_field',         [ $this, 'sanitize_field_data'], 10, 2);
 
                     add_filter( 'wapf/field_template_model',                    [ $this, 'define_products_and_defaults_on_model' ], 10, 5 );
 

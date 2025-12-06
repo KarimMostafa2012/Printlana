@@ -39,15 +39,16 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 		        return mb_strlen('' . $str);
 	        });
 
-            	        wapf_add_formula_function( 'lookuptable', function($args,$data) {
+            	        wapf_add_formula_function( 'lookuptable', function( $args, $data ) {
 
-		        $tables = apply_filters('wapf/lookup_tables', []);
+		        $tables = apply_filters( 'wapf/lookup_tables', [] );
 
-		        if(!empty($tables) && isset($tables[$args[0]])) {
-			        $table = $tables[ $args[0] ];
+                		        if( ! empty( $tables ) && isset( $tables[ $args[0] ] ) ) {
 
-			        $table_values = [];
-			        $prev         = $table;
+                                    $clone_index    = $data['clone_index'] ?? 0;
+			        $table          = $tables[ $args[0] ];
+			        $table_values   = [];
+			        $prev           = $table;
 
 			        for ( $k = 1; $k < sizeof( $args ); $k ++ ) {
 
@@ -58,23 +59,37 @@ namespace SW_WAPF_PRO\Includes\Controllers {
                             $value = $args[ $k ];
                         }
                         else {
-                            $field = Enumerable::from($data['fields'])->firstOrDefault(function ($x) use ($args, $k) {
-                                return $x['id'] === $args[$k];
-                            });
-                            if ( ! $field ) {
+
+                                                        $field = Enumerable::from( $data['fields'] )->firstOrDefault( function ( $x ) use ( $args, $k, $clone_index ) {
+                                if( $x['id'] === $args[$k] ) {
+
+                                    if( ! empty( $x['clone_type'] ) && $x['clone_type'] === 'button' ) {
+                                        return ( $x['clone_idx'] ?? 0 ) == $clone_index;
+                                    }
+
+                                                                        return true;
+                                }
+                                return false;
+                            } );
+
+                                                        if ( ! $field ) {
                                 $solution = 0;
                                 break;
                             }
-                            $value = $field['values'][0]['label'];
-                            if ($value === '') {
+
+                                                        $value = $field['values'][0]['label'];
+
+                                                        if ( $value === '' ) {
                                 $solution = 0;
                                 break;
                             }
                         }
-				        $n              = Helper::find_nearest( $value, $prev );
+
+                        				        $n              = Helper::find_nearest( $value, $prev );
 				        $table_values[] = $n;
 				        $prev           = $prev[ $n ];
-			        }
+
+                        			        }
 
 			        return array_reduce( $table_values, function ( $acc, $curr ) {
 				        return $acc[ $curr ];

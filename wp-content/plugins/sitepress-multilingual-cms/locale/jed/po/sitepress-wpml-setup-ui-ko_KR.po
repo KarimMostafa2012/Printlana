@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -157,6 +159,10 @@ msgstr "언어 쌍 수정하기"
 #: src/js/components/translators/TranslatorsTable.js:62
 msgid "Delete language pair(s)"
 msgstr "언어 쌍 삭제하기"
+
+#: src/js/setup/components/Steps/AITranslation.js:52
+msgid "Loading AI Translation..."
+msgstr "AI 번역 로딩 중..."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."

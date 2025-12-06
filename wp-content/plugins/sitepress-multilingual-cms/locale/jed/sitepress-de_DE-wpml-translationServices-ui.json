@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "de_DE"
          },
          "Connect this site to your %s account": [
             "Verbinden Sie diese Website mit Ihrem %s-Account"

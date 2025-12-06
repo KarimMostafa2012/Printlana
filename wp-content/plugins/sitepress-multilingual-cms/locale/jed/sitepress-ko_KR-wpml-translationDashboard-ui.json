@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ko_KR"
          },
          "Your pending automatic translations will be canceled.": [
             "대기 중인 자동 번역이 취소됩니다."

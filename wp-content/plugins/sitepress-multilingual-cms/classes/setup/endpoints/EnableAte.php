@@ -23,6 +23,4 @@ class EnableAte implements IHandler {
 
 		return Either::of( true );
 	}
-
-
 }

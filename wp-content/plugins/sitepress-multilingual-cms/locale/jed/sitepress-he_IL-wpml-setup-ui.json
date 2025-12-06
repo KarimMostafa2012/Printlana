@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "he_IL"
          },
          "From:": [
             "מ:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "מחק צמד(י) שפות"
+         ],
+         "Loading AI Translation...": [
+            "טוען תרגום בינה מלאכותית..."
          ],
          "%s file upload failed.": [
             "העלאת קובץ %s נכשלה."

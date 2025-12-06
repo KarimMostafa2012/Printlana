@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "تم تحديث ترخيص WPML"
 msgid "Translate Everything Automatically is not active."
 msgstr "خاصية الترجمة التلقائية للكل غير مفعلة."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "إعادة محاولة الترجمات التلقائية العالقة"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -119,8 +121,12 @@ msgstr "جاري التحقق من مهام الترجمة العالقة..."
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:13
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
-msgstr[0] "جاري المعالجة... تم العثور على %s ترجمة عالقة حتى الآن"
+msgstr[0] "Processing... %s stuck translations found so far"
 msgstr[1] "جاري المعالجة... تم العثور على %s ترجمة عالقة حتى الآن"
+msgstr[2] "Processing... %s stuck translations found so far"
+msgstr[3] "Processing... %s stuck translations found so far"
+msgstr[4] "Processing... %s stuck translations found so far"
+msgstr[5] "جاري المعالجة... تم العثور على %s ترجمة عالقة حتى الآن"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -135,5 +141,9 @@ msgstr "لم يتم العثور على مهام ترجمة عالقة."
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة التقدم في لوحة التحكم بالترجمة."
-msgstr[1] "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة تقدمها في لوحة التحكم بالترجمة."
+msgstr[0] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[1] "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة التقدم في لوحة التحكم بالترجمة."
+msgstr[2] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[3] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[4] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[5] "تم العثور على %s مهمة ترجمة عالقة. سيقوم WPML بترجمتها تلقائيًا في الخلفية.\nيمكنك متابعة تقدمها في لوحة التحكم بالترجمة."

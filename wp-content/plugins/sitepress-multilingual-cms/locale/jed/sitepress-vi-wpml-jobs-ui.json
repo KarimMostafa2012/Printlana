@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi_VN"
          },
          "Start batch sync": [
             "Bắt đầu đồng bộ hóa hàng loạt"
@@ -393,7 +395,6 @@
             "Đồng bộ hóa với dịch vụ Dịch thuật Chuyên nghiệp đã thất bại"
          ],
          "%d translation has been downloaded": [
-            "%d bản dịch đã được tải xuống",
             "%d bản dịch đã được tải xuống"
          ],
          "Batch sync finished successfully!": [

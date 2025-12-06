@@ -278,7 +278,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
         }
 
-	    public static function get_product_attributes( $product, $strict = false ): array
+	    public static function get_product_attributes( $product, bool $strict = false ): array
         {
 		    $attributes = [];
 
@@ -286,12 +286,12 @@ namespace SW_WAPF_PRO\Includes\Classes {
                 $product = wc_get_product( $product );
             }
 
-		    if ( !$strict && $product->is_type( 'variation' ) ) {
+		    if ( ! $strict && $product->is_type( 'variation' ) ) {
 			    $product_id = $product->get_parent_id();
 			    $product = wc_get_product( $product_id );
 		    }
 
-		    if ( !is_object( $product ) ) {
+		    if ( ! is_object( $product ) ) {
                 return $attributes;
             }
 

@@ -2,7 +2,8 @@
 
 namespace WPML\ATE\Proxies;
 
-use WPML_TM_ATE_AMS_Endpoints;
+use WPML\Core\Component\WpmlProxy\Application\Service\WpmlProxyService;
+use WPML\Infrastructure\Dic;
 
 /**
  * Class ProxyInterceptorLoader
@@ -55,23 +56,34 @@ class ProxyInterceptorLoader {
 	 *
 	 * @var string[]
 	 */
-	private $domains = [];
+	private $allowed_domains = [];
+
+	/**
+	 * List of HTTP request patterns that should be ignored by the proxy interceptor.
+	 * These requests will bypass the proxy and be sent directly to their original destination.
+	 *
+	 * @var string[]
+	 */
+	private $bypassed_http_requests = [];
+
+	/**
+	 * @var WpmlProxyService
+	 */
+	private $wpml_proxy_service;
+
 
 	/**
 	 * Private constructor for singleton.
+	 *
+	 * @param WpmlProxyService  $wpmlProxyService
+	 * @param ProxyRoutingRules $proxyRoutingRules
 	 */
-	private function __construct() {
-		$this->domains = self::getAllowedDomains();
+	private function __construct( WpmlProxyService $wpmlProxyService, ProxyRoutingRules $proxyRoutingRules ) {
+		$this->allowed_domains        = $proxyRoutingRules->getAllowedDomains();
+		$this->bypassed_http_requests = $proxyRoutingRules->getBypassedHttpRequests();
+		$this->wpml_proxy_service     = $wpmlProxyService;
 	}
 
-	static function getAllowedDomains() {
-		$ateEndpoints = new WPML_TM_ATE_AMS_Endpoints();
-
-		return [
-			$ateEndpoints->get_ATE_host(),
-			$ateEndpoints->get_AMS_host(),
-		];
-	}
 
 	/**
 	 * Retrieve the singleton instance.
@@ -79,8 +91,10 @@ class ProxyInterceptorLoader {
 	 * @return self
 	 */
 	public static function get() {
+		/** @var Dic $wpml_dic */
+		global $wpml_dic;
 		if ( null === self::$instance ) {
-			self::$instance = new self();
+			self::$instance = new self( $wpml_dic->make( WpmlProxyService::class ), new ProxyRoutingRules() );
 		}
 
 		return self::$instance;
@@ -94,7 +108,7 @@ class ProxyInterceptorLoader {
 	 * @return bool True when proxy should be active; false to bypass.
 	 */
 	public function shouldEnableProxy() {
-		return ! defined( 'WPML_DISABLE_PROXY' ) || ! WPML_DISABLE_PROXY;
+		return $this->wpml_proxy_service->isEnabled();
 	}
 
 	/**
@@ -116,7 +130,7 @@ class ProxyInterceptorLoader {
 			$this->enable();
 		}
 		$url = $this->getProxyUrl( $url );
-		$url = add_query_arg(['_wpnonce' => wp_create_nonce( 'wp_rest' )], $url);
+		$url = add_query_arg( [ '_wpnonce' => wp_create_nonce( 'wp_rest' ) ], $url );
 
 		$deps = array_merge( $deps, [ self::HANDLE_JS ] );
 
@@ -138,11 +152,18 @@ class ProxyInterceptorLoader {
 		wp_register_script( self::HANDLE_JS, $src, [], ICL_SITEPRESS_SCRIPT_VERSION, true );
 
 		// Expose options to the inline script
-		wp_add_inline_script( self::HANDLE_JS, 'window.wpmlProxyOptions = ' . wp_json_encode( [
-				'domains'   => $this->domains,
-				'proxyPath' => (string) $this->getProxyUrl( '' ),
-				'nonce'     => wp_create_nonce( 'wp_rest' ),
-			] ) . ';', 'before' );
+		wp_add_inline_script(
+			self::HANDLE_JS,
+			'window.wpmlProxyOptions = ' . wp_json_encode(
+				[
+					'domains'              => $this->allowed_domains,
+					'bypassedHttpRequests' => $this->bypassed_http_requests,
+					'proxyPath'            => (string) $this->getProxyUrl( '' ),
+					'nonce'                => wp_create_nonce( 'wp_rest' ),
+				]
+			) . ';',
+			'before'
+		);
 
 		// Only localize options; logic lives in the dedicated JS file.
 		wp_enqueue_script( self::HANDLE_JS );
@@ -151,11 +172,14 @@ class ProxyInterceptorLoader {
 
 	/**
 	 * @param string $url
+	 *
 	 * @return string
 	 */
-	private function getProxyUrl( $url ) {
+	private function getProxyUrl( $url = '' ) {
 		$proxyUrl = get_rest_url( null, self::PROXY_REST_PATH );
-		$proxyUrl = add_query_arg( [ 'url' => $url ], $proxyUrl );
+		if ( ! empty( $url ) ) {
+			$proxyUrl = add_query_arg( [ 'url' => $url ], $proxyUrl );
+		}
 
 		return $proxyUrl;
 	}

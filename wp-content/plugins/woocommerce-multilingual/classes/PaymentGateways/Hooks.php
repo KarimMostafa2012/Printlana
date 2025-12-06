@@ -6,7 +6,6 @@ use IWPML_Backend_Action;
 use IWPML_Frontend_Action;
 use IWPML_DIC_Action;
 use WCML\MultiCurrency\Geolocation;
-use WCML\PaymentGateways\Strings;
 use WCML\StandAlone\IStandAloneAction;
 use WCML\Utilities\Resources;
 use WCML\Utilities\AdminUrl;
@@ -18,7 +17,6 @@ use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\FP\Str;
 use WPML\FP\Type;
-
 
 class Hooks implements IWPML_Backend_Action, IWPML_Frontend_Action, IWPML_DIC_Action, IStandAloneAction {
 

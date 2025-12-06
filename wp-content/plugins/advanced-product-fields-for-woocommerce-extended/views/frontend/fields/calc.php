@@ -9,20 +9,19 @@ $type = isset( $model['field']->options['calc_type'] ) && $model['field']->optio
 $result_format = $type === 'default' ? ( empty( $model['field']->options['result_format'] ) ? 'number' : 'none' ) : '';
 
 $attributes = [
-    'class'             => 'wapf-input input-' . $model['field']->id,
-    'data-field-id '    => $model['field']->id
+    'class'                 => 'wapf-input input-' . $model['field']->id,
+    'data-field-id '        => $model['field']->id,
+    'data-calc-type'        => $type,
+    'data-wapf-price'       => $formula,
+    'data-wapf-pricetype'   => 'fx'
 ];
 
-if( $type === 'cost' ) {
-    $attributes['data-wapf-pricetype'] = 'fx';
-    $attributes['data-wapf-price'] = $formula;
-}
-
 $attributes = Util::array_to_attributes( $attributes );
-// but value="idle" so tyhat calculateOptionsTotal would calculate this field.
+// Put value="idle" so that calculateOptionsTotal would calculate this field (doesn't calc empty fields).
 ?>
 
 <div class="wapf-calc-wrapper">
-    <span class="wapf-calc-text" data-type="<?php echo $type ?>" data-format="<?php echo $result_format ?>" data-txt="<?php echo $result_text ?>" data-formula="<?php echo $formula ?>"></span>
-    <input data-is-calc="1" type="hidden" <?php echo $attributes ?> data-fid="<?php echo $model['field']->id;?>" value="idle" name="wapf[field_<?php echo $model['field']->id;?>]" />
+    <span class="wapf-calc-text" data-type="<?php echo esc_attr( $type ) ?>" data-format="<?php echo esc_attr( $result_format ) ?>" data-txt="<?php echo esc_attr( $result_text ) ?>" data-formula="<?php echo esc_attr( $formula ) ?>"></span>
+    <input data-is-calc="1" type="hidden" <?php echo $attributes ?> value="idle" name="wapf[field_<?php echo esc_attr( $model['field']->id ) ?>]" />
+    <input type="hidden" value="" class="calc-raw" data-field-id="<?php echo esc_attr( $model['field']->id ) ?>" name="wapf[field_<?php echo esc_attr( $model['field']->id ) ?>_raw]" />
 </div>

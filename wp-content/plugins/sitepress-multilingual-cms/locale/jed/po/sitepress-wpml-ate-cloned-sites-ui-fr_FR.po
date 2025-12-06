@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/js/ate-cloned-sites/components/CloseButton.js:15
 msgid "Close"
@@ -242,35 +244,35 @@ msgstr "Il semble que ce site soit une copie d'un site différent, ou qu'il ait 
 msgid "Site Moved or Copied - Action Required"
 msgstr "Site déplacé ou copié - Action requise"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+#: src/js/ate-cloned-sites/steps/RevertMove.js:36
 msgid "You or someone else moved this site to %s. Please keep in mind that:"
 msgstr "Vous ou quelqu'un d'autre avez déplacé ce site vers %s. Veuillez garder à l'esprit que :"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+#: src/js/ate-cloned-sites/steps/RevertMove.js:50
 msgid "Translations that you do at %s will not appear on this site."
 msgstr "Les traductions que vous effectuez sur %s n'apparaîtront pas sur ce site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+#: src/js/ate-cloned-sites/steps/RevertMove.js:56
 msgid "You cannot edit translations on this site."
 msgstr "Vous ne pouvez pas modifier les traductions sur ce site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+#: src/js/ate-cloned-sites/steps/RevertMove.js:67
 msgid ""
 "The site at %s is using the same credits for automatic translation as this "
 "site."
 msgstr "Le site sur %s utilise les mêmes crédits pour la traduction automatique que ce site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+#: src/js/ate-cloned-sites/steps/RevertMove.js:76
 msgid ""
 "If you didn't intend to move this site to %s, you can <a>indicate that this "
 "site should be at %s</a>."
 msgstr "Si vous n'aviez pas l'intention de déplacer ce site vers %s, vous pouvez <a>indiquer que ce site devrait être sur %s</a>."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+#: src/js/ate-cloned-sites/steps/RevertMove.js:9
 msgid "This site has moved to a new location"
 msgstr "Ce site a été déplacé vers un nouvel emplacement"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+#: src/js/ate-cloned-sites/steps/RevertMove.js:96
 msgid ""
 "If you prefer not to move this site, you can <a>mark it as a copy</a> and "
 "enable automatic translation for it."
@@ -325,15 +327,15 @@ msgstr "Si vous n'avez pas changé votre domaine principal et que vous vous ête
 msgid "Something went wrong"
 msgstr "Un problème est survenu"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:38
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:39
 msgid "I just logged in from a secondary domain"
 msgstr "Je viens de me connecter depuis un domaine secondaire"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:47
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:48
 msgid "You're all set!"
 msgstr "Tout est prêt !"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:52
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:53
 msgid ""
 "This domain is now registered as a secondary domain and WPML will recognize "
 "it correctly."

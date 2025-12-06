@@ -377,25 +377,87 @@ class WPML_TM_AMS_API {
 	/**
 	 * Gets the data required by AMS to register a user.
 	 *
+	 * Ensures that critical user fields (email and display_name) are never empty.
+	 * If they are empty, generates fallback values and persists them to the database.
+	 *
 	 * @param WP_User $wp_user           The user from which data should be extracted.
 	 * @param bool    $with_name_details True if name details should be included.
 	 *
-	 * @return array
+	 * @return array User data array with 'email' and 'name' or detailed name fields.
 	 */
 	private function get_user_data( WP_User $wp_user, $with_name_details = false ) {
 		$data = array();
 
-		$data['email'] = $wp_user->user_email;
+		// wpmldev-5943
+		$data['email'] = $this->ensure_user_email_is_not_empty( $wp_user );
+		// wpmldev-5943
+		$display_name = $this->ensure_display_name_is_not_empty( $wp_user, $data['email'] );
 
+		// Add name fields based on requirements.
 		if ( $with_name_details ) {
-			$data['display_name'] = $wp_user->display_name;
+			$data['display_name'] = $display_name;
 			$data['first_name']   = $wp_user->first_name;
 			$data['last_name']    = $wp_user->last_name;
 		} else {
-			$data['name'] = $wp_user->display_name;
+			$data['name'] = $display_name;
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Ensures user has a valid email address.
+	 *
+	 * If the user's email is empty, generates a placeholder email
+	 * and updates the user in the database.
+	 *
+	 * @param WP_User $wp_user The user object.
+	 *
+	 * @return string The user's email (real or generated).
+	 */
+	private function ensure_user_email_is_not_empty( WP_User $wp_user ) {
+		if ( ! empty( $wp_user->user_email ) ) {
+			return $wp_user->user_email;
+		}
+
+		$fake_email = 'noreply-user-' . $wp_user->ID . '@placeholder.test';
+
+		wp_update_user(
+			array(
+				'ID'         => $wp_user->ID,
+				'user_email' => $fake_email,
+			)
+		);
+
+		return $fake_email;
+	}
+
+	/**
+	 * Ensures user has a valid display name.
+	 *
+	 * If the user's display name is empty, uses user_login as fallback,
+	 * or the email if user_login is also empty. Updates the user in the database.
+	 *
+	 * @param WP_User $wp_user       The user object.
+	 * @param string  $default_value The default value (used as final fallback).
+	 *
+	 * @return string The user's display name (real or generated).
+	 */
+	private function ensure_display_name_is_not_empty( WP_User $wp_user, string $default_value ) {
+		if ( ! empty( $wp_user->display_name ) ) {
+			return $wp_user->display_name;
+		}
+
+		$display_name = ! empty( $wp_user->user_login ) ? $wp_user->user_login : $default_value;
+
+		wp_update_user(
+			array(
+				'ID'           => $wp_user->ID,
+				'display_name' => $display_name,
+			)
+		);
+
+		return $display_name;
 	}
 
 	private function prepareClonedSiteArguments( $method ) {

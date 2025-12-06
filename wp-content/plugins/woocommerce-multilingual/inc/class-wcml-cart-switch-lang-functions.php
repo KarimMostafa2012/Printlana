@@ -49,7 +49,7 @@ class WCML_Cart_Switch_Lang_Functions implements \IWPML_Frontend_Action, \IWPML_
 	}
 
 	public function wcml_language_switch_dialog() {
-		global $woocommerce_wpml, $sitepress, $wp, $post;
+		global $woocommerce_wpml, $sitepress, $post;
 
 		if ( make( WCML_Dependencies::class )->check() ) {
 			$current_url = $this->get_current_url();
@@ -67,7 +67,7 @@ class WCML_Cart_Switch_Lang_Functions implements \IWPML_Frontend_Action, \IWPML_
 			}
 
 			$cart_for_session = false;
-			if ( isset( WC()->cart ) ) {
+			if ( WC()->cart instanceof WC_Cart ) {
 				$cart_for_session = WC()->cart->get_cart_for_session();
 			}
 

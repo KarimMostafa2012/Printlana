@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/notices-site-key/components/HelpLink.js:18
 msgid "Get a key for this site"
@@ -15,11 +17,11 @@ msgstr "Ключ сайта:"
 msgid "Enter your site key here"
 msgstr "Введите ключ вашего сайта здесь"
 
-#: src/js/notices-site-key/components/SiteKeyForm.js:49
+#: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Registering..."
 msgstr "Регистрация..."
 
-#: src/js/notices-site-key/components/SiteKeyForm.js:49
+#: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Register"
 msgstr "Зарегистрировать"
 
@@ -27,7 +29,7 @@ msgstr "Зарегистрировать"
 msgid "A New Site Key Is Required"
 msgstr "Требуется новый ключ сайта"
 
-#: src/js/notices-site-key/components/SiteKeyNotice.js:32
+#: src/js/notices-site-key/components/SiteKeyNotice.js:34
 msgid ""
 "To continue using WPML features like automatic translation and plugin "
 "updates, please register your site again. Don’t worry, your existing "

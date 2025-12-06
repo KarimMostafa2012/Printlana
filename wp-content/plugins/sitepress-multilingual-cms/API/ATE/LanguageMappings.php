@@ -25,8 +25,8 @@ class LanguageMappings {
 	const IGNORE_MAPPING_ID = - 1;
 
 
-	public static function getAllLanguagesWithAutomaticSupportInfo(): array {
-		return static::withCanBeTranslatedAutomatically( Languages::getActive() );
+	public static function getAllLanguagesWithAutomaticSupportInfo( $sourceLang = null ): array {
+		return static::withCanBeTranslatedAutomatically( Languages::getActive(), $sourceLang );
 	}
 
 	public static function doesDefaultLanguageSupportAutomaticTranslations(): bool {
@@ -40,14 +40,14 @@ class LanguageMappings {
 		return false;
 	}
 
-	public static function withCanBeTranslatedAutomatically( $languages = null ) {
-		$fn = curryN( 1, function ( $languages ) {
+	public static function withCanBeTranslatedAutomatically( $languages = null, $sourceLang = null ) {
+		$fn = curryN( 1, function ( $languages, $sourceLang = null ) {
 			if ( ! is_object( $languages ) && ! is_array( $languages ) ) {
 				return $languages;
 			}
 			$ateAPI             = static::getATEAPI();
 			$targetCodes        = Lst::pluck( 'code', Obj::values( $languages ) );
-			$supportedLanguages = $ateAPI->get_languages_supported_by_automatic_translations( $targetCodes )->getOrElse( [] );
+			$supportedLanguages = $ateAPI->get_languages_supported_by_automatic_translations( $targetCodes, $sourceLang )->getOrElse( [] );
 
 			$areThereAnySupportedLanguages = Lst::find( Logic::isNotNull(), $supportedLanguages );
 			$isSupportedCode               = pipe( Obj::prop( Fns::__, $supportedLanguages ), Logic::isNotNull() );

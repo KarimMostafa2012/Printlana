@@ -492,7 +492,9 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 			wpml_tm_load_job_factory()->update_job_data( $job_id, array( 'editor' => WPML_TM_Editors::ATE ) );
 			$job->existing_ate_id = make( \WPML\TM\ATE\JobRecords::class )->get_ate_job_id( $job_id );
 		} else {
-			$apply_memory = $previousStatus && (int) $previousStatus['status'] === ICL_TM_COMPLETE && ! $previousStatus['needs_update'] ? $applyTranslationMemoryForCompletedJobs : true;
+			$completedTranslationService = ( new \WPML\Translation\CompletedTranslationServiceFactory() )->create();
+
+	    $apply_memory = $completedTranslationService->hasJobBeenCompletedBeforeResending( $job_id ) ? $applyTranslationMemoryForCompletedJobs : true;
 
 			$job->source_language->code = $translation_job->get_source_language_code();
 			$job->source_language->name = $translation_job->get_source_language_code( true );

@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
          },
          "Sending for translation": [
             "正在发送翻译"
@@ -60,7 +62,6 @@
             "自动翻译额度已用完"
          ],
          "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
-            "您在wpml.org账户中有<b>1</b>个预付费翻译额度。将这些额度分配给您的网站以开始使用自动翻译",
             "您在wpml.org账户中有<b>%s</b>个预付费翻译额度。将这些额度分配给您的网站以开始使用自动翻译"
          ],
          "Preparing content for translation": [
@@ -79,14 +80,12 @@
             "您的默认语言%s必须映射到支持的语言才能使用自动翻译。"
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "您的语言%s必须映射到支持的语言才能使用自动翻译。",
             "您网站上的以下语言必须映射到支持的语言才能使用自动翻译：%s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "这些语言的内容：%s，除非您将它们映射到与默认语言不同的语言，否则无法自动翻译。"
          ],
          "%d translation waiting for review": [
-            "%d个翻译等待审核",
             "%d个翻译等待审核"
          ],
          "Account credits used": [

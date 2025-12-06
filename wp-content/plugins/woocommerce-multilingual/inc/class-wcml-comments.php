@@ -521,7 +521,7 @@ class WCML_Comments {
 	}
 
 	/**
-	 * @see \WCML\Reviews\Translations::translateReview
+	 * @see \WCML\Reviews\Translations\FrontEndHooks::translateReview
 	 *
 	 * @param WP_Comment $comment
 	 *

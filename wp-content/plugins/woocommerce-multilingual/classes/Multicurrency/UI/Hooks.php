@@ -159,9 +159,7 @@ class Hooks implements \IWPML_Action, IStandAloneAction {
 				'code'            => $data['code'],
 				'displayName'     => $data['display_name'],
 				'flagUrl'         => $this->sitepress->get_flag_url( $data['code'] ),
-				'defaultCurrency' => isset( $this->wcmlSettings['default_currencies'][ $data['code'] ] )
-					? $this->wcmlSettings['default_currencies'][ $data['code'] ]
-					: false,
+				'defaultCurrency' => $this->wcmlSettings['default_currencies'][ $data['code'] ] ?? false,
 			];
 		};
 

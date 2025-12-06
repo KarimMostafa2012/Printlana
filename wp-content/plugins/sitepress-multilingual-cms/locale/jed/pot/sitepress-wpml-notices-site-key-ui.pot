@@ -15,11 +15,11 @@ msgstr ""
 msgid "Enter your site key here"
 msgstr ""
 
-#: src/js/notices-site-key/components/SiteKeyForm.js:49
+#: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Registering..."
 msgstr ""
 
-#: src/js/notices-site-key/components/SiteKeyForm.js:49
+#: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Register"
 msgstr ""
 
@@ -27,7 +27,7 @@ msgstr ""
 msgid "A New Site Key Is Required"
 msgstr ""
 
-#: src/js/notices-site-key/components/SiteKeyNotice.js:32
+#: src/js/notices-site-key/components/SiteKeyNotice.js:34
 msgid ""
 "To continue using WPML features like automatic translation and plugin "
 "updates, please register your site again. Don’t worry, your existing "

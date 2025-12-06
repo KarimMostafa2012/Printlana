@@ -4,12 +4,12 @@
  * Plugin Name: Advanced Product Fields Extended for WooCommerce
  * Plugin URI: https://www.studiowombat.com/plugin/advanced-product-fields-for-woocommerce/
  * Description: Customize WooCommerce product pages with powerful and intuitive fields ( = product add-ons).
- * Version: 3.0.9
+ * Version: 3.1.2
  * Author: StudioWombat
  * Author URI: https://studiowombat.com/
  * Text Domain: sw-wapf
  * WC requires at least: 4.9
- * WC tested up to: 10.0.4
+ * WC tested up to: 10.3
  * Requires at least: 6.0
  * Requires PHP: 7.0
  */
@@ -49,7 +49,7 @@ if( ! function_exists( 'SW_WAPF_PRO_auto_loader ') ) {
 if( ! function_exists( 'wapf_pro' ) ) {
 	function wapf_pro() {
 
-		$version = '3.0.9';
+		$version = '3.1.2';
 
 		// globals
 		global $wapf;
@@ -59,7 +59,7 @@ if( ! function_exists( 'wapf_pro' ) ) {
 			$wapf = new \SW_WAPF_PRO\WAPF();
 			$wapf->initialize( $version, __FILE__ );
 		}
-
+        
 		return $wapf;
 
 	}

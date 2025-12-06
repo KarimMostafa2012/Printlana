@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "sv_SE"
          },
          "From:": [
             "Från:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "Ta bort språkpar"
+         ],
+         "Loading AI Translation...": [
+            "Laddar AI-översättning..."
          ],
          "%s file upload failed.": [
             "%s filuppladdning misslyckades."

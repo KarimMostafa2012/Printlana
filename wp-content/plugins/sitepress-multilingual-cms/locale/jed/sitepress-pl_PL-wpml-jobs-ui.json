@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "pl_PL"
          },
          "Start batch sync": [
             "Rozpocznij synchronizację wsadową"
@@ -393,8 +395,7 @@
             "Synchronizacja z usługą tłumaczeń profesjonalnych nie powiodła się"
          ],
          "%d translation has been downloaded": [
-            "%d tłumaczenie zostało pobrane",
-            "%d tłumaczenia zostały pobrane"
+            "%d tłumaczenie zostało pobrane"
          ],
          "Batch sync finished successfully!": [
             "Synchronizacja wsadowa zakończona pomyślnie!"

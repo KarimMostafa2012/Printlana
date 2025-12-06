@@ -27,7 +27,7 @@ class BlockHooks implements \IWPML_Action {
 	 * @param PaymentMethodRegistry $registry
 	 */
 	public function translateSettings( $registry ) {
-		if ( $this->woocommerce_wpml->gateways ) {
+		if ( $this->woocommerce_wpml->gateways instanceof \WCML_WC_Gateways ) {
 			foreach ( $registry->get_all_registered() as $gatewayId => $gateway ) {
 				Hooks::onFilter( 'option_woocommerce_' . $gatewayId . '_settings' )
 					->then( spreadArgs( function( $settings ) use ( $gatewayId ) {

@@ -115,4 +115,9 @@ class WPML_Site_ID {
 
 		return null;
 	}
+
+	public function reset( string $scope = self::SITE_SCOPES_GLOBAL ) {
+		delete_option( $this->get_option_key( $scope ) );
+		unset( $this->site_ids[ $scope ] );
+	}
 }

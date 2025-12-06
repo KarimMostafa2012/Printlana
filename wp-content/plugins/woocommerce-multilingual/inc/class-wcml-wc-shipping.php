@@ -10,19 +10,12 @@ class WCML_WC_Shipping {
 	private $current_language;
 	/** @var SitePress */
 	private $sitepress;
-	/** @var WCML_WC_Strings */
-	private $wcmlStrings;
 
 	/**
-	 * WCML_WC_Shipping constructor.
-	 *
-	 * @param SitePress       $sitepress
-	 * @param WCML_WC_Strings $wcmlStrings
+	 * @param SitePress $sitepress
 	 */
-	public function __construct( \WPML\Core\ISitePress $sitepress, WCML_WC_Strings $wcmlStrings ) {
-
-		$this->sitepress   = $sitepress;
-		$this->wcmlStrings = $wcmlStrings;
+	public function __construct( \WPML\Core\ISitePress $sitepress ) {
+		$this->sitepress = $sitepress;
 
 		$this->current_language = $this->sitepress->get_current_language();
 		if ( $this->current_language == 'all' ) {
@@ -52,12 +45,11 @@ class WCML_WC_Shipping {
 		$shipping_methods = WC()->shipping()->get_shipping_methods();
 
 		foreach ( $shipping_methods as $shipping_method ) {
-
-			if ( isset( $shipping_method->id ) ) {
-				$shipping_method_id = $shipping_method->id;
-			} else {
+			if ( empty( $shipping_method->id ) ) {
 				continue;
 			}
+
+			$shipping_method_id = $shipping_method->id;
 
 			add_filter(
 				'woocommerce_shipping_' . $shipping_method_id . '_instance_settings_values',
@@ -262,7 +254,7 @@ class WCML_WC_Shipping {
 
 	/**
 	 * @param array $data
-	 * @param array $inst_settings
+	 * @param array|mixed $inst_settings
 	 *
 	 * @return array|mixed
 	 */
@@ -278,9 +270,10 @@ class WCML_WC_Shipping {
 
 		$updated_costs_settings = $this->update_woocommerce_shipping_settings_for_class_costs( $settings );
 
-		$inst_settings = is_array( $inst_settings ) ? array_merge( $inst_settings, $updated_costs_settings ) : $updated_costs_settings;
-
-		return $inst_settings;
+		if ( is_array( $inst_settings ) ) {
+			return array_merge( $inst_settings, $updated_costs_settings );
+		}
+		return $updated_costs_settings;
 	}
 
 	/**

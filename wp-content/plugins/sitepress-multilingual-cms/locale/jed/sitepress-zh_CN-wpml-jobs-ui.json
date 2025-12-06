@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
          },
          "Start batch sync": [
             "开始批量同步"
@@ -393,7 +395,6 @@
             "与专业翻译服务的同步失败"
          ],
          "%d translation has been downloaded": [
-            "已下载%d份翻译",
             "已下载%d份翻译"
          ],
          "Batch sync finished successfully!": [

@@ -2,17 +2,19 @@
 # This file is distributed under the same license as the WPML String Translation plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML String Translation 3.3.0-dev\n"
+"Project-Id-Version: WPML String Translation 3.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpml-string-translation\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T19:16:39+00:00\n"
+"POT-Creation-Date: 2025-09-24T13:13:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wpml-string-translation\n"
+"Language: zh@Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
 #: plugin.php
@@ -26,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: plugin.php
-msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">WPML String Translation 3.3.0-dev release notes</a>"
-msgstr "为wpml添加主题和插件本地化功能 | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">文档</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">wpml字符串翻译3.3.0-dev发布说明</a>"
+msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">WPML String Translation 3.4.1 release notes</a>"
+msgstr "为 WPML 添加主题和插件本地化功能 | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">文档</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">WPML 字符串翻译 3.4.1 发布说明</a>"
 
 #. Author of the plugin
 #: plugin.php
@@ -724,8 +726,7 @@ msgstr "扫描选定组件的字符串"
 #: inc/wpml-string-translation.class.php:612
 msgid "WPML could not detect the translation files (.mo) for %s. To fix this, visit your site's frontend in a secondary language."
 msgid_plural "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
-msgstr[0] "WPML无法检测到%s的翻译文件（.mo）。要解决此问题，请以次要语言访问您网站的前端。"
-msgstr[1] "WPML无法检测到%s和%s的翻译文件（.mo）。要解决此问题，请以次要语言访问您网站的前端。"
+msgstr[0] "WPML无法检测到%s和%s的翻译文件（.mo）。要解决此问题，请以次要语言访问您网站的前端。"
 
 #: inc/wpml-string-translation.class.php:646
 msgid "This will load the translation files and WPML will be able to scan them."
@@ -751,13 +752,11 @@ msgstr "选择受影响的组件"
 msgid "%d new translation was added."
 msgid_plural "%d new translations were added."
 msgstr[0] "%d 增加了新的译文。"
-msgstr[1] "%d 增加了新的译文。"
 
 #: menu/auto-download-mo.php:58
 msgid "%d translation was updated."
 msgid_plural "%d translations were updated."
-msgstr[0] "%d 翻译已更新。"
-msgstr[1] "%d 更新了译文。"
+msgstr[0] "%d 更新了译文。"
 
 #: menu/auto-download-mo.php:65
 msgid "No action performed. Please select the strings that you need to update or add."

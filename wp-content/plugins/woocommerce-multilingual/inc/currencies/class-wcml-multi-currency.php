@@ -124,7 +124,7 @@ class WCML_Multi_Currency {
 	 * WCML_Multi_Currency constructor.
 	 */
 	public function __construct() {
-		global $woocommerce_wpml, $woocommerce, $wpdb, $wp_locale, $wp;
+		global $woocommerce_wpml, $woocommerce, $wpdb, $wp;
 
 		$sitepress = getSitePress();
 
@@ -143,10 +143,10 @@ class WCML_Multi_Currency {
 			$table_rate_shipping_multi_currency->add_hooks();
 
 			$this->coupons  = new WCML_Multi_Currency_Coupons();
-			$this->shipping = new WCML_Multi_Currency_Shipping( $this, $sitepress, $wpdb );
+			$this->shipping = new WCML_Multi_Currency_Shipping( $this, $wpdb );
 			$this->shipping->add_hooks();
 		}
-		$this->reports = new WCML_Multi_Currency_Reports( $woocommerce_wpml, $sitepress, $wpdb );
+		$this->reports = new WCML_Multi_Currency_Reports( $woocommerce_wpml, $wpdb );
 		$this->reports->add_hooks();
 		$this->orders                  = new WCML_Multi_Currency_Orders( $this, $woocommerce_wpml, $wp );
 		$this->admin_currency_selector = new WCML_Admin_Currency_Selector(
@@ -413,7 +413,7 @@ class WCML_Multi_Currency {
 	}
 
 	public function delete_currency_by_code( $code, $settings = false, $update = true ) {
-		$settings = $settings ? $settings : $this->woocommerce_wpml->get_settings();
+		$settings = $settings ?: $this->woocommerce_wpml->get_settings();
 		unset( $settings['currency_options'][ $code ] );
 
 		if ( isset( $settings['currencies_order'] ) ) {

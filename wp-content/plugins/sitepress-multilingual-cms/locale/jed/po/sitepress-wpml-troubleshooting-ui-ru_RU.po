@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "Лицензия WPML обновлена"
 msgid "Translate Everything Automatically is not active."
 msgstr "Автоматический перевод всего неактивен."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "Повторить застрявшие автоматические переводы"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,8 @@ msgstr "Проверка застрявших заданий на перевод
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "Обработка... Найден %s застрявший перевод"
-msgstr[1] "Обработка... Найдено %s застрявших переводов"
+msgstr[1] "Processing... %s stuck translations found so far"
+msgstr[2] "Processing... %s stuck translations found so far"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -136,4 +139,5 @@ msgstr "Застрявших заданий на перевод не найде�
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
 msgstr[0] "Найдено %s застрявшее задание на перевод. WPML переведет его автоматически в фоновом режиме.\nВы можете отслеживать прогресс в панели переводов."
-msgstr[1] "Найдено %s застрявших заданий на перевод. WPML переведет их автоматически в фоновом режиме.\nВы можете отслеживать их прогресс в панели переводов."
+msgstr[1] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[2] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."

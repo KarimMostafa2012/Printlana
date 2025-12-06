@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
          },
          "From:": [
             "从："
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "删除语言对"
+         ],
+         "Loading AI Translation...": [
+            "正在加载 AI 翻译..."
          ],
          "%s file upload failed.": [
             "%s文件上传失败。"

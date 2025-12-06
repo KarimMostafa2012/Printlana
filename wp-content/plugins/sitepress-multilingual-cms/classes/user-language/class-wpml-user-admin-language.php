@@ -65,7 +65,27 @@ class WPML_User_Admin_Language {
 
 		if ( ! $lang || $lang === '_default_' ) {
 			$default = $this->sitepress->get_default_language();
-			$lang    = $default ? $default : 'en';
+			$lang    = $default
+				? $default :
+				$this->sitepress->get_language_code_from_locale( get_locale() );
+
+			if ( ! $lang ) {
+				$lang = $this->get_language_code_from_wordpress_locale();
+			}
+		}
+
+		return $lang;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_language_code_from_wordpress_locale() {
+		$lang   = 'en';
+		$locale = get_locale();
+		if ( $locale ) {
+			$locale_parts = explode( '_', $locale );
+			$lang         = $locale_parts[0];
 		}
 
 		return $lang;

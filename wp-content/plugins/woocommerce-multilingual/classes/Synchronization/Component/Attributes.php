@@ -22,7 +22,7 @@ class Attributes extends SynchronizerForMeta {
 		$storedAttributes = $this->getMeta( self::PRODUCT_ATTRIBUTES_META_KEY, $productsIds );
 
 		$this->runForAttributes( $product->ID, $translationsIds, $translationsLanguages, $storedAttributes );
-		$this->runForDefaultAttributes( $product->ID, $translationsIds, $translationsLanguages, $storedAttributes);
+		$this->runForDefaultAttributes( $product->ID, $translationsIds, $translationsLanguages, $storedAttributes );
 	}
 
 	private function runForAttributes( $productId, $translationsIds, $translationsLanguages, $storedAttributes ) {
@@ -38,10 +38,13 @@ class Attributes extends SynchronizerForMeta {
 			$this->spreadEmptyValue( $translationsIds, $storedAttributes, self::PRODUCT_ATTRIBUTES_META_KEY );
 			return;
 		}
-		
-		$hasLocalAttributes = (bool) Lst::find( function( $attributeData ) {
-			return (bool) Obj::prop( 'is_taxonomy', $attributeData ) === false;
-		}, $productAttributes );
+
+		$hasLocalAttributes = (bool) Lst::find(
+			function( $attributeData ) {
+				return (bool) Obj::prop( 'is_taxonomy', $attributeData ) === false;
+			},
+			$productAttributes
+		);
 
 		$duplicationsIds = [];
 		if ( $hasLocalAttributes ) {
@@ -132,27 +135,27 @@ class Attributes extends SynchronizerForMeta {
 		foreach ( $defaultAttributes as $attribute => $defaultAttributeValue ) {
 			if ( WCTaxonomies::isProductAttribute( $attribute ) ) {
 				if ( $this->woocommerceWpml->attributes->is_translatable_attribute( $attribute ) ) {
-					$sanitizedAttributeName    = wc_sanitize_taxonomy_name( $attribute );
-					$defaultTermId             = $this->woocommerceWpml->terms->wcml_get_term_id_by_slug( $sanitizedAttributeName, $defaultAttributeValue );
-					$defaultTermIdTranslations = $this->elementTranslations->get_element_translations( $defaultTermId, false, true );
+					$sanitizedAttributeName  = wc_sanitize_taxonomy_name( $attribute );
+					$defaultTerm             = $this->woocommerceWpml->terms->wcml_get_term_by_slug( $defaultAttributeValue, $sanitizedAttributeName );
+					$defaultTermTranslations = $defaultTerm
+						? $this->elementTranslations->get_element_translations( $defaultTerm->term_taxonomy_id, false, true )
+						: [];
 
-					foreach( $translationsLanguages as $translationId => $language ) {
-						// Maybe do this at the top, as a map!
-						$translatedDefaultAttributes = $storedDefaultAttributes[ $translationId ] ?? [];
-						if ( ! array_key_exists( $attribute, $translatedDefaultAttributes ) ) {
-							$translatedDefaultAttributes[ $attribute ] = 0;
-						}
-						$translationDefaultAttributeValue = (int) $translatedDefaultAttributes[ $attribute ];
-						if ( in_array( $translationDefaultAttributeValue, $defaultTermIdTranslations, true ) ) {
-							continue;
-						}
-						$translatedDefaultTermId = $this->elementTranslations->element_id_in( $defaultTermId, $language );
-						$translatedDefaultTerm   = $translatedDefaultTermId
-							? $this->woocommerceWpml->terms->wcml_get_term_by_id( $translatedDefaultTermId, $sanitizedAttributeName )
+					foreach ( $translationsLanguages as $translationId => $language ) {
+						$translatedDefaultAttributes     = $storedDefaultAttributes[ $translationId ] ?? [];
+						$translatedDefaultTermTaxonomyId = $defaultTermTranslations[ $language ] ?? null;
+						$translatedDefaultTerm           = $translatedDefaultTermTaxonomyId
+							? $this->woocommerceWpml->terms->wcml_get_term_by_taxonomy_id( $translatedDefaultTermTaxonomyId, $sanitizedAttributeName )
 							: null;
-						$defaultAttributesToUpdate[ $translationId ][ $attribute ] = $translatedDefaultTerm
+						$translatedDefaultAttributeValue = $translatedDefaultTerm
 							? $translatedDefaultTerm->slug
 							: 0;
+						if (
+							! array_key_exists( $attribute, $translatedDefaultAttributes )
+							|| $translatedDefaultAttributes[ $attribute ] !== $translatedDefaultAttributeValue
+						) {
+							$defaultAttributesToUpdate[ $translationId ][ $attribute ] = $translatedDefaultAttributeValue;
+						}
 					}
 				} else {
 					foreach ( $translationsIds as $translationId ) {
@@ -216,7 +219,7 @@ class Attributes extends SynchronizerForMeta {
 			$metaToUpdate = [];
 			foreach ( $defaultAttributesToUpdate as $translationId => $translationAttributes ) {
 				if ( ! array_key_exists( $translationId, $storedDefaultAttributes ) ) {
-					$metaToInsert[ $translationId ] = $defaultAttributesToUpdate[ $translationId ];
+					$metaToInsert[ $translationId ] = $translationAttributes;
 					continue;
 				}
 				$translationDefaultAttributes = $storedDefaultAttributes[ $translationId ];

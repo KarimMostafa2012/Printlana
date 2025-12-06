@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "Start batch sync": [
             "เริ่มการซิงค์แบบกลุ่ม"
@@ -393,7 +395,6 @@
             "การซิงโครไนซ์กับบริการแปลมืออาชีพล้มเหลว"
          ],
          "%d translation has been downloaded": [
-            "ดาวน์โหลด %d การแปลแล้ว",
             "ดาวน์โหลด %d การแปลแล้ว"
          ],
          "Batch sync finished successfully!": [

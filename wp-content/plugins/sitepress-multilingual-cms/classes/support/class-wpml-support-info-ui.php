@@ -108,7 +108,7 @@ class WPML_Support_Info_UI {
 					),
 					'rest_enabled'     => array(
 						'label'    => __( 'REST enabled', 'sitepress' ),
-						'value'    => wpml_is_rest_enabled() ? __( 'Yes' ) : __( 'No' ),
+						'value'    => wpml_is_rest_enabled(false) ? __( 'Yes' ) : __( 'No' ),
 					),
 				),
 			),

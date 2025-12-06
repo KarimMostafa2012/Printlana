@@ -761,12 +761,11 @@ class WCML_Bookings implements \IWPML_Action {
 
 				$resource_id = apply_filters( 'wpml_object_id', $orig_resource_id, 'bookable_resource', false, $language );
 
-				/** @var stdClass */
 				$orig_resource = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT resource_id, sort_order FROM {$this->wpdb->prefix}wc_booking_relationships WHERE resource_id = %d AND product_id = %d", $orig_resource_id, $original_product_id ), OBJECT );
 
 				if ( is_null( $resource_id ) ) {
 
-					if ( $orig_resource ) {
+					if ( is_object( $orig_resource ) ) {
 						$resource_id = $this->duplicate_resource( $tr_product_id, $orig_resource, $language );
 					} else {
 						continue;
@@ -1459,7 +1458,7 @@ class WCML_Bookings implements \IWPML_Action {
 
 		if ( self::isWcBooking( $booking_id ) ) {
 			$language_details = $this->sitepress->get_element_language_details( $booking_id, 'post_' . self::POST_TYPE );
-			if ( ! $language_details ) {
+			if ( ! is_object( $language_details ) ) {
 				$current_language = $this->sitepress->get_current_language();
 				$this->sitepress->set_element_language_details( $booking_id, 'post_' . self::POST_TYPE, false, $current_language );
 			}

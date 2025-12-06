@@ -90,10 +90,11 @@ class MediaImgParse {
 
 	/**
 	 * @param string $text
+	 * @param bool   $get_attachment_ids_from_urls
 	 *
 	 * @return array
 	 */
-	public function get_from_img_tags( $text ) {
+	public function get_from_img_tags( $text, $get_attachment_ids_from_urls = true ) {
 		$media = wpml_collect( [] );
 
 		$media_elements = [
@@ -104,14 +105,19 @@ class MediaImgParse {
 
 		foreach ( $media_elements as $element_expression ) {
 			if ( preg_match_all( $element_expression, $text, $matches ) ) {
-				$media = $media->merge( $this->getAttachments( $matches ) );
+				$media = $media->merge( $this->getAttachments( $matches, $get_attachment_ids_from_urls  ) );
 			}
 		}
 
 		return $media->toArray();
 	}
 
-	private function getAttachments( $matches ) {
+	/**
+	 * @param bool $get_attachment_ids_from_urls
+	 *
+	 * @return array
+	 */
+	private function getAttachments( $matches, $get_attachment_ids_from_urls = true ) {
 		$attachments = [];
 
 		foreach ( $matches[1] as $i => $match ) {
@@ -122,7 +128,7 @@ class MediaImgParse {
 				}
 				if ( isset( $attributes['src'] ) ) {
 					$attachments[ $i ]['attributes']    = $attributes;
-					$attachments[ $i ]['attachment_id'] = Attachment::idFromUrl( $attributes['src'] );
+					$attachments[ $i ]['attachment_id'] = $get_attachment_ids_from_urls ? Attachment::idFromUrl( $attributes['src'] ) : null;
 				}
 			}
 		}

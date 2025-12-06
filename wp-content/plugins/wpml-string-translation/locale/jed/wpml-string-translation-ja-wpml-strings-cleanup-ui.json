@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
             "ドメインごとに未翻訳の文字列を削除して、文字列変換テーブルをクリーンアップする。"

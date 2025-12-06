@@ -1,8 +1,6 @@
 <?php
 
-use WCML\Options\WPML;
 use WPML\FP\Obj;
-use WPML\FP\Relation;
 
 class WCML_Setup_Handlers {
 

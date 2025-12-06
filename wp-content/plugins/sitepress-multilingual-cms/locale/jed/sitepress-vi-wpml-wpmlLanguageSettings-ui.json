@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi_VN"
          },
          "Choose the image file type for flags": [
             "Chọn loại tệp hình ảnh cho cờ"

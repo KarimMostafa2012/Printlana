@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "Connect this site to your %s account": [
             "เชื่อมต่อเว็บไซต์นี้กับบัญชี %s ของคุณ"

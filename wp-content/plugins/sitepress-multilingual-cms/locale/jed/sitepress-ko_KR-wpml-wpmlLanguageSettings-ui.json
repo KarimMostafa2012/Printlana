@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ko_KR"
          },
          "Choose the image file type for flags": [
             "플래그에 사용할 이미지 파일 유형을 선택합니다"

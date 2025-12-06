@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "el"
          },
          "From:": [
             "Από:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "Διαγραφή ζεύγους/ζευγών γλωσσών"
+         ],
+         "Loading AI Translation...": [
+            "Φόρτωση μετάφρασης AI..."
          ],
          "%s file upload failed.": [
             "Η μεταφόρτωση του αρχείου %s απέτυχε."

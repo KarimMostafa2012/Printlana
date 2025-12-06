@@ -25,7 +25,7 @@ if ( ! class_exists( 'YITH_WCAF' ) ) {
 		 * @const string
 		 * @since 2.0.0
 		 */
-		const VERSION = '3.21.0';
+		const VERSION = '3.23.0';
 
 		/**
 		 * Plugin version
@@ -103,7 +103,7 @@ if ( ! class_exists( 'YITH_WCAF' ) ) {
 			}
 
 			// register plugin script.
-			YITH_WCAF_Scripts::register( 'yith-wcaf-shortcodes', '', array( 'jquery', 'jquery-blockui', 'jquery-ui-datepicker', 'selectWoo', 'wc-country-select' ) );
+			YITH_WCAF_Scripts::register( 'yith-wcaf-shortcodes', '', array( 'jquery', \YIT_Assets::wc_script_handle( 'wc-jquery-blockui' ), 'jquery-ui-datepicker', 'selectWoo', 'wc-country-select' ) );
 
 			/**
 			 * DO_ACTION: yith_wcaf_scripts_registered

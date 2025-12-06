@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/settings/UI/TranslationMethod.js:47
 msgid ""
@@ -30,8 +32,7 @@ msgstr "Vui lòng xác nhận cài đặt bản dịch này"
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:76
 msgid "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item."
 msgid_plural "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing items."
-msgstr[0] "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d mục hiện có."
-msgstr[1] "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d các mục hiện có."
+msgstr[0] "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d các mục hiện có."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
 msgid ""

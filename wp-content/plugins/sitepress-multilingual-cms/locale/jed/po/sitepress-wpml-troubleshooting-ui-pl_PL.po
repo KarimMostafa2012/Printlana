@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -102,11 +104,11 @@ msgstr "Odświeżono licencję WPML"
 msgid "Translate Everything Automatically is not active."
 msgstr "Automatyczne tłumaczenie wszystkiego nie jest aktywne."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "Ponów próbę zablokowanych automatycznych tłumaczeń"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
@@ -120,7 +122,8 @@ msgstr "Sprawdzanie zablokowanych zadań tłumaczeniowych..."
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
 msgstr[0] "Przetwarzanie... Do tej pory znaleziono %s zablokowane tłumaczenie"
-msgstr[1] "Przetwarzanie... Do tej pory znaleziono %s zablokowanych tłumaczeń"
+msgstr[1] "Processing... %s stuck translations found so far"
+msgstr[2] "Processing... %s stuck translations found so far"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
@@ -136,4 +139,5 @@ msgstr "Nie znaleziono zablokowanych zadań tłumaczeniowych."
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
 msgstr[0] "Znaleziono %s zablokowane zadanie tłumaczeniowe. WPML przetłumaczy je automatycznie w tle.\nMożesz sprawdzić postęp w Panelu tłumaczeń."
-msgstr[1] "Znaleziono %s zablokowanych zadań tłumaczeniowych. WPML przetłumaczy je automatycznie w tle.\nMożesz sprawdzić ich postęp w Panelu tłumaczeń."
+msgstr[1] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[2] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."

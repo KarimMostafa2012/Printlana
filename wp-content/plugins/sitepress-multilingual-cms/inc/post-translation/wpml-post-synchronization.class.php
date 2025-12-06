@@ -125,7 +125,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			$trid                               = $this->post_translation->get_element_trid( $post_id );
 			$translated_ids                     = $this->get_translations_without_source( $post_id, $trid );
 			if ( $this->sync_delete || Lst::includes( $post_type, [ 'wp_template', 'wp_template_part' ] ) ) {
-				$this->delete_translations( $translated_ids, $keep_db_entries );
+				$this->delete_translations( $post_type, $translated_ids, $keep_db_entries );
 			}
 			$this->is_deleting_all_translations = false;
 		}
@@ -191,17 +191,25 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 	}
 
 	/**
-	 * @param array $translated_ids
-	 * @param bool  $keep_db_entries
+	 * @param array  $translated_ids
+	 * @param bool   $keep_db_entries
+	 * @param string $post_type
 	 */
-	private function delete_translations( array $translated_ids, $keep_db_entries ) {
+	private function delete_translations( $post_type, array $translated_ids, $keep_db_entries ) {
 		if ( ! empty( $translated_ids ) ) {
 			foreach ( $translated_ids as $trans_id ) {
 				if ( ! $this->is_bulk_prevented( $trans_id ) ) {
 					if ( $keep_db_entries ) {
 						$this->post_translation->trash_translation( $trans_id );
 					} else {
+						if ( $post_type === 'attachment' ) {
+							// When we delete the attachment entry from the database for the translation there is no reason to even allow a file deletion from the filesystem.
+							add_filter( 'wp_delete_file', '__return_false', PHP_INT_MAX );
+						}
 						wp_delete_post( $trans_id, true );
+						if ( $post_type === 'attachment' ) {
+							remove_filter( 'wp_delete_file', '__return_false', PHP_INT_MAX );
+						}
 					}
 				}
 			}

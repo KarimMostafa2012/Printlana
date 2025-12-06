@@ -17,7 +17,7 @@
 /**
  * WARNING: INCREASE THIS LOADER VERSION ON EVERY NEW RELEASE.
  */
-$wpml_page_builders_version = 30;
+$wpml_page_builders_version = 31;
 
 add_action(
 	'init',

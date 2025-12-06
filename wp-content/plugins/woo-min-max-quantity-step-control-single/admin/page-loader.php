@@ -14,6 +14,9 @@ class Page_Loader extends Base
     public $topbar_sub_title;
 
     protected $is_pro;
+
+    //Specially for FS pro version
+    protected $is_premium_installed;
     protected $pro_version;
     public $license;
     public $module_controller;
@@ -21,6 +24,7 @@ class Page_Loader extends Base
     public function __construct()
     {
         $this->is_pro = defined( 'WC_MMQ_PRO_VERSION' );
+        $this->is_premium_installed = wcmmq_is_premium_installed();
         if($this->is_pro){
             $this->pro_version = WC_MMQ_PRO_VERSION;
             $this->license = property_exists('\WC_MMQ_PRO','direct') ? \WC_MMQ_PRO::$direct : null;
@@ -114,10 +118,6 @@ class Page_Loader extends Base
 
         if (class_exists('\PSSG_Sync_Sheet\App\Handle\Quick_Table')) {
             add_submenu_page( $this->main_slug, esc_html__( 'Min Max Bulk Edit', 'woo-min-max-quantity-step-control-single' ) . $proString,  __( 'Min Max Bulk Edit', 'woo-min-max-quantity-step-control-single' ), $capability, 'wcmmq-product-quick-edit', [$this, 'product_quick_edit'] );
-        }
-        
-        if( ! $this->is_pro){
-            add_submenu_page($this->main_slug, 'Get Premium', 'Get Premium', 'read','https://codeastrology.com/min-max-quantity/pricing/');
         }
         
 
@@ -297,8 +297,13 @@ class Page_Loader extends Base
          * ar jehetu amora 2010 er por kaj suru korechi. tai sei expire date ba ager date asar kOnO karonoi nai.
          * tai zodi 2012 er kom timestamp ase amora return null kore debo.
          * za already diyechi: if( $exp_timestamp < $year2010_timestamp ) return; by this line. niche follow korun.
+         * 
+         * Performance optimization: Cache the timestamp calculation
          */
-        $year2010_timestamp = strtotime('2023-09-08 23:59:59');
+        static $year2010_timestamp = null;
+        if ($year2010_timestamp === null) {
+            $year2010_timestamp = strtotime('2023-09-08 23:59:59');
+        }
         if( $exp_timestamp < $year2010_timestamp ) return;
 
         //ekhon amora bortoman date er sathe tulona korbo
@@ -357,6 +362,11 @@ class Page_Loader extends Base
 
     public function discount_notice()
     {
+        return;
+        if( wcmmq_is_old_dir() ) return;
+
+        if( $this->is_premium_installed ) return;
+
         $campaign_bool = apply_filters( 'wcmmq_campaign_bool', true );
         if( ! $campaign_bool ) return;
 
@@ -365,7 +375,7 @@ class Page_Loader extends Base
 
         $logo = WC_MMQ_BASE_URL . 'assets/images/brand/social/min-max.png';
         $link_label = __( 'Claim Your Coupon', 'woo-product-table' );
-        $link = "https://codeastrology.com/min-max-quantity/pricing/";
+        $link = wcmmq_fs()->checkout_url() . '&coupon=BIZZSPECIAL15';
         $plug_name = __( 'Min Max Control Pro', 'woo-min-max-quantity-step-control-single' );
 
         global $current_screen;

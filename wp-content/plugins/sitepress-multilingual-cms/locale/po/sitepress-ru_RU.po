@@ -2,17 +2,19 @@
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.0-dev\n"
+"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T13:17:57+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sitepress\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Plugin Name of the plugin
 #: sitepress.php
@@ -26,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-0/\">WPML 4.8.0 release notes</a>"
-msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Документация</a> | <a href=\"https://wpml.org/version/wpml-4-8-0/\">Примечания к выпуску WPML 4.8.0</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Документация</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">Примечания к выпуску WPML 4.8.5</a>"
 
 #. Author of the plugin
 #: sitepress.php
@@ -40,7 +42,7 @@ msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:335
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr "Кнопка: Текст"
 
@@ -49,7 +51,7 @@ msgid "Button: Link"
 msgstr "Кнопка: Ссылка"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:240
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr "Заголовок: Название"
 
@@ -58,7 +60,7 @@ msgid "Heading: Link"
 msgstr "Заголовок: Ссылка"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:350
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr "HTML"
 
@@ -67,7 +69,7 @@ msgid "Photo: Link"
 msgstr "Фото: Ссылка"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:255
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr "Текстовый редактор: Текст"
 
@@ -301,7 +303,6 @@ msgid "Tab Item: Content"
 msgstr "Вкладка: Содержание"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/modules/class-wpml-beaver-builder-testimonials.php:16
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:390
 msgid "Testimonial: content"
 msgstr "Отзыв: содержание"
 
@@ -449,307 +450,315 @@ msgstr "Невозможно использовать конструктор Div
 msgid "Divi %s"
 msgstr "Divi %s"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:229
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:236
 msgid "Container: Link URL"
 msgstr "Контейнер: URL ссылки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:245
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:252
 msgid "Heading: Link URL"
 msgstr "Заголовок: URL ссылки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:265
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:272
 msgid "Video: Link"
 msgstr "Видео: Ссылка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:270
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:277
 msgid "Video: Vimeo link"
 msgstr "Видео: Ссылка Vimeo"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:275
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:282
 msgid "Video: Youtube URL"
 msgstr "Видео: URL Youtube"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:280
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:287
 msgid "Video: Vimeo URL"
 msgstr "Видео: URL Vimeo"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:285
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:292
 msgid "Video: DailyMotion URL"
 msgstr "Видео: URL DailyMotion"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:290
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:297
 msgid "Video: Self hosted"
 msgstr "Видео: Самостоятельно размещенное"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:295
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:302
 msgid "Video: External hosted"
 msgstr "Видео: Внешне размещенное"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:305
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:312
 msgid "Login: Button text"
 msgstr "Вход: Текст кнопки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:310
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:317
 msgid "Login: User label"
 msgstr "Вход: Метка пользователя"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:315
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:322
 msgid "Login: User placeholder"
 msgstr "Вход: Заполнитель пользователя"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:320
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:327
 msgid "Login: Password label"
 msgstr "Вход: Метка пароля"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:325
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:332
 msgid "Login: Password placeholder"
 msgstr "Вход: Заполнитель пароля"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:340
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:347
 msgid "Button: Link URL"
 msgstr "Кнопка: URL ссылки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:360
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:367
 msgid "Alert: Title"
 msgstr "Оповещение: Заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:365
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:372
 msgid "Alert: Description"
 msgstr "Оповещение: Описание"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:375
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:382
 msgid "Blockquote: Content"
 msgstr "Блочная цитата: Содержание"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:380
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:387
 msgid "Blockquote: Tweet button label"
 msgstr "Блочная цитата: Метка кнопки твита"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:395
-msgid "Testimonial: name"
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:397
+msgid "Testimonial: Content"
+msgstr "Отзыв: содержание"
+
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:402
+msgid "Testimonial: Name"
 msgstr "Отзыв: имя"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:400
-msgid "Testimonial: job"
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:407
+msgid "Testimonial: Job"
 msgstr "Отзыв: должность"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:410
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:412
+msgid "Testimonial: Link URL"
+msgstr "Отзыв: URL ссылки"
+
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:422
 msgid "Progress: Title"
 msgstr "Прогресс: Заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:415
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:427
 msgid "Progress: Inner text"
 msgstr "Прогресс: Внутренний текст"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:425
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:437
 msgid "Counter: Starting number"
 msgstr "Счетчик: Начальное число"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:430
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:442
 msgid "Counter: Title"
 msgstr "Счетчик: Заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:435
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:447
 msgid "Counter: Prefix"
 msgstr "Счетчик: Префикс"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:440
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:452
 msgid "Counter: Suffix"
 msgstr "Счетчик: Суффикс"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:450
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:462
 msgid "Icon Box: Title text"
 msgstr "Иконка-бокс: Текст заголовка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:455
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:467
 msgid "Icon Box: Description text"
 msgstr "Иконка-бокс: Текст описания"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:460
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:472
 msgid "Icon Box: Link"
 msgstr "Иконка-бокс: Ссылка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:470
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:482
 msgid "Image Box: Title text"
 msgstr "Изображение-бокс: Текст заголовка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:475
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:487
 msgid "Image Box: Description text"
 msgstr "Изображение-бокс: Текст описания"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:480
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:492
 msgid "Image Box: Link"
 msgstr "Изображение-бокс: Ссылка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:490
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:502
 msgid "Animated Headline: Before text"
 msgstr "Анимированный заголовок: Текст перед"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:495
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:507
 msgid "Animated Headline: Highlighted text"
 msgstr "Анимированный заголовок: Выделенный текст"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:500
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:512
 msgid "Animated Headline: Rotating text"
 msgstr "Анимированный заголовок: Вращающийся текст"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:505
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:517
 msgid "Animated Headline: After text"
 msgstr "Анимированный заголовок: Текст после"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:510
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:522
 msgid "Animated Headline: Link URL"
 msgstr "Анимированный заголовок: URL ссылки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:520
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:532
 msgid "Flip Box: Title text side A"
 msgstr "Флип-бокс: Текст заголовка стороны А"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:525
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:537
 msgid "Flip Box: Description text side A"
 msgstr "Флип-бокс: Текст описания стороны А"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:530
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:542
 msgid "Flip Box: Title text side B"
 msgstr "Флип-бокс: Текст заголовка стороны B"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:535
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:547
 msgid "Flip Box: Description text side B"
 msgstr "Флип-бокс: Текст описания стороны B"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:540
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:552
 msgid "Flip Box: Button text"
 msgstr "Флип-бокс: Текст кнопки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:545
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:557
 msgid "Flip Box: Button link"
 msgstr "Флип-бокс: Ссылка кнопки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:555
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:567
 msgid "Call to action: title"
 msgstr "Призыв к действию: заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:560
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:572
 msgid "Call to action: description"
 msgstr "Призыв к действию: описание"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:565
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:577
 msgid "Call to action: button"
 msgstr "Призыв к действию: кнопка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:570
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:582
 msgid "Call to action: ribbon title"
 msgstr "Призыв к действию: заголовок ленты"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:575
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:587
 msgid "Call to action: link"
 msgstr "Призыв к действию: ссылка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:615
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:627
 msgid "Price Table: Heading"
 msgstr "Таблица цен: Заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:620
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:632
 msgid "Price Table: Sub heading"
 msgstr "Таблица цен: Подзаголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:625
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:637
 msgid "Price Table: Period"
 msgstr "Таблица цен: Период"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:630
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:642
 msgid "Price Table: Button text"
 msgstr "Таблица цен: Текст кнопки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:635
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:647
 msgid "Price Table: Footer additional info"
 msgstr "Таблица цен: Дополнительная информация в футере"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:640
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:652
 msgid "Price Table: Ribbon title"
 msgstr "Таблица цен: Заголовок ленты"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:645
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:657
 msgid "Price Table: Button link"
 msgstr "Таблица цен: Ссылка кнопки"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:656
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:668
 msgid "Menu Anchor"
 msgstr "Якорь меню"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:666
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:678
 msgid "Archive: Cards Separator"
 msgstr "Архив: Разделитель карточек"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:671
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:683
 msgid "Archive: Cards Read More Text"
 msgstr "Архив: Текст 'Читать далее' для карточек"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:676
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:688
 msgid "Archive: Nothing Found Message"
 msgstr "Архив: Сообщение 'Ничего не найдено'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:681
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:693
 msgid "Archive: Previous Label"
 msgstr "Архив: Метка 'Предыдущее'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:686
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:698
 msgid "Archive: Next Label"
 msgstr "Архив: Метка 'Следующее'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:691
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:703
 msgid "Archive: Classic Separator"
 msgstr "Архив: Классический разделитель"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:696
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:708
 msgid "Archive: Classic Read More Text"
 msgstr "Архив: Классический текст 'Читать далее'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:706
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:718
 msgid "Search: Placeholder"
 msgstr "Поиск: Заполнитель"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:716
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:728
 msgid "Post Navigation: Previous Label"
 msgstr "Навигация по записям: Метка 'Предыдущее'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:721
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:733
 msgid "Post Navigation: Next Label"
 msgstr "Навигация по записям: Метка 'Следующее'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:731
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:743
 msgid "Divider: Text"
 msgstr "Разделитель: Текст"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:741
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:753
 msgid "Table of Contents: Title"
 msgstr "Оглавление: Заголовок"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:751
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:763
 msgid "Author: Name"
 msgstr "Автор: Имя"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:756
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:768
 msgid "Author: Bio"
 msgstr "Автор: Биография"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:762
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:774
 msgid "Author: Link"
 msgstr "Автор: Ссылка"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:767
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:779
 msgid "Author: Archive Text"
 msgstr "Автор: Текст архива"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:773
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:785
 msgid "Author: Archive URL"
 msgstr "Автор: URL архива"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:790
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:802
 msgid "Galleries: All Label"
 msgstr "Галереи: Метка 'Все'"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:795
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:807
 msgid "Galleries: Gallery custom link"
 msgstr "Галереи: Пользовательская ссылка галереи"
 
@@ -771,7 +780,7 @@ msgid "Language switcher type"
 msgstr "Тип переключателя языков"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:67
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:372
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:373
 msgid "Custom"
 msgstr "Пользовательский"
 
@@ -792,12 +801,12 @@ msgid "Show Active Language - has to be ON with Dropdown"
 msgstr "Показать активный язык - должно быть включено с выпадающим списком"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:97
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:361
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:362
 msgid "Native language name"
 msgstr "Родное название языка"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:107
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:362
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:363
 msgid "Language name in current language"
 msgstr "Название языка на текущем языке"
 
@@ -806,7 +815,7 @@ msgid "Style"
 msgstr "Стиль"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:128
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:572
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
 msgid "Normal"
 msgstr "Обычный"
 
@@ -822,7 +831,7 @@ msgid "Background Color"
 msgstr "Цвет фона"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:174
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
 msgid "Hover"
 msgstr "При наведении"
 
@@ -856,7 +865,7 @@ msgid "Icon List: Link URL"
 msgstr "Список с иконками: URL ссылки"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/modules/class-wpml-elementor-price-table.php:29
-msgid "Price table: text"
+msgid "Price Table: text"
 msgstr "Таблица цен: текст"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/modules/class-wpml-elementor-slides.php:30
@@ -1018,18 +1027,18 @@ msgstr "Ошибка: Пожалуйста, активируйте плагин 
 #: classes/action-filter-loader/class-wpml-ajax-action-validation.php:23
 #: classes/class-wpml-config-update-integrator.php:79
 #: classes/class-wpml-translation-management.php:414
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1310
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1367
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1437
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1517
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1570
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1591
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1612
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1852
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1865
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1995
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2024
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2047
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1371
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1428
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1498
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1578
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1631
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1652
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1673
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1913
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1926
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2056
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2085
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2108
 #: classes/translation-feedback/hooks/wpml-tf-frontend-ajax-hooks.php:75
 #: classes/troubleshooting/SynchronizeSourceIdOfATEJobs/TriggerSynchronization.php:79
 #: classes/url-handling/class-wpml-xdomain-data-parser.php:84
@@ -1043,7 +1052,7 @@ msgstr "Недопустимый запрос!"
 
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:43
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:44
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:371
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:372
 #: inc/functions-network.php:36
 #: inc/functions-network.php:37
 msgid "WPML"
@@ -1159,12 +1168,12 @@ msgstr "Добавлено %1$s заданий в Расширенный ред�
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr "Вы активировали Расширенный редактор переводов для этого сайта, но вы обновляете старый перевод. WPML открыл Стандартный редактор переводов, чтобы вы могли обновить этот перевод. При переводе нового содержимого вы получите Расширенный редактор переводов со всеми его функциями. Чтобы изменить настройки, перейдите в Настройки WPML."
 
-#: classes/ATE/sitekey/Endpoint.php:39
+#: classes/ATE/sitekey/Endpoint.php:49
 msgid "Initializing AMS credentials."
 msgstr "Инициализация учетных данных AMS."
 
 #: classes/ATE/TranslateEverything/TranslatableData/View.php:97
-#: classes/setup/endpoints/LicenseStep.php:75
+#: classes/setup/endpoints/LicenseStep.php:84
 msgid "Server error. Please refresh and try again."
 msgstr "Ошибка сервера. Пожалуйста, обновите страницу и попробуйте снова."
 
@@ -1218,7 +1227,7 @@ msgid "Select this option if your theme or plugins use AJAX operations on the fr
 msgstr "Выберите этот параметр, если ваша тема или плагины используют AJAX-операции на фронтенде, которые WPML необходимо фильтровать. WPML установит файл cookie с помощью JavaScript, что позволит возвращать правильное содержимое для AJAX-операций."
 
 #: classes/cookie/class-wpml-cookie-admin-ui.php:50
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:357
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:358
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:208
 #: classes/seo/class-wpml-seo-headlangs.php:134
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:34
@@ -1249,8 +1258,8 @@ msgid "Some content may appear gone due to the default language change. See "
 msgstr "Некоторый контент может исчезнуть из-за изменения языка по умолчанию. Смотрите "
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:36
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2009
-#: classes/media/settings/class-wpml-media-settings.php:66
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2070
+#: classes/media/settings/class-wpml-media-settings.php:107
 #: menu/upgrade_notice.php:24
 msgid "Learn more"
 msgstr "Узнать больше"
@@ -1310,63 +1319,63 @@ msgstr "Перевод %s назначен локальному переводч
 msgid "%s translation awaiting first available translator"
 msgstr "Перевод %s ожидает первого доступного переводчика"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:116
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:117
 #: classes/translation-feedback/hooks/wpml-tf-backend-options-ajax-hooks.php:92
 #: sitepress.class.php:2098
 msgid "Settings saved"
 msgstr "Настройки сохранены"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:118
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:119
 msgid "You can't do that!"
 msgstr "Вы не можете это сделать!"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:160
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:161
 msgid "Preview update failed"
 msgstr "Не удалось обновить предварительный просмотр"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:198
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:467
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:199
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:468
 msgid "Language switcher options"
 msgstr "Параметры переключателя языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:203
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:604
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:204
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:605
 msgid "Reset settings"
 msgstr "Сбросить настройки"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:251
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:252
 msgid "Customize the language switcher"
 msgstr "Настроить переключатель языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:257
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:258
 msgid "Add a language switcher"
 msgstr "Добавить переключатель языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:352
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:353
 msgid "There are no templates available."
 msgstr "Нет доступных шаблонов."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:353
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:354
 msgctxt "Language switcher preview"
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:354
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:355
 msgctxt "Language switcher preview"
 msgid "Position"
 msgstr "Позиция"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:355
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:356
 msgctxt "Language switcher preview"
 msgid "Actions"
 msgstr "Действия"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:356
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:357
 msgctxt "Language switcher preview"
 msgid "Action"
 msgstr "Действие"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:358
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:359
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:204
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-row-view.php:92
 #: menu/edit-languages.php:301
@@ -1376,428 +1385,428 @@ msgstr "Действие"
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:211
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:227
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:49
-#: menu/wpml-tm-menus-settings.php:342
+#: menu/wpml-tm-menus-settings.php:339
 #: sitepress.class.php:1267
 msgid "Cancel"
 msgstr "Отмена"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:359
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:360
 msgid "What to include in the language switcher:"
 msgstr "Что включить в переключатель языков:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:360
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:361
 #: menu/edit-languages.php:234
 #: menu/edit-languages.php:260
 msgid "Flag"
 msgstr "Флаг"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:363
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:364
 msgid "Current language"
 msgstr "Текущий язык"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:364
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:365
 msgid "Width"
 msgstr "Ширина"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:365
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:366
 msgid "Height"
 msgstr "Высота"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:366
 #: classes/language-switcher/class-wpml-ls-admin-ui.php:367
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:368
 msgid "auto"
 msgstr "авто"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:368
 #: classes/language-switcher/class-wpml-ls-admin-ui.php:369
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:370
 msgid "px"
 msgstr "пкс"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:370
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:371
 msgid "Language switcher style:"
 msgstr "Стиль переключателя языков:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:373
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:374
 msgid "Edit language switcher"
 msgstr "Редактировать переключатель языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:374
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:375
 msgid "Delete language switcher"
 msgstr "Удалить переключатель языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:375
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:376
 msgid "Back"
 msgstr "Назад"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:376
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:377
 msgid "Next"
 msgstr "Далее"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:386
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:387
 msgid "This is the order in which the languages will be displayed in the language switcher."
 msgstr "Это порядок, в котором языки будут отображаться в переключателе языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:389
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:390
 msgid "Some content may not be translated to all languages. Choose what should appear in the language switcher when translation is missing."
 msgstr "Некоторое содержимое может быть не переведено на все языки. Выберите, что должно отображаться в переключателе языков, когда перевод отсутствует."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:392
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:393
 msgid "Add a comma-separated list of URL arguments that you want WPML to pass when switching languages."
 msgstr "Добавьте список аргументов URL, разделенных запятыми, которые вы хотите, чтобы WPML передавал при переключении языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:394
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:395
 msgid "Preserving URL arguments"
 msgstr "Сохранение аргументов URL"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:401
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:402
 msgid "Enter CSS to add to the page. This is useful when you want to add styling to the language switcher, without having to edit the CSS file on the server."
 msgstr "Введите CSS для добавления на страницу. Это полезно, когда вы хотите добавить стили к переключателю языков, не редактируя файл CSS на сервере."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:403
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:404
 msgid "Styling the language switcher with additional CSS"
 msgstr "Стилизация переключателя языков с помощью дополнительного CSS"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:410
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:411
 msgid "You can display links to translation of posts before the post and after it. These links look like \"This post is also available in...\""
 msgstr "Вы можете отображать ссылки на переводы записей до и после записи. Эти ссылки выглядят как “Эта запись также доступна на...”"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:413
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:414
 msgid "The button is disabled because all existing menus have language switchers. You can edit the settings of the existing language switchers."
 msgstr "Кнопка отключена, потому что все существующие меню имеют переключатели языков. Вы можете редактировать настройки существующих переключателей языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:416
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:417
 msgid "The button is disabled because there are no menus in the site. Add a menu and you can later enable a language switcher in it."
 msgstr "Кнопка отключена, потому что на сайте нет меню. Добавьте меню, и позже вы сможете включить в нем переключатель языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:419
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:420
 msgid "The button is disabled because all existing widget areas have language switchers. You can edit the settings of the existing language switchers."
 msgstr "Кнопка отключена, потому что все существующие области виджетов имеют переключатели языков. Вы можете редактировать настройки существующих переключателей языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:422
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:423
 msgid "The button is disabled because there are no registered widget areas in the site."
 msgstr "Кнопка отключена, потому что на сайте нет зарегистрированных областей виджетов."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:425
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:426
 msgid "Elements to include in the language switcher."
 msgstr "Элементы для включения в переключатель языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:428
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:429
 msgid "Select the menus, in which to display the language switcher."
 msgstr "Выберите меню, в которых отображать переключатель языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:432
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:433
 msgid "Select the widget area where to include the language switcher."
 msgstr "Выберите область виджетов, куда включить переключатель языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:435
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:436
 msgid "Select the style of the language switcher."
 msgstr "Выберите стиль переключателя языков."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:438
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:439
 msgid "Select how to display the language switcher in the menu. Choose \"List of languages\" to display all the items at the same level or \"Dropdown\" to display the current language as parent and other languages as children."
 msgstr "Выберите, как отображать переключатель языков в меню. Выберите “Список языков” для отображения всех элементов на одном уровне или “Выпадающий список” для отображения текущего языка как родительского, а других языков как дочерних."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:441
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:442
 msgid "Select the position to display the language switcher in the menu."
 msgstr "Выберите позицию для отображения переключателя языков в меню."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:444
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:445
 msgid "Enter the title of the widget or leave empty for no title."
 msgstr "Введите заголовок виджета или оставьте пустым, если заголовок не нужен."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:447
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:448
 msgid "Select the position to display the post translations links."
 msgstr "Выберите позицию для отображения ссылок на переводы записей."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:450
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:451
 msgid "This text appears before the list of languages. Your text needs to include the string %s which is a placeholder for the actual links."
 msgstr "Этот текст появляется перед списком языков. Ваш текст должен включать строку %s, которая является заполнителем для фактических ссылок."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:453
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:454
 msgid "Since WPML 3.6.0, the language switchers are not using CSS IDs and the CSS classes have changed. This was required to fix some bugs and match the latest standards. If your theme or your custom CSS is not relying on these old selectors, it's recommended to skip the backwards compatibility. However, it's still possible to re-activate this option later."
 msgstr "Начиная с версии WPML 3.6.0, переключатели языков не используют CSS ID, и CSS классы изменились. Это было необходимо для исправления некоторых ошибок и соответствия последним стандартам. Если ваша тема или пользовательский CSS не зависит от этих старых селекторов, рекомендуется пропустить обратную совместимость. Однако, всегда можно повторно активировать эту опцию позже."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:457
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:458
 msgid "You can display a language switcher in the site's footer. You can customize and style it here."
 msgstr "Вы можете отобразить переключатель языков в нижнем колонтитуле сайта. Здесь вы можете настроить и стилизовать его."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:468
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:469
 msgid "All language switchers in your site are affected by the settings in this section."
 msgstr "Настройки в этом разделе влияют на все переключатели языков на вашем сайте."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:469
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:470
 msgid "Order of languages"
 msgstr "Порядок языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:470
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
 msgid "Drag and drop the languages to change their order"
 msgstr "Перетащите языки, чтобы изменить их порядок"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:472
 msgid "How to handle languages without translation"
 msgstr "Как обрабатывать языки без перевода"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:472
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:473
 msgid "Skip language"
 msgstr "Пропустить язык"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:473
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
 msgid "Link to home of language for missing translations"
 msgstr "Ссылка на главную страницу языка для отсутствующих переводов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:475
 msgid "Preserve URL arguments"
 msgstr "Сохранять аргументы URL"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:475
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:476
 msgid "Additional CSS"
 msgstr "Дополнительный CSS"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:476
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
 msgid "Backwards compatibility"
 msgstr "Обратная совместимость"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:478
 msgid "Skip backwards compatibility"
 msgstr "Пропустить обратную совместимость"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:486
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:487
 msgid "Menu language switcher"
 msgstr "Переключатель языков в меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:487
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:488
 msgid "Add a new language switcher to a menu"
 msgstr "Добавить новый переключатель языков в меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:488
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
 msgid "Menu"
 msgstr "Меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:490
 msgid "Choose a menu"
 msgstr "Выберите меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:490
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:491
 msgid "Position:"
 msgstr "Позиция:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:491
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
 msgid "First menu item"
 msgstr "Первый пункт меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:493
 msgid "Last menu item"
 msgstr "Последний пункт меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:493
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:494
 msgid "Language menu items style:"
 msgstr "Стиль пунктов меню языков:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:494
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:495
 msgid "List of languages"
 msgstr "Список языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:495
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
 msgid "good for menus that display items as a list"
 msgstr "подходит для меню, отображающих элементы в виде списка"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:497
 msgid "Dropdown"
 msgstr "Выпадающий список"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:497
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:498
 msgid "good for menus that support drop-downs"
 msgstr "подходит для меню, поддерживающих выпадающие списки"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:498
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:499
 msgid "Edit Menu Language Switcher"
 msgstr "Редактировать переключатель языков меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:499
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:500
 msgid "New Menu Language Switcher"
 msgstr "Новый переключатель языков меню"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:508
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
 msgid "Widget language switcher"
 msgstr "Виджет переключателя языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
 msgid "Add a new language switcher to a widget area"
 msgstr "Добавить новый переключатель языков в область виджетов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
 msgid "Widget area"
 msgstr "Область виджетов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
 msgid "Choose a widget area"
 msgstr "Выберите область виджетов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
 msgid "Widget title:"
 msgstr "Заголовок виджета:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
 msgid "Edit Widget Area Language Switcher"
 msgstr "Редактировать переключатель языков области виджетов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:515
 msgid "New Widget Area language switcher"
 msgstr "Новый переключатель языков области виджетов"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:523
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:524
 msgid "Footer language switcher"
 msgstr "Переключатель языков в нижнем колонтитуле"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:524
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
 msgid "Show language switcher in footer"
 msgstr "Показать переключатель языков в нижнем колонтитуле"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:526
 msgid "Edit Footer Language Switcher"
 msgstr "Редактировать переключатель языков нижнего колонтитула"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:534
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
 msgid "Links to translation of posts"
 msgstr "Ссылки на переводы записей"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
 msgid "Show links above or below posts, offering them in other languages"
 msgstr "Показывать ссылки над или под записями, предлагая их на других языках"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
 msgid "Position of link(s):"
 msgstr "Позиция ссылки(ок):"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
 msgid "Above post"
 msgstr "Над записью"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:539
 msgid "Below post"
 msgstr "Под записью"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:539
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:540
 msgid "Text for alternative languages for posts:"
 msgstr "Текст для альтернативных языков для записей:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:540
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:541
 #: classes/language-switcher/class-wpml-ls-settings.php:187
 msgid "This post is also available in: %s"
 msgstr "Эта запись также доступна на: %s"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:541
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:542
 msgid "Edit Post Translations Language Switcher"
 msgstr "Редактировать переключатель языков переводов записей"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:550
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:551
 msgctxt "Custom languuage switcher description: external link text"
 msgid "insert WPML's switchers in custom locations"
 msgstr "вставить переключатели WPML в пользовательские места"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:553
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:554
 msgctxt "Custom languuage switcher description: text"
 msgid "Need more options? See how you can %s."
 msgstr "Нужно больше опций? Посмотрите, как вы можете %s."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:556
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:557
 msgid "Custom language switchers"
 msgstr "Пользовательские переключатели языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:558
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:559
 #: menu/languages.php:233
 msgid "Enable"
 msgstr "Включить"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:559
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:560
 msgid "Customize"
 msgstr "Настроить"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:560
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:561
 msgid "Edit Shortcode Actions Language Switcher"
 msgstr "Редактировать переключатель языков шорткода действий"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:569
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:570
 msgid "Language switcher colors"
 msgstr "Цвета переключателя языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:570
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:571
 msgid "Color themes:"
 msgstr "Цветовые темы:"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:571
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:572
 msgid "Select a preset"
 msgstr "Выберите предустановку"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
 msgid "Background"
 msgstr "Фон"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
 msgid "Border"
 msgstr "Граница"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
 msgid "Current language font color"
 msgstr "Цвет шрифта текущего языка"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
 msgid "Current language background color"
 msgstr "Цвет фона текущего языка"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
 msgid "Other language font color"
 msgstr "Цвет шрифта других языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:580
 msgid "Other language background color"
 msgstr "Цвет фона других языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:588
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
 msgid "Do you really want to remove this item?"
 msgstr "Вы действительно хотите удалить этот элемент?"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:590
 msgid "Leave the text box to auto-save"
 msgstr "Покиньте текстовое поле для автосохранения"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:590
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:591
 msgid "Choose which menu to display your language switcher"
 msgstr "Выберите меню для отображения переключателя языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:591
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:592
 msgid "Choose which widget to display your language switcher"
 msgstr "Выберите виджет для отображения переключателя языков"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:601
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:602
 msgid "in options, menus, widgets, footer and shortcode"
 msgstr "в параметрах, меню, виджетах, нижнем колонтитуле и шорткоде"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:605
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:606
 msgid "This will change the settings of your language switchers %s to their defaults as set by the theme. Please note that some switchers may be removed and others may be added."
 msgstr "Это изменит настройки ваших переключателей языков %s на значения по умолчанию, установленные темой. Обратите внимание, что некоторые переключатели могут быть удалены, а другие добавлены."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:607
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
 msgid "* Your theme has a %s file, which sets the default values for WPML."
 msgstr "* В вашей теме есть файл %s, который устанавливает значения по умолчанию для WPML."
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:609
 msgid "Are you sure you want to reset to the default settings?"
 msgstr "Вы уверены, что хотите сбросить настройки до значений по умолчанию?"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:610
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:611
 msgid "Restore default"
 msgstr "Восстановить значения по умолчанию"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:624
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:625
 msgid "%s is defined in your theme. The language switcher can only be customized using the theme's CSS."
 msgstr "%s определен в вашей теме. Переключатель языков можно настроить только с помощью CSS темы."
 
-#: classes/language-switcher/class-wpml-ls-menu-item.php:49
-msgid "Switch to "
-msgstr "Переключиться на "
+#: classes/language-switcher/class-wpml-ls-model-build.php:211
+msgid "Switch to %s"
+msgstr "Переключиться на %s"
 
-#: classes/language-switcher/class-wpml-ls-render.php:270
+#: classes/language-switcher/class-wpml-ls-render.php:271
 msgid "menu items"
 msgstr "пункты меню"
 
@@ -1845,41 +1854,41 @@ msgstr "по умолчанию"
 msgid "WordPress language file (.mo) is missing. Keeping existing display language."
 msgstr "Отсутствует языковой файл WordPress (.mo). Сохраняется существующий язык отображения."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1337
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1398
 msgid "Duplicating featured content: %d left. Stay here until complete. May take a few minutes."
 msgstr "Дублирование избранного контента: осталось %d. Оставайся здесь до завершения. Может занять несколько минут."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1339
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1400
 msgid "Duplicating featured content: 0 left. Stay here until complete. May take a few minutes."
 msgstr "Дублирование избранного контента: осталось 0. Оставайся здесь до завершения. Может занять несколько минут."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1412
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1500
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1473
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1561
 msgid "Duplicating content: %d left. Stay here until complete. May take a few minutes."
 msgstr "Дублирование контента: осталось %d. Оставайся здесь до завершения. Может занять несколько минут."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1414
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1502
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1475
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1563
 msgid "Duplicating content: 0 left. Stay here until complete. May take a few minutes."
 msgstr "Дублирование контента: осталось 0. Оставайся здесь до завершения. Может занять несколько минут."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1557
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1618
 msgid "Setting language to media. %d left"
 msgstr "Установка языка для медиафайлов. Осталось %d"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1559
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1620
 msgid "Setting language to media: done!"
 msgstr "Установка языка для медиафайлов: завершено!"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1763
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1824
 msgid "Done!"
 msgstr "Готово!"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1855
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1916
 msgid "Saving settings..."
 msgstr "Сохранение настроек..."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1895
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1956
 #: inc/icl-admin-notifier.php:232
 #: inc/icl-admin-notifier.php:284
 #: inc/icl-admin-notifier.php:714
@@ -1901,39 +1910,39 @@ msgstr "Сохранение настроек..."
 msgid "Done"
 msgstr "Готово"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1962
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2023
 msgid "New in WPML 4.8 - Automatic image and media detection"
 msgstr "Новое в WPML 4.8 - Автоматическое обнаружение изображений и медиафайлов"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1963
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2007
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2036
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2024
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2068
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2097
 msgid "Close banner"
 msgstr "Закрыть баннер"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1965
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2026
 msgid "WPML can now automatically detect what types of texts (alt, caption, title) your images use. Enable this option to avoid duplicate fields in the translation editor and missing translations for your images."
 msgstr "Теперь WPML может автоматически определять, какие типы текстов (alt, подпись, заголовок) используют ваши изображения. Включите эту опцию, чтобы избежать дублирования полей в редакторе перевода и отсутствия переводов для ваших изображений."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1973
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2012
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2034
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2073
 msgid "Enable it now"
 msgstr "Включить сейчас"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1983
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2044
 msgid "Learn more about media translation"
 msgstr "Узнать больше о переводе медиафайлов"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2008
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2069
 msgid "We strongly recommend enabling WPML's automatic detection for image texts to avoid duplicated media fields and missing translations."
 msgstr "Мы настоятельно рекомендуем включить автоматическое обнаружение текстов изображений WPML, чтобы избежать дублирования полей медиафайлов и отсутствия переводов."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2037
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2098
 msgid "As this site uses Elementor, changes you make here might not be visible on the front-end. In this case, go to Elementor settings and clear its cache."
 msgstr "Поскольку этот сайт использует Elementor, изменения, которые вы вносите здесь, могут быть не видны на фронтенде. В этом случае перейдите в настройки Elementor и очистите его кэш."
 
 #: classes/media/settings/class-wpml-media-settings.php:55
-#: classes/media/settings/class-wpml-media-settings.php:280
+#: classes/media/settings/class-wpml-media-settings.php:295
 msgid "Media Translation"
 msgstr "Перевод медиафайлов"
 
@@ -1941,89 +1950,98 @@ msgstr "Перевод медиафайлов"
 msgid "Media Translation Documentation"
 msgstr "Документация по переводу медиафайлов"
 
-#: classes/media/settings/class-wpml-media-settings.php:65
-msgid "We recommend enabling automatic detection of image texts (alt, caption, title). This helps prevent duplicate media fields and missing translations."
-msgstr "Мы рекомендуем включить автоматическое обнаружение текстов изображений (alt, caption, title). Это помогает предотвратить появление дублирующихся медиаполей и отсутствующих переводов."
+#: classes/media/settings/class-wpml-media-settings.php:67
+#: menu/wpml-tm-menus-settings.php:205
+msgid "Recommended"
+msgstr "Рекомендуемое"
 
-#: classes/media/settings/class-wpml-media-settings.php:73
+#: classes/media/settings/class-wpml-media-settings.php:71
 msgid "Automatically detect best options for translating image texts (alt, caption, title)"
 msgstr "Автоматически определять лучшие варианты для перевода текстов изображений (alt, caption, title)"
 
-#: classes/media/settings/class-wpml-media-settings.php:76
+#: classes/media/settings/class-wpml-media-settings.php:74
 msgid "This option ensures image texts (like alt, title, and caption) are translatable and displayed on the front-end. WPML duplicates media only when needed and only during translation, keeping your database clean and avoiding unnecessary entries."
 msgstr "Эта опция гарантирует, что тексты изображений (например, alt, title и caption) будут доступны для перевода и отображения на фронтенде. WPML дублирует медиафайлы только при необходимости и только во время перевода, сохраняя вашу базу данных чистой и избегая ненужных записей."
 
-#: classes/media/settings/class-wpml-media-settings.php:83
+#: classes/media/settings/class-wpml-media-settings.php:81
 msgid "Learn more about translating media with WPML"
 msgstr "Узнайте больше о переводе медиафайлов с WPML"
 
-#: classes/media/settings/class-wpml-media-settings.php:91
-msgid "Recommended - avoids unnecessary duplicate media fields and missing image translations"
-msgstr "Рекомендуется - позволяет избежать ненужных дублирующихся медиаполей и отсутствующих переводов изображений"
+#: classes/media/settings/class-wpml-media-settings.php:89
+msgid "avoids unnecessary duplicate media fields and missing image translations"
+msgstr "избегает ненужных дублирующихся полей медиа и отсутствующих переводов изображений"
 
-#: classes/media/settings/class-wpml-media-settings.php:96
-#: classes/media/settings/class-wpml-media-settings.php:237
+#: classes/media/settings/class-wpml-media-settings.php:94
+#: classes/media/settings/class-wpml-media-settings.php:252
 msgid "ON"
 msgstr "ВКЛ"
 
-#: classes/media/settings/class-wpml-media-settings.php:97
-#: classes/media/settings/class-wpml-media-settings.php:238
+#: classes/media/settings/class-wpml-media-settings.php:95
+#: classes/media/settings/class-wpml-media-settings.php:253
 msgid "OFF"
 msgstr "ВЫКЛ"
 
-#: classes/media/settings/class-wpml-media-settings.php:109
+#: classes/media/settings/class-wpml-media-settings.php:106
+msgid "We recommend enabling automatic detection of image texts (alt, caption, title). This helps prevent duplicate media fields and missing translations."
+msgstr "Мы рекомендуем включить автоматическое обнаружение текстов изображений (alt, caption, title). Это помогает предотвратить появление дублирующихся медиаполей и отсутствующих переводов."
+
+#: classes/media/settings/class-wpml-media-settings.php:117
+msgid "Setup manually"
+msgstr "Настроить вручную"
+
+#: classes/media/settings/class-wpml-media-settings.php:124
 msgid "Please install and activate WPML’s String Translation add-on to use this setting."
 msgstr "Пожалуйста, установите и активируйте дополнение WPML String Translation для использования этой настройки."
 
-#: classes/media/settings/class-wpml-media-settings.php:110
+#: classes/media/settings/class-wpml-media-settings.php:125
 #: classes/requirements/class-wpml-requirements-notifications.php:120
 #: classes/user-language/class-wpml-user-language.php:335
 #: menu/network.php:167
 msgid "Activate"
 msgstr "Активировать"
 
-#: classes/media/settings/class-wpml-media-settings.php:131
+#: classes/media/settings/class-wpml-media-settings.php:146
 msgid "Existing content"
 msgstr "Существующий контент"
 
-#: classes/media/settings/class-wpml-media-settings.php:134
+#: classes/media/settings/class-wpml-media-settings.php:149
 msgid "New content"
 msgstr "Новый контент"
 
-#: classes/media/settings/class-wpml-media-settings.php:144
+#: classes/media/settings/class-wpml-media-settings.php:159
 msgid "Duplicate texts (alt, caption, title) for all media to all languages"
 msgstr "Дублировать тексты (alt, caption, title) для всех медиафайлов на все языки"
 
-#: classes/media/settings/class-wpml-media-settings.php:148
-#: classes/media/settings/class-wpml-media-settings.php:176
+#: classes/media/settings/class-wpml-media-settings.php:163
+#: classes/media/settings/class-wpml-media-settings.php:191
 msgid "This applies to all types of media items (images, videos, PDFs, etc.) and not just images. WPML will only duplicate media texts (alt, caption, title) and not the media files."
 msgstr "Это относится ко всем типам медиафайлов (изображения, видео, PDF и т.д.), а не только к изображениям. WPML будет дублировать только тексты медиафайлов (alt, caption, title), а не сами медиафайлы."
 
-#: classes/media/settings/class-wpml-media-settings.php:172
+#: classes/media/settings/class-wpml-media-settings.php:187
 msgid "Duplicate image texts (alt, caption, title) for all feature images to all languages"
 msgstr "Дублировать тексты изображений (alt, caption, title) для всех избранных изображений на все языки"
 
-#: classes/media/settings/class-wpml-media-settings.php:204
+#: classes/media/settings/class-wpml-media-settings.php:219
 msgid "This will duplicate media texts (alt, title, caption) to all languages using the options you selected above. Please stay on this page until the process completes - it may take a few minutes."
 msgstr "Это действие продублирует тексты медиафайлов (alt, title, подпись) на все языки, используя выбранные тобой выше опции. Пожалуйста, оставайся на этой странице до завершения процесса — это может занять несколько минут."
 
-#: classes/media/settings/class-wpml-media-settings.php:212
+#: classes/media/settings/class-wpml-media-settings.php:227
 msgid "Start the process"
 msgstr "Начать процесс"
 
-#: classes/media/settings/class-wpml-media-settings.php:223
+#: classes/media/settings/class-wpml-media-settings.php:238
 msgid "How to handle Media Library texts (alt, caption, title)"
 msgstr "Как обрабатывать тексты Медиатеки (alt, caption, title)"
 
-#: classes/media/settings/class-wpml-media-settings.php:246
+#: classes/media/settings/class-wpml-media-settings.php:261
 msgid "Translate Media Library texts (alt, caption, title) when translating content"
 msgstr "Переводить тексты Медиатеки (alt, caption, title) при переводе контента"
 
-#: classes/media/settings/class-wpml-media-settings.php:249
+#: classes/media/settings/class-wpml-media-settings.php:264
 msgid "Enable this option to translate image texts (alt, caption, title) for images connected to Media Library. Such images reuse the same texts across all posts and pages. This setting is required for page builders like Elementor and Divi."
 msgstr "Включите эту опцию для перевода текстов изображений (alt, caption, title) для изображений, связанных с Медиатекой. Такие изображения повторно используют одни и те же тексты во всех записях и страницах. Эта настройка необходима для конструкторов страниц, таких как Elementor и Divi."
 
-#: classes/media/settings/class-wpml-media-settings.php:269
+#: classes/media/settings/class-wpml-media-settings.php:284
 msgid "You're all done. From now on, all new media files that you upload to content will receive a language. You can automatically duplicate them to translations from the post-edit screen."
 msgstr "Готово. Отныне все новые медиафайлы, которые вы загружаете в контент, будут получать язык. Вы можете автоматически дублировать их для переводов с экрана редактирования поста."
 
@@ -2246,7 +2264,7 @@ msgstr "В настоящее время отображаются все язы�
 msgid "Display hidden languages"
 msgstr "Отобразить скрытые языки"
 
-#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:38
+#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:31
 msgid "Translation Tools"
 msgstr "Инструменты перевода"
 
@@ -2425,13 +2443,17 @@ msgstr "Ошибка сервера"
 msgid "Something went wrong. Please try again."
 msgstr "Что-то пошло не так. Пожалуйста, попробуйте снова."
 
-#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:141
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:145
 msgid "Your site doesn't meet WPML's minimum requirements."
 msgstr "Ваш сайт не соответствует минимальным требованиям WPML."
 
-#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:142
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:146
 msgid "Fix now"
 msgstr "Исправить сейчас"
+
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:162
+msgid "Great! All WPML requirements are now met. Your site is ready to use WPML."
+msgstr "Отлично! Все требования WPML теперь выполнены. Ваш сайт готов к использованию WPML."
 
 #: classes/notices/class-wpml-notice-render.php:57
 #: inc/icl-admin-notifier.php:527
@@ -2589,28 +2611,32 @@ msgstr "Автоматический перевод"
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d день"
-msgstr[1] "%d дня"
+msgstr[1] "%d days"
+msgstr[2] "%d days"
 
 #. translators: %d is for the number of hour(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:457
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d час"
-msgstr[1] "%d часа"
+msgstr[1] "%d hours"
+msgstr[2] "%d hours"
 
 #. translators: %d is for the number of minute(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:465
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d минута"
-msgstr[1] "%d минуты"
+msgstr[1] "%d minutes"
+msgstr[2] "%d minutes"
 
 #. translators: %1$1s and %2$2s is used for adding html tags to make WPML support a link. %3$s is a list of numeric ids.
 #: classes/notices/wpml-tm-post-edit-notices.php:515
 msgid "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translation is stuck: %3$3s"
 msgid_plural "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
-msgstr[0] "Что-то пошло не так с автоматическим переводом. Пожалуйста, свяжитесь с %1$1sподдержкой WPML%2$2s и сообщите, что следующий автоматический перевод застрял: %3$3s"
-msgstr[1] "Что-то пошло не так с автоматическим переводом. Пожалуйста, свяжитесь с %1$1sподдержкой WPML%2$2s и сообщите, что следующие автоматические переводы застряли: %3$3s"
+msgstr[0] "Что-то пошло не так с автоматическим переводом. Пожалуйста, свяжитесь с %1$1sслужбой поддержки WPML%2$2s и сообщите, что следующий автоматический перевод застрял: %3$3s"
+msgstr[1] "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
+msgstr[2] "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
 
 #: classes/plugins/Plugins.php:131
 msgid "WPML Translation Management is now included in WPML Multilingual CMS."
@@ -2625,12 +2651,12 @@ msgid "Read more"
 msgstr "Подробнее"
 
 #: classes/post-edit-screen/TranslationEditorPostSettings.php:73
-#: menu/wpml-tm-menus-settings.php:209
+#: menu/wpml-tm-menus-settings.php:206
 msgid "Advanced Translation Editor"
 msgstr "Расширенный редактор переводов"
 
 #: classes/post-edit-screen/TranslationEditorPostSettings.php:74
-#: menu/wpml-tm-menus-settings.php:213
+#: menu/wpml-tm-menus-settings.php:210
 msgid "Classic Translation Editor"
 msgstr "Классический редактор переводов"
 
@@ -2867,11 +2893,7 @@ msgstr "Расположение ссылок hreflang"
 msgid "A user does not have a proper license to enable ATE."
 msgstr "У пользователя нет соответствующей лицензии для включения ATE."
 
-#: classes/setup/endpoints/EnableAte.php:19
-msgid "ATE is already enabled."
-msgstr "ATE уже включен."
-
-#: classes/setup/endpoints/LicenseStep.php:56
+#: classes/setup/endpoints/LicenseStep.php:53
 msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr "Благодарим вас за регистрацию WPML на этом сайте. Вы будете получать автоматические обновления, когда появятся новые версии."
 
@@ -2945,21 +2967,21 @@ msgstr "Недоступно"
 msgid "Available"
 msgstr "Доступно"
 
-#: classes/support/class-wpml-support-info-ui.php:140
-msgid "Automatic"
-msgstr "Автоматически"
-
-#: classes/support/class-wpml-support-info-ui.php:151
+#: classes/support/class-wpml-support-info-ui.php:136
 msgid "WPML needs at least 208 KB of Available stack size on PHP 8.3+; please set \"zend.max_allowed_stack_size\" to at least 256 KB and \"zend.reserved_stack_size\" to at least 48 KB in your php.ini file. After these changes, restart your web server."
 msgstr "WPML требуется как минимум 208 КБ доступного размера стека на PHP 8.3+; пожалуйста, установи “zend.max_allowed_stack_size” как минимум на 256 КБ и “zend.reserved_stack_size” как минимум на 48 КБ в твоем файле php.ini. После этих изменений перезапусти веб-сервер."
 
-#: classes/support/class-wpml-support-info-ui.php:161
+#: classes/support/class-wpml-support-info-ui.php:146
 msgid "Available Stack Size"
 msgstr "Доступный размер стека"
 
-#: classes/support/class-wpml-support-info-ui.php:200
+#: classes/support/class-wpml-support-info-ui.php:187
 msgid "Info"
 msgstr "Информация"
+
+#: classes/support/class-wpml-support-info-ui.php:212
+msgid "Automatic"
+msgstr "Автоматически"
 
 #: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:96
 msgid "Translating %1$s? Use the %2$s table for easier translation."
@@ -3129,13 +3151,15 @@ msgstr "WPML не может связаться с удаленной служб
 msgid "%d feedback was updated."
 msgid_plural "%d feedback were updated."
 msgstr[0] "%d отзыв был обновлен."
-msgstr[1] "%d отзыва было обновлено."
+msgstr[1] "%d feedback were updated."
+msgstr[2] "%d feedback were updated."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:28
 msgid "%d feedback was trashed."
 msgid_plural "%d feedback were trashed."
 msgstr[0] "%d отзыв был перемещен в корзину."
-msgstr[1] "%d отзыва было перемещено в корзину."
+msgstr[1] "%d feedback were trashed."
+msgstr[2] "%d feedback were trashed."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:30
 msgid "The trashed feedback will be permanently deleted after %d days."
@@ -3145,13 +3169,15 @@ msgstr "Отзывы в корзине будут безвозвратно уд�
 msgid "%d feedback was restored."
 msgid_plural "%d feedback were restored."
 msgstr[0] "%d отзыв был восстановлен."
-msgstr[1] "%d отзыва было восстановлено."
+msgstr[1] "%d feedback were restored."
+msgstr[2] "%d feedback were restored."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:36
 msgid "%d feedback was permanently deleted."
 msgid_plural "%d feedback were permanently deleted."
 msgstr[0] "%d отзыв был окончательно удален."
-msgstr[1] "%d отзыва было окончательно удалено."
+msgstr[1] "%d feedback were permanently deleted."
+msgstr[2] "%d feedback were permanently deleted."
 
 #: classes/translation-feedback/notices/wpml-tf-promote-notices.php:31
 msgid "Want to know if recent translations you received have problems?"
@@ -3732,7 +3758,8 @@ msgstr "Навигация"
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] "%s элемент"
-msgstr[1] "%s элементов"
+msgstr[1] "%s items"
+msgstr[2] "%s items"
 
 #: classes/utilities/class-wpml-flags.php:108
 msgid "Flag for %s"
@@ -4040,41 +4067,41 @@ msgstr "Завершить"
 msgid "In progress - needs retry"
 msgstr "В процессе - требуется повторная попытка"
 
-#: inc/translation-management/translation-management.class.php:1797
+#: inc/translation-management/translation-management.class.php:1769
 msgid "Translation entry not found for: %d"
 msgstr "Запись перевода не найдена для: %d"
 
-#: inc/translation-management/translation-management.class.php:1944
-#: inc/translation-management/translation-management.class.php:1963
+#: inc/translation-management/translation-management.class.php:1915
+#: inc/translation-management/translation-management.class.php:1934
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:26
 msgid "translate"
 msgstr "перевести"
 
-#: inc/translation-management/translation-management.class.php:1946
+#: inc/translation-management/translation-management.class.php:1917
 msgid "string not registered"
 msgstr "строка не зарегистрирована"
 
-#: inc/translation-management/translation-management.class.php:1954
+#: inc/translation-management/translation-management.class.php:1925
 msgid "Multiple options"
 msgstr "Несколько вариантов"
 
-#: inc/translation-management/translation-management.class.php:1966
+#: inc/translation-management/translation-management.class.php:1937
 msgid "some strings might be not registered"
 msgstr "некоторые строки могут быть не зарегистрированы"
 
-#: inc/translation-management/translation-management.class.php:2191
+#: inc/translation-management/translation-management.class.php:2162
 msgid " - (needs update)"
 msgstr " - (требует обновления)"
 
-#: inc/translation-management/translation-management.class.php:2367
+#: inc/translation-management/translation-management.class.php:2338
 msgid "Preferences saved."
 msgstr "Настройки сохранены."
 
-#: inc/translation-management/translation-management.class.php:2386
+#: inc/translation-management/translation-management.class.php:2357
 msgid "Translation requests cancelled."
 msgstr "Запросы на перевод отменены."
 
-#: inc/translation-management/translation-management.class.php:2388
+#: inc/translation-management/translation-management.class.php:2359
 msgid "No Translation requests selected."
 msgstr "Не выбраны запросы на перевод."
 
@@ -5058,48 +5085,52 @@ msgstr "Этот пост уже дублирован."
 msgid "Can't create a duplicate. A translation is in progress."
 msgstr "Невозможно создать дубликат. Перевод в процессе."
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:565
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:766
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:554
+msgid " for "
+msgstr " для "
+
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:573
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:774
 msgid "Post without a title"
 msgstr "Пост без заголовка"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:634
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:642
 msgid "Media attachments"
 msgstr "Медиа-вложения"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:647
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:655
 msgid "Duplicate uploaded media to translations"
 msgstr "Дублировать загруженные медиа для переводов"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:648
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:656
 msgid "Duplicate featured image to translations"
 msgstr "Дублировать изображение записи для переводов"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:650
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:658
 msgid "Duplicate uploaded media from original"
 msgstr "Дублировать загруженные медиа из оригинала"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:651
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:659
 msgid "Duplicate featured image from original"
 msgstr "Дублировать изображение записи из оригинала"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:674
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:682
 msgid "Copy content from %s"
 msgstr "Копировать содержимое из %s"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:681
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:689
 msgid "This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor."
 msgstr "Эта операция копирует содержимое с исходного языка в этот перевод. Она предназначена для случаев, когда вы хотите начать с исходного содержания, но продолжить перевод на этом языке. Эта кнопка активна только когда в редакторе нет содержимого."
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:696
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:704
 msgid "Overwrite with %s content."
 msgstr "Перезаписать содержимым %s."
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:701
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:709
 msgid "The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content."
 msgstr "Текущее содержимое этого %s будет безвозвратно утеряно. WPML скопирует содержимое %s и заменит текущее содержимое."
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:711
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:719
 msgid "This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language."
 msgstr "Эта операция синхронизирует этот перевод с исходным языком. При редактировании оригинала этот перевод будет немедленно обновляться. Это предназначено для случаев, когда вы хотите, чтобы содержание на этом языке всегда совпадало с содержанием на исходном языке."
 
@@ -5346,7 +5377,7 @@ msgstr "Исходный язык"
 msgid "This term has additional meta fields:"
 msgstr "У этого термина есть дополнительные метаполя:"
 
-#: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:219
+#: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:223
 msgid "Wrong nonce"
 msgstr "Неверный одноразовый код"
 
@@ -5640,130 +5671,130 @@ msgstr "Добавить перевод для %s"
 msgid "Translation Jobs"
 msgstr "Задания на перевод"
 
-#: menu/wpml-tm-menus-settings.php:178
+#: menu/wpml-tm-menus-settings.php:148
+msgid "New translations detected. Scan your content to update internal links so they point to the correct translated pages and posts."
+msgstr "Обнаружены новые переводы. Просканируйте содержимое, чтобы обновить внутренние ссылки, чтобы они указывали на правильные переведенные страницы и записи."
+
+#: menu/wpml-tm-menus-settings.php:175
 msgid "Side-by-side editing"
 msgstr "Редактирование бок о бок"
 
-#: menu/wpml-tm-menus-settings.php:179
+#: menu/wpml-tm-menus-settings.php:176
 msgid "Unique designs for translations"
 msgstr "Уникальные дизайны для переводов"
 
-#: menu/wpml-tm-menus-settings.php:180
+#: menu/wpml-tm-menus-settings.php:177
 msgid "Glossary Support"
 msgstr "Поддержка глоссария"
 
-#: menu/wpml-tm-menus-settings.php:181
+#: menu/wpml-tm-menus-settings.php:178
 msgid "Automatic Translation"
 msgstr "Автоматический перевод"
 
-#: menu/wpml-tm-menus-settings.php:182
+#: menu/wpml-tm-menus-settings.php:179
 msgid "Use your free automatic translation quota"
 msgstr "Используйте вашу бесплатную квоту автоматического перевода"
 
-#: menu/wpml-tm-menus-settings.php:183
+#: menu/wpml-tm-menus-settings.php:180
 msgid "Spell Checker"
 msgstr "Проверка орфографии"
 
-#: menu/wpml-tm-menus-settings.php:184
+#: menu/wpml-tm-menus-settings.php:181
 msgid "Safe HTML editing"
 msgstr "Безопасное редактирование HTML"
 
-#: menu/wpml-tm-menus-settings.php:185
+#: menu/wpml-tm-menus-settings.php:182
 msgid "Translation Memory"
 msgstr "Память переводов"
 
-#: menu/wpml-tm-menus-settings.php:208
-msgid "Recommended"
-msgstr "Рекомендуемое"
-
-#: menu/wpml-tm-menus-settings.php:212
+#: menu/wpml-tm-menus-settings.php:209
 msgid "Legacy"
 msgstr "Устаревшее"
 
-#: menu/wpml-tm-menus-settings.php:225
-#: menu/wpml-tm-menus-settings.php:231
+#: menu/wpml-tm-menus-settings.php:222
+#: menu/wpml-tm-menus-settings.php:228
 msgid "Includes "
 msgstr "Включает "
 
-#: menu/wpml-tm-menus-settings.php:273
+#: menu/wpml-tm-menus-settings.php:270
 msgid "Use also for old translations created with the classic editor"
 msgstr "Использовать также для старых переводов, созданных с помощью классического редактора"
 
 #. translators: heading shown for selecting the editor to use when updating content that was created with WPML's Classic Translation Editor
-#: menu/wpml-tm-menus-settings.php:296
+#: menu/wpml-tm-menus-settings.php:293
 msgid "Translation Editor FAQ"
 msgstr "FAQ по редактору переводов"
 
-#: menu/wpml-tm-menus-settings.php:304
+#: menu/wpml-tm-menus-settings.php:301
 msgid "Can I have completely different designs for translations?"
 msgstr "Могу ли я иметь совершенно разные дизайны для переводов?"
 
 #. translators: %s links
-#: menu/wpml-tm-menus-settings.php:309
+#: menu/wpml-tm-menus-settings.php:306
 msgid "Yes, WPML allows you to use %1$scompletely different designs for translations%2$s."
 msgstr "Да, WPML позволяет использовать %1$sсовершенно различные дизайны для переводов%2$s."
 
-#: menu/wpml-tm-menus-settings.php:315
+#: menu/wpml-tm-menus-settings.php:312
 msgid "Can I use my free automatic translation quota with the Classic Translation Editor?"
 msgstr "Могу ли я использовать свою бесплатную квоту на автоматический перевод с классическим редактором переводов?"
 
-#: menu/wpml-tm-menus-settings.php:318
+#: menu/wpml-tm-menus-settings.php:315
 msgid "No. Automatic translation is only available via WPML’s Advanced Translator Editor, so you can only use your free quota using it."
 msgstr "Нет. Автоматический перевод доступен только через расширенный редактор переводов WPML, поэтому вы можете использовать свою бесплатную квоту только с его помощью."
 
-#: menu/wpml-tm-menus-settings.php:323
+#: menu/wpml-tm-menus-settings.php:320
 msgid "When should I use WPML’s Classic Translation Editor?"
 msgstr "Когда следует использовать классический редактор переводов WPML?"
 
-#: menu/wpml-tm-menus-settings.php:326
+#: menu/wpml-tm-menus-settings.php:323
 msgid "We maintain WPML’s Classic Translation Editor as part of WPML for backward compatibility. You should only use it if you’ve started with the Classic Editor and are concerned about losing the translation history."
 msgstr "Мы поддерживаем Классический редактор переводов WPML в составе WPML для обратной совместимости. Вам следует использовать его только в том случае, если вы начали работу с Классическим редактором и беспокоитесь о потере истории переводов."
 
-#: menu/wpml-tm-menus-settings.php:341
+#: menu/wpml-tm-menus-settings.php:338
 msgid "Yes, use Advanced Translation Editor for existing content"
 msgstr "Да, использовать Расширенный редактор переводов для существующего контента"
 
-#: menu/wpml-tm-menus-settings.php:348
+#: menu/wpml-tm-menus-settings.php:345
 msgid "You are about to use Advanced Translation Editor for your existing translations"
 msgstr "Вы собираетесь использовать Расширенный редактор переводов для ваших существующих переводов"
 
-#: menu/wpml-tm-menus-settings.php:351
+#: menu/wpml-tm-menus-settings.php:348
 msgid "Some of your content was translated using the Classic Translation Editor. If you proceed, re-translating may overwrite or delete those translations."
 msgstr "Часть вашего контента была переведена с использованием Классического редактора переводов. Если вы продолжите, повторный перевод может перезаписать или удалить эти переводы."
 
-#: menu/wpml-tm-menus-settings.php:384
+#: menu/wpml-tm-menus-settings.php:381
 msgid "When you receive completed translations"
 msgstr "Когда вы получаете завершенные переводы"
 
-#: menu/wpml-tm-menus-settings.php:398
+#: menu/wpml-tm-menus-settings.php:395
 msgid "Publish the translated post when original is also published (default)"
 msgstr "Опубликовать переведенную запись, когда оригинал также опубликован (по умолчанию)"
 
-#: menu/wpml-tm-menus-settings.php:415
+#: menu/wpml-tm-menus-settings.php:412
 msgid "Save the translated post as a draft"
 msgstr "Сохранить переведенную запись как черновик"
 
-#: menu/wpml-tm-menus-settings.php:421
+#: menu/wpml-tm-menus-settings.php:418
 msgid "Choose if translations should be published when received. Note: If Publish is selected, the translation will only be published if the original document is published when the translation is received."
 msgstr "Выберите, должны ли переводы публиковаться при получении. Примечание: Если выбрано 'Опубликовать', перевод будет опубликован только если оригинальный документ опубликован на момент получения перевода."
 
-#: menu/wpml-tm-menus-settings.php:431
+#: menu/wpml-tm-menus-settings.php:428
 msgid "When you publish the original post"
 msgstr "Когда вы публикуете оригинальную запись"
 
-#: menu/wpml-tm-menus-settings.php:444
+#: menu/wpml-tm-menus-settings.php:441
 msgid "Publish the post translations"
 msgstr "Опубликовать переводы записи"
 
-#: menu/wpml-tm-menus-settings.php:458
+#: menu/wpml-tm-menus-settings.php:455
 msgid "Do not publish the post translations"
 msgstr "Не публиковать переводы записи"
 
-#: menu/wpml-tm-menus-settings.php:529
+#: menu/wpml-tm-menus-settings.php:526
 msgid "Translated taxonomies"
 msgstr "Переведенные таксономии"
 
-#: menu/wpml-tm-menus-settings.php:541
+#: menu/wpml-tm-menus-settings.php:538
 msgid "Don't show translated taxonomies in Translation Editor"
 msgstr "Не показывать переведенные таксономии в Редакторе переводов"
 

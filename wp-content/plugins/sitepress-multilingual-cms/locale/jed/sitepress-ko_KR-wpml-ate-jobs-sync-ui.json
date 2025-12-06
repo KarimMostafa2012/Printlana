@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ko_KR"
          },
          "Sending for translation": [
             "번역하도록 전송"
@@ -60,7 +62,6 @@
             "자동 번역을 위한 크레딧이 부족합니다"
          ],
          "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
-            "Wpml.org 계정에 <b>1</b>개의 선불 번역 크레딧이 있습니다. 자동 번역을 시작하려면 이 크레딧을 사이트에 할당하십시오",
             "Wpml.org 계정에 <b>%s</b>개의 선불 번역 크레딧이 있습니다. 자동 번역을 시작하려면 이 크레딧을 사이트에 할당하십시오"
          ],
          "Preparing content for translation": [
@@ -79,14 +80,12 @@
             "자동 번역을 사용하려면 기본 언어인 %s를 지원되는 언어로 매핑해야 합니다."
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "자동 번역을 사용하려면 당신의 언어, %s을(를) 지원되는 언어로 매핑해야 합니다.",
             "자동 번역을 사용하려면 귀하의 사이트에서 다음 언어를 지원되는 언어로 매핑해야 합니다: %s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "해당 언어의 콘텐츠: %s는 기본 언어와 다른 언어로 매핑하지 않는 한 자동으로 번역될 수 없습니다."
          ],
          "%d translation waiting for review": [
-            "%d개의 번역이 검토 대기 중입니다",
             "%d개의 번역이 검토 대기 중입니다"
          ],
          "Account credits used": [

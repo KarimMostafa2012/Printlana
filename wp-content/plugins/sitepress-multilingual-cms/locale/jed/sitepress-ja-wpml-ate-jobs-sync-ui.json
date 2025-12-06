@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Sending for translation": [
             "翻訳に送る"
@@ -60,7 +62,6 @@
             "自動翻訳のクレジットが不足しています"
          ],
          "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
-            "Wpml.orgアカウントに<b>1</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、このクレジットをサイトに割り当ててください",
             "Wpml.orgアカウントに<b>%s</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、これらのクレジットをサイトに割り当ててください"
          ],
          "Preparing content for translation": [
@@ -79,14 +80,12 @@
             "自動翻訳を使用するには、あなたのデフォルト言語、%sを対応言語のマップで示す必要があります。"
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "自動翻訳を使用するには、あなたの言語、%s、をサポートされている言語にマッピングする必要があります。",
             "自動翻訳を使用するには、あなたのサイトの以下の言語をサポートされている言語にマッピングする必要があります：%s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "これらの言語のコンテンツ: %s、はこれらをデフォルトと異なる言語に地図を付けなければ、自動翻訳できません。"
          ],
          "%d translation waiting for review": [
-            "%d 件の翻訳がレビュー待ちです",
             "%d 件の翻訳がレビュー待ちです"
          ],
          "Account credits used": [

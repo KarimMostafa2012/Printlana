@@ -97,8 +97,6 @@ class SettingsPage extends BasePage {
 			self::PAGE_SLUG,
 			array( $this, 'render_page' )
 		);
-
-		add_action( "load-{$this->page}", array( $this, 'render_help_tab' ) );
 	}
 
 	/**
@@ -108,17 +106,21 @@ class SettingsPage extends BasePage {
 	public function render_page() {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Email Log Settings', 'email-log' ); ?></h1>
+			<h1><img class="el-logo" src="<?php echo esc_url(EMAIL_LOG_URL . 'assets/img/logo-64x64.png'); ?>" /><?php esc_html_e( 'Email Log', 'email-log' ); ?></h1>
+            <div class="email-log-body-wrapper">
+                <form method="post" action="options.php">
+                    <?php
+                    settings_errors();
+                    settings_fields( self::PAGE_SLUG );
+                    do_settings_sections( self::PAGE_SLUG );
 
-			<form method="post" action="options.php">
-				<?php
-				settings_errors();
-				settings_fields( self::PAGE_SLUG );
-				do_settings_sections( self::PAGE_SLUG );
-
-				submit_button( __( 'Save', 'email-log' ) );
-				?>
-			</form>
+                    submit_button( __( 'Save', 'email-log' ) );
+                    ?>
+                </form>
+            </div>
+            <div class="email-log-sidebar-wrapper">
+                <?php \EmailLog\Core\EmailLog::wp_kses_wf($this->sidebar()); ?>
+            </div>
 
 		</div>
 		<?php

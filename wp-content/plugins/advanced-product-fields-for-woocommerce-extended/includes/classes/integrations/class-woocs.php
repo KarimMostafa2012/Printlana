@@ -99,6 +99,10 @@ namespace SW_WAPF_PRO\Includes\Classes\Integrations {
                 return $price;
             }
 
+            if( empty( $cart_item ) || empty( $cart_item['data'] )  ) {
+                return $price;
+            }
+
             return $this->get_original_product_price( $cart_item['data'] );
 
         }

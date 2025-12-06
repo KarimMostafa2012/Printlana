@@ -2,17 +2,19 @@
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.0-dev\n"
+"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T13:17:57+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sitepress\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
 #: sitepress.php
@@ -26,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-0/\">WPML 4.8.0 release notes</a>"
-msgstr "WPML 多语言 CMS | <a href=\"https://wpml.org\">文档</a> | <a href=\"https://wpml.org/version/wpml-4-8-0/\">WPML 4.8.0 发布说明</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgstr "WPML 多语言 CMS | <a href=\"https://wpml.org\">文档</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 发行说明</a>"
 
 #. Author of the plugin
 #: sitepress.php
@@ -40,7 +42,7 @@ msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:335
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr "按钮：文本"
 
@@ -49,7 +51,7 @@ msgid "Button: Link"
 msgstr "按钮：链接"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:240
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr "标题：标题"
 
@@ -58,7 +60,7 @@ msgid "Heading: Link"
 msgstr "标题：链接"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:350
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr "HTML"
 
@@ -67,7 +69,7 @@ msgid "Photo: Link"
 msgstr "图片：链接"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:255
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr "文本编辑器：文本"
 
@@ -301,7 +303,6 @@ msgid "Tab Item: Content"
 msgstr "选项卡项目：内容"
 
 #: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/modules/class-wpml-beaver-builder-testimonials.php:16
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:390
 msgid "Testimonial: content"
 msgstr "推荐语：内容"
 
@@ -449,307 +450,315 @@ msgstr "无法使用Divi的后端构建器编辑与您的域名语言不同的�
 msgid "Divi %s"
 msgstr "Divi %s"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:229
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:236
 msgid "Container: Link URL"
 msgstr "容器：链接URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:245
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:252
 msgid "Heading: Link URL"
 msgstr "标题：链接URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:265
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:272
 msgid "Video: Link"
 msgstr "视频：链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:270
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:277
 msgid "Video: Vimeo link"
 msgstr "视频：Vimeo链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:275
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:282
 msgid "Video: Youtube URL"
 msgstr "视频：YouTube URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:280
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:287
 msgid "Video: Vimeo URL"
 msgstr "视频：Vimeo URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:285
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:292
 msgid "Video: DailyMotion URL"
 msgstr "视频：DailyMotion URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:290
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:297
 msgid "Video: Self hosted"
 msgstr "视频：自托管"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:295
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:302
 msgid "Video: External hosted"
 msgstr "视频：外部托管"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:305
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:312
 msgid "Login: Button text"
 msgstr "登录：按钮文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:310
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:317
 msgid "Login: User label"
 msgstr "登录：用户标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:315
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:322
 msgid "Login: User placeholder"
 msgstr "登录：用户占位符"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:320
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:327
 msgid "Login: Password label"
 msgstr "登录：密码标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:325
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:332
 msgid "Login: Password placeholder"
 msgstr "登录：密码占位符"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:340
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:347
 msgid "Button: Link URL"
 msgstr "按钮：链接URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:360
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:367
 msgid "Alert: Title"
 msgstr "警告：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:365
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:372
 msgid "Alert: Description"
 msgstr "警告：描述"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:375
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:382
 msgid "Blockquote: Content"
 msgstr "引用块：内容"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:380
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:387
 msgid "Blockquote: Tweet button label"
 msgstr "引用块：推文按钮标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:395
-msgid "Testimonial: name"
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:397
+msgid "Testimonial: Content"
+msgstr "推荐语：内容"
+
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:402
+msgid "Testimonial: Name"
 msgstr "推荐语：姓名"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:400
-msgid "Testimonial: job"
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:407
+msgid "Testimonial: Job"
 msgstr "推荐语：职位"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:410
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:412
+msgid "Testimonial: Link URL"
+msgstr "推荐语：链接网址"
+
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:422
 msgid "Progress: Title"
 msgstr "进度：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:415
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:427
 msgid "Progress: Inner text"
 msgstr "进度：内部文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:425
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:437
 msgid "Counter: Starting number"
 msgstr "计数器：起始数字"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:430
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:442
 msgid "Counter: Title"
 msgstr "计数器：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:435
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:447
 msgid "Counter: Prefix"
 msgstr "计数器：前缀"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:440
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:452
 msgid "Counter: Suffix"
 msgstr "计数器：后缀"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:450
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:462
 msgid "Icon Box: Title text"
 msgstr "图标框：标题文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:455
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:467
 msgid "Icon Box: Description text"
 msgstr "图标框：描述文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:460
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:472
 msgid "Icon Box: Link"
 msgstr "图标框：链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:470
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:482
 msgid "Image Box: Title text"
 msgstr "图片框：标题文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:475
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:487
 msgid "Image Box: Description text"
 msgstr "图片框：描述文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:480
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:492
 msgid "Image Box: Link"
 msgstr "图片框：链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:490
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:502
 msgid "Animated Headline: Before text"
 msgstr "动画标题：前置文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:495
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:507
 msgid "Animated Headline: Highlighted text"
 msgstr "动画标题：高亮文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:500
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:512
 msgid "Animated Headline: Rotating text"
 msgstr "动画标题：轮换文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:505
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:517
 msgid "Animated Headline: After text"
 msgstr "动画标题：后置文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:510
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:522
 msgid "Animated Headline: Link URL"
 msgstr "动画标题：链接URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:520
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:532
 msgid "Flip Box: Title text side A"
 msgstr "翻转框：A面标题文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:525
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:537
 msgid "Flip Box: Description text side A"
 msgstr "翻转框：A面描述文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:530
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:542
 msgid "Flip Box: Title text side B"
 msgstr "翻转框：B面标题文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:535
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:547
 msgid "Flip Box: Description text side B"
 msgstr "翻转框：B面描述文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:540
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:552
 msgid "Flip Box: Button text"
 msgstr "翻转框：按钮文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:545
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:557
 msgid "Flip Box: Button link"
 msgstr "翻转框：按钮链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:555
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:567
 msgid "Call to action: title"
 msgstr "行动号召：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:560
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:572
 msgid "Call to action: description"
 msgstr "行动号召：描述"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:565
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:577
 msgid "Call to action: button"
 msgstr "行动号召：按钮"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:570
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:582
 msgid "Call to action: ribbon title"
 msgstr "行动号召：丝带标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:575
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:587
 msgid "Call to action: link"
 msgstr "行动号召：链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:615
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:627
 msgid "Price Table: Heading"
 msgstr "价格表：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:620
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:632
 msgid "Price Table: Sub heading"
 msgstr "价格表：副标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:625
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:637
 msgid "Price Table: Period"
 msgstr "价格表：周期"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:630
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:642
 msgid "Price Table: Button text"
 msgstr "价格表：按钮文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:635
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:647
 msgid "Price Table: Footer additional info"
 msgstr "价格表：页脚附加信息"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:640
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:652
 msgid "Price Table: Ribbon title"
 msgstr "价格表：丝带标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:645
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:657
 msgid "Price Table: Button link"
 msgstr "价格表：按钮链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:656
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:668
 msgid "Menu Anchor"
 msgstr "菜单锚点"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:666
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:678
 msgid "Archive: Cards Separator"
 msgstr "存档：卡片分隔符"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:671
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:683
 msgid "Archive: Cards Read More Text"
 msgstr "存档：卡片阅读更多文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:676
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:688
 msgid "Archive: Nothing Found Message"
 msgstr "存档：未找到消息"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:681
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:693
 msgid "Archive: Previous Label"
 msgstr "存档：上一页标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:686
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:698
 msgid "Archive: Next Label"
 msgstr "存档：下一页标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:691
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:703
 msgid "Archive: Classic Separator"
 msgstr "存档：经典分隔符"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:696
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:708
 msgid "Archive: Classic Read More Text"
 msgstr "存档：经典阅读更多文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:706
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:718
 msgid "Search: Placeholder"
 msgstr "搜索：占位符"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:716
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:728
 msgid "Post Navigation: Previous Label"
 msgstr "文章导航：上一篇标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:721
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:733
 msgid "Post Navigation: Next Label"
 msgstr "文章导航：下一篇标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:731
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:743
 msgid "Divider: Text"
 msgstr "分隔线：文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:741
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:753
 msgid "Table of Contents: Title"
 msgstr "目录：标题"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:751
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:763
 msgid "Author: Name"
 msgstr "作者：姓名"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:756
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:768
 msgid "Author: Bio"
 msgstr "作者：简介"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:762
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:774
 msgid "Author: Link"
 msgstr "作者：链接"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:767
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:779
 msgid "Author: Archive Text"
 msgstr "作者：存档文本"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:773
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:785
 msgid "Author: Archive URL"
 msgstr "作者：存档URL"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:790
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:802
 msgid "Galleries: All Label"
 msgstr "画廊：全部标签"
 
-#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:795
+#: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:807
 msgid "Galleries: Gallery custom link"
 msgstr "画廊：画廊自定义链接"
 
@@ -771,7 +780,7 @@ msgid "Language switcher type"
 msgstr "语言切换器类型"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:67
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:372
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:373
 msgid "Custom"
 msgstr "自定义"
 
@@ -792,12 +801,12 @@ msgid "Show Active Language - has to be ON with Dropdown"
 msgstr "显示当前语言 - 必须与下拉菜单一起开启"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:97
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:361
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:362
 msgid "Native language name"
 msgstr "本地语言名称"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:107
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:362
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:363
 msgid "Language name in current language"
 msgstr "当前语言中的语言名称"
 
@@ -806,7 +815,7 @@ msgid "Style"
 msgstr "样式"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:128
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:572
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
 msgid "Normal"
 msgstr "普通"
 
@@ -822,7 +831,7 @@ msgid "Background Color"
 msgstr "背景颜色"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:174
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
 msgid "Hover"
 msgstr "悬停"
 
@@ -856,7 +865,7 @@ msgid "Icon List: Link URL"
 msgstr "图标列表：链接URL"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/modules/class-wpml-elementor-price-table.php:29
-msgid "Price table: text"
+msgid "Price Table: text"
 msgstr "价格表：文本"
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/modules/class-wpml-elementor-slides.php:30
@@ -1018,18 +1027,18 @@ msgstr "错误：请激活WPML翻译管理插件"
 #: classes/action-filter-loader/class-wpml-ajax-action-validation.php:23
 #: classes/class-wpml-config-update-integrator.php:79
 #: classes/class-wpml-translation-management.php:414
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1310
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1367
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1437
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1517
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1570
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1591
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1612
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1852
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1865
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1995
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2024
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2047
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1371
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1428
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1498
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1578
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1631
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1652
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1673
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1913
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1926
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2056
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2085
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2108
 #: classes/translation-feedback/hooks/wpml-tf-frontend-ajax-hooks.php:75
 #: classes/troubleshooting/SynchronizeSourceIdOfATEJobs/TriggerSynchronization.php:79
 #: classes/url-handling/class-wpml-xdomain-data-parser.php:84
@@ -1043,7 +1052,7 @@ msgstr "无效请求！"
 
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:43
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:44
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:371
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:372
 #: inc/functions-network.php:36
 #: inc/functions-network.php:37
 msgid "WPML"
@@ -1159,12 +1168,12 @@ msgstr "%1$s 个任务已添加到高级翻译编辑器。"
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr "您已为此站点激活了高级翻译编辑器，但您正在更新旧翻译。WPML打开了标准翻译编辑器，以便您可以更新此翻译。当您翻译新内容时，您将获得具有所有功能的高级翻译编辑器。要更改设置，请转到WPML设置。"
 
-#: classes/ATE/sitekey/Endpoint.php:39
+#: classes/ATE/sitekey/Endpoint.php:49
 msgid "Initializing AMS credentials."
 msgstr "正在初始化AMS凭证。"
 
 #: classes/ATE/TranslateEverything/TranslatableData/View.php:97
-#: classes/setup/endpoints/LicenseStep.php:75
+#: classes/setup/endpoints/LicenseStep.php:84
 msgid "Server error. Please refresh and try again."
 msgstr "服务器错误。请刷新并重试。"
 
@@ -1218,7 +1227,7 @@ msgid "Select this option if your theme or plugins use AJAX operations on the fr
 msgstr "如果您的主题或插件在前端使用AJAX操作，而WPML需要过滤这些操作，请选择此选项。WPML将使用JavaScript设置cookie，这将允许它为AJAX操作返回正确的内容。"
 
 #: classes/cookie/class-wpml-cookie-admin-ui.php:50
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:357
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:358
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:208
 #: classes/seo/class-wpml-seo-headlangs.php:134
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:34
@@ -1249,8 +1258,8 @@ msgid "Some content may appear gone due to the default language change. See "
 msgstr "由于默认语言的更改，某些内容可能会看似消失。请参阅"
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:36
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2009
-#: classes/media/settings/class-wpml-media-settings.php:66
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2070
+#: classes/media/settings/class-wpml-media-settings.php:107
 #: menu/upgrade_notice.php:24
 msgid "Learn more"
 msgstr "了解更多"
@@ -1310,63 +1319,63 @@ msgstr "%s翻译已分配给本地翻译人员"
 msgid "%s translation awaiting first available translator"
 msgstr "%s翻译等待第一个可用的翻译人员"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:116
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:117
 #: classes/translation-feedback/hooks/wpml-tf-backend-options-ajax-hooks.php:92
 #: sitepress.class.php:2098
 msgid "Settings saved"
 msgstr "设置已保存"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:118
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:119
 msgid "You can't do that!"
 msgstr "您不能这样做！"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:160
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:161
 msgid "Preview update failed"
 msgstr "预览更新失败"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:198
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:467
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:199
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:468
 msgid "Language switcher options"
 msgstr "语言切换器选项"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:203
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:604
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:204
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:605
 msgid "Reset settings"
 msgstr "重置设置"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:251
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:252
 msgid "Customize the language switcher"
 msgstr "自定义语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:257
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:258
 msgid "Add a language switcher"
 msgstr "添加语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:352
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:353
 msgid "There are no templates available."
 msgstr "没有可用的模板。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:353
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:354
 msgctxt "Language switcher preview"
 msgid "Preview"
 msgstr "预览"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:354
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:355
 msgctxt "Language switcher preview"
 msgid "Position"
 msgstr "位置"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:355
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:356
 msgctxt "Language switcher preview"
 msgid "Actions"
 msgstr "操作"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:356
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:357
 msgctxt "Language switcher preview"
 msgid "Action"
 msgstr "操作"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:358
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:359
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:204
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-row-view.php:92
 #: menu/edit-languages.php:301
@@ -1376,428 +1385,428 @@ msgstr "操作"
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:211
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:227
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:49
-#: menu/wpml-tm-menus-settings.php:342
+#: menu/wpml-tm-menus-settings.php:339
 #: sitepress.class.php:1267
 msgid "Cancel"
 msgstr "取消"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:359
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:360
 msgid "What to include in the language switcher:"
 msgstr "在语言切换器中包含："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:360
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:361
 #: menu/edit-languages.php:234
 #: menu/edit-languages.php:260
 msgid "Flag"
 msgstr "旗帜"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:363
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:364
 msgid "Current language"
 msgstr "当前语言"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:364
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:365
 msgid "Width"
 msgstr "宽度"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:365
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:366
 msgid "Height"
 msgstr "高度"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:366
 #: classes/language-switcher/class-wpml-ls-admin-ui.php:367
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:368
 msgid "auto"
 msgstr "自动"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:368
 #: classes/language-switcher/class-wpml-ls-admin-ui.php:369
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:370
 msgid "px"
 msgstr "像素"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:370
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:371
 msgid "Language switcher style:"
 msgstr "语言切换器样式："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:373
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:374
 msgid "Edit language switcher"
 msgstr "编辑语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:374
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:375
 msgid "Delete language switcher"
 msgstr "删除语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:375
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:376
 msgid "Back"
 msgstr "返回"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:376
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:377
 msgid "Next"
 msgstr "下一步"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:386
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:387
 msgid "This is the order in which the languages will be displayed in the language switcher."
 msgstr "这是语言切换器中显示语言的顺序。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:389
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:390
 msgid "Some content may not be translated to all languages. Choose what should appear in the language switcher when translation is missing."
 msgstr "某些内容可能不会被翻译成所有语言。请选择在缺少翻译时应在语言切换器中显示的内容。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:392
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:393
 msgid "Add a comma-separated list of URL arguments that you want WPML to pass when switching languages."
 msgstr "添加一个以逗号分隔的 URL 参数列表，这些参数是您希望 WPML 在切换语言时传递的。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:394
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:395
 msgid "Preserving URL arguments"
 msgstr "保留 URL 参数"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:401
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:402
 msgid "Enter CSS to add to the page. This is useful when you want to add styling to the language switcher, without having to edit the CSS file on the server."
 msgstr "输入要添加到页面的 CSS。当您想为语言切换器添加样式而不必编辑服务器上的 CSS 文件时，这很有用。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:403
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:404
 msgid "Styling the language switcher with additional CSS"
 msgstr "使用额外的 CSS 为语言切换器设置样式"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:410
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:411
 msgid "You can display links to translation of posts before the post and after it. These links look like \"This post is also available in...\""
 msgstr "您可以在文章前后显示指向文章翻译的链接。这些链接看起来像 “这篇文章也提供以下语言版本...”"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:413
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:414
 msgid "The button is disabled because all existing menus have language switchers. You can edit the settings of the existing language switchers."
 msgstr "该按钮被禁用，因为所有现有菜单都有语言切换器。您可以编辑现有语言切换器的设置。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:416
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:417
 msgid "The button is disabled because there are no menus in the site. Add a menu and you can later enable a language switcher in it."
 msgstr "该按钮被禁用，因为站点中没有菜单。添加一个菜单，之后您可以在其中启用语言切换器。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:419
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:420
 msgid "The button is disabled because all existing widget areas have language switchers. You can edit the settings of the existing language switchers."
 msgstr "该按钮被禁用，因为所有现有的小部件区域都有语言切换器。您可以编辑现有语言切换器的设置。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:422
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:423
 msgid "The button is disabled because there are no registered widget areas in the site."
 msgstr "该按钮被禁用，因为站点中没有注册的小部件区域。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:425
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:426
 msgid "Elements to include in the language switcher."
 msgstr "要包含在语言切换器中的元素。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:428
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:429
 msgid "Select the menus, in which to display the language switcher."
 msgstr "选择要在其中显示语言切换器的菜单。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:432
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:433
 msgid "Select the widget area where to include the language switcher."
 msgstr "选择要包含语言切换器的小部件区域。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:435
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:436
 msgid "Select the style of the language switcher."
 msgstr "选择语言切换器的样式。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:438
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:439
 msgid "Select how to display the language switcher in the menu. Choose \"List of languages\" to display all the items at the same level or \"Dropdown\" to display the current language as parent and other languages as children."
 msgstr "选择如何在菜单中显示语言切换器。选择 “语言列表” 以在同一级别显示所有项目，或选择 “下拉菜单” 以将当前语言显示为父项，其他语言显示为子项。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:441
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:442
 msgid "Select the position to display the language switcher in the menu."
 msgstr "选择在菜单中显示语言切换器的位置。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:444
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:445
 msgid "Enter the title of the widget or leave empty for no title."
 msgstr "输入小部件的标题，或留空表示无标题。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:447
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:448
 msgid "Select the position to display the post translations links."
 msgstr "选择显示文章翻译链接的位置。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:450
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:451
 msgid "This text appears before the list of languages. Your text needs to include the string %s which is a placeholder for the actual links."
 msgstr "此文本出现在语言列表之前。您的文本需要包含字符串 %s，它是实际链接的占位符。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:453
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:454
 msgid "Since WPML 3.6.0, the language switchers are not using CSS IDs and the CSS classes have changed. This was required to fix some bugs and match the latest standards. If your theme or your custom CSS is not relying on these old selectors, it's recommended to skip the backwards compatibility. However, it's still possible to re-activate this option later."
 msgstr "自 WPML 3.6.0 起，语言切换器不再使用 CSS ID，并且 CSS 类已更改。这是为了修复一些错误并符合最新标准。如果您的主题或自定义 CSS 不依赖于这些旧选择器，建议跳过向后兼容。但是，以后仍可以重新激活此选项。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:457
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:458
 msgid "You can display a language switcher in the site's footer. You can customize and style it here."
 msgstr "您可以在网站的页脚显示语言切换器。您可以在这里自定义和设置其样式。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:468
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:469
 msgid "All language switchers in your site are affected by the settings in this section."
 msgstr "本节中的设置会影响您网站中的所有语言切换器。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:469
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:470
 msgid "Order of languages"
 msgstr "语言顺序"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:470
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
 msgid "Drag and drop the languages to change their order"
 msgstr "拖放语言以更改其顺序"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:472
 msgid "How to handle languages without translation"
 msgstr "如何处理没有翻译的语言"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:472
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:473
 msgid "Skip language"
 msgstr "跳过语言"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:473
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
 msgid "Link to home of language for missing translations"
 msgstr "对于缺少翻译的内容链接到该语言的主页"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:475
 msgid "Preserve URL arguments"
 msgstr "保留 URL 参数"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:475
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:476
 msgid "Additional CSS"
 msgstr "额外的 CSS"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:476
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
 msgid "Backwards compatibility"
 msgstr "向后兼容性"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:478
 msgid "Skip backwards compatibility"
 msgstr "跳过向后兼容性"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:486
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:487
 msgid "Menu language switcher"
 msgstr "菜单语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:487
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:488
 msgid "Add a new language switcher to a menu"
 msgstr "向菜单添加新的语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:488
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
 msgid "Menu"
 msgstr "菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:490
 msgid "Choose a menu"
 msgstr "选择一个菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:490
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:491
 msgid "Position:"
 msgstr "位置："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:491
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
 msgid "First menu item"
 msgstr "第一个菜单项"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:493
 msgid "Last menu item"
 msgstr "最后一个菜单项"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:493
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:494
 msgid "Language menu items style:"
 msgstr "语言菜单项样式："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:494
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:495
 msgid "List of languages"
 msgstr "语言列表"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:495
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
 msgid "good for menus that display items as a list"
 msgstr "适用于将项目显示为列表的菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:497
 msgid "Dropdown"
 msgstr "下拉菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:497
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:498
 msgid "good for menus that support drop-downs"
 msgstr "适用于支持下拉菜单的菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:498
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:499
 msgid "Edit Menu Language Switcher"
 msgstr "编辑菜单语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:499
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:500
 msgid "New Menu Language Switcher"
 msgstr "新建菜单语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:508
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
 msgid "Widget language switcher"
 msgstr "小部件语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
 msgid "Add a new language switcher to a widget area"
 msgstr "向小部件区域添加新的语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
 msgid "Widget area"
 msgstr "小部件区域"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
 msgid "Choose a widget area"
 msgstr "选择一个小部件区域"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
 msgid "Widget title:"
 msgstr "小部件标题："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
 msgid "Edit Widget Area Language Switcher"
 msgstr "编辑小部件区域语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:515
 msgid "New Widget Area language switcher"
 msgstr "新建小部件区域语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:523
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:524
 msgid "Footer language switcher"
 msgstr "页脚语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:524
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
 msgid "Show language switcher in footer"
 msgstr "在页脚显示语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:526
 msgid "Edit Footer Language Switcher"
 msgstr "编辑页脚语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:534
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
 msgid "Links to translation of posts"
 msgstr "文章翻译链接"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
 msgid "Show links above or below posts, offering them in other languages"
 msgstr "在文章上方或下方显示链接，提供其他语言版本"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
 msgid "Position of link(s):"
 msgstr "链接位置："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
 msgid "Above post"
 msgstr "文章上方"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:539
 msgid "Below post"
 msgstr "文章下方"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:539
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:540
 msgid "Text for alternative languages for posts:"
 msgstr "文章其他语言版本的文本："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:540
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:541
 #: classes/language-switcher/class-wpml-ls-settings.php:187
 msgid "This post is also available in: %s"
 msgstr "本文还提供以下语言版本：%s"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:541
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:542
 msgid "Edit Post Translations Language Switcher"
 msgstr "编辑文章翻译语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:550
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:551
 msgctxt "Custom languuage switcher description: external link text"
 msgid "insert WPML's switchers in custom locations"
 msgstr "在自定义位置插入 WPML 的切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:553
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:554
 msgctxt "Custom languuage switcher description: text"
 msgid "Need more options? See how you can %s."
 msgstr "需要更多选项？查看如何 %s。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:556
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:557
 msgid "Custom language switchers"
 msgstr "自定义语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:558
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:559
 #: menu/languages.php:233
 msgid "Enable"
 msgstr "启用"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:559
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:560
 msgid "Customize"
 msgstr "自定义"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:560
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:561
 msgid "Edit Shortcode Actions Language Switcher"
 msgstr "编辑短代码操作语言切换器"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:569
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:570
 msgid "Language switcher colors"
 msgstr "语言切换器颜色"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:570
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:571
 msgid "Color themes:"
 msgstr "颜色主题："
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:571
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:572
 msgid "Select a preset"
 msgstr "选择预设"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
 msgid "Background"
 msgstr "背景"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
 msgid "Border"
 msgstr "边框"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
 msgid "Current language font color"
 msgstr "当前语言字体颜色"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
 msgid "Current language background color"
 msgstr "当前语言背景颜色"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
 msgid "Other language font color"
 msgstr "其他语言字体颜色"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:580
 msgid "Other language background color"
 msgstr "其他语言背景颜色"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:588
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
 msgid "Do you really want to remove this item?"
 msgstr "您确定要删除此项吗？"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:590
 msgid "Leave the text box to auto-save"
 msgstr "离开文本框以自动保存"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:590
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:591
 msgid "Choose which menu to display your language switcher"
 msgstr "选择要显示语言切换器的菜单"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:591
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:592
 msgid "Choose which widget to display your language switcher"
 msgstr "选择要显示语言切换器的小部件"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:601
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:602
 msgid "in options, menus, widgets, footer and shortcode"
 msgstr "在选项、菜单、小部件、页脚和短代码中"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:605
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:606
 msgid "This will change the settings of your language switchers %s to their defaults as set by the theme. Please note that some switchers may be removed and others may be added."
 msgstr "这将把您的语言切换器 %s 的设置更改为主题设置的默认值。请注意，某些切换器可能会被删除，而其他切换器可能会被添加。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:607
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
 msgid "* Your theme has a %s file, which sets the default values for WPML."
 msgstr "* 您的主题有一个 %s 文件，它设置了 WPML 的默认值。"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:609
 msgid "Are you sure you want to reset to the default settings?"
 msgstr "您确定要重置为默认设置吗？"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:610
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:611
 msgid "Restore default"
 msgstr "恢复默认设置"
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:624
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:625
 msgid "%s is defined in your theme. The language switcher can only be customized using the theme's CSS."
 msgstr "%s 在您的主题中已定义。语言切换器只能使用主题的 CSS 进行自定义。"
 
-#: classes/language-switcher/class-wpml-ls-menu-item.php:49
-msgid "Switch to "
-msgstr "切换到"
+#: classes/language-switcher/class-wpml-ls-model-build.php:211
+msgid "Switch to %s"
+msgstr "切换到 %s"
 
-#: classes/language-switcher/class-wpml-ls-render.php:270
+#: classes/language-switcher/class-wpml-ls-render.php:271
 msgid "menu items"
 msgstr "菜单项"
 
@@ -1845,41 +1854,41 @@ msgstr "默认"
 msgid "WordPress language file (.mo) is missing. Keeping existing display language."
 msgstr "缺少 WordPress 语言文件（.mo）。保留现有显示语言。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1337
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1398
 msgid "Duplicating featured content: %d left. Stay here until complete. May take a few minutes."
 msgstr "正在复制精选内容：还剩 %d 个。请留在此页面直到完成。可能需要几分钟。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1339
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1400
 msgid "Duplicating featured content: 0 left. Stay here until complete. May take a few minutes."
 msgstr "正在复制精选内容：还剩 0 个。请留在此页面直到完成。可能需要几分钟。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1412
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1500
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1473
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1561
 msgid "Duplicating content: %d left. Stay here until complete. May take a few minutes."
 msgstr "正在复制内容：还剩 %d 个。请留在此页面直到完成。可能需要几分钟。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1414
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1502
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1475
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1563
 msgid "Duplicating content: 0 left. Stay here until complete. May take a few minutes."
 msgstr "正在复制内容：还剩 0 个。请留在此页面直到完成。可能需要几分钟。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1557
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1618
 msgid "Setting language to media. %d left"
 msgstr "为媒体设置语言。剩余%d"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1559
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1620
 msgid "Setting language to media: done!"
 msgstr "为媒体设置语言：完成！"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1763
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1824
 msgid "Done!"
 msgstr "完成！"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1855
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1916
 msgid "Saving settings..."
 msgstr "正在保存设置..."
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1895
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1956
 #: inc/icl-admin-notifier.php:232
 #: inc/icl-admin-notifier.php:284
 #: inc/icl-admin-notifier.php:714
@@ -1901,39 +1910,39 @@ msgstr "正在保存设置..."
 msgid "Done"
 msgstr "完成"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1962
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2023
 msgid "New in WPML 4.8 - Automatic image and media detection"
 msgstr "WPML 4.8 新功能 - 自动图像和媒体检测"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1963
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2007
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2036
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2024
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2068
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2097
 msgid "Close banner"
 msgstr "关闭横幅"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1965
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2026
 msgid "WPML can now automatically detect what types of texts (alt, caption, title) your images use. Enable this option to avoid duplicate fields in the translation editor and missing translations for your images."
 msgstr "WPML 现在可以自动检测您的图像使用的文本类型（alt、caption、title）。启用此选项可避免在翻译编辑器中出现重复字段和图像缺失翻译。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1973
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2012
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2034
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2073
 msgid "Enable it now"
 msgstr "立即启用"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1983
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2044
 msgid "Learn more about media translation"
 msgstr "了解更多关于媒体翻译的信息"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2008
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2069
 msgid "We strongly recommend enabling WPML's automatic detection for image texts to avoid duplicated media fields and missing translations."
 msgstr "我们强烈建议启用 WPML 的自动图像文本检测功能，以避免重复的媒体字段和缺失的翻译。"
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2037
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2098
 msgid "As this site uses Elementor, changes you make here might not be visible on the front-end. In this case, go to Elementor settings and clear its cache."
 msgstr "由于本站使用 Elementor，您在此处做的更改可能不会在前端显示。在这种情况下，请进入 Elementor 设置并清除其缓存。"
 
 #: classes/media/settings/class-wpml-media-settings.php:55
-#: classes/media/settings/class-wpml-media-settings.php:280
+#: classes/media/settings/class-wpml-media-settings.php:295
 msgid "Media Translation"
 msgstr "媒体翻译"
 
@@ -1941,89 +1950,98 @@ msgstr "媒体翻译"
 msgid "Media Translation Documentation"
 msgstr "媒体翻译文档"
 
-#: classes/media/settings/class-wpml-media-settings.php:65
-msgid "We recommend enabling automatic detection of image texts (alt, caption, title). This helps prevent duplicate media fields and missing translations."
-msgstr "我们建议启用图像文本（alt、caption、title）的自动检测。这有助于防止重复的媒体字段和缺失的翻译。"
+#: classes/media/settings/class-wpml-media-settings.php:67
+#: menu/wpml-tm-menus-settings.php:205
+msgid "Recommended"
+msgstr "推荐"
 
-#: classes/media/settings/class-wpml-media-settings.php:73
+#: classes/media/settings/class-wpml-media-settings.php:71
 msgid "Automatically detect best options for translating image texts (alt, caption, title)"
 msgstr "自动检测翻译图像文本（alt、caption、title）的最佳选项"
 
-#: classes/media/settings/class-wpml-media-settings.php:76
+#: classes/media/settings/class-wpml-media-settings.php:74
 msgid "This option ensures image texts (like alt, title, and caption) are translatable and displayed on the front-end. WPML duplicates media only when needed and only during translation, keeping your database clean and avoiding unnecessary entries."
 msgstr "此选项确保图像文本（如 alt、title 和 caption）可翻译并显示在前端。WPML 仅在需要时且仅在翻译期间复制媒体，保持数据库整洁并避免不必要的条目。"
 
-#: classes/media/settings/class-wpml-media-settings.php:83
+#: classes/media/settings/class-wpml-media-settings.php:81
 msgid "Learn more about translating media with WPML"
 msgstr "了解更多关于使用 WPML 翻译媒体的信息"
 
-#: classes/media/settings/class-wpml-media-settings.php:91
-msgid "Recommended - avoids unnecessary duplicate media fields and missing image translations"
-msgstr "推荐 - 避免不必要的重复媒体字段和缺失的图像翻译"
+#: classes/media/settings/class-wpml-media-settings.php:89
+msgid "avoids unnecessary duplicate media fields and missing image translations"
+msgstr "避免不必要的重复媒体字段和缺失的图片翻译"
 
-#: classes/media/settings/class-wpml-media-settings.php:96
-#: classes/media/settings/class-wpml-media-settings.php:237
+#: classes/media/settings/class-wpml-media-settings.php:94
+#: classes/media/settings/class-wpml-media-settings.php:252
 msgid "ON"
 msgstr "开启"
 
-#: classes/media/settings/class-wpml-media-settings.php:97
-#: classes/media/settings/class-wpml-media-settings.php:238
+#: classes/media/settings/class-wpml-media-settings.php:95
+#: classes/media/settings/class-wpml-media-settings.php:253
 msgid "OFF"
 msgstr "关闭"
 
-#: classes/media/settings/class-wpml-media-settings.php:109
+#: classes/media/settings/class-wpml-media-settings.php:106
+msgid "We recommend enabling automatic detection of image texts (alt, caption, title). This helps prevent duplicate media fields and missing translations."
+msgstr "我们建议启用图像文本（alt、caption、title）的自动检测。这有助于防止重复的媒体字段和缺失的翻译。"
+
+#: classes/media/settings/class-wpml-media-settings.php:117
+msgid "Setup manually"
+msgstr "手动设置"
+
+#: classes/media/settings/class-wpml-media-settings.php:124
 msgid "Please install and activate WPML’s String Translation add-on to use this setting."
 msgstr "请安装并激活 WPML 的字符串翻译插件以使用此设置。"
 
-#: classes/media/settings/class-wpml-media-settings.php:110
+#: classes/media/settings/class-wpml-media-settings.php:125
 #: classes/requirements/class-wpml-requirements-notifications.php:120
 #: classes/user-language/class-wpml-user-language.php:335
 #: menu/network.php:167
 msgid "Activate"
 msgstr "激活"
 
-#: classes/media/settings/class-wpml-media-settings.php:131
+#: classes/media/settings/class-wpml-media-settings.php:146
 msgid "Existing content"
 msgstr "现有内容"
 
-#: classes/media/settings/class-wpml-media-settings.php:134
+#: classes/media/settings/class-wpml-media-settings.php:149
 msgid "New content"
 msgstr "新内容"
 
-#: classes/media/settings/class-wpml-media-settings.php:144
+#: classes/media/settings/class-wpml-media-settings.php:159
 msgid "Duplicate texts (alt, caption, title) for all media to all languages"
 msgstr "将所有媒体的文本（alt、caption、title）复制到所有语言"
 
-#: classes/media/settings/class-wpml-media-settings.php:148
-#: classes/media/settings/class-wpml-media-settings.php:176
+#: classes/media/settings/class-wpml-media-settings.php:163
+#: classes/media/settings/class-wpml-media-settings.php:191
 msgid "This applies to all types of media items (images, videos, PDFs, etc.) and not just images. WPML will only duplicate media texts (alt, caption, title) and not the media files."
 msgstr "这适用于所有类型的媒体项目（图像、视频、PDF 等），而不仅仅是图像。WPML 将只复制媒体文本（alt、caption、title），而不复制媒体文件。"
 
-#: classes/media/settings/class-wpml-media-settings.php:172
+#: classes/media/settings/class-wpml-media-settings.php:187
 msgid "Duplicate image texts (alt, caption, title) for all feature images to all languages"
 msgstr "将所有特色图像的文本（alt、caption、title）复制到所有语言"
 
-#: classes/media/settings/class-wpml-media-settings.php:204
+#: classes/media/settings/class-wpml-media-settings.php:219
 msgid "This will duplicate media texts (alt, title, caption) to all languages using the options you selected above. Please stay on this page until the process completes - it may take a few minutes."
 msgstr "这将根据你上面选择的选项将媒体文本（alt、title、caption）复制到所有语言。请留在此页面直到过程完成 - 可能需要几分钟。"
 
-#: classes/media/settings/class-wpml-media-settings.php:212
+#: classes/media/settings/class-wpml-media-settings.php:227
 msgid "Start the process"
 msgstr "开始处理"
 
-#: classes/media/settings/class-wpml-media-settings.php:223
+#: classes/media/settings/class-wpml-media-settings.php:238
 msgid "How to handle Media Library texts (alt, caption, title)"
 msgstr "如何处理媒体库文本（alt、caption、title）"
 
-#: classes/media/settings/class-wpml-media-settings.php:246
+#: classes/media/settings/class-wpml-media-settings.php:261
 msgid "Translate Media Library texts (alt, caption, title) when translating content"
 msgstr "翻译内容时翻译媒体库文本（alt、caption、title）"
 
-#: classes/media/settings/class-wpml-media-settings.php:249
+#: classes/media/settings/class-wpml-media-settings.php:264
 msgid "Enable this option to translate image texts (alt, caption, title) for images connected to Media Library. Such images reuse the same texts across all posts and pages. This setting is required for page builders like Elementor and Divi."
 msgstr "启用此选项以翻译与媒体库关联的图像的文本（alt、caption、title）。这些图像在所有文章和页面中重复使用相同的文本。此设置对于 Elementor 和 Divi 等页面构建器是必需的。"
 
-#: classes/media/settings/class-wpml-media-settings.php:269
+#: classes/media/settings/class-wpml-media-settings.php:284
 msgid "You're all done. From now on, all new media files that you upload to content will receive a language. You can automatically duplicate them to translations from the post-edit screen."
 msgstr "您已全部完成。从现在开始，您上传到内容中的所有新媒体文件都将获得一种语言。您可以从文章编辑页面自动将它们复制到翻译中。"
 
@@ -2246,7 +2264,7 @@ msgstr "目前显示所有语言。选择在隐藏网站语言时要执行的操
 msgid "Display hidden languages"
 msgstr "显示隐藏的语言"
 
-#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:38
+#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:31
 msgid "Translation Tools"
 msgstr "翻译工具"
 
@@ -2425,13 +2443,17 @@ msgstr "服务器错误"
 msgid "Something went wrong. Please try again."
 msgstr "出现问题。请重试。"
 
-#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:141
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:145
 msgid "Your site doesn't meet WPML's minimum requirements."
 msgstr "您的网站不满足 WPML 的最低要求。"
 
-#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:142
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:146
 msgid "Fix now"
 msgstr "立即修复"
+
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:162
+msgid "Great! All WPML requirements are now met. Your site is ready to use WPML."
+msgstr "太好了！现在已满足所有 WPML 要求。您的网站已准备好使用 WPML。"
 
 #: classes/notices/class-wpml-notice-render.php:57
 #: inc/icl-admin-notifier.php:527
@@ -2589,28 +2611,24 @@ msgstr "自动翻译"
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d天"
-msgstr[1] "%d天"
 
 #. translators: %d is for the number of hour(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:457
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d小时"
-msgstr[1] "%d小时"
 
 #. translators: %d is for the number of minute(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:465
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d分钟"
-msgstr[1] "%d分钟"
 
 #. translators: %1$1s and %2$2s is used for adding html tags to make WPML support a link. %3$s is a list of numeric ids.
 #: classes/notices/wpml-tm-post-edit-notices.php:515
 msgid "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translation is stuck: %3$3s"
 msgid_plural "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
 msgstr[0] "自动翻译出现问题。请联系%1$1sWPML支持%2$2s，并报告以下自动翻译卡住：%3$3s"
-msgstr[1] "自动翻译出现问题。请联系%1$1sWPML支持%2$2s，并报告以下自动翻译卡住：%3$3s"
 
 #: classes/plugins/Plugins.php:131
 msgid "WPML Translation Management is now included in WPML Multilingual CMS."
@@ -2625,12 +2643,12 @@ msgid "Read more"
 msgstr "阅读更多"
 
 #: classes/post-edit-screen/TranslationEditorPostSettings.php:73
-#: menu/wpml-tm-menus-settings.php:209
+#: menu/wpml-tm-menus-settings.php:206
 msgid "Advanced Translation Editor"
 msgstr "高级翻译编辑器"
 
 #: classes/post-edit-screen/TranslationEditorPostSettings.php:74
-#: menu/wpml-tm-menus-settings.php:213
+#: menu/wpml-tm-menus-settings.php:210
 msgid "Classic Translation Editor"
 msgstr "经典翻译编辑器"
 
@@ -2867,11 +2885,7 @@ msgstr "Hreflang链接的位置"
 msgid "A user does not have a proper license to enable ATE."
 msgstr "用户没有适当的许可证来启用 ATE。"
 
-#: classes/setup/endpoints/EnableAte.php:19
-msgid "ATE is already enabled."
-msgstr "ATE 已经启用。"
-
-#: classes/setup/endpoints/LicenseStep.php:56
+#: classes/setup/endpoints/LicenseStep.php:53
 msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr "感谢您在本站注册WPML。当有新版本可用时，您将收到自动更新。"
 
@@ -2945,21 +2959,21 @@ msgstr "不可用"
 msgid "Available"
 msgstr "可用"
 
-#: classes/support/class-wpml-support-info-ui.php:140
-msgid "Automatic"
-msgstr "自动"
-
-#: classes/support/class-wpml-support-info-ui.php:151
+#: classes/support/class-wpml-support-info-ui.php:136
 msgid "WPML needs at least 208 KB of Available stack size on PHP 8.3+; please set \"zend.max_allowed_stack_size\" to at least 256 KB and \"zend.reserved_stack_size\" to at least 48 KB in your php.ini file. After these changes, restart your web server."
 msgstr "WPML 在 PHP 8.3+ 上至少需要 208 KB 的可用堆栈大小；请在你的 php.ini 文件中将 “zend.max_allowed_stack_size” 设置为至少 256 KB，将 “zend.reserved_stack_size” 设置为至少 48 KB。进行这些更改后，重启你的网络服务器。"
 
-#: classes/support/class-wpml-support-info-ui.php:161
+#: classes/support/class-wpml-support-info-ui.php:146
 msgid "Available Stack Size"
 msgstr "可用堆栈大小"
 
-#: classes/support/class-wpml-support-info-ui.php:200
+#: classes/support/class-wpml-support-info-ui.php:187
 msgid "Info"
 msgstr "信息"
+
+#: classes/support/class-wpml-support-info-ui.php:212
+msgid "Automatic"
+msgstr "自动"
 
 #: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:96
 msgid "Translating %1$s? Use the %2$s table for easier translation."
@@ -3129,13 +3143,11 @@ msgstr "WPML无法与远程翻译服务通信。请确保WPML翻译管理已激�
 msgid "%d feedback was updated."
 msgid_plural "%d feedback were updated."
 msgstr[0] "已更新 %d 条反馈。"
-msgstr[1] "已更新 %d 条反馈。"
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:28
 msgid "%d feedback was trashed."
 msgid_plural "%d feedback were trashed."
 msgstr[0] "已将 %d 条反馈移至回收站。"
-msgstr[1] "已将 %d 条反馈移至回收站。"
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:30
 msgid "The trashed feedback will be permanently deleted after %d days."
@@ -3145,13 +3157,11 @@ msgstr "移至回收站的反馈将在 %d 天后永久删除。"
 msgid "%d feedback was restored."
 msgid_plural "%d feedback were restored."
 msgstr[0] "已恢复 %d 条反馈。"
-msgstr[1] "已恢复 %d 条反馈。"
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:36
 msgid "%d feedback was permanently deleted."
 msgid_plural "%d feedback were permanently deleted."
 msgstr[0] "已永久删除 %d 条反馈。"
-msgstr[1] "已永久删除 %d 条反馈。"
 
 #: classes/translation-feedback/notices/wpml-tf-promote-notices.php:31
 msgid "Want to know if recent translations you received have problems?"
@@ -3732,7 +3742,6 @@ msgstr "导航"
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] "%s个项目"
-msgstr[1] "%s个项目"
 
 #: classes/utilities/class-wpml-flags.php:108
 msgid "Flag for %s"
@@ -4040,41 +4049,41 @@ msgstr "完成"
 msgid "In progress - needs retry"
 msgstr "进行中 - 需要重试"
 
-#: inc/translation-management/translation-management.class.php:1797
+#: inc/translation-management/translation-management.class.php:1769
 msgid "Translation entry not found for: %d"
 msgstr "未找到%d的翻译条目"
 
-#: inc/translation-management/translation-management.class.php:1944
-#: inc/translation-management/translation-management.class.php:1963
+#: inc/translation-management/translation-management.class.php:1915
+#: inc/translation-management/translation-management.class.php:1934
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:26
 msgid "translate"
 msgstr "翻译"
 
-#: inc/translation-management/translation-management.class.php:1946
+#: inc/translation-management/translation-management.class.php:1917
 msgid "string not registered"
 msgstr "字符串未注册"
 
-#: inc/translation-management/translation-management.class.php:1954
+#: inc/translation-management/translation-management.class.php:1925
 msgid "Multiple options"
 msgstr "多个选项"
 
-#: inc/translation-management/translation-management.class.php:1966
+#: inc/translation-management/translation-management.class.php:1937
 msgid "some strings might be not registered"
 msgstr "某些字符串可能未注册"
 
-#: inc/translation-management/translation-management.class.php:2191
+#: inc/translation-management/translation-management.class.php:2162
 msgid " - (needs update)"
 msgstr " - （需要更新）"
 
-#: inc/translation-management/translation-management.class.php:2367
+#: inc/translation-management/translation-management.class.php:2338
 msgid "Preferences saved."
 msgstr "偏好设置已保存。"
 
-#: inc/translation-management/translation-management.class.php:2386
+#: inc/translation-management/translation-management.class.php:2357
 msgid "Translation requests cancelled."
 msgstr "翻译请求已取消。"
 
-#: inc/translation-management/translation-management.class.php:2388
+#: inc/translation-management/translation-management.class.php:2359
 msgid "No Translation requests selected."
 msgstr "未选择翻译请求。"
 
@@ -5058,48 +5067,52 @@ msgstr "此文章已经被复制。"
 msgid "Can't create a duplicate. A translation is in progress."
 msgstr "无法创建副本。翻译正在进行中。"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:565
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:766
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:554
+msgid " for "
+msgstr " 为 "
+
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:573
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:774
 msgid "Post without a title"
 msgstr "无标题文章"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:634
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:642
 msgid "Media attachments"
 msgstr "媒体附件"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:647
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:655
 msgid "Duplicate uploaded media to translations"
 msgstr "复制上传的媒体到翻译"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:648
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:656
 msgid "Duplicate featured image to translations"
 msgstr "复制特色图片到翻译"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:650
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:658
 msgid "Duplicate uploaded media from original"
 msgstr "从原始版本复制上传的媒体"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:651
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:659
 msgid "Duplicate featured image from original"
 msgstr "从原始版本复制特色图片"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:674
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:682
 msgid "Copy content from %s"
 msgstr "从%s复制内容"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:681
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:689
 msgid "This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor."
 msgstr "此操作将原始语言的内容复制到这个翻译上。这适用于当你想从原始内容开始，但继续在这种语言中翻译的情况。只有当编辑器中没有内容时，此按钮才会启用。"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:696
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:704
 msgid "Overwrite with %s content."
 msgstr "用%s内容覆盖"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:701
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:709
 msgid "The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content."
 msgstr "此%s的当前内容将永久丢失。WPML将复制%s内容并替换当前内容。"
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:711
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:719
 msgid "This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language."
 msgstr "此操作将使这个翻译与原始语言同步。当你编辑原始内容时，这个翻译将立即更新。这适用于当你希望这种语言的内容始终与原始语言内容相同的情况。"
 
@@ -5346,7 +5359,7 @@ msgstr "原始语言"
 msgid "This term has additional meta fields:"
 msgstr "此术语有额外的元字段："
 
-#: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:219
+#: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:223
 msgid "Wrong nonce"
 msgstr "错误的一次性令牌"
 
@@ -5640,130 +5653,130 @@ msgstr "添加 %s 的翻译"
 msgid "Translation Jobs"
 msgstr "翻译作业"
 
-#: menu/wpml-tm-menus-settings.php:178
+#: menu/wpml-tm-menus-settings.php:148
+msgid "New translations detected. Scan your content to update internal links so they point to the correct translated pages and posts."
+msgstr "检测到新翻译。扫描您的内容以更新内部链接，使其指向正确的翻译页面和文章。"
+
+#: menu/wpml-tm-menus-settings.php:175
 msgid "Side-by-side editing"
 msgstr "并排编辑"
 
-#: menu/wpml-tm-menus-settings.php:179
+#: menu/wpml-tm-menus-settings.php:176
 msgid "Unique designs for translations"
 msgstr "翻译独特设计"
 
-#: menu/wpml-tm-menus-settings.php:180
+#: menu/wpml-tm-menus-settings.php:177
 msgid "Glossary Support"
 msgstr "术语表支持"
 
-#: menu/wpml-tm-menus-settings.php:181
+#: menu/wpml-tm-menus-settings.php:178
 msgid "Automatic Translation"
 msgstr "自动翻译"
 
-#: menu/wpml-tm-menus-settings.php:182
+#: menu/wpml-tm-menus-settings.php:179
 msgid "Use your free automatic translation quota"
 msgstr "使用您的免费自动翻译配额"
 
-#: menu/wpml-tm-menus-settings.php:183
+#: menu/wpml-tm-menus-settings.php:180
 msgid "Spell Checker"
 msgstr "拼写检查器"
 
-#: menu/wpml-tm-menus-settings.php:184
+#: menu/wpml-tm-menus-settings.php:181
 msgid "Safe HTML editing"
 msgstr "安全的HTML编辑"
 
-#: menu/wpml-tm-menus-settings.php:185
+#: menu/wpml-tm-menus-settings.php:182
 msgid "Translation Memory"
 msgstr "翻译记忆库"
 
-#: menu/wpml-tm-menus-settings.php:208
-msgid "Recommended"
-msgstr "推荐"
-
-#: menu/wpml-tm-menus-settings.php:212
+#: menu/wpml-tm-menus-settings.php:209
 msgid "Legacy"
 msgstr "传统"
 
-#: menu/wpml-tm-menus-settings.php:225
-#: menu/wpml-tm-menus-settings.php:231
+#: menu/wpml-tm-menus-settings.php:222
+#: menu/wpml-tm-menus-settings.php:228
 msgid "Includes "
 msgstr "包括"
 
-#: menu/wpml-tm-menus-settings.php:273
+#: menu/wpml-tm-menus-settings.php:270
 msgid "Use also for old translations created with the classic editor"
 msgstr "也用于使用经典编辑器创建的旧翻译"
 
 #. translators: heading shown for selecting the editor to use when updating content that was created with WPML's Classic Translation Editor
-#: menu/wpml-tm-menus-settings.php:296
+#: menu/wpml-tm-menus-settings.php:293
 msgid "Translation Editor FAQ"
 msgstr "翻译编辑器常见问题"
 
-#: menu/wpml-tm-menus-settings.php:304
+#: menu/wpml-tm-menus-settings.php:301
 msgid "Can I have completely different designs for translations?"
 msgstr "我可以为翻译使用完全不同的设计吗？"
 
 #. translators: %s links
-#: menu/wpml-tm-menus-settings.php:309
+#: menu/wpml-tm-menus-settings.php:306
 msgid "Yes, WPML allows you to use %1$scompletely different designs for translations%2$s."
 msgstr "是的，WPML允许您为翻译使用%1$s完全不同的设计%2$s。"
 
-#: menu/wpml-tm-menus-settings.php:315
+#: menu/wpml-tm-menus-settings.php:312
 msgid "Can I use my free automatic translation quota with the Classic Translation Editor?"
 msgstr "我可以在经典翻译编辑器中使用我的免费自动翻译配额吗？"
 
-#: menu/wpml-tm-menus-settings.php:318
+#: menu/wpml-tm-menus-settings.php:315
 msgid "No. Automatic translation is only available via WPML’s Advanced Translator Editor, so you can only use your free quota using it."
 msgstr "不可以。自动翻译仅通过WPML的高级翻译编辑器提供，因此您只能使用它来使用您的免费配额。"
 
-#: menu/wpml-tm-menus-settings.php:323
+#: menu/wpml-tm-menus-settings.php:320
 msgid "When should I use WPML’s Classic Translation Editor?"
 msgstr "我应该什么时候使用WPML的经典翻译编辑器？"
 
-#: menu/wpml-tm-menus-settings.php:326
+#: menu/wpml-tm-menus-settings.php:323
 msgid "We maintain WPML’s Classic Translation Editor as part of WPML for backward compatibility. You should only use it if you’ve started with the Classic Editor and are concerned about losing the translation history."
 msgstr "为了向后兼容，我们在WPML中保留了WPML的经典翻译编辑器。只有在您开始使用经典编辑器并担心丢失翻译历史记录的情况下，才应使用它。"
 
-#: menu/wpml-tm-menus-settings.php:341
+#: menu/wpml-tm-menus-settings.php:338
 msgid "Yes, use Advanced Translation Editor for existing content"
 msgstr "是的，对现有内容使用高级翻译编辑器"
 
-#: menu/wpml-tm-menus-settings.php:348
+#: menu/wpml-tm-menus-settings.php:345
 msgid "You are about to use Advanced Translation Editor for your existing translations"
 msgstr "您即将对现有翻译使用高级翻译编辑器"
 
-#: menu/wpml-tm-menus-settings.php:351
+#: menu/wpml-tm-menus-settings.php:348
 msgid "Some of your content was translated using the Classic Translation Editor. If you proceed, re-translating may overwrite or delete those translations."
 msgstr "您的部分内容是使用经典翻译编辑器翻译的。如果您继续，重新翻译可能会覆盖或删除这些翻译。"
 
-#: menu/wpml-tm-menus-settings.php:384
+#: menu/wpml-tm-menus-settings.php:381
 msgid "When you receive completed translations"
 msgstr "当您收到完成的翻译时"
 
-#: menu/wpml-tm-menus-settings.php:398
+#: menu/wpml-tm-menus-settings.php:395
 msgid "Publish the translated post when original is also published (default)"
 msgstr "当原文发布时发布翻译文章（默认）"
 
-#: menu/wpml-tm-menus-settings.php:415
+#: menu/wpml-tm-menus-settings.php:412
 msgid "Save the translated post as a draft"
 msgstr "将翻译文章保存为草稿"
 
-#: menu/wpml-tm-menus-settings.php:421
+#: menu/wpml-tm-menus-settings.php:418
 msgid "Choose if translations should be published when received. Note: If Publish is selected, the translation will only be published if the original document is published when the translation is received."
 msgstr "选择收到翻译时是否应发布。注意：如果选择发布，只有在收到翻译时原始文档已发布，翻译才会发布。"
 
-#: menu/wpml-tm-menus-settings.php:431
+#: menu/wpml-tm-menus-settings.php:428
 msgid "When you publish the original post"
 msgstr "当您发布原始文章时"
 
-#: menu/wpml-tm-menus-settings.php:444
+#: menu/wpml-tm-menus-settings.php:441
 msgid "Publish the post translations"
 msgstr "发布文章翻译"
 
-#: menu/wpml-tm-menus-settings.php:458
+#: menu/wpml-tm-menus-settings.php:455
 msgid "Do not publish the post translations"
 msgstr "不发布文章翻译"
 
-#: menu/wpml-tm-menus-settings.php:529
+#: menu/wpml-tm-menus-settings.php:526
 msgid "Translated taxonomies"
 msgstr "已翻译的分类法"
 
-#: menu/wpml-tm-menus-settings.php:541
+#: menu/wpml-tm-menus-settings.php:538
 msgid "Don't show translated taxonomies in Translation Editor"
 msgstr "不在翻译编辑器中显示已翻译的分类法"
 

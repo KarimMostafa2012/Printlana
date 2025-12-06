@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
@@ -82,8 +84,7 @@ msgstr "Hết Tín Dụng cho Dịch Tự Động"
 #: src/js/ate/status-bar/components/constants.js:29
 msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
 msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgstr[0] "Bạn có <b>1</b> tín dụng dịch thuật trả trước trong tài khoản wpml.org của bạn. Gán các tín dụng này cho trang web của bạn để bắt đầu sử dụng dịch tự động"
-msgstr[1] "Bạn có <b>%s</b> tín dụng dịch thuật trả trước trong tài khoản wpml.org của bạn. Gán các tín dụng này cho trang web của bạn để bắt đầu sử dụng dịch tự động"
+msgstr[0] "Bạn có <b>%s</b> tín dụng dịch thuật trả trước trong tài khoản wpml.org của bạn. Gán các tín dụng này cho trang web của bạn để bắt đầu sử dụng dịch tự động"
 
 #: src/js/ate/status-bar/components/constants.js:41
 #: src/js/ate/status-bar/components/sending/index.js:10
@@ -116,8 +117,7 @@ msgstr "Ngôn ngữ mặc định của bạn, %s, phải được ánh xạ t�
 #. %s is replaced by the language(s) name.
 msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
 msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
-msgstr[0] "Ngôn ngữ của bạn, %s, phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động."
-msgstr[1] "Các ngôn ngữ sau trên trang web của bạn phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động: %s"
+msgstr[0] "Các ngôn ngữ sau trên trang web của bạn phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động: %s"
 
 #: src/js/ate/status-bar/components/constants.js:68
 msgid ""
@@ -130,7 +130,6 @@ msgstr "Nội dung bằng các ngôn ngữ: %s, không thể được dịch t�
 msgid "%d translation waiting for review"
 msgid_plural "%d translations waiting for review"
 msgstr[0] "%d bản dịch đang chờ xem xét"
-msgstr[1] "%d bản dịch đang chờ xem xét"
 
 #: src/js/ate/status-bar/components/credit/index.js:100
 msgid "Account credits used"

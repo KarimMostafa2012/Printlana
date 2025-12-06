@@ -78,11 +78,11 @@ class WCML_Payment_Gateway_Stripe extends WCML_Payment_Gateway {
 				$currencies_details[ $code ]['test_secret_key']      = $this->get_gateway()->settings['test_secret_key'];
 			} else {
 				$currency_gateway_setting                            = $this->get_setting( $code );
-				$currencies_details[ $code ]['currency']             = isset( $currency_gateway_setting['currency'] ) ? $currency_gateway_setting['currency'] : '';
-				$currencies_details[ $code ]['publishable_key']      = isset( $currency_gateway_setting['publishable_key'] ) ? $currency_gateway_setting['publishable_key'] : '';
-				$currencies_details[ $code ]['secret_key']           = isset( $currency_gateway_setting['secret_key'] ) ? $currency_gateway_setting['secret_key'] : '';
-				$currencies_details[ $code ]['test_publishable_key'] = isset( $currency_gateway_setting['test_publishable_key'] ) ? $currency_gateway_setting['test_publishable_key'] : '';
-				$currencies_details[ $code ]['test_secret_key']      = isset( $currency_gateway_setting['test_secret_key'] ) ? $currency_gateway_setting['test_secret_key'] : '';
+				$currencies_details[ $code ]['currency']             = $currency_gateway_setting['currency'] ?? '';
+				$currencies_details[ $code ]['publishable_key']      = $currency_gateway_setting['publishable_key'] ?? '';
+				$currencies_details[ $code ]['secret_key']           = $currency_gateway_setting['secret_key'] ?? '';
+				$currencies_details[ $code ]['test_publishable_key'] = $currency_gateway_setting['test_publishable_key'] ?? '';
+				$currencies_details[ $code ]['test_secret_key']      = $currency_gateway_setting['test_secret_key'] ?? '';
 			}
 		}
 

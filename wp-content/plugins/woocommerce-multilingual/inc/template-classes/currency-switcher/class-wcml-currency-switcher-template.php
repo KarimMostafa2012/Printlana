@@ -20,23 +20,13 @@ class WCML_Currency_Switcher_Template extends WCML_Templates_Factory implements 
 	/* @var string $prefix */
 	private $prefix = 'wcml-cs-';
 
-	/**
-	 * @var woocommerce_wpml
-	 */
-	private $woocommerce_wpml;
-
 	/** @var array|null $model */
 	private $model;
 
 	/**
-	 * WCML_Currency_Switcher_Template constructor.
-	 *
-	 * @param woocommerce_wpml $woocommerce_wpml
 	 * @param array $template_data
 	 */
-	public function __construct( $woocommerce_wpml, $template_data ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-
+	public function __construct( $template_data ) {
 		$this->template = $this->format_data( $template_data );
 
 		if ( array_key_exists( 'template_string', $this->template ) ) {
@@ -51,7 +41,7 @@ class WCML_Currency_Switcher_Template extends WCML_Templates_Factory implements 
 	}
 
 	/**
-	 * @param array $model
+	 * @param array|mixed $model
 	 */
 	public function set_model( $model ) {
 		$this->model = is_array( $model ) ? $model : [ $model ];
@@ -105,7 +95,7 @@ class WCML_Currency_Switcher_Template extends WCML_Templates_Factory implements 
 	 */
 	private function format_data( $template_data ) {
 		foreach ( [ 'path', 'js', 'css' ] as $k ) {
-			$template_data[ $k ] = isset( $template_data[ $k ] ) ? $template_data[ $k ] : [];
+			$template_data[ $k ] = $template_data[ $k ] ?? [];
 			$template_data[ $k ] = is_array( $template_data[ $k ] ) ? $template_data[ $k ] : [ $template_data[ $k ] ];
 		}
 
@@ -129,7 +119,7 @@ class WCML_Currency_Switcher_Template extends WCML_Templates_Factory implements 
 	}
 
 	public function get_resource_handler( string $index ): string {
-		$slug = isset( $this->template['slug'] ) ? $this->template['slug'] : '';
+		$slug = $this->template['slug'] ?? '';
 		$prefix = $this->is_core() ? '' : $this->prefix;
 
 		return $prefix . $slug . '-' . $index;

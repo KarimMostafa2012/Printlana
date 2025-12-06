@@ -30,7 +30,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
                     }
 
-        public static function pricing_hint_format(): string {
+                public static function pricing_hint_format(): string {
 
             static $hint = null;
 

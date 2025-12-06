@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -157,6 +159,10 @@ msgstr "Редактировать языковую пару (пары)"
 #: src/js/components/translators/TranslatorsTable.js:62
 msgid "Delete language pair(s)"
 msgstr "Удалить языковую пару (пары)"
+
+#: src/js/setup/components/Steps/AITranslation.js:52
+msgid "Loading AI Translation..."
+msgstr "Загрузка ИИ-перевода..."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."

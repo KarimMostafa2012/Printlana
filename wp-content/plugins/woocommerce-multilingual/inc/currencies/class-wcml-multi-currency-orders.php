@@ -341,20 +341,12 @@ class WCML_Multi_Currency_Orders {
 	 * @param array $coupons
 	 * @param int|bool $order_id
 	 * @param string|bool $order_currency
+	 * @deprecated since WCML 4.11.0
 	 */
 	public function set_converted_totals_for_item( $item, $coupons, $order_id = false, $order_currency = false ) {
 			// Add a deprecation notice?
 	}
-	
-	/**
-	 * @param WC_Order_Item_Product $item
-	 *
-	 * @return bool
-	 */
-	private function total_is_changed( $item ) {
-		return (int) $item->get_product()->get_price() * (int) $item->get_quantity() !== (int) $item->get_total();
-	}
-	
+
 	/**
 	 * @param string $key
 	 *
@@ -421,10 +413,8 @@ class WCML_Multi_Currency_Orders {
 
 		if ( isset( $_COOKIE['_wcml_order_currency'] ) ) {
 			return $_COOKIE['_wcml_order_currency'];
-		} else {
-			return wcml_get_woocommerce_currency_option();
 		}
-
+		return wcml_get_woocommerce_currency_option();
 	}
 
 	/**

@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "コンテンツを自動翻訳するには、アドバンス翻訳エディターを使用する必要があります。"
@@ -21,7 +23,6 @@
             "この翻訳設定を確認してください"
          ],
          "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
-            "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d 既存の項目を自動的に翻訳します。",
             "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d の既存項目を自動的に翻訳します。"
          ],
          "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [

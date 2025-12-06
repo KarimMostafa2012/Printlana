@@ -1,334 +1,278 @@
 (function($) {
     'use strict';
-    function addCustomInputBox(){
-        var decimal_separator = WCMMQ_DATA.decimal_separator;
-        if( decimal_separator != '.' ){
-            $('input.input-text.qty.text').not('.wcmmq-second-input-box,.wcmmq-main-input-box').each(function(){
-                
-                $(this).addClass('wcmmq-main-input-box');
-                var input_val = $(this).val();
-                var val_with_coma = input_val.replace(/\./g, decimal_separator);
-                var parentQuantity = $(this).parents('.quantity');
-                parentQuantity.addClass('wcmmq-coma-separator-activated');
-                $(this).after('<input type="text" value="' + val_with_coma + '" class="wcmmq-second-input-box input-text qty text" id="wcmmq-second-input-id">');
+
+    const WCMMQCustom = {
+        decimalSeparator: WCMMQ_DATA.decimal_separator || '.',
+        decimalCount: parseInt(WCMMQ_DATA.decimal_count || 2),
+
+        init: function() {
+            this.bindEvents();
+            this.addCustomInputBox();
+        },
+
+        // =========================
+        // Event Bindings
+        // =========================
+        bindEvents: function() {
+            const self = this;
+
+            // Ajax complete trigger
+            $(document).ajaxComplete(function() {
+                setTimeout(() => self.addCustomInputBox(), 150);
             });
-        }
-    }
-    $(document).ajaxComplete(function () {
-        setTimeout(addCustomInputBox,320);
-    });
-    $(document).ready(function () {
-        var decimal_separator = WCMMQ_DATA.decimal_separator;
-        var decimal_count = WCMMQ_DATA.decimal_count;
-        
-        if(typeof decimal_count !== 'undefined'){
-            decimal_count = parseInt(decimal_count);
-        }else{
-            decimal_count = 2;
-        }
-        
-        addCustomInputBox();
 
-        
-        $(document.body).on('wpt_changed_variations',function(e, targetAttributeObject){
+            // Variation change (WPT compatibility)
+            $(document.body).on('wpt_changed_variations', function(e, targetAttributeObject) {
+                if (!targetAttributeObject.status) return;
+                const productId = targetAttributeObject.product_id;
+                const variationId = targetAttributeObject.variation_id;
+                const variationData = $('#wcmmq_variation_data_' + productId).data('variation_data');
+                const qtyBoxWPT = $('.product_id_' + productId + ' input.input-text.qty.text');
+                self.distributeMinMax(variationId, variationData, qtyBoxWPT);
+            });
 
-            if(targetAttributeObject.status == false){
-                return false;
+            // Validation message customization
+            $(document).on('keyup invalid change', 'input.input-text.qty.text.wcmmq-qty-custom-validation', function() {
+                self.validateCustomMessage(this);
+            });
+
+            // Variation stock/limits
+            $(document.body).on('change', 'form.variations_form.cart input.variation_id', function() {
+                self.handleVariationChange($(this));
+            });
+
+            // Comma separator input handling
+            $(document.body).on('keyup', '.wcmmq-second-input-box', function(e) {
+                self.handleSecondInputKeyup(e, $(this));
+            });
+
+            // Sync quantity box on change
+            const qtySelector = '.qib-button-wrapper .quantity input.input-text.qty.text, .single-product div.product form.cart .quantity input[type=number]';
+            $(document.body).on('change', qtySelector, function() {
+                self.syncSecondInput($(this));
+            });
+        },
+
+        // =========================
+        // Core Functions
+        // =========================
+        addCustomInputBox: function() {
+            const self = this;
+            if (self.decimalSeparator !== '.') {
+                $('input.input-text.qty.text').not('.wcmmq-second-input-box,.wcmmq-main-input-box').each(function() {
+                    $(this).addClass('wcmmq-main-input-box');
+                    const inputVal = $(this).val();
+                    const valWithComma = inputVal.replace(/\./g, self.decimalSeparator);
+                    const parentQuantity = $(this).parents('.quantity');
+                    parentQuantity.addClass('wcmmq-coma-separator-activated');
+                    $(this).after('<input type="text" value="' + valWithComma + '" class="wcmmq-second-input-box input-text qty text">');
+                });
             }
-            var product_id = targetAttributeObject.product_id;
-            var variation_id = targetAttributeObject.variation_id;
-            var variation_data = $('#wcmmq_variation_data_' + product_id).data('variation_data');
-            var qty_boxWPT = $('.product_id_' + product_id + ' input.input-text.qty.text');
-            distributeMinMax(variation_id,variation_data,qty_boxWPT);
-        });
+        },
 
-        /**
-         * Custom work
-         */
-        $('input.input-text.qty.text.wcmmq-qty-custom-validation').on('keyup', validatinMessageCustomize);
-        $('input.input-text.qty.text.wcmmq-qty-custom-validation').on('invalid', validatinMessageCustomize);
-        $('input.input-text.qty.text.wcmmq-qty-custom-validation').on('change', validatinMessageCustomize);
-        function validatinMessageCustomize() {
+        validateCustomMessage: function(inputEl) {
+            const $el = $(inputEl);
+            const DataObject = $('.wcmmq-json-options-data');
+            const stepValidationMsg = DataObject.data('step_error_valiation') || '';
+            let fullMessage = "";
+            const msgMinLimit = (DataObject.data('msg_min_limit') || '') + " ";
+            const msgMaxLimit = (DataObject.data('msg_max_limit') || '') + " ";
+            const productName = "🎁 Product";
 
-            var DataObject = $('.wcmmq-json-options-data');
-            var json_data = DataObject.data('wcmmq_json_data');
-            // console.log(json_data);
-            var step_validation_msg = DataObject.data('step_error_valiation');
-            var full_message = "";
-            var msg_min_limit = DataObject.data('msg_min_limit') + " ";
-            var msg_max_limit = DataObject.data('msg_max_limit') + " ";
+            let inputValue = parseFloat($el.val());
+            const min = parseFloat($el.attr('min'));
+            const max = parseFloat($el.attr('max'));
+            const step = parseFloat($el.attr('step'));
 
-            var product_name = "🎁 Product";
+            let lowerNearest = Math.floor((inputValue - min) / step) * step + min;
+            let upperNearest = lowerNearest + step;
 
-            // var step_validation_msg = 'Please enter a valid value. The two nearest valid values are [should_min] and [should_next]';
-            // Parse input value as a float
-            var inputValue = parseFloat($(this).val());
-
-            // Get the min, max, and step attributes
-            var min = parseFloat($(this).attr('min'));
-            var max = parseFloat($(this).attr('max'));
-            var step = parseFloat($(this).attr('step'));
-
-            // Calculate the nearest valid values
-            var lowerNearest = Math.floor((inputValue - min) / step) * step + min;
-            var upperNearest = lowerNearest + step;
-
-            if( inputValue <  min){
-                full_message += msg_min_limit.replace("[min_quantity]", min);
+            if (inputValue < min) {
+                fullMessage += msgMinLimit.replace("[min_quantity]", min);
                 lowerNearest = min;
                 upperNearest = lowerNearest + step;
-            }else if(inputValue > max && max > min){
-                full_message += msg_max_limit.replace("[max_quantity]", max);
+            } else if (inputValue > max && max > min) {
+                fullMessage += msgMaxLimit.replace("[max_quantity]", max);
                 lowerNearest = max - step;
                 upperNearest = max;
             }
 
-            step_validation_msg = step_validation_msg.replace("[should_min]", lowerNearest);
-            step_validation_msg = step_validation_msg.replace("[should_next]", upperNearest);
-            full_message += step_validation_msg;
-            
-            var final_full_message = full_message.replace('"[product_name]"', product_name);
-            final_full_message = final_full_message.replace("[product_name]", product_name);
+            let msg = stepValidationMsg.replace("[should_min]", lowerNearest).replace("[should_next]", upperNearest);
+            fullMessage += msg;
 
-            
+            let finalMessage = fullMessage.replace('"[product_name]"', productName).replace("[product_name]", productName);
 
-            // Check if the input is within the valid range
             if (inputValue < min || inputValue > max || (inputValue - min) % step !== 0) {
-                // var step_validation_msg = 'Nearest valid values are ' + lowerNearest + ' and ' + upperNearest;
-                this.setCustomValidity(final_full_message);
+                inputEl.setCustomValidity(finalMessage);
+                this.showNotification(finalMessage, 'error');
             } else {
-                // Clear custom validity message if input is valid
-                this.setCustomValidity('');
+                inputEl.setCustomValidity('');
             }
-        }
+        },
 
-        /**
-         * New added 
-         * First time, It was handle from Min_Max_Controller::single_variation_handle()
-         * currently that method is not need.
-         * 
-         * We will handle it from javascript actually.
-         */
-        $(document.body).on('change','form.variations_form.cart input.variation_id',function(){
-            var min,max,step,basic;
-            var in_stock, stock_msg;
-            var form = $(this).closest('form.variations_form.cart');
+        handleVariationChange: function($input) {
+            const form = $input.closest('form.variations_form.cart');
             form.find('.wcmmq-custom-stock-msg').remove();
-            var qty_box = form.find('input.input-text.qty.text');
-            var variation_id = $(this).val();
-            variation_id = parseInt(variation_id);
-            var variation_pass = variation_id > 0;
-            if( ! variation_pass ){
-                return;
+
+            const qtyBox = form.find('input.input-text.qty.text');
+            let variationId = parseInt($input.val());
+
+            if (!(variationId > 0)) return;
+
+            let productVariations = form.data('product_variations');
+            if (!productVariations) {
+                productVariations = form.find('.wcmmq-available-variaions').data('product_variations');
             }
-            var product_variations = form.data('product_variations');
-            if( ! product_variations ){
-                //kept an another div using hook 'woocommerce_single_variation' at inc/min-max-controller.php file. if found empty at product variatins data
-				product_variations = form.find('.wcmmq-available-variaions').data('product_variations');
-			}
 
-            var gen_product_variations = new Array();
-            $.each(product_variations, function(index, eachVariation){
-                
-                var this_variation_id = eachVariation['variation_id'];
-                if( this_variation_id == variation_id){
-                    in_stock = eachVariation['is_in_stock'];
-                    stock_msg = eachVariation['availability_html'];
-                    
-                    min = eachVariation['min_value'];
-                    max = eachVariation['max_value'];
-                    step = eachVariation['step'];
-                    basic = min;
+            $.each(productVariations, function(index, eachVariation) {
+                if (eachVariation.variation_id == variationId) {
 
-                    if( ! in_stock){
-                        form.find('.single_variation_wrap').prepend('<div class="wcmmq-custom-stock-msg">' + stock_msg + '</div>');
-                        min = 0;
-                        max = 0;
-                        basic = 0;
-                        step = 0;
+                    let { is_in_stock, availability_html, min_value, max_value, step } = eachVariation;
+
+                    if (!is_in_stock) {
+                        form.find('.single_variation_wrap').prepend('<div class="wcmmq-custom-stock-msg">' + availability_html + '</div>');
+                        min_value = max_value = step = 0;
+                    }
+
+                    const updater = setInterval(() => {
+                        qtyBox.attr({ min: min_value, max: max_value, step: step, value: min_value });
+                        qtyBox.val(min_value).trigger('change');
+                        clearInterval(updater);
+                    }, 200);
+
+
+                    if (!is_in_stock) {
+                        WCMMQCustom.showNotification('This variation is out of stock.', 'error', 8000);
                     }
                 }
-                if(min || ! in_stock){
-                    
-                    var lateSome = setInterval(function(){
-                        qty_box.attr({
-                            min:min,
-                            max:max,
-                            step:step,
-                            value:min
-                        });
-    
-                        qty_box.val(basic).trigger('change');
-                        clearInterval(lateSome);
-                    },500);
-                }
-                
             });
-        });
+        },
+
+        distributeMinMax: function(variationId, variationData, qtyBox) {
+            if (!variationId || !variationData[variationId]) return;
+
+            const min = variationData[variationId]['min_quantity'];
+            const max = variationData[variationId]['max_quantity'];
+            const step = variationData[variationId]['step_quantity'];
 
 
-        //End of Custom Worl *******************/
+            setTimeout(() => {
+                qtyBox.attr({ min: min, max: max, step: step, value: min });
+                qtyBox.val(min).trigger('change');
+            }, 500);
 
-        function distributeMinMax(variation_id,variation_data,qty_boxWPT){
-            if(typeof variation_id !== 'undefined' && variation_id !== ''  && variation_id !== ' '){
-                var min,max,step,basic;
+            this.showNotification(`Quantity set between ${min} - ${max}`, 'info');
+        },
 
-                min = variation_data[variation_id]['min_quantity'];
-                if(typeof min === 'undefined'){
-                    return false;
-                }
+        handleSecondInputKeyup: function(Event, $input) {
+            let arrowPress = false;
 
-                max = variation_data[variation_id]['max_quantity'];
-                step = variation_data[variation_id]['step_quantity'];
-
-                basic = min;
-                var lateSome = setInterval(function(){
-
-                    qty_boxWPT.attr({
-                        min:min,
-                        max:max,
-                        step:step,
-                        value:min
-                    });
-                    qty_boxWPT.val(basic).trigger('change');
-                    clearInterval(lateSome);
-                },500);
-
-            }
-        }
-        /**
-             * It's our custom input box with text type
-             * and we will transfer this text to main input(number) with convert comma to dot
-             * 
-             * @since 3.5.2
-             */
-        $(document.body).on('keyup','.wcmmq-second-input-box',function(Event){
-                
-            /**
-             * First, I will findout, If any user click on
-             * up or down arrow.
-             * So that, we can set behavier like number input box.
-             */
-            var arrowPress = false;
-            if(typeof Event === 'object' && typeof Event.originalEvent === 'object'){
-                var originalEvent = Event.originalEvent;
-                if(originalEvent.keyCode === 38 || originalEvent.code === 'ArrowUp'){
-                      arrowPress = 'ArrowUp';
-                }else if(originalEvent.keyCode === 40 || originalEvent.code === 'ArrowDown'){
+            if (Event.originalEvent) {
+                if (Event.originalEvent.keyCode === 38 || Event.originalEvent.code === 'ArrowUp') {
+                    arrowPress = 'ArrowUp';
+                } else if (Event.originalEvent.keyCode === 40 || Event.originalEvent.code === 'ArrowDown') {
                     arrowPress = 'ArrowDown';
                 }
-
             }
-            
-            /**
-             * Checking Down/Up arrow button
-             * If not click on up or down arrow button
-             * and if click on any number, then this bellow code will write in our 
-             * main input(number) box with . or , 
-             * 
-             * @since3.5.2
-             */
-            if( !arrowPress ){
-                var parentQuantity = $(this).parents('.quantity');
-                var secondInputVal = $(this).val();
-                var secondValWithDot = secondInputVal.replace(/,/g, '.');
+
+            if (!arrowPress) {
+                const parentQuantity = $input.parents('.quantity');
+                const secondValWithDot = $input.val().replace(/,/g, '.');
                 parentQuantity.find('.wcmmq-main-input-box').val(secondValWithDot);
-            }else{
-                var secondInboxObject = $(this);
+            } else {
                 Event.preventDefault();
-                plusMinusOnArrowCalculate(arrowPress,secondInboxObject);
+                this.plusMinusOnArrowCalculate(arrowPress, $input);
             }
-        });
-        /**
-         * ONLY for coman decimal separator, Not for else
-         * 
-         * First requirement:
-         * It will work ONLY a User enable comma as Decimal
-         * Otherwise, this is not will impact any more.
-         * 
-         * @since 3.5.2
-         * 
-         */
-        function plusMinusOnArrowCalculate(type,secondInboxObject){
+        },
 
-            var qty = secondInboxObject.closest('.wcmmq-coma-separator-activated').find('input.input-text.qty.text.wcmmq-main-input-box');
-            // Read value and attributes min, max, step.
-            var val = parseFloat(qty.val());
-            var max = parseFloat(qty.attr("max"));
-            var min = parseFloat(qty.attr("min"));
-            var step = parseFloat(qty.attr("step"));
-            console.log(min,val,max,step);
+        plusMinusOnArrowCalculate: function(type, $secondInput) {
+            const qty = $secondInput.closest('.wcmmq-coma-separator-activated').find('.wcmmq-main-input-box');
+            let val = parseFloat(qty.val());
+            const max = parseFloat(qty.attr("max"));
+            const min = parseFloat(qty.attr("min"));
+            const step = parseFloat(qty.attr("step"));
 
-            if( type === 'ArrowUp'){
-                if (val === max){
-                    return false;
-                }
-                    
-                if (isNaN(val)) {
-                    qty.val(step).trgger('change');
-                    return false;
-                }
-
+            if (type === 'ArrowUp') {
+                if (val === max) return false;
+                if (isNaN(val)) { qty.val(step).trigger('change'); return false; }
                 qty.val(val + step);
-            }else if( type === 'ArrowDown'){
-                if (val === min){
-                    return false;
-                }
-                if (isNaN(val)) {
-                    qty.val(min).trgger('change');
-                    return false;
-                }
-                if (val - step < min) {
-                    qty.val(min);
-                } else {
-                    qty.val(val - step);
-                }
+            } else if (type === 'ArrowDown') {
+                if (val === min) return false;
+                if (isNaN(val)) { qty.val(min).trigger('change'); return false; }
+                qty.val(val - step < min ? min : val - step);
             }
 
             qty.val(Math.round(qty.val() * 100000) / 100000);
             qty.trigger("change");
-        }
+        },
 
-        /**
-         * this will only output 2 digit 
-         * Especially solved for OceanWP theme
-         */
-        
-        function CheckDecimal(inputtxt) { 
-            if(!/^[-+]?[0-9]+\.[0-9]+$/.test(inputtxt)) { 
-                return true;
-            } else { 
-                return false;
+        syncSecondInput: function($mainInput) {
+            let val = $mainInput.val();
+            if (this.decimalSeparator !== '.') {
+                val = val.replace(/\./g, this.decimalSeparator);
             }
-        }
-        var qty_box,qty_box_selector, qty_value, formatted_value;
-        qty_box_selector = '.qib-button-wrapper .quantity input.input-text.qty.text, .single-product div.product form.cart .quantity input[type=number], .single-product div.product form.cart .quantity input[type=number]';
-        $(document.body).on('change',qty_box_selector,function(){
-            qty_value = $(this).val();
-            
-            if( decimal_separator != '.' ){
-                console.log(decimal_separator);
-                qty_value = qty_value.replace(/\./g, decimal_separator);
+            $mainInput.parents('.quantity').find('.wcmmq-second-input-box').val(val);
+        },
+
+        // =========================
+        // Notification System
+        // =========================
+
+        showNotification: function (message, type = 'info', timeout = 3000) {
+            const $notification = $(`<div class="wcmmq-notification wcmmq-notification-${type}">${message}</div>`);
+
+            // style for notification
+            $notification.css({
+                background: type === 'success' ? '#46b450' : (type === 'error' ? '#dc3232' : '#0073aa'),
+                color: 'white',
+                padding: '10px 18px',
+                borderRadius: '4px',
+                fontSize: '13px',
+                fontWeight: '500',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+                transform: 'translateX(120%)',
+                transition: 'transform 0.3s ease',
+                cursor: 'pointer'
+            });
+
+            // container for stacking
+            let $container = $('.wcmmq-notification-container');
+            if (!$container.length) {
+                $container = $('<div class="wcmmq-notification-container"></div>').css({
+                    position: 'fixed',
+                    top: '52px',
+                    right: '30px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-end',
+                    gap: '10px',
+                    zIndex: 1000000
+                });
+                $('body').append($container);
             }
 
-            $(this).parents('.quantity').find('.wcmmq-second-input-box').val(qty_value);
-        });
-        
-        // this may not work. we need to check the classs 
-        // qty_box = $('.qib-button-wrapper .quantity input.input-text.qty.text, .single-product div.product form.cart .quantity input[type=number], .single-product div.product form.cart .quantity input[type=number]');
-        
-        // qty_box.on('change', function(){
-        //     qty_value = $(this).val();
+            // add to container
+            $container.append($notification);
 
-        //     if( decimal_separator === ',' ){
-        //         qty_value = qty_value.replace(/\./g, ',');
-        //         // $(this).parents('.quantity').find('.wcmmq-second-input-box').val(qty_value);
-        //     }
+            // animate in
+            setTimeout(() => $notification.css('transform', 'translateX(0)'), 30);
 
-        //     $(this).parents('.quantity').find('.wcmmq-second-input-box').val(qty_value);
-        // });
-        
+            // auto remove after 3s
+            setTimeout(() => {
+                $notification.css('transform', 'translateX(120%)');
+                setTimeout(() => $notification.remove(), 300);
+            }, timeout);
+            $notification.on('click', function() {
+                $(this).css('transform', 'translateX(100%)');
+                setTimeout(() => $(this).remove(), 300);
+            });
+        }
+    };
+
+    $(document).ready(function() {
+        WCMMQCustom.init();
     });
 
+    window.WCMMQCustom = WCMMQCustom;
 
 })(jQuery);

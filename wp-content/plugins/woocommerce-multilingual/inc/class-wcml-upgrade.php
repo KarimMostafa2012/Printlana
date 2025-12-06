@@ -209,16 +209,10 @@ class WCML_Upgrade {
 		// Multi-currency migration.
 		if ( 'yes' === $wcml_settings['enable_multi_currency'] && 2 === (int) $wcml_settings['currency_converting_option'] ) {
 
-			// Get currencies exchange rates.
-			$results = $wpdb->get_results( "SELECT code, value FROM {$wpdb->prefix}icl_currencies" );
-			foreach ( $results as $row ) {
-				$exchange_rates[ $row->code ] = $row->value;
-			}
-
 			// Get languages currencies map.
 			$results = $wpdb->get_results( "SELECT l.language_code, c.code FROM {$wpdb->prefix}icl_languages_currencies l JOIN {$wpdb->prefix}icl_currencies c ON l.currency_id = c.id" );
 			foreach ( $results as $row ) {
-				$language_currencies[ $row->language_code ] = $row->code;
+				 $language_currencies[ $row->language_code ] = $row->code;
 			}
 
 			$results = $wpdb->get_results(
@@ -309,7 +303,6 @@ class WCML_Upgrade {
 	}
 
 	public function upgrade_3_5() {
-		global $wpdb;
 		$wcml_settings = get_option( '_wcml_settings' );
 
 		$wcml_settings['products_sync_order'] = 1;
@@ -596,7 +589,7 @@ class WCML_Upgrade {
 
 			$wcml_settings['currency_switchers']['product'] = [
 				'switcher_style' => $switcher_style,
-				'template'       => isset( $wcml_settings['wcml_curr_template'] ) ? $wcml_settings['wcml_curr_template'] : '',
+				'template'       => $wcml_settings['wcml_curr_template'] ?? '',
 				'widget_title'   => '',
 				'color_scheme'   => [
 					'font_current_normal'       => '',
@@ -646,7 +639,7 @@ class WCML_Upgrade {
 	private function upgrade_4_2_10() {
 		// #wcml-2307
 		global $wpdb;
-
+		/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 		if ( defined( 'WC_BOOKINGS_VERSION' ) && version_compare( WC_BOOKINGS_VERSION, '1.10.9', '>=' ) ) {
 			$results = $wpdb->get_results(
 				"

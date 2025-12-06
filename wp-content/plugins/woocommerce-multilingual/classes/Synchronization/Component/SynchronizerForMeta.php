@@ -142,7 +142,7 @@ abstract class SynchronizerForMeta extends Synchronizer {
 		$metaToInsert = [];
 		$idsToUpdate  = [];
 		foreach ( $translationsIds as $translationId ) {
-			if ( ! isset( $storedMeta[ $translationId ] ) ) {
+			if ( ! array_key_exists( $translationId, $storedMeta ) ) {
 				$metaToInsert[ $translationId ] = $productMeta;
 				continue;
 			}

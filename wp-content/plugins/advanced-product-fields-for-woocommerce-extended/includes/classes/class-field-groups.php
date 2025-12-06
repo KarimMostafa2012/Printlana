@@ -20,32 +20,20 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
 	        foreach( $fg->fields as $field ) {
 
-		        if( isset( $field->parent_qty_based ) ) unset($field->parent_qty_based);
-				unset( $field->parent_clone ); 
-
                 if( $field->type === 'image-swatch' || $field->type === 'multi-image-swatch' ) {
                     if( empty( $field->options['grid_layout'] ) ) {
                         $field->options['grid_layout'] = 'flexible';
                     }
                 }
 
-	        	if( $field->qty_based && !$field->clone['enabled'] ) {
-	        		$field->clone['enabled'] = true;
-	        		$field->clone['type'] = 'qty';
-	        		if( !empty( $field->clone_txt ) ) $field->clone['label'] = $field->clone_txt;
-		        }
-
-                	        	unset( $field->qty_based );
-	        	unset( $field->clone_txt );
-
-	        	$conditional_count = count( $field->conditionals );
+                	        	$conditional_count = count( $field->conditionals );
 
 		        for ( $j = 0; $j < $conditional_count; $j++ ) {
 
 					$rules_count = count( $field->conditionals[$j]->rules );
 
 			        for( $i = 0; $i < $rules_count; $i++ ) {
-				        if( in_array( $field->conditionals[$j]->rules[$i]->condition, ['product_var','!product_var','patts','!patts'] ) ) {
+				        if( in_array( $field->conditionals[$j]->rules[$i]->condition, [ 'product_var', '!product_var', 'patts', '!patts'] ) ) {
 					        unset( $field->conditionals[$j]->rules[$i] );
 					        continue;
 				        }
@@ -67,7 +55,16 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
 	        }
 
-	        $json_array = json_decode(json_encode($fg->fields),true);
+            foreach ( $fg->rules_groups as $rg ) {
+                foreach ( $rg->rules as $r ) {
+                    if( $r->condition === 'product' ) $r->condition = 'products';
+                    if( $r->condition === '!product' ) $r->condition = '!products';
+                    if( $r->condition === '!product_cat' ) $r->condition = '!product_cats';
+                    if( $r->condition === 'product_cat' ) $r->condition = 'product_cats';
+                }
+            }
+
+            	        $json_array = json_decode(json_encode($fg->fields),true);
 
             foreach( $json_array as &$field ) {
 
@@ -257,7 +254,10 @@ namespace SW_WAPF_PRO\Includes\Classes {
                         case 'textarea': $field->options['default'] = Helper::sanitize( $raw_field['default'], 'textarea' ); break;
                         case 'number': 
                             $number_type = isset( $raw_field['number_type'] ) && $raw_field['number_type'] === 'any' ? 'decimal' : 'int';
-                            $field->options['default'] = Helper::sanitize( $raw_field['default'], $number_type, 0 ); break;
+                            if( $raw_field['default'] != '' ) {
+                                $field->options['default'] = Helper::sanitize( $raw_field['default'], $number_type, 0 );
+                            }
+                            break;
                         default: $field->options['default'] = Helper::sanitize( $raw_field['default'], 'text' ); break;
                     }
                 }
@@ -429,36 +429,6 @@ namespace SW_WAPF_PRO\Includes\Classes {
 	            }
             }
 
-            foreach( $fg->rules_groups as $rg ) {
-
-                               $variation_rules = $rg->get_variation_rules();
-
-		        if( !empty( $variation_rules ) ) {
-
-	        		foreach( $variation_rules as $variation_rule ) {
-				        foreach ($fg->fields as $field) {
-				        	$rule = new ConditionalRule();
-				        	$rule->field = $field->id;
-					        $rule->generated = true;
-					        $rule->condition = $variation_rule->condition;
-
-				        	$rule->value = Enumerable::from((array)$variation_rule->value)->join(function($value) use($variation_rule) {
-						        return $variation_rule->subject === 'product_variation' ? intval( $value['id'] ) : $value['id'];
-					        },',');
-				        	if( empty( $field->conditionals ) ) {
-						        $c = new Conditional();
-						        $c->rules[] = $rule;
-						        $field->conditionals[] = $c;
-				            } else {
-								foreach( $field->conditionals as $conditional ) {
-									$conditional->rules[] = $rule;
-								}
-					        }
-				        }
-			        }
-		        }
-	        }
-
 	        for ( $i = 0; $i < count( $fg->fields ); $i++ ) {
 
 	        	                $clone_type = $fg->fields[$i]->get_clone_type();
@@ -492,41 +462,46 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
 	        for ( $i = 0; $i < count( $fg->fields ); $i++ ) {
 
-		        if( $fg->fields[$i]->type === 'section' && $fg->fields[$i]->has_conditionals() ) {
+                $field = $fg->fields[$i]; 
 
-		        	$field = $fg->fields[$i]; 
+                                if( $field->type === 'section' && $field->has_conditionals() ) {
 
-			        for($j = $i+1;$j<count($fg->fields);$j++) {
+                    			        for( $j = $i + 1; $j < count( $fg->fields ); $j++ ) {
 
-			        	if($fg->fields[$j]->type === 'sectionend')
+			        	if( $fg->fields[$j]->type === 'sectionend' ) {
 					        break;
+                        }
 
 						$fieldB = $fg->fields[$j]; 
 
-				        if(empty($fieldB->conditionals)) {
-					        foreach($field->conditionals as $fieldA_Condition) {
-					        	$c = new Conditional();
-					        	$c->rules = Enumerable::from($fieldA_Condition->rules)->select(function($x){
+				        if( empty( $fieldB->conditionals ) ) {
+					        foreach( $field->conditionals as $fieldA_Condition ) {
+
+                                					        	$c = new Conditional();
+
+                                					        	$c->rules = Enumerable::from( $fieldA_Condition->rules )->select( function( $x ) {
 					        		$r = new ConditionalRule();
 					        		$r->generated = true;
 					        		$r->field = $x->field;
 					        		$r->value = $x->value;
 					        		$r->condition = $x->condition;
 					        		return $r;
-						        })->toArray();
-					        	$fieldB->conditionals[] = $c;
-					        }
+						        } )->toArray();
+
+                                					        	$fieldB->conditionals[] = $c;
+
+                                					        }
 				        }
 				        else { 
 				        	$conditionals = [];
-				        	foreach ($fieldB->conditionals as $fieldB_condition) {
+				        	foreach ( $fieldB->conditionals as $fieldB_condition ) {
 								$ctr = 0;
-				        		foreach($field->conditionals as $fieldA_condition) {
+				        		foreach( $field->conditionals as $fieldA_condition ) {
 				        			$ctr++;
 
 				        			$c = new Conditional();
 
-				        			$rules_from_a = Enumerable::from($fieldA_condition->rules)->select(function($x) {
+				        			$rules_from_a = Enumerable::from( $fieldA_condition->rules )->select( function( $x ) {
 				        				$v = new ConditionalRule();
 				        				$v->generated = true;
 				        				$v->field = $x->field;
@@ -544,13 +519,16 @@ namespace SW_WAPF_PRO\Includes\Classes {
 								        return $v;
 							        })->toArray();
 
-							        $c->rules = array_merge($rules_from_b, $rules_from_a);
+							        $c->rules = array_merge( $rules_from_b, $rules_from_a );
 
 				        			$conditionals[] = $c;
-						        }
+
+                                    						        }
 					        }
-				        	$fieldB->conditionals = $conditionals;
-				        }
+
+                            				        	$fieldB->conditionals = $conditionals;
+
+                            				        }
 
 			        }
 
@@ -564,13 +542,13 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
         public static function get_all( $deprecated = null ): array {
 
-            $cache_key = self::$all_groups_cache_key;
+                        $cache_key = self::$all_groups_cache_key;
 
             $cached = Cache::get( $cache_key );
 
             if( $cached === false ) {
 
-            	$args = [
+                            	$args = [
 		            'post_type'                 => 'wapf_product',
 		            'posts_per_page'            => -1,
 		            'post_status'               => 'publish',
@@ -583,23 +561,23 @@ namespace SW_WAPF_PRO\Includes\Classes {
 		            $args['suppress_filters'] = false;
 	            }
 
-	            $posts = get_posts($args);
-
+	            $posts = get_posts( $args );
                 $groups = [];
 
                 foreach ( $posts as $post ) {
-                	$processed =  self::process_data( $post->post_content );
-                	if(!empty($processed->fields))
+                	$processed = self::process_data( $post->post_content );
+                	if( ! empty( $processed->fields ) ) {
                         $groups[] = $processed;
+                    }
                 }
 
-                $cached = $groups;
+                                $cached = $groups;
 
                 Cache::set( $cache_key, $groups );
 
-            }
+                           }
 
-            return $cached;
+                        return $cached;
         }
 
         public static function get_by_id( $id ) {
@@ -663,136 +641,158 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
                 public static function product_has_field_group( $product ): bool {
 
-            if(is_int($product))
-                $product = wc_get_product($product);
+            if( is_int( $product ) ) {
+                $product = wc_get_product( $product );
+            }
 
-            $field_group_on_product = get_post_meta($product->get_id(),'_wapf_fieldgroup', true);
+            $product_id = $product->get_id();
+            $cache_key  = 'product-has-field-group-' . $product_id;
+            $cached     = Cache::get( $cache_key, null );
 
-            if(!empty($field_group_on_product)) {
-	            if(is_object($field_group_on_product)) {
-		            $field_group_on_product = (array) $field_group_on_product;
-	            }
+            if( $cached !== null ) {
+                return $cached;
+            }
 
-	            if(!empty($field_group_on_product['fields'])) {
-	            	return true;
-	            }
+                        $field_group_on_product = get_post_meta( $product_id, '_wapf_fieldgroup', true );
 
+            if( ! empty( $field_group_on_product ) && ! empty( $field_group_on_product['fields'] ) ) {
+                Cache::set( $cache_key, true );
+                return true;
             }
 
             $field_groups = Field_Groups::get_all();
 
-            foreach ($field_groups as $group) {
+            foreach ( $field_groups as $group ) {
 
-            	if(empty($group->fields))
-            		continue;
+            	if( empty( $group->fields ) ) continue;
 
-                if(Conditions::is_field_group_valid_for_product($group, $product))
+                                if( Conditions::is_field_group_valid_for_product( $group, $product ) ) {
+                    Cache::set( $cache_key, true );
                     return true;
-
+                }
             }
 
+            Cache::set( $cache_key, false );
             return false;
 
         }
 
         public static function get_field_groups_of_product( $product ) {
 
-	        if( is_int( $product ) )
-		        $product = wc_get_product($product);
+	        if( is_int( $product ) ) {
+                $product = wc_get_product( $product );
+            }
 
-                        if( empty( $product ) ) return [];
+            if( empty( $product ) ) {
+                return [];
+            }
 
 	        $product_id = $product->get_id();
-            $parent_id = $product->get_parent_id();
-
-            	        $cache_key = self::$field_groups_product_cache_key . $product_id;
-
-	        $cached = Cache::get( $cache_key );
+            $parent_id  = $product->get_parent_id();
+	        $cache_key  = self::$field_groups_product_cache_key . $product_id; 
+	        $cached     = Cache::get( $cache_key );
 
 	        if( $cached !== false ) {
                 return apply_filters( 'wapf/product_field_groups', $cached, $product );
 	        }
 
-	        $field_groups_of_product = [];
-	        $field_group_on_product = self::process_data(get_post_meta( empty( $parent_id ) ? $product_id : $parent_id, '_wapf_fieldgroup', true));
+	        $field_groups       = [];
+	        $local_field_group  = self::process_data( get_post_meta( empty( $parent_id ) ? $product_id : $parent_id, '_wapf_fieldgroup', true ) ); 
+            $all_field_groups   = self::get_all(); 
 
-	        if( $field_group_on_product && ! empty( $field_group_on_product->fields ) || ! empty( $field_group_on_product->variables ) )
-                array_push($field_groups_of_product, $field_group_on_product);
+            	        if( $local_field_group && ! empty( $local_field_group->fields ) || ! empty( $local_field_group->variables ) ) {
+                $field_groups[] = $local_field_group;
+            }
 
-        	$all_field_groups = self::get_all();
+	        foreach( $all_field_groups as $fg ) {
 
-	        foreach ($all_field_groups as $fg) {
-        	    if(Conditions::is_field_group_valid_for_product($fg, $product))
-        	    	$field_groups_of_product[] = $fg;
-	        }
+                                $meta = [];
 
-	        Cache::set( $cache_key, $field_groups_of_product );
+                if( Conditions::is_field_group_valid_for_product( $fg, $product, $meta ) ) {
 
-	        return apply_filters( 'wapf/product_field_groups', $field_groups_of_product, $product );
+                    $copy_fg = clone $fg;
+                    $rules = [];
+
+                                        if( ! empty( $meta['frontend_validation'] ) && ! empty( $meta['valid_rule_group'] ) ) {
+                        $rules = Conditions::get_frontend_conditions( $meta['valid_rule_group'] );
+                    }
+
+                    foreach ( $copy_fg->fields as $field ) {
+                        Conditions::merge_frontend_conditions( $field, $rules );
+                    }
+
+                                        $field_groups[] = $copy_fg;
+
+                }
+
+                	        }
+
+	        Cache::set( $cache_key, $field_groups );
+
+	        return apply_filters( 'wapf/product_field_groups', $field_groups, $product );
 
         }
 
-        public static function save(FieldGroup $fg, $post_type = 'wapf_product', $post_id = null, $post_title = null, $status = null) {
+        public static function save( FieldGroup $fg, string $post_type = 'wapf_product', $post_id = null, $post_title = null, $status = null ): int {
 
-            $post_type = strtolower($post_type);
-            $fg->type = $post_type;
+            $post_type  = strtolower( $post_type );
+            $fg->type   = $post_type;
+            $save       = [ 'post_type' => $post_type ];
 
-            $save = [
-                'post_type' => $post_type
-            ];
-
-            if($post_id != null) {
+            if( $post_id != null ) {
                 $save['ID'] = $post_id;
                 $fg->id = $post_id;
             }
 
-            if($status != null)
-                $save['post_status'] = $status;
+            if( $status != null ) {
+                $save[ 'post_status' ] = $status;
+            }
 
-            if($post_title != null)
-                $save['post_title'] = sanitize_text_field($post_title);
+            if( $post_title != null ) {
+                $save[ 'post_title' ] = sanitize_text_field( $post_title );
+            }
 
-            $save['post_content'] = Helper::wp_slash(serialize($fg->to_array()));
+            $save['post_content'] = Helper::wp_slash( serialize( $fg->to_array() ) );
 
-            if($post_id)
-                $id = wp_update_post($save);
+            if( $post_id ) {
+                $id = wp_update_post( $save );
+            }
             else {
-                $id = wp_insert_post($save);
+
+                $id = wp_insert_post( $save );
 
                 $fg->id = $id;
                 $update_data = [
-                    'ID'            => $id,
-                    'post_content'  => Helper::wp_slash(serialize($fg->to_array()))
+                    'ID' => $id,
+                    'post_content' => Helper::wp_slash( serialize( $fg->to_array() ) )
                 ];
-                $id = wp_update_post($update_data);
-            }
+
+                $id = wp_update_post( $update_data );
+
+                            }
 
             return $id;
-        }
 
-        public static function process_data($data) {
+                    }
 
-            if( is_serialized( $data ) ) {
+        public static function process_data( $data ) {
+
+                        if( is_serialized( $data ) ) {
 
 	        	try {
 
+                                       $unserialized = unserialize( $data );
 
-                    $unserialized = unserialize( $data );
-
-	        							if( is_array( $unserialized ) ) {
+                    					if( is_array( $unserialized ) ) {
 						$fg = new FieldGroup();
 						return $fg->from_array( $unserialized );
-			        } else if( is_object( $unserialized ) ) { 
-                        return $unserialized;
-                    }
+			        }
 
 	        						return false;
 
 		        } catch( \Exception $e ) {
-
 			        return false;
-
-		        				}
+				}
 
 	        }
 

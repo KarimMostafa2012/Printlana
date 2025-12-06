@@ -18,6 +18,7 @@ use function WPML\FP\pipe;
 
 class EnableATE implements IHandler {
 
+
 	public function run( Collection $data ) {
 		Settings::assoc( 'translation-management', 'doc_translation_method', ICL_TM_TMETHOD_ATE );
 
@@ -51,6 +52,19 @@ class EnableATE implements IHandler {
 		}
 
 		return $result->map( Fns::tap( [ make( \WPML_TM_AMS_Synchronize_Actions::class ), 'synchronize_translators' ] ) )
+									->map( $this->confirmSiteKey() )
 		              ->bimap( pipe( Lst::make(), Lst::keyWith( 'error' ), Lst::nth(0) ), Fns::identity() );
+	}
+
+	/**
+	 * Confirm site key with AMS immediately after enabling ATE.
+	 * If confirmation fails, the Sync class will schedule a background task as fallback.
+	 */
+	private function confirmSiteKey() {
+		return Fns::tap(function() {
+			$confirmationService = make( \WPML\TM\ATE\Sitekey\SitekeyConfirmationService::class );
+			$confirmationService->confirm();
+			// Don't care about return value - Sync will handle fallback if confirmation failed
+		});
 	}
 }

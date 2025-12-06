@@ -44,7 +44,6 @@ class WCML_Multi_Currency_Prices {
 		add_filter( 'woocommerce_currency', [ $this, 'currency_filter' ] );
 		add_filter( 'wcml_price_currency', [ $this, 'price_currency_filter' ] );
 		add_filter( 'get_post_metadata', [ $this, 'product_price_filter' ], 10, 4 );
-		add_filter( 'get_post_metadata', [ $this, 'variation_prices_filter' ], 12, 4 );
 		add_filter( 'wcml_formatted_price', [ $this, 'formatted_price' ], 10, 2 );
 
 		if ( $this->multi_currency->load_filters ) {
@@ -286,43 +285,7 @@ class WCML_Multi_Currency_Prices {
 			$unlocked = true;
 		}
 
-		return isset( $price ) ? $price : $null;
-	}
-
-	public function variation_prices_filter( $null, $object_id, $meta_key, $single ) {
-
-		if ( empty( $meta_key ) && get_post_type( $object_id ) === 'product_variation' ) {
-			static $no_filter = false;
-
-			if ( empty( $no_filter ) && $this->is_multi_currency_filters_loaded() ) {
-				$no_filter = true;
-
-				$variation_fields = get_post_meta( $object_id );
-
-				$manual_prices = $this->multi_currency->custom_prices->get_product_custom_prices( $object_id, $this->multi_currency->get_client_currency() );
-
-				foreach ( $variation_fields as $k => $v ) {
-
-					if ( in_array( $k, [ '_price', '_regular_price', '_sale_price' ], true ) ) {
-
-						foreach ( $v as $j => $amount ) {
-
-							if ( isset( $manual_prices[ $k ] ) ) {
-								$variation_fields[ $k ][ $j ] = $manual_prices[ $k ];     // manual price.
-
-							} elseif ( $amount ) {
-								$variation_fields[ $k ][ $j ] = apply_filters( 'wcml_raw_price_amount', $amount );   // automatic conversion.
-							}
-						}
-					}
-				}
-
-				$no_filter = false;
-			}
-		}
-
-		return isset( $variation_fields ) ? $variation_fields : $null;
-
+		return $price ?? $null;
 	}
 
 	/**
@@ -438,7 +401,7 @@ class WCML_Multi_Currency_Prices {
 
 	public function apply_rounding_rules( $price, $currency = false ) {
 
-		if ( is_null( $this->currency_options ) ) {
+		if ( empty( $this->currency_options ) ) {
 			global $woocommerce_wpml;
 			$this->currency_options = $woocommerce_wpml->get_setting( 'currency_options' );
 		}
@@ -494,17 +457,13 @@ class WCML_Multi_Currency_Prices {
 	 * The PHP 5.2 compatible equivalent to "round($amount, 0, PHP_ROUND_HALF_UP)"
 	 *
 	 * @param float|int $amount
-	 *
-	 * @return float|int
 	 */
-	private function round_up( $amount ) {
+	private function round_up( $amount ): float {
 		if ( $amount - floor( $amount ) < 0.5 ) {
-			$amount = floor( $amount );
-		} else {
-			$amount = ceil( $amount );
+			return floor( $amount );
 		}
 
-		return $amount;
+		return ceil( $amount );
 	}
 
 	/**

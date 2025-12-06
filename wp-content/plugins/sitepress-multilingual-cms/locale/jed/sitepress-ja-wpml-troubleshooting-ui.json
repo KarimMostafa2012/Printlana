@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Preparing...": [
             "準備しています..."
@@ -84,7 +86,6 @@
             "停止した翻訳ジョブを確認中..."
          ],
          "Processing... %s stuck translation found so far": [
-            "処理中... これまでに%s件の停止した翻訳が見つかりました",
             "処理中... これまでに%s件の停止した翻訳が見つかりました"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -94,7 +95,6 @@
             "停止した翻訳ジョブは見つかりませんでした。"
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
-            "%s件の停止した翻訳ジョブが見つかりました。WPMLがバックグラウンドで自動的に翻訳します。\n翻訳ダッシュボードで進捗状況を確認できます。",
             "%s件の停止した翻訳ジョブが見つかりました。WPMLがバックグラウンドで自動的に翻訳します。\n翻訳ダッシュボードで進捗状況を確認できます。"
          ]
       }

@@ -1,0 +1,42 @@
+/* Font Awesome Free 6.0.0, License @ https://fontawesome.com/license/free */
+
+@font-face {
+	font-family: 'FontAwesome';
+	font-style: normal;
+	font-weight: normal;
+	font-display: block;
+	src: url('../fonts/awesome/fa-solid-900.woff2') format('woff2'),
+	     url('../fonts/awesome/fa-solid-900.ttf')   format('truetype');
+	}
+
+.fa {
+	font-family: 'FontAwesome';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	font-size: inherit;
+	display: inline-block;
+	text-rendering: auto;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	}
+
+.fa-pad { padding: 0 4px 0 0; }
+
+.fa-eye::before          { content: '\f06e'; }
+.fa-eye-slash::before    { content: '\f070'; }
+.fa-file-alt::before     { content: '\f15c'; }
+.fa-hand-point::before   { content: '\f0a4'; }
+.fa-grin::before         { content: '\f580'; }
+.fa-star::before         { content: '\f005'; }
+.fa-plus::before         { content: '\f067'; }
+.fa-plus-circle::before  { content: '\f055'; }
+.fa-minus-circle::before { content: '\f056'; }
+.fa-gear::before         { content: '\f013'; }
+
+.fa-arrows::before       { content: "\f31e"; }
+.fa-chevron::before      { content: "\f138"; }
+
+.fa-redo::before         { content: "\f01e"; }
+.fa-coffee::before       { content: "\f0f4"; }

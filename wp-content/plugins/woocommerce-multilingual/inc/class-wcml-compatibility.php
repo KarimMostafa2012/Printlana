@@ -29,8 +29,6 @@ class WCML_Compatibility {
 	public function init() {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-		$woocommerce_wpml = getWooCommerceWpml();
-
 		// $isActiveTheme :: string -> bool
 		$isActiveTheme = Relation::equals( wp_get_theme()->get( 'Name' ) );
 
@@ -48,6 +46,7 @@ class WCML_Compatibility {
 			\WCML\Compatibility\Sensei\Factory::class                 => class_exists( 'WooThemes_Sensei' ),
 			\WCML\Compatibility\TmExtraProductOptions\Factory::class  => class_exists( 'TM_Extra_Product_Options' ),
 			\WCML\Compatibility\WcDynamicPricing\Factory::class       => class_exists( 'WC_Dynamic_Pricing' ),
+			/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 			\WCML\Compatibility\WcBookings\Factory::class             => defined( 'WC_BOOKINGS_VERSION' ) && version_compare( WC_BOOKINGS_VERSION, '1.7.8', '>=' ),
 			\WCML\Compatibility\WoobeBulkEditor\Factory::class        => defined( 'WOOBE_PATH' ),
 			\WCML\Compatibility\WcCheckoutFieldEditor\Factory::class  => function_exists( 'woocommerce_init_checkout_field_editor' ),

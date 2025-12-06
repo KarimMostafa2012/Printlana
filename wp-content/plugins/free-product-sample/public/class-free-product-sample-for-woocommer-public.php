@@ -91,7 +91,7 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                         'ajax_url'                => WC()->ajax_url(),
                         'wc_ajax_url'             => WC_AJAX::get_endpoint( "%%endpoint%%" ),
                         'i18n_view_cart'          => esc_attr__( 'View cart', 'free-product-sample' ),
-                        'cart_url'                => apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url() ),
+                        'cart_url'                => apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url(), null ),
                         'is_cart'                 => is_cart(),
                         'cart_redirect_after_add' => get_option( 'woocommerce_cart_redirect_after_add' ),
                     ) );
@@ -121,6 +121,18 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                     'max_sample_qty'   => $this->dsfps_get_max_quantity_for_sample( get_the_ID() ),
                 ) );
             }
+            // Register script for mini cart customizations
+            if ( !wp_script_is( $this->plugin_name . '-mini-cart-customizations', 'registered' ) ) {
+                wp_register_script(
+                    $this->plugin_name . '-mini-cart-customizations',
+                    plugin_dir_url( __FILE__ ) . 'js/dsfps-mini-cart-customizations.js',
+                    array('wp-hooks', 'wc-blocks-checkout'),
+                    $this->version,
+                    true
+                );
+            }
+            // Enqueue our script
+            wp_enqueue_script( $this->plugin_name . '-mini-cart-customizations' );
         }
 
         public function dsfps_get_max_quantity_for_sample( $product_id ) {
@@ -303,6 +315,10 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
             if ( is_product_tag() ) {
                 return;
             }
+            // Check if product is purchasable and in stock
+            if ( !$product->is_purchasable() || !$product->is_in_stock() ) {
+                return;
+            }
             if ( $product->is_type( 'simple' ) ) {
                 if ( isset( $sample_max_qty ) && '0' === $sample_max_qty ) {
                     $fps_title_type = get_option( 'fps_product_title_type' );
@@ -362,10 +378,12 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                     $fps_products_restrict_flag = 1;
                 }
             }
+            // Allow users to filter custom conditions for hiding the sample button
+            $hide_button = apply_filters( 'fps_hide_sample_button_condition_for_archive', false );
             // conditions for sample button
             if ( $fps_settings_enable_disable === 'on' ) {
                 if ( $fps_settings_hide_on_shop === 'on' && $fps_settings_hide_on_category === 'on' ) {
-                    if ( is_product_category() || is_shop() ) {
+                    if ( is_product_category() || is_shop() || $hide_button ) {
                         return;
                     }
                     if ( 1 === $fps_users_restrict_flag ) {
@@ -378,7 +396,7 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                         }
                     }
                 } elseif ( $fps_settings_hide_on_category === 'on' ) {
-                    if ( is_product_category() ) {
+                    if ( is_product_category() || $hide_button ) {
                         return;
                     }
                     if ( 1 === $fps_users_restrict_flag ) {
@@ -391,7 +409,7 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                         }
                     }
                 } elseif ( $fps_settings_hide_on_shop === 'on' ) {
-                    if ( is_shop() ) {
+                    if ( is_shop() || $hide_button ) {
                         return;
                     }
                     if ( 1 === $fps_users_restrict_flag ) {
@@ -404,6 +422,9 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                         }
                     }
                 } else {
+                    if ( $hide_button ) {
+                        return;
+                    }
                     if ( 1 === $fps_users_restrict_flag ) {
                         if ( 1 === $fps_products_restrict_flag ) {
                             echo wp_kses_post( $sample_button );
@@ -441,23 +462,33 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
          * 
          * @since    1.4.0
          */
-        public function dsfps_block_prepend_text_to_cart_item() {
-            // We have use _ in namespce becasuse we are using it in JS and JS does not support hyphen in variable name
+        /**
+         * Register Store API data for sample products
+         *
+         * @since    1.0.0
+         */
+        private function dsfps_register_store_api_data() {
             woocommerce_store_api_register_endpoint_data( array(
                 'endpoint'        => Automattic\WooCommerce\StoreApi\Schemas\V1\CartItemSchema::IDENTIFIER,
                 'namespace'       => 'dsfps_free_product_sample',
                 'data_callback'   => function ( $cart_item ) {
                     $product = $cart_item['data'];
                     $product_name = $product->get_name();
+                    $is_sample = !empty( $cart_item['fps_free_sample'] );
                     return array(
-                        'dsfps_product_type' => ( !empty( $cart_item['fps_free_sample'] ) ? 'sample' : '' ),
-                        'name'               => $this->dsfps_get_sample_name_with_prefix( $product_name ),
+                        'dsfps_product_type' => ( $is_sample ? 'sample' : '' ),
+                        'name'               => ( $is_sample ? $this->dsfps_get_sample_name_with_prefix( $product_name ) : $product_name ),
                     );
                 },
                 'schema_callback' => function () {
                     return array(
                         'dsfps_product_type' => array(
-                            'description' => __( 'Whether a product was added via at checkout bump.', 'free-product-sample' ),
+                            'description' => __( 'Whether this is a sample product', 'free-product-sample' ),
+                            'type'        => 'string',
+                            'readonly'    => true,
+                        ),
+                        'name'               => array(
+                            'description' => __( 'Product name with sample prefix if applicable', 'free-product-sample' ),
                             'type'        => 'string',
                             'readonly'    => true,
                         ),
@@ -465,6 +496,37 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                 },
                 'schema_type'     => ARRAY_A,
             ) );
+        }
+
+        /**
+         * Add script dependencies for WooCommerce blocks
+         *
+         * @param array  $dependencies Array of script dependencies.
+         * @param string $script_handle Script handle being filtered.
+         * @return array Modified dependencies.
+         */
+        public function dsfps_add_block_script_dependencies( $dependencies, $script_handle ) {
+            if ( in_array( $script_handle, array('wc-cart-block-frontend', 'wc-checkout-block-frontend', 'wc-mini-cart-block-frontend'), true ) ) {
+                $dependencies[] = $this->plugin_name . '-mini-cart-customizations';
+            }
+            return $dependencies;
+        }
+
+        /**
+         * Initialize blocks integration for sample products
+         *
+         * @since    1.0.0
+         */
+        public function dsfps_block_prepend_text_to_cart_item() {
+            // Register Store API data
+            $this->dsfps_register_store_api_data();
+            // Add script dependencies
+            add_filter(
+                'woocommerce_blocks_register_script_dependencies',
+                array($this, 'dsfps_add_block_script_dependencies'),
+                10,
+                2
+            );
         }
 
         /**
@@ -963,7 +1025,7 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro_Public' ) ) {
                         } else {
                             wc_clear_notices();
                             // Clear other WC notices
-                            wc_add_notice( sprintf( __( 'The maximum allows order quantity is %s for sample product and you have %s in your cart.', 'free-product-sample' ), $fps_quantity_per_order, $cart_quantity ), 'error' );
+                            wc_add_notice( sprintf( __( 'The maximum allows order quantity is %1$s for sample product and you have %2$s in your cart.', 'free-product-sample' ), $fps_quantity_per_order, $cart_quantity ), 'error' );
                             $sample_passed = false;
                         }
                     }

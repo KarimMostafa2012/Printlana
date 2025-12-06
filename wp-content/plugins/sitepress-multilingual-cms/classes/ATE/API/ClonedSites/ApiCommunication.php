@@ -74,5 +74,7 @@ class ApiCommunication {
 	private function handleClonedDetection( $error_data ) {
 		$error = array_pop( $error_data );
 		$this->lock->lock( $error );
+
+		do_action( 'wpml_site_lock_detected' );
 	}
 }

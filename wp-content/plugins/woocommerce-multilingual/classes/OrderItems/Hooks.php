@@ -2,7 +2,6 @@
 
 namespace WCML\OrderItems;
 
-use function WPML\Container\make;
 use IWPML_Backend_Action;
 use IWPML_DIC_Action;
 use IWPML_Frontend_Action;
@@ -153,7 +152,7 @@ class Hooks implements IWPML_Backend_Action, IWPML_Frontend_Action, IWPML_DIC_Ac
 			$targetLanguage = $this->sitepress->get_current_language();
 		}
 
-		foreach ( $items as $index => $item ) {
+		foreach ( $items as $item ) {
 			if ( $item instanceof \WC_Order_Item_Product ) {
 				$this->translateLineItem( $item, $targetLanguage );
 			} elseif ( $item instanceof \WC_Order_Item_Shipping ) {

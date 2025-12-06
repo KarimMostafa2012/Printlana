@@ -2,17 +2,19 @@
 # This file is distributed under the same license as the WPML String Translation plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML String Translation 3.3.0-dev\n"
+"Project-Id-Version: WPML String Translation 3.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpml-string-translation\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T19:16:39+00:00\n"
+"POT-Creation-Date: 2025-09-24T13:13:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wpml-string-translation\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
 
 #. Plugin Name of the plugin
 #: plugin.php
@@ -26,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: plugin.php
-msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">WPML String Translation 3.3.0-dev release notes</a>"
-msgstr "يضيف إمكانيات ترجمة السمة والإضافات إلى WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">الوثائق</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">ملاحظات إصدار WPML String Translation 3.3.0-dev</a>"
+msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">WPML String Translation 3.4.1 release notes</a>"
+msgstr "يضيف إمكانيات ترجمة السمات والإضافات إلى WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">الوثائق</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">ملاحظات إصدار WPML String Translation 3.4.1</a>"
 
 #. Author of the plugin
 #: plugin.php
@@ -724,8 +726,12 @@ msgstr "مسح المكونات المحددة للنصوص"
 #: inc/wpml-string-translation.class.php:612
 msgid "WPML could not detect the translation files (.mo) for %s. To fix this, visit your site's frontend in a secondary language."
 msgid_plural "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
-msgstr[0] "لم يتمكن WPML من اكتشاف ملفات الترجمة (.mo) لـ %s. لإصلاح هذا، قم بزيارة الواجهة الأمامية لموقعك بلغة ثانوية."
-msgstr[1] "لم يتمكن WPML من اكتشاف ملفات الترجمة (.mo) لـ %s و %s. لإصلاح هذا، قم بزيارة الواجهة الأمامية لموقعك بلغة ثانوية."
+msgstr[0] "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
+msgstr[1] "لم يتمكن WPML من اكتشاف ملفات الترجمة (.mo) لـ %s. لإصلاح هذا، قم بزيارة الواجهة الأمامية لموقعك بلغة ثانوية."
+msgstr[2] "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
+msgstr[3] "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
+msgstr[4] "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
+msgstr[5] "لم يتمكن WPML من اكتشاف ملفات الترجمة (.mo) لـ %s و %s. لإصلاح هذا، قم بزيارة الواجهة الأمامية لموقعك بلغة ثانوية."
 
 #: inc/wpml-string-translation.class.php:646
 msgid "This will load the translation files and WPML will be able to scan them."
@@ -750,14 +756,22 @@ msgstr "حدد المكونات المتأثرة"
 #: menu/auto-download-mo.php:41
 msgid "%d new translation was added."
 msgid_plural "%d new translations were added."
-msgstr[0] "%dتمت إضافة ترجمة جديدة."
-msgstr[1] "%dتمت إضافة ترجمات جديدة."
+msgstr[0] "%d new translations were added."
+msgstr[1] "%dتمت إضافة ترجمة جديدة."
+msgstr[2] "%d new translations were added."
+msgstr[3] "%d new translations were added."
+msgstr[4] "%d new translations were added."
+msgstr[5] "%dتمت إضافة ترجمات جديدة."
 
 #: menu/auto-download-mo.php:58
 msgid "%d translation was updated."
 msgid_plural "%d translations were updated."
-msgstr[0] "%dتم تحديث الترجمة."
-msgstr[1] "%dتم تحديث الترجمات."
+msgstr[0] "%d translations were updated."
+msgstr[1] "%dتم تحديث الترجمة."
+msgstr[2] "%d translations were updated."
+msgstr[3] "%d translations were updated."
+msgstr[4] "%d translations were updated."
+msgstr[5] "%dتم تحديث الترجمات."
 
 #: menu/auto-download-mo.php:65
 msgid "No action performed. Please select the strings that you need to update or add."

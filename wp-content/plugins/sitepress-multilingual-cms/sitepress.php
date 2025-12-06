@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML Multilingual CMS
  * Plugin URI: https://wpml.org/
- * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-8-1/">WPML 4.8.1 release notes</a>
+ * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-8-5/">WPML 4.8.5 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 4.8.1
+ * Version: 4.8.5
  * Plugin Slug: sitepress-multilingual-cms
  *
  * @package WPML\Core
@@ -32,11 +32,11 @@ if ( ! \WPML\Requirements\WordPress::checkMinimumRequiredVersion() ) {
 	return;
 }
 
-define( 'ICL_SITEPRESS_VERSION', '4.8.1' );
+define( 'ICL_SITEPRESS_VERSION', '4.8.5' );
 
 // Script version, first 3 digits are the same as the plugin version.
 // Increase the last 3 digits by 1 for intermediate packages (i.e. beta, rc, internal).
-define( 'ICL_SITEPRESS_SCRIPT_VERSION', '481990' );
+define( 'ICL_SITEPRESS_SCRIPT_VERSION', '485900' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -104,6 +104,8 @@ require_once __DIR__ . '/inc/functions-security.php';
 require_once __DIR__ . '/inc/wpml-post-comments.class.php';
 require_once __DIR__ . '/inc/icl-admin-notifier.php';
 require_once __DIR__ . '/classes/container/functions.php';
+
+
 
 
 if ( ! function_exists( 'filter_input' ) ) {

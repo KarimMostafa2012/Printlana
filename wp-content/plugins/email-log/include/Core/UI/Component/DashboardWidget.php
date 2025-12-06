@@ -26,7 +26,7 @@ class DashboardWidget implements Loadie {
 	public function register() {
 		wp_add_dashboard_widget(
 			'email_log_dashboard_widget',
-			__( 'Email Logs Summary', 'email-log' ),
+			__( 'Email Log Summary', 'email-log' ),
 			array( $this, 'render' )
 		);
 	}
@@ -54,10 +54,10 @@ class DashboardWidget implements Loadie {
 		?>
 
 		<ul class="subsubsub" style="float: none">
-			<li><?php 
+			<li><?php
             /* translators: %s email logs page link */
-            \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( '<a href="%s">Email Logs</a>', 'email-log' ), 'admin.php?page=email-log' )); ?> <span style="color: #ddd"> | </span></li>
-			<li><?php 
+            \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( '<a href="%s">View Logs</a>', 'email-log' ), 'admin.php?page=email-log' )); ?> <span style="color: #ddd"> | </span></li>
+			<li><?php
             /* translators: %s settings page link */
             \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( '<a href="%s">Settings</a>', 'email-log' ), 'admin.php?page=email-log-settings' )); ?> <span style="color: #ddd"> | </span></li>
 		</ul>

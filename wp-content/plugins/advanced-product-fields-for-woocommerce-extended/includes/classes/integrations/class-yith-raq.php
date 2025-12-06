@@ -92,8 +92,16 @@ namespace SW_WAPF_PRO\Includes\Classes\Integrations {
 
 		public function after_quantity_input_field() {
 
-            if( apply_filters( 'wapf/yith_raq_disable_quantity_edits', true ) ) {
-                echo '<script>var wapf_qtys = document.querySelectorAll(\'.qty[name*="raq["]\');for(i=0;i<wapf_qtys.length;++i){wapf_qtys[i].readOnly=true;}</script>';
+            static $raq_page_id = null;
+
+                        if( $raq_page_id === null && function_exists( 'YITH_Request_Quote' ) ) {
+                $raq_page_id = (int) YITH_Request_Quote()->get_raq_page_id();
+            }
+
+                        if( ! empty( $raq_page_id ) && is_page( $raq_page_id ) ) {
+                if( apply_filters( 'wapf/yith_raq_disable_quantity_edits', true ) ) {
+                    echo '<script>var wapf_qtys = document.querySelectorAll(\'.qty[name*="raq["]\');for(i=0;i<wapf_qtys.length;++i){wapf_qtys[i].readOnly=true;}</script>';
+                }
             }
 
 		}

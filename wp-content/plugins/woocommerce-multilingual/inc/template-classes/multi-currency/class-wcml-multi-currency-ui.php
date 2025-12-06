@@ -142,10 +142,8 @@ class WCML_Multi_Currency_UI extends WCML_Templates_Factory {
 				'delete_nonce'              => wp_create_nonce( 'delete_currency_switcher' ),
 				'order_tip'                 => __( 'Drag and drop the currencies to change their order', 'woocommerce-multilingual' ),
 				'visibility_label'          => __( 'Show a currency switcher on the product page template', 'woocommerce-multilingual' ),
-				'visibility_on'             => isset( $this->woocommerce_wpml->settings['currency_switcher_product_visibility'] ) ?
-										$this->woocommerce_wpml->settings['currency_switcher_product_visibility'] : 1,
-				'additional_css'            => isset( $this->woocommerce_wpml->settings['currency_switcher_additional_css'] ) ?
-										$this->woocommerce_wpml->settings['currency_switcher_additional_css'] : '',
+				'visibility_on'             => $this->woocommerce_wpml->settings['currency_switcher_product_visibility'] ?? 1,
+				'additional_css'            => $this->woocommerce_wpml->settings['currency_switcher_additional_css'] ?? '',
 			],
 			'exchange_rates'         => $exchange_rates_ui->get_model(),
 		];
@@ -175,7 +173,7 @@ class WCML_Multi_Currency_UI extends WCML_Templates_Factory {
 	public function load_curency_switcher_option_boxes() {
 
 		$wcml_settings      = $this->woocommerce_wpml->get_settings();
-		$currency_switchers = isset( $wcml_settings['currency_switchers'] ) ? $wcml_settings['currency_switchers'] : [];
+		$currency_switchers = $wcml_settings['currency_switchers'] ?? [];
 
 		// Add empty dialog for new sidebar currency switcher.
 		$currency_switchers['new_widget'] = [
@@ -265,7 +263,7 @@ class WCML_Multi_Currency_UI extends WCML_Templates_Factory {
 
 	public function widget_currency_switchers() {
 		$wcml_settings      = $this->woocommerce_wpml->get_settings();
-		$currency_switchers = isset( $wcml_settings['currency_switchers'] ) ? $wcml_settings['currency_switchers'] : [];
+		$currency_switchers = $wcml_settings['currency_switchers'] ?? [];
 		$sidebars           = $this->woocommerce_wpml->multi_currency->currency_switcher->get_registered_sidebars();
 		foreach ( $sidebars as $key => $sidebar ) {
 			if ( ! isset( $currency_switchers[ $key ] ) ) {

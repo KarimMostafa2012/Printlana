@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n > 1);",
+            "lang": "pt_BR"
          },
          "From:": [
             "De:"
@@ -112,6 +114,9 @@
          ],
          "Delete language pair(s)": [
             "Excluir par(es) de idiomas"
+         ],
+         "Loading AI Translation...": [
+            "Carregando tradução de IA..."
          ],
          "%s file upload failed.": [
             "Falha no upload do arquivo %s."

@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -157,6 +159,10 @@ msgstr "ערוך צמד(י) שפות"
 #: src/js/components/translators/TranslatorsTable.js:62
 msgid "Delete language pair(s)"
 msgstr "מחק צמד(י) שפות"
+
+#: src/js/setup/components/Steps/AITranslation.js:52
+msgid "Loading AI Translation..."
+msgstr "טוען תרגום בינה מלאכותית..."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."

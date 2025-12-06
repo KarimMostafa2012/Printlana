@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "sv_SE"
          },
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "Använd avancerad översättningsredigerare för automatisk översättning."

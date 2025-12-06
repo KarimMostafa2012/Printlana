@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "sv"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
             "Rensa strängtabellen genom att ta bort oöversatta."

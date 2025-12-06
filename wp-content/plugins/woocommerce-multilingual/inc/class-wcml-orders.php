@@ -216,7 +216,7 @@ class WCML_Orders {
 					'orderby'      => 'code',
 				]
 			);
-			$selected_lang = isset( $_COOKIE [ self::DASHBOARD_COOKIE_NAME ] ) ? $_COOKIE [ self::DASHBOARD_COOKIE_NAME ] : $this->sitepress->get_default_language();
+			$selected_lang = $_COOKIE [ self::DASHBOARD_COOKIE_NAME ] ?? $this->sitepress->get_default_language();
 			?>
 			<li class="wide">
 				<label><?php _e( 'Order language:' ); ?></label>
