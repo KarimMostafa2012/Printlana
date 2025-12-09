@@ -1572,3 +1572,46 @@ function printlana_force_utf8_encoding($data)
     }
     return $data;
 }
+
+/**
+ * Debug withdraw page loading issues
+ * Add console logging to help identify what's causing the infinite loading
+ */
+add_action('dokan_withdraw_content_after', 'printlana_debug_withdraw_page');
+function printlana_debug_withdraw_page()
+{
+    ?>
+    <script>
+    console.log('[Withdraw Debug] Page loaded at:', new Date().toISOString());
+    console.log('[Withdraw Debug] DOM content loaded');
+
+    // Log all AJAX requests
+    (function() {
+        var originalOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url) {
+            this.addEventListener('load', function() {
+                console.log('[Withdraw Debug] AJAX Complete:', method, url, this.status);
+            });
+            this.addEventListener('error', function() {
+                console.error('[Withdraw Debug] AJAX Error:', method, url);
+            });
+            console.log('[Withdraw Debug] AJAX Started:', method, url);
+            return originalOpen.apply(this, arguments);
+        };
+
+        // Also intercept jQuery AJAX if available
+        if (typeof jQuery !== 'undefined') {
+            jQuery(document).ajaxStart(function() {
+                console.log('[Withdraw Debug] jQuery AJAX started');
+            });
+            jQuery(document).ajaxComplete(function(event, xhr, settings) {
+                console.log('[Withdraw Debug] jQuery AJAX complete:', settings.url, xhr.status);
+            });
+            jQuery(document).ajaxError(function(event, xhr, settings, error) {
+                console.error('[Withdraw Debug] jQuery AJAX error:', settings.url, error);
+            });
+        }
+    })();
+    </script>
+    <?php
+}
