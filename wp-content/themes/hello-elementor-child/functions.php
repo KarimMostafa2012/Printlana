@@ -1577,40 +1577,80 @@ function printlana_force_utf8_encoding($data)
  * Debug withdraw page loading issues
  * Add console logging to help identify what's causing the infinite loading
  */
-add_action('dokan_withdraw_content_after', 'printlana_debug_withdraw_page');
-function printlana_debug_withdraw_page()
+add_action('wp_head', 'printlana_debug_withdraw_page_early', 1);
+function printlana_debug_withdraw_page_early()
 {
+    // Only run on withdraw page
+    if (!function_exists('dokan_is_withdraw_page') || !dokan_is_withdraw_page()) {
+        return;
+    }
     ?>
     <script>
-    console.log('[Withdraw Debug] Page loaded at:', new Date().toISOString());
-    console.log('[Withdraw Debug] DOM content loaded');
+    console.log('[Withdraw Debug] Script injected in HEAD - Page is loading...');
+    console.log('[Withdraw Debug] Time:', new Date().toISOString());
+
+    // Track page load timing
+    window.addEventListener('DOMContentLoaded', function() {
+        console.log('[Withdraw Debug] DOMContentLoaded event fired');
+    });
+
+    window.addEventListener('load', function() {
+        console.log('[Withdraw Debug] Window load event fired');
+    });
 
     // Log all AJAX requests
     (function() {
+        var requestCount = 0;
         var originalOpen = XMLHttpRequest.prototype.open;
+        var originalSend = XMLHttpRequest.prototype.send;
+
         XMLHttpRequest.prototype.open = function(method, url) {
-            this.addEventListener('load', function() {
-                console.log('[Withdraw Debug] AJAX Complete:', method, url, this.status);
-            });
-            this.addEventListener('error', function() {
-                console.error('[Withdraw Debug] AJAX Error:', method, url);
-            });
-            console.log('[Withdraw Debug] AJAX Started:', method, url);
+            this._requestId = ++requestCount;
+            this._method = method;
+            this._url = url;
+            this._startTime = Date.now();
+            console.log('[Withdraw Debug] AJAX #' + this._requestId + ' OPENED:', method, url);
             return originalOpen.apply(this, arguments);
+        };
+
+        XMLHttpRequest.prototype.send = function() {
+            var xhr = this;
+            console.log('[Withdraw Debug] AJAX #' + xhr._requestId + ' SENT:', xhr._method, xhr._url);
+
+            this.addEventListener('load', function() {
+                var duration = Date.now() - xhr._startTime;
+                console.log('[Withdraw Debug] AJAX #' + xhr._requestId + ' COMPLETE (' + duration + 'ms):', xhr._method, xhr._url, 'Status:', xhr.status);
+            });
+
+            this.addEventListener('error', function() {
+                var duration = Date.now() - xhr._startTime;
+                console.error('[Withdraw Debug] AJAX #' + xhr._requestId + ' ERROR (' + duration + 'ms):', xhr._method, xhr._url);
+            });
+
+            this.addEventListener('timeout', function() {
+                console.error('[Withdraw Debug] AJAX #' + xhr._requestId + ' TIMEOUT:', xhr._method, xhr._url);
+            });
+
+            return originalSend.apply(this, arguments);
         };
 
         // Also intercept jQuery AJAX if available
         if (typeof jQuery !== 'undefined') {
             jQuery(document).ajaxStart(function() {
-                console.log('[Withdraw Debug] jQuery AJAX started');
+                console.log('[Withdraw Debug] jQuery AJAX batch started');
             });
             jQuery(document).ajaxComplete(function(event, xhr, settings) {
-                console.log('[Withdraw Debug] jQuery AJAX complete:', settings.url, xhr.status);
+                console.log('[Withdraw Debug] jQuery AJAX complete:', settings.url, 'Status:', xhr.status);
             });
             jQuery(document).ajaxError(function(event, xhr, settings, error) {
-                console.error('[Withdraw Debug] jQuery AJAX error:', settings.url, error);
+                console.error('[Withdraw Debug] jQuery AJAX ERROR:', settings.url, 'Error:', error, 'Status:', xhr.status);
             });
         }
+
+        // Check for stuck requests every 10 seconds
+        setInterval(function() {
+            console.log('[Withdraw Debug] Health check - Page still responsive. Total AJAX requests:', requestCount);
+        }, 10000);
     })();
     </script>
     <?php
