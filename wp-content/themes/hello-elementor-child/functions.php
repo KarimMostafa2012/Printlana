@@ -347,6 +347,7 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
     wp_enqueue_script('jquery');
 
     $nonce = wp_create_nonce('pl_vendor_assign_nonce');
+    $vendor_request_nonce = wp_create_nonce('pl_vendor_request');
     $ajaxurl = admin_url('admin-ajax.php');
     $user_id = get_current_user_id();
     $is_admin = current_user_can('manage_woocommerce') ? '1' : '0';
@@ -358,12 +359,21 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
         }
 
         var plNonce   = '{$nonce}';
+        var plVendorRequestNonce = '{$vendor_request_nonce}';
         var plAjaxUrl = '{$ajaxurl}';
         var plUserId  = {$user_id};
         var plIsAdmin = {$is_admin} === 1; // bool
 
+        // Make vendor request nonce available globally for the request plugin
+        if (typeof plVendorRequests === 'undefined') {
+            window.plVendorRequests = {
+                ajaxurl: plAjaxUrl,
+                nonce: plVendorRequestNonce
+            };
+        }
+
         console.log('[PL-SPMV] Script loaded immediately');
-        console.log('[PL-SPMV] init → nonce:', plNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
+        console.log('[PL-SPMV] init → nonce:', plNonce, ' vendorRequestNonce:', plVendorRequestNonce, ' ajaxurl:', plAjaxUrl, ' isAdmin:', plIsAdmin, ' userId:', plUserId);
 
         // Wait for jQuery to be available
         function initWhenReady() {
@@ -463,7 +473,7 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
 
         waitForButtonsAndCheck();
 
-        // Attach our handler: call pl_assign_vendors
+        // Attach our handler: vendors use request system, admins use direct assignment
         $(document).on('click', '.dokan-spmv-clone-product', function(e){
             e.preventDefault();
             e.stopImmediatePropagation(); // Prevent Dokan's handler from running
@@ -471,7 +481,7 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
             var \$btn     = $(this);
             var productId = \$btn.data('product');
 
-            console.log('[PL-SPMV] Button clicked → productId:', productId);
+            console.log('[PL-SPMV] Button clicked → productId:', productId, ' isAdmin:', plIsAdmin);
 
             if (!productId) {
                 console.error('[PL-SPMV] No data-product attribute found.');
@@ -479,30 +489,42 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                 return;
             }
 
-            // Check if already marked as added
-            if (\$btn.hasClass('pl-assigned')) {
-                console.log('[PL-SPMV] Product already assigned, ignoring click.');
+            // Check if already marked as added or requested
+            if (\$btn.hasClass('pl-assigned') || \$btn.hasClass('pl-requested')) {
+                console.log('[PL-SPMV] Product already assigned/requested, ignoring click.');
                 return;
             }
 
             var originalText = \$btn.text();
-            \$btn.prop('disabled', true).text('Assigning...');
+            \$btn.prop('disabled', true).text('Processing...');
 
-            // Base payload: always send product_ids
-            var payload = {
-                action:      'pl_assign_vendors',
-                nonce:       plNonce,
-                product_ids: [ productId ]
-            };
+            // Different endpoints for vendors vs admins
+            var payload, actionName;
 
-            // IMPORTANT:
-            // - For vendors: plugin ignores vendor_ids and uses current user.
-            // - For admins: plugin REQUIRES vendor_ids, so we send current admin ID.
             if (plIsAdmin) {
-                payload.vendor_ids = [ plUserId ];
+                // Admins use the assignment endpoint
+                actionName = 'pl_assign_vendors';
+                payload = {
+                    action:      actionName,
+                    nonce:       plNonce,
+                    product_ids: [ productId ],
+                    vendor_ids:  [ plUserId ]
+                };
+            } else {
+                // Vendors use the request endpoint (from printlana-vendor-product-requests plugin)
+                actionName = 'pl_request_to_sell_product';
+
+                // Get the vendor request nonce (will be created by the request plugin)
+                var vendorNonce = typeof plVendorRequests !== 'undefined' ? plVendorRequests.nonce : plNonce;
+
+                payload = {
+                    action:      actionName,
+                    nonce:       vendorNonce,
+                    product_id:  productId
+                };
             }
 
-            console.log('[PL-SPMV] Sending AJAX payload:', payload);
+            console.log('[PL-SPMV] Sending AJAX to:', actionName, ' with payload:', payload);
 
             $.ajax({
                 url:      plAjaxUrl,
@@ -515,21 +537,22 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
 
                 if (resp && resp.success) {
                     var data = resp.data || {};
-                    // If the backend created/has a pending request, reflect that state
-                    if (data.status === 'pending_request') {
-                        var reqMsg = data.message || 'Request sent for approval.';
-                        alert(reqMsg);
-                        \$btn.text('Request Pending').addClass('pl-requested').prop('disabled', true);
-                        return;
-                    }
 
-                    var msg = data.message ? data.message : 'Assigned successfully.';
-                    alert(msg);
-                    \$btn.text('Added').addClass('pl-assigned');
+                    if (plIsAdmin) {
+                        // Admin successfully assigned product
+                        var msg = data.message ? data.message : 'Product assigned successfully.';
+                        alert(msg);
+                        \$btn.text('Added').addClass('pl-assigned');
+                    } else {
+                        // Vendor successfully sent request
+                        var msg = data.message ? data.message : 'Request sent successfully!';
+                        alert(msg);
+                        \$btn.text('Request Pending').addClass('pl-requested').prop('disabled', true);
+                    }
                 } else {
                     var msg = (resp && resp.data && resp.data.message)
                         ? resp.data.message
-                        : 'Unknown logical failure.';
+                        : 'Unknown error occurred.';
                     console.error('[PL-SPMV] Logical failure:', resp);
                     alert('Error: ' + msg);
                     \$btn.prop('disabled', false).text(originalText);
@@ -543,6 +566,18 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                     textStatus:   textStatus,
                     errorThrown:  errorThrown
                 });
+
+                // Try to parse error message
+                try {
+                    var responseData = JSON.parse(jqXHR.responseText);
+                    if (responseData && responseData.data && responseData.data.message) {
+                        alert('Error: ' + responseData.data.message);
+                        \$btn.prop('disabled', false).text(originalText);
+                        return;
+                    }
+                } catch(e) {
+                    console.error('[PL-SPMV] Failed to parse error response:', e);
+                }
 
                 alert(
                     'AJAX ERROR ' + jqXHR.status + '\\n' +

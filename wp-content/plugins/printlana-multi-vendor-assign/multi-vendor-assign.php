@@ -590,113 +590,19 @@ public function ajax_assign_vendors()
     $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
 
     /**
-     * Permissions:
-     * - Admins (manage_woocommerce) can assign ANY vendors (bulk tool in wp-admin).
-     * - Vendors can ONLY self-assign (their own user ID).
+     * IMPORTANT: This endpoint is now ADMIN-ONLY.
+     * Vendors should use the printlana-vendor-product-requests plugin instead.
      */
     if ( ! $is_admin ) {
-        // Require Dokan vendor/seller for front-end self-assign
-        if ( function_exists('dokan_is_user_seller') ) {
-            if ( ! dokan_is_user_seller( $current_user_id ) ) {
-                wp_send_json_error(['message' => 'Permission denied.'], 403);
-            }
-        } else {
-            // If Dokan helper is missing, block non-admins
-            wp_send_json_error(['message' => 'Permission denied.'], 403);
-        }
-
-        // Vendor path: ensure each product has an approved request before auto-assigning
-        if ( empty( $product_ids ) ) {
-            wp_send_json_error(['message' => 'Missing product IDs.'], 400);
-        }
-
-        global $wpdb;
-        $requests_table = $wpdb->prefix . 'pl_vendor_product_requests';
-
-        // Count approved requests for this vendor and the requested products
-        $placeholders = implode(',', array_fill(0, count($product_ids), '%d'));
-        $params       = array_merge( [ $current_user_id ], $product_ids );
-        $approved     = (int) $wpdb->get_var(
-            $wpdb->prepare(
-                "SELECT COUNT(*) FROM {$requests_table}
-                 WHERE vendor_id = %d
-                   AND status    = 'approved'
-                   AND product_id IN ({$placeholders})",
-                $params
-            )
-        );
-
-        if ( $approved < count( $product_ids ) ) {
-            // Missing approvals: create or refresh pending requests, then stop (no assignment yet)
-            $existing = $wpdb->get_results(
-                $wpdb->prepare(
-                    "SELECT product_id, status
-                     FROM {$requests_table}
-                     WHERE vendor_id  = %d
-                       AND product_id IN ({$placeholders})",
-                    $params
-                ),
-                OBJECT_K
-            );
-
-            $created = 0;
-            foreach ( $product_ids as $pid ) {
-                if ( isset( $existing[ $pid ] ) ) {
-                    // If rejected, allow resubmission by setting back to pending
-                    if ( $existing[ $pid ]->status === 'rejected' ) {
-                        $wpdb->update(
-                            $requests_table,
-                            [
-                                'status'       => 'pending',
-                                'requested_at' => current_time( 'mysql' ),
-                                'processed_at' => null,
-                                'processed_by' => null,
-                            ],
-                            [
-                                'product_id' => $pid,
-                                'vendor_id'  => $current_user_id,
-                            ],
-                            ['%s', '%s', '%s', '%d'],
-                            ['%d', '%d']
-                        );
-                    }
-                    // If already pending/approved, nothing to do.
-                    continue;
-                }
-
-                $inserted = $wpdb->insert(
-                    $requests_table,
-                    [
-                        'product_id'   => $pid,
-                        'vendor_id'    => $current_user_id,
-                        'status'       => 'pending',
-                        'requested_at' => current_time( 'mysql' ),
-                    ],
-                    ['%d', '%d', '%s', '%s']
-                );
-
-                if ( $inserted ) {
-                    $created++;
-                }
-            }
-
-            wp_send_json_success([
-                'status'   => 'pending_request',
-                'message'  => $created
-                    ? 'Request sent for approval. You will be able to add this product once approved.'
-                    : 'Request already pending approval.',
-                'products' => $product_ids,
-            ]);
-        }
+        error_log('[Product Assignment] Non-admin user ID ' . $current_user_id . ' attempted to use pl_assign_vendors. Vendors should use the request system instead.');
+        wp_send_json_error([
+            'message' => 'Please use the "Request to Sell" button to request access to this product. An admin will review your request.',
+            'requires_request' => true
+        ], 403);
     }
 
-    // For admins: keep the original behavior (vendor_ids[] from request)
-    if ( $is_admin ) {
-        $vendor_ids_to_add = isset($_POST['vendor_ids']) ? array_map('absint', (array) $_POST['vendor_ids']) : [];
-    } else {
-        // For vendors: ignore any posted vendor_ids, always use current user
-        $vendor_ids_to_add = [$current_user_id];
-    }
+    // Admin-only path: Admins can assign ANY vendors (bulk tool in wp-admin)
+    $vendor_ids_to_add = isset($_POST['vendor_ids']) ? array_map('absint', (array) $_POST['vendor_ids']) : [];
 
     if (empty($product_ids) || empty($vendor_ids_to_add)) {
         wp_send_json_error(['message' => 'Missing product or vendor IDs.'], 400);
