@@ -627,9 +627,66 @@ public function ajax_assign_vendors()
         );
 
         if ( $approved < count( $product_ids ) ) {
-            wp_send_json_error([
-                'message' => 'You need an approved request before adding this product.',
-            ], 403);
+            // Missing approvals: create or refresh pending requests, then stop (no assignment yet)
+            $existing = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT product_id, status
+                     FROM {$requests_table}
+                     WHERE vendor_id  = %d
+                       AND product_id IN ({$placeholders})",
+                    $params
+                ),
+                OBJECT_K
+            );
+
+            $created = 0;
+            foreach ( $product_ids as $pid ) {
+                if ( isset( $existing[ $pid ] ) ) {
+                    // If rejected, allow resubmission by setting back to pending
+                    if ( $existing[ $pid ]->status === 'rejected' ) {
+                        $wpdb->update(
+                            $requests_table,
+                            [
+                                'status'       => 'pending',
+                                'requested_at' => current_time( 'mysql' ),
+                                'processed_at' => null,
+                                'processed_by' => null,
+                            ],
+                            [
+                                'product_id' => $pid,
+                                'vendor_id'  => $current_user_id,
+                            ],
+                            ['%s', '%s', '%s', '%d'],
+                            ['%d', '%d']
+                        );
+                    }
+                    // If already pending/approved, nothing to do.
+                    continue;
+                }
+
+                $inserted = $wpdb->insert(
+                    $requests_table,
+                    [
+                        'product_id'   => $pid,
+                        'vendor_id'    => $current_user_id,
+                        'status'       => 'pending',
+                        'requested_at' => current_time( 'mysql' ),
+                    ],
+                    ['%d', '%d', '%s', '%s']
+                );
+
+                if ( $inserted ) {
+                    $created++;
+                }
+            }
+
+            wp_send_json_success([
+                'status'   => 'pending_request',
+                'message'  => $created
+                    ? 'Request sent for approval. You will be able to add this product once approved.'
+                    : 'Request already pending approval.',
+                'products' => $product_ids,
+            ]);
         }
     }
 

@@ -514,7 +514,16 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
                 console.log('[PL-SPMV] AJAX success response:', resp);
 
                 if (resp && resp.success) {
-                    var msg = resp.data && resp.data.message ? resp.data.message : 'Assigned successfully.';
+                    var data = resp.data || {};
+                    // If the backend created/has a pending request, reflect that state
+                    if (data.status === 'pending_request') {
+                        var reqMsg = data.message || 'Request sent for approval.';
+                        alert(reqMsg);
+                        \$btn.text('Request Pending').addClass('pl-requested').prop('disabled', true);
+                        return;
+                    }
+
+                    var msg = data.message ? data.message : 'Assigned successfully.';
                     alert(msg);
                     \$btn.text('Added').addClass('pl-assigned');
                 } else {
