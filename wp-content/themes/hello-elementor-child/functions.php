@@ -1490,7 +1490,25 @@ add_filter('intermediate_image_sizes_advanced', 'remove_default_image_sizes');
 add_action('init', 'printlana_start_csv_buffer', 1);
 function printlana_start_csv_buffer()
 {
-    // Start output buffering very early to catch everything
+    // Only start buffering for CSV export requests to avoid interfering with other pages
+    $is_export_request = (
+        (isset($_GET['action']) && (
+            strpos($_GET['action'], 'export') !== false ||
+            strpos($_GET['action'], 'csv') !== false ||
+            strpos($_GET['action'], 'download') !== false
+        )) ||
+        (isset($_POST['action']) && (
+            strpos($_POST['action'], 'export') !== false ||
+            strpos($_POST['action'], 'csv') !== false ||
+            $_POST['action'] === 'withdraw_ajax_submission' // Dokan withdraw CSV export
+        ))
+    );
+
+    if (!$is_export_request) {
+        return; // Don't buffer non-export requests
+    }
+
+    // Start output buffering only for CSV exports
     ob_start(function ($buffer) {
         // Check if response headers indicate this is a CSV file
         $headers = headers_list();
