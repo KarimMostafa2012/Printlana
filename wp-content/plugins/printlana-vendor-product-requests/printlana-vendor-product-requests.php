@@ -102,17 +102,29 @@ class Printlana_Vendor_Product_Requests
      */
     public function enqueue_admin_assets($hook)
     {
-        if ($hook !== 'dokan_page_pl-product-requests') {
+        // Debug: Log the hook to find the correct one
+        error_log('[Product Requests] Admin hook: ' . $hook);
+
+        // Check if we're on the product requests page
+        // The hook format for a submenu is: {parent_slug}_page_{menu_slug}
+        // Or we can check the page parameter
+        $is_requests_page = (
+            isset($_GET['page']) && $_GET['page'] === 'pl-product-requests'
+        );
+
+        if (!$is_requests_page) {
             return;
         }
 
-        wp_enqueue_style('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/css/admin.css', [], '1.0.1');
-        wp_enqueue_script('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/js/admin.js', ['jquery'], '1.0.1', true);
+        wp_enqueue_style('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/css/admin.css', [], '1.0.2');
+        wp_enqueue_script('pl-product-requests-admin', plugin_dir_url(__FILE__) . 'assets/js/admin.js', ['jquery'], '1.0.2', true);
 
         wp_localize_script('pl-product-requests-admin', 'plProductRequests', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('pl_product_requests'),
         ]);
+
+        error_log('[Product Requests] Admin assets enqueued');
     }
 
     /**
@@ -333,13 +345,18 @@ class Printlana_Vendor_Product_Requests
      */
     public function ajax_approve_request()
     {
+        error_log('[Product Request] Approve request AJAX called');
+
         check_ajax_referer('pl_product_requests', 'nonce');
 
         if (!current_user_can('manage_woocommerce')) {
+            error_log('[Product Request] Approve denied - not admin');
             wp_send_json_error(['message' => __('Permission denied.', 'printlana')], 403);
         }
 
         $request_id = isset($_POST['request_id']) ? absint($_POST['request_id']) : 0;
+        error_log('[Product Request] Approving request ID: ' . $request_id);
+
         if (!$request_id) {
             wp_send_json_error(['message' => __('Invalid request.', 'printlana')], 400);
         }
@@ -354,8 +371,11 @@ class Printlana_Vendor_Product_Requests
         ));
 
         if (!$request) {
+            error_log('[Product Request] Request not found for ID: ' . $request_id);
             wp_send_json_error(['message' => __('Request not found.', 'printlana')], 404);
         }
+
+        error_log('[Product Request] Found request - Product: ' . $request->product_id . ', Vendor: ' . $request->vendor_id);
 
         // Update request status
         $wpdb->update(
@@ -381,9 +401,12 @@ class Printlana_Vendor_Product_Requests
             ['%d', '%d']
         );
 
+        error_log('[Product Request] Product ' . $request->product_id . ' assigned to vendor ' . $request->vendor_id);
+
         // Send email to vendor
         $this->send_approval_email($request->vendor_id, $request->product_id);
 
+        error_log('[Product Request] Request approved successfully');
         wp_send_json_success(['message' => __('Request approved!', 'printlana')]);
     }
 
@@ -392,13 +415,18 @@ class Printlana_Vendor_Product_Requests
      */
     public function ajax_reject_request()
     {
+        error_log('[Product Request] Reject request AJAX called');
+
         check_ajax_referer('pl_product_requests', 'nonce');
 
         if (!current_user_can('manage_woocommerce')) {
+            error_log('[Product Request] Reject denied - not admin');
             wp_send_json_error(['message' => __('Permission denied.', 'printlana')], 403);
         }
 
         $request_id = isset($_POST['request_id']) ? absint($_POST['request_id']) : 0;
+        error_log('[Product Request] Rejecting request ID: ' . $request_id);
+
         if (!$request_id) {
             wp_send_json_error(['message' => __('Invalid request.', 'printlana')], 400);
         }
@@ -418,6 +446,7 @@ class Printlana_Vendor_Product_Requests
             ['%d']
         );
 
+        error_log('[Product Request] Request rejected successfully');
         wp_send_json_success(['message' => __('Request rejected.', 'printlana')]);
     }
 
