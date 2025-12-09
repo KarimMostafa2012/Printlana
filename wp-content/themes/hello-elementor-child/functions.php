@@ -1574,7 +1574,43 @@ function printlana_force_utf8_encoding($data)
 }
 
 /**
- * Debug withdraw page loading issues
+ * Debug withdraw page loading issues - SERVER SIDE
+ * Track PHP execution to find where it gets stuck
+ */
+add_action('template_redirect', 'printlana_debug_withdraw_server_side', 1);
+function printlana_debug_withdraw_server_side()
+{
+    // Only run on withdraw page
+    if (!function_exists('dokan_is_withdraw_page') || !dokan_is_withdraw_page()) {
+        return;
+    }
+
+    $log_file = WP_CONTENT_DIR . '/withdraw-debug.log';
+    $log_msg = '[' . date('Y-m-d H:i:s') . '] Withdraw page detected - Starting execution tracking' . PHP_EOL;
+    $log_msg .= '[' . date('Y-m-d H:i:s') . '] Memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+    $log_msg .= '[' . date('Y-m-d H:i:s') . '] User ID: ' . get_current_user_id() . PHP_EOL;
+    file_put_contents($log_file, $log_msg, FILE_APPEND);
+
+    // Track execution time
+    $start_time = microtime(true);
+
+    register_shutdown_function(function() use ($start_time, $log_file) {
+        $execution_time = microtime(true) - $start_time;
+        $log_msg = '[' . date('Y-m-d H:i:s') . '] Page execution completed in ' . round($execution_time, 2) . ' seconds' . PHP_EOL;
+        $log_msg .= '[' . date('Y-m-d H:i:s') . '] Final memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+
+        $error = error_get_last();
+        if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+            $log_msg .= '[' . date('Y-m-d H:i:s') . '] FATAL ERROR: ' . $error['message'] . ' in ' . $error['file'] . ':' . $error['line'] . PHP_EOL;
+        }
+
+        $log_msg .= str_repeat('=', 80) . PHP_EOL;
+        file_put_contents($log_file, $log_msg, FILE_APPEND);
+    });
+}
+
+/**
+ * Debug withdraw page loading issues - CLIENT SIDE
  * Add console logging to help identify what's causing the infinite loading
  */
 add_action('wp_head', 'printlana_debug_withdraw_page_early', 1);
@@ -1584,6 +1620,8 @@ function printlana_debug_withdraw_page_early()
     if (!function_exists('dokan_is_withdraw_page') || !dokan_is_withdraw_page()) {
         return;
     }
+
+    error_log('[Withdraw Debug SERVER] wp_head hook reached - HTML is being generated');
     ?>
     <script>
     console.log('[Withdraw Debug] Script injected in HEAD - Page is loading...');
