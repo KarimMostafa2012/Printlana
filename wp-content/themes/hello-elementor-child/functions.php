@@ -1480,3 +1480,80 @@ function remove_default_image_sizes($sizes)
     return $sizes;
 }
 add_filter('intermediate_image_sizes_advanced', 'remove_default_image_sizes');
+
+/**
+ * Fix Arabic characters in CSV exports
+ * Adds UTF-8 BOM to make Excel and other programs display Arabic text correctly
+ */
+add_action('init', 'printlana_fix_csv_export_for_arabic', 20);
+function printlana_fix_csv_export_for_arabic()
+{
+    // Hook into WooCommerce product export
+    if (class_exists('WC_Product_CSV_Exporter')) {
+        add_filter('woocommerce_product_export_product_query_args', 'printlana_add_utf8_bom_to_csv_export');
+    }
+
+    // Hook into Dokan product export
+    add_action('dokan_product_csv_export_start', 'printlana_add_utf8_bom_header');
+}
+
+/**
+ * Add UTF-8 BOM to CSV export headers
+ */
+function printlana_add_utf8_bom_header()
+{
+    // Output UTF-8 BOM at the start of CSV
+    echo "\xEF\xBB\xBF";
+}
+
+/**
+ * Filter to ensure proper encoding for WooCommerce exports
+ */
+function printlana_add_utf8_bom_to_csv_export($args)
+{
+    // Hook into the actual CSV generation
+    add_action('woocommerce_product_export_before_data', function () {
+        if (!headers_sent()) {
+            // Output UTF-8 BOM
+            echo "\xEF\xBB\xBF";
+        }
+    }, 1);
+
+    return $args;
+}
+
+/**
+ * Alternative approach: Hook into the HTTP response for any CSV download
+ */
+add_action('template_redirect', 'printlana_fix_csv_downloads_arabic', 1);
+function printlana_fix_csv_downloads_arabic()
+{
+    // Check if this is a CSV download request
+    if (isset($_GET['action']) && (
+        $_GET['action'] === 'download_product_csv' ||
+        $_GET['action'] === 'dokan_product_export' ||
+        strpos($_GET['action'], 'export') !== false ||
+        strpos($_GET['action'], 'csv') !== false
+    )) {
+        // Start output buffering to capture the CSV
+        ob_start(function ($buffer) {
+            // Check if content type is CSV
+            $headers = headers_list();
+            $is_csv = false;
+
+            foreach ($headers as $header) {
+                if (stripos($header, 'content-type') !== false && stripos($header, 'csv') !== false) {
+                    $is_csv = true;
+                    break;
+                }
+            }
+
+            // If it's a CSV, prepend UTF-8 BOM
+            if ($is_csv) {
+                return "\xEF\xBB\xBF" . $buffer;
+            }
+
+            return $buffer;
+        });
+    }
+}
