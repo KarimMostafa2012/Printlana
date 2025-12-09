@@ -36,6 +36,9 @@ class Printlana_Vendor_Product_Requests
         // AJAX handler for vendors
         add_action('wp_ajax_pl_request_to_sell_product', [$this, 'ajax_vendor_request']);
 
+        // AJAX handler to check request status
+        add_action('wp_ajax_pl_check_request_status', [$this, 'ajax_check_request_status']);
+
         // Test endpoint to verify plugin is working
         add_action('wp_ajax_pl_test_plugin', function () {
             wp_send_json_success(['message' => 'Plugin is active and AJAX is working!']);
@@ -264,6 +267,65 @@ class Printlana_Vendor_Product_Requests
 
         error_log("[Product Request] SUCCESS - Vendor {$user_id} requested product {$product_id}");
         wp_send_json_success(['message' => __('Request sent successfully!', 'printlana')]);
+    }
+
+    /**
+     * AJAX: Check request status for products
+     * Returns which products have pending/approved requests for the current vendor
+     */
+    public function ajax_check_request_status()
+    {
+        check_ajax_referer('pl_vendor_request', 'nonce');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged in.', 'printlana')], 403);
+        }
+
+        $user_id = get_current_user_id();
+        if (!dokan_is_user_seller($user_id)) {
+            wp_send_json_error(['message' => __('Only vendors can check request status.', 'printlana')], 403);
+        }
+
+        $product_ids = isset($_POST['product_ids']) ? array_map('absint', (array) $_POST['product_ids']) : [];
+        if (empty($product_ids)) {
+            wp_send_json_error(['message' => __('No product IDs provided.', 'printlana')], 400);
+        }
+
+        // Limit to prevent abuse
+        $product_ids = array_slice($product_ids, 0, 50);
+
+        global $wpdb;
+        $table = $wpdb->prefix . self::TABLE_NAME;
+
+        // Get all requests for this vendor and these products
+        $placeholders = implode(',', array_fill(0, count($product_ids), '%d'));
+        $params = array_merge([$user_id], $product_ids);
+
+        $requests = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT product_id, status FROM {$table}
+                 WHERE vendor_id = %d
+                 AND product_id IN ({$placeholders})",
+                $params
+            ),
+            OBJECT_K
+        );
+
+        $pending_products = [];
+        $approved_products = [];
+
+        foreach ($requests as $product_id => $request) {
+            if ($request->status === 'pending') {
+                $pending_products[] = (int) $product_id;
+            } elseif ($request->status === 'approved') {
+                $approved_products[] = (int) $product_id;
+            }
+        }
+
+        wp_send_json_success([
+            'pending_products' => $pending_products,
+            'approved_products' => $approved_products,
+        ]);
     }
 
     /**

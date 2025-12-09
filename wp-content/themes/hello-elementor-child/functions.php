@@ -416,46 +416,135 @@ function pl_override_dokan_spmv_add_to_store_for_vendor()
 
             console.log('[PL-SPMV] Checking assignment status for products:', productIds);
 
-            // AJAX call to check which products are assigned
+            // For vendors: Check both assigned products AND request status
+            if (!plIsAdmin) {
+                // First check assigned products
+                $.ajax({
+                    url: plAjaxUrl,
+                    method: 'POST',
+                    data: {
+                        action: 'pl_check_assigned_products',
+                        nonce: plNonce,
+                        product_ids: productIds
+                    },
+                    dataType: 'json',
+                    timeout: 5000
+                })
+                .done(function(resp){
+                    console.log('[PL-SPMV] Assigned products response:', resp);
+
+                    if (resp && resp.success && resp.data && resp.data.assigned_products) {
+                        var assignedProducts = resp.data.assigned_products;
+
+                        // Mark assigned products
+                        \$buttons.each(function(){
+                            var \$btn = $(this);
+                            var productId = \$btn.data('product');
+
+                            if (assignedProducts.indexOf(productId) !== -1) {
+                                \$btn.text('Added')
+                                    .addClass('pl-assigned')
+                                    .prop('disabled', true);
+                                console.log('[PL-SPMV] Product ' + productId + ' marked as Added');
+                            }
+                        });
+                    }
+
+                    // Then check request status for non-assigned products
+                    checkRequestStatus(productIds);
+                })
+                .fail(function(jqXHR){
+                    console.error('[PL-SPMV] Assigned check error:', jqXHR.responseText);
+                    // Still check request status even if assigned check fails
+                    checkRequestStatus(productIds);
+                });
+            } else {
+                // For admins: Only check assigned products
+                $.ajax({
+                    url: plAjaxUrl,
+                    method: 'POST',
+                    data: {
+                        action: 'pl_check_assigned_products',
+                        nonce: plNonce,
+                        product_ids: productIds
+                    },
+                    dataType: 'json',
+                    timeout: 5000
+                })
+                .done(function(resp){
+                    console.log('[PL-SPMV] Admin assigned check:', resp);
+
+                    if (resp && resp.success && resp.data && resp.data.assigned_products) {
+                        var assignedProducts = resp.data.assigned_products;
+
+                        \$buttons.each(function(){
+                            var \$btn = $(this);
+                            var productId = \$btn.data('product');
+
+                            if (assignedProducts.indexOf(productId) !== -1) {
+                                \$btn.text('Added')
+                                    .addClass('pl-assigned')
+                                    .prop('disabled', true);
+                            }
+                        });
+                    }
+                })
+                .fail(function(jqXHR){
+                    console.error('[PL-SPMV] Admin check error:', jqXHR.responseText);
+                });
+            }
+        }
+
+        /**
+         * Check request status for vendor (pending/approved requests)
+         */
+        function checkRequestStatus(productIds) {
+            console.log('[PL-SPMV] Checking request status for products:', productIds);
+
             $.ajax({
                 url: plAjaxUrl,
                 method: 'POST',
                 data: {
-                    action: 'pl_check_assigned_products',
-                    nonce: plNonce,
+                    action: 'pl_check_request_status',
+                    nonce: plVendorRequestNonce,
                     product_ids: productIds
                 },
                 dataType: 'json',
-                timeout: 5000 // 5 second timeout
+                timeout: 5000
             })
             .done(function(resp){
-                console.log('[PL-SPMV] Check response:', resp);
+                console.log('[PL-SPMV] Request status response:', resp);
 
-                if (resp && resp.success && resp.data && resp.data.assigned_products) {
-                    var assignedProducts = resp.data.assigned_products;
-                    console.log('[PL-SPMV] Assigned products:', assignedProducts);
+                if (resp && resp.success && resp.data) {
+                    var pendingProducts = resp.data.pending_products || [];
+                    var approvedProducts = resp.data.approved_products || [];
 
-                    // Update buttons for assigned products
+                    var \$buttons = $('.dokan-spmv-clone-product');
                     \$buttons.each(function(){
                         var \$btn = $(this);
                         var productId = \$btn.data('product');
 
-                        if (assignedProducts.indexOf(productId) !== -1) {
-                            // Product is assigned - change button to 'Added'
-                            \$btn.text('Added')
-                                .addClass('pl-assigned')
+                        // Skip if already marked as assigned
+                        if (\$btn.hasClass('pl-assigned')) {
+                            return;
+                        }
+
+                        if (pendingProducts.indexOf(productId) !== -1) {
+                            \$btn.text('Request Pending')
+                                .addClass('pl-requested')
                                 .prop('disabled', true);
-                            console.log('[PL-SPMV] Product ' + productId + ' marked as Added');
+                            console.log('[PL-SPMV] Product ' + productId + ' has pending request');
+                        } else if (approvedProducts.indexOf(productId) !== -1) {
+                            \$btn.text('Request Approved')
+                                .addClass('pl-approved')
+                                .prop('disabled', true);
+                            console.log('[PL-SPMV] Product ' + productId + ' has approved request');
                         }
                     });
                 }
             })
-            .fail(function(jqXHR, textStatus, errorThrown){
-                console.error('[PL-SPMV] Check AJAX error:', {
-                    status: jqXHR.status,
-                    statusText: jqXHR.statusText,
-                    responseText: jqXHR.responseText
-                });
+            .fail(function(jqXHR){
+                console.error('[PL-SPMV] Request status check error:', jqXHR.responseText);
             });
         }
 
@@ -1380,13 +1469,14 @@ new Simple_Login_Validator();
 
 
 //Yahya Remove thumbnails
-function remove_default_image_sizes( $sizes ) {
-    unset( $sizes['thumbnail'] );
-    unset( $sizes['medium'] );
-    unset( $sizes['medium_large'] );
-    unset( $sizes['large'] );
-    unset( $sizes['1536x1536'] ); // For WordPress 5.3+ large size
-    unset( $sizes['2048x2048'] ); // For WordPress 5.3+ large size
+function remove_default_image_sizes($sizes)
+{
+    unset($sizes['thumbnail']);
+    unset($sizes['medium']);
+    unset($sizes['medium_large']);
+    unset($sizes['large']);
+    unset($sizes['1536x1536']); // For WordPress 5.3+ large size
+    unset($sizes['2048x2048']); // For WordPress 5.3+ large size
     return $sizes;
 }
-add_filter( 'intermediate_image_sizes_advanced', 'remove_default_image_sizes' );
+add_filter('intermediate_image_sizes_advanced', 'remove_default_image_sizes');
