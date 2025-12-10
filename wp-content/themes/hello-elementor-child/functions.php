@@ -85,7 +85,7 @@ add_action('init', function () {
  * Fix WooCommerce Analytics REST API authentication for vendor dashboard
  * Add REST nonce to wpApiSettings for frontend vendor dashboard analytics
  */
-add_action('wp_enqueue_scripts', 'pl_add_rest_nonce_for_vendor_analytics', 100);
+add_action('wp_enqueue_scripts', 'pl_add_rest_nonce_for_vendor_analytics', 999);
 function pl_add_rest_nonce_for_vendor_analytics()
 {
     // Only run on Dokan seller dashboard
@@ -98,29 +98,154 @@ function pl_add_rest_nonce_for_vendor_analytics()
         return;
     }
 
-    // Ensure wp-api-fetch script is enqueued (WooCommerce Analytics depends on it)
-    wp_enqueue_script('wp-api-fetch');
+    // Create nonce for REST API
+    $nonce = wp_create_nonce('wp_rest');
+    $rest_root = esc_url_raw(rest_url());
 
-    // Add REST API settings with nonce
-    wp_localize_script(
-        'wp-api-fetch',
-        'wpApiSettings',
-        array(
-            'root'          => esc_url_raw(rest_url()),
-            'nonce'         => wp_create_nonce('wp_rest'),
-            'versionString' => 'wp/v2/',
-        )
-    );
-
-    // Also add it for wc-settings which WooCommerce uses
+    // Add inline script to set up API fetch with nonce BEFORE WooCommerce scripts run
     wp_add_inline_script(
         'wp-api-fetch',
-        sprintf(
-            'wp.apiFetch.use( wp.apiFetch.createNonceMiddleware( "%s" ) );',
-            wp_create_nonce('wp_rest')
-        ),
-        'after'
+        "
+        (function() {
+            console.log('[PL Analytics] Setting up REST API authentication');
+            console.log('[PL Analytics] REST Root:', '{$rest_root}');
+            console.log('[PL Analytics] Nonce:', '{$nonce}');
+
+            // Set wpApiSettings if it doesn't exist
+            if (typeof wpApiSettings === 'undefined') {
+                window.wpApiSettings = {
+                    root: '{$rest_root}',
+                    nonce: '{$nonce}',
+                    versionString: 'wp/v2/'
+                };
+                console.log('[PL Analytics] Created wpApiSettings:', wpApiSettings);
+            } else {
+                // Update existing wpApiSettings
+                wpApiSettings.nonce = '{$nonce}';
+                wpApiSettings.root = '{$rest_root}';
+                console.log('[PL Analytics] Updated wpApiSettings:', wpApiSettings);
+            }
+
+            // Also set wcSettings for WooCommerce
+            if (typeof wcSettings === 'undefined') {
+                window.wcSettings = {};
+            }
+            if (typeof wcSettings.admin === 'undefined') {
+                wcSettings.admin = {};
+            }
+            wcSettings.admin.nonce = '{$nonce}';
+            wcSettings.admin.root = '{$rest_root}';
+
+            console.log('[PL Analytics] WC Settings:', wcSettings);
+        })();
+        ",
+        'before'
     );
+}
+
+/**
+ * Add REST nonce via wp_head as a fallback
+ * This ensures the nonce is available even if wp-api-fetch loads late
+ */
+add_action('wp_head', 'pl_add_rest_nonce_inline', 1);
+function pl_add_rest_nonce_inline()
+{
+    // Only run on Dokan seller dashboard
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
+        return;
+    }
+
+    // Only for logged-in users with analytics capabilities
+    if (!is_user_logged_in() || !current_user_can('view_woocommerce_analytics')) {
+        return;
+    }
+
+    $nonce = wp_create_nonce('wp_rest');
+    $rest_root = esc_url_raw(rest_url());
+    ?>
+    <script>
+        console.log('[PL Analytics Early] Initializing REST API settings in HEAD');
+
+        // Initialize wpApiSettings early
+        window.wpApiSettings = {
+            root: '<?php echo $rest_root; ?>',
+            nonce: '<?php echo $nonce; ?>',
+            versionString: 'wp/v2/'
+        };
+
+        // Initialize wcSettings early
+        window.wcSettings = window.wcSettings || {};
+        window.wcSettings.admin = window.wcSettings.admin || {};
+        window.wcSettings.admin.nonce = '<?php echo $nonce; ?>';
+        window.wcSettings.admin.root = '<?php echo $rest_root; ?>';
+
+        console.log('[PL Analytics Early] wpApiSettings:', window.wpApiSettings);
+        console.log('[PL Analytics Early] wcSettings.admin:', window.wcSettings.admin);
+
+        // Intercept all XMLHttpRequest calls to wc-analytics and add nonce header
+        (function() {
+            var XHR = XMLHttpRequest.prototype;
+            var open = XHR.open;
+            var send = XHR.send;
+            var setRequestHeader = XHR.setRequestHeader;
+
+            XHR.open = function(method, url) {
+                this._url = url;
+                return open.apply(this, arguments);
+            };
+
+            XHR.setRequestHeader = function(header, value) {
+                this._headers = this._headers || {};
+                this._headers[header] = value;
+                return setRequestHeader.apply(this, arguments);
+            };
+
+            XHR.send = function(postData) {
+                // Check if this is a request to wc-analytics or wc-admin API
+                if (this._url && (this._url.indexOf('/wc-analytics/') !== -1 || this._url.indexOf('/wc-admin/') !== -1 || this._url.indexOf('/wc/') !== -1)) {
+                    console.log('[PL Analytics] Intercepting API request:', this._url);
+
+                    // Add nonce header if not already present
+                    if (!this._headers || !this._headers['X-WP-Nonce']) {
+                        console.log('[PL Analytics] Adding X-WP-Nonce header:', '<?php echo $nonce; ?>');
+                        setRequestHeader.call(this, 'X-WP-Nonce', '<?php echo $nonce; ?>');
+                    }
+                }
+                return send.apply(this, arguments);
+            };
+
+            console.log('[PL Analytics] XHR interceptor installed');
+        })();
+
+        // Also intercept fetch API calls
+        if (window.fetch) {
+            const originalFetch = window.fetch;
+            window.fetch = function(url, options) {
+                const urlString = typeof url === 'string' ? url : url.url;
+
+                // Check if this is a WooCommerce API request
+                if (urlString && (urlString.indexOf('/wc-analytics/') !== -1 || urlString.indexOf('/wc-admin/') !== -1 || urlString.indexOf('/wc/') !== -1)) {
+                    console.log('[PL Analytics] Intercepting fetch request:', urlString);
+
+                    options = options || {};
+                    options.headers = options.headers || {};
+
+                    // Add nonce if not present
+                    if (!options.headers['X-WP-Nonce']) {
+                        console.log('[PL Analytics] Adding X-WP-Nonce to fetch:', '<?php echo $nonce; ?>');
+                        options.headers['X-WP-Nonce'] = '<?php echo $nonce; ?>';
+                    }
+
+                    // Ensure credentials are included
+                    options.credentials = options.credentials || 'include';
+                }
+
+                return originalFetch(url, options);
+            };
+            console.log('[PL Analytics] Fetch interceptor installed');
+        }
+    </script>
+    <?php
 }
 
 
