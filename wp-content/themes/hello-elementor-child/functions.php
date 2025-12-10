@@ -1574,6 +1574,19 @@ function printlana_force_utf8_encoding($data)
 }
 
 /**
+ * Enable WordPress debug logging
+ */
+if (!defined('WP_DEBUG')) {
+    define('WP_DEBUG', true);
+}
+if (!defined('WP_DEBUG_LOG')) {
+    define('WP_DEBUG_LOG', true);
+}
+if (!defined('WP_DEBUG_DISPLAY')) {
+    define('WP_DEBUG_DISPLAY', false);
+}
+
+/**
  * Debug withdraw page loading issues - SERVER SIDE
  * Track PHP execution to find where it gets stuck
  */
@@ -1585,27 +1598,26 @@ function printlana_debug_withdraw_server_side()
         return;
     }
 
-    $log_file = WP_CONTENT_DIR . '/withdraw-debug.log';
-    $log_msg = '[' . date('Y-m-d H:i:s') . '] Withdraw page detected - Starting execution tracking' . PHP_EOL;
-    $log_msg .= '[' . date('Y-m-d H:i:s') . '] Memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB' . PHP_EOL;
-    $log_msg .= '[' . date('Y-m-d H:i:s') . '] User ID: ' . get_current_user_id() . PHP_EOL;
-    file_put_contents($log_file, $log_msg, FILE_APPEND);
+    error_log('========== WITHDRAW PAGE DEBUG START ==========');
+    error_log('[Withdraw Debug] Withdraw page detected - Starting execution tracking');
+    error_log('[Withdraw Debug] Memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB');
+    error_log('[Withdraw Debug] User ID: ' . get_current_user_id());
+    error_log('[Withdraw Debug] Current URL: ' . $_SERVER['REQUEST_URI']);
 
     // Track execution time
     $start_time = microtime(true);
 
-    register_shutdown_function(function() use ($start_time, $log_file) {
+    register_shutdown_function(function() use ($start_time) {
         $execution_time = microtime(true) - $start_time;
-        $log_msg = '[' . date('Y-m-d H:i:s') . '] Page execution completed in ' . round($execution_time, 2) . ' seconds' . PHP_EOL;
-        $log_msg .= '[' . date('Y-m-d H:i:s') . '] Final memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+        error_log('[Withdraw Debug] Page execution completed in ' . round($execution_time, 2) . ' seconds');
+        error_log('[Withdraw Debug] Final memory usage: ' . round(memory_get_usage(true) / 1024 / 1024, 2) . ' MB');
 
         $error = error_get_last();
         if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
-            $log_msg .= '[' . date('Y-m-d H:i:s') . '] FATAL ERROR: ' . $error['message'] . ' in ' . $error['file'] . ':' . $error['line'] . PHP_EOL;
+            error_log('[Withdraw Debug] FATAL ERROR: ' . $error['message'] . ' in ' . $error['file'] . ':' . $error['line']);
         }
 
-        $log_msg .= str_repeat('=', 80) . PHP_EOL;
-        file_put_contents($log_file, $log_msg, FILE_APPEND);
+        error_log('========== WITHDRAW PAGE DEBUG END ==========');
     });
 }
 
