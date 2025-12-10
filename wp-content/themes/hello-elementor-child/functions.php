@@ -69,6 +69,19 @@ add_action('init', function () {
     }
 });
 
+add_action('init', function () {
+    if (is_user_logged_in()) {
+        $user_id = get_current_user_id();
+        error_log(
+            '[Analytics Cap Check] User ' . $user_id . ' role caps: reports=' .
+            (current_user_can('view_woocommerce_reports') ? 'yes' : 'no') .
+            ' analytics=' .
+            (current_user_can('view_woocommerce_analytics') ? 'yes' : 'no')
+        );
+    }
+});
+
+
 
 
 function get_last_added_product()
