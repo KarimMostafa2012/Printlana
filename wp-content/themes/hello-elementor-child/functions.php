@@ -81,6 +81,48 @@ add_action('init', function () {
     }
 });
 
+/**
+ * Fix WooCommerce Analytics REST API authentication for vendor dashboard
+ * Add REST nonce to wpApiSettings for frontend vendor dashboard analytics
+ */
+add_action('wp_enqueue_scripts', 'pl_add_rest_nonce_for_vendor_analytics', 100);
+function pl_add_rest_nonce_for_vendor_analytics()
+{
+    // Only run on Dokan seller dashboard
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
+        return;
+    }
+
+    // Only for logged-in users with analytics capabilities
+    if (!is_user_logged_in() || !current_user_can('view_woocommerce_analytics')) {
+        return;
+    }
+
+    // Ensure wp-api-fetch script is enqueued (WooCommerce Analytics depends on it)
+    wp_enqueue_script('wp-api-fetch');
+
+    // Add REST API settings with nonce
+    wp_localize_script(
+        'wp-api-fetch',
+        'wpApiSettings',
+        array(
+            'root'          => esc_url_raw(rest_url()),
+            'nonce'         => wp_create_nonce('wp_rest'),
+            'versionString' => 'wp/v2/',
+        )
+    );
+
+    // Also add it for wc-settings which WooCommerce uses
+    wp_add_inline_script(
+        'wp-api-fetch',
+        sprintf(
+            'wp.apiFetch.use( wp.apiFetch.createNonceMiddleware( "%s" ) );',
+            wp_create_nonce('wp_rest')
+        ),
+        'after'
+    );
+}
+
 
 
 
