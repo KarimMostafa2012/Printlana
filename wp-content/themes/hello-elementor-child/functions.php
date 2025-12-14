@@ -183,24 +183,24 @@ function pl_add_rest_nonce_inline()
         console.log('[PL Analytics Early] wcSettings.admin:', window.wcSettings.admin);
 
         // Intercept all XMLHttpRequest calls to wc-analytics and add nonce header
-        (function() {
+        (function () {
             var XHR = XMLHttpRequest.prototype;
             var open = XHR.open;
             var send = XHR.send;
             var setRequestHeader = XHR.setRequestHeader;
 
-            XHR.open = function(method, url) {
+            XHR.open = function (method, url) {
                 this._url = url;
                 return open.apply(this, arguments);
             };
 
-            XHR.setRequestHeader = function(header, value) {
+            XHR.setRequestHeader = function (header, value) {
                 this._headers = this._headers || {};
                 this._headers[header] = value;
                 return setRequestHeader.apply(this, arguments);
             };
 
-            XHR.send = function(postData) {
+            XHR.send = function (postData) {
                 // Check if this is a request to wc-analytics or wc-admin API
                 if (this._url && (this._url.indexOf('/wc-analytics/') !== -1 || this._url.indexOf('/wc-admin/') !== -1 || this._url.indexOf('/wc/') !== -1)) {
                     console.log('[PL Analytics] Intercepting API request:', this._url);
@@ -220,7 +220,7 @@ function pl_add_rest_nonce_inline()
         // Also intercept fetch API calls
         if (window.fetch) {
             const originalFetch = window.fetch;
-            window.fetch = function(url, options) {
+            window.fetch = function (url, options) {
                 const urlString = typeof url === 'string' ? url : url.url;
 
                 // Check if this is a WooCommerce API request
@@ -1156,6 +1156,8 @@ function custom_woocommerce_register_form_shortcode()
         <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>
 
             <?php do_action('woocommerce_register_form_start'); ?>
+            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text hidden" name="role" id="role"
+                value="customer" required aria-required="true" />
 
             <?php if ('no' === get_option('woocommerce_registration_generate_username')): ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
