@@ -1350,6 +1350,71 @@ function custom_woocommerce_register_form_shortcode()
 add_shortcode('custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode');
 
 
+/**
+ * Validate Saudi phone numbers for registration
+ */
+add_filter('woocommerce_process_registration_errors', 'validate_saudi_phone_number_registration', 10, 4);
+function validate_saudi_phone_number_registration($errors, $username, $email, $validation_error)
+{
+    if (isset($_POST['phone'])) {
+        $phone = sanitize_text_field($_POST['phone']);
+
+        if (!empty($phone) && !is_valid_saudi_phone_number($phone)) {
+            $errors->add('phone_error', __('Please enter a valid Saudi phone number (e.g., 0501234567 or +966501234567)', 'woocommerce'));
+        }
+    }
+
+    return $errors;
+}
+
+/**
+ * Helper function to validate Saudi phone numbers
+ * Accepts formats:
+ * - 05XXXXXXXX (10 digits, mobile)
+ * - 01XXXXXXX, 02XXXXXXX, etc. (9 digits, landline)
+ * - +9665XXXXXXXX (international format for mobile)
+ * - +96611XXXXXXX (international format for landline)
+ * - 009665XXXXXXXX (international format with 00 prefix)
+ */
+function is_valid_saudi_phone_number($phone)
+{
+    // Remove spaces, dashes, and parentheses
+    $phone = preg_replace('/[\s\-\(\)]/', '', $phone);
+
+    // Pattern 1: Mobile number starting with 05 (10 digits)
+    if (preg_match('/^05[0-9]{8}$/', $phone)) {
+        return true;
+    }
+
+    // Pattern 2: Landline starting with 01, 02, 03, 04, 06, 07 (9 digits)
+    if (preg_match('/^0[1-4,6-7][0-9]{7}$/', $phone)) {
+        return true;
+    }
+
+    // Pattern 3: International format +966 5XXXXXXXX (mobile)
+    if (preg_match('/^\+9665[0-9]{8}$/', $phone)) {
+        return true;
+    }
+
+    // Pattern 4: International format +966 1XXXXXXX (landline)
+    if (preg_match('/^\+966[1-4,6-7][0-9]{7}$/', $phone)) {
+        return true;
+    }
+
+    // Pattern 5: International format with 00 prefix (mobile)
+    if (preg_match('/^009665[0-9]{8}$/', $phone)) {
+        return true;
+    }
+
+    // Pattern 6: International format with 00 prefix (landline)
+    if (preg_match('/^00966[1-4,6-7][0-9]{7}$/', $phone)) {
+        return true;
+    }
+
+    return false;
+}
+
+
 
 // Move Checkout payment section under Billing Adress Form
 
