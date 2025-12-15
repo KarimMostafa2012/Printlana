@@ -326,9 +326,18 @@ function pl_scan_css_files() {
 
 /**
  * Find CSS files in theme and plugin directories
+ * Now scans ONLY files that are actually enqueued on the frontend
  */
 function pl_find_css_files() {
     $css_files = array();
+
+    // First, get actually enqueued styles by simulating frontend
+    $enqueued_files = pl_get_enqueued_frontend_css();
+
+    if (!empty($enqueued_files)) {
+        // Use enqueued files as primary source
+        $css_files = $enqueued_files;
+    }
 
     // Theme CSS (child theme)
     $theme_dir = get_stylesheet_directory();
