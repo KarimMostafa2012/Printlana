@@ -313,18 +313,27 @@ function pl_preload_critical_resources()
 
 /**
  * Defer non-critical CSS to eliminate render-blocking
- * Critical CSS loads normally, everything else loads asynchronously
+ * DISABLED FOR NOW - Use only when properly configured
+ *
+ * To enable: Uncomment the add_filter line below and configure critical_styles
  */
-add_filter('style_loader_tag', 'pl_defer_non_critical_css', 10, 4);
+// add_filter('style_loader_tag', 'pl_defer_non_critical_css', 10, 4);
 function pl_defer_non_critical_css($html, $handle, $href, $media)
 {
-    // Critical styles that MUST load immediately
+    // Critical styles that MUST load immediately (EXPAND THIS LIST!)
     $critical_styles = array(
         'elementor-frontend',
-        'elementor-post-',  // Elementor page-specific CSS
+        'elementor-post-',
+        'elementor-pro',
         'elementor-icons',
+        'elementor-global',
         'hello-elementor',
         'hello-elementor-theme-style',
+        'main-custom-style',  // Your custom theme CSS
+        'woocommerce-layout',
+        'woocommerce-smallscreen',
+        'woocommerce-general',
+        // Add more critical CSS handles here
     );
 
     // Check if this is a critical style
@@ -342,11 +351,10 @@ function pl_defer_non_critical_css($html, $handle, $href, $media)
     }
 
     // Defer non-critical CSS using media="print" trick
-    // This loads CSS asynchronously without blocking render
     $html = str_replace("media='all'", "media='print' onload=\"this.media='all'; this.onload=null;\"", $html);
     $html = str_replace('media="all"', 'media="print" onload="this.media=\'all\'; this.onload=null;"', $html);
 
-    // Add noscript fallback for users without JavaScript
+    // Add noscript fallback
     if (strpos($html, 'media="print"') !== false || strpos($html, "media='print'") !== false) {
         $noscript = '<noscript>' . str_replace(['media="print"', "media='print'"], 'media="all"', $html) . '</noscript>';
         $html .= $noscript;
