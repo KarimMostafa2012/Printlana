@@ -312,6 +312,50 @@ function pl_preload_critical_resources()
 }
 
 /**
+ * Defer non-critical CSS to eliminate render-blocking
+ * Critical CSS loads normally, everything else loads asynchronously
+ */
+add_filter('style_loader_tag', 'pl_defer_non_critical_css', 10, 4);
+function pl_defer_non_critical_css($html, $handle, $href, $media)
+{
+    // Critical styles that MUST load immediately
+    $critical_styles = array(
+        'elementor-frontend',
+        'elementor-post-',  // Elementor page-specific CSS
+        'elementor-icons',
+        'hello-elementor',
+        'hello-elementor-theme-style',
+    );
+
+    // Check if this is a critical style
+    $is_critical = false;
+    foreach ($critical_styles as $critical) {
+        if (strpos($handle, $critical) !== false) {
+            $is_critical = true;
+            break;
+        }
+    }
+
+    // Don't defer critical CSS
+    if ($is_critical) {
+        return $html;
+    }
+
+    // Defer non-critical CSS using media="print" trick
+    // This loads CSS asynchronously without blocking render
+    $html = str_replace("media='all'", "media='print' onload=\"this.media='all'; this.onload=null;\"", $html);
+    $html = str_replace('media="all"', 'media="print" onload="this.media=\'all\'; this.onload=null;"', $html);
+
+    // Add noscript fallback for users without JavaScript
+    if (strpos($html, 'media="print"') !== false || strpos($html, "media='print'") !== false) {
+        $noscript = '<noscript>' . str_replace(['media="print"', "media='print'"], 'media="all"', $html) . '</noscript>';
+        $html .= $noscript;
+    }
+
+    return $html;
+}
+
+/**
  * Remove query strings from static resources (for better caching)
  */
 add_filter('style_loader_src', 'pl_remove_query_strings', 10, 2);
