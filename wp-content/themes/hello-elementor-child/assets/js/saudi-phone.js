@@ -56,3 +56,40 @@ jQuery(function ($) {
   });
 
 });
+
+jQuery(function ($) {
+
+  const $accountRadios = $('input[name="account_type"]');
+  if (!$accountRadios.length) return;
+
+  const $sectorRow  = $('#reg_sector').closest('p.woocommerce-form-row');
+  const $companyRow = $('#reg_company_name').closest('p.woocommerce-form-row');
+
+  function setCompanyMode(isCompany) {
+    // show/hide rows
+    $sectorRow.toggle(isCompany);
+    $companyRow.toggle(isCompany);
+
+    // clear values when hidden (optional)
+    if (!isCompany) {
+      $('#reg_sector').val('');
+      $('#reg_company_name').val('');
+    }
+
+    // toggle required (optional)
+    $('#reg_sector').prop('required', isCompany);
+    $('#reg_company_name').prop('required', isCompany);
+  }
+
+  function syncFromSelected() {
+    const type = $('input[name="account_type"]:checked').val() || 'individual';
+    setCompanyMode(type === 'company');
+  }
+
+  // Run on page load (handles pre-selected POST value too)
+  syncFromSelected();
+
+  // Run when user changes account type
+  $(document).on('change', 'input[name="account_type"]', syncFromSelected);
+
+});
