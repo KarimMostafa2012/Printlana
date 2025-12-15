@@ -85,7 +85,7 @@ add_action('wp_enqueue_scripts', function () {
     if (is_account_page()) {
         wp_enqueue_script(
             'pl-saudi-phone-validation',
-            get_stylesheet_directory_uri() . '/js/saudi-phone.js',
+            get_stylesheet_directory_uri() . '/assets/js/saudi-phone.js',
             ['jquery'],
             '1.0.0',
             true
