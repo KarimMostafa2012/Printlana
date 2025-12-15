@@ -330,51 +330,138 @@ function pl_scan_css_files() {
 function pl_find_css_files() {
     $css_files = array();
 
-    // Theme CSS
+    // Theme CSS (child theme)
     $theme_dir = get_stylesheet_directory();
     if (is_dir($theme_dir)) {
         $theme_css = glob($theme_dir . '/*.css');
         if ($theme_css) {
-            $css_files = array_merge($css_files, $theme_css);
+            foreach ($theme_css as $file) {
+                // Exclude RTL and editor CSS
+                if (strpos($file, '-rtl.css') === false &&
+                    strpos($file, 'editor-style') === false) {
+                    $css_files[] = $file;
+                }
+            }
         }
-        $theme_css_dir = glob($theme_dir . '/css/*.css');
-        if ($theme_css_dir) {
-            $css_files = array_merge($css_files, $theme_css_dir);
+        // Check css subdirectory
+        if (is_dir($theme_dir . '/css')) {
+            $theme_css_dir = glob($theme_dir . '/css/*.css');
+            if ($theme_css_dir) {
+                $css_files = array_merge($css_files, $theme_css_dir);
+            }
+        }
+        // Check assets subdirectory
+        if (is_dir($theme_dir . '/assets/css')) {
+            $assets_css = glob($theme_dir . '/assets/css/*.css');
+            if ($assets_css) {
+                $css_files = array_merge($css_files, $assets_css);
+            }
         }
     }
 
-    // Parent theme CSS
+    // Parent theme CSS (hello-elementor)
     $parent_dir = get_template_directory();
     if (is_dir($parent_dir) && $parent_dir !== $theme_dir) {
         $parent_css = glob($parent_dir . '/*.css');
         if ($parent_css) {
-            $css_files = array_merge($css_files, $parent_css);
-        }
-    }
-
-    // WooCommerce CSS
-    $wc_assets = WP_PLUGIN_DIR . '/woocommerce/assets/css';
-    if (is_dir($wc_assets)) {
-        $wc_css = glob($wc_assets . '/*.css');
-        if ($wc_css) {
-            $css_files = array_merge($css_files, array_slice($wc_css, 0, 5)); // Limit to 5 files
-        }
-    }
-
-    // Elementor CSS (in uploads)
-    $elementor_css = WP_CONTENT_DIR . '/uploads/elementor/css';
-    if (is_dir($elementor_css)) {
-        $elem_files = glob($elementor_css . '/*.css');
-        if ($elem_files) {
-            // Only include the main global CSS
-            foreach ($elem_files as $file) {
-                if (strpos($file, 'global.css') !== false) {
+            foreach ($parent_css as $file) {
+                // Exclude RTL and editor CSS
+                if (strpos($file, '-rtl.css') === false &&
+                    strpos($file, 'editor-style') === false) {
                     $css_files[] = $file;
-                    break;
                 }
             }
         }
     }
+
+    // WooCommerce frontend CSS only (exclude admin and RTL)
+    $wc_assets = WP_PLUGIN_DIR . '/woocommerce/assets/css';
+    if (is_dir($wc_assets)) {
+        $important_wc_files = array(
+            'woocommerce.css',
+            'woocommerce-layout.css',
+            'woocommerce-smallscreen.css',
+        );
+        foreach ($important_wc_files as $filename) {
+            $filepath = $wc_assets . '/' . $filename;
+            if (file_exists($filepath)) {
+                $css_files[] = $filepath;
+            }
+        }
+    }
+
+    // Elementor frontend CSS (in uploads/elementor/css)
+    $elementor_css = WP_CONTENT_DIR . '/uploads/elementor/css';
+    if (is_dir($elementor_css)) {
+        $elem_files = glob($elementor_css . '/*.css');
+        if ($elem_files) {
+            foreach ($elem_files as $file) {
+                // Include global.css and post-*.css files (exclude kit and custom-*.css)
+                if (strpos(basename($file), 'global.css') !== false ||
+                    strpos(basename($file), 'post-') === 0) {
+                    $css_files[] = $file;
+                }
+            }
+        }
+    }
+
+    // Elementor plugin CSS
+    $elementor_plugin = WP_PLUGIN_DIR . '/elementor/assets/css';
+    if (is_dir($elementor_plugin)) {
+        $elem_plugin_files = array(
+            'frontend.min.css',
+            'frontend-legacy.min.css',
+        );
+        foreach ($elem_plugin_files as $filename) {
+            $filepath = $elementor_plugin . '/' . $filename;
+            if (file_exists($filepath)) {
+                $css_files[] = $filepath;
+            }
+        }
+    }
+
+    // Elementor Pro CSS
+    $elementor_pro = WP_PLUGIN_DIR . '/elementor-pro/assets/css';
+    if (is_dir($elementor_pro)) {
+        if (file_exists($elementor_pro . '/frontend.min.css')) {
+            $css_files[] = $elementor_pro . '/frontend.min.css';
+        }
+    }
+
+    // Common plugin directories (only frontend CSS)
+    $plugin_dirs = array(
+        WP_PLUGIN_DIR . '/dokan-lite/assets/css',
+        WP_PLUGIN_DIR . '/dokan-pro/assets/css',
+        WP_PLUGIN_DIR . '/yith-woocommerce-wishlist/assets/css',
+        WP_PLUGIN_DIR . '/contact-form-7/includes/css',
+    );
+
+    foreach ($plugin_dirs as $plugin_dir) {
+        if (is_dir($plugin_dir)) {
+            $plugin_css = glob($plugin_dir . '/*.css');
+            if ($plugin_css) {
+                foreach ($plugin_css as $file) {
+                    // Exclude admin, RTL, and editor CSS
+                    $basename = basename($file);
+                    if (strpos($basename, 'admin') === false &&
+                        strpos($basename, '-rtl.css') === false &&
+                        strpos($basename, 'editor') === false) {
+                        $css_files[] = $file;
+                    }
+                }
+            }
+        }
+    }
+
+    // Remove duplicates
+    $css_files = array_unique($css_files);
+
+    // Filter out very small files (< 2KB) and very large files (> 500KB)
+    $css_files = array_filter($css_files, function($file) {
+        if (!file_exists($file)) return false;
+        $size = filesize($file);
+        return ($size >= 2048 && $size <= 512000);
+    });
 
     // Sort by file size (largest first) and return
     usort($css_files, function($a, $b) {
