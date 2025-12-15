@@ -411,6 +411,68 @@ function pl_optimize_elementor()
 }
 
 /**
+ * Disable WordPress emoji scripts (saves ~15KB)
+ */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');
+
+/**
+ * Remove WordPress version from head (minor security improvement)
+ */
+remove_action('wp_head', 'wp_generator');
+
+/**
+ * Disable jQuery Migrate (saves ~10KB if not needed)
+ * Only disable if your site doesn't use old jQuery plugins
+ */
+add_filter('wp_default_scripts', 'pl_disable_jquery_migrate');
+function pl_disable_jquery_migrate($scripts)
+{
+    if (!is_admin() && !empty($scripts->registered['jquery'])) {
+        $scripts->registered['jquery']->deps = array_diff(
+            $scripts->registered['jquery']->deps,
+            array('jquery-migrate')
+        );
+    }
+    return $scripts;
+}
+
+/**
+ * Disable WordPress embeds (saves ~5KB)
+ */
+add_action('wp_footer', 'pl_disable_embeds');
+function pl_disable_embeds()
+{
+    wp_dequeue_script('wp-embed');
+}
+
+/**
+ * Add DNS prefetch for external domains
+ */
+add_action('wp_head', 'pl_dns_prefetch', 0);
+function pl_dns_prefetch()
+{
+    echo '<link rel="dns-prefetch" href="//fonts.googleapis.com">';
+    echo '<link rel="dns-prefetch" href="//fonts.gstatic.com">';
+    // Add more external domains as needed
+}
+
+/**
+ * Optimize Heartbeat API (reduces server load)
+ */
+add_filter('heartbeat_settings', 'pl_optimize_heartbeat');
+function pl_optimize_heartbeat($settings)
+{
+    // Slow down or disable heartbeat on frontend
+    if (!is_admin()) {
+        $settings['interval'] = 120; // 120 seconds instead of default 15
+    }
+    return $settings;
+}
+
+/**
  * Add console log to track when page becomes interactive
  */
 add_action('wp_footer', 'pl_track_interactivity', 1);
