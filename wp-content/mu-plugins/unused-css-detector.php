@@ -36,10 +36,19 @@ function pl_css_analyzer_page() {
 
     // Handle scan request
     $scan_results = array();
-    $scan_in_progress = false;
+    $error_message = '';
 
     if (isset($_POST['scan_css']) && check_admin_referer('pl_css_scan', 'pl_css_nonce')) {
+        // Clear cache before scanning to force fresh results
+        delete_transient('pl_css_scan_results');
+
         $scan_results = pl_scan_css_files();
+
+        // Check for errors
+        if (isset($scan_results['error'])) {
+            $error_message = $scan_results['error'];
+            $scan_results = array();
+        }
     }
 
     if (isset($_POST['clear_cache']) && check_admin_referer('pl_css_scan', 'pl_css_nonce')) {
@@ -48,9 +57,9 @@ function pl_css_analyzer_page() {
     }
 
     // Check for cached results
-    if (empty($scan_results)) {
+    if (empty($scan_results) && empty($error_message)) {
         $cached = get_transient('pl_css_scan_results');
-        if ($cached) {
+        if ($cached && !isset($cached['error'])) {
             $scan_results = $cached;
         }
     }
@@ -59,6 +68,20 @@ function pl_css_analyzer_page() {
     <div class="wrap">
         <h1>Unused CSS Detector</h1>
         <p>This tool analyzes CSS files to identify potentially unused selectors. PageSpeed reports <strong>900ms potential savings</strong> from unused CSS.</p>
+
+        <?php if (!empty($error_message)): ?>
+            <div class="notice notice-error" style="padding: 15px; margin: 20px 0;">
+                <h3 style="margin-top: 0;">Scan Failed</h3>
+                <p><strong>Error:</strong> <?php echo esc_html($error_message); ?></p>
+                <p>Common causes:</p>
+                <ul>
+                    <li>PHP timeout (increase max_execution_time in php.ini)</li>
+                    <li>Memory limit too low (increase memory_limit in php.ini)</li>
+                    <li>Cannot fetch homepage (check site URL and permalinks)</li>
+                </ul>
+                <p><strong>Alternative:</strong> Use WP Rocket's "Remove Unused CSS" feature for automated detection.</p>
+            </div>
+        <?php endif; ?>
 
         <div class="card" style="max-width: 900px; margin: 20px 0; background: #fff3cd; border-left: 4px solid #ffc107;">
             <h2 style="margin-top: 0;">⚠️ Important Notes</h2>
@@ -90,7 +113,7 @@ function pl_css_analyzer_page() {
                 <?php endif; ?>
             </p>
             <p class="description">
-                This will scan your theme and plugin CSS files. The process may take 30-60 seconds.
+                This will scan your theme and plugin CSS files. The process may take 30-60 seconds. Results are cached for 10 minutes.
             </p>
         </form>
 
@@ -209,7 +232,9 @@ function pl_css_analyzer_page() {
  * Scan CSS files for unused selectors
  */
 function pl_scan_css_files() {
-    set_time_limit(300); // Allow up to 5 minutes
+    // Increase limits
+    @ini_set('memory_limit', '256M');
+    @set_time_limit(120);
 
     $results = array(
         'files' => array(),
@@ -222,170 +247,228 @@ function pl_scan_css_files() {
         )
     );
 
-    // Get all enqueued CSS files
-    global $wp_styles;
-    wp_enqueue_scripts();
-    do_action('wp_enqueue_scripts');
+    try {
+        // Get homepage HTML for comparison
+        $homepage_html = pl_get_page_html(home_url());
 
-    if (!isset($wp_styles) || !is_object($wp_styles)) {
-        return array('error' => 'Could not access WordPress styles');
+        if (empty($homepage_html)) {
+            return array('error' => 'Could not fetch homepage HTML. Please check your site URL.');
+        }
+
+        // Manually find CSS files in common locations
+        $css_files = pl_find_css_files();
+
+        if (empty($css_files)) {
+            return array('error' => 'No CSS files found to analyze.');
+        }
+
+        // Analyze each CSS file (limit to top 15 largest files)
+        $count = 0;
+        foreach ($css_files as $file_path) {
+            if ($count >= 15) break; // Limit processing
+
+            if (!file_exists($file_path)) {
+                continue;
+            }
+
+            $file_size = filesize($file_path);
+
+            // Skip very small files (< 2KB) or very large files (> 500KB)
+            if ($file_size < 2048 || $file_size > 512000) {
+                continue;
+            }
+
+            try {
+                $file_data = pl_analyze_css_file($file_path, $homepage_html);
+
+                if ($file_data && $file_data['total_selectors'] > 0) {
+                    $results['files'][] = $file_data;
+                    $results['summary']['files_scanned']++;
+                    $results['summary']['total_selectors'] += $file_data['total_selectors'];
+                    $results['summary']['used_selectors'] += $file_data['used_selectors'];
+                    $results['summary']['unused_selectors'] += $file_data['unused_selectors'];
+                    $count++;
+                }
+            } catch (Exception $e) {
+                // Skip problematic files
+                continue;
+            }
+        }
+
+        if (empty($results['files'])) {
+            return array('error' => 'No CSS files could be analyzed. Files may be too large or in unsupported format.');
+        }
+
+        // Sort files by unused percentage (worst first)
+        usort($results['files'], function($a, $b) {
+            return $b['unused_percent'] - $a['unused_percent'];
+        });
+
+        // Limit to top 10 files
+        $results['files'] = array_slice($results['files'], 0, 10);
+
+        // Calculate estimated savings (rough estimate)
+        $total_kb = 0;
+        foreach ($results['files'] as $file) {
+            $total_kb += $file['size_kb'] * ($file['unused_percent'] / 100);
+        }
+        $results['summary']['estimated_savings'] = round($total_kb) . 'KB';
+
+        // Cache results for 10 minutes
+        set_transient('pl_css_scan_results', $results, 10 * MINUTE_IN_SECONDS);
+
+        return $results;
+
+    } catch (Exception $e) {
+        return array('error' => 'Scan failed: ' . $e->getMessage());
     }
-
-    // Get homepage HTML for comparison
-    $homepage_html = pl_get_page_html(home_url());
-
-    // Scan each CSS file
-    foreach ($wp_styles->registered as $handle => $style) {
-        if (empty($style->src)) {
-            continue;
-        }
-
-        // Skip external CSS
-        if (strpos($style->src, home_url()) === false && strpos($style->src, '/') === 0) {
-            $file_path = ABSPATH . ltrim($style->src, '/');
-        } elseif (strpos($style->src, home_url()) !== false) {
-            $file_path = str_replace(home_url(), ABSPATH, $style->src);
-        } else {
-            continue; // External file
-        }
-
-        // Clean up query strings
-        $file_path = preg_replace('/\?.*$/', '', $file_path);
-
-        if (!file_exists($file_path)) {
-            continue;
-        }
-
-        $file_size = filesize($file_path);
-
-        // Skip very small files (< 1KB)
-        if ($file_size < 1024) {
-            continue;
-        }
-
-        $file_data = pl_analyze_css_file($file_path, $homepage_html);
-
-        if ($file_data && $file_data['unused_selectors'] > 0) {
-            $results['files'][] = $file_data;
-            $results['summary']['files_scanned']++;
-            $results['summary']['total_selectors'] += $file_data['total_selectors'];
-            $results['summary']['used_selectors'] += $file_data['used_selectors'];
-            $results['summary']['unused_selectors'] += $file_data['unused_selectors'];
-        }
-    }
-
-    // Sort files by size (largest first)
-    usort($results['files'], function($a, $b) {
-        return $b['size_kb'] - $a['size_kb'];
-    });
-
-    // Limit to top 10 files
-    $results['files'] = array_slice($results['files'], 0, 10);
-
-    // Calculate estimated savings (rough estimate)
-    $total_kb = 0;
-    foreach ($results['files'] as $file) {
-        $total_kb += $file['size_kb'] * ($file['unused_percent'] / 100);
-    }
-    $results['summary']['estimated_savings'] = round($total_kb) . 'KB';
-
-    // Cache results for 1 hour
-    set_transient('pl_css_scan_results', $results, HOUR_IN_SECONDS);
-
-    return $results;
 }
 
 /**
- * Analyze a single CSS file
+ * Find CSS files in theme and plugin directories
+ */
+function pl_find_css_files() {
+    $css_files = array();
+
+    // Theme CSS
+    $theme_dir = get_stylesheet_directory();
+    if (is_dir($theme_dir)) {
+        $theme_css = glob($theme_dir . '/*.css');
+        if ($theme_css) {
+            $css_files = array_merge($css_files, $theme_css);
+        }
+        $theme_css_dir = glob($theme_dir . '/css/*.css');
+        if ($theme_css_dir) {
+            $css_files = array_merge($css_files, $theme_css_dir);
+        }
+    }
+
+    // Parent theme CSS
+    $parent_dir = get_template_directory();
+    if (is_dir($parent_dir) && $parent_dir !== $theme_dir) {
+        $parent_css = glob($parent_dir . '/*.css');
+        if ($parent_css) {
+            $css_files = array_merge($css_files, $parent_css);
+        }
+    }
+
+    // WooCommerce CSS
+    $wc_assets = WP_PLUGIN_DIR . '/woocommerce/assets/css';
+    if (is_dir($wc_assets)) {
+        $wc_css = glob($wc_assets . '/*.css');
+        if ($wc_css) {
+            $css_files = array_merge($css_files, array_slice($wc_css, 0, 5)); // Limit to 5 files
+        }
+    }
+
+    // Elementor CSS (in uploads)
+    $elementor_css = WP_CONTENT_DIR . '/uploads/elementor/css';
+    if (is_dir($elementor_css)) {
+        $elem_files = glob($elementor_css . '/*.css');
+        if ($elem_files) {
+            // Only include the main global CSS
+            foreach ($elem_files as $file) {
+                if (strpos($file, 'global.css') !== false) {
+                    $css_files[] = $file;
+                    break;
+                }
+            }
+        }
+    }
+
+    // Sort by file size (largest first) and return
+    usort($css_files, function($a, $b) {
+        return filesize($b) - filesize($a);
+    });
+
+    return $css_files;
+}
+
+/**
+ * Analyze a single CSS file (simplified for speed)
  */
 function pl_analyze_css_file($file_path, $html) {
-    $css_content = file_get_contents($file_path);
+    $css_content = @file_get_contents($file_path);
 
     if (empty($css_content)) {
         return null;
     }
 
-    // Remove comments
-    $css_content = preg_replace('/\/\*.*?\*\//s', '', $css_content);
+    // Limit analysis to first 100KB for performance
+    if (strlen($css_content) > 102400) {
+        $css_content = substr($css_content, 0, 102400);
+    }
 
-    // Extract all CSS selectors (simplified regex - won't catch everything)
-    preg_match_all('/([^\{\}]+)\{[^\}]*\}/s', $css_content, $matches);
+    // Remove comments and minify for faster processing
+    $css_content = preg_replace('/\/\*.*?\*\//s', '', $css_content);
+    $css_content = preg_replace('/\s+/', ' ', $css_content);
+
+    // Extract selectors with simpler regex (faster but less accurate)
+    preg_match_all('/([^{]+)\{/', $css_content, $matches);
 
     if (empty($matches[1])) {
         return null;
     }
 
     $selectors = array();
+    $total_count = 0;
+
     foreach ($matches[1] as $selector_group) {
-        // Split multiple selectors (e.g., "h1, h2, h3")
-        $parts = explode(',', $selector_group);
+        // Split multiple selectors
+        $parts = array_map('trim', explode(',', $selector_group));
         foreach ($parts as $selector) {
-            $selector = trim($selector);
-            if (!empty($selector) && !in_array($selector, $selectors)) {
+            if (!empty($selector) && strlen($selector) < 200) { // Skip malformed selectors
                 $selectors[] = $selector;
+                $total_count++;
             }
         }
     }
 
-    // Check which selectors are used
+    // Limit to 500 selectors per file for performance
+    $selectors = array_slice($selectors, 0, 500);
+
+    // Quick check which selectors are used
     $used = 0;
     $unused = 0;
     $unused_sample = array();
 
     foreach ($selectors as $selector) {
-        // Skip pseudo-classes and media queries (would need dynamic checking)
-        if (preg_match('/:(hover|focus|active|visited|before|after|nth-child|first-child|last-child)/i', $selector)) {
-            $used++; // Assume these are used
+        // Auto-assume these are used (can't check dynamically)
+        if (preg_match('/@|:(hover|focus|active|visited|before|after|nth-|first-|last-|not\(|has\()/i', $selector)) {
+            $used++;
             continue;
         }
 
-        if (preg_match('/@media|@keyframes|@font-face/i', $selector)) {
-            $used++; // Assume these are used
-            continue;
-        }
+        // Extract main identifier (class, id, or tag)
+        $found = false;
 
-        // Simplify selector for checking (remove pseudo-elements, attributes)
-        $simple_selector = preg_replace('/::?(before|after|hover|focus|active).*$/', '', $selector);
-        $simple_selector = preg_replace('/\[.*?\]/', '', $simple_selector);
-
-        // Extract class/id/tag names
-        if (preg_match_all('/[.#]?[\w-]+/', $simple_selector, $parts)) {
-            $found = false;
-            foreach ($parts[0] as $part) {
-                $part = trim($part);
-                if (empty($part)) continue;
-
-                // Check if this class/id/tag exists in HTML
-                if (strpos($part, '.') === 0) {
-                    // Class selector
-                    $class = substr($part, 1);
-                    if (preg_match('/class=["\'][^"\']*\b' . preg_quote($class, '/') . '\b[^"\']*["\']/', $html)) {
-                        $found = true;
-                        break;
-                    }
-                } elseif (strpos($part, '#') === 0) {
-                    // ID selector
-                    $id = substr($part, 1);
-                    if (preg_match('/id=["\']' . preg_quote($id, '/') . '["\']/', $html)) {
-                        $found = true;
-                        break;
-                    }
-                } else {
-                    // Tag selector
-                    if (preg_match('/<' . preg_quote($part, '/') . '[\s>]/', $html)) {
-                        $found = true;
-                        break;
-                    }
-                }
+        // Check for class
+        if (preg_match('/\.([a-zA-Z0-9_-]+)/', $selector, $class_match)) {
+            $class = $class_match[1];
+            if (stripos($html, 'class="' . $class) !== false || stripos($html, 'class=\'' . $class) !== false || stripos($html, ' ' . $class . ' ') !== false) {
+                $found = true;
             }
+        }
 
-            if ($found) {
-                $used++;
-            } else {
-                $unused++;
-                if (count($unused_sample) < 20) {
-                    $unused_sample[] = $selector;
-                }
+        // Check for ID
+        if (!$found && preg_match('/#([a-zA-Z0-9_-]+)/', $selector, $id_match)) {
+            $id = $id_match[1];
+            if (stripos($html, 'id="' . $id . '"') !== false || stripos($html, 'id=\'' . $id . '\'') !== false) {
+                $found = true;
+            }
+        }
+
+        // Check for common tags
+        if (!$found && preg_match('/^(div|span|p|a|h[1-6]|ul|li|img|input|button|form|table|tr|td|section|article|nav|header|footer)[\s.#:\[]/', $selector)) {
+            $found = true; // Assume common tags are used
+        }
+
+        if ($found) {
+            $used++;
+        } else {
+            $unused++;
+            if (count($unused_sample) < 20) {
+                $unused_sample[] = $selector;
             }
         }
     }
@@ -395,7 +478,7 @@ function pl_analyze_css_file($file_path, $html) {
 
     return array(
         'file' => basename($file_path),
-        'path' => $file_path,
+        'path' => str_replace(ABSPATH, '', $file_path),
         'total_selectors' => $total,
         'used_selectors' => $used,
         'unused_selectors' => $unused,
