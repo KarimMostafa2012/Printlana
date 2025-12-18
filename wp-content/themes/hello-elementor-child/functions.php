@@ -1441,7 +1441,7 @@ function custom_redirect_vendors_after_login($redirect_to, $request, $user)
 
         if ($is_vendor && class_exists('WeDevs_Dokan')) {
             // Redirect vendors to the Dokan dashboard
-            //return dokan_get_page_url('dashboard', 'dokan');
+            return dokan_get_page_url('dashboard', 'dokan');
         } else {
             // Redirect non-vendors to the My Account page
             return 'https://printlana.com/my-account/';
@@ -1487,8 +1487,8 @@ function custom_redirect_vendors_from_my_account()
 
         // Redirect vendors to the Dokan dashboard
         if (class_exists('WeDevs_Dokan')) {
-            //wp_safe_redirect(dokan_get_page_url('dashboard', 'dokan'));
-            //exit;
+            wp_safe_redirect(dokan_get_page_url('dashboard', 'dokan'));
+            exit;
         }
     }
 }
