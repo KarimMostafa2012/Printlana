@@ -1831,8 +1831,63 @@ function pl_fix_dokan_dashboard_loading()
     wp_dequeue_style('thmaf-public-style');
     wp_deregister_style('thmaf-public-style');
 
-    // Log for debugging (check browser console)
+    // Enhanced debugging script
     wp_add_inline_script('jquery', '
-        console.log("[PL Dashboard Fix] ThemeHigh scripts dequeued on Dokan dashboard");
+        console.log("[PL Dashboard Fix] ThemeHigh scripts dequeued");
+
+        // Wait for DOM to be ready
+        jQuery(document).ready(function($) {
+            console.log("[PL Dashboard Debug] DOM Ready");
+            console.log("[PL Dashboard Debug] Current URL:", window.location.href);
+            console.log("[PL Dashboard Debug] Vue loaded:", typeof Vue !== "undefined");
+            console.log("[PL Dashboard Debug] Dokan loaded:", typeof dokan !== "undefined");
+
+            // Check if page has loading indicators
+            setTimeout(function() {
+                const loaders = document.querySelectorAll(".dokan-loading, .spinner, .loader, [class*=loading]");
+                if (loaders.length > 0) {
+                    console.warn("[PL Dashboard Debug] Page still showing loaders after 3s:", loaders);
+                }
+
+                // Check if page is empty
+                const contentArea = document.querySelector(".dokan-dashboard-content");
+                if (contentArea && contentArea.innerHTML.trim().length < 100) {
+                    console.error("[PL Dashboard Debug] Content area appears empty");
+                }
+            }, 3000);
+
+            // Monitor all fetch/AJAX requests
+            const originalFetch = window.fetch;
+            window.fetch = function(...args) {
+                const url = typeof args[0] === "string" ? args[0] : args[0].url;
+                console.log("[PL Dashboard Debug] Fetch request:", url);
+
+                return originalFetch.apply(this, args)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error("[PL Dashboard Debug] Fetch failed:", {
+                                url: url,
+                                status: response.status,
+                                statusText: response.statusText
+                            });
+                            // Clone response to read body
+                            return response.clone().text().then(body => {
+                                console.error("[PL Dashboard Debug] Error response body:", body);
+                                return response;
+                            });
+                        }
+                        console.log("[PL Dashboard Debug] Fetch success:", url);
+                        return response;
+                    })
+                    .catch(error => {
+                        console.error("[PL Dashboard Debug] Fetch error:", {
+                            url: url,
+                            error: error.message,
+                            stack: error.stack
+                        });
+                        throw error;
+                    });
+            };
+        });
     ');
 }
