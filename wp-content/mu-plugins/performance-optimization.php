@@ -19,7 +19,34 @@ add_filter('script_loader_tag', 'pl_defer_non_critical_scripts', 10, 3);
 function pl_defer_non_critical_scripts($tag, $handle, $src)
 {
     // Don't defer ANY scripts on Dokan dashboard (Vue.js needs proper loading order)
+    // Use multiple methods to detect Dokan dashboard
+    $is_dokan_dashboard = false;
+
+    // Method 1: Use Dokan function if available
     if (function_exists('dokan_is_seller_dashboard') && dokan_is_seller_dashboard()) {
+        $is_dokan_dashboard = true;
+    }
+
+    // Method 2: Check URL pattern (more reliable for early hooks)
+    if (!$is_dokan_dashboard && isset($_SERVER['REQUEST_URI'])) {
+        $request_uri = $_SERVER['REQUEST_URI'];
+        if (strpos($request_uri, '/dashboard/') !== false ||
+            strpos($request_uri, 'dashboard') !== false && get_query_var('author') !== '') {
+            $is_dokan_dashboard = true;
+        }
+    }
+
+    // Method 3: Check if Dokan scripts are being loaded
+    if (!$is_dokan_dashboard && (
+        strpos($handle, 'dokan') !== false ||
+        strpos($handle, 'vue') !== false ||
+        $handle === 'dokan-vue-vendor' ||
+        $handle === 'dokan-vue-bootstrap'
+    )) {
+        $is_dokan_dashboard = true;
+    }
+
+    if ($is_dokan_dashboard) {
         return $tag;
     }
 
@@ -119,7 +146,32 @@ function pl_disable_unnecessary_wc_scripts()
     }
 
     // CRITICAL: Don't run on Dokan seller dashboard (needs all scripts including Vue.js)
+    // Use multiple detection methods
+    $is_dokan_dashboard = false;
+
+    // Method 1: Use Dokan function
     if (function_exists('dokan_is_seller_dashboard') && dokan_is_seller_dashboard()) {
+        $is_dokan_dashboard = true;
+    }
+
+    // Method 2: Check URL pattern
+    if (!$is_dokan_dashboard && isset($_SERVER['REQUEST_URI'])) {
+        $request_uri = $_SERVER['REQUEST_URI'];
+        if (strpos($request_uri, '/dashboard/') !== false) {
+            $is_dokan_dashboard = true;
+        }
+    }
+
+    // Method 3: Check if it's a dokan page type
+    if (!$is_dokan_dashboard) {
+        global $wp_query;
+        if (isset($wp_query->query_vars['pagename']) &&
+            strpos($wp_query->query_vars['pagename'], 'dashboard') !== false) {
+            $is_dokan_dashboard = true;
+        }
+    }
+
+    if ($is_dokan_dashboard) {
         return;
     }
 
