@@ -184,6 +184,31 @@ function pl_disable_unnecessary_wc_scripts()
     $is_woocommerce = is_woocommerce();
 
     // ====================
+    // PROTECT DOKAN SCRIPTS (Never remove these)
+    // ====================
+    // If any Dokan/Vue scripts are enqueued, this is likely a dashboard page
+    // Even if our detection above failed, protect these critical scripts
+    global $wp_scripts;
+    $dokan_critical_scripts = [
+        'dokan-vue-vendor',
+        'dokan-vue-bootstrap',
+        'dokan-vue-admin',
+        'dokan-pro-vue-admin',
+        'dokan-pro-vue-frontend-shipping',
+        'vue',
+        'vuex',
+        'vue-router'
+    ];
+
+    foreach ($dokan_critical_scripts as $script_handle) {
+        if (isset($wp_scripts->registered[$script_handle]) ||
+            isset($wp_scripts->queue) && in_array($script_handle, $wp_scripts->queue)) {
+            // Dokan script detected - abort optimization entirely
+            return;
+        }
+    }
+
+    // ====================
     // ALWAYS REMOVE (on ALL pages - we have custom alternatives)
     // ====================
 
