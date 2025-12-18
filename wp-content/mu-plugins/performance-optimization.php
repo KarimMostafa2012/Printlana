@@ -18,6 +18,11 @@ if (!defined('ABSPATH')) {
 add_filter('script_loader_tag', 'pl_defer_non_critical_scripts', 10, 3);
 function pl_defer_non_critical_scripts($tag, $handle, $src)
 {
+    // Don't defer ANY scripts on Dokan dashboard (Vue.js needs proper loading order)
+    if (function_exists('dokan_is_seller_dashboard') && dokan_is_seller_dashboard()) {
+        return $tag;
+    }
+
     // Critical scripts that MUST load immediately (do NOT defer these)
     $critical_scripts = array(
         'jquery',
@@ -110,6 +115,11 @@ function pl_disable_unnecessary_wc_scripts()
 {
     // Don't run on admin
     if (is_admin()) {
+        return;
+    }
+
+    // CRITICAL: Don't run on Dokan seller dashboard (needs all scripts including Vue.js)
+    if (function_exists('dokan_is_seller_dashboard') && dokan_is_seller_dashboard()) {
         return;
     }
 
