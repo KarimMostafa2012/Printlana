@@ -1810,3 +1810,29 @@ function printlana_force_utf8_encoding($data)
 // if (!defined('WP_DEBUG_DISPLAY')) {
 //     define('WP_DEBUG_DISPLAY', false);
 // }
+
+/**
+ * Fix Dokan vendor dashboard infinite loading issue
+ * Dequeue conflicting scripts that interfere with Dokan Vue.js pages
+ */
+add_action('wp_enqueue_scripts', 'pl_fix_dokan_dashboard_loading', 999);
+function pl_fix_dokan_dashboard_loading()
+{
+    // Only run on Dokan seller dashboard
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
+        return;
+    }
+
+    // Dequeue ThemeHigh Multiple Addresses scripts on Dokan dashboard
+    // These scripts can conflict with Dokan's Vue.js components
+    wp_dequeue_script('thmaf-public');
+    wp_deregister_script('thmaf-public');
+
+    wp_dequeue_style('thmaf-public-style');
+    wp_deregister_style('thmaf-public-style');
+
+    // Log for debugging (check browser console)
+    wp_add_inline_script('jquery', '
+        console.log("[PL Dashboard Fix] ThemeHigh scripts dequeued on Dokan dashboard");
+    ');
+}
