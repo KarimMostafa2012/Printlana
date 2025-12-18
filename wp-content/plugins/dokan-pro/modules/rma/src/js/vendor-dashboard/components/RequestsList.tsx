@@ -21,7 +21,8 @@ import StatusFilter from './Navigation/StatusFilter';
 import { useWarrantyRequests } from '../hooks/useWarrantyRequests';
 
 const defaultLayouts = {
-    density: 'comfortable',
+    table: { density: 'comfortable' },
+    list: {},
 };
 
 type RequestsListProps = {
@@ -271,8 +272,7 @@ export default function RequestsList( { navigate, location, createSearchParams }
     const actions = [
         {
             id: 'return-request-view',
-            label: '',
-            icon: () => (
+            label: () => (
                 <div className={`px-2 bg-transparent font-medium dokan-link block w-full`}>
                     {__('View', 'dokan')}
                 </div>
@@ -284,8 +284,7 @@ export default function RequestsList( { navigate, location, createSearchParams }
         },
         {
             id: 'return-request-delete',
-            label: '',
-            icon: () => (
+            label: () => (
                 <div className={`px-2 bg-transparent font-medium text-dokan-danger hover:text-dokan-danger-hover text-sm`}>
                     {__('Delete', 'dokan')}
                 </div>

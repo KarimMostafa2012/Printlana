@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\Razorpay\Order;
 
+use WC_Order;
 use WeDevs\Dokan\Cache;
 use WP_Error;
 use WC_Order_Query;
@@ -168,7 +169,7 @@ class OrderController {
 
         // Validate the Order getting from request
         $order = dokan_pro()->module->razorpay->cart_handler->get_order_from_request();
-        if ( ! $order instanceof \WC_Order ) {
+        if ( ! $order instanceof WC_Order ) {
             return;
         }
 
@@ -244,8 +245,8 @@ class OrderController {
      *
      * @since 3.5.0
      *
-     * @param \WC_Order $order
-     * @param object    $payment_data Razorpay payment data
+     * @param WC_Order $order
+     * @param object    $razorpay_payment Razorpay payment data
      *
      * @return void
      * @throws DokanException
@@ -265,21 +266,26 @@ class OrderController {
 
         // Do transfer related works.
         $all_withdraws = [];
-        $currency      = $razorpay_payment->currency;
         $order_total   = $order->get_total();
         $razorpay_fee  = wc_format_decimal( Helper::format_balance( $razorpay_payment->fee ), 2 );
 
         // Add gateway fee to order meta.
         $order->update_meta_data( 'dokan_razorpay_gateway_fee', $razorpay_fee );
-        $order->update_meta_data( 'dokan_gateway_fee', $razorpay_fee );
+        $order->update_meta_data( 'dokan_gateway_fee_paid_by', Helper::seller_pays_the_processing_fee() ? 'seller' : 'admin' );
         $order->save();
-
-        /* translators: 1: Gateway fee */
-        $order->add_order_note( sprintf( __( 'Payment gateway processing fee %s', 'dokan' ), wc_price( $razorpay_fee, [ 'currency' => $currency ] ) ) );
+        /**
+         * Process the gateway fee for the suborder
+         *
+         * @param float $processing_fee
+         * @param WC_Order $order
+         *
+         * @since 4.1.1
+         */
+        do_action( 'dokan_process_payment_gateway_fee', $razorpay_fee, $order, Helper::get_gateway_id() );
 
         // Process all orders and make transfer one by one.
         foreach ( $all_orders as $tmp_order ) {
-            if ( ! $tmp_order instanceof \WC_Order ) {
+            if ( ! $tmp_order instanceof WC_Order ) {
                 continue;
             }
 
@@ -297,10 +303,6 @@ class OrderController {
 
             $razorpay_suborder_fee = Helper::calculate_processing_fee_for_suborder( $razorpay_fee, $tmp_order, $order );
 
-            if ( Helper::seller_pays_the_processing_fee() && ! empty( $order_total ) && ! empty( $tmp_order_total ) && ! empty( $razorpay_fee ) ) {
-                $vendor_raw_earning = $vendor_raw_earning - $razorpay_suborder_fee;
-            }
-
             // Update vendor earning after calculating the gateway fee if seller pays processing fee.
             $vendor_earning = wc_format_decimal( $vendor_raw_earning, 2 );
             if ( false === OrderValidator::is_order_transferable( $tmp_order, $connected_vendor_id, $vendor_earning ) ) {
@@ -311,7 +313,6 @@ class OrderController {
             $tmp_order->update_meta_data( '_dokan_razorpay_payment_disbursement_mode', Helper::get_disbursement_mode() );
             $tmp_order->update_meta_data( '_dokan_razorpay_payment_charge_captured', 'yes' );
             $tmp_order->update_meta_data( '_dokan_razorpay_payment_processing_fee', wc_format_decimal( $razorpay_suborder_fee, 2 ) );
-            $tmp_order->update_meta_data( 'dokan_gateway_fee', wc_format_decimal( $razorpay_suborder_fee, 2 ) );
             $tmp_order->update_meta_data( 'paid_with_dokan_razorpay', true );
             $tmp_order->update_meta_data( 'dokan_gateway_fee_paid_by', Helper::seller_pays_the_processing_fee() ? 'seller' : 'admin' );
 

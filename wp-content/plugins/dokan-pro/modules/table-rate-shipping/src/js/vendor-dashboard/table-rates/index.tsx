@@ -1,11 +1,11 @@
-import { TableRow } from './TableRow';
-import { TableHeader } from './TableHeader';
+import TableRow from './TableRow';
+import TableHeader from '../common/TableHeader';
 import { useState } from '@wordpress/element';
 import { DokanModal } from '@dokan/components';
-import { ActionButtons } from './ActionButtons';
-import { __, sprintf, _n } from '@wordpress/i18n';
-import TableRatesSkeleton from './TableRatesSkeleton';
+import ActionButtons from '../common/ActionButtons';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import { useTableRates } from '../hooks/useTableRates';
+import TableSkeleton from '../common/TableSkeleton';
 
 interface TableRatesProps {
     zoneId: number;
@@ -28,6 +28,91 @@ const TableRates = ( { zoneId, instanceId }: TableRatesProps ) => {
         handleSave,
         handleOrderUpdate,
     } = useTableRates( zoneId, instanceId );
+
+    interface BaseColumn {
+        key: string;
+        label: string;
+        tooltip: string;
+        className?: string;
+    }
+
+    const getTableRateColumns = (): BaseColumn[] => [
+        {
+            key: 'shipping_class',
+            label: __( 'Shipping Class', 'dokan' ),
+            tooltip: __( 'Shipping class this rate applies to.', 'dokan' ),
+        },
+        {
+            key: 'condition',
+            label: __( 'Condition', 'dokan' ),
+            tooltip: __( 'Condition vs. destination.', 'dokan' ),
+        },
+        {
+            key: 'min_max',
+            label: __( 'Min-Max', 'dokan' ),
+            tooltip: __(
+                'Bottom and top range for the selected condition.',
+                'dokan'
+            ),
+        },
+        {
+            key: 'break',
+            label: __( 'Break', 'dokan' ),
+            tooltip: __(
+                'Break at this point. For per-order rates, no rates other than this will be offered. For calculated rates, this will stop any further rates being matched.',
+                'dokan'
+            ),
+        },
+        {
+            key: 'abort',
+            label: __( 'Abort', 'dokan' ),
+            tooltip: __(
+                'Enable this option to disable all rates/this shipping method if this row matches any item/line/class being quoted.',
+                'dokan'
+            ),
+        },
+        {
+            key: 'row_cost',
+            label: __( 'Row cost', 'dokan' ),
+            tooltip: __(
+                'Cost for shipping the order, including tax.',
+                'dokan'
+            ),
+        },
+        {
+            key: 'item_cost',
+            label: __( 'Item cost', 'dokan' ),
+            tooltip: __( 'Cost per item, including tax.', 'dokan' ),
+        },
+        {
+            key: 'weight_cost',
+            label: sprintf(
+                /* translators: 1) Weight unit */
+                __( '%1$s cost', 'dokan' ),
+                // Assuming you have access to weight unit, otherwise use generic label
+                dokanTableRateShippingHelper?.weight_unit ||
+                    __( 'Weight', 'dokan' )
+            ),
+            tooltip: __( 'Cost per weight unit.', 'dokan' ),
+        },
+        {
+            key: 'percent_cost',
+            label: __(
+                /* translators: % cost */
+                '% cost',
+                'dokan'
+            ),
+            tooltip: __( 'Percentage of total to charge.', 'dokan' ),
+        },
+        {
+            key: 'label',
+            label: __( 'Label', 'dokan' ),
+            tooltip: __(
+                'Label for the shipping method which the user will be presented.',
+                'dokan'
+            ),
+        },
+    ];
 
     const rateConditionOptions = [
         { value: '', label: __( 'None', 'dokan' ) },
@@ -56,7 +141,7 @@ const TableRates = ( { zoneId, instanceId }: TableRatesProps ) => {
     ];
 
     if ( isLoading ) {
-        return <TableRatesSkeleton />;
+        return <TableSkeleton columns={ 12 } />;
     }
 
     return (
@@ -87,6 +172,11 @@ const TableRates = ( { zoneId, instanceId }: TableRatesProps ) => {
                                 tableData.length > 0 &&
                                 selectedRows.length === tableData.length
                             }
+                            columns={ getTableRateColumns() }
+                            dragTooltip={ __(
+                                'Draggable distance rates.',
+                                'dokan'
+                            ) }
                         />
                         <tbody>
                             <TableRow
@@ -108,8 +198,10 @@ const TableRates = ( { zoneId, instanceId }: TableRatesProps ) => {
                     isSaving={ isSaving }
                     onAdd={ handleAddShippingRate }
                     onDuplicate={ handleDuplicateRows }
-                    onDelete={ () => setShowModal( true ) }
                     hasSelectedRows={ selectedRows.length > 0 }
+                    onDelete={ () => setShowModal( true ) }
+                    addButtonLabel={ __( 'Add Shipping Rate', 'dokan' ) }
+                    saveButtonLabel={ __( 'Save Shipping Rates', 'dokan' ) }
                 />
 
                 { /* Delete confirmation modal */ }

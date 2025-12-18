@@ -44,6 +44,33 @@ class Helper {
     }
 
     /**
+     * Get subscribed vendor count
+     *
+     * @since 4.1.0
+     *
+     * @return int The count of subscribed vendors
+     */
+    public static function get_subscribed_vendor_count(): int {
+        global $wpdb;
+
+        // Check if a subscription module is enabled
+        $enable_option = get_option( 'dokan_product_subscription', [ 'enable_pricing' => 'off' ] );
+        if ( ! isset( $enable_option['enable_pricing'] ) || $enable_option['enable_pricing'] !== 'on' ) {
+            return 0;
+        }
+
+        // Get subscribed vendors count.
+        $subscribed_vendors = $wpdb->get_var(
+            "SELECT COUNT(DISTINCT user_id)
+            FROM {$wpdb->usermeta}
+            WHERE meta_key = 'product_package_id'
+            AND meta_value != ''"
+        );
+
+        return (int) ( $subscribed_vendors ?? 0 );
+    }
+
+    /**
      * Check if its vendor subscribed pack
      *
      * @param integer $product_id

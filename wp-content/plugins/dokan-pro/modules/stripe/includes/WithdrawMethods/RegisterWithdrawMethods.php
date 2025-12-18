@@ -40,8 +40,6 @@ class RegisterWithdrawMethods {
      */
     private function hooks() {
         add_filter( 'dokan_withdraw_methods', [ $this, 'register_methods' ] );
-        add_filter( 'dokan_get_processing_fee', [ $this, 'get_order_processing_fee' ], 10, 2 );
-        add_filter( 'dokan_get_processing_gateway_fee', [ $this, 'get_processing_gateway_fee' ], 10, 3 );
         add_filter( 'dokan_orders_vendor_net_amount', [ $this, 'dokan_orders_vendor_net_amount' ], 10, 5 );
         add_filter( 'dokan_withdraw_method_settings_title', [ $this, 'get_heading' ], 10, 2 );
         add_action( 'template_redirect', [ $this, 'authorize_vendor' ] );
@@ -312,53 +310,6 @@ class RegisterWithdrawMethods {
 
         wp_safe_redirect( $redirect_url );
         exit;
-    }
-
-    /**
-     * Order processing fee for Stripe
-     *
-     * @since 3.1.0
-     *
-     * @param float     $processing_fee
-     * @param \WC_Order $order
-     *
-     * @return float
-     */
-    public function get_order_processing_fee( $processing_fee, $order ) {
-        if ( 'dokan-stripe-connect' === $order->get_payment_method() ) {
-            $stripe_processing_fee = $order->get_meta( 'dokan_gateway_fee' );
-
-            if ( ! $stripe_processing_fee ) {
-                // During processing vendor payment we save stripe fee in parent order
-                $stripe_processing_fee = $order->get_meta( 'dokan_gateway_stripe_fee' );
-            }
-
-            if ( $stripe_processing_fee ) {
-                $processing_fee = $stripe_processing_fee;
-            }
-        }
-
-        return $processing_fee;
-    }
-
-    /**
-     * Calculate gateway fee for a suborder
-     *
-     * @since 3.1.0
-     *
-     * @param float     $gateway_fee
-     * @param \WC_Order $suborder
-     * @param \WC_Order $order
-     *
-     * @return float|int
-     */
-    public function get_processing_gateway_fee( $gateway_fee, $suborder, $order ) {
-        if ( 'dokan-stripe-connect' === $order->get_payment_method() ) {
-            $order_processing_fee = class_exists( 'WeDevs\Dokan\Fees' ) ? dokan()->fees->get_processing_fee( $order ) : dokan()->commission->get_processing_fee( $order );
-            $gateway_fee          = Helper::calculate_processing_fee_for_suborder( $order_processing_fee, $suborder, $order );
-        }
-
-        return $gateway_fee;
     }
 
     /**

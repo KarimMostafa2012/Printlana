@@ -247,9 +247,20 @@ class Helper {
         // Getting vendor delivery settings
         $vendor_delivery_time_settings = get_user_meta( $vendor_id, '_dokan_vendor_delivery_time_settings', true );
 
-        // get delivery time settings from vendor user meta if set
+        // If vendor override exists, merge with defaults to ensure new keys exist
         if ( $vendor_can_override_settings && isset( $vendor_delivery_time_settings['delivery_day'] ) ) {
-            return $vendor_delivery_time_settings;
+            $delivery_settings = $vendor_delivery_time_settings;
+
+            // Migration/backfill for new buffer settings
+            $preorder = self::get_mepped_preorder( $delivery_settings );
+            if ( empty( $delivery_settings['delivery_buffer_unit'] ) ) {
+                $delivery_settings['delivery_buffer_unit'] = 'days';
+            }
+            if ( ! isset( $delivery_settings['delivery_buffer_value'] ) ) {
+                $delivery_settings['delivery_buffer_value'] = $preorder;
+            }
+
+            return $delivery_settings;
         }
 
         // Getting admin delivery settings
@@ -265,12 +276,113 @@ class Helper {
             }
         }
 
-        $delivery_settings['preorder_date']     = isset( $admin_delivery_time_settings['preorder_date'] ) ? $admin_delivery_time_settings['preorder_date'] : '0';
-        $delivery_settings['order_per_slot']    = isset( $admin_delivery_time_settings['order_per_slot']) ? $admin_delivery_time_settings['order_per_slot'] : '0';
+        $delivery_settings['preorder_date']     = self::get_mepped_preorder( $admin_delivery_time_settings );
+        $delivery_settings['order_per_slot']    = isset( $admin_delivery_time_settings['order_per_slot'] ) ? $admin_delivery_time_settings['order_per_slot'] : '0';
         $delivery_settings['delivery_support']  = ! empty( $admin_delivery_time_settings['delivery_support']['delivery'] ) && 'delivery' === $admin_delivery_time_settings['delivery_support']['delivery'] ? 'on' : 'off';
         $delivery_settings['time_slot_minutes'] = isset( $admin_delivery_time_settings['time_slot_minutes'] ) ? $admin_delivery_time_settings['time_slot_minutes'] : '30';
 
+        // New buffer settings from admin defaults with sane fallbacks
+        $delivery_settings['delivery_buffer_unit']  = isset( $admin_delivery_time_settings['delivery_buffer_unit'] ) && in_array( $admin_delivery_time_settings['delivery_buffer_unit'], [ 'days', 'hours' ], true ) ? $admin_delivery_time_settings['delivery_buffer_unit'] : 'days';
+        $delivery_settings['delivery_buffer_value'] = isset( $admin_delivery_time_settings['delivery_buffer_value'] ) ? (int) $admin_delivery_time_settings['delivery_buffer_value'] : (int) $delivery_settings['preorder_date'];
+
+        // Allow 3rd parties to adjust defaults
+        $delivery_settings = apply_filters( 'dokan_delivery_time_buffer_settings_defaults', $delivery_settings, $vendor_id );
+
         return $delivery_settings;
+    }
+
+    /**
+     * Computes the earliest date and time a customer may select for delivery/pickup for a vendor.
+     *
+     * Behaviour by buffer mode:
+     * - days: Returns midnight (00:00) of the day that is N whole days from the order_time day.
+     *         Example: N=0 → today 00:00; N=1 → tomorrow 00:00.
+     * - hours: Adds N hours to order_time, then aligns the result to the vendor’s opening/closing
+     *          hours for that calendar day. If the vendor is closed or the time falls after closing,
+     *          it advances to the next day and repeats. Scans up to 14 days ahead.
+     *
+     * Inputs and assumptions:
+     * - Settings come from self::get_delivery_time_settings($vendor_id) and include:
+     *   delivery_buffer_unit ('days'|'hours'), preorder_date (days), delivery_buffer_value (hours),
+     *   and per-day opening_time/closing_time strings.
+     * - Legacy day-based settings are normalized earlier, so preorder_date/delivery_buffer_value
+     *   can be trusted here.
+     *
+     * Timezone and safety:
+     * - Works within the timezone of $order_time (or dokan_current_datetime() if null) by cloning.
+     * - Uses a bounded scan (max 14 days) to avoid infinite loops when skipping closed days.
+     *
+     * Extensibility:
+     * - Applies the 'dokan_delivery_time_earliest_datetime' filter to the datetime before returning.
+     *
+     * @since 4.1.4
+     *
+     * @param int $vendor_id Vendor ID whose settings/hours are considered.
+     * @param \DateTimeInterface|null $order_time Reference time (defaults to current site time).
+     *
+     * @return \DateTimeInterface Earliest allowed delivery datetime, adjusted to vendor rules.
+     */
+    public static function get_earliest_delivery_datetime( $vendor_id, $order_time = null ) {
+        $order_time = $order_time ? $order_time : dokan_current_datetime();
+        $settings   = self::get_delivery_time_settings( $vendor_id );
+
+        $unit = isset( $settings['delivery_buffer_unit'] ) ? $settings['delivery_buffer_unit'] : 'days';
+
+        if ( 'days' === $unit ) {
+            $value = isset( $settings['preorder_date'] ) ? (int) $settings['preorder_date'] : 0;
+            $value = max( 0, $value );
+            // Existing behavior: start of day + N days
+            $earliest = $order_time->setTime( 0, 0 )->modify( '+' . $value . ' day' );
+            return apply_filters( 'dokan_delivery_time_earliest_datetime', $earliest, $vendor_id, $settings );
+        }
+
+        $value = isset( $settings['delivery_buffer_value'] ) ? (int) $settings['delivery_buffer_value'] : 0;
+        $value = max( 0, $value );
+        // Hours mode
+        $updated_order_time  = $order_time->modify( '+' . $value . ' hour' );
+        $tz = $updated_order_time->getTimezone();
+
+        // Safety cap to prevent infinite loops
+        for ( $i = 0; $i < 14; $i++ ) {
+            $day_dey = strtolower( $updated_order_time->format( 'l' ) );
+
+            $open_str  = self::get_delivery_times( $day_dey, $settings['opening_time'] ?? [], 0 );
+            $close_str = self::get_delivery_times( $day_dey, $settings['closing_time'] ?? [], 0 );
+
+            // If no hours or day closed, move to next day 00:00
+            if ( empty( $open_str ) || empty( $close_str ) ) {
+                $updated_order_time = $updated_order_time->setTime( 0, 0 )->modify( '+1 day' );
+                continue;
+            }
+
+            // Build open/close datetime for the day
+            $open  = dokan_current_datetime();
+            $open  = $open->modify( $updated_order_time->format( 'Y-m-d' ) );
+            $open  = $open->modify( $open_str );
+            $close = dokan_current_datetime();
+            $close = $close->modify( $updated_order_time->format( 'Y-m-d' ) );
+            $close = $close->modify( $close_str );
+
+            // Normalize timezone
+            $open  = $open->setTimezone( $tz );
+            $close = $close->setTimezone( $tz );
+
+            if ( $updated_order_time < $open ) {
+                $earliest = $open;
+                return apply_filters( 'dokan_delivery_time_earliest_datetime', $earliest, $vendor_id, $settings );
+            }
+
+            if ( $updated_order_time >= $open && $updated_order_time <= $close ) {
+                $earliest = $updated_order_time;
+                return apply_filters( 'dokan_delivery_time_earliest_datetime', $earliest, $vendor_id, $settings );
+            }
+
+            // After closing; advance to next day
+            $updated_order_time = $updated_order_time->setTime( 0, 0 )->modify( '+1 day' );
+        }
+
+        // Fallback: return T after loop
+        return apply_filters( 'dokan_delivery_time_earliest_datetime', $updated_order_time, $vendor_id, $settings );
     }
 
     /**
@@ -330,28 +442,77 @@ class Helper {
         $delivery_buffer_days = dokan_get_option( 'preorder_date', 'dokan_delivery_time', '0' );
         $time_slot_duration   = dokan_get_option( 'time_slot_minutes', 'dokan_delivery_time', '0' );
 
-        // Get todays date data
+        // Get todays date data (relative to site/vendor timezone)
         $now          = dokan_current_datetime();
         $today        = strtolower( $now->format( 'l' ) );
         $current_date = $now->format( 'Y-m-d' );
 
-        // Getting vendor slot settings
-        $vendor_slot_settings = get_user_meta( $vendor_id, '_dokan_vendor_delivery_time_slots', true );
-        if ( $vendor_can_override_settings && ( is_array( $vendor_slot_settings ) && ! empty( $vendor_slot_settings ) ) ) {
-            $delivery_slot_settings        = $vendor_slot_settings;
-            $vendor_delivery_time_settings = get_user_meta( $vendor_id, '_dokan_vendor_delivery_time_settings', true );
-            $delivery_buffer_days          = isset( $vendor_delivery_time_settings['preorder_date'] ) ? $vendor_delivery_time_settings['preorder_date'] : '0';
-            $time_slot_duration            = isset( $vendor_delivery_time_settings['time_slot_minutes'][ $today ] ) ? $vendor_delivery_time_settings['time_slot_minutes'][ $today ] : '0';
+        // Getting vendor slot settings only if override is allowed
+        $vendor_delivery_time_settings = [];
+        if ( $vendor_can_override_settings ) {
+            $vendor_slot_settings = get_user_meta( $vendor_id, '_dokan_vendor_delivery_time_slots', true );
+            if ( is_array( $vendor_slot_settings ) && ! empty( $vendor_slot_settings ) ) {
+                $delivery_slot_settings        = $vendor_slot_settings;
+                $vendor_delivery_time_settings = get_user_meta( $vendor_id, '_dokan_vendor_delivery_time_settings', true );
+                $delivery_buffer_days          = isset( $vendor_delivery_time_settings['preorder_date'] ) ? $vendor_delivery_time_settings['preorder_date'] : '0';
+                $time_slot_duration            = isset( $vendor_delivery_time_settings['time_slot_minutes'][ $today ] ) ? $vendor_delivery_time_settings['time_slot_minutes'][ $today ] : '0';
+            }
         }
 
-        // Return if delivery time slots isn't current day time slot.
-        if ( 0 !== intval( $delivery_buffer_days ) || ! array_key_exists( $today, $delivery_slot_settings ) ) {
+        // Determine buffer mode
+        $buffer_unit  = 'days';
+        $buffer_value = (int) $delivery_buffer_days;
+        $settings_source = ( is_array( $vendor_delivery_time_settings ) && ! empty( $vendor_delivery_time_settings ) )
+            ? $vendor_delivery_time_settings
+            : get_option( 'dokan_delivery_time', [] );
+
+        if ( ! empty( $settings_source['delivery_buffer_unit'] ) ) {
+            $buffer_unit = in_array( $settings_source['delivery_buffer_unit'], [ 'days', 'hours' ], true )
+                ? $settings_source['delivery_buffer_unit']
+                : 'days';
+        }
+
+        if ( isset( $settings_source['delivery_buffer_value'] ) ) {
+            $buffer_value = max( 0, (int) $settings_source['delivery_buffer_value'] );
+        }
+
+        // Hour-based buffer handling: filter out dates/slots earlier than earliest
+        if ( 'hours' === $buffer_unit ) {
+            $earliest = self::get_earliest_delivery_datetime( $vendor_id, $now );
+            $earliest_date = $earliest->format( 'Y-m-d' );
+            $earliest_time = $earliest->format( 'g:i a' );
+
+            $requested_day_of_week = strtolower( ( clone $now )->modify( $date )->format( 'l' ) );
+
+            if ( $date < $earliest_date ) {
+                // Entire day is blocked
+                return [];
+            }
+
+            if ( $date === $earliest_date && isset( $delivery_slot_settings[ $requested_day_of_week ] ) ) {
+                $earliest_ts = strtotime( $earliest_time );
+                $delivery_slot_settings[ $requested_day_of_week ] = array_filter(
+                    $delivery_slot_settings[ $requested_day_of_week ], static function ( $slot ) use ( $earliest_ts ) {
+                        // Allow any slot that still covers the earliest allowed time
+                        // i.e., include if slot end is strictly after earliest
+                        return strtotime( $slot['end'] ) > $earliest_ts;
+                    }
+                );
+            }
+
             return $delivery_slot_settings;
         }
 
-        $current_time = $now->modify( "+ $time_slot_duration minutes" )->format( 'h:i a' );
+        // Days-based behavior: if there is any day-based buffer, don't filter today's slots here.
+        // Use $buffer_value which reflects vendor/admin settings (and legacy mapping),
+        // instead of raw $delivery_buffer_days.
+        if ( 0 !== (int) $buffer_value || ! isset( $delivery_slot_settings[ $today ] ) ) {
+            return $delivery_slot_settings;
+        }
+
+        $current_time = ( clone $now )->modify( "+ $time_slot_duration minutes" )->format( 'h:i a' );
         $delivery_slot_settings[ $today ] = array_filter(
-            $delivery_slot_settings[ $today ], function( $data ) use ( $current_time, $current_date, $date ) {
+            $delivery_slot_settings[ $today ], function ( $data ) use ( $current_time, $current_date, $date ) {
                 return ! ( $current_date === $date ) || strtotime( $data['start'] ) > strtotime( $current_time );
             }
         );
@@ -468,7 +629,7 @@ class Helper {
         $pickup_location = 'store-pickup' === $delivery_type ? $store_location : '';
 
         if ( $prev_delivery_info ) {
-            $policy_note     = $prev_delivery_info->delivery_type === $delivery_type ? "$delivery_type time changed from" :
+            $policy_note = $prev_delivery_info->delivery_type === $delivery_type ? "$delivery_type time changed from" :
                 "policy changed from $prev_delivery_info->delivery_type to $delivery_type & time";
         } else {
             $policy_note = '';
@@ -584,22 +745,18 @@ class Helper {
      * @return array
      */
     public static function get_current_date_active_delivery_time_slots( $vendor_id, $date ) {
-        $vendor_can_override  = static::vendor_can_override_settings();
-        $admin_delivery_slots = get_option( '_dokan_delivery_slot_settings', [] );
-        $current_day_of_week  = strtolower( dokan_current_datetime()->modify( $date )->format( 'l' ) );
-
         $vendor_delivery_options = self::get_delivery_time_settings( $vendor_id );
         $vendor_order_per_slot   = (int) isset( $vendor_delivery_options['order_per_slot'] ) ? $vendor_delivery_options['order_per_slot'] : -1;
 
-        $admin_delivery_slots  = ! empty( $admin_delivery_slots[ $current_day_of_week ] ) ? $admin_delivery_slots[ $current_day_of_week ] : [];
-        $vendor_delivery_slots = self::get_available_delivery_slots_by_date( $vendor_id, $vendor_order_per_slot, $date );
+        // Always use calculated vendor delivery slots so that buffer rules (days or hours) and per-slot availability apply
+        $delivery_slots = self::get_available_delivery_slots_by_date( $vendor_id, $vendor_order_per_slot, $date );
 
-        $delivery_slots = $vendor_can_override ? $vendor_delivery_slots : $admin_delivery_slots;
-
-        if ( $date === dokan_current_datetime()->format( "Y-m-d" ) ) {
-            $delivery_slots = array_filter( $delivery_slots, function( $slot ) {
-                return strtotime( $slot[ 'start' ] ) > strtotime( dokan_current_datetime()->format( 'g:i a' ) );
-            } );
+        if ( $date === dokan_current_datetime()->format( 'Y-m-d' ) ) {
+            $delivery_slots = array_filter(
+                $delivery_slots, function ( $slot ) {
+					return strtotime( $slot['start'] ) > strtotime( dokan_current_datetime()->format( 'g:i a' ) );
+				}
+            );
         }
 
         return $delivery_slots;
@@ -656,9 +813,19 @@ class Helper {
             $is_delivery_time_active           = isset( $vendor_delivery_options['delivery_support'] ) && 'on' === $vendor_delivery_options['delivery_support'];
             $vendor['is_delivery_time_active'] = $is_delivery_time_active;
 
+            // Determine buffer unit/value for display purposes
+            $buffer_unit  = isset( $vendor_delivery_options['delivery_buffer_unit'] ) ? $vendor_delivery_options['delivery_buffer_unit'] : 'days';
+            $buffer_value = isset( $vendor_delivery_options['delivery_buffer_value'] ) ? (int) $vendor_delivery_options['delivery_buffer_value'] : (int) ( $vendor_delivery_options['preorder_date'] ?? 0 );
             $preorder_date = isset( $vendor_delivery_options['preorder_date'] ) ? $vendor_delivery_options['preorder_date'] : '';
 
-            $delivery_box_info_message = str_replace( '%DAY%', $preorder_date, $delivery_box_info );
+            // Build delivery box info message for frontend
+            if ( 'hours' === $buffer_unit ) {
+                /* translators: %s: hour(s) */
+                $delivery_box_info_message = sprintf( __( 'This store needs %s hour(s) to process your delivery request', 'dokan' ), $buffer_value );
+            } else {
+                // Backward compatible (days)
+                $delivery_box_info_message = str_replace( '%DAY%', $preorder_date, $delivery_box_info );
+            }
 
             $vendor_delivery_options['delivery_date_label']       = $delivery_date_label;
             $vendor_delivery_options['delivery_box_info_message'] = $delivery_box_info_message;
@@ -678,18 +845,38 @@ class Helper {
             $vendor['vendor_delivery_options'] = $vendor_delivery_options;
             $vendor['vendor_vacation_days']    = ( dokan_pro()->module->is_active( 'seller_vacation' ) && isset( $store_info['seller_vacation_schedules'] ) && isset( $store_info['setting_go_vacation'] ) && 'yes' === $store_info['setting_go_vacation'] ) ? $store_info['seller_vacation_schedules'] : [];
 
-            $current_date                  = $current_date->modify( '+' . $vendor_preorder_blocked_date_count . ' day' );
-            $vendor_preorder_block_date_to = strtolower( $current_date->format( 'Y-m-d' ) );
-
             $vendor['vendor_preorder_blocked_dates'] = [];
 
-            if ( $vendor_preorder_blocked_date_count > 0 ) {
-                $vendor['vendor_preorder_blocked_dates'] = [
-                    [
-                        'from' => $date,
-                        'to'   => $vendor_preorder_block_date_to,
-                    ],
-                ];
+            if ( 'hours' === $buffer_unit ) {
+                // In hours mode, block whole days only if the earliest allowed date is after today
+                $earliest_dt   = self::get_earliest_delivery_datetime( $_vendor_id, dokan_current_datetime() );
+                $earliest_date = strtolower( $earliest_dt->format( 'Y-m-d' ) );
+
+                if ( $earliest_date > $date ) {
+                    // Block up to the previous day of earliest_date so that earliest_date remains selectable
+                    $prev_day = dokan_current_datetime();
+                    $prev_day = strtolower( $prev_day->modify( $earliest_date )->modify( '-1 day' )->format( 'Y-m-d' ) );
+
+                    $vendor['vendor_preorder_blocked_dates'] = [
+                        [
+                            'from' => $date,
+                            'to'   => $prev_day,
+                        ],
+                    ];
+                }
+            } else {
+                $prev_day                      = $current_date->modify( '-1 day' );
+                $current_date                  = $prev_day->modify( '+' . $vendor_preorder_blocked_date_count . ' day' );
+                $vendor_preorder_block_date_to = strtolower( $current_date->format( 'Y-m-d' ) );
+
+                if ( $vendor_preorder_blocked_date_count > 0 ) {
+                    $vendor['vendor_preorder_blocked_dates'] = [
+                        [
+                            'from' => $date,
+                            'to'   => $vendor_preorder_block_date_to,
+                        ],
+                    ];
+                }
             }
 
             $is_store_location_pickup_active    = StorePickupHelper::is_store_pickup_location_active( $_vendor_id );
@@ -781,5 +968,19 @@ class Helper {
         }
 
         return apply_filters( 'dokan_delivery_time_dashboard_calendar_events', $calendar_events, $start_date, $end_date, $filter_type );
+    }
+
+    public static function get_mepped_preorder( $delivery_settings ) {
+        $preorder_date = isset( $delivery_settings['preorder_date'] ) ? (int) $delivery_settings['preorder_date'] : 0;
+
+        if ( ! empty( $delivery_settings['delivery_buffer_unit'] ) ) {
+            return $preorder_date;
+        }
+
+        if ( $preorder_date > 0 ) {
+            ++$preorder_date;
+        }
+
+        return $preorder_date;
     }
 }

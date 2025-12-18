@@ -82,6 +82,7 @@ class Module {
      * @return void
      */
     private function define_constants() {
+        define( 'DOKAN_SELLER_BADGE_DIR', __DIR__ );
         define( 'DOKAN_SELLER_BADGE_ASSETS_DIR', plugins_url( 'assets', __FILE__ ) );
         define( 'DOKAN_SELLER_BADGE_FILE', __FILE__ );
         define( 'DOKAN_SELLER_BADGE_PATH', dirname( DOKAN_SELLER_BADGE_FILE ) );
@@ -127,6 +128,10 @@ class Module {
      * @return void
      */
     public function register_scripts() {
+        // Initialize Admin menu similar to Vendor Support
+        $menu = new AdminMenu();
+        $menu->register_hooks();
+
         // Use minified libraries if SCRIPT_DEBUG is turned off
         [ $suffix, $version ] = dokan_get_script_suffix_and_version();
 
@@ -156,6 +161,21 @@ class Module {
         );
         wp_set_script_translations( 'dokan-seller-badge-frontend', 'dokan', plugin_dir_path( DOKAN_PRO_FILE ) . 'languages' );
 
+        $script_assets_path = DOKAN_SELLER_BADGE_PATH . '/assets/js/dokan-seller-badge-admin-vendor.asset.php';
+        if ( file_exists( $script_assets_path ) ) {
+            $vendor_asset = require $script_assets_path;
+            $dependencies = $vendor_asset['dependencies'] ?? [];
+            $version      = $vendor_asset['version'] ?? '';
+
+            wp_register_script(
+                'dokan-seller-badge-admin-vendor',
+                DOKAN_SELLER_BADGE_ASSETS . '/js/dokan-seller-badge-admin-vendor' . $suffix . '.js',
+                $dependencies,
+                $version,
+                true
+            );
+        }
+
         wp_register_style(
             'dokan-seller-badge-frontend',
             DOKAN_SELLER_BADGE_ASSETS . '/js/dokan-seller-badge-frontend' . $suffix . '.css',
@@ -171,6 +191,35 @@ class Module {
                 'assetsUrl' => DOKAN_SELLER_BADGE_ASSETS,
             ]
         );
+
+	    $vendor_tab_file = DOKAN_SELLER_BADGE_DIR . '/assets/js/dokan-seller-badge-vendor-tab.asset.php';
+	    if ( file_exists( $vendor_tab_file ) ) {
+		    $vendor_tab_script = require $vendor_tab_file;
+		    $dependencies      = $vendor_tab_script['dependencies'] ?? [];
+		    $dependencies[]    = 'dokan-admin-dashboard';
+		    $version           = $vendor_tab_script['version'] ?? '';
+
+		    wp_register_style(
+			    'dokan-seller-badge-vendor-tab',
+			    DOKAN_SELLER_BADGE_ASSETS_DIR . '/js/dokan-seller-badge-vendor-tab' . $suffix . '.css',
+			    [],
+			    $version
+		    );
+
+		    wp_register_script(
+			    'dokan-seller-badge-vendor-tab',
+			    DOKAN_SELLER_BADGE_ASSETS_DIR . '/js/dokan-seller-badge-vendor-tab' . $suffix . '.js',
+			    [ 'dokan-admin-dashboard' ],
+			    $version,
+			    true
+		    );
+
+		    wp_set_script_translations(
+			    'dokan-seller-badge-vendor-tab',
+			    'dokan',
+			    plugin_dir_path( DOKAN_PRO_FILE ) . 'languages'
+		    );
+	    }
     }
 
     /**

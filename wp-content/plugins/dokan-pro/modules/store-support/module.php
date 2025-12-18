@@ -100,11 +100,13 @@ class Module {
         // flush rewrite rules
         add_action( 'woocommerce_flush_rewrite_rules', [ $this, 'flush_rewrite_rules' ] );
 
-        add_filter( 'dokan_email_classes', [ $this, 'load_support_ticekt_emails' ] );
+        add_filter( 'dokan_email_classes', [ $this, 'load_support_ticket_emails' ] );
         add_filter( 'dokan_email_list', [ $this, 'set_email_template_directory' ] );
         add_filter( 'woocommerce_email_actions', [ $this, 'register_email_actions' ] );
 
         add_filter( 'dokan_rest_api_class_map', [ $this, 'rest_api_class_map' ] );
+	    add_filter( 'dokan_rest_admin_dashboard_todo_data', [ $this, 'load_todo_support_tickets_count' ] );
+	    add_filter( 'dokan_rest_admin_dashboard_monthly_overview_data', [ $this, 'load_monthly_support_tickets_count' ], 10, 2 );
     }
 
     /**
@@ -226,6 +228,37 @@ class Module {
         wp_register_style( 'dokan-store-support-styles', plugins_url( 'assets/css/style.css', __FILE__ ), [], $version );
         wp_register_script( 'dokan-store-support-scripts', plugins_url( 'assets/js/script.js', __FILE__ ), [ 'jquery' ], $version, true );
         wp_register_script( 'dokan-store-support-filter', plugins_url( 'assets/js/store-support-filter.js', __FILE__ ), [ 'jquery', 'dokan-select2-js', 'moment', 'dokan-date-range-picker', 'wp-i18n', 'dokan-util-helper' ], $version, true );
+
+        $asset_file = DOKAN_STORE_SUPPORT_DIR . '/assets/dist/js/vendor-store-support.asset.php';
+        if ( file_exists( $asset_file ) ) {
+            $asset        = include $asset_file;
+            $dependencies = $asset['dependencies'] ?? [];
+            $version      = $asset['version'] ?? $version;
+
+            wp_register_script(
+                'dokan-vendor-store-support',
+                DOKAN_STORE_SUPPORT_PLUGIN_ASSEST . '/dist/js/vendor-store-support.js',
+                array_merge( [ 'dokan-react-components', 'dokan-utilities' ], $dependencies ),
+                $version,
+                true
+            );
+            wp_register_style(
+                'dokan-vendor-store-support',
+                DOKAN_STORE_SUPPORT_PLUGIN_ASSEST . '/dist/js/vendor-store-support.css',
+                [],
+                $version
+            );
+
+            wp_localize_script(
+                'dokan-vendor-store-support',
+                'DokanStoreSupport',
+                [
+                    'currentUserId'     => dokan_get_current_user_id(),
+                    'currentUserName'   => wp_get_current_user()->display_name,
+                    'currentUserAvatar' => get_avatar_url( dokan_get_current_user_id() ),
+                ]
+            );
+        }
     }
 
     /**
@@ -265,6 +298,11 @@ class Module {
             wp_enqueue_style( 'dokan-select2-css' );
             wp_enqueue_style( 'dokan-date-range-picker' );
             wp_enqueue_script( 'dokan-store-support-filter' );
+        }
+
+        if ( dokan_is_seller_dashboard() ) {
+            wp_enqueue_script( 'dokan-vendor-store-support' );
+            wp_enqueue_style( 'dokan-vendor-store-support' );
         }
     }
 
@@ -765,7 +803,7 @@ class Module {
      *
      * @return array
      */
-    public function load_support_ticekt_emails( $emails ): array {
+    public function load_support_ticket_emails( $emails ): array {
         require_once DOKAN_STORE_SUPPORT_INC_DIR . '/class-new-support-ticket-email.php';
         require_once DOKAN_STORE_SUPPORT_INC_DIR . '/class-reply-to-store-support-ticket-email.php';
         require_once DOKAN_STORE_SUPPORT_INC_DIR . '/class-reply-to-user-support-ticket-email.php';
@@ -836,10 +874,12 @@ class Module {
      */
     public function add_store_support_page( $urls ): array {
         $menu = [
-            'title' => __( 'Support', 'dokan' ),
-            'icon'  => '<i class="far fa-life-ring"></i>',
-            'url'   => dokan_get_navigation_url( 'support' ),
-            'pos'   => 199,
+            'title'       => __( 'Support', 'dokan' ),
+            'icon'        => '<i class="far fa-life-ring"></i>',
+            'url'         => dokan_get_navigation_url( 'support' ),
+            'pos'         => 199,
+            'icon_name'   => 'Headphones',
+            'react_route' => 'support',
         ];
 
         if ( ! current_user_can( 'dokan_manage_support_tickets' ) ) {
@@ -1525,13 +1565,18 @@ class Module {
      * Query all topics by given customer
      *
      * @param int $customer_id
+     * @param array $args
+     *
+     * @phpcs:disabled WordPress.Security.NonceVerification.Recommended
      *
      * @return WP_Query $topic_query
      *@since 1.0
      */
-    public function get_topics_by_customer( $customer_id ): WP_Query {
-        $request_data = $_GET; // phpcs:ignore
-        $pagenum  = isset( $request_data['pagenum'] ) ? absint( wp_unslash( $request_data['pagenum'] ) ) : 1;
+    public function get_topics_by_customer( $customer_id, $args = [] ): WP_Query {
+        global $wpdb;
+        $pagenum  = isset( $_GET['pagenum'] ) ? absint( wp_unslash( $_GET['pagenum'] ) ) : 1;
+        $this->per_page = $args['posts_per_page'] ?? $this->per_page;
+        $pagenum = $args['pagenum'] ?? $pagenum;
         $offset   = ( $pagenum - 1 ) * $this->per_page;
         $paged    = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
@@ -1553,8 +1598,23 @@ class Module {
         ];
         $args_c['post_status'] = 'open';
 
-        if ( isset( $request_data['ticket_status'] ) ) {
-            $args_c['post_status'] = sanitize_text_field( wp_unslash( $request_data['ticket_status'] ) );
+        if ( isset( $_GET['ticket_status'] ) ) {
+            $args_c['post_status'] = sanitize_text_field( wp_unslash( $_GET['ticket_status'] ) );
+        }
+        if ( isset( $_GET['ticket_keyword'] ) ) {
+            if ( is_numeric( $args['ticket_keyword'] ) ) {
+                $args_c['p'] = $wpdb->esc_like( $args['ticket_keyword'] );
+            } else {
+                $args_c['s'] = $wpdb->esc_like( $args['ticket_keyword'] );
+            }
+        }
+
+        if ( isset( $args['ticket_start_date'] ) && isset( $args['ticket_end_date'] ) ) {
+            $args_c['date_query'] = [
+                'after'     => $args['ticket_start_date'],
+                'before'    => $args['ticket_end_date'],
+                'inclusive' => true,
+            ];
         }
 
         $cache_group = "store_support_customer_{$customer_id}";
@@ -2155,9 +2215,12 @@ class Module {
      */
     private function instances() {
         require_once DOKAN_STORE_SUPPORT_INC_DIR . '/Admin/class-admin-support.php';
+        require_once DOKAN_STORE_SUPPORT_INC_DIR . '/Admin/Dashboard.php';
         require_once DOKAN_STORE_SUPPORT_INC_DIR . '/SettingsApi/Store.php';
 
         new \Dokan_Admin_Support();
+        // Register Admin Dashboard page for Store Support
+        ( new \WeDevs\DokanPro\Modules\StoreSupport\Admin\Dashboard() )->register_hooks();
         new Store();
     }
 
@@ -2176,7 +2239,85 @@ class Module {
 
         $class_map[ $store_support_controller_class ] = \AdminStoreSupportTicketController::class;
 
+        // Register vendor store support REST controller
+        $vendor_store_support_controller_class = DOKAN_STORE_SUPPORT_INC_DIR . '/Rest/class-dokan-vendor-store-support-rest-controller.php';
+        $customer_store_support_controller_class = DOKAN_STORE_SUPPORT_INC_DIR . '/Rest/CustomerStoreSupportTicketController.php';
+
+        $class_map[ $vendor_store_support_controller_class ] = \WeDevs\DokanPro\Modules\StoreSupport\Rest\VendorStoreSupportTicketController::class;
+        $class_map[ $customer_store_support_controller_class ] = \WeDevs\DokanPro\Modules\StoreSupport\Rest\CustomerStoreSupportTicketController::class;
+
         return $class_map;
+    }
+
+    /**
+     * Load open support tickets count in the admin dashboard to-do data.
+     *
+     * @since 4.1.0
+     *
+     * @param array $data The existing to-do data.
+     *
+     * @return array The modified to-do data with open support tickets count.
+     */
+    public function load_todo_support_tickets_count( array $data ): array {
+        $counts = \StoreSupportHelper::dokan_get_support_topics_status_count();
+        $data['open_support_tickets'] = [
+            'icon'         => 'Headset',
+            'count'        => $counts['open_topics'] ?? 0,
+            'title'        => esc_html__( 'Open Support Tickets', 'dokan' ),
+            'redirect_url' => admin_url( 'admin.php?page=dokan#/admin-store-support' ),
+            'position'     => 50,
+        ];
+
+        return $data;
+    }
+
+    /**
+     * Load monthly support tickets count for the dashboard.
+     *
+     * @since 4.1.0
+     *
+     * @param array $data
+     * @param array $date_rage
+     *
+     * @return mixed
+     */
+    public function load_monthly_support_tickets_count( $data, $date_range ) {
+        global $wpdb;
+
+        $results = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT
+                    SUM(CASE WHEN post_date BETWEEN %s AND %s THEN 1 ELSE 0 END) as current_count,
+                    SUM(CASE WHEN post_date BETWEEN %s AND %s THEN 1 ELSE 0 END) as previous_count
+                FROM $wpdb->posts
+                WHERE post_type = 'dokan_store_support'
+                AND post_date BETWEEN %s AND %s",
+                $date_range['current_month_start'],
+                $date_range['current_month_end'],
+                $date_range['previous_month_start'],
+                $date_range['previous_month_end'],
+                $date_range['previous_month_start'],
+                $date_range['current_month_end']
+            )
+        );
+
+        $support_tickets_current  = $results->current_count ?? 0;
+        $support_tickets_previous = $results->previous_count ?? 0;
+
+        // Apply filters to modify the support tickets data.
+        $data['support_tickets'] = apply_filters(
+            'dokan_dashboard_monthly_support_tickets_count',
+            [
+                'icon'     => 'Tag',
+                'current'  => (int) $support_tickets_current,
+                'previous' => (int) $support_tickets_previous,
+                'title'    => esc_html__( 'Support Tickets', 'dokan' ),
+                'tooltip'  => esc_html__( 'Support tickets raised in the time period', 'dokan' ),
+                'position' => 90,
+            ]
+        );
+
+        return $data;
     }
 
     /**

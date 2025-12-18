@@ -52,6 +52,7 @@ final class Module {
         require_once DOKAN_REPORT_ABUSE_INCLUDES . '/Admin.php';
         require_once DOKAN_REPORT_ABUSE_INCLUDES . '/Rest.php';
         require_once DOKAN_REPORT_ABUSE_INCLUDES . '/AdminSingleProduct.php';
+        require_once DOKAN_REPORT_ABUSE_INCLUDES . '/AdminDashboard.php';
     }
 
     /**
@@ -70,6 +71,7 @@ final class Module {
         new \WeDevs\DokanPro\Modules\ReportAbuse\Admin();
         new \WeDevs\DokanPro\Modules\ReportAbuse\Rest();
         new \WeDevs\DokanPro\Modules\ReportAbuse\AdminSingleProduct();
+        ( new \WeDevs\DokanPro\Modules\ReportAbuse\AdminDashboard() )->register_hooks();
     }
 
     /**

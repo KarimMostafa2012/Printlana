@@ -239,22 +239,30 @@ class VendorLinkedAccount {
 
         // Create a new account.
         $linked_account_data = [
-            'name'                => ! empty( $data['razorpay_account_name'] ) ? $data['razorpay_account_name'] : '',
+            'type'                => 'route',
             'email'               => ! empty( $data['razorpay_account_email'] ) ? $data['razorpay_account_email'] : '',
-            'tnc_accepted'        => true,
-            'account_details' => [
-                'business_name'    => ! empty( $data['razorpay_business_name'] ) ? $data['razorpay_business_name'] : '',
-                'business_type'    => ! empty( $data['razorpay_business_type'] ) ? $data['razorpay_business_type'] : '',
-            ],
-            'bank_account'    => [
-                'ifsc_code'        => ! empty( $data['razorpay_ifsc_code'] ) ? $data['razorpay_ifsc_code'] : '',
-                'beneficiary_name' => ! empty( $data['razorpay_beneficiary_name'] ) ? $data['razorpay_beneficiary_name'] : '',
-                'account_type'     => ! empty( $data['razorpay_account_type'] ) ? $data['razorpay_account_type'] : '',
-                'account_number'   => ! empty( $data['razorpay_account_number'] ) ? $data['razorpay_account_number'] : '',
+            'phone'               => ! empty( $data['razorpay_account_phone'] ) ? $data['razorpay_account_phone'] : '',
+            'legal_business_name' => $data['razorpay_business_name'],
+            'business_type'       => ! empty( $data['razorpay_business_type'] ) ? $data['razorpay_business_type'] : '',
+            'profile'             => [
+                // category and subcategory are required fields but razorpay has no api to get the list of categories and subcategories. So, we are using 'others' as default value.
+                // If you want to use other
+                'category' => 'others',
+                'subcategory' => 'others',
+                'addresses' => [
+                    'registered' => [
+                        'street1'     => $data['razorpay_address_line1'],
+                        'street2'     => $data['razorpay_address_line2'],
+                        'city'        => $data['razorpay_city'],
+                        'state'       => $data['razorpay_state'],
+                        'postal_code' => $data['razorpay_postal_code'],
+                        'country'     => $data['razorpay_country'],
+                    ],
+                ],
             ],
         ];
 
-        $url      = $this->processor->make_razorpay_url( 'v1/beta/accounts/' );
+        $url      = $this->processor->make_razorpay_url( 'v2/accounts' );
         $response = $this->processor->make_request(
             [
                 'url'  => $url,
@@ -304,7 +312,7 @@ class VendorLinkedAccount {
      * @return object|WP_Error
      */
     private function get_account( $account_id ) {
-        $url      = $this->processor->make_razorpay_url( "v1/beta/accounts/{$account_id}" );
+        $url      = $this->processor->make_razorpay_url( "v2/accounts/{$account_id}" );
         $response = $this->processor->make_request(
             [
                 'url'    => $url,

@@ -133,7 +133,7 @@ class ProfileProgress {
                 break;
 
             case 'twitter':
-                $info['title'] = __( 'Twitter', 'dokan' );
+                $info['title'] = __( 'X', 'dokan' );
                 break;
 
             case 'youtube':

@@ -26,6 +26,7 @@ class Product {
         add_action( 'dokan_new_product_added', [ $this, 'save_rma_data' ], 12 );
         add_action( 'dokan_product_updated', [ $this, 'save_rma_data' ], 12 );
         add_filter( 'woocommerce_product_tabs', [ $this, 'refund_policy_tab' ] );
+        add_filter( 'woocommerce_rest_prepare_product_object', [ $this, 'add_rma_settings_into_product' ], 10, 2 );
     }
 
     /**
@@ -136,5 +137,23 @@ class Product {
 				'policy' => $data['policy'],
 			]
         );
+    }
+
+    /**
+     * Add RMA settings into product REST API response
+     *
+     * @param $response
+     * @param $product
+     *
+     * @since 4.2.0
+     *
+     * @return mixed
+     */
+    public function add_rma_settings_into_product( $response, $product ) {
+        $product_id = $product->get_id();
+        $rma_settings = $this->get_settings( $product_id );
+        $response->data['dokan_rma_settings'] = $rma_settings;
+
+        return $response;
     }
 }

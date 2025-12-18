@@ -3,6 +3,7 @@
 namespace WeDevs\DokanPro\Modules\VendorVerification\Frontend;
 
 use WeDevs\Dokan\Utilities\AdminSettings;
+use WeDevs\DokanPro\Modules\VendorVerification\Helper;
 use WeDevs\DokanPro\Modules\VendorVerification\Models\VerificationMethod;
 use WeDevs\DokanPro\Modules\VendorVerification\Models\VerificationRequest;
 
@@ -339,7 +340,7 @@ class Dashboard {
     public function enable_selling_status_if_verification_is_approved( $vendor_id ) {
         $enable_selling_status = dokan_get_container()->get( AdminSettings::class )->get_new_seller_enable_selling_status();
 
-        if ( false === strpos( get_user_meta( $vendor_id, 'dokan_verification_status', true ), 'approved' ) || 'verified_only' !== $enable_selling_status ) {
+        if ( ! Helper::is_seller_verified( $vendor_id ) || 'verified_only' !== $enable_selling_status ) {
             return;
         }
 

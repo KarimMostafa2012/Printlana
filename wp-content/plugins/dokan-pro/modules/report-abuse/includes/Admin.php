@@ -17,6 +17,7 @@ class Admin {
         add_action( 'dokan-vue-admin-scripts', [ self::class, 'enqueue_admin_script' ] );
         add_action( 'init', [ self::class, 'register_scripts' ] );
         add_action( 'dokan_after_saving_settings', [ $this, 'after_save_settings' ], 10, 3 );
+        add_filter( 'dokan_admin_dashboard_pages_settings', [ $this, 'load_most_reported_vendors' ] );
     }
 
     /**
@@ -113,5 +114,20 @@ class Admin {
         foreach ( $option_value['abuse_reasons'] as $key => $status ) {
             do_action( 'dokan_pro_register_abuse_report_reason', $status['value'] );
         }
+    }
+
+    /**
+     * Load most reported vendors data into localized data for the admin dashboard.
+     *
+     * @since 4.1.0
+     *
+     * @param array $localized_data
+     *
+     * @return array
+     */
+    public function load_most_reported_vendors( array $localized_data ): array {
+        $localized_data['show_most_reported_vendors'] = true;
+
+        return $localized_data;
     }
 }

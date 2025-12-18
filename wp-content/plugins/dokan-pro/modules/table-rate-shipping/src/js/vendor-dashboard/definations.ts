@@ -59,3 +59,60 @@ export type UseTableRatesReturn = {
     handleSave: () => Promise< void >;
     handleOrderUpdate: ( updatedItems: TableRate[] ) => void;
 };
+
+export type DistanceRateSettingsData = {
+    title: string;
+    tax_status: string;
+    distance_rate_mode: string;
+    distance_rate_avoid: string;
+    distance_rate_unit: string;
+    distance_rate_show_distance: string;
+    distance_rate_show_duration: string;
+    distance_rate_address_1: string;
+    distance_rate_address_2: string;
+    distance_rate_city: string;
+    distance_rate_postal_code: string;
+    distance_rate_state_province: string;
+    distance_rate_country: string;
+};
+
+export type DistanceRateSettingsResponse = {
+    success: boolean;
+    message: string;
+    settings: DistanceRateSettingsData;
+};
+
+export type DistanceRate = {
+    rate_id: string;
+    zone_id: string;
+    instance_id: string;
+    vendor_id: string;
+    rate_condition: string;
+    rate_min: string;
+    rate_max: string;
+    rate_cost: string;
+    rate_cost_unit: string;
+    rate_fee: string;
+    rate_break: string;
+    rate_abort: string;
+    rate_order: string;
+};
+
+export type UseDistanceRatesReturn = {
+    selectedRows: string[];
+    tableData: DistanceRate[];
+    isLoading: boolean;
+    isSaving: boolean;
+    handleSelectAll: ( checked: boolean ) => void;
+    handleSelectRow: ( rateOrder: string, checked: boolean ) => void;
+    handleDuplicateRows: () => void;
+    handleAddDistanceRate: () => void;
+    handleDeleteRows: () => Promise< void >;
+    handleTableDataUpdate: (
+        rateOrder: string,
+        field: keyof DistanceRate,
+        value: string
+    ) => void;
+    handleSave: () => Promise< void >;
+    handleOrderUpdate: ( updatedItems: DistanceRate[] ) => void;
+};

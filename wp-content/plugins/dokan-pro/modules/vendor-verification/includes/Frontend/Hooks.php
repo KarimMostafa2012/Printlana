@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\VendorVerification\Frontend;
 
+use WeDevs\Dokan\Vendor\Vendor;
 use WeDevs\DokanPro\Modules\VendorVerification\Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -26,6 +27,7 @@ class Hooks {
 
         // Custom dir for vendor uploaded file
         add_filter( 'upload_dir', [ $this, 'dokan_customize_upload_dir' ], 10 );
+        add_filter( 'dokan_rest_store_additional_fields', [ $this, 'add_vendor_is_verified_data' ], 10, 2 );
     }
 
     /**
@@ -38,7 +40,7 @@ class Hooks {
      */
     public function add_vendor_verified_icon( $vendor ) {
         // check seller id, address or business has not verified
-        if ( false === strpos( get_user_meta( $vendor->get_id(), 'dokan_verification_status', true ), 'approved' ) ) {
+        if ( ! Helper::is_seller_verified( $vendor->get_id() ) ) {
             return;
         }
         $all_icons = Helper::get_verified_icons();
@@ -159,5 +161,21 @@ EOD;
                 set_transient( 'dokan_vendor_verification_access_check', true, DAY_IN_SECONDS * 7 );
             }
         }
+    }
+
+    /**
+     * Add seller is verified data.
+     *
+     * @since 4.1.3
+     *
+     * @param array  $additional_fields
+     * @param Vendor $store
+     *
+     * @return array
+     */
+    public function add_vendor_is_verified_data( $additional_fields, $store ) {
+        $additional_fields['is_verified'] = Helper::is_seller_verified( $store->get_id() );
+
+        return $additional_fields;
     }
 }

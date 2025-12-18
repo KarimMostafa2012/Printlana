@@ -5,6 +5,7 @@ namespace WeDevs\DokanPro\Modules\Stripe;
 use Exception;
 use Stripe\Charge;
 use Stripe\SetupIntent;
+use WC_Order;
 use WeDevs\DokanPro\Modules\Stripe\Helper;
 use WeDevs\Dokan\Exceptions\DokanException;
 use WeDevs\DokanPro\Modules\Stripe\DokanStripe;
@@ -261,25 +262,27 @@ class IntentController extends StripePaymentGateway {
         $currency      = $order->get_currency();
         $charge_id     = $this->get_charge_id_from_order( $order );
         $all_orders    = $this->get_all_orders_to_be_processed( $order );
-        $order_total   = $order->get_total();
         $stripe_fee    = Helper::format_gateway_balance_fee( $intent->charges->first()->balance_transaction );
-
-        // This will make sure the parent order has processing_fee that requires in
-        // Fees::calculate_gateway_fee() method at beginning.
         $order->update_meta_data( 'dokan_gateway_stripe_fee', $stripe_fee );
+        $order->update_meta_data( 'dokan_gateway_fee_paid_by', Helper::seller_pays_the_processing_fee() ? 'seller' : 'admin' );
+        $order->save();
 
-        // In case of we have sub orders, lets add the gateway fee in the parent order.
-        if ( $order->get_meta( 'has_sub_order' ) ) {
-            $order->update_meta_data( 'dokan_gateway_fee', $stripe_fee );
-            $order->add_order_note( sprintf( __( 'Payment gateway processing fee %s', 'dokan' ), $stripe_fee ) );
-        }
+        /**
+         * Process the gateway fee for the suborder
+         *
+         * @param float $processing_fee
+         * @param WC_Order $order
+         *
+         * @since 4.1.1
+         */
+        do_action( 'dokan_process_payment_gateway_fee', $stripe_fee, $order, Helper::get_gateway_id() );
 
         if ( ! $charge_id ) {
-            throw new DokanException( 'dokan_charge_id_not_found', __( 'No charge id is found to process the order!', 'dokan' ) );
+            throw new DokanException( 'dokan_charge_id_not_found', esc_html__( 'No charge id is found to process the order!', 'dokan' ) );
         }
 
         if ( ! $all_orders ) {
-            throw new DokanException( 'dokan_no_order_found', __( 'No orders found to be processed!', 'dokan' ) );
+            throw new DokanException( 'dokan_no_order_found', esc_html__( 'No orders found to be processed!', 'dokan' ) );
         }
 
         foreach ( $all_orders as $tmp_order ) {
@@ -295,19 +298,16 @@ class IntentController extends StripePaymentGateway {
             $tmp_order_total       = $tmp_order->get_total();
             $stripe_fee_for_vendor = 0;
 
-            if ( $tmp_order_total == 0 ) {
+            if ( $tmp_order_total <= 0 ) {
+                // translators: 1) Order number.
                 $tmp_order->add_order_note( sprintf( __( 'Order %s payment completed', 'dokan' ), $tmp_order->get_order_number() ) );
                 continue;
             }
 
             if ( Helper::seller_pays_the_processing_fee() && ! empty( $order_total ) && ! empty( $tmp_order_total ) && ! empty( $stripe_fee ) ) {
                 $stripe_fee_for_vendor = Helper::calculate_processing_fee_for_suborder( $stripe_fee, $tmp_order, $order );
-                $vendor_raw_earning    = $vendor_raw_earning - $stripe_fee_for_vendor;
-
                 $tmp_order->update_meta_data( 'dokan_gateway_stripe_fee', $stripe_fee_for_vendor );
-                $tmp_order->update_meta_data( 'dokan_gateway_fee_paid_by', 'seller' );
             }
-
             $vendor_earning = Helper::get_stripe_amount( $vendor_raw_earning );
 
             if ( ! $connected_vendor_id ) {
@@ -318,6 +318,7 @@ class IntentController extends StripePaymentGateway {
             }
 
             if ( $vendor_earning < 1 ) {
+                // translators: 1) Vendor earning, 2) Currency.
                 $tmp_order->add_order_note( sprintf( __( 'Transfer to the vendor stripe account skipped due to a negative balance: %1$s %2$s', 'dokan' ), $vendor_raw_earning, $currency ) );
                 $tmp_order->save();
                 continue;
@@ -351,6 +352,7 @@ class IntentController extends StripePaymentGateway {
                 $tmp_order->update_meta_data( '_dokan_stripe_transfer_id', $transfer->id );
             } catch ( Exception $e ) {
                 dokan_log( 'Could not transfer amount to connected vendor account via 3ds. Order ID: ' . $tmp_order->get_id() . ', Amount tried to transfer: ' . $vendor_raw_earning . " $currency" );
+                // translators: 1) Error message.
                 $tmp_order->add_order_note( sprintf( __( 'Transfer failed to vendor account (%s)', 'dokan' ), $e->getMessage() ) );
                 $tmp_order->add_order_note( __( 'Vendor payment will be transferred to the admin account since the transfer to the vendor stripe account had failed.', 'dokan' ) );
                 $tmp_order->save();
@@ -378,6 +380,7 @@ class IntentController extends StripePaymentGateway {
                 $tmp_order->update_meta_data( 'paid_with_dokan_3ds', true );
                 $tmp_order->add_order_note(
                     sprintf(
+                        // translators: 1) Order number, 2) Payment method title, 3) Charge ID.
                         __( 'Order %1$s payment is completed via %2$s with 3d secure on (Charge ID: %3$s)', 'dokan' ),
                         $tmp_order->get_order_number(),
                         Helper::get_gateway_title(),
@@ -410,6 +413,7 @@ class IntentController extends StripePaymentGateway {
         $this->process_seller_withdraws( $all_withdraws );
         $order->add_order_note(
             sprintf(
+                // translators: 1) Order number, 2) Payment method title, 3) Charge ID.
                 __( 'Order %1$s payment is completed via %2$s 3d secure. (Charge ID: %3$s)', 'dokan' ),
                 $order->get_order_number(),
                 Helper::get_gateway_title(),

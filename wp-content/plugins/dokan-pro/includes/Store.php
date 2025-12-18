@@ -161,10 +161,17 @@ class Store {
             } else {
                 $coupon_amount_formatted = wc_price( dokan_get_prop( $wc_coupon, 'amount' ) );
             }
+            $description = '';
+            if ( ! empty( $wc_coupon->get_description() ) ) {
+                $description = $wc_coupon->get_description();
+            } elseif ( ! empty( $coupon->post_content ) ) {
+                $description = $coupon->post_content;
+            }
 
             $coupons[] = [
                 'coupon'                  => $coupon,
                 'coupon_amount_formatted' => $coupon_amount_formatted,
+                'coupon_description'      => $description,
                 'expiry_date'             => $expiry_date,
                 'current_time'            => $current_time,
             ];

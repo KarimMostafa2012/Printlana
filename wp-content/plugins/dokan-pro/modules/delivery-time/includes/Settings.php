@@ -97,13 +97,42 @@ class Settings {
                 'default' => __( 'Delivery Date', 'dokan' ),
                 'type'    => 'text',
             ],
+            'delivery_buffer_unit' => [
+                'name'    => 'delivery_buffer_unit',
+                'label'   => __( 'Delivery Blocked Buffer Units', 'dokan' ),
+                'desc'    => __( 'Select the time unit for the delivery buffer. Choose "Days" for full calendar days or "Hours" for more precise same-day delivery control.', 'dokan' ),
+                'type'    => 'select',
+                'options' => [
+                    'days'  => __( 'Days', 'dokan' ),
+                    'hours' => __( 'Hours', 'dokan' ),
+                ],
+                'default' => 'days',
+            ],
             'preorder_date' => [
                 'name'    => 'preorder_date',
-                'label'   => __( 'Delivery Blocked Buffer', 'dokan' ),
-                'desc'    => __( 'How many days the delivery date is blocked from current date? 0 for no block buffer', 'dokan' ),
+                'label'   => __( 'Buffer Duration', 'dokan' ),
+                'desc'    => __( 'Minimum number of days between order and delivery. Set to 0 for same-day delivery, 1 for next-day delivery, etc.', 'dokan' ),
                 'default' => '0',
                 'type'    => 'number',
                 'min'     => '0',
+                'show_if' => [
+                    'delivery_buffer_unit' => [
+                        'equal' => 'days',
+                    ],
+                ],
+            ],
+            'delivery_buffer_value' => [
+                'name'    => 'delivery_buffer_value',
+                'label'   => __( 'Buffer Duration', 'dokan' ),
+                'desc'    => __( 'Minimum number of hours between order and delivery. If the time exceeds today\'s store hours, delivery starts from the next business day.', 'dokan' ),
+                'default' => '0',
+                'type'    => 'number',
+                'min'     => '0',
+                'show_if' => [
+                    'delivery_buffer_unit' => [
+                        'equal' => 'hours',
+                    ],
+                ],
             ],
             'time_slot_minutes' => [
                 'name'    => 'time_slot_minutes',
@@ -183,10 +212,12 @@ class Settings {
         $errors = [];
 
         $delivery_date_label     = ! empty( $option_value['delivery_date_label'] ) ? sanitize_text_field( wp_unslash( $option_value['delivery_date_label'] ) ) : '';
-        $delivery_blocked_buffer = ! empty( $option_value['preorder_date'] ) ? sanitize_text_field( wp_unslash( $option_value['preorder_date'] ) ) : '';
+        $delivery_blocked_buffer = isset( $option_value['preorder_date'] ) ? sanitize_text_field( wp_unslash( $option_value['preorder_date'] ) ) : '';
         $delivery_box_info       = ! empty( $option_value['delivery_box_info'] ) ? sanitize_text_field( wp_unslash( $option_value['delivery_box_info'] ) ) : '';
         $time_slot_minutes       = ! empty( $option_value['time_slot_minutes'] ) ? sanitize_text_field( wp_unslash( $option_value['time_slot_minutes'] ) ) : '';
-        $order_per_slot          = ! empty( $option_value['order_per_slot'] ) ? sanitize_text_field( wp_unslash( $option_value['order_per_slot'] ) ) : '';
+        $order_per_slot          = isset( $option_value['order_per_slot'] ) ? sanitize_text_field( wp_unslash( $option_value['order_per_slot'] ) ) : '';
+        $delivery_buffer_unit    = ! empty( $option_value['delivery_buffer_unit'] ) ? sanitize_text_field( wp_unslash( $option_value['delivery_buffer_unit'] ) ) : 'days';
+        $delivery_buffer_value   = isset( $option_value['delivery_buffer_value'] ) ? sanitize_text_field( wp_unslash( $option_value['delivery_buffer_value'] ) ) : '0';
 
         if ( empty( $delivery_date_label ) ) {
             $errors[] = [
@@ -206,6 +237,21 @@ class Settings {
             $errors[] = [
                 'name'  => 'delivery_box_info',
                 'error' => __( 'Delivery box information can not be empty', 'dokan' ),
+            ];
+        }
+
+        // Validate buffer unit and value
+        $allowed_units = [ 'days', 'hours' ];
+        if ( ! in_array( $delivery_buffer_unit, $allowed_units, true ) ) {
+            $errors[] = [
+                'name'  => 'delivery_buffer_unit',
+                'error' => __( 'Invalid delivery buffer unit. Please select Days or Hours.', 'dokan' ),
+            ];
+        }
+        if ( 'hours' === $delivery_buffer_unit && ( null === $delivery_buffer_value || intval( $delivery_buffer_value ) < 0 ) ) {
+            $errors[] = [
+                'name'  => 'delivery_buffer_value',
+                'error' => __( 'Delivery buffer hours can not be empty or less than 0', 'dokan' ),
             ];
         }
 
@@ -279,9 +325,12 @@ class Settings {
         }
 
         $time_slots                        = [];
-        $option_value['preorder_date']     = intval( $option_value['preorder_date'] );
-        $option_value['order_per_slot']    = intval( $option_value['order_per_slot'] );
-        $option_value['time_slot_minutes'] = intval( $option_value['time_slot_minutes'] );
+        $option_value['preorder_date']     = isset( $option_value['preorder_date'] ) ? intval( $option_value['preorder_date'] ) : 0;
+        $option_value['order_per_slot']    = isset( $option_value['order_per_slot'] ) ? intval( $option_value['order_per_slot'] ) : 0;
+        $option_value['time_slot_minutes'] = isset( $option_value['time_slot_minutes'] ) ? intval( $option_value['time_slot_minutes'] ) : 30;
+        // New delivery buffer unit/value persistence
+        $option_value['delivery_buffer_unit']  = isset( $option_value['delivery_buffer_unit'] ) && in_array( $option_value['delivery_buffer_unit'], [ 'days', 'hours' ], true ) ? $option_value['delivery_buffer_unit'] : 'days';
+        $option_value['delivery_buffer_value'] = isset( $option_value['delivery_buffer_value'] ) ? intval( $option_value['delivery_buffer_value'] ) : 0;
 
         foreach ( dokan_get_translated_days() as $day_key => $day ) {
             $delivery_opening_time = ! empty( $option_value[ 'delivery_day_' . $day_key ]['opening_time'] ) ? $option_value[ 'delivery_day_' . $day_key ]['opening_time'] : '';

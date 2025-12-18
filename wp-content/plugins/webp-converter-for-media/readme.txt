@@ -3,9 +3,9 @@ Contributors: mateuszgbiorczyk
 Donate link: https://url.mattplugins.com/converter-readme-donate-link
 Tags: convert webp, webp, optimize images, image optimization, compress images
 Requires at least: 4.9
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.1
-Stable tag: 6.2.4
+Stable tag: 6.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -308,6 +308,20 @@ Current list of supported CDN servers:
 5. Ability to manually undo optimization of selected image
 
 == Changelog ==
+
+= 6.4.0 (2025-12-08) =
+* `[Security]` Added permission check to ensure the user can edit the post before manually converting an image in the Media Library (CVE-2025-13750)
+* `[Security]` Added stricter permission checks to REST API endpoints for authenticated users
+
+= 6.3.2 (2025-11-24) =
+* `[Added]` Support for WordPress 6.9
+
+= 6.3.1 (2025-11-09) =
+* `[Fixed]` Support for Bunny CDN and BunnyCDN plugin
+* `[Fixed]` Support for QUIC.cloud CDN
+
+= 6.3.0 (2025-10-28) =
+* `[Changed]` Message about rewrites_uploads_blocked server configuration error
 
 = 6.2.4 (2025-09-09) =
 * `[Fixed]` Deprecated notice for implicitly nullable parameter when converting images

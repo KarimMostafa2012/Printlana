@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\VendorVerification\Admin;
 
+use WeDevs\DokanPro\Modules\VendorVerification\Admin\Dashboard\Pages\Verification;
 use WeDevs\DokanPro\Modules\VendorVerification\Models\VerificationRequest;
 
 defined( 'ABSPATH' ) || exit;
@@ -22,6 +23,10 @@ class Hooks {
         add_action( 'dokan_admin_menu', [ $this, 'load_verification_admin_menu' ], 11, 2 );
         add_filter( 'dokan-admin-routes', [ $this, 'vue_admin_routes' ] );
         add_filter( 'dokan_new_seller_enable_selling_statuses', [ $this, 'add_verified_enabled_status' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'add_vendor_single_components_script' ], 1 );
+
+        // Register and initialize the Verification page
+        $this->init_verification_page();
     }
 
     /**
@@ -82,5 +87,50 @@ class Hooks {
      */
     public function add_verified_enabled_status( $statuses ) {
         return array_merge( $statuses, [ 'verified_only' => __( 'Verified Only', 'dokan' ) ] );
+    }
+
+    /**
+     * Add script.
+     *
+     * @since 4.1.3
+     *
+     * @return void
+     */
+    public function add_vendor_single_components_script() {
+        $admin_dashboard_file = DOKAN_VERFICATION_DIR . '/assets/js/vendor-single.asset.php';
+
+        if ( file_exists( $admin_dashboard_file ) ) {
+            $dashboard_script = require $admin_dashboard_file;
+            $dependencies     = array_merge( $dashboard_script['dependencies'] ?? [], [ 'dokan-react-components' ] );
+            $version          = $dashboard_script['version'] ?? '';
+            $script_key       = 'dokan-admin-dashboard-vendor-single-vendor-verification';
+
+            wp_enqueue_script(
+                $script_key,
+                DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/vendor-single.js',
+                $dependencies,
+                $version,
+                true
+            );
+
+            wp_enqueue_style(
+                $script_key,
+                DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/vendor-single.css',
+                [],
+                $version
+            );
+        }
+    }
+
+    /**
+     * Initialize the Verification page.
+     *
+     * @since 4.1.4
+     *
+     * @return void
+     */
+    protected function init_verification_page() {
+        $verification_page = new Verification();
+        $verification_page->register_hooks();
     }
 }

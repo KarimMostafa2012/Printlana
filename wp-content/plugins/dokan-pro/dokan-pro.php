@@ -3,11 +3,11 @@
  * Plugin Name: Dokan Pro
  * Plugin URI: https://dokan.co/wordpress/
  * Description: An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs.
- * Version: 4.0.10
+ * Version: 4.2.1
  * Author: Dokan Inc.
  * Author URI: https://dokan.co/wordpress/
  * WC requires at least: 8.5.0
- * WC tested up to: 10.2.1
+ * WC tested up to: 10.3.4
  * License: GPL2
  * Text Domain: dokan
  * Domain Path: /languages
@@ -60,7 +60,7 @@ class Dokan_Pro {
      *
      * @var string
      */
-    public $version = '4.0.10';
+    public $version = '4.2.1';
 
     /**
      * Database version key
@@ -449,6 +449,8 @@ class Dokan_Pro {
         $this->container['vendor_discount']          = new \WeDevs\DokanPro\VendorDiscount\Controller();
         $this->container['menu_manager']             = new \WeDevs\DokanPro\MenuManager\Controller();
         $this->container['product_rejection']        = new \WeDevs\DokanPro\ProductRejection\Manager();
+        $this->container['ai']                       = new \WeDevs\DokanPro\Intelligence\Manager();
+        $this->container['payment_gateway_fee']      = new \WeDevs\DokanPro\Payments\GatewayFeeHandler();
 
         if ( is_user_logged_in() ) {
             new \WeDevs\DokanPro\Dashboard\Dashboard();
