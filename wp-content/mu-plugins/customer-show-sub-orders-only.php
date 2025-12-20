@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Customer Show Sub Orders Only
- * Description: Filters customer "My Account" orders page to show only sub-orders and hide parent orders
- * Version: 1.0
+ * Description: Filters customer "My Account" orders page to show only sub-orders and hide parent orders (reverses Dokan's default behavior)
+ * Version: 2.0
  * Author: Printlana
  */
 
@@ -11,111 +11,130 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Enable debugging mode - set to false to disable logs
-define( 'PRINTLANA_SUB_ORDERS_DEBUG', true );
+define( 'PRINTLANA_CUSTOMER_SUB_ORDERS_DEBUG', true );
 
-/**
- * Helper function to log debug messages
- */
-function printlana_sub_orders_log( $message, $data = null ) {
-    if ( ! defined( 'PRINTLANA_SUB_ORDERS_DEBUG' ) || ! PRINTLANA_SUB_ORDERS_DEBUG ) {
-        return;
+class Printlana_Customer_Show_Suborders_Only {
+
+    public function __construct() {
+        // Remove Dokan's filter that shows only parent orders and add our own
+        add_action( 'init', array( $this, 'override_dokan_filter' ), 999 );
+
+        // Log orders being returned (for debugging)
+        add_action( 'woocommerce_before_account_orders', array( $this, 'log_customer_orders' ) );
     }
 
-    $log_message = '[PRINTLANA SUB ORDERS] ' . $message;
+    /**
+     * Override Dokan's filter to reverse the behavior
+     */
+    public function override_dokan_filter() {
+        $this->log( 'Plugin initializing - setting up filters' );
 
-    if ( $data !== null ) {
-        $log_message .= ' | Data: ' . print_r( $data, true );
+        // Remove Dokan's filter that shows only parent orders (post_parent = 0)
+        $removed = remove_filter( 'woocommerce_my_account_my_orders_query', 'dokan_get_customer_main_order' );
+        $this->log( 'Dokan filter removed?', $removed ? 'Success' : 'Failed or did not exist' );
+
+        // Add our custom filter to show only sub-orders (reverse of Dokan's behavior)
+        add_filter( 'woocommerce_my_account_my_orders_query', array( $this, 'show_sub_orders_only' ), 10 );
+        $this->log( 'Custom filter added successfully' );
     }
 
-    error_log( $log_message );
-}
+    /**
+     * Filter to show only sub-orders (exclude parent orders)
+     * This is the opposite of Dokan's dokan_get_customer_main_order function
+     *
+     * @param array $customer_orders Query args
+     * @return array Modified query args
+     */
+    public function show_sub_orders_only( $customer_orders ) {
+        $this->log( 'Filter triggered - original query args', $customer_orders );
 
-/**
- * Override the default Dokan filter to show only sub-orders to customers
- * This removes the Dokan filter that shows only parent orders (post_parent = 0)
- * and replaces it with our filter that shows only sub-orders (post_parent != 0)
- */
-function printlana_show_only_sub_orders_to_customers() {
-    printlana_sub_orders_log( 'Plugin initializing - setting up filters' );
+        // Dokan uses: $customer_orders['post_parent'] = 0; (only parent orders)
+        // We use parent_exclude to exclude orders with post_parent = 0 (exclude parent orders)
 
-    // Check if Dokan filter exists before removing
-    $has_dokan_filter = has_filter( 'woocommerce_my_account_my_orders_query', 'dokan_get_customer_main_order' );
-    printlana_sub_orders_log( 'Dokan filter exists?', $has_dokan_filter ? 'Yes' : 'No' );
+        if ( empty( $customer_orders['parent_exclude'] ) || ! is_array( $customer_orders['parent_exclude'] ) ) {
+            $customer_orders['parent_exclude'] = array( 0 );
+        } else {
+            // Merge with existing parent_exclude if any
+            $customer_orders['parent_exclude'][] = 0;
+            $customer_orders['parent_exclude'] = array_values( array_unique( array_map( 'intval', $customer_orders['parent_exclude'] ) ) );
+        }
 
-    // Remove Dokan's default filter that shows only parent orders
-    $removed = remove_filter( 'woocommerce_my_account_my_orders_query', 'dokan_get_customer_main_order' );
-    printlana_sub_orders_log( 'Dokan filter removed?', $removed ? 'Success' : 'Failed or did not exist' );
+        $this->log( 'Filter applied - modified query args (excluding parent orders)', $customer_orders );
 
-    // Add our custom filter to show only sub-orders
-    add_filter( 'woocommerce_my_account_my_orders_query', 'printlana_get_customer_sub_orders', 10 );
-    printlana_sub_orders_log( 'Custom filter added successfully' );
-}
-add_action( 'init', 'printlana_show_only_sub_orders_to_customers', 20 );
-
-/**
- * Filter customer orders to show only sub-orders (exclude parent orders)
- *
- * @param array $customer_orders WooCommerce customer orders query arguments
- * @return array Modified query arguments
- */
-function printlana_get_customer_sub_orders( $customer_orders ) {
-    printlana_sub_orders_log( 'Filter triggered - original query args', $customer_orders );
-
-    // Only show orders that have a parent (sub-orders)
-    // Exclude orders where parent = 0 (parent orders)
-    // WooCommerce uses 'parent_exclude' parameter for this
-    $customer_orders['parent_exclude'] = array( 0 );
-
-    printlana_sub_orders_log( 'Filter applied - modified query args', $customer_orders );
-
-    return $customer_orders;
-}
-
-/**
- * Log the actual orders being displayed after WooCommerce query
- */
-function printlana_log_wc_orders_result( $orders, $query_vars ) {
-    // Only log if we have the customer parameter (indicates My Account orders)
-    if ( ! isset( $query_vars['customer'] ) ) {
-        return $orders;
+        return $customer_orders;
     }
 
-    printlana_sub_orders_log( 'WooCommerce orders query executed', array(
-        'customer' => $query_vars['customer'],
-        'parent_exclude' => isset( $query_vars['parent_exclude'] ) ? $query_vars['parent_exclude'] : 'Not set',
-        'total_orders' => is_object( $orders ) && isset( $orders->total ) ? $orders->total : count( $orders ),
-    ) );
+    /**
+     * Log the customer's orders for debugging
+     */
+    public function log_customer_orders( $current_page ) {
+        if ( ! is_user_logged_in() ) {
+            return;
+        }
 
-    // Log individual orders
-    $orders_list = is_object( $orders ) && isset( $orders->orders ) ? $orders->orders : $orders;
+        $customer_id = get_current_user_id();
 
-    if ( ! empty( $orders_list ) && is_array( $orders_list ) ) {
-        $orders_info = array();
-        foreach ( $orders_list as $order ) {
-            if ( is_a( $order, 'WC_Order' ) ) {
+        // Get orders using the same method WooCommerce uses
+        $customer_orders = wc_get_orders( apply_filters(
+            'woocommerce_my_account_my_orders_query',
+            array(
+                'customer' => $customer_id,
+                'page'     => $current_page,
+                'paginate' => true,
+            )
+        ) );
+
+        $this->log( 'Customer orders query executed', array(
+            'customer_id' => $customer_id,
+            'total_orders' => isset( $customer_orders->total ) ? $customer_orders->total : 0,
+            'current_page' => $current_page,
+        ) );
+
+        // Log each order's details
+        if ( isset( $customer_orders->orders ) && ! empty( $customer_orders->orders ) ) {
+            $orders_info = array();
+            foreach ( $customer_orders->orders as $order ) {
                 $orders_info[] = array(
                     'order_id' => $order->get_id(),
                     'parent_id' => $order->get_parent_id(),
                     'status' => $order->get_status(),
                     'total' => $order->get_total(),
-                    'is_sub_order' => $order->get_parent_id() > 0 ? 'YES' : 'NO (PARENT ORDER)',
+                    'is_sub_order' => $order->get_parent_id() > 0 ? 'YES (SUB-ORDER)' : 'NO (PARENT ORDER)',
+                    'date' => $order->get_date_created()->date( 'Y-m-d H:i:s' ),
                 );
             }
+            $this->log( 'Orders being displayed (' . count( $orders_info ) . ' total)', $orders_info );
+        } else {
+            $this->log( 'No orders found for this customer' );
         }
-        printlana_sub_orders_log( 'Orders returned (' . count( $orders_info ) . ' total)', $orders_info );
-    } else {
-        printlana_sub_orders_log( 'No orders found - customer may have no sub-orders' );
     }
 
-    return $orders;
+    /**
+     * Debug logger
+     */
+    private function log( $message, $data = null ) {
+        if ( ! defined( 'PRINTLANA_CUSTOMER_SUB_ORDERS_DEBUG' ) || ! PRINTLANA_CUSTOMER_SUB_ORDERS_DEBUG ) {
+            return;
+        }
+
+        $log_message = '[PRINTLANA CUSTOMER SUB ORDERS] ' . $message;
+
+        if ( $data !== null ) {
+            $log_message .= ' | Data: ' . print_r( $data, true );
+        }
+
+        error_log( $log_message );
+    }
 }
-add_filter( 'woocommerce_orders_get_orders_query', 'printlana_log_wc_orders_result', 999, 2 );
+
+// Initialize the plugin
+new Printlana_Customer_Show_Suborders_Only();
 
 /**
  * Add admin notice to show debugging is active
  */
-function printlana_debug_admin_notice() {
-    if ( ! defined( 'PRINTLANA_SUB_ORDERS_DEBUG' ) || ! PRINTLANA_SUB_ORDERS_DEBUG ) {
+function printlana_customer_sub_orders_debug_notice() {
+    if ( ! defined( 'PRINTLANA_CUSTOMER_SUB_ORDERS_DEBUG' ) || ! PRINTLANA_CUSTOMER_SUB_ORDERS_DEBUG ) {
         return;
     }
 
@@ -123,8 +142,8 @@ function printlana_debug_admin_notice() {
         return;
     }
 
-    echo '<div class="notice notice-info is-dismissible">';
-    echo '<p><strong>Printlana Sub Orders Debug Mode Active:</strong> Check your debug.log file for detailed logging. Logs are prefixed with [PRINTLANA SUB ORDERS]</p>';
+    echo '<div class="notice notice-warning is-dismissible">';
+    echo '<p><strong>Printlana Customer Sub-Orders Debug Mode Active:</strong> Check your debug.log file for detailed logging. Logs are prefixed with [PRINTLANA CUSTOMER SUB ORDERS]. Remember to disable debugging in production!</p>';
     echo '</div>';
 }
-add_action( 'admin_notices', 'printlana_debug_admin_notice' );
+add_action( 'admin_notices', 'printlana_customer_sub_orders_debug_notice' );
