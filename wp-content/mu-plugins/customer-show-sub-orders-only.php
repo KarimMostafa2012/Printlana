@@ -62,8 +62,9 @@ function printlana_get_customer_sub_orders( $customer_orders ) {
     printlana_sub_orders_log( 'Filter triggered - original query args', $customer_orders );
 
     // Only show orders that have a parent (sub-orders)
-    // Exclude orders where post_parent = 0 (parent orders)
-    $customer_orders['post_parent__not_in'] = array( 0 );
+    // Exclude orders where parent = 0 (parent orders)
+    // WooCommerce uses 'parent_exclude' parameter for this
+    $customer_orders['parent_exclude'] = array( 0 );
 
     printlana_sub_orders_log( 'Filter applied - modified query args', $customer_orders );
 
@@ -71,47 +72,44 @@ function printlana_get_customer_sub_orders( $customer_orders ) {
 }
 
 /**
- * Log the actual orders being displayed (for debugging)
+ * Log the actual orders being displayed after WooCommerce query
  */
-function printlana_log_customer_orders( $query ) {
-    // Only log on My Account orders page
-    if ( ! is_account_page() || ! $query->is_main_query() ) {
-        return;
+function printlana_log_wc_orders_result( $orders, $query_vars ) {
+    // Only log if we have the customer parameter (indicates My Account orders)
+    if ( ! isset( $query_vars['customer'] ) ) {
+        return $orders;
     }
 
-    if ( $query->get( 'post_type' ) !== 'shop_order' ) {
-        return;
-    }
-
-    printlana_sub_orders_log( 'Orders query executed', array(
-        'post_type' => $query->get( 'post_type' ),
-        'post_parent' => $query->get( 'post_parent' ),
-        'post_parent__not_in' => $query->get( 'post_parent__not_in' ),
-        'customer_id' => $query->get( 'customer_id' ),
-        'found_posts' => $query->found_posts,
+    printlana_sub_orders_log( 'WooCommerce orders query executed', array(
+        'customer' => $query_vars['customer'],
+        'parent_exclude' => isset( $query_vars['parent_exclude'] ) ? $query_vars['parent_exclude'] : 'Not set',
+        'total_orders' => is_object( $orders ) && isset( $orders->total ) ? $orders->total : count( $orders ),
     ) );
 
-    // Log individual orders returned
-    if ( ! empty( $query->posts ) ) {
+    // Log individual orders
+    $orders_list = is_object( $orders ) && isset( $orders->orders ) ? $orders->orders : $orders;
+
+    if ( ! empty( $orders_list ) && is_array( $orders_list ) ) {
         $orders_info = array();
-        foreach ( $query->posts as $post ) {
-            $order = wc_get_order( $post->ID );
-            if ( $order ) {
+        foreach ( $orders_list as $order ) {
+            if ( is_a( $order, 'WC_Order' ) ) {
                 $orders_info[] = array(
                     'order_id' => $order->get_id(),
                     'parent_id' => $order->get_parent_id(),
                     'status' => $order->get_status(),
                     'total' => $order->get_total(),
-                    'is_sub_order' => $order->get_parent_id() > 0 ? 'Yes' : 'No',
+                    'is_sub_order' => $order->get_parent_id() > 0 ? 'YES' : 'NO (PARENT ORDER)',
                 );
             }
         }
         printlana_sub_orders_log( 'Orders returned (' . count( $orders_info ) . ' total)', $orders_info );
     } else {
-        printlana_sub_orders_log( 'No orders found in query results' );
+        printlana_sub_orders_log( 'No orders found - customer may have no sub-orders' );
     }
+
+    return $orders;
 }
-add_action( 'pre_get_posts', 'printlana_log_customer_orders', 999 );
+add_filter( 'woocommerce_orders_get_orders_query', 'printlana_log_wc_orders_result', 999, 2 );
 
 /**
  * Add admin notice to show debugging is active
