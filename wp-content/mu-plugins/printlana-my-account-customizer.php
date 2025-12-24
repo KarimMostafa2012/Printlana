@@ -53,6 +53,11 @@ class Printlana_My_Account_Customizer {
             $current_endpoint = !empty($endpoints) ? $endpoints[0] : 'dashboard';
         }
 
+        // VISIBLE TEST - Add HTML comment to page to verify plugin is loading
+        add_action('wp_head', function() use ($current_endpoint) {
+            echo "\n<!-- PRINTLANA MY ACCOUNT PLUGIN IS ACTIVE - Endpoint: " . esc_html($current_endpoint) . " -->\n";
+        });
+
         $this->log('=== MY ACCOUNT PAGE LOADED ===', [
             'endpoint' => $current_endpoint,
             'full_url' => home_url($wp->request),
