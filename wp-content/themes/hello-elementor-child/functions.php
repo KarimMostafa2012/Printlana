@@ -1362,6 +1362,52 @@ function custom_woocommerce_register_form_shortcode()
 
 add_shortcode('custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode');
 
+/**
+ * Validate email format during registration
+ */
+add_filter('woocommerce_registration_errors', 'custom_validate_registration_email', 10, 3);
+function custom_validate_registration_email($errors, $username, $email)
+{
+    if (empty($email)) {
+        return $errors;
+    }
+
+    // Check if email is valid using WordPress built-in function
+    if (!is_email($email)) {
+        $errors->add('invalid_email', __('Please enter a valid email address.', 'woocommerce'));
+        return $errors;
+    }
+
+    // Additional format validation - check for common issues
+    // Check for spaces
+    if (strpos($email, ' ') !== false) {
+        $errors->add('invalid_email_spaces', __('Email address cannot contain spaces.', 'woocommerce'));
+    }
+
+    // Check for multiple @ symbols
+    if (substr_count($email, '@') !== 1) {
+        $errors->add('invalid_email_format', __('Email address format is invalid.', 'woocommerce'));
+    }
+
+    // Check domain part
+    $email_parts = explode('@', $email);
+    if (count($email_parts) === 2) {
+        $domain = $email_parts[1];
+
+        // Domain must contain at least one dot
+        if (strpos($domain, '.') === false) {
+            $errors->add('invalid_email_domain', __('Email domain is invalid.', 'woocommerce'));
+        }
+
+        // Domain must not start or end with dot or hyphen
+        if (preg_match('/^[.-]|[.-]$/', $domain)) {
+            $errors->add('invalid_email_domain_format', __('Email domain format is invalid.', 'woocommerce'));
+        }
+    }
+
+    return $errors;
+}
+
 
 // Move Checkout payment section under Billing Adress Form
 
