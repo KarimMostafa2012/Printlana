@@ -1363,49 +1363,126 @@ function custom_woocommerce_register_form_shortcode()
 add_shortcode('custom_woocommerce_register', 'custom_woocommerce_register_form_shortcode');
 
 /**
- * Validate email format during registration
+ * Enqueue registration validation script
  */
-add_filter('woocommerce_registration_errors', 'custom_validate_registration_email', 10, 3);
-function custom_validate_registration_email($errors, $username, $email)
+add_action('wp_enqueue_scripts', 'enqueue_registration_validation_script');
+function enqueue_registration_validation_script()
 {
+    // Only load on registration page
+    if (is_page() || is_account_page()) {
+        wp_enqueue_script(
+            'registration-validation',
+            get_stylesheet_directory_uri() . '/assets/js/registration-validation.js',
+            ['jquery'],
+            '1.0.0',
+            true
+        );
+
+        // Pass AJAX URL to script
+        wp_localize_script('registration-validation', 'registrationValidation', [
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('registration_validation_nonce')
+        ]);
+    }
+}
+
+/**
+ * AJAX handler to check if email exists
+ */
+add_action('wp_ajax_check_email_exists', 'check_email_exists');
+add_action('wp_ajax_nopriv_check_email_exists', 'check_email_exists');
+function check_email_exists()
+{
+    check_ajax_referer('registration_validation_nonce', 'nonce');
+
+    $email = sanitize_email($_POST['email']);
+
     if (empty($email)) {
-        return $errors;
+        wp_send_json_error(['message' => 'Email is required']);
     }
 
-    // Check if email is valid using WordPress built-in function
-    if (!is_email($email)) {
-        $errors->add('invalid_email', __('Please enter a valid email address.', 'woocommerce'));
-        return $errors;
+    $user = get_user_by('email', $email);
+
+    if ($user) {
+        wp_send_json_error(['message' => 'This email is already registered']);
     }
 
-    // Additional format validation - check for common issues
-    // Check for spaces
-    if (strpos($email, ' ') !== false) {
-        $errors->add('invalid_email_spaces', __('Email address cannot contain spaces.', 'woocommerce'));
+    wp_send_json_success(['message' => 'Email is available']);
+}
+
+/**
+ * AJAX handler to check if phone exists
+ */
+add_action('wp_ajax_check_phone_exists', 'check_phone_exists');
+add_action('wp_ajax_nopriv_check_phone_exists', 'check_phone_exists');
+function check_phone_exists()
+{
+    check_ajax_referer('registration_validation_nonce', 'nonce');
+
+    $phone = sanitize_text_field($_POST['phone']);
+
+    if (empty($phone)) {
+        wp_send_json_error(['message' => 'Phone is required']);
     }
 
-    // Check for multiple @ symbols
-    if (substr_count($email, '@') !== 1) {
-        $errors->add('invalid_email_format', __('Email address format is invalid.', 'woocommerce'));
+    // Search for user with this phone number in billing_phone meta
+    $users = get_users([
+        'meta_key' => 'billing_phone',
+        'meta_value' => $phone,
+        'number' => 1
+    ]);
+
+    if (!empty($users)) {
+        wp_send_json_error(['message' => 'This phone number is already registered']);
     }
 
-    // Check domain part
-    $email_parts = explode('@', $email);
-    if (count($email_parts) === 2) {
-        $domain = $email_parts[1];
+    wp_send_json_success(['message' => 'Phone is available']);
+}
 
-        // Domain must contain at least one dot
-        if (strpos($domain, '.') === false) {
-            $errors->add('invalid_email_domain', __('Email domain is invalid.', 'woocommerce'));
-        }
+/**
+ * AJAX handler to check if company name exists
+ */
+add_action('wp_ajax_check_company_exists', 'check_company_exists');
+add_action('wp_ajax_nopriv_check_company_exists', 'check_company_exists');
+function check_company_exists()
+{
+    check_ajax_referer('registration_validation_nonce', 'nonce');
 
-        // Domain must not start or end with dot or hyphen
-        if (preg_match('/^[.-]|[.-]$/', $domain)) {
-            $errors->add('invalid_email_domain_format', __('Email domain format is invalid.', 'woocommerce'));
-        }
+    $company_name = sanitize_text_field($_POST['company_name']);
+
+    if (empty($company_name)) {
+        wp_send_json_success(['message' => 'Company name is optional']);
     }
 
-    return $errors;
+    // Search for user with this company name in billing_company meta
+    $users = get_users([
+        'meta_key' => 'billing_company',
+        'meta_value' => $company_name,
+        'number' => 1
+    ]);
+
+    if (!empty($users)) {
+        wp_send_json_error(['message' => 'This company name is already registered']);
+    }
+
+    wp_send_json_success(['message' => 'Company name is available']);
+}
+
+/**
+ * Save phone and company to user meta during registration
+ */
+add_action('woocommerce_created_customer', 'save_registration_extra_fields');
+function save_registration_extra_fields($customer_id)
+{
+    if (isset($_POST['phone'])) {
+        $phone = sanitize_text_field($_POST['phone']);
+        update_user_meta($customer_id, 'billing_phone', $phone);
+    }
+
+    if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
+        $company_name = sanitize_text_field($_POST['company_name']);
+        update_user_meta($customer_id, 'billing_company', $company_name);
+    }
 }
 
 
