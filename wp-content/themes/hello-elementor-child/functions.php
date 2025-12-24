@@ -17,29 +17,6 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     return $attr;
 }, 10, 3);
 
-// implement length in Advanced Custom Fields
-
-add_action('save_post_product', function ($post_id) {
-    // Only run on product post type
-    if (get_post_type($post_id) !== 'product') {
-        return;
-    }
-
-    $product = wc_get_product($post_id);
-    if (!$product)
-        return;
-
-    // Get WooCommerce dimensions
-    $length = floatval($product->get_length());
-    $width = floatval($product->get_width());
-    $height = floatval($product->get_height());
-
-    // Save into ACF or custom meta fields
-    update_post_meta($post_id, 'pl_length', $length);
-    update_post_meta($post_id, 'pl_width', $width);
-    update_post_meta($post_id, 'pl_height', $height);
-});
-
 
 add_action('init', function () {
     // Ensure Administrator has full WooCommerce Analytics access
