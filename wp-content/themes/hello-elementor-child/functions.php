@@ -241,68 +241,70 @@ function pl_add_rest_nonce_inline()
 
 
 
-function get_last_added_product()
-{
-    $products = wc_get_products([
-        'limit' => 1,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'return' => 'objects',
-    ]);
-
-    return $products ? $products[0] : null;
-}
-
 add_action('save_post_product', function ($post_id, $post, $update) {
-    if ($update)
-        return; // Only for new products
+    // Only run for new products
+    if ($update) {
+        return;
+    }
+
+    // Prevent infinite loops
+    static $processing = false;
+    if ($processing) {
+        return;
+    }
+    $processing = true;
 
     $product = wc_get_product($post_id);
-    if (!$product)
+    if (!$product) {
+        $processing = false;
         return;
+    }
 
     // Skip if product already has a SKU
-    if ($product->get_sku())
+    if ($product->get_sku()) {
+        $processing = false;
         return;
+    }
 
     $prefix = 'P126';
-    $number_length = 5; // Always keep 5 digits
-    $new_sku = '';
+    $number_length = 5;
 
-    // Get the last product with this prefix to determine next number
-    $last_product = get_last_added_product();
+    // Get the highest SKU number with this prefix (excluding current product)
+    global $wpdb;
+    $highest_sku = $wpdb->get_var($wpdb->prepare(
+        "SELECT meta_value
+        FROM {$wpdb->postmeta}
+        WHERE meta_key = '_sku'
+        AND meta_value LIKE %s
+        AND post_id != %d
+        ORDER BY meta_value DESC
+        LIMIT 1",
+        $prefix . '%',
+        $post_id
+    ));
 
-    if ($last_product && $last_product->get_sku()) {
-        $last_sku = $last_product->get_sku();
-
-        // Only process if the last SKU has our prefix
-        if (strpos($last_sku, $prefix) === 0) {
-            // Remove the prefix to get numeric part
-            $number_part = str_replace($prefix, '', $last_sku);
-
-            // Increment the number
-            $new_number = intval($number_part) + 1;
-
-            // Format with leading zeros to fixed width
-            $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
-        } else {
-            // Last product doesn't have our prefix, start from 1
-            $new_sku = $prefix . str_pad(1, $number_length, '0', STR_PAD_LEFT);
-        }
+    if ($highest_sku && strpos($highest_sku, $prefix) === 0) {
+        // Extract number from SKU
+        $number_part = str_replace($prefix, '', $highest_sku);
+        $new_number = intval($number_part) + 1;
     } else {
-        // No previous product found, start from 1
-        $new_sku = $prefix . str_pad(1, $number_length, '0', STR_PAD_LEFT);
+        // No existing SKU found, start from 1
+        $new_number = 1;
     }
 
-    // Verify SKU doesn't already exist before setting it
-    if ($new_sku && !wc_get_product_id_by_sku($new_sku)) {
-        try {
-            $product->set_sku($new_sku);
-            $product->save();
-        } catch (Exception $e) {
-            error_log('[SKU Generation Error] Failed to set SKU for product ' . $post_id . ': ' . $e->getMessage());
-        }
-    }
+    // Generate new SKU with leading zeros
+    $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+
+    // Log for debugging
+    error_log('[SKU Generation] Product ID: ' . $post_id . ' | New SKU: ' . $new_sku);
+
+    // Set SKU without triggering another save
+    update_post_meta($post_id, '_sku', $new_sku);
+
+    // Clear WooCommerce cache
+    wc_delete_product_transients($post_id);
+
+    $processing = false;
 }, 10, 3);
 
 /**

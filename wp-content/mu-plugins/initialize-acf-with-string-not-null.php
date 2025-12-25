@@ -32,12 +32,18 @@ function pl_initialize_acf_fields_with_strings($post_id)
         return;
     }
 
+    error_log('[ACF Init] Running for product ID: ' . $post_id);
+
     // Get all ACF field groups assigned to this post
     $field_groups = acf_get_field_groups(['post_id' => $post_id]);
 
     if (empty($field_groups)) {
+        error_log('[ACF Init] No field groups found for product ' . $post_id);
         return;
     }
+
+    error_log('[ACF Init] Found ' . count($field_groups) . ' field group(s) for product ' . $post_id);
+    $initialized_count = 0;
 
     // Loop through each field group
     foreach ($field_groups as $field_group) {
@@ -52,7 +58,7 @@ function pl_initialize_acf_fields_with_strings($post_id)
             $value = get_field($field['name'], $post_id);
 
             // If value is NULL or false, initialize it with proper type
-            if ($value === null || $value === false) {
+            if ($value === null || $value === false || $value === '') {
                 $field_type = $field['type'];
 
                 // Text-based fields that must be strings, not NULL
@@ -94,10 +100,14 @@ function pl_initialize_acf_fields_with_strings($post_id)
 
                     // Update the field with the proper default value
                     update_field($field['name'], $default_value, $post_id);
+                    $initialized_count++;
+                    error_log('[ACF Init] Initialized field: ' . $field['name'] . ' (type: ' . $field_type . ') with value: ' . json_encode($default_value));
                 }
             }
         }
     }
+
+    error_log('[ACF Init] Initialized ' . $initialized_count . ' field(s) for product ' . $post_id);
 }
 
 /**
