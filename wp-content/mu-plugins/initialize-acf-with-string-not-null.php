@@ -16,33 +16,29 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Initialize ACF text fields with empty strings instead of NULL
- *
- * This runs after ACF saves a post to ensure all text-based fields
+ * FIX #1: Initialize ACF text fields on save
+ * Runs after ACF saves a post to ensure all text-based fields
  * have proper string values in the database instead of NULL.
- *
- * @param int $post_id The post ID being saved
- * @return void
  */
 add_action('acf/save_post', 'pl_initialize_acf_fields_with_strings', 20);
 function pl_initialize_acf_fields_with_strings($post_id)
 {
-    // Only run for products (change this if you need it for other post types)
+    // Only run for products
     if (get_post_type($post_id) !== 'product') {
         return;
     }
 
-    error_log('[ACF Init] Running for product ID: ' . $post_id);
+    error_log('[ACF Init Save] Running for product ID: ' . $post_id);
 
     // Get all ACF field groups assigned to this post
     $field_groups = acf_get_field_groups(['post_id' => $post_id]);
 
     if (empty($field_groups)) {
-        error_log('[ACF Init] No field groups found for product ' . $post_id);
+        error_log('[ACF Init Save] No field groups found for product ' . $post_id);
         return;
     }
 
-    error_log('[ACF Init] Found ' . count($field_groups) . ' field group(s) for product ' . $post_id);
+    error_log('[ACF Init Save] Found ' . count($field_groups) . ' field group(s)');
     $initialized_count = 0;
 
     // Loop through each field group
@@ -101,13 +97,61 @@ function pl_initialize_acf_fields_with_strings($post_id)
                     // Update the field with the proper default value
                     update_field($field['name'], $default_value, $post_id);
                     $initialized_count++;
-                    error_log('[ACF Init] Initialized field: ' . $field['name'] . ' (type: ' . $field_type . ') with value: ' . json_encode($default_value));
+                    error_log('[ACF Init Save] Initialized field: ' . $field['name'] . ' = ' . json_encode($default_value));
                 }
             }
         }
     }
 
-    error_log('[ACF Init] Initialized ' . $initialized_count . ' field(s) for product ' . $post_id);
+    error_log('[ACF Init Save] Initialized ' . $initialized_count . ' field(s)');
+}
+
+/**
+ * FIX #2: Filter ACF values when loading on front end
+ * This prevents NULL values from being returned and causing warnings
+ */
+add_filter('acf/load_value', 'pl_convert_null_to_empty_string', 10, 3);
+function pl_convert_null_to_empty_string($value, $post_id, $field)
+{
+    // Only process text-type fields
+    $text_types = [
+        'text',
+        'textarea',
+        'wysiwyg',
+        'email',
+        'url',
+        'number',
+        'select',
+        'radio'
+    ];
+
+    if (!in_array($field['type'], $text_types)) {
+        return $value;
+    }
+
+    // If value is NULL, return empty string instead
+    if ($value === null || $value === false) {
+        return '';
+    }
+
+    return $value;
+}
+
+/**
+ * FIX #3: Format ACF values before display
+ * Additional safety layer to ensure no NULL values reach the template
+ */
+add_filter('acf/format_value', 'pl_ensure_string_value', 10, 3);
+function pl_ensure_string_value($value, $post_id, $field)
+{
+    // Text fields must return strings
+    $text_types = ['text', 'textarea', 'email', 'url', 'number'];
+
+    if (in_array($field['type'], $text_types) && ($value === null || $value === false)) {
+        return '';
+    }
+
+    return $value;
 }
 
 /**
