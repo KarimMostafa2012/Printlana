@@ -260,46 +260,77 @@ add_action('save_post_product', function ($post_id, $post, $update) {
         return;
     }
 
-    // Skip if product already has a SKU
-    if ($product->get_sku()) {
-        $processing = false;
-        return;
+    // === SKU GENERATION ===
+    if (!$product->get_sku()) {
+        $prefix = 'P126';
+        $number_length = 5;
+
+        // Get the highest SKU number with this prefix (excluding current product)
+        global $wpdb;
+        $highest_sku = $wpdb->get_var($wpdb->prepare(
+            "SELECT meta_value
+            FROM {$wpdb->postmeta}
+            WHERE meta_key = '_sku'
+            AND meta_value LIKE %s
+            AND post_id != %d
+            ORDER BY meta_value DESC
+            LIMIT 1",
+            $prefix . '%',
+            $post_id
+        ));
+
+        if ($highest_sku && strpos($highest_sku, $prefix) === 0) {
+            // Extract number from SKU
+            $number_part = str_replace($prefix, '', $highest_sku);
+            $new_number = intval($number_part) + 1;
+        } else {
+            // No existing SKU found, start from 1
+            $new_number = 1;
+        }
+
+        // Generate new SKU with leading zeros
+        $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+
+        // Set SKU
+        update_post_meta($post_id, '_sku', $new_sku);
+        error_log('[Product Init] SKU set: ' . $new_sku);
     }
 
-    $prefix = 'P126';
-    $number_length = 5;
+    // === INITIALIZE WOOCOMMERCE PRODUCT META ===
+    // These are essential WooCommerce fields that must exist
 
-    // Get the highest SKU number with this prefix (excluding current product)
-    global $wpdb;
-    $highest_sku = $wpdb->get_var($wpdb->prepare(
-        "SELECT meta_value
-        FROM {$wpdb->postmeta}
-        WHERE meta_key = '_sku'
-        AND meta_value LIKE %s
-        AND post_id != %d
-        ORDER BY meta_value DESC
-        LIMIT 1",
-        $prefix . '%',
-        $post_id
-    ));
-
-    if ($highest_sku && strpos($highest_sku, $prefix) === 0) {
-        // Extract number from SKU
-        $number_part = str_replace($prefix, '', $highest_sku);
-        $new_number = intval($number_part) + 1;
-    } else {
-        // No existing SKU found, start from 1
-        $new_number = 1;
+    // Price fields - initialize to empty if not set
+    if (!metadata_exists('post', $post_id, '_regular_price')) {
+        update_post_meta($post_id, '_regular_price', '');
+        update_post_meta($post_id, '_price', '');
+        error_log('[Product Init] Price fields initialized');
     }
 
-    // Generate new SKU with leading zeros
-    $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+    // Stock/Inventory fields
+    if (!metadata_exists('post', $post_id, '_manage_stock')) {
+        update_post_meta($post_id, '_manage_stock', 'no');
+        update_post_meta($post_id, '_stock_status', 'instock');
+        update_post_meta($post_id, '_stock', '');
+        error_log('[Product Init] Stock fields initialized');
+    }
 
-    // Log for debugging
-    error_log('[SKU Generation] Product ID: ' . $post_id . ' | New SKU: ' . $new_sku);
+    // Visibility and featured
+    if (!metadata_exists('post', $post_id, '_visibility')) {
+        update_post_meta($post_id, '_visibility', 'visible');
+        update_post_meta($post_id, '_featured', 'no');
+    }
 
-    // Set SKU without triggering another save
-    update_post_meta($post_id, '_sku', $new_sku);
+    // Tax and shipping
+    if (!metadata_exists('post', $post_id, '_tax_status')) {
+        update_post_meta($post_id, '_tax_status', 'taxable');
+        update_post_meta($post_id, '_tax_class', '');
+    }
+
+    // Virtual and downloadable
+    if (!metadata_exists('post', $post_id, '_virtual')) {
+        update_post_meta($post_id, '_virtual', 'no');
+        update_post_meta($post_id, '_downloadable', 'no');
+    }
 
     // Clear WooCommerce cache
     wc_delete_product_transients($post_id);
