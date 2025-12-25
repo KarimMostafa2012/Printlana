@@ -261,25 +261,48 @@ add_action('save_post_product', function ($post_id, $post, $update) {
     if (!$product)
         return;
 
+    // Skip if product already has a SKU
+    if ($product->get_sku())
+        return;
+
     $prefix = 'P126';
     $number_length = 5; // Always keep 5 digits
+    $new_sku = '';
+
+    // Get the last product with this prefix to determine next number
     $last_product = get_last_added_product();
 
-    if ($last_product) {
+    if ($last_product && $last_product->get_sku()) {
         $last_sku = $last_product->get_sku();
 
-        // Remove the prefix to get numeric part
-        $number_part = str_replace($prefix, '', strtoupper($last_sku));
+        // Only process if the last SKU has our prefix
+        if (strpos($last_sku, $prefix) === 0) {
+            // Remove the prefix to get numeric part
+            $number_part = str_replace($prefix, '', $last_sku);
 
-        // Increment the number
-        $new_number = intval($number_part) + 1;
+            // Increment the number
+            $new_number = intval($number_part) + 1;
 
-        // Format with leading zeros to fixed width
-        $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+            // Format with leading zeros to fixed width
+            $new_sku = $prefix . str_pad($new_number, $number_length, '0', STR_PAD_LEFT);
+        } else {
+            // Last product doesn't have our prefix, start from 1
+            $new_sku = $prefix . str_pad(1, $number_length, '0', STR_PAD_LEFT);
+        }
+    } else {
+        // No previous product found, start from 1
+        $new_sku = $prefix . str_pad(1, $number_length, '0', STR_PAD_LEFT);
     }
 
-    $product->set_sku($new_sku);
-    $product->save();
+    // Verify SKU doesn't already exist before setting it
+    if ($new_sku && !wc_get_product_id_by_sku($new_sku)) {
+        try {
+            $product->set_sku($new_sku);
+            $product->save();
+        } catch (Exception $e) {
+            error_log('[SKU Generation Error] Failed to set SKU for product ' . $post_id . ': ' . $e->getMessage());
+        }
+    }
 }, 10, 3);
 
 /**
