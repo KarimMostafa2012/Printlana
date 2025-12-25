@@ -1446,7 +1446,46 @@ function check_company_exists()
 }
 
 /**
- * Save phone and company to user meta during registration
+ * Validate registration fields
+ */
+add_action('woocommerce_register_post', 'validate_registration_extra_fields', 10, 3);
+function validate_registration_extra_fields($username, $email, $validation_errors)
+{
+    // Validate phone number
+    if (empty($_POST['phone'])) {
+        $validation_errors->add('phone_error', __('Phone number is required.', 'woocommerce'));
+    }
+
+    // Validate company name if account type is company
+    if (isset($_POST['account_type']) && $_POST['account_type'] === 'company') {
+        if (empty($_POST['company_name'])) {
+            $validation_errors->add('company_error', __('Company name is required for company accounts.', 'woocommerce'));
+        } else {
+            $company_name = sanitize_text_field($_POST['company_name']);
+
+            // Check if company name already exists
+            $existing_users = get_users([
+                'meta_key' => 'billing_company',
+                'meta_value' => $company_name,
+                'number' => 1
+            ]);
+
+            if (!empty($existing_users)) {
+                $validation_errors->add('company_error', __('This company name is already registered.', 'woocommerce'));
+            }
+
+            // Minimum length validation
+            if (strlen($company_name) < 2) {
+                $validation_errors->add('company_error', __('Company name must be at least 2 characters.', 'woocommerce'));
+            }
+        }
+    }
+
+    return $validation_errors;
+}
+
+/**
+ * Save phone, company, account type, and sector to user meta during registration
  */
 add_action('woocommerce_created_customer', 'save_registration_extra_fields');
 function save_registration_extra_fields($customer_id)
@@ -1459,6 +1498,16 @@ function save_registration_extra_fields($customer_id)
     if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
         $company_name = sanitize_text_field($_POST['company_name']);
         update_user_meta($customer_id, 'billing_company', $company_name);
+    }
+
+    if (isset($_POST['account_type'])) {
+        $account_type = sanitize_text_field($_POST['account_type']);
+        update_user_meta($customer_id, 'account_type', $account_type);
+    }
+
+    if (isset($_POST['sector']) && !empty($_POST['sector'])) {
+        $sector = sanitize_text_field($_POST['sector']);
+        update_user_meta($customer_id, 'sector', $sector);
     }
 }
 

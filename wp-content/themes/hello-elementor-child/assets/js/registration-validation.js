@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
     const $emailField = $registrationForm.find('#reg_email');
     const $phoneField = $registrationForm.find('#reg_phone');
     const $companyField = $registrationForm.find('#reg_company_name');
+    const $accountTypeRadios = $registrationForm.find('input[name="account_type"]');
 
     // Create error message container helper
     function showError($field, message) {
@@ -174,17 +175,55 @@ jQuery(document).ready(function ($) {
         }, 500);
     });
 
-    // Company field validation
+    // Helper function to check if company account type is selected
+    function isCompanyAccountType() {
+        return $accountTypeRadios.filter(':checked').val() === 'company';
+    }
+
+    // Update company field required attribute based on account type
+    function updateCompanyRequired() {
+        if (isCompanyAccountType()) {
+            $companyField.prop('required', true);
+            $companyField.closest('p').find('label').append('<span class="required" aria-hidden="true">*</span>');
+        } else {
+            $companyField.prop('required', false);
+            $companyField.closest('p').find('label .required').remove();
+            clearError($companyField);
+        }
+    }
+
+    // Listen for account type changes
+    $accountTypeRadios.on('change', function () {
+        updateCompanyRequired();
+    });
+
+    // Set initial state on page load
+    updateCompanyRequired();
+
+    // Company field validation (with duplicate check)
     let companyTimeout;
     $companyField.on('blur input', function () {
         clearTimeout(companyTimeout);
         const companyName = $(this).val().trim();
+
+        // Only validate if company account type is selected
+        if (!isCompanyAccountType()) {
+            clearError($companyField);
+            return;
+        }
 
         if (!companyName) {
             clearError($companyField);
             return;
         }
 
+        // Validate minimum length
+        if (companyName.length < 2) {
+            showError($companyField, 'Company name must be at least 2 characters');
+            return;
+        }
+
+        // Check for duplicate company name (live validation)
         companyTimeout = setTimeout(function () {
             checkCompanyExists(companyName, function (response) {
                 if (!response.success) {
@@ -229,6 +268,20 @@ jQuery(document).ready(function ($) {
             e.preventDefault();
             showError($phoneField, 'Phone number is required');
             hasErrors = true;
+        }
+
+        // Validate company name if company account type is selected
+        if (isCompanyAccountType()) {
+            const companyName = $companyField.val().trim();
+            if (!companyName) {
+                e.preventDefault();
+                showError($companyField, 'Company name is required for company accounts');
+                hasErrors = true;
+            } else if (companyName.length < 2) {
+                e.preventDefault();
+                showError($companyField, 'Company name must be at least 2 characters');
+                hasErrors = true;
+            }
         }
 
         if (hasErrors) {
