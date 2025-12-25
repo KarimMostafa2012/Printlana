@@ -6,6 +6,11 @@
  * Author: Qersh Yahya
  */
 
+// TEST: This will run on EVERY page load to verify the file is being loaded
+add_action('wp_footer', function() {
+    echo '<!-- PRINTLANA PLUGIN LOADED! -->';
+}, 999);
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
