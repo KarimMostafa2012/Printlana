@@ -283,24 +283,6 @@ add_action('save_post_product', function ($post_id, $post, $update) {
 }, 10, 3);
 
 /**
- * FIX: Initialize ACF fields for new products
- * Ensures all ACF fields are recognized when creating new products
- */
-add_action('acf/init', 'ensure_acf_recognizes_products');
-function ensure_acf_recognizes_products()
-{
-    // Force ACF to load field groups for products
-    if (function_exists('acf_get_field_groups')) {
-        $field_groups = acf_get_field_groups(['post_type' => 'product']);
-
-        // Log for debugging
-        if (empty($field_groups)) {
-            error_log('[ACF] WARNING: No field groups configured for products! Check Location Rules in ACF admin.');
-        }
-    }
-}
-
-/**
  * Re-order product categories for the Loop Grid widget with Query ID = home_categories
  * (Elementor Source: Product categories).
  */
