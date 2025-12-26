@@ -68,21 +68,35 @@ class Printlana_My_Account_Customizer {
             'full_url' => home_url($wp->request),
         ]);
 
-        // TEMPORARILY DISABLED - The logging created a 42MB log file!
-        // add_action('all', [$this, 'log_all_hooks'], 1);
+        // Enable filtered logging - only log payment/account related hooks
+        add_action('all', [$this, 'log_filtered_hooks'], 1);
     }
 
     /**
-     * Log every single action/filter that fires
+     * Log only payment/account related hooks
      */
-    public function log_all_hooks($hook) {
+    public function log_filtered_hooks($hook) {
         // Only log action hooks (not filters)
         if (!doing_action()) {
             return;
         }
 
-        // Log everything
-        $this->log('ACTION FIRED: ' . $hook);
+        // Keywords to filter for
+        $keywords = [
+            'payment',
+            'woocommerce_account',
+            'woocommerce_before_account',
+            'woocommerce_after_account',
+            'my_account',
+        ];
+
+        // Check if hook name contains any of our keywords
+        foreach ($keywords as $keyword) {
+            if (stripos($hook, $keyword) !== false) {
+                $this->log('RELEVANT ACTION: ' . $hook);
+                break;
+            }
+        }
     }
 
     /**
