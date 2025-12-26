@@ -70,6 +70,10 @@ class Printlana_My_Account_Customizer {
 
         // Enable filtered logging - only log payment/account related hooks
         add_action('all', [$this, 'log_filtered_hooks'], 1);
+
+        // Add test elements to payment methods page
+        add_action('woocommerce_before_account_payment_methods', [$this, 'add_test_before_payment_methods']);
+        add_action('woocommerce_after_account_payment_methods', [$this, 'add_test_after_payment_methods']);
     }
 
     /**
@@ -97,6 +101,20 @@ class Printlana_My_Account_Customizer {
                 break;
             }
         }
+    }
+
+    /**
+     * Add test paragraph BEFORE payment methods content
+     */
+    public function add_test_before_payment_methods() {
+        echo '<p style="background: #ffeb3b; padding: 15px; border: 2px solid #f57c00; font-weight: bold;">TEST: This appears BEFORE payment methods</p>';
+    }
+
+    /**
+     * Add test paragraph AFTER payment methods content
+     */
+    public function add_test_after_payment_methods() {
+        echo '<p style="background: #4caf50; padding: 15px; border: 2px solid #2e7d32; color: white; font-weight: bold;">TEST: This appears AFTER payment methods</p>';
     }
 
     /**
