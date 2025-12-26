@@ -104,17 +104,20 @@ class Printlana_My_Account_Customizer {
     }
 
     /**
-     * Add test paragraph BEFORE payment methods content
+     * Add security notice BEFORE payment methods content
      */
     public function add_test_before_payment_methods() {
-        echo '<p style="background: #ffeb3b; padding: 15px; border: 2px solid #f57c00; font-weight: bold;">TEST: This appears BEFORE payment methods</p>';
+        echo '<div style="background: #e3f2fd; padding: 20px; border-right: 4px solid #2196f3; margin-bottom: 20px; border-radius: 4px;">';
+        echo '<p style="margin: 0; color: #1976d2; font-size: 15px; line-height: 1.6;">لأسباب أمنية، لا نقوم حالياً بحفظ بيانات طرق الدفع. هذه الميزة ستكون متاحة قريباً.</p>';
+        echo '</div>';
     }
 
     /**
-     * Add test paragraph AFTER payment methods content
+     * Add security notice AFTER payment methods content (placeholder for future use)
      */
     public function add_test_after_payment_methods() {
-        echo '<p style="background: #4caf50; padding: 15px; border: 2px solid #2e7d32; color: white; font-weight: bold;">TEST: This appears AFTER payment methods</p>';
+        // Currently not displaying anything after payment methods
+        // This can be used for additional information in the future
     }
 
     /**
