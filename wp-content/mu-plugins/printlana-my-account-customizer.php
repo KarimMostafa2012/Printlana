@@ -68,8 +68,8 @@ class Printlana_My_Account_Customizer {
             'full_url' => home_url($wp->request),
         ]);
 
-        // Hook into all actions and log them - NO FILTERING
-        add_action('all', [$this, 'log_all_hooks'], 1);
+        // TEMPORARILY DISABLED - The logging created a 42MB log file!
+        // add_action('all', [$this, 'log_all_hooks'], 1);
     }
 
     /**
