@@ -169,7 +169,8 @@ class Printlana_My_Account_Customizer {
      * Add CSS for orders page customization
      */
     public function orders_custom_css() {
-        if (!is_wc_endpoint_url('orders')) {
+        // Run on all My Account pages to ensure CSS loads
+        if (!is_account_page()) {
             return;
         }
         ?>
@@ -181,9 +182,10 @@ class Printlana_My_Account_Customizer {
             }
 
             /* Reorder button styling */
-            .order-reorder-btn {
-                background: #2196f3;
-                color: white;
+            .order-reorder-btn,
+            .woocommerce-button.button.order-again {
+                background: #2196f3 !important;
+                color: white !important;
                 padding: 8px 16px;
                 border: none;
                 border-radius: 4px;
@@ -195,32 +197,62 @@ class Printlana_My_Account_Customizer {
                 margin-top: 8px;
                 transition: background 0.2s;
             }
-            .order-reorder-btn:hover {
-                background: #1976d2;
-                color: white;
+            .order-reorder-btn:hover,
+            .woocommerce-button.button.order-again:hover {
+                background: #1976d2 !important;
+                color: white !important;
             }
         </style>
         <?php
     }
 
     /**
-     * Translate "Order" text to Arabic
+     * Check if current language is Arabic
+     */
+    private function is_arabic() {
+        // Check if WPML is active and current language is Arabic
+        if (defined('ICL_LANGUAGE_CODE')) {
+            return ICL_LANGUAGE_CODE === 'ar';
+        }
+
+        // Fallback: check URL for /ar/ or ?lang=ar
+        $current_url = $_SERVER['REQUEST_URI'] ?? '';
+        return (strpos($current_url, '/ar/') !== false || strpos($current_url, '?lang=ar') !== false || strpos($current_url, '&lang=ar') !== false);
+    }
+
+    /**
+     * Translate "Order" text based on language
      */
     public function translate_order_text($translated, $text, $domain) {
-        if ($domain === 'woocommerce' && $text === 'Order') {
+        // Only translate for WooCommerce domain
+        if ($domain !== 'woocommerce') {
+            return $translated;
+        }
+
+        // Don't translate if not Arabic
+        if (!$this->is_arabic()) {
+            return $translated;
+        }
+
+        // Translate "Order" to Arabic
+        if ($text === 'Order') {
             return 'رقم الطلب';
         }
+
         return $translated;
     }
 
     /**
-     * Add date label and reorder button to order actions
+     * Add reorder button to order actions
      */
     public function add_order_actions($actions, $order) {
+        // Determine button text based on language
+        $button_text = $this->is_arabic() ? 'إعادة الطلب' : 'Reorder';
+
         // Add reorder button
         $actions['order-again'] = [
             'url' => wp_nonce_url(add_query_arg('order_again', $order->get_id(), wc_get_cart_url()), 'woocommerce-order_again'),
-            'name' => 'إعادة الطلب',
+            'name' => $button_text,
         ];
 
         return $actions;
@@ -239,15 +271,24 @@ class Printlana_My_Account_Customizer {
     public function end_order_output_buffer() {
         $content = ob_get_clean();
 
-        // 1. Replace "Order No." with Arabic
-        $content = preg_replace('/Order No\./i', 'رقم الطلب', $content);
+        if ($this->is_arabic()) {
+            // Arabic version: Replace "Order No." with Arabic
+            $content = preg_replace('/Order No\./i', 'رقم الطلب', $content);
 
-        // 2. Add date label before time elements
-        $content = preg_replace(
-            '/<div class="order-date">\s*<time/',
-            '<div class="order-date"><span class="date-label" style="margin-left: 0.3em;">التاريخ: </span><time',
-            $content
-        );
+            // Arabic version: Add date label before time elements
+            $content = preg_replace(
+                '/<div class="order-date">\s*<time/',
+                '<div class="order-date"><span class="date-label" style="margin-left: 0.3em;">التاريخ: </span><time',
+                $content
+            );
+        } else {
+            // English version: Keep "Order No." but add date label
+            $content = preg_replace(
+                '/<div class="order-date">\s*<time/',
+                '<div class="order-date"><span class="date-label" style="margin-right: 0.3em;">Date: </span><time',
+                $content
+            );
+        }
 
         echo $content;
     }
