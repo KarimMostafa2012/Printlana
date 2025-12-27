@@ -83,6 +83,10 @@ class Printlana_My_Account_Customizer {
         add_action('wp_head', [$this, 'orders_custom_css']);
         add_filter('gettext', [$this, 'translate_order_text'], 20, 3);
         add_filter('woocommerce_my_account_my_orders_actions', [$this, 'add_order_actions'], 10, 2);
+
+        // Use output buffering to modify order date display
+        add_action('woocommerce_account_orders_endpoint', [$this, 'start_order_output_buffer'], 1);
+        add_action('woocommerce_account_orders_endpoint', [$this, 'end_order_output_buffer'], 999);
     }
 
     /**
@@ -223,11 +227,29 @@ class Printlana_My_Account_Customizer {
     }
 
     /**
-     * Format order date with label
+     * Start output buffering for orders content
      */
-    public function format_order_date($date_html) {
-        // Add label before date
-        return '<span class="date-label" style="margin-left: 0.3em;">التاريخ: </span>' . $date_html;
+    public function start_order_output_buffer() {
+        ob_start();
+    }
+
+    /**
+     * End output buffering and modify orders content
+     */
+    public function end_order_output_buffer() {
+        $content = ob_get_clean();
+
+        // 1. Replace "Order No." with Arabic
+        $content = preg_replace('/Order No\./i', 'رقم الطلب', $content);
+
+        // 2. Add date label before time elements
+        $content = preg_replace(
+            '/<div class="order-date">\s*<time/',
+            '<div class="order-date"><span class="date-label" style="margin-left: 0.3em;">التاريخ: </span><time',
+            $content
+        );
+
+        echo $content;
     }
 
     /**
