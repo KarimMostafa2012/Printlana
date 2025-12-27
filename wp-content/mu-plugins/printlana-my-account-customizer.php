@@ -287,20 +287,24 @@ class Printlana_My_Account_Customizer {
      * Add pagination numbers between Previous and Next buttons
      */
     private function add_pagination_numbers($content) {
-        // Get current page number from URL
-        $current_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+        // Get current page number - WooCommerce uses endpoint-based pagination
+        global $wp;
+        $current_page = isset($wp->query_vars['orders']) && absint($wp->query_vars['orders']) > 1
+            ? absint($wp->query_vars['orders'])
+            : 1;
 
         // Check if pagination exists in content
         if (strpos($content, 'woocommerce-pagination') !== false) {
-            // Get total number of pages
+            // Get total number of pages using WooCommerce's pagination
             $customer_orders = wc_get_orders([
                 'customer_id' => get_current_user_id(),
                 'limit' => -1,
                 'return' => 'ids',
+                'paginate' => false,
             ]);
 
             $total_orders = count($customer_orders);
-            $per_page = get_option('posts_per_page', 10);
+            $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
             $total_pages = ceil($total_orders / $per_page);
 
             if ($total_pages > 1) {
@@ -309,24 +313,53 @@ class Printlana_My_Account_Customizer {
 
                 // Previous button
                 if ($current_page > 1) {
-                    $prev_url = add_query_arg('paged', $current_page - 1);
+                    $prev_url = wc_get_endpoint_url('orders', $current_page - 1);
                     $prev_text = $this->is_arabic() ? 'السابق' : 'Previous';
                     $pagination_html .= '<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="' . esc_url($prev_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $prev_text . '</a>';
                 }
 
+                // Page numbers - show max 5 pages for better UX
+                $start_page = max(1, $current_page - 2);
+                $end_page = min($total_pages, $current_page + 2);
+
+                // Adjust range if we're at the beginning or end
+                if ($current_page <= 3) {
+                    $end_page = min(5, $total_pages);
+                } elseif ($current_page >= $total_pages - 2) {
+                    $start_page = max(1, $total_pages - 4);
+                }
+
+                // First page if not in range
+                if ($start_page > 1) {
+                    $page_url = wc_get_endpoint_url('orders', 1);
+                    $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">1</a>';
+                    if ($start_page > 2) {
+                        $pagination_html .= '<span style="display: inline-block; padding: 8px 12px;">...</span>';
+                    }
+                }
+
                 // Page numbers
-                for ($i = 1; $i <= $total_pages; $i++) {
+                for ($i = $start_page; $i <= $end_page; $i++) {
                     if ($i == $current_page) {
                         $pagination_html .= '<span style="display: inline-block; padding: 8px 12px; margin: 0 2px; font-weight: bold; color: #0044F1; background: #f0f0f0; border-radius: 3px;">' . $i . '</span>';
                     } else {
-                        $page_url = add_query_arg('paged', $i);
+                        $page_url = wc_get_endpoint_url('orders', $i);
                         $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $i . '</a>';
                     }
                 }
 
+                // Last page if not in range
+                if ($end_page < $total_pages) {
+                    if ($end_page < $total_pages - 1) {
+                        $pagination_html .= '<span style="display: inline-block; padding: 8px 12px;">...</span>';
+                    }
+                    $page_url = wc_get_endpoint_url('orders', $total_pages);
+                    $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $total_pages . '</a>';
+                }
+
                 // Next button
                 if ($current_page < $total_pages) {
-                    $next_url = add_query_arg('paged', $current_page + 1);
+                    $next_url = wc_get_endpoint_url('orders', $current_page + 1);
                     $next_text = $this->is_arabic() ? 'التالي' : 'Next';
                     $pagination_html .= '<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="' . esc_url($next_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $next_text . '</a>';
                 }
