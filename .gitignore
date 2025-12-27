@@ -59,6 +59,8 @@ composer.lock
 *.swp
 *.bak
 *.old
+COMMIT_MSG.txt
+orders_snapshot/
 
 # Env and sensitive config
 .env
