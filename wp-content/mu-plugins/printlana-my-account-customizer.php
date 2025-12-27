@@ -298,17 +298,25 @@ class Printlana_My_Account_Customizer {
             // Get ONLY current user's orders for accurate count
             $customer_id = get_current_user_id();
 
-            // Use WooCommerce customer data to get accurate order count
-            $customer = new WC_Customer($customer_id);
+            // Get current user's orders with proper filtering
             $customer_orders = wc_get_orders([
-                'customer' => $customer_id,
-                'limit' => -1,
-                'return' => 'ids',
+                'customer_id' => $customer_id,  // Use customer_id for filtering
+                'limit' => -1,  // Get all orders
+                'return' => 'ids',  // Only return IDs for performance
             ]);
 
             $total_orders = count($customer_orders);
             $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
             $total_pages = max(1, ceil($total_orders / $per_page));
+
+            // Debug logging
+            $this->log('PAGINATION DEBUG', [
+                'customer_id' => $customer_id,
+                'total_orders' => $total_orders,
+                'per_page' => $per_page,
+                'total_pages' => $total_pages,
+                'current_page' => $current_page,
+            ]);
 
             if ($total_pages > 1) {
                 // Build pagination HTML with product card button styles
