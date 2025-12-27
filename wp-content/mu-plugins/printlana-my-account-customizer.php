@@ -78,6 +78,11 @@ class Printlana_My_Account_Customizer {
         // Add test elements to orders page (for discovery)
         add_action('woocommerce_before_account_orders', [$this, 'add_test_before_orders']);
         add_action('woocommerce_after_account_orders', [$this, 'add_test_after_orders']);
+
+        // Customize orders page
+        add_action('wp_head', [$this, 'orders_custom_css']);
+        add_filter('gettext', [$this, 'translate_order_text'], 20, 3);
+        add_filter('woocommerce_my_account_my_orders_actions', [$this, 'add_order_actions'], 10, 2);
     }
 
     /**
@@ -154,6 +159,75 @@ class Printlana_My_Account_Customizer {
     public function add_test_after_orders() {
         // Currently not displaying anything after orders
         // This can be used for additional information in the future
+    }
+
+    /**
+     * Add CSS for orders page customization
+     */
+    public function orders_custom_css() {
+        if (!is_wc_endpoint_url('orders')) {
+            return;
+        }
+        ?>
+        <style>
+            /* Fix SAR currency symbol position - move to left side */
+            .order-total .sar-currency-svg {
+                margin-right: 0 !important;
+                margin-left: 0.2em !important;
+            }
+
+            /* Reorder button styling */
+            .order-reorder-btn {
+                background: #2196f3;
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 8px;
+                transition: background 0.2s;
+            }
+            .order-reorder-btn:hover {
+                background: #1976d2;
+                color: white;
+            }
+        </style>
+        <?php
+    }
+
+    /**
+     * Translate "Order" text to Arabic
+     */
+    public function translate_order_text($translated, $text, $domain) {
+        if ($domain === 'woocommerce' && $text === 'Order') {
+            return 'رقم الطلب';
+        }
+        return $translated;
+    }
+
+    /**
+     * Add date label and reorder button to order actions
+     */
+    public function add_order_actions($actions, $order) {
+        // Add reorder button
+        $actions['order-again'] = [
+            'url' => wp_nonce_url(add_query_arg('order_again', $order->get_id(), wc_get_cart_url()), 'woocommerce-order_again'),
+            'name' => 'إعادة الطلب',
+        ];
+
+        return $actions;
+    }
+
+    /**
+     * Format order date with label
+     */
+    public function format_order_date($date_html) {
+        // Add label before date
+        return '<span class="date-label" style="margin-left: 0.3em;">التاريخ: </span>' . $date_html;
     }
 
     /**
