@@ -298,12 +298,12 @@ class Printlana_My_Account_Customizer {
             // Get ONLY current user's orders for accurate count
             $customer_id = get_current_user_id();
 
-            // Get current user's orders with proper filtering
+            // Get current user's orders - use same query as WooCommerce My Account page
+            // Don't specify status - let it match what WooCommerce displays
             $customer_orders = wc_get_orders([
-                'customer_id' => $customer_id,  // Use customer_id for filtering
-                'limit' => -1,  // Get all orders
-                'return' => 'ids',  // Only return IDs for performance
-                'status' => ['wc-completed', 'wc-processing', 'wc-on-hold', 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed'],
+                'customer_id' => $customer_id,
+                'limit' => -1,
+                'paginate' => false,
             ]);
 
             $total_orders = count($customer_orders);
