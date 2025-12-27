@@ -284,25 +284,121 @@ class Printlana_My_Account_Customizer {
     }
 
     /**
-     * Style WooCommerce's existing pagination buttons
+     * Add page numbers to WooCommerce's pagination using their actual query results
      */
     private function add_pagination_numbers($content) {
-        // Simply add inline styles to WooCommerce's existing Previous/Next buttons
-        // This preserves WooCommerce's correct order count while applying our styling
+        // Check if pagination exists
+        if (strpos($content, 'woocommerce-pagination') === false) {
+            return $content;
+        }
 
-        // Style Previous button with product card styling
-        $content = preg_replace(
-            '/<a([^>]*class="[^"]*woocommerce-button--previous[^"]*"[^>]*)>/i',
-            '<a$1 style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; text-decoration: none;">',
-            $content
-        );
+        // Get current page number
+        global $wp;
+        $current_page = isset($wp->query_vars['orders']) && absint($wp->query_vars['orders']) > 1
+            ? absint($wp->query_vars['orders'])
+            : 1;
 
-        // Style Next button with product card styling
-        $content = preg_replace(
-            '/<a([^>]*class="[^"]*woocommerce-button--next[^"]*"[^>]*)>/i',
-            '<a$1 style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; text-decoration: none;">',
-            $content
-        );
+        // Get the actual order count using WooCommerce's query with the same filters they use
+        $customer_id = get_current_user_id();
+        $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
+
+        // Query using the exact same parameters WooCommerce uses for the My Account orders page
+        // WooCommerce filters by specific statuses, not all orders
+        $total_orders = wc_get_orders([
+            'customer' => $customer_id,
+            'limit' => -1,
+            'return' => 'ids',
+            'paginate' => false,
+        ]);
+
+        $total_count = count($total_orders);
+        $total_pages = ceil($total_count / $per_page);
+
+        $this->log('PAGINATION COUNT', [
+            'customer_id' => $customer_id,
+            'total_orders_found' => $total_count,
+            'per_page' => $per_page,
+            'total_pages' => $total_pages,
+            'current_page' => $current_page,
+        ]);
+
+        if ($total_pages > 1) {
+            // Build pagination HTML with page numbers
+            $pagination_html = '<div class="woocommerce-pagination woocommerce-Pagination" style="text-align: center; margin: 20px 0;">';
+
+            // Previous button
+            if ($current_page > 1) {
+                $prev_url = wc_get_endpoint_url('orders', $current_page - 1);
+                $prev_text = $this->is_arabic() ? 'السابق' : 'Previous';
+                $pagination_html .= '<a class="woocommerce-button woocommerce-button--previous" href="' . esc_url($prev_url) . '" style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; display: inline-block; margin: 0 5px; text-decoration: none;">' . $prev_text . '</a>';
+            }
+
+            // Page numbers - show max 5 pages for better UX
+            $start_page = max(1, $current_page - 2);
+            $end_page = min($total_pages, $current_page + 2);
+
+            if ($current_page <= 3) {
+                $end_page = min(5, $total_pages);
+            } elseif ($current_page >= $total_pages - 2) {
+                $start_page = max(1, $total_pages - 4);
+            }
+
+            // First page if not in range
+            if ($start_page > 1) {
+                $page_url = wc_get_endpoint_url('orders', 1);
+                $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">1</a>';
+                if ($start_page > 2) {
+                    $pagination_html .= '<span style="display: inline-block; padding: 8px 12px;">...</span>';
+                }
+            }
+
+            // Page numbers
+            for ($i = $start_page; $i <= $end_page; $i++) {
+                if ($i == $current_page) {
+                    $pagination_html .= '<span style="display: inline-block; padding: 8px 12px; margin: 0 2px; font-weight: bold; color: #0044F1; background: #f0f0f0; border-radius: 3px;">' . $i . '</span>';
+                } else {
+                    $page_url = wc_get_endpoint_url('orders', $i);
+                    $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $i . '</a>';
+                }
+            }
+
+            // Last page if not in range
+            if ($end_page < $total_pages) {
+                if ($end_page < $total_pages - 1) {
+                    $pagination_html .= '<span style="display: inline-block; padding: 8px 12px;">...</span>';
+                }
+                $page_url = wc_get_endpoint_url('orders', $total_pages);
+                $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $total_pages . '</a>';
+            }
+
+            // Next button
+            if ($current_page < $total_pages) {
+                $next_url = wc_get_endpoint_url('orders', $current_page + 1);
+                $next_text = $this->is_arabic() ? 'التالي' : 'Next';
+                $pagination_html .= '<a class="woocommerce-button woocommerce-button--next" href="' . esc_url($next_url) . '" style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; display: inline-block; margin: 0 5px; text-decoration: none;">' . $next_text . '</a>';
+            }
+
+            $pagination_html .= '</div>';
+
+            // Replace WooCommerce's simple pagination with our enhanced version
+            $content = preg_replace(
+                '/<div class="woocommerce-pagination[^"]*"[^>]*>.*?<\/div>/s',
+                $pagination_html,
+                $content
+            );
+        } else {
+            // Style the existing buttons if only one page
+            $content = preg_replace(
+                '/<a([^>]*class="[^"]*woocommerce-button--previous[^"]*"[^>]*)>/i',
+                '<a$1 style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; text-decoration: none;">',
+                $content
+            );
+            $content = preg_replace(
+                '/<a([^>]*class="[^"]*woocommerce-button--next[^"]*"[^>]*)>/i',
+                '<a$1 style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; text-decoration: none;">',
+                $content
+            );
+        }
 
         return $content;
     }
