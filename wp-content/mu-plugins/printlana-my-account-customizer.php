@@ -141,8 +141,9 @@ class Printlana_My_Account_Customizer {
 
         // Only show message if user has NO orders
         if (empty($customer_orders)) {
-            echo '<div style="background: #fff3e0; padding: 20px; border-right: 4px solid #ff9800; margin-bottom: 20px; border-radius: 4px;">';
-            echo '<p style="margin: 0; color: #e65100; font-size: 15px; line-height: 1.6;">لم تقم بإنشاء أي طلب بعد. ابدأ التسوق الآن لتقديم طلبك الأول!</p>';
+            $shop_url = get_permalink(wc_get_page_id('shop'));
+            echo '<div style="background: #e3f2fd; padding: 20px; border-right: 4px solid #2196f3; margin-bottom: 20px; border-radius: 4px;">';
+            echo '<p style="margin: 0; color: #1976d2; font-size: 15px; line-height: 1.6;">لم تقم بإنشاء أي طلب بعد. <a href="' . esc_url($shop_url) . '" style="color: #1976d2; font-weight: bold; text-decoration: underline;">ابدأ التسوق الآن</a> لتقديم طلبك الأول!</p>';
             echo '</div>';
         }
     }
