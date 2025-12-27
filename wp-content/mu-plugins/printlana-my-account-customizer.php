@@ -74,6 +74,10 @@ class Printlana_My_Account_Customizer {
         // Add test elements to payment methods page
         add_action('woocommerce_before_account_payment_methods', [$this, 'add_test_before_payment_methods']);
         add_action('woocommerce_after_account_payment_methods', [$this, 'add_test_after_payment_methods']);
+
+        // Add test elements to orders page (for discovery)
+        add_action('woocommerce_before_account_orders', [$this, 'add_test_before_orders']);
+        add_action('woocommerce_after_account_orders', [$this, 'add_test_after_orders']);
     }
 
     /**
@@ -92,6 +96,7 @@ class Printlana_My_Account_Customizer {
             'woocommerce_before_account',
             'woocommerce_after_account',
             'my_account',
+            'orders',
         ];
 
         // Check if hook name contains any of our keywords
@@ -118,6 +123,20 @@ class Printlana_My_Account_Customizer {
     public function add_test_after_payment_methods() {
         // Currently not displaying anything after payment methods
         // This can be used for additional information in the future
+    }
+
+    /**
+     * Test: Add yellow box BEFORE orders content
+     */
+    public function add_test_before_orders() {
+        echo '<p style="background: #ffeb3b; padding: 15px; border: 2px solid #f57c00; font-weight: bold;">TEST: This appears BEFORE orders</p>';
+    }
+
+    /**
+     * Test: Add green box AFTER orders content
+     */
+    public function add_test_after_orders() {
+        echo '<p style="background: #4caf50; padding: 15px; border: 2px solid #2e7d32; color: white; font-weight: bold;">TEST: This appears AFTER orders</p>';
     }
 
     /**
