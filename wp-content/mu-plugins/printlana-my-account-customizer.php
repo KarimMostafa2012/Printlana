@@ -317,14 +317,20 @@ class Printlana_My_Account_Customizer {
             $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
             $total_pages = max(1, ceil($total_orders / $per_page));
 
-            // Debug logging with order ownership verification
+            // Debug logging with order ownership and parent order detection
             $sample_orders_debug = [];
-            foreach (array_slice($customer_orders, 0, 3) as $order_id) {
+            $parent_count = 0;
+            foreach (array_slice($customer_orders, 0, 5) as $order_id) {
                 $order = wc_get_order($order_id);
                 if ($order) {
+                    $has_sub = get_post_meta($order_id, 'has_sub_order', true);
+                    if ($has_sub) {
+                        $parent_count++;
+                    }
                     $sample_orders_debug[] = [
                         'order_id' => $order_id,
                         'customer_id' => $order->get_customer_id(),
+                        'has_sub_order' => $has_sub ? 'YES' : 'NO',
                     ];
                 }
             }
@@ -332,10 +338,11 @@ class Printlana_My_Account_Customizer {
             $this->log('PAGINATION DEBUG', [
                 'current_customer_id' => $customer_id,
                 'total_orders' => $total_orders,
+                'parent_orders_in_sample' => $parent_count,
                 'per_page' => $per_page,
                 'total_pages' => $total_pages,
                 'current_page' => $current_page,
-                'sample_orders' => $sample_orders_debug,  // Show which customer owns these orders
+                'sample_orders' => $sample_orders_debug,
             ]);
 
             if ($total_pages > 1) {
