@@ -298,13 +298,19 @@ class Printlana_My_Account_Customizer {
             // Get ONLY current user's orders for accurate count
             $customer_id = get_current_user_id();
 
-            // Get current user's orders - use same query as WooCommerce My Account page
-            // WooCommerce uses 'any' status which filters to valid customer-viewable statuses
+            // Get current user's orders - exclude parent orders (Dokan splits them into sub-orders)
+            // Customers should only see sub-orders, not parent orders
             $customer_orders = wc_get_orders([
                 'customer' => $customer_id,
                 'limit' => -1,
-                'status' => 'any',  // This applies WooCommerce's default customer order status filtering
+                'status' => 'any',
                 'return' => 'ids',
+                'meta_query' => [
+                    [
+                        'key' => 'has_sub_order',
+                        'compare' => 'NOT EXISTS',  // Exclude parent orders that were split
+                    ],
+                ],
             ]);
 
             $total_orders = count($customer_orders);
