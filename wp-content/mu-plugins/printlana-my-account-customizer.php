@@ -166,41 +166,18 @@ class Printlana_My_Account_Customizer {
     }
 
     /**
-     * Add CSS for orders page customization
+     * Add CSS for orders page
      */
     public function orders_custom_css() {
-        // Run on all My Account pages to ensure CSS loads
+        // Run on all My Account pages
         if (!is_account_page()) {
             return;
         }
         ?>
         <style>
-            /* Fix SAR currency symbol position - move to left side */
-            .order-total .sar-currency-svg {
-                margin-right: 0 !important;
-                margin-left: 0.2em !important;
-            }
-
-            /* Reorder button styling */
-            .order-reorder-btn,
-            .woocommerce-button.button.order-again {
-                background: #2196f3 !important;
-                color: white !important;
-                padding: 8px 16px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
-                text-decoration: none;
-                display: inline-block;
-                margin-top: 8px;
-                transition: background 0.2s;
-            }
-            .order-reorder-btn:hover,
-            .woocommerce-button.button.order-again:hover {
-                background: #1976d2 !important;
-                color: white !important;
+            /* Center align order status */
+            .order-status {
+                text-align: center;
             }
         </style>
         <?php
@@ -290,7 +267,82 @@ class Printlana_My_Account_Customizer {
             );
         }
 
+        // Fix SAR currency position by swapping order in DOM
+        $content = preg_replace_callback(
+            '/<bdi>([\d,\.]+)<span class="woocommerce-Price-currencySymbol">(.*?)<\/span><\/bdi>/s',
+            function($matches) {
+                // Swap: put currency symbol before the amount
+                return '<bdi>' . $matches[2] . $matches[1] . '</bdi>';
+            },
+            $content
+        );
+
+        // Add pagination between Previous/Next buttons
+        $content = $this->add_pagination_numbers($content);
+
         echo $content;
+    }
+
+    /**
+     * Add pagination numbers between Previous and Next buttons
+     */
+    private function add_pagination_numbers($content) {
+        // Get current page number from URL
+        $current_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+
+        // Check if pagination exists in content
+        if (strpos($content, 'woocommerce-pagination') !== false) {
+            // Get total number of pages
+            $customer_orders = wc_get_orders([
+                'customer_id' => get_current_user_id(),
+                'limit' => -1,
+                'return' => 'ids',
+            ]);
+
+            $total_orders = count($customer_orders);
+            $per_page = get_option('posts_per_page', 10);
+            $total_pages = ceil($total_orders / $per_page);
+
+            if ($total_pages > 1) {
+                // Build pagination HTML
+                $pagination_html = '<div class="woocommerce-pagination woocommerce-Pagination" style="text-align: center; margin: 20px 0;">';
+
+                // Previous button
+                if ($current_page > 1) {
+                    $prev_url = add_query_arg('paged', $current_page - 1);
+                    $prev_text = $this->is_arabic() ? 'السابق' : 'Previous';
+                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="' . esc_url($prev_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $prev_text . '</a>';
+                }
+
+                // Page numbers
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    if ($i == $current_page) {
+                        $pagination_html .= '<span style="display: inline-block; padding: 8px 12px; margin: 0 2px; font-weight: bold; color: #0044F1; background: #f0f0f0; border-radius: 3px;">' . $i . '</span>';
+                    } else {
+                        $page_url = add_query_arg('paged', $i);
+                        $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $i . '</a>';
+                    }
+                }
+
+                // Next button
+                if ($current_page < $total_pages) {
+                    $next_url = add_query_arg('paged', $current_page + 1);
+                    $next_text = $this->is_arabic() ? 'التالي' : 'Next';
+                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="' . esc_url($next_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $next_text . '</a>';
+                }
+
+                $pagination_html .= '</div>';
+
+                // Replace existing pagination - match the entire div
+                $content = preg_replace(
+                    '/<div class="woocommerce-pagination[^"]*"[^>]*>.*?<\/div>/s',
+                    $pagination_html,
+                    $content
+                );
+            }
+        }
+
+        return $content;
     }
 
     /**
