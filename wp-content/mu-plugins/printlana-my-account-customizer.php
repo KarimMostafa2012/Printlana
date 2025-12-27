@@ -303,19 +303,32 @@ class Printlana_My_Account_Customizer {
                 'customer_id' => $customer_id,  // Use customer_id for filtering
                 'limit' => -1,  // Get all orders
                 'return' => 'ids',  // Only return IDs for performance
+                'status' => ['wc-completed', 'wc-processing', 'wc-on-hold', 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed'],
             ]);
 
             $total_orders = count($customer_orders);
             $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
             $total_pages = max(1, ceil($total_orders / $per_page));
 
-            // Debug logging
+            // Debug logging with order ownership verification
+            $sample_orders_debug = [];
+            foreach (array_slice($customer_orders, 0, 3) as $order_id) {
+                $order = wc_get_order($order_id);
+                if ($order) {
+                    $sample_orders_debug[] = [
+                        'order_id' => $order_id,
+                        'customer_id' => $order->get_customer_id(),
+                    ];
+                }
+            }
+
             $this->log('PAGINATION DEBUG', [
-                'customer_id' => $customer_id,
+                'current_customer_id' => $customer_id,
                 'total_orders' => $total_orders,
                 'per_page' => $per_page,
                 'total_pages' => $total_pages,
                 'current_page' => $current_page,
+                'sample_orders' => $sample_orders_debug,  // Show which customer owns these orders
             ]);
 
             if ($total_pages > 1) {
