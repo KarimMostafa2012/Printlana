@@ -126,17 +126,33 @@ class Printlana_My_Account_Customizer {
     }
 
     /**
-     * Test: Add yellow box BEFORE orders content
+     * Add message BEFORE orders content if no orders exist
      */
     public function add_test_before_orders() {
-        echo '<p style="background: #ffeb3b; padding: 15px; border: 2px solid #f57c00; font-weight: bold;">TEST: This appears BEFORE orders</p>';
+        // Get current user
+        $customer_id = get_current_user_id();
+
+        // Get order count for this customer
+        $customer_orders = wc_get_orders([
+            'customer_id' => $customer_id,
+            'limit' => 1, // We only need to know if at least one exists
+            'return' => 'ids',
+        ]);
+
+        // Only show message if user has NO orders
+        if (empty($customer_orders)) {
+            echo '<div style="background: #fff3e0; padding: 20px; border-right: 4px solid #ff9800; margin-bottom: 20px; border-radius: 4px;">';
+            echo '<p style="margin: 0; color: #e65100; font-size: 15px; line-height: 1.6;">لم تقم بإنشاء أي طلب بعد. ابدأ التسوق الآن لتقديم طلبك الأول!</p>';
+            echo '</div>';
+        }
     }
 
     /**
-     * Test: Add green box AFTER orders content
+     * Placeholder for content AFTER orders
      */
     public function add_test_after_orders() {
-        echo '<p style="background: #4caf50; padding: 15px; border: 2px solid #2e7d32; color: white; font-weight: bold;">TEST: This appears AFTER orders</p>';
+        // Currently not displaying anything after orders
+        // This can be used for additional information in the future
     }
 
     /**
