@@ -295,27 +295,30 @@ class Printlana_My_Account_Customizer {
 
         // Check if pagination exists in content
         if (strpos($content, 'woocommerce-pagination') !== false) {
-            // Get total number of pages using WooCommerce's pagination
+            // Get ONLY current user's orders for accurate count
+            $customer_id = get_current_user_id();
+
+            // Use WooCommerce customer data to get accurate order count
+            $customer = new WC_Customer($customer_id);
             $customer_orders = wc_get_orders([
-                'customer_id' => get_current_user_id(),
+                'customer' => $customer_id,
                 'limit' => -1,
                 'return' => 'ids',
-                'paginate' => false,
             ]);
 
             $total_orders = count($customer_orders);
             $per_page = apply_filters('woocommerce_my_account_my_orders_per_page', 10);
-            $total_pages = ceil($total_orders / $per_page);
+            $total_pages = max(1, ceil($total_orders / $per_page));
 
             if ($total_pages > 1) {
-                // Build pagination HTML
+                // Build pagination HTML with product card button styles
                 $pagination_html = '<div class="woocommerce-pagination woocommerce-Pagination" style="text-align: center; margin: 20px 0;">';
 
-                // Previous button
+                // Previous button - using product card button style
                 if ($current_page > 1) {
                     $prev_url = wc_get_endpoint_url('orders', $current_page - 1);
                     $prev_text = $this->is_arabic() ? 'السابق' : 'Previous';
-                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="' . esc_url($prev_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $prev_text . '</a>';
+                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="' . esc_url($prev_url) . '" style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; display: inline-block; margin: 0 5px; text-decoration: none;">' . $prev_text . '</a>';
                 }
 
                 // Page numbers - show max 5 pages for better UX
@@ -357,11 +360,11 @@ class Printlana_My_Account_Customizer {
                     $pagination_html .= '<a href="' . esc_url($page_url) . '" style="display: inline-block; padding: 8px 12px; margin: 0 2px; text-decoration: none; border-radius: 3px;">' . $total_pages . '</a>';
                 }
 
-                // Next button
+                // Next button - using product card button style
                 if ($current_page < $total_pages) {
                     $next_url = wc_get_endpoint_url('orders', $current_page + 1);
                     $next_text = $this->is_arabic() ? 'التالي' : 'Next';
-                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="' . esc_url($next_url) . '" style="display: inline-block; padding: 8px 16px; margin: 0 5px; text-decoration: none;">' . $next_text . '</a>';
+                    $pagination_html .= '<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="' . esc_url($next_url) . '" style="border: 1px solid var(--e-global-color-ee4e79d); background-color: white; padding: 12px 47px; border-radius: 100px; display: inline-block; margin: 0 5px; text-decoration: none;">' . $next_text . '</a>';
                 }
 
                 $pagination_html .= '</div>';
