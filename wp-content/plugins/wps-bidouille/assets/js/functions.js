@@ -146,11 +146,13 @@ jQuery(function ($) {
         var elem = $(this).parent().find('.main');
         var h2 = $(this).parent().find('h2');
         var option_name = $(this).parent().attr('id');
+        var nonce = $(this).parent().parent().parent().data('nonce');
         if (elem.hasClass('wps-hide')) {
             elem.removeClass('wps-hide').addClass('wps-view');
             h2.removeClass('block-hide').addClass('block-view');
             data = {
                 'action': 'delete_option_wps_display',
+                'wps-nonce': nonce,
                 'option_name': option_name
             };
 
@@ -161,6 +163,7 @@ jQuery(function ($) {
             h2.removeClass('block-view').addClass('block-hide');
             data = {
                 'action': 'add_option_wps_display',
+                'wps-nonce': nonce,
                 'option_name': option_name
             };
 

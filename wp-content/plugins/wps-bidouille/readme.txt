@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/donateWPServeur
 Tags: admin, tools, error, login, transient, wpserveur
 Requires at least: 4.2
 Tested up to: 6.8
-Stable tag: 1.33.1
+Stable tag: 1.33.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,6 +130,9 @@ This plugin is only maintained, which means we do not guarantee free support. Co
 
 
 == Changelog ==
+
+= 1.33.2 =
+* Fix vulnerability (Thanks Legion Hunter - Patchstack) : Subscriber level user can inject any option field for option name "wps_display" via AJAX.
 
 = 1.33.1 =
 * Tested up to 6.8

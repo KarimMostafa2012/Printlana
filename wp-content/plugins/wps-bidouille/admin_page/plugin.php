@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 } ?>
 
-<div id="plugin-filter" class="wrap">
+<div id="plugin-filter" class="wrap" data-nonce="<?php echo wp_create_nonce('wps_bidouille_display'); ?>">
     <?php
     include( WPS_BIDOUILLE_DIR . 'blocks/title.php' );
     include( WPS_BIDOUILLE_DIR . 'blocks/pub.php' );
