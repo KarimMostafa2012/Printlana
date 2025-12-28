@@ -18,20 +18,24 @@ function fix_wapf_qty_formula($cart) {
         $current_price = $cart_item['data']->get_price();
         $qty = $cart_item['quantity'];
         
-        if ($qty <= 0) continue; // Safety check
+        if ($qty <= 0) continue;
         
         $adjustment = 0;
+        $found_qty_formula = false;
         
         // Find the formula field with [qty]
         foreach ($cart_item['wapf'] as $field) {
             if (empty($field['values'])) continue;
             
             foreach ($field['values'] as $value) {
-                if (isset($value['price_type']) && $value['price_type'] === 'fx') {
+                if (!isset($value['price_type']) || !isset($value['price'])) continue;
+                
+                if ($value['price_type'] === 'fx') {
                     $formula = $value['price'];
                     
                     // Only adjust formulas with [qty] in them
                     if (strpos($formula, '[qty]') !== false) {
+                        $found_qty_formula = true;
                         
                         // Parse the formula to calculate the result
                         if (preg_match('/\[price\.(\w+)\]/', $formula, $matches)) {
@@ -45,34 +49,35 @@ function fix_wapf_qty_formula($cart) {
                                 }
                             }
                             
-                            // Skip if divisor is 0
-                            if ($divisor <= 0) {
-                                error_log("WAPF: Divisor is zero, skipping adjustment");
-                                continue;
+                            if ($divisor > 0) {
+                                // Formula result (what WAPF calculated)
+                                $formula_result = $qty / $divisor;
+                                
+                                // Adjustment needed
+                                $adjustment = $formula_result - ($formula_result / $qty);
+                                
+                                error_log("WAPF Fix Applied: Qty=$qty, Divisor=$divisor, Formula=$formula_result, Adjustment=$adjustment");
+                            } else {
+                                error_log("WAPF: Cannot apply fix - divisor is zero or not found");
                             }
-                            
-                            // Formula result (what WAPF calculated)
-                            $formula_result = $qty / $divisor;
-                            
-                            // This was added to price, but will be multiplied by qty
-                            // So we need to subtract it and add (formula_result / qty) instead
-                            $adjustment = $formula_result - ($formula_result / $qty);
-                            
-                            error_log("WAPF: Qty=$qty, Divisor=$divisor, Formula Result=$formula_result, Adjustment=$adjustment");
                         }
                     }
                 }
             }
         }
         
-        if ($adjustment > 0) {
+        if ($found_qty_formula && $adjustment > 0) {
             $new_price = $current_price - $adjustment;
             $cart_item['data']->set_price($new_price);
             
-            error_log("Adjusted price from $current_price to $new_price (removed $adjustment)");
+            error_log("Price adjusted from $current_price to $new_price (removed $adjustment)");
+        } elseif ($found_qty_formula) {
+            error_log("WAPF: Found qty formula but adjustment=$adjustment (skipped)");
         }
     }
 }
+
+
 add_action('woocommerce_before_calculate_totals', 'debug_cart_prices', 10, 1);
 
 function debug_cart_prices($cart) {
