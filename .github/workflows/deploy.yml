@@ -1,0 +1,43 @@
+# .github/workflows/deploy.yml
+name: Deploy WordPress Plugins & Themes
+
+on:
+  push:
+    branches: [main]  # change to 'master' if that's your branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/html/your-site-directory
+            git pull origin main
+            
+            # Install/update composer dependencies if any custom plugins use them
+            if [ -f "wp-content/plugins/your-plugin/composer.json" ]; then
+              cd wp-content/plugins/your-plugin
+              composer install --no-dev --optimize-autoloader
+              cd ../../..
+            fi
+            
+            # Install/update npm dependencies and build if themes use them
+            if [ -f "wp-content/themes/your-theme/package.json" ]; then
+              cd wp-content/themes/your-theme
+              npm install --production
+              npm run build
+              cd ../../..
+            fi
+            
+            # Clear WordPress cache
+            wp cache flush --path=/var/www/html/your-site-directory --allow-root || true
+            
+            # Optional: Clear LiteSpeed cache (since you have litespeed folder)
+            if command -v litespeed-cache &> /dev/null; then
+              wp litespeed-purge all --allow-root || true
+            fi
