@@ -17,6 +17,9 @@ function fix_wapf_qty_formula($cart) {
         
         $current_price = $cart_item['data']->get_price();
         $qty = $cart_item['quantity'];
+        
+        if ($qty <= 0) continue; // Safety check
+        
         $adjustment = 0;
         
         // Find the formula field with [qty]
@@ -34,12 +37,18 @@ function fix_wapf_qty_formula($cart) {
                         if (preg_match('/\[price\.(\w+)\]/', $formula, $matches)) {
                             $ref_id = $matches[1];
                             
-                            $divisor = 1;
+                            $divisor = 0;
                             foreach ($cart_item['wapf'] as $ref_field) {
                                 if ($ref_field['id'] === $ref_id && !empty($ref_field['values'])) {
                                     $divisor = floatval($ref_field['values'][0]['price']);
                                     break;
                                 }
+                            }
+                            
+                            // Skip if divisor is 0
+                            if ($divisor <= 0) {
+                                error_log("WAPF: Divisor is zero, skipping adjustment");
+                                continue;
                             }
                             
                             // Formula result (what WAPF calculated)
@@ -48,6 +57,8 @@ function fix_wapf_qty_formula($cart) {
                             // This was added to price, but will be multiplied by qty
                             // So we need to subtract it and add (formula_result / qty) instead
                             $adjustment = $formula_result - ($formula_result / $qty);
+                            
+                            error_log("WAPF: Qty=$qty, Divisor=$divisor, Formula Result=$formula_result, Adjustment=$adjustment");
                         }
                     }
                 }
@@ -62,7 +73,6 @@ function fix_wapf_qty_formula($cart) {
         }
     }
 }
-
 add_action('woocommerce_before_calculate_totals', 'debug_cart_prices', 10, 1);
 
 function debug_cart_prices($cart) {
