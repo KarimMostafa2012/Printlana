@@ -8,43 +8,71 @@
 // testing cart issue start
 add_action('woocommerce_before_calculate_totals', 'fix_wapf_qty_formula', 999);
 
+add_action('woocommerce_before_calculate_totals', 'fix_wapf_qty_formula', 999);
+
 function fix_wapf_qty_formula($cart) {
     if (is_admin() && !defined('DOING_AJAX')) return;
     if (did_action('woocommerce_before_calculate_totals') >= 2) return;
     
-    foreach ($cart->get_cart() as $cart_item) {
-        if (!isset($cart_item['wapf'])) continue;
+    error_log("=== WAPF FIX: Starting ===");
+    
+    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+        error_log("Processing cart item: " . $cart_item['data']->get_name());
+        
+        if (!isset($cart_item['wapf'])) {
+            error_log("No WAPF data found, skipping");
+            continue;
+        }
         
         $current_price = $cart_item['data']->get_price();
         $qty = $cart_item['quantity'];
         
-        if ($qty <= 0) continue;
+        error_log("Current price: $current_price, Qty: $qty");
+        
+        if ($qty <= 0) {
+            error_log("Qty is 0 or negative, skipping");
+            continue;
+        }
         
         $adjustment = 0;
         $found_qty_formula = false;
         
         // Find the formula field with [qty]
         foreach ($cart_item['wapf'] as $field) {
-            if (empty($field['values'])) continue;
+            error_log("Checking field: " . $field['id']);
+            
+            if (empty($field['values'])) {
+                error_log("Field has no values, skipping");
+                continue;
+            }
             
             foreach ($field['values'] as $value) {
-                if (!isset($value['price_type']) || !isset($value['price'])) continue;
+                if (!isset($value['price_type']) || !isset($value['price'])) {
+                    error_log("Missing price_type or price");
+                    continue;
+                }
+                
+                error_log("Price type: " . $value['price_type'] . ", Price: " . $value['price']);
                 
                 if ($value['price_type'] === 'fx') {
                     $formula = $value['price'];
+                    error_log("Found formula: $formula");
                     
                     // Only adjust formulas with [qty] in them
                     if (strpos($formula, '[qty]') !== false) {
                         $found_qty_formula = true;
+                        error_log("Formula contains [qty]");
                         
                         // Parse the formula to calculate the result
                         if (preg_match('/\[price\.(\w+)\]/', $formula, $matches)) {
                             $ref_id = $matches[1];
+                            error_log("Looking for reference field: $ref_id");
                             
                             $divisor = 0;
                             foreach ($cart_item['wapf'] as $ref_field) {
                                 if ($ref_field['id'] === $ref_id && !empty($ref_field['values'])) {
                                     $divisor = floatval($ref_field['values'][0]['price']);
+                                    error_log("Found divisor: $divisor");
                                     break;
                                 }
                             }
@@ -56,10 +84,12 @@ function fix_wapf_qty_formula($cart) {
                                 // Adjustment needed
                                 $adjustment = $formula_result - ($formula_result / $qty);
                                 
-                                error_log("WAPF Fix Applied: Qty=$qty, Divisor=$divisor, Formula=$formula_result, Adjustment=$adjustment");
+                                error_log("SUCCESS: Qty=$qty, Divisor=$divisor, Formula=$formula_result, Adjustment=$adjustment");
                             } else {
-                                error_log("WAPF: Cannot apply fix - divisor is zero or not found");
+                                error_log("ERROR: Divisor is zero or not found");
                             }
+                        } else {
+                            error_log("ERROR: Could not parse formula for price reference");
                         }
                     }
                 }
@@ -70,24 +100,28 @@ function fix_wapf_qty_formula($cart) {
             $new_price = $current_price - $adjustment;
             $cart_item['data']->set_price($new_price);
             
-            error_log("Price adjusted from $current_price to $new_price (removed $adjustment)");
+            error_log("APPLIED: Price adjusted from $current_price to $new_price");
         } elseif ($found_qty_formula) {
-            error_log("WAPF: Found qty formula but adjustment=$adjustment (skipped)");
+            error_log("SKIPPED: Found formula but adjustment=$adjustment");
+        } else {
+            error_log("SKIPPED: No qty formula found");
         }
     }
+    
+    error_log("=== WAPF FIX: Finished ===");
 }
 
 
-add_action('woocommerce_before_calculate_totals', 'debug_cart_prices', 10, 1);
+// add_action('woocommerce_before_calculate_totals', 'debug_cart_prices', 10, 1);
 
-function debug_cart_prices($cart) {
-    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
-        error_log('Product: ' . $cart_item['data']->get_name());
-        error_log('Price: ' . $cart_item['data']->get_price());
-        error_log('Quantity: ' . $cart_item['quantity']);
-        error_log('Custom Data: ' . print_r($cart_item, true));
-    }
-}
+// function debug_cart_prices($cart) {
+//     foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+//         error_log('Product: ' . $cart_item['data']->get_name());
+//         error_log('Price: ' . $cart_item['data']->get_price());
+//         error_log('Quantity: ' . $cart_item['quantity']);
+//         error_log('Custom Data: ' . print_r($cart_item, true));
+//     }
+// }
 
 // testing cart issue end
 
