@@ -4,6 +4,53 @@
 
 // ------------------------------
 
+
+// testing cart issue start
+add_action('woocommerce_before_calculate_totals', 'recalculate_custom_price', 10, 1);
+
+function recalculate_custom_price($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) return;
+    
+    // Prevent multiple executions
+    if (did_action('woocommerce_before_calculate_totals') >= 2) return;
+    
+    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+        if (isset($cart_item['custom_price'])) {
+            $cart_item['data']->set_price($cart_item['custom_price']);
+        }
+    }
+}
+
+// When adding to cart, store the FINAL price (not formula)
+add_filter('woocommerce_add_cart_item_data', 'save_custom_field_data', 10, 2);
+
+function save_custom_field_data($cart_item_data, $product_id) {
+    // Get your custom fields
+    $qty = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+    $base_price = isset($_POST['price_e134531']) ? floatval($_POST['price_e134531']) : 0;
+    
+    // Calculate ONCE and store the unit price
+    $calculated_price = $base_price; // Your calculation logic here
+    
+    $cart_item_data['custom_price'] = $calculated_price;
+    $cart_item_data['custom_fields'] = $_POST; // Store original data
+    
+    return $cart_item_data;
+}
+
+add_action('woocommerce_before_calculate_totals', 'debug_cart_prices', 10, 1);
+
+function debug_cart_prices($cart) {
+    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+        error_log('Product: ' . $cart_item['data']->get_name());
+        error_log('Price: ' . $cart_item['data']->get_price());
+        error_log('Quantity: ' . $cart_item['quantity']);
+        error_log('Custom Data: ' . print_r($cart_item, true));
+    }
+}
+
+// testing cart issue end
+
 // functions.php
 add_filter('wp_get_attachment_image_attributes', function ($attr, $att, $size) {
     // Replace 12345 with your hero/LCP attachment ID
