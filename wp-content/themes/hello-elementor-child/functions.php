@@ -5,7 +5,7 @@
 // ------------------------------
 
 
-// testing cart issue
+// testing cart issue starting now
 add_action('woocommerce_before_calculate_totals', 'recalculate_custom_price', 10, 1);
 
 function recalculate_custom_price($cart) {
