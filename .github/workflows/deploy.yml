@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/html/your-site-directory
+            cd /home/u983237415/domains/printlana.com/public_html
             git pull origin main
             
             # Install/update composer dependencies if any custom plugins use them
@@ -35,7 +35,7 @@ jobs:
             fi
             
             # Clear WordPress cache
-            wp cache flush --path=/var/www/html/your-site-directory --allow-root || true
+            wp cache flush --path=/home/u983237415/domains/printlana.com/public_html --allow-root || true
             
             # Optional: Clear LiteSpeed cache (since you have litespeed folder)
             if command -v litespeed-cache &> /dev/null; then
