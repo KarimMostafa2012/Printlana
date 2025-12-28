@@ -469,8 +469,25 @@ add_action('save_post_product', function ($post_id, $post, $update) {
     // Clear WooCommerce cache
     wc_delete_product_transients($post_id);
 
+    // === FIX PERMALINK ISSUE ===
+    // Mark that permalinks need to be flushed
+    set_transient('pl_flush_permalinks', 1, 60);
+    error_log('[Product Init] Marked permalinks for flushing');
+
     $processing = false;
 }, 10, 3);
+
+/**
+ * Flush permalinks after new product is created
+ * This fixes the issue where new products return 404
+ */
+add_action('init', function() {
+    if (get_transient('pl_flush_permalinks')) {
+        flush_rewrite_rules(false);
+        delete_transient('pl_flush_permalinks');
+        error_log('[Permalinks] Flushed rewrite rules');
+    }
+});
 
 /**
  * Re-order product categories for the Loop Grid widget with Query ID = home_categories
