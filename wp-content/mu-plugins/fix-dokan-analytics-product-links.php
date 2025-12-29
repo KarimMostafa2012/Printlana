@@ -3,7 +3,7 @@
  * Plugin Name: Fix Dokan Analytics Product Links
  * Description: Modifies product links in Dokan analytics orders table to use dokan-reports with search instead of wc-admin with product filter
  * Version: 1.0.0
- * Author: Qersh Yahya
+ * Author: Karim Mostafa
  */
 
 if (!defined('ABSPATH')) {
