@@ -24,10 +24,24 @@ add_action('template_redirect', function() {
         return;
     }
 
+    $url = $_SERVER['REQUEST_URI'];
     error_log('[Dokan Social Fix] === SELLER DASHBOARD PAGE ===');
-    error_log('[Dokan Social Fix] URL: ' . $_SERVER['REQUEST_URI']);
+    error_log('[Dokan Social Fix] URL: ' . $url);
     error_log('[Dokan Social Fix] GET params: ' . print_r($_GET, true));
     error_log('[Dokan Social Fix] Current user: ' . get_current_user_id());
+
+    // Check if this is the social settings page
+    if (strpos($url, '/settings/social') !== false) {
+        error_log('[Dokan Social Fix] !!! THIS IS THE SOCIAL SETTINGS PAGE !!!');
+        error_log('[Dokan Social Fix] Attempting to grant permissions...');
+
+        // Force grant capabilities
+        $current_user = wp_get_current_user();
+        $current_user->allcaps['dokan_view_store_social_setting'] = true;
+        $current_user->allcaps['dokan_view_social_settings'] = true;
+
+        error_log('[Dokan Social Fix] Permissions granted to user ' . $current_user->ID);
+    }
 }, 1);
 
 /**
