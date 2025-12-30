@@ -3,12 +3,20 @@
  * Plugin Name: Fix Dokan Social Permissions
  * Description: Fixes permission issues preventing vendors and admins from accessing the Dokan Social settings page
  * Version: 1.0.0
- * Author: Qersh Yahya
+ * Author: Karim Mostafa
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// Immediate log to confirm plugin loads
+error_log('[Dokan Social Fix] ===== PLUGIN LOADED =====');
+
+// Add HTML comment to confirm loading
+add_action('wp_head', function() {
+    echo "\n<!-- DOKAN SOCIAL FIX PLUGIN ACTIVE -->\n";
+}, 1);
 
 /**
  * Grant access to Dokan Social settings page for vendors and admins
