@@ -18,6 +18,18 @@ add_action('wp_head', function() {
     echo "\n<!-- DOKAN SOCIAL FIX PLUGIN ACTIVE -->\n";
 }, 1);
 
+// Log ALL page loads to seller dashboard
+add_action('template_redirect', function() {
+    if (!function_exists('dokan_is_seller_dashboard') || !dokan_is_seller_dashboard()) {
+        return;
+    }
+
+    error_log('[Dokan Social Fix] === SELLER DASHBOARD PAGE ===');
+    error_log('[Dokan Social Fix] URL: ' . $_SERVER['REQUEST_URI']);
+    error_log('[Dokan Social Fix] GET params: ' . print_r($_GET, true));
+    error_log('[Dokan Social Fix] Current user: ' . get_current_user_id());
+}, 1);
+
 /**
  * Grant access to Dokan Social settings page for vendors and admins
  */
