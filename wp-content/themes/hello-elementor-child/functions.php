@@ -5,6 +5,21 @@
 // ------------------------------
 
 
+
+add_action('woocommerce_process_product_meta', 'acf_save_product_fields_late', 20);
+
+function acf_save_product_fields_late($post_id) {
+    if (!function_exists('acf_save_post')) {
+        return;
+    }
+
+    acf_save_post($post_id);
+}
+
+add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+
+
+
 // testing cart issue start
 // Run on multiple hooks to catch all cart contexts
 add_action('woocommerce_before_calculate_totals', 'fix_wapf_qty_formula', 99999);
