@@ -311,6 +311,7 @@
   border-radius: 8px;
   overflow-x: auto;
   padding-top: 60px;
+  padding-left: 60px;
 }
 
 .co-sheet {
@@ -319,12 +320,13 @@
   position: relative;
   background: #fff;
   padding: 10px;
+  box-sizing: border-box;
   /* min-width: 400px; */
 }
 
 .co-sheet-label-width {
   position: absolute;
-  top: -25px;
+  top: -50px;
   left: 0;
   font-size: 12px;
   font-weight: 600;
@@ -335,18 +337,49 @@
   padding: 12px 0;
   overflow: visible;
 }
+
+.co-sheet-label-height:after {
+  content: "";
+  display: block;
+  width: 2px;
+  background-color: red;
+  height: 270px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .co-sheet-label-height {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: -20px;
   font-size: 12px;
   font-weight: 600;
   color: #646970;
   font-size: 22px;
   right: -40px;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   padding: 12px 0;
   overflow: visible;
+  width: fit-content;
+}
+
+.co-sheet-label-height-bottom-line {
+  position: absolute;
+  height: calc(50% - 60px);
+  width: 2px;
+  background: #2271b1;
+  left: -20px;
+  bottom: 0;
+}
+.co-sheet-label-height-top-line {
+  position: absolute;
+  height: calc(50% - 20px);
+  width: 2px;
+  background: #2271b1;
+  left: -20px;
+  top: 0;
 }
 
 .co-box-grid {
@@ -381,6 +414,7 @@
   background: #fff3cd;
   border-left: 4px solid #ffc107;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .co-waste-info p {

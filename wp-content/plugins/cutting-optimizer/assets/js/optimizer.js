@@ -348,8 +348,10 @@
 
       html += `
             <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
-                <div class="co-sheet-label-width">${optimizer.sheetWidth} mm</div>
-                <div class="co-sheet-label-height">${optimizer.sheetHeight} mm</div>
+                <div class="co-sheet-label-width">${optimizer.sheetWidth} cm</div>
+                <div class="co-sheet-label-height">${optimizer.sheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height-bottom-line"></div>
+                <div class="co-sheet-label-height-top-line"></div>
                 <div class="co-box-grid" style="
                     display: grid;
                     grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
@@ -380,8 +382,10 @@
       // Mixed orientation layout
       html += `
             <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight}; padding: 10px;">
-                <div class="co-sheet-label-width">${optimizer.sheetWidth} mm</div>
-                <div class="co-sheet-label-height">${optimizer.sheetHeight} mm</div>
+                <div class="co-sheet-label-width">${optimizer.sheetWidth} cm</div>
+                <div class="co-sheet-label-height">${optimizer.sheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height-bottom-line"></div>
+                <div class="co-sheet-label-height-top-line"></div>
                 <div style="display: flex; flex-direction: column; height: 100%;">
         `;
 
