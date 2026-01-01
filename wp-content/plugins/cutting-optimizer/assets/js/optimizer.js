@@ -412,13 +412,17 @@
     `;
 
     if (layout.type === "single") {
+      // Determine actual sheet dimensions (accounting for rotation)
+      const actualSheetWidth = layout.sheetRotated ? optimizer.sheetHeight : optimizer.sheetWidth;
+      const actualSheetHeight = layout.sheetRotated ? optimizer.sheetWidth : optimizer.sheetHeight;
+
       // Calculate the total used dimensions
       const totalUsedWidth = layout.usedWidth;
       const totalUsedHeight = layout.usedHeight;
 
       // Calculate box dimensions as percentages of the USED space
-      const usedWidthPercent = (totalUsedWidth / optimizer.sheetWidth) * 100;
-      const usedHeightPercent = (totalUsedHeight / optimizer.sheetHeight) * 100;
+      const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
+      const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
 
       // Calculate individual box size as percentage of total used space
       const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
@@ -429,11 +433,11 @@
       const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
 
       html += `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
-                <div class="co-sheet-label-width">${optimizer.sheetWidth} cm</div>
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
+                <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
                 <div class="co-sheet-label-width-left-line"></div>
                 <div class="co-sheet-label-width-right-line"></div>
-                <div class="co-sheet-label-height">${optimizer.sheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
                 <div class="co-sheet-label-height-bottom-line"></div>
                 <div class="co-sheet-label-height-top-line"></div>
                 <div class="co-box-grid" style="
