@@ -179,6 +179,16 @@
   transition: all 0.3s ease;
 }
 
+.co-layout-item.selected {
+  border-color: #2271b1;
+  box-shadow: 0 4px 12px rgba(34, 113, 177, 0.3);
+  background: #f0f6fc;
+}
+
+.co-layout-item {
+  cursor: pointer;
+}
+
 .co-layout-item:hover {
   border-color: #2271b1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -358,7 +368,7 @@
 .co-sheet-label-height {
   position: absolute;
   top: 50%;
-  left: -20px;
+  left: -30px;
   font-size: 12px;
   font-weight: 600;
   color: #646970;
@@ -375,7 +385,7 @@
   height: calc(50% - 30px);
   width: 2px;
   background: #2271b1;
-  left: -20px;
+  left: -30px;
   bottom: 0;
 }
 .co-sheet-label-height-top-line {
@@ -383,7 +393,7 @@
   height: calc(50% - 30px);
   width: 2px;
   background: #2271b1;
-  left: -20px;
+  left: -30px;
   top: 0;
 }
 

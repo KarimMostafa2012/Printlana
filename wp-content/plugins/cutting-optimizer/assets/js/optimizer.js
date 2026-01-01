@@ -220,10 +220,22 @@
                         )} mm²</div>
                     </div>
                     <div class="co-summary-item">
+                    <label>Grid</label>
+                    <div class="value">${optimal.wastedArea.toFixed(
+                      0
+                    )} mm²</div>
+                    </div>
+                    <div class="co-summary-item">
                         <label>Wasted Area</label>
-                        <div class="value">${optimal.wastedArea.toFixed(
+                        <div class="value">${optimal.cols.toFixed(
                           0
-                        )} mm²</div>
+                        )} x ${optimal.rows.toFixed(0)}</div>
+                    </div>
+                    <div class="co-summary-item">
+                        <label>Used Dimensions</label>
+                        <div class="value">${optimal.usedWidth.toFixed(
+                          1
+                        )} × ${optimal.usedHeight.toFixed(1)}</div>
                     </div>
                 </div>
             </div>
