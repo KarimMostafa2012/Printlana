@@ -412,11 +412,21 @@
     `;
 
     if (layout.type === "single") {
-      // Calculate box dimensions as percentages
-      const boxWidthPercent = (layout.boxWidth / optimizer.sheetWidth) * 100;
-      const boxHeightPercent = (layout.boxHeight / optimizer.sheetHeight) * 100;
-      const gapWidthPercent = (optimizer.gap / optimizer.sheetWidth) * 100;
-      const gapHeightPercent = (optimizer.gap / optimizer.sheetHeight) * 100;
+      // Calculate the total used dimensions
+      const totalUsedWidth = layout.usedWidth;
+      const totalUsedHeight = layout.usedHeight;
+
+      // Calculate box dimensions as percentages of the USED space
+      const usedWidthPercent = (totalUsedWidth / optimizer.sheetWidth) * 100;
+      const usedHeightPercent = (totalUsedHeight / optimizer.sheetHeight) * 100;
+
+      // Calculate individual box size as percentage of total used space
+      const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
+      const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+
+      // Calculate gap as percentage of total used space
+      const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
+      const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
 
       html += `
             <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
@@ -429,8 +439,9 @@
                 <div class="co-box-grid" style="
                     grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
                     grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
-                    gap: ${gapWidthPercent}% ${gapHeightPercent}%;
-                    height: 100%;
+                    gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                    width: ${usedWidthPercent}%;
+                    height: ${usedHeightPercent}%;
                 ">
         `;
 
@@ -453,29 +464,48 @@
         `;
     } else {
       // Mixed orientation layout
+      // Calculate total used dimensions as percentages of sheet
+      const usedWidthPercent = (layout.usedWidth / optimizer.sheetWidth) * 100;
+      const usedHeightPercent = (layout.usedHeight / optimizer.sheetHeight) * 100;
+
+      // Calculate strip heights as percentages of USED height
+      const hStripHeight = layout.horizontalStrips > 0
+        ? (optimizer.boxHeight / layout.usedHeight) * 100
+        : 0;
+      const vStripHeight = layout.verticalStrips > 0
+        ? (optimizer.boxWidth / layout.usedHeight) * 100
+        : 0;
+
+      // Calculate box widths as percentages of USED width
+      const hBoxWidth = layout.boxesPerHStrip > 0
+        ? (optimizer.boxWidth / layout.usedWidth) * 100
+        : 0;
+      const vBoxWidth = layout.boxesPerVStrip > 0
+        ? (optimizer.boxHeight / layout.usedWidth) * 100
+        : 0;
+
+      // Calculate gap percentages
+      const gapWidthPercent = (optimizer.gap / layout.usedWidth) * 100;
+      const gapHeightPercent = (optimizer.gap / layout.usedHeight) * 100;
+
       html += `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight}; padding: 10px;">
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
                 <div class="co-sheet-label-width">${optimizer.sheetWidth} cm</div>
+                <div class="co-sheet-label-width-left-line"></div>
+                <div class="co-sheet-label-width-right-line"></div>
                 <div class="co-sheet-label-height">${optimizer.sheetHeight}<br/>cm</div>
                 <div class="co-sheet-label-height-bottom-line"></div>
                 <div class="co-sheet-label-height-top-line"></div>
-                <div style="display: flex; flex-direction: column; height: 100%;">
+                <div style="display: flex; flex-direction: column; width: ${usedWidthPercent}%; height: ${usedHeightPercent}%; padding: 10px; box-sizing: border-box;">
         `;
 
       let boxCounter = 1;
 
-      // Calculate heights as percentages
-      const hStripHeight = (optimizer.boxHeight / optimizer.sheetHeight) * 100;
-      const vStripHeight = (optimizer.boxWidth / optimizer.sheetHeight) * 100;
-      const hBoxWidth = (optimizer.boxWidth / optimizer.sheetWidth) * 100;
-      const vBoxWidth = (optimizer.boxHeight / optimizer.sheetWidth) * 100;
-
       // Render horizontal strips (boxes oriented as boxWidth × boxHeight)
       for (let h = 0; h < layout.horizontalStrips; h++) {
         html += `
-                <div style="display: flex; align-items: center; height: ${hStripHeight}%; margin-bottom: 0.5%;">
-                    <span style="font-size: 10px; color: #646970; margin-right: 5px; min-width: 15px;">H:</span>
-                    <div style="display: flex; gap: 0.5%; flex: 1; height: 100%;">
+                <div style="display: flex; align-items: center; height: ${hStripHeight}%; ${h < layout.horizontalStrips - 1 || layout.verticalStrips > 0 ? `margin-bottom: ${gapHeightPercent}%;` : ''}">
+                    <div style="display: flex; gap: ${gapWidthPercent}%; width: 100%; height: 100%;">
             `;
 
         for (let b = 0; b < layout.boxesPerHStrip; b++) {
@@ -498,9 +528,8 @@
       // Render vertical strips (boxes oriented as boxHeight × boxWidth)
       for (let v = 0; v < layout.verticalStrips; v++) {
         html += `
-                <div style="display: flex; align-items: center; height: ${vStripHeight}%; margin-bottom: 0.5%;">
-                    <span style="font-size: 10px; color: #646970; margin-right: 5px; min-width: 15px;">V:</span>
-                    <div style="display: flex; gap: 0.5%; flex: 1; height: 100%;">
+                <div style="display: flex; align-items: center; height: ${vStripHeight}%; ${v < layout.verticalStrips - 1 ? `margin-bottom: ${gapHeightPercent}%;` : ''}">
+                    <div style="display: flex; gap: ${gapWidthPercent}%; width: 100%; height: 100%;">
             `;
 
         for (let b = 0; b < layout.boxesPerVStrip; b++) {
