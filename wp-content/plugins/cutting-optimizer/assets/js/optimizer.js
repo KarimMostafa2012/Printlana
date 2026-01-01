@@ -67,6 +67,28 @@
 
         const totalBoxes = hBoxes + vBoxes;
 
+        // Calculate used dimensions for mixed orientation
+        const hUsedWidth =
+          boxesPerHStrip > 0
+            ? boxesPerHStrip * (this.boxWidth + this.gap) - this.gap
+            : 0;
+        const hUsedHeight =
+          hStrips > 0 ? hStrips * (this.boxHeight + this.gap) - this.gap : 0;
+
+        const vUsedWidth =
+          boxesPerVStrip > 0
+            ? boxesPerVStrip * (this.boxHeight + this.gap) - this.gap
+            : 0;
+        const vUsedHeight =
+          vStrips > 0 ? vStrips * (this.boxWidth + this.gap) - this.gap : 0;
+
+        const usedWidth = Math.max(hUsedWidth, vUsedWidth);
+        const usedHeight =
+          hUsedHeight + (vStrips > 0 ? this.gap : 0) + vUsedHeight;
+
+        const wasteWidth = this.sheetWidth - usedWidth;
+        const wasteHeight = this.sheetHeight - usedHeight;
+
         if (totalBoxes > 0) {
           results.push({
             type: "mixed",
@@ -77,6 +99,13 @@
             totalBoxes,
             boxesPerHStrip,
             boxesPerVStrip,
+            usedWidth,
+            usedHeight,
+            wasteWidth,
+            wasteHeight,
+            // Grid info for mixed layouts
+            cols: `${boxesPerHStrip}H / ${boxesPerVStrip}V`,
+            rows: `${hStrips}H / ${vStrips}V`,
           });
         }
       }
@@ -199,6 +228,10 @@
     const layouts = optimizer.findOptimalLayout();
     const optimal = layouts[0];
 
+    // Find all layouts with the same efficiency and box count as optimal
+    const optimalBoxCount = optimal.totalBoxes;
+    const optimalEfficiency = optimal.efficiency.toFixed(2);
+
     let html = `
             <div class="co-summary">
                 <h2><span class="dashicons dashicons-yes-alt"></span> Optimal Solution Found</h2>
@@ -220,16 +253,16 @@
                         )} mm²</div>
                     </div>
                     <div class="co-summary-item">
-                    <label>Grid</label>
-                    <div class="value">${optimal.wastedArea.toFixed(
-                      0
-                    )} mm²</div>
+                        <label>Wasted Area</label>
+                        <div class="value">${optimal.wastedArea.toFixed(
+                          0
+                        )} mm²</div>
                     </div>
                     <div class="co-summary-item">
-                        <label>Wasted Area</label>
-                        <div class="value">${optimal.cols.toFixed(
-                          0
-                        )} x ${optimal.rows.toFixed(0)}</div>
+                        <label>Grid</label>
+                        <div class="value">${optimal.cols} × ${
+      optimal.rows
+    }</div>
                     </div>
                     <div class="co-summary-item">
                         <label>Used Dimensions</label>
@@ -247,15 +280,20 @@
         `;
 
     // Add visual diagram for optimal layout RIGHT AFTER summary
-    html += renderVisualDiagram(optimal, optimizer);
+    html += renderVisualDiagram(optimal, optimizer, 0);
 
     html += '<div class="co-layouts"><h3>All Layout Options</h3>';
 
     layouts.forEach((layout, index) => {
-      const isOptimal = index === 0;
+      // Check if this layout is optimal (same box count and efficiency)
+      const isOptimal =
+        layout.totalBoxes === optimalBoxCount &&
+        layout.efficiency.toFixed(2) === optimalEfficiency;
 
       html += `
-                <div class="co-layout-item ${isOptimal ? "optimal" : ""}">
+                <div class="co-layout-item ${
+                  isOptimal ? "optimal" : ""
+                }" data-layout-index="${index}">
                     <div class="co-layout-header">
                         <div class="co-layout-title">
                             ${
@@ -324,8 +362,32 @@
                 `;
       } else {
         html += `
-                    <p><strong>Horizontal Strips:</strong> ${layout.horizontalStrips} strips × ${layout.boxesPerHStrip} boxes (${optimizer.boxWidth}×${optimizer.boxHeight}) = ${layout.boxesInHorizontal} boxes</p>
-                    <p><strong>Vertical Strips:</strong> ${layout.verticalStrips} strips × ${layout.boxesPerVStrip} boxes (${optimizer.boxHeight}×${optimizer.boxWidth}) = ${layout.boxesInVertical} boxes</p>
+                    <p><strong>Grid:</strong> ${layout.cols} columns, ${
+          layout.rows
+        } rows</p>
+                    <p><strong>Box Dimensions:</strong> Horizontal (${
+                      optimizer.boxWidth
+                    }×${optimizer.boxHeight}), Vertical (${
+          optimizer.boxHeight
+        }×${optimizer.boxWidth})</p>
+                    <p><strong>Used Dimensions:</strong> ${layout.usedWidth.toFixed(
+                      1
+                    )} × ${layout.usedHeight.toFixed(1)} mm</p>
+                    <p><strong>Waste:</strong> ${layout.wasteWidth.toFixed(
+                      1
+                    )} mm (width) × ${layout.wasteHeight.toFixed(
+          1
+        )} mm (height)</p>
+                    <p><strong>Horizontal Strips:</strong> ${
+                      layout.horizontalStrips
+                    } strips × ${layout.boxesPerHStrip} boxes = ${
+          layout.boxesInHorizontal
+        } boxes</p>
+                    <p><strong>Vertical Strips:</strong> ${
+                      layout.verticalStrips
+                    } strips × ${layout.boxesPerVStrip} boxes = ${
+          layout.boxesInVertical
+        } boxes</p>
                 `;
       }
 
@@ -340,14 +402,12 @@
     return html;
   }
 
-  function renderVisualDiagram(layout, optimizer) {
-    // Calculate aspect ratio
-    const aspectRatio = optimizer.sheetHeight / optimizer.sheetWidth;
-    const aspectRatioPercent = (aspectRatio * 100).toFixed(2);
-
+  function renderVisualDiagram(layout, optimizer, layoutIndex) {
     let html = `
-        <div class="co-visual-diagram">
-            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout (Optimal)</h3>
+        <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
+            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${
+              layoutIndex === 0 ? " (Optimal)" : ""
+            }</h3>
             <div class="co-diagram-container">
     `;
 
@@ -367,7 +427,6 @@
                 <div class="co-sheet-label-height-bottom-line"></div>
                 <div class="co-sheet-label-height-top-line"></div>
                 <div class="co-box-grid" style="
-                    display: grid;
                     grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
                     grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
                     gap: ${gapWidthPercent}% ${gapHeightPercent}%;
@@ -466,8 +525,9 @@
             </div>
             <div class="co-waste-info">
                 <p><strong>Layout Type:</strong> Mixed Orientation</p>
-                <p><strong>H:</strong> Horizontal strips with boxes ${optimizer.boxWidth}×${optimizer.boxHeight} mm</p>
-                <p><strong>V:</strong> Vertical strips with boxes ${optimizer.boxHeight}×${optimizer.boxWidth} mm (rotated 90°)</p>
+                <p><strong>Waste Areas:</strong></p>
+                <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
+                <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
             </div>
         `;
     }
@@ -479,6 +539,10 @@
 
     return html;
   }
+
+  // Store optimizer instance globally for click handlers
+  let currentOptimizer = null;
+  let currentLayouts = null;
 
   $(document).ready(function () {
     $("#calculate-btn").on("click", function () {
@@ -514,17 +578,44 @@
       $("#results").hide();
 
       setTimeout(function () {
-        const optimizer = new CuttingOptimizer(
+        currentOptimizer = new CuttingOptimizer(
           boxWidth,
           boxHeight,
           sheetWidth,
           sheetHeight,
           gap
         );
-        const resultsHtml = renderResults(optimizer);
+        currentLayouts = currentOptimizer.findOptimalLayout();
+        const resultsHtml = renderResults(currentOptimizer);
 
         $("#results").html(resultsHtml).fadeIn();
         $("#loading").hide();
+
+        // Attach click handlers to layout items
+        $(".co-layout-item").on("click", function () {
+          const layoutIndex = $(this).data("layout-index");
+          const selectedLayout = currentLayouts[layoutIndex];
+
+          // Update visual diagram
+          const newDiagram = renderVisualDiagram(
+            selectedLayout,
+            currentOptimizer,
+            layoutIndex
+          );
+          $(".co-visual-diagram").replaceWith(newDiagram);
+
+          // Scroll to visual diagram
+          $("html, body").animate(
+            {
+              scrollTop: $(".co-visual-diagram").offset().top - 100,
+            },
+            500
+          );
+
+          // Highlight selected layout item
+          $(".co-layout-item").removeClass("selected");
+          $(this).addClass("selected");
+        });
       }, 500);
     });
 
