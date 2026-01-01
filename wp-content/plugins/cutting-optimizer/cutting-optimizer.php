@@ -87,7 +87,7 @@ class CuttingOptimizerPlugin {
                                 <span class="dashicons dashicons-media-document"></span>
                                 Sheet Width (cm)
                             </label>
-                            <input type="number" id="sheet-width" value="69" step="0.1" min="0.1">
+                            <input type="number" id="sheet-width" value="99" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
@@ -95,7 +95,7 @@ class CuttingOptimizerPlugin {
                                 <span class="dashicons dashicons-media-document"></span>
                                 Sheet Height (cm)
                             </label>
-                            <input type="number" id="sheet-height" value="99" step="0.1" min="0.1">
+                            <input type="number" id="sheet-height" value="69" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
