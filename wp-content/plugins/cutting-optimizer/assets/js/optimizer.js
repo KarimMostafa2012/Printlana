@@ -447,7 +447,7 @@
 
       for (let i = 0; i < layout.totalBoxes; i++) {
         html += `
-                <div class="co-box">
+                <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
                     <span class="co-box-number">#${i + 1}</span>
                 </div>
             `;
