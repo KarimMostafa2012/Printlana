@@ -69,39 +69,39 @@ class CuttingOptimizerPlugin {
                         <div class="co-input-group">
                             <label for="box-width">
                                 <span class="dashicons dashicons-admin-page"></span>
-                                Box Width (mm)
+                                Box Width (cm)
                             </label>
-                            <input type="number" id="box-width" value="31" step="0.1" min="0.1">
+                            <input type="number" id="box-width" value="1" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
                             <label for="box-height">
                                 <span class="dashicons dashicons-admin-page"></span>
-                                Box Height (mm)
+                                Box Length (cm)
                             </label>
-                            <input type="number" id="box-height" value="20" step="0.1" min="0.1">
+                            <input type="number" id="box-height" value="1" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
                             <label for="sheet-width">
                                 <span class="dashicons dashicons-media-document"></span>
-                                Sheet Width (mm)
+                                Sheet Width (cm)
                             </label>
-                            <input type="number" id="sheet-width" value="70" step="0.1" min="0.1">
+                            <input type="number" id="sheet-width" value="69" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
                             <label for="sheet-height">
                                 <span class="dashicons dashicons-media-document"></span>
-                                Sheet Height (mm)
+                                Sheet Height (cm)
                             </label>
-                            <input type="number" id="sheet-height" value="100" step="0.1" min="0.1">
+                            <input type="number" id="sheet-height" value="99" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
                             <label for="gap">
                                 <span class="dashicons dashicons-leftright"></span>
-                                Gap Between Boxes (mm)
+                                Gap Between Boxes (cm)
                             </label>
                             <input type="number" id="gap" value="0.3" step="0.1" min="0">
                         </div>
