@@ -234,6 +234,9 @@
             </div>
         `;
 
+    // Add visual diagram for optimal layout RIGHT AFTER summary
+    html += renderVisualDiagram(optimal, optimizer);
+
     html += '<div class="co-layouts"><h3>All Layout Options</h3>';
 
     layouts.forEach((layout, index) => {
@@ -322,13 +325,14 @@
 
     html += "</div>";
 
-    // Add visual diagram for optimal layout
-    html += renderVisualDiagram(optimal, optimizer);
-
     return html;
   }
 
   function renderVisualDiagram(layout, optimizer) {
+    // Calculate aspect ratio
+    const aspectRatio = optimizer.sheetHeight / optimizer.sheetWidth;
+    const aspectRatioPercent = (aspectRatio * 100).toFixed(2);
+
     let html = `
         <div class="co-visual-diagram">
             <h3><span class="dashicons dashicons-visibility"></span> Visual Layout (Optimal)</h3>
@@ -336,28 +340,28 @@
     `;
 
     if (layout.type === "single") {
-      const scale = Math.min(
-        600 / optimizer.sheetWidth,
-        400 / optimizer.sheetHeight
-      );
-      const displayWidth = optimizer.sheetWidth * scale;
-      const displayHeight = optimizer.sheetHeight * scale;
-      const boxDisplayWidth = layout.boxWidth * scale;
-      const boxDisplayHeight = layout.boxHeight * scale;
+      // Calculate box dimensions as percentages
+      const boxWidthPercent = (layout.boxWidth / optimizer.sheetWidth) * 100;
+      const boxHeightPercent = (layout.boxHeight / optimizer.sheetHeight) * 100;
+      const gapWidthPercent = (optimizer.gap / optimizer.sheetWidth) * 100;
+      const gapHeightPercent = (optimizer.gap / optimizer.sheetHeight) * 100;
 
       html += `
-            <div class="co-sheet" style="width: ${displayWidth}px; height: ${displayHeight}px;">
-                <div class="co-sheet-label">${optimizer.sheetWidth} × ${
-        optimizer.sheetHeight
-      } mm</div>
-                <div class="co-box-grid" style="grid-template-columns: repeat(${
-                  layout.cols
-                }, ${boxDisplayWidth}px); gap: ${optimizer.gap * scale}px;">
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
+                <div class="co-sheet-label-width">${optimizer.sheetWidth} mm</div>
+                <div class="co-sheet-label-height">${optimizer.sheetHeight} mm</div>
+                <div class="co-box-grid" style="
+                    display: grid;
+                    grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                    grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                    gap: ${gapWidthPercent}% ${gapHeightPercent}%;
+                    height: 100%;
+                ">
         `;
 
       for (let i = 0; i < layout.totalBoxes; i++) {
         html += `
-                <div class="co-box" style="height: ${boxDisplayHeight}px;">
+                <div class="co-box">
                     <span class="co-box-number">#${i + 1}</span>
                 </div>
             `;
@@ -374,40 +378,32 @@
         `;
     } else {
       // Mixed orientation layout
-      const scale = Math.min(
-        600 / optimizer.sheetWidth,
-        400 / optimizer.sheetHeight
-      );
-      const displayWidth = optimizer.sheetWidth * scale;
-      const displayHeight = optimizer.sheetHeight * scale;
-
       html += `
-            <div class="co-sheet" style="width: ${displayWidth}px; min-height: ${displayHeight}px; padding: 10px;">
-                <div class="co-sheet-label">${optimizer.sheetWidth} × ${
-        optimizer.sheetHeight
-      } mm</div>
-                <div style="display: flex; flex-direction: column; gap: ${
-                  optimizer.gap * scale
-                }px;">
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight}; padding: 10px;">
+                <div class="co-sheet-label-width">${optimizer.sheetWidth} mm</div>
+                <div class="co-sheet-label-height">${optimizer.sheetHeight} mm</div>
+                <div style="display: flex; flex-direction: column; height: 100%;">
         `;
 
       let boxCounter = 1;
 
+      // Calculate heights as percentages
+      const hStripHeight = (optimizer.boxHeight / optimizer.sheetHeight) * 100;
+      const vStripHeight = (optimizer.boxWidth / optimizer.sheetHeight) * 100;
+      const hBoxWidth = (optimizer.boxWidth / optimizer.sheetWidth) * 100;
+      const vBoxWidth = (optimizer.boxHeight / optimizer.sheetWidth) * 100;
+
       // Render horizontal strips (boxes oriented as boxWidth × boxHeight)
       for (let h = 0; h < layout.horizontalStrips; h++) {
-        const boxDisplayWidth = optimizer.boxWidth * scale;
-        const boxDisplayHeight = optimizer.boxHeight * scale;
-
         html += `
-                <div style="display: flex; gap: ${
-                  optimizer.gap * scale
-                }px; align-items: center;">
+                <div style="display: flex; align-items: center; height: ${hStripHeight}%; margin-bottom: 0.5%;">
                     <span style="font-size: 10px; color: #646970; margin-right: 5px; min-width: 15px;">H:</span>
+                    <div style="display: flex; gap: 0.5%; flex: 1; height: 100%;">
             `;
 
         for (let b = 0; b < layout.boxesPerHStrip; b++) {
           html += `
-                    <div class="co-box" style="width: ${boxDisplayWidth}px; height: ${boxDisplayHeight}px; flex-shrink: 0;">
+                    <div class="co-box" style="width: ${hBoxWidth}%; height: 100%; flex-shrink: 0;">
                         <span class="co-box-number">#${boxCounter++}</span>
                         <div style="font-size: 9px; margin-top: 2px;">${
                           optimizer.boxWidth
@@ -416,24 +412,23 @@
                 `;
         }
 
-        html += `</div>`;
+        html += `
+                    </div>
+                </div>
+            `;
       }
 
       // Render vertical strips (boxes oriented as boxHeight × boxWidth)
       for (let v = 0; v < layout.verticalStrips; v++) {
-        const boxDisplayWidth = optimizer.boxHeight * scale;
-        const boxDisplayHeight = optimizer.boxWidth * scale;
-
         html += `
-                <div style="display: flex; gap: ${
-                  optimizer.gap * scale
-                }px; align-items: center;">
+                <div style="display: flex; align-items: center; height: ${vStripHeight}%; margin-bottom: 0.5%;">
                     <span style="font-size: 10px; color: #646970; margin-right: 5px; min-width: 15px;">V:</span>
+                    <div style="display: flex; gap: 0.5%; flex: 1; height: 100%;">
             `;
 
         for (let b = 0; b < layout.boxesPerVStrip; b++) {
           html += `
-                    <div class="co-box" style="width: ${boxDisplayWidth}px; height: ${boxDisplayHeight}px; flex-shrink: 0;">
+                    <div class="co-box" style="width: ${vBoxWidth}%; height: 100%; flex-shrink: 0;">
                         <span class="co-box-number">#${boxCounter++}</span>
                         <div style="font-size: 9px; margin-top: 2px;">${
                           optimizer.boxHeight
@@ -442,7 +437,10 @@
                 `;
         }
 
-        html += `</div>`;
+        html += `
+                    </div>
+                </div>
+            `;
       }
 
       html += `
