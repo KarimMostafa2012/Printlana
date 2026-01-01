@@ -349,6 +349,8 @@
       html += `
             <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight};">
                 <div class="co-sheet-label-width">${optimizer.sheetWidth} cm</div>
+                <div class="co-sheet-label-width-left-line"></div>
+                <div class="co-sheet-label-width-right-line"></div>
                 <div class="co-sheet-label-height">${optimizer.sheetHeight}<br/>cm</div>
                 <div class="co-sheet-label-height-bottom-line"></div>
                 <div class="co-sheet-label-height-top-line"></div>
