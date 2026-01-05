@@ -1,6 +1,18 @@
 <?php
 
 
+add_filter('woocommerce_get_breadcrumb', 'remove_shop_from_breadcrumb', 10, 2);
+
+function remove_shop_from_breadcrumb($crumbs, $breadcrumb) {
+    // Remove the "Shop" breadcrumb
+    foreach ($crumbs as $key => $crumb) {
+        if ($crumb[1] === wc_get_page_permalink('shop')) {
+            unset($crumbs[$key]);
+        }
+    }
+    return array_values($crumbs); // Re-index array
+}
+
 
 // ------------------------------
 
