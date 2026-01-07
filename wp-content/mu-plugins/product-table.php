@@ -314,3 +314,5 @@ function custom_product_table_settings_link($links) {
     return array_merge($plugin_links, $links);
 }
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'custom_product_table_settings_link');
+
+
