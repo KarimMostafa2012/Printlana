@@ -63,23 +63,24 @@ class Client_Side_BG_Remover
             return;
         }
 
-        // Enqueue the background removal library - CORRECT PATH
-        wp_enqueue_script(
-            'imgly-bg-removal',
-            'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.umd.min.js',
-            array(),
-            '1.4.5',
-            true
-        );
+        // NO library enqueued here - we'll load it via ES module in JS
 
-        // Enqueue our custom script
+        // Enqueue our custom script as MODULE
         wp_enqueue_script(
             'product-bg-remover',
             PBR_PLUGIN_URL . 'js/product-bg-remover.js',
-            array('jquery', 'imgly-bg-removal'),
+            array('jquery'),
             PBR_VERSION,
             true
         );
+
+        // Mark it as a module
+        add_filter('script_loader_tag', function ($tag, $handle) {
+            if ('product-bg-remover' === $handle) {
+                $tag = str_replace('<script ', '<script type="module" ', $tag);
+            }
+            return $tag;
+        }, 10, 2);
 
         wp_localize_script('product-bg-remover', 'bgRemoverData', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -126,7 +127,7 @@ class Client_Side_BG_Remover
         }
     ');
     }
-    
+
     /**
      * Check if image hash already processed
      */
