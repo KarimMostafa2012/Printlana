@@ -63,11 +63,6 @@ class Client_Side_BG_Remover
             return;
         }
 
-        // Check if feature is enabled (if using plugin version)
-        // if (!get_option('pbr_enabled', true)) {
-        //     return;
-        // }
-
         // Enqueue the background removal library - UMD version (no CORS issues)
         wp_enqueue_script(
             'imgly-bg-removal',
@@ -77,12 +72,12 @@ class Client_Side_BG_Remover
             true
         );
 
-        // Enqueue our custom script
+        // Enqueue our custom script - USE PBR_PLUGIN_URL for plugin!
         wp_enqueue_script(
             'product-bg-remover',
-            get_stylesheet_directory_uri() . '/js/product-bg-remover.js', // Or PBR_PLUGIN_URL for plugin
+            PBR_PLUGIN_URL . 'js/product-bg-remover.js', // CORRECTED!
             array('jquery', 'imgly-bg-removal'),
-            '1.0.2', // Increment version
+            PBR_VERSION, // Use plugin version constant
             true
         );
 
