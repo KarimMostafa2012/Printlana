@@ -70,9 +70,6 @@ class Custom_Product_Table {
         // Start output buffering
         ob_start();
         
-        // Include CSS
-        $this->render_styles();
-        
         // Include HTML
         $this->render_html();
         
