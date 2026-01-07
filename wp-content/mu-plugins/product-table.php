@@ -109,7 +109,7 @@ class Custom_Product_Table {
                     <td>
                         <div class="acf-qty-controls">
                             <button type="button" class="acf-qty-minus" aria-label="<?php esc_attr_e('Decrease quantity', 'custom-product-table'); ?>">−</button>
-                            <span id="acf-qty-val">1</span>
+                            <input id="acf-qty-val" type="number" min="1" value="1">
                             <button type="button" class="acf-qty-plus" aria-label="<?php esc_attr_e('Increase quantity', 'custom-product-table'); ?>">+</button>
                         </div>
                     </td>
