@@ -63,12 +63,12 @@ class Client_Side_BG_Remover
             return;
         }
 
-        // Enqueue the background removal library - LOCAL VERSION
+        // Enqueue the background removal library - CORRECT PATH
         wp_enqueue_script(
             'imgly-bg-removal',
-            PBR_PLUGIN_URL . 'js/background-removal.umd.js', // LOCAL FILE
+            'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.umd.min.js',
             array(),
-            PBR_VERSION,
+            '1.4.5',
             true
         );
 
@@ -126,6 +126,7 @@ class Client_Side_BG_Remover
         }
     ');
     }
+    
     /**
      * Check if image hash already processed
      */
