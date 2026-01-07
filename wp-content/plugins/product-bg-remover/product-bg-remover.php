@@ -63,21 +63,21 @@ class Client_Side_BG_Remover
             return;
         }
 
-        // Enqueue the background removal library - UMD version (no CORS issues)
+        // Enqueue the background removal library - LOCAL VERSION
         wp_enqueue_script(
             'imgly-bg-removal',
-            'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/browser.umd.js',
+            PBR_PLUGIN_URL . 'js/background-removal.umd.js', // LOCAL FILE
             array(),
-            '1.4.5',
+            PBR_VERSION,
             true
         );
 
-        // Enqueue our custom script - USE PBR_PLUGIN_URL for plugin!
+        // Enqueue our custom script
         wp_enqueue_script(
             'product-bg-remover',
-            PBR_PLUGIN_URL . 'js/product-bg-remover.js', // CORRECTED!
+            PBR_PLUGIN_URL . 'js/product-bg-remover.js',
             array('jquery', 'imgly-bg-removal'),
-            PBR_VERSION, // Use plugin version constant
+            PBR_VERSION,
             true
         );
 
@@ -126,7 +126,6 @@ class Client_Side_BG_Remover
         }
     ');
     }
-
     /**
      * Check if image hash already processed
      */
