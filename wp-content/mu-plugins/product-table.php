@@ -216,8 +216,7 @@ class Custom_Product_Table
 
                     updateQtyDisplay: function () {
                         var qty = parseInt($('input[name="quantity"]').val()) || 1;
-                        $('#acf-qty-val').value = qty;
-                        $('#acf-qty-val').setAttribute('value', qty);
+                        $('#acf-qty-val').val(qty);
                         this.updatePricePerPiece();
                         this.updateButtonStates();
                     },
