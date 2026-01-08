@@ -171,18 +171,26 @@ class Custom_Product_Table
                         var qty = parseInt($('input[name="quantity"]').val()) || 1;
                         var totalPrice = 0;
 
-                        // Try multiple price sources
-                        var $price = $('.wapf-total-price').first();
-                        if (!$price.length) {
-                            $price = $('.woocommerce-Price-amount').first();
-                        }
-                        if (!$price.length) {
-                            $price = $('.price .amount').first();
-                        }
+                        // Try to get price from the main product price element
+                        var priceElement = document.querySelector('.woocommerce:where(body:not(.woocommerce-uses-block-theme)) div.product span.price');
 
-                        if ($price.length) {
-                            var priceText = $price.text().replace(/[^0-9.]/g, '');
+                        if (priceElement) {
+                            var priceText = priceElement.textContent.trim().replace(/,/g, '').replace(/[^0-9.]/g, '');
                             totalPrice = parseFloat(priceText);
+                        } else {
+                            // Fallback to jQuery selectors
+                            var $price = $('.wapf-total-price').first();
+                            if (!$price.length) {
+                                $price = $('.woocommerce-Price-amount').first();
+                            }
+                            if (!$price.length) {
+                                $price = $('.price .amount').first();
+                            }
+
+                            if ($price.length) {
+                                var priceText = $price.text().replace(/,/g, '').replace(/[^0-9.]/g, '');
+                                totalPrice = parseFloat(priceText);
+                            }
                         }
 
                         if (totalPrice > 0 && qty > 0) {
