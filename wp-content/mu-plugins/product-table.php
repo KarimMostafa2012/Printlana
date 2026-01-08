@@ -258,6 +258,21 @@ class Custom_Product_Table
                             }
                         });
 
+                        // ACF quantity input manual change
+                        $('#acf-qty-val').on('change input', function () {
+                            var $qtyInput = $('input[name="quantity"]');
+                            var newQty = parseInt($(this).val()) || 1;
+                            var min = parseInt($qtyInput.attr('min')) || 1;
+                            var max = parseInt($qtyInput.attr('max')) || 999999;
+
+                            // Clamp value within min/max
+                            newQty = Math.max(min, Math.min(max, newQty));
+
+                            // Update both inputs
+                            $(this).val(newQty);
+                            $qtyInput.val(newQty).trigger('change');
+                        });
+
                         // WooCommerce quantity change
                         $(document).on('change', 'input[name="quantity"]', function () {
                             self.updateQtyDisplay();
