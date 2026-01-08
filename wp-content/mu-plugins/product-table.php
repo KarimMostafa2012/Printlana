@@ -194,7 +194,7 @@ class Custom_Product_Table
                         }
 
                         if (totalPrice > 0 && qty > 0) {
-                            var perPiece = (totalPrice / qty).toFixed(2);
+                            var perPiece = (totalPrice / qty).toFixed(4);
                             var currency = this.getCurrency();
                             $('#acf-price-piece').text(perPiece + ' ' + currency);
                         } else {
