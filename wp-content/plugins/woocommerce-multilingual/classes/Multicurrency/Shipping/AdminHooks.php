@@ -12,11 +12,6 @@ class AdminHooks implements IWPML_Action, IStandAloneAction {
 	/** @var WCML_Multi_Currency */
 	private $wcmlMultiCurrency;
 
-	/**
-	 * AdminHooks constructor.
-	 *
-	 * @param \WCML_Multi_Currency $wcmlMultiCurrency
-	 */
 	public function __construct( \WCML_Multi_Currency $wcmlMultiCurrency ) {
 		$this->wcmlMultiCurrency = $wcmlMultiCurrency;
 	}

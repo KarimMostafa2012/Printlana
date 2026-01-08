@@ -38,9 +38,9 @@ class ProductTerms extends Handler {
 
 		if ( $language ) {
 			if ( 'all' === $language ) {
-				remove_filter( 'terms_clauses', [ $this->sitepress, 'terms_clauses' ], 10 );
+				remove_filter( 'terms_clauses', [ $this->sitepress, 'terms_clauses' ] );
 				remove_filter( 'get_term', [ $this->sitepress, 'get_term_adjust_id' ], 1 );
-				remove_filter( 'get_terms_args', [ $this->sitepress, 'get_terms_args_filter' ], 10 );
+				remove_filter( 'get_terms_args', [ $this->sitepress, 'get_terms_args_filter' ] );
 			} else {
 				$this->checkLanguage( $language );
 			}
@@ -68,7 +68,7 @@ class ProductTerms extends Handler {
 		if ( $trid ) {
 			$getTermId = function( $termTaxonomyId ) {
 				$term = get_term_by( 'term_taxonomy_id', $termTaxonomyId );
-				return isset( $term->term_id ) ? $term->term_id : null;
+				return $term->term_id ?? null;
 			};
 
 			$response->data['translations'] = Fns::map(

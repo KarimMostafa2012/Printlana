@@ -194,7 +194,7 @@ class WCML_Payment_Gateway_PayPal_V2 extends WCML_Payment_Gateway_PayPal {
 			return $data;
 		}
 
-		if ( $gateway_setting ) {
+
 			if ( $client_currency !== $convert_to_currency ) {
 				$convert_price = $this->get_convert_price_callable( $convert_to_currency );
 
@@ -226,7 +226,7 @@ class WCML_Payment_Gateway_PayPal_V2 extends WCML_Payment_Gateway_PayPal {
 					}
 				}
 			}
-		}
+
 
 		return $data;
 	}

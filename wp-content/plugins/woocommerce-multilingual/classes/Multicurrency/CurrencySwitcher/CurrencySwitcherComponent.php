@@ -5,8 +5,10 @@ namespace WCML\Multicurrency\CurrencySwitcher;
 class CurrencySwitcherComponent implements CurrencySwitcherTemplateInterface {
 	const TEMPLATE_FILENAME = 'template.php';
 
-	/** @var array|string[] */
-	private $templateSetup = [];
+	/**
+	 * @var ?array{"path": array, "js": array, "css": array, "is_core": bool, "slug": string}
+	 */
+	private $templateSetup;
 
 	/** @var array|string[] */
 	private $templatePaths = [];
@@ -23,17 +25,10 @@ class CurrencySwitcherComponent implements CurrencySwitcherTemplateInterface {
 	private $wp_api;
 
 	/**
-	 * @var \woocommerce_wpml
+	 * @param array $templateSetup
 	 */
-	private $woocommerce_wpml;
-
-	/**
-	 * @param \woocommerce_wpml $woocommerce_wpml
-	 * @param array             $templateSetup
-	 */
-	public function __construct( $woocommerce_wpml, $templateSetup ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->templateSetup    = $this->formatTemplateSetupData( $templateSetup );
+	public function __construct( $templateSetup ) {
+		$this->templateSetup = $this->formatTemplateSetupData( $templateSetup );
 		$this->initTemplateBaseDir();
 	}
 
@@ -58,6 +53,7 @@ class CurrencySwitcherComponent implements CurrencySwitcherTemplateInterface {
 	}
 
 	public function set_model( $model ) {
+		/* @phpstan-ignore ternary.elseUnreachable */
 		$this->model = is_array( $model ) ? $model : [ $model ];
 	}
 
@@ -84,8 +80,7 @@ class CurrencySwitcherComponent implements CurrencySwitcherTemplateInterface {
 
 		try {
 			$output = $this->renderUsingPHPTemplate( $template, $model );
-		} catch ( \RuntimeException $e ) {
-			/** @phpstan-ignore-next-line */
+		} catch ( \WPML\Core\Twig\Error\Error $e ) {
 			$message = 'Invalid template string: ' . $e->getRawMessage() . "\n" . $template;
 			$this->getWPML_WP_APIInstance()->error_log( $message );
 		}
@@ -185,7 +180,7 @@ class CurrencySwitcherComponent implements CurrencySwitcherTemplateInterface {
 	}
 
 	protected function getWPML_WP_APIInstance(): \WPML_WP_API {
-		if ( ! $this->wp_api ) {
+		if ( ! ( $this->wp_api instanceof \WPML_WP_API ) ) {
 			$this->wp_api = new \WPML_WP_API();
 		}
 

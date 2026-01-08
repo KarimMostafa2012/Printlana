@@ -5,9 +5,6 @@ use function WCML\functions\getSitePress;
 use function WCML\functions\isStandAlone;
 use function WPML\Container\make;
 
-/**
- * Class woocommerce_wpml
- */
 /* phpcs:ignore PEAR.NamingConventions.ValidClassName.StartWithCapital, PEAR.NamingConventions.ValidClassName.Invalid */
 class woocommerce_wpml {
 
@@ -15,74 +12,118 @@ class woocommerce_wpml {
 	public $settings;
 	/** @var  WCML_Troubleshooting */
 	public $troubleshooting;
-	/** @var  WCML_Endpoints */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_Endpoints
+	 */
 	public $endpoints;
-	/** @var WCML_Products */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Products
+	 */
 	public $products;
-	/** @var  WCML_Synchronize_Product_Data */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_Synchronize_Product_Data
+	 */
 	public $sync_product_data;
-	/** @var  WCML_Synchronize_Variations_Data */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_Synchronize_Variations_Data
+	 */
 	public $sync_variations_data;
-	/** @var WCML_Store_Pages */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Store_Pages
+	 */
 	public $store;
-	/** @var WCML_Emails */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Emails
+	 */
 	public $emails;
-	/** @var WCML_Terms */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Terms
+	 */
 	public $terms;
-	/** @var WCML_Attributes */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Attributes
+	 */
 	public $attributes;
 	/** @var WCML_Orders */
 	public $orders;
-	/** @var WCML_Currencies */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Currencies
+	 */
 	public $currencies;
 	/** @var WCML_Multi_Currency */
 	public $multi_currency;
 	/** @var WCML_Languages_Upgrader */
 	public $languages_upgrader;
-	/** @var WCML_Url_Translation */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Url_Translation
+	 */
 	public $url_translation;
-	/** @var WCML_Coupons */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Coupons
+	 */
 	public $coupons;
 	/** @var WCML_Locale */
 	public $locale;
-	/** @var WCML\Media\Wrapper\IMedia */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML\Media\Wrapper\IMedia
+	 */
 	public $media;
-	/** @var WCML_Downloadable_Products */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Downloadable_Products
+	 */
 	public $downloadable;
-	/** @var WCML_WC_Strings */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_WC_Strings
+	 */
 	public $strings;
-	/** @var WCML_WC_Shipping */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_WC_Shipping
+	 */
 	public $shipping;
-	/** @var  WCML_WC_Gateways */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_WC_Gateways
+	 */
 	public $gateways;
 	/** @var  WCML_Currency_Switcher_Templates */
 	public $cs_templates;
-	/** @var  WCML_Comments */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_Comments
+	 */
 	public $comments;
-	/** @var  WCML_Translation_Editor */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var  WCML_Translation_Editor
+	 */
 	public $translation_editor;
 
 	/**
-	 * @deprecated Use `make( WCML_Dependencies::class )` instead.
-	 *
-	 * @var WCML_Dependencies
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Cart
 	 */
-	public $dependencies;
-
-	/**
-	 * @deprecated Use `make( WCML_Dependencies::class )->check()` instead.
-	 *
-	 * @var bool|int
-	 */
-	public $dependencies_are_ok;
-
-	/** @var WCML_Cart */
 	public $cart;
-	/** @var WCML_Cart_Sync_Warnings */
+	/**
+	 * @deprecated will be rebuilt in WCML 5.6
+	 * @var WCML_Cart_Sync_Warnings
+	 */
 	public $cart_sync_warnings;
 
-	/** @var  WCML_Reports */
-	private $reports;
 	/** @var  WCML_Requests */
 	public $requests;
 	// NOTE: reverted back to public after wcml-1218.
@@ -96,6 +137,7 @@ class woocommerce_wpml {
 	public $page_builders;
 
 	/**
+	 * @deprecated will be rebuilt in WCML 5.6
 	 * @var WCML_Products_Screen_Options
 	 */
 	private $wcml_products_screen;
@@ -124,7 +166,7 @@ class woocommerce_wpml {
 	private function load_rest_api() {
 		$sitepress = getSitePress();
 
-		if ( class_exists( 'WooCommerce' ) && defined( 'WC_VERSION' ) && ! is_null( $sitepress ) && WCML\Rest\Functions::isRestApiRequest() ) {
+		if ( class_exists( 'WooCommerce' ) && defined( 'WC_VERSION' ) && ( $sitepress instanceof \WPML\Core\ISitePress ) && WCML\Rest\Functions::isRestApiRequest() ) {
 			WCML\Rest\Hooks::addHooks();
 		}
 	}
@@ -138,17 +180,17 @@ class woocommerce_wpml {
 		do_action( 'wcml_loaded' );
 	}
 
+	/**
+	 * @return bool|void
+	 */
 	public function init() {
 		global $wpdb, $woocommerce, $wpml_url_converter, $wpml_post_translations, $wpml_term_translations;
 
 		$sitepress = getSitePress();
 
-		$this->dependencies        = make( WCML_Dependencies::class );
-		$this->dependencies_are_ok = $this->dependencies->check();
-
 		WCML_Admin_Menus::set_up_menus( $this, $sitepress, $wpdb );
 
-		if ( ! $this->dependencies_are_ok ) {
+		if ( ! \WPML\Container\make( WCML_Dependencies::class )->check() ) {
 			if ( is_admin() && AdminPages::isWcmlSettings() ) {
 				WCML_Capabilities::set_up_capabilities();
 
@@ -204,15 +246,14 @@ class woocommerce_wpml {
 		}
 	}
 
-	private function init_full( $sitepress, $wpdb, $woocommerce, $wpml_url_converter, $wpml_post_translations, $wpml_term_translations ) {
+	private function init_full( SitePress $sitepress, wpdb $wpdb, $woocommerce, $wpml_url_converter, $wpml_post_translations, $wpml_term_translations ): bool {
 		$this->currencies = new WCML_Currencies( $this );
 		$this->currencies->add_hooks();
 
-		$syncHashManager            = new WCML\Utilities\SyncHash();
-		$this->sync_variations_data = new WCML_Synchronize_Variations_Data( $this, $sitepress, $wpdb, $syncHashManager );
+		$this->sync_variations_data = new WCML_Synchronize_Variations_Data( $this, $sitepress, $wpdb );
 
 		if ( is_admin() || wpml_is_rest_request() ) {
-			$this->translation_editor = new WCML_Translation_Editor( $this, $sitepress, $wpdb, $syncHashManager );
+			$this->translation_editor = new WCML_Translation_Editor( $this, $sitepress, $wpdb );
 			$this->translation_editor->add_hooks();
 			$tp_support = new WCML_TP_Support( $this, $wpdb, new WPML_Element_Translation_Package(), $sitepress->get_setting( 'translation-management', [] ) );
 			$tp_support->add_hooks();
@@ -230,7 +271,7 @@ class woocommerce_wpml {
 			$wcml_pointers->add_hooks();
 		}
 
-		$this->sync_product_data = new WCML_Synchronize_Product_Data( $this, $sitepress, $wpml_post_translations, $wpdb, $syncHashManager );
+		$this->sync_product_data = new WCML_Synchronize_Product_Data( $this, $sitepress, $wpml_post_translations, $wpdb );
 		$this->sync_product_data->add_hooks();
 		$this->duplicate_product = new WCML_WC_Admin_Duplicate_Product( $this, $sitepress, $wpdb );
 		$this->products          = new WCML_Products( $this, $sitepress, $wpml_post_translations, $wpdb );
@@ -240,14 +281,14 @@ class woocommerce_wpml {
 		$this->strings = new WCML_WC_Strings( $this, $sitepress, $wpdb );
 		$this->strings->add_hooks();
 		// do not pass mailer instance instead of $woocommerce.
-		$this->emails = new WCML_Emails( $this->strings, $sitepress, $woocommerce, $wpdb );
+		$this->emails = new WCML_Emails( $this->strings, $sitepress, $woocommerce );
 		$this->emails->add_hooks();
 		$this->terms = new WCML_Terms( $this, $sitepress, $wpdb );
 		$this->terms->add_hooks();
 		$this->attributes = new WCML_Attributes( $this, $sitepress, $wpml_post_translations, $wpml_term_translations, $wpdb );
 		$this->attributes->add_hooks();
 		$this->orders   = new WCML_Orders( $this, $sitepress );
-		$this->shipping = new WCML_WC_Shipping( $sitepress, $this->strings );
+		$this->shipping = new WCML_WC_Shipping( $sitepress );
 		$this->shipping->add_hooks();
 		$this->gateways = new WCML_WC_Gateways( $this, $sitepress );
 		$this->gateways->add_hooks();
@@ -257,15 +298,14 @@ class woocommerce_wpml {
 		$this->endpoints->add_hooks();
 		$this->requests = new WCML_Requests();
 		$this->cart->add_hooks(); // object is instantiated before.
-		$this->coupons = new WCML_Coupons( $this, $sitepress );
+		$this->coupons = new WCML_Coupons( $sitepress );
 		$this->coupons->add_hooks();
-		$this->locale = new WCML_Locale( $this, $sitepress );
-		$this->media  = WCML\Media\Wrapper\Factory::create( $this );
+		$this->locale = new WCML_Locale( $sitepress );
+		$this->media  = WCML\Media\Wrapper\Factory::create();
 		$this->media->add_hooks();
 		$this->downloadable = new WCML_Downloadable_Products( $this, $sitepress, $wpdb );
 		$this->downloadable->add_hooks();
 		$this->page_builders        = new WCML_Page_Builders( $sitepress );
-		$this->reports              = new WCML_Reports();
 		$this->wcml_products_screen = new WCML_Products_Screen_Options();
 		$this->wcml_products_screen->init();
 		$this->cart_sync_warnings = new WCML_Cart_Sync_Warnings( $this, $sitepress );
@@ -296,7 +336,7 @@ class woocommerce_wpml {
 		return true;
 	}
 
-	private function init_standalone( $sitepress, $wpdb ) {
+	private function init_standalone( \WPML\Core\ISitePress $sitepress, wpdb $wpdb ): bool {
 		$this->currencies = new WCML_Currencies( $this );
 		$this->currencies->add_hooks();
 
@@ -458,7 +498,7 @@ class woocommerce_wpml {
 	 * @return WCML_Multi_Currency
 	 */
 	public function get_multi_currency() {
-		if ( ! isset( $this->multi_currency ) ) {
+		if ( ! ( $this->multi_currency instanceof WCML_Multi_Currency ) ) {
 			$this->multi_currency = make( WCML_Multi_Currency::class );
 		}
 		return $this->multi_currency;

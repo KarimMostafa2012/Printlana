@@ -1,14 +1,14 @@
-=== Advanced Product Sample for WooCommerce ===
-Plugin Name: Advanced Product Sample for WooCommerce
+=== Free Product Samples for WooCommerce – Try Before You Buy, Request Samples by Mail ===
+Plugin Name: Free Product Samples for WooCommerce – Try Before You Buy, Request Samples by Mail
 Author: theDotstore
 Author URI: https://www.thedotstore.com/
 Contributors: dots
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 Requires PHP: 5.6
 Tags: free, free sample, product sample, product, sample
 Requires at least: 5.0
-Tested up to: 6.7.1
-WC tested up to: 9.5.1
+Tested up to: 6.8.3
+WC tested up to: 10.2.2
 Donate link: https://www.thedotstore.com/
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -23,7 +23,7 @@ Advanced Product Sample for WooCommerce does one thing, and it does it well. It 
 
 eCommerce websites are often looking for different methods to increase their product sales and <strong>improve customer satisfaction.</strong> One of the most effective ways of achieving these is by promoting your products and services by offering product samples.
 
-The <a href="https://bit.ly/3GXprMO">Advanced Product Sample for WooCommerce </a> is designed for store owners who want to employ an effective marketing tool, and are concerned about their customers and the target audience of their product.
+The <a href="https://www.thedotstore.com/product-sample-woocommerce/?utm_source=wporg&utm_medium=freepluginlink&utm_campaign=landing_page&utm_id=productsample_free">Advanced Product Sample for WooCommerce </a> is designed for store owners who want to employ an effective marketing tool, and are concerned about their customers and the target audience of their product.
 
 This plugin when integrated with your WooCommerce store allows the <strong>store owners to grab the attention of their customers</strong> by providing sample products for free or at a percentage of the original price. 
 
@@ -48,11 +48,11 @@ The Sample Product plugin is equipped with several advanced features that make i
 🔑 Display a custom message when customers exceed the sample limit.
 🔑 Enable Ajax Add to Cart for a smoother, more responsive user experience.
 
-== 📣 PREMIUM: Product Sample for WooCommerce —  <a href ="https://bit.ly/3GXprMO" target="_blank">Try Pro Version Today!</a> ==
+== 📣 PREMIUM: Product Sample for WooCommerce —  <a href ="https://www.thedotstore.com/product-sample-woocommerce/?utm_source=wporg&utm_medium=freepluginlink&utm_campaign=landing_page&utm_id=productsample_free" target="_blank">Try Pro Version Today!</a> ==
 
 == ✅ NEED EVEN MORE FEATURES? ==
 
-Upgrade to <a href ="https://bit.ly/3GXprMO" target="_blank">Product Sample Plugin PRO</a> to get all the advanced features.
+Upgrade to <a href ="https://www.thedotstore.com/product-sample-woocommerce/?utm_source=wporg&utm_medium=freepluginlink&utm_campaign=landing_page&utm_id=productsample_free" target="_blank">Product Sample Plugin PRO</a> to get all the advanced features.
 
 🔑 Includes all free plugin features.
 🔑 Set custom prefixes or suffixes for sample product titles.
@@ -66,7 +66,7 @@ Upgrade to <a href ="https://bit.ly/3GXprMO" target="_blank">Product Sample Plug
 🔑 Manage inventory or stock levels for sample products separately.
 🔑 Automatically send follow-up emails after sample orders, encouraging customers to purchase the full-size product.
 
-== 📣 LEARN MORE: Product Sample Plugin — <a href ="https://bit.ly/3GXprMO" target="_blank">Try Pro Version Today!</a> == 
+== 📣 LEARN MORE: Product Sample Plugin — <a href ="https://www.thedotstore.com/product-sample-woocommerce/?utm_source=wporg&utm_medium=freepluginlink&utm_campaign=landing_page&utm_id=productsample_free" target="_blank">Try Pro Version Today!</a> == 
 
 == Key Benefits of Product Sampling ==
 
@@ -234,6 +234,13 @@ Ans: No, you can only assign the global flat sample charges.
 Automatic updates should work great for you.  As always, though, we recommend backing up your site prior to making any updates just to be sure nothing goes wrong.
 
 == Changelog ==
+= 1.4.2 =
+* [Bug Fix] Minor fixes related to sample button display with out-of-stock products
+* [Bug Fix] Minor fixes related to the plugin compatibility issue with the CartFlow plugin
+* [Bug Fix] Minor fixes related to the plugin compatibility with the WooCommerce mini cart block
+* [Enhancement] Compatible with WooCommerce 10.2.x
+* [Enhancement] Compatible with WordPress 6.8.x
+
 = 1.4.1 =
 * [Bug Fix] Minor fixes related to the sample add-to-cart issue
 * [Bug Fix] Minor fixes related to plugin compatibility with WooCommerce Cart/Checkout blocks

@@ -159,6 +159,7 @@ class Template {
                 'icon'          => '<i class="fas fa-bell"></i>',
                 'url'           => dokan_get_navigation_url( 'announcement' ),
                 'pos'           => 181,
+                'icon_name'     => 'Megaphone',
                 'react_route'   => 'announcement',
                 'permission'    => 'dokan_view_announcement',
             ];

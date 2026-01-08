@@ -17,6 +17,7 @@ class StoreCategory {
         add_filter( 'dokan_settings_general_vendor_store_options', array( $this, 'add_admin_settings' ) );
         add_action( 'dokan_after_saving_settings', array( $this, 'set_default_category' ), 10, 2 );
         add_filter( 'dokan_admin_localize_script', array( $this, 'add_localized_data' ) );
+        add_filter( 'dokan_admin_dashboard_pages_settings', array( $this, 'add_localized_data' ) );
         add_filter( 'dokan_localized_args', array( $this, 'set_localized_data' ) );
 
         if ( dokan_is_store_categories_feature_on() ) {

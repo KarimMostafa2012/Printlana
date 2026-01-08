@@ -1,7 +1,6 @@
 <?php
 
-use \WCML\Multicurrency\Shipping\ShippingModeProvider as ManualCost;
-use WPML\Core\ISitePress;
+use WCML\Multicurrency\Shipping\ShippingModeProvider as ManualCost;
 
 class WCML_Multi_Currency_Shipping {
 
@@ -9,18 +8,20 @@ class WCML_Multi_Currency_Shipping {
 
 	/** @var WCML_Multi_Currency */
 	private $multi_currency;
-	/** @var ISitePress */
-	private $sitepress;
 	/** @var wpdb */
 	private $wpdb;
 
 	/** @var int */
 	const PRIORITY_SHIPPING = 10;
 
-	public function __construct( WCML_Multi_Currency $multi_currency, ISitePress $sitepress, wpdb $wpdb ) {
+	/**
+	 * @var \WC_Shipping_Method[]
+	 */
+	private $wcShippingCostInMcList = [];
+
+	public function __construct( WCML_Multi_Currency $multi_currency, wpdb $wpdb ) {
 
 		$this->multi_currency = $multi_currency;
-		$this->sitepress      = $sitepress;
 		$this->wpdb           = $wpdb;
 		wp_cache_add_non_persistent_groups( self::CACHE_PERSISTENT_GROUP );
 	}
@@ -35,6 +36,7 @@ class WCML_Multi_Currency_Shipping {
 		}
 
 		// Used for table rate shipping compatibility class.
+		add_action( 'wcml_shipping_cost_in_mc', [ $this, 'action_shipping_cost_in_mc' ] );
 		add_filter( 'wcml_shipping_price_amount', [ $this, 'shipping_price_filter' ] ); // WCML filters.
 		add_filter( 'wcml_shipping_free_min_amount', [ $this, 'shipping_free_min_amount' ], 10, 2 ); // WCML filters.
 
@@ -48,6 +50,13 @@ class WCML_Multi_Currency_Shipping {
 		], \WCML_Multi_Currency_Shipping::PRIORITY_SHIPPING + 1 );
 
 		add_filter( 'woocommerce_package_rates', [ $this, 'convert_shipping_costs_in_package_rates' ] );
+	}
+
+	/**
+	 * @param \WC_Shipping_Method $wcShippingMethod
+	 */
+	public function action_shipping_cost_in_mc( $wcShippingMethod ) {
+		$this->wcShippingCostInMcList[] = $wcShippingMethod;
 	}
 
 	/**
@@ -88,8 +97,8 @@ class WCML_Multi_Currency_Shipping {
 	public function convert_shipping_method_cost_settings( $settings ) {
 
 		$has_free_shipping_coupon = false;
-		if ( WC()->cart && $coupons = WC()->cart->get_coupons() ) {
-			foreach ( $coupons as $code => $coupon ) {
+		if ( null !== WC()->cart && $coupons = WC()->cart->get_coupons() ) {
+			foreach ( $coupons as $coupon ) {
 
 				if (
 					$coupon->is_valid() &&
@@ -130,7 +139,7 @@ class WCML_Multi_Currency_Shipping {
 	 * @return array
 	 */
 	public function woocommerce_evaluate_shipping_cost_args( $args, $sum, $WC_Shipping_Method ) {
-		if( isset( $WC_Shipping_Method->wcml_shipping_cost_in_mc ) && $WC_Shipping_Method->wcml_shipping_cost_in_mc === true ) {
+		if ( in_array( $WC_Shipping_Method, $this->wcShippingCostInMcList, true ) ) {
 			return $args;
 		}
 

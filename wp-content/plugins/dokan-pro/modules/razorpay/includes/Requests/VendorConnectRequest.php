@@ -54,19 +54,18 @@ class VendorConnectRequest implements RequestHandler {
         /*
         * Validate all required data
         */
-        if ( empty( $data['razorpay_account_name'] ) ) {
-            $errors[] = [
-                'code'    => 'invalid_account_name',
-                'message' => __( 'Please give your razorpay account name.', 'dokan' ),
-                'detail'  => __( 'Invalid account name.', 'dokan' ),
-            ];
-        }
-
         if ( empty( $data['razorpay_account_email'] ) ) {
             $errors[] = [
                 'code'    => 'invalid_email',
                 'message' => __( 'Please give your razorpay account email.', 'dokan' ),
                 'detail'  => __( 'Invalid email address.', 'dokan' ),
+            ];
+        }
+        if ( empty( $data['razorpay_account_phone'] ) ) {
+            $errors[] = [
+                'code'    => 'invalid_phone',
+                'message' => __( 'Please give your phone number', 'dokan' ),
+                'detail'  => __( 'Invalid phone number', 'dokan' ),
             ];
         }
 
@@ -85,28 +84,49 @@ class VendorConnectRequest implements RequestHandler {
                 'detail'  => __( 'Invalid business type.', 'dokan' ),
             ];
         }
-
-        if ( empty( $data['razorpay_beneficiary_name'] ) ) {
+        if ( empty( $data['razorpay_address_line1'] ) ) {
             $errors[] = [
-                'code'    => 'invalid_beneficiary_name',
-                'message' => __( 'Please give your bank account name.', 'dokan' ),
-                'detail'  => __( 'Invalid bank account name.', 'dokan' ),
+                'code'    => 'invalid_address_line1',
+                'message' => __( 'Please give your address line 1.', 'dokan' ),
+                'detail'  => __( 'Invalid address line 1.', 'dokan' ),
             ];
         }
 
-        if ( empty( $data['razorpay_account_number'] ) ) {
+        if ( empty( $data['razorpay_address_line2'] ) ) {
             $errors[] = [
-                'code'    => 'invalid_account_number',
-                'message' => __( 'Please give your bank account number.', 'dokan' ),
-                'detail'  => __( 'Invalid account number.', 'dokan' ),
+                'code'    => 'invalid_address_line2',
+                'message' => __( 'Please give your address line 2.', 'dokan' ),
+                'detail'  => __( 'Invalid address line 2.', 'dokan' ),
             ];
         }
 
-        if ( empty( $data['razorpay_ifsc_code'] ) ) {
+        if ( empty( $data['razorpay_city'] ) ) {
             $errors[] = [
-                'code'    => 'invalid_ifsc_code',
-                'message' => __( 'Please give your bank IFSC code.', 'dokan' ),
-                'detail'  => __( 'Invalid IFSC code.', 'dokan' ),
+                'code'    => 'invalid_city',
+                'message' => __( 'Please give your city name.', 'dokan' ),
+                'detail'  => __( 'Invalid city name.', 'dokan' ),
+            ];
+        }
+        if ( empty( $data['razorpay_state'] ) ) {
+            $errors[] = [
+                'code'    => 'invalid_state',
+                'message' => __( 'Please give your state name.', 'dokan' ),
+                'detail'  => __( 'Invalid state name.', 'dokan' ),
+            ];
+        }
+        if ( empty( $data['razorpay_postal_code'] ) ) {
+            $errors[] = [
+                'code'    => 'razorpay_postal_code',
+                'message' => __( 'Please give your postcode.', 'dokan' ),
+                'detail'  => __( 'Invalid postcode.', 'dokan' ),
+            ];
+        }
+
+        if ( empty( $data['razorpay_country'] ) ) {
+            $errors[] = [
+                'code'    => 'invalid_country',
+                'message' => __( 'Please give your country name.', 'dokan' ),
+                'detail'  => __( 'Invalid country name.', 'dokan' ),
             ];
         }
 

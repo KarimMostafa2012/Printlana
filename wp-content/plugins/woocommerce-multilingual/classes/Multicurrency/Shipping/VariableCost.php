@@ -181,7 +181,7 @@ trait VariableCost {
 			$termTrid = apply_filters( 'wpml_element_trid', null, $termId, 'tax_product_shipping_class' );
 			$termTranslations = apply_filters( 'wpml_get_element_translations', null, $termTrid, 'tax_product_shipping_class' );
 			if ( is_array( $termTranslations ) ) {
-				foreach ( $termTranslations as $languageCode => $translation ) {
+				foreach ( $termTranslations as $translation ) {
 					if ( $translation->source_language_code === null ) {
 						$shippingClassKey = str_replace( $termId, $translation->element_id, $shippingClassKey );
 						break;

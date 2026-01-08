@@ -5,8 +5,6 @@ class WCML_Status_Status_UI extends WCML_Templates_Factory {
 	private $sitepress;
 
 	/**
-	 * WCML_Status_Status_UI constructor.
-	 *
 	 * @param SitePress $sitepress
 	 */
 	public function __construct( $sitepress ) {

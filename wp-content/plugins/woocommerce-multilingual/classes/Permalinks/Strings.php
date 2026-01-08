@@ -2,11 +2,6 @@
 
 namespace WCML\Permalinks;
 
-use WCML\TranslationControls as TranslationControlsBase;
-use WCML\Utilities\WcAdminPages;
-use WPML\FP\Obj;
-use WPML\FP\Str;
-
 class Strings {
 
 	const DEFAULT_PRODUCT_BASE           = 'product';

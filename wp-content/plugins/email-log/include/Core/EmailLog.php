@@ -1,4 +1,6 @@
-<?php namespace EmailLog\Core;
+<?php
+
+namespace EmailLog\Core;
 
 use EmailLog\Core\DB\TableManager;
 use EmailLog\EmailLogAutoloader;
@@ -8,216 +10,330 @@ use EmailLog\EmailLogAutoloader;
  *
  * @since Genesis
  */
-class EmailLog {
+class EmailLog
+{
+    /**
+     * Flag to track if the plugin is loaded.
+     *
+     * @since 2.0
+     * @access private
+     *
+     * @var bool
+     */
+    private $loaded = false;
 
-	/**
-	 * Plugin Version number.
-	 *
-	 * @since Genesis
-	 *
-	 * @var string
-	 */
-	const VERSION = '2.4.9';
+    /**
+     * Flag to override plugin API.
+     *
+     * @since 2.4.5
+     * @access private
+     *
+     * @var bool
+     */
+    private $plugins_api_overridden = false;
 
-	/**
-	 * Email Log Store URL.
-	 */
-	const STORE_URL = 'https://wpemaillog.com';
+    /**
+     * Plugin file path.
+     *
+     * @since 2.0
+     * @access private
+     *
+     * @var string
+     */
+    private $plugin_file;
 
-	/**
-	 * Flag to track if the plugin is loaded.
-	 *
-	 * @since 2.0
-	 * @access private
-	 *
-	 * @var bool
-	 */
-	private $loaded = false;
+    /**
+     * Filesystem directory path where translations are stored.
+     *
+     * @since 2.0
+     *
+     * @var string
+     */
+    public $translations_path;
 
-	/**
-	 * Flag to override plugin API.
-	 *
-	 * @since 2.4.5
-	 * @access private
-	 *
-	 * @var bool
-	 */
-	private $plugins_api_overridden = false;
+    /**
+     * Auto loader.
+     *
+     * @var \EmailLog\EmailLogAutoloader
+     */
+    public $loader;
 
-	/**
-	 * Plugin file path.
-	 *
-	 * @since 2.0
-	 * @access private
-	 *
-	 * @var string
-	 */
-	private $plugin_file;
+    /**
+     * Database Table Manager.
+     *
+     * @since 2.0
+     *
+     * @var \EmailLog\Core\DB\TableManager
+     */
+    public $table_manager;
 
-	/**
-	 * Filesystem directory path where translations are stored.
-	 *
-	 * @since 2.0
-	 *
-	 * @var string
-	 */
-	public $translations_path;
-
-	/**
-	 * Auto loader.
-	 *
-	 * @var \EmailLog\EmailLogAutoloader
-	 */
-	public $loader;
-
-	/**
-	 * Database Table Manager.
-	 *
-	 * @since 2.0
-	 *
-	 * @var \EmailLog\Core\DB\TableManager
-	 */
-	public $table_manager;
-
-	/**
-	 * List of loadies.
-	 *
-	 * @var Loadie[]
-	 */
-	private $loadies = array();
+    /**
+     * List of loadies.
+     *
+     * @var Loadie[]
+     */
+    private $loadies = array();
     private $loadies_init = array();
-	/**
-	 * Initialize the plugin.
-	 *
-	 * @param string             $file          Plugin file.
-	 * @param EmailLogAutoloader $loader        EmailLog Autoloader.
-	 * @param TableManager       $table_manager Table Manager.
-	 */
-	public function __construct( $file, $loader, $table_manager ) {
-		$this->plugin_file   = $file;
-		$this->loader        = $loader;
-		$this->table_manager = $table_manager;
+    /**
+     * Initialize the plugin.
+     *
+     * @param string             $file          Plugin file.
+     * @param EmailLogAutoloader $loader        EmailLog Autoloader.
+     * @param TableManager       $table_manager Table Manager.
+     */
+    public function __construct($file, $loader, $table_manager)
+    {
+        $this->plugin_file   = $file;
+        $this->loader        = $loader;
+        $this->table_manager = $table_manager;
 
-		$this->add_loadie( $table_manager );
+        $this->add_loadie($table_manager);
 
-		$this->translations_path = dirname( plugin_basename( $this->plugin_file ) ) . '/languages/' ;
-	}
+        $this->translations_path = dirname(plugin_basename($this->plugin_file)) . '/languages/';
+    }
 
-	/**
-	 * Add an Email Log Loadie.
-	 * The `load()` method of the Loadies will be called when Email Log is loaded.
-	 *
-	 * @param \EmailLog\Core\Loadie $loadie Loadie to be loaded.
-	 *
-	 * @return bool False if Email Log is already loaded or if $loadie is not of `Loadie` type. True otherwise.
-	 */
-	public function add_loadie( $loadie, $loadie_init = false ) {
-		if ( $this->loaded ) {
-			return false;
-		}
+    /**
+     * Add an Email Log Loadie.
+     * The `load()` method of the Loadies will be called when Email Log is loaded.
+     *
+     * @param \EmailLog\Core\Loadie $loadie Loadie to be loaded.
+     *
+     * @return bool False if Email Log is already loaded or if $loadie is not of `Loadie` type. True otherwise.
+     */
+    public function add_loadie($loadie, $loadie_init = false)
+    {
+        if ($this->loaded) {
+            return false;
+        }
 
-		if ( ! $loadie instanceof Loadie ) {
-			return false;
-		}
-		
-        if($loadie_init === true){
+        if (! $loadie instanceof Loadie) {
+            return false;
+        }
+
+        if ($loadie_init === true) {
             $this->loadies_init[] = $loadie;
         } else {
             $this->loadies[] = $loadie;
         }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Load the plugin.
-	 */
-	public function load() {
-		if ( $this->loaded ) {
-			return;
-		}
+    /**
+     * Load the plugin.
+     */
+    public function load()
+    {
+        if ($this->loaded) {
+            return;
+        }
 
-		load_plugin_textdomain( 'email-log', false, $this->translations_path );
+        load_plugin_textdomain('email-log', false, $this->translations_path);
 
-		$this->table_manager->load();
+        $this->table_manager->load();
 
-		foreach ( $this->loadies as $loadie ) {
+        foreach ($this->loadies as $loadie) {
             $loadie->load();
-		}
+        }
 
-        foreach ( $this->loadies_init as $loadie_init ) {
+        foreach ($this->loadies_init as $loadie_init) {
             add_action('init', array($loadie_init, 'load'));
+        }
+
+        $this->loaded = true;
+
+        $options = get_option('email-log-core');
+
+        /**
+         * Email Log plugin loaded.
+         *
+         * @since 2.0
+         */
+        do_action('el_loaded');
+
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+        add_action('admin_action_emaillog_install_wp301', array($this, 'install_wp301'));
+    }
+
+    function admin_enqueue_scripts()
+    {
+        $js_localize = array(
+            'undocumented_error' => __('An undocumented error has occurred. Please refresh the page and try again.', 'email-log'),
+            'documented_error' => __('An error has occurred.', 'email-log'),
+            'plugin_name' => 'Email Log PRO',
+            'url' => EMAIL_LOG_URL,
+            'icon_url' => EMAIL_LOG_URI . 'assets/img/loader-icon.png',
+            'settings_url' => admin_url('admin.php?page=email-log'),
+            'is_plugin_page' => $this->is_plugin_page(),
+            'home_url' => get_home_url(),
+            'loading_icon_url' => EMAIL_LOG_URI . 'assets/img/loading-icon.png',
+            'email_test_url' => EMAIL_LOG_URI . 'assets/img/emaillog-test.gif',
+            'el_nonce' => wp_create_nonce('el-email-test'),
+            'wp301_install_url' => add_query_arg(array('action' => 'emaillog_install_wp301', '_wpnonce' => wp_create_nonce('install_wp301'), 'rnd' => wp_rand()), admin_url('admin.php')),
+        );
+
+        if ($this->is_plugin_page()) {
+            wp_enqueue_style('wp-jquery-ui-dialog');
+
+            wp_enqueue_script('jquery-ui-position');
+            wp_enqueue_script("jquery-effects-core");
+            wp_enqueue_script("jquery-effects-blind");
+            wp_enqueue_script('jquery-ui-accordion');
+            wp_enqueue_script('jquery-ui-dialog');
+
+            wp_enqueue_script('email-log', EMAIL_LOG_URL . 'assets/js/email-log-admin.js', array('jquery'), $this->get_version(), true);
+            wp_enqueue_style('email-log', EMAIL_LOG_URL . 'assets/css/email-log-admin.css', array(), $this->get_version());
+            wp_localize_script('email-log', 'wp_email_log', $js_localize);
+        }
+    }
+
+    // auto download / install / activate WP 301 Redirects plugin
+    public function install_wp301()
+    {
+        check_ajax_referer('install_wp301');
+
+        if (false === current_user_can('manage_options')) {
+            wp_die('Sorry, you have to be an admin to run this action.');
+        }
+
+        $plugin_slug = 'eps-301-redirects/eps-301-redirects.php';
+        $plugin_zip = 'https://downloads.wordpress.org/plugin/eps-301-redirects.latest-stable.zip';
+
+        @include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        @include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        @include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        @include_once ABSPATH . 'wp-admin/includes/file.php';
+        @include_once ABSPATH . 'wp-admin/includes/misc.php';
+        echo '<style>
+		body{
+			font-family: sans-serif;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #444;
 		}
+		</style>';
 
-		$this->loaded = true;
+        echo '<div style="margin: 20px; color:#444;">';
+        echo 'If things are not done in a minute <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term')) . '">install the plugin manually via Plugins page</a><br><br>';
+        echo 'Starting ...<br><br>';
 
-		/**
-		 * Email Log plugin loaded.
-		 *
-		 * @since 2.0
-		 */
-		do_action( 'el_loaded' );
-	}
+        wp_cache_flush();
+        $upgrader = new \Plugin_Upgrader();
+        echo 'Check if WP 301 Redirects is already installed ... <br />';
+        if ($this->is_plugin_installed($plugin_slug)) {
+            echo 'WP 301 Redirects is already installed! <br /><br />Making sure it\'s the latest version.<br />';
+            $upgrader->upgrade($plugin_slug);
+            $installed = true;
+        } else {
+            echo 'Installing WP 301 Redirects.<br />';
+            $installed = $upgrader->install($plugin_zip);
+        }
+        wp_cache_flush();
 
-	/**
-	 * Plugin API has been overridden.
-	 *
-	 * @since 2.4.5
-	 */
-	public function plugin_api_overridden() {
-		$this->plugins_api_overridden = true;
-	}
+        if (!is_wp_error($installed) && $installed) {
+            echo 'Activating WP 301 Redirects.<br />';
+            $activate = activate_plugin($plugin_slug);
 
-	/**
-	 * Has the plugin API have been overridden?
-	 *
-	 * @since 2.4.5
-	 *
-	 * @return bool True if overridden, False otherwise.
-	 */
-	public function is_plugin_api_overridden() {
-		return $this->plugins_api_overridden;
-	}
+            if (is_null($activate)) {
+                echo 'WP 301 Redirects Activated.<br />';
 
-	/**
-	 * Return Email Log version.
-	 *
-	 * @return string Email Log Version.
-	 */
-	public function get_version() {
-		return self::VERSION;
-	}
+                echo '<script>setTimeout(function() { top.location = "' . esc_url(admin_url('options-general.php?page=eps_redirects')) . '"; }, 1000);</script>';
+                echo '<br>If you are not redirected in a few seconds - <a href="' . esc_url(admin_url('options-general.php?page=eps_redirects')) . '" target="_parent">click here</a>.';
+            }
+        } else {
+            echo 'Could not install WP 301 Redirects. You\'ll have to <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term')) . '">download and install manually</a>.';
+        }
 
-	/**
-	 * Return the Email Log plugin directory path.
-	 *
-	 * @return string Plugin directory path.
-	 */
-	public function get_plugin_path() {
-		return plugin_dir_path( $this->plugin_file );
-	}
+        echo '</div>';
+    } // install_wp301
 
-	/**
-	 * Return the Email Log plugin file.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return string Plugin directory path.
-	 */
-	public function get_plugin_file() {
-		return $this->plugin_file;
-	}
+    /**
+     * Check if given plugin is installed
+     *
+     * @param [string] $slug Plugin slug
+     * @return boolean
+     */
+    static function is_plugin_installed($slug)
+    {
+        if (!function_exists('get_plugins')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        $all_plugins = get_plugins();
 
-	/**
-	 * Get Email Log Store URL.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return string Store URL
-	 */
-	public function get_store_url() {
-		return self::STORE_URL;
-	}
+        if (!empty($all_plugins[$slug])) {
+            return true;
+        } else {
+            return false;
+        }
+    } // is_plugin_installed
+
+    public function is_plugin_page()
+    {
+        if (!function_exists('get_current_screen')) {
+            return false;
+        }
+
+        $current_screen = get_current_screen();
+        if (!empty($current_screen) && in_array($current_screen->id, array('toplevel_page_email-log', 'toplevel_page_email-log-license', 'email-log_page_email-log-settings', 'email-log_page_email-log-license', 'email-log_page_email-log-monitor'))) {
+            return true;
+        } else {
+            return false;
+        }
+    } // is_plugin_page
+
+    /**
+     * Plugin API has been overridden.
+     *
+     * @since 2.4.5
+     */
+    public function plugin_api_overridden()
+    {
+        $this->plugins_api_overridden = true;
+    }
+
+    /**
+     * Has the plugin API have been overridden?
+     *
+     * @since 2.4.5
+     *
+     * @return bool True if overridden, False otherwise.
+     */
+    public function is_plugin_api_overridden()
+    {
+        return $this->plugins_api_overridden;
+    }
+
+    /**
+     * Return Email Log version.
+     *
+     * @return string Email Log Version.
+     */
+    public function get_version()
+    {
+        return email_log_plugin_version();
+    }
+
+    /**
+     * Return the Email Log plugin directory path.
+     *
+     * @return string Plugin directory path.
+     */
+    public function get_plugin_path()
+    {
+        return plugin_dir_path($this->plugin_file);
+    }
+
+    /**
+     * Return the Email Log plugin file.
+     *
+     * @since 2.0.0
+     *
+     * @return string Plugin directory path.
+     */
+    public function get_plugin_file()
+    {
+        return $this->plugin_file;
+    }
 
     public static function wp_kses_wf($html)
     {
@@ -472,7 +588,11 @@ class EmailLog {
             'style' => true
         );
 
-        echo wp_kses($html, $allowed_tags);
+        if(empty($html)){
+            echo '';
+        } else {
+            echo wp_kses($html, $allowed_tags);
+        }
 
         add_filter('safe_style_css', function ($styles) {
             $styles_wf = array(

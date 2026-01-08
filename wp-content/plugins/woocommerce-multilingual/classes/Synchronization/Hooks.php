@@ -161,8 +161,8 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 			return;
 		}
 		$variationLanguageDetails = $this->sitepress->get_element_language_details( $variationId, 'post_product_variation' );
-		if ( ! $variationLanguageDetails ) {
-			$this->sitepress->set_element_language_details( $variationId, 'post_product_variation', false, $productLanguage );
+		if ( ! is_object( $variationLanguageDetails ) ) {
+			$this->sitepress->set_element_language_details( $variationId, 'post_product_variation', null, $productLanguage );
 		}
 	}
 
@@ -189,13 +189,13 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 			return;
 		}
 
-		if ( isset( $_POST['wp-preview'] ) && ! empty( $_POST['wp-preview'] ) ) {
+		if ( ! empty( $_POST['wp-preview'] ) ) {
 			return;
 		}
 
 		$postId = apply_filters( 'wpml_object_id', $postId, 'product', false, $currentLanguage );
 
-		$this->manager->run( $originalProduct, [ $postId ], [ $postId => $currentLanguage ] );;			
+		$this->manager->run( $originalProduct, [ $postId ], [ $postId => $currentLanguage ] );
 	}
 
 	/**

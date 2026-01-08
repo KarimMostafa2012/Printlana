@@ -2,7 +2,9 @@
 
 namespace SW_WAPF_PRO\Includes\Models {
 
-        class FieldGroup
+    use SW_WAPF_PRO\Includes\Classes\Config;
+
+    class FieldGroup
     {
         public $id;
 
@@ -28,7 +30,19 @@ namespace SW_WAPF_PRO\Includes\Models {
 
                     }
 
-        public function from_array($a): FieldGroup
+        public function __clone() {
+
+            foreach ( $this->rules_groups as $i => $group ) {
+                $this->rules_groups[$i] = clone $group;
+            }
+
+            foreach ( $this->fields as $i => $field ) {
+                $this->fields[$i] = clone $field;
+            }
+
+                    }
+
+        public function from_array( $a ): FieldGroup
         {
 
 			$this->id = $a['id'];
@@ -48,9 +62,14 @@ namespace SW_WAPF_PRO\Includes\Models {
 				$this->rules_groups[] = $rulegroup;
 			}
 
-			foreach($a['fields'] as $f) {
+            $all_field_definitions = Config::get_field_definitions();
+
+            			foreach( $a['fields'] as $f ) {
 				$field = new Field();
-				$this->fields[] = $field->from_array($f);
+				$this->fields[] = $field->from_array( $f, false );
+
+                $the_type = $field->type . ( $field->subtype ? ( '-' . $field->subtype ) : '' );
+                $field->meta = $all_field_definitions[ $the_type ] ?? false;
 			}
 
 			return $this;

@@ -3,6 +3,7 @@
 namespace SW_WAPF_PRO\Includes\Classes {
 
 
+    use ParagonIE\Sodium\Core\Curve25519\Ge\P1p1;
     use SW_WAPF_PRO\Includes\Models\Field;
 	use SW_WAPF_PRO\Includes\Models\FieldGroup;
 
@@ -51,9 +52,13 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
         }
 
-        public static function get_raw_field_value_from_request(Field $for_field, $clone_index = 0, $return_null = false) {
+        public static function get_raw_field_value_from_request( Field $for_field, $clone_index = 0, $return_null = false ) {
 
         	$field_name = 'field_' . $for_field->id . ( $clone_index > 0 ? ( '_clone_' . $clone_index ) : '' );
+
+            if( $for_field->type === 'calc' ) {
+                $field_name = $field_name . '_raw';
+            }
 
             if( $for_field->type === 'file' && ! File_Upload::is_ajax_upload() ) { 
 
@@ -291,56 +296,60 @@ namespace SW_WAPF_PRO\Includes\Classes {
 	            	return $is_qty_based_field ? (float)$v : (float) $v/$qty;
 	            case 'charq': return mb_strlen($val) * $amount; 
 	            case 'fx':
-		            $field_groups = Field_Groups::get_by_ids($field_group_ids);
-		            $variables = Enumerable::from($field_groups)->merge(function($x){return $x->variables;})->toArray();
 
-		            		            $math = Helper::replace_in_formula( $amount, $qty, $base_price_formulas, $val, $options_total, $cart_item_fields, $product_id, $clone_idx );
+                    		            $field_groups   = Field_Groups::get_by_ids($field_group_ids);
+		            $variables      = Enumerable::from($field_groups)->merge(function($x){return $x->variables;})->toArray();
+		            $math           = Helper::replace_in_formula( $amount, $qty, $base_price_formulas, $val, $options_total, $cart_item_fields, $product_id, $clone_idx );
 
-
-		            	            	if( ! empty( $variables ) ) {
-			            $fields = Enumerable::from($field_groups)->merge( function( $x ) { return $x->fields; } )->toArray();
-			            $math = Helper::evaluate_variables( $math, $fields, $variables, $product_id, $clone_idx, $base_price_formulas, $val, $qty, $options_total, $cart_item_fields );
+	            	if( ! empty( $variables ) ) {
+			            $fields     = Enumerable::from($field_groups)->merge( function( $x ) { return $x->fields; } )->toArray();
+			            $math       = Helper::evaluate_variables( $math, $fields, $variables, $product_id, $clone_idx, $base_price_formulas, $val, $qty, $options_total, $cart_item_fields );
 		            }
 
-	            	$x = Helper::parse_math_string( $math, $cart_item_fields, true, [ 'product_id' => $product_id ] );
+	            	$x = Helper::parse_math_string( $math, $cart_item_fields, true, [ 'product_id' => $product_id, 'clone_index' => $clone_idx ] );
 
-		            return (float) ( $is_qty_based_field ? $x : ($x/$qty) );
+		            return (float) ( $is_qty_based_field ? $x : ( $x/$qty ) );
                 default: 
                     return $is_qty_based_field ? (float) $amount : (float) $amount/$qty;
             }
         }
 
-        public static function should_field_be_filled_out(FieldGroup $group, Field $field, $product_id, $clone_index = 0): bool {
+        public static function should_field_be_filled_out( FieldGroup $group, Field $field, $product_id, $clone_index = 0 ): bool {
 
-        	if(!$field->has_conditionals())
-        		return true;
+        	if( ! $field->has_conditionals() ) {
+                return true;
+            }
 
-			foreach ($field->conditionals as $conditional) {
-				if(self::validate_rules($group, $conditional->rules, $product_id, $clone_index)) 
-					return true;
+			foreach ( $field->conditionals as $conditional ) {
+				if( self::validate_rules( $group, $conditional->rules, $product_id, $clone_index ) ) {
+                    return true;
+                }
 			}
 
 			return false;
 
         }
 
-        public static function validate_rules(FieldGroup $group, $rules, $product_id, $clone_index = 0): bool {
+        public static function validate_rules( FieldGroup $group, $rules, $product_id, $clone_index = 0 ): bool {
 
-	       foreach ($rules as $rule) {
+	       foreach ( $rules as $rule ) {
 
-	       	    if(!self::is_valid_rule($group->fields,$rule->field,$rule->condition,$rule->value,$product_id,null,$clone_index))
-			       return false;
+                	       	    if( ! self::is_valid_rule( $group->fields, $rule->field, $rule->condition, $rule->value, $product_id, null, $clone_index ) ) {
+                    return false;
+                }
 
 	       }
 
 	       return true;
-        }
+
+                   }
 
         public static function is_valid_rule( $fields, $subject, $condition, $rule_value, $product_id, $cart_fields = null, $clone_index = 0, $qty = 1 ): bool {
 
-	        if($subject === 'qty')
-		        $value = $qty;
-	        else {
+            	        if( $subject === 'qty' ) {
+                $value = $qty;
+            } else {
+
 		        $field = Enumerable::from( $fields )->firstOrDefault( function ( $x ) use ( $subject ) {
 			        return $x->id === $subject;
 		        } );
@@ -348,35 +357,38 @@ namespace SW_WAPF_PRO\Includes\Classes {
 		        if ( ! $field ) {
 			        return false;
 		        }
+
 		        if ( strpos( $condition, 'product_var' ) !== false ) {
 			        if ( $condition === 'product_var' )
 				        return in_array( $product_id, explode( ',', $rule_value ) );
 			        else
 				        return ! in_array( $product_id, explode( ',', $rule_value ) );
 		        }
-		        if(strpos($condition,'patts') !== false) {
-		        	$product = wc_get_product($product_id);
+
+		        if( strpos($condition,'patts') !== false ) {
+		        	$product = wc_get_product( $product_id );
 
 		        	if($condition === 'patts')
 						return Conditions::product_has_attribute_values($product,explode(',',$rule_value),true);
 		        	else return !Conditions::product_has_attribute_values($product,explode(',',$rule_value),true);
 		        }
 
-		        if(!empty($cart_fields)) {
+		        if( ! empty( $cart_fields ) ) {
 			        $value = Enumerable::from( $cart_fields )->firstOrDefault( function ( $x ) use ( $subject ) {
 				        return $x['id'] === $subject;
 			        } );
 			        if($value != null)
 			        	$value = $value['raw'];
-		        }
+
+                    		        }
 		        else
 		        	$value = Fields::get_raw_field_value_from_request( $field, $clone_index, true );
 
-                if ($value === null ) {
+                                if ( $value === null ) {
 			        return false;
 		        }
 
-				if($field->type === 'date' && $rule_value) {
+				if( $field->type === 'date' && $rule_value ) {
 					if($value) {
 						$date_format = get_option( 'wapf_date_format', 'mm-dd-yyyy' );
 						$value       = \DateTime::createFromFormat( Helper::date_format_to_php_format( $date_format ), $value )->setTime( 0, 0 );
@@ -384,9 +396,9 @@ namespace SW_WAPF_PRO\Includes\Classes {
 					$rule_value = \DateTime::createFromFormat('m-d-Y',$rule_value)->setTime(0,0);
 				}
 
-	        }
+                        }
 
-	        switch($condition) {
+	        switch( $condition ) {
 		        case "check"        : return $value === '1';
 		        case "!check"       : return $value === '0';
 		        case '=='           : return $rule_value instanceof \DateTime ? $value && $value == $rule_value : in_array($rule_value, (array) $value);

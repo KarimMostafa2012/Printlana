@@ -86,10 +86,9 @@ class WCML_Menus_Wrap extends WCML_Menu_Wrap_Base {
 				break;
 
 			case AdminPages::TAB_MULTILINGUAL:
-				$wcml_products_ui = new WCML_Multilingual_UI( $this->woocommerce_wpml, $this->sitepress );
+				$wcml_products_ui = new WCML_Multilingual_UI();
 
 				return $wcml_products_ui->get_view();
-				break;
 
 			case AdminPages::TAB_MULTICURRENCY:
 				if ( current_user_can( 'wpml_operate_woocommerce_multilingual' ) ) {

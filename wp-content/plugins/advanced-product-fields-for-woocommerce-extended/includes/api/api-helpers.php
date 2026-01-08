@@ -31,10 +31,17 @@ function wapf_add_formula_function( $func, $callback ) {
     \SW_WAPF_PRO\Includes\Classes\Helper::add_formula_function( $func, $callback );
 }
 
-function wapf_display_field_groups_for_product($product) {
-	$field_groups = wapf_get_field_groups_of_product( $product );
-	return \SW_WAPF_PRO\Includes\Classes\Html::display_field_groups( $field_groups, $product );
-}
+function wapf_display_field_groups_for_product( $product ) {
+
+	    $field_groups = wapf_get_field_groups_of_product( $product );
+
+        if( empty( $field_groups ) ) {
+        return '';
+    }
+
+    	return \SW_WAPF_PRO\Includes\Classes\Html::display_field_groups( $field_groups, $product );
+
+    }
 
 function wapf_product_has_options( $product ) {
 	return Field_Groups::product_has_field_group( $product );

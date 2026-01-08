@@ -164,7 +164,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_REST_Action {
 				$group       = self::getTopLevelGroup();
 				$group['pa'] = 'Attributes';
 
-				$extradata = isset( $field['extradata'] ) ? $field['extradata'] : [];
+				$extradata = $field['extradata'] ?? [];
 
 				$extradata['unit']     = $title;
 				$extradata['group']    = implode( '/', array_values( $group ) );

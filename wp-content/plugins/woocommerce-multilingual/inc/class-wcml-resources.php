@@ -3,7 +3,6 @@
 use function WCML\functions\isStandAlone;
 use WCML\Utilities\AdminPages;
 use WCML\Utilities\AdminUrl;
-use WPML\API\Sanitize;
 use WPML\FP\Relation;
 
 class WCML_Resources {
@@ -23,8 +22,8 @@ class WCML_Resources {
 	}
 
 	/**
-	 * @param woocommerce_wpml $woocommerce_wpml
-	 * @param SitePress        $sitepress
+	 * @param woocommerce_wpml      $woocommerce_wpml
+	 * @param SitePress $sitepress
 	 */
 	public static function set_up_resources( $woocommerce_wpml, $sitepress ) {
 		global $pagenow;
@@ -52,10 +51,10 @@ class WCML_Resources {
 			if ( $is_edit_product ) {
 				$is_using_native_editor = WPML_TM_Post_Edit_TM_Editor_Mode::is_using_tm_editor( self::$sitepress, filter_var( $_GET['post'], FILTER_SANITIZE_NUMBER_INT ) );
 			} else {
-				$is_using_native_editor = isset( $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ]['product'] ) ? $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ]['product'] : false;
+				$is_using_native_editor = $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ]['product'] ?? false;
 
 				if ( ! $is_using_native_editor ) {
-					$is_using_native_editor = isset( $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_GLOBAL_USE_NATIVE ] ) ? $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_GLOBAL_USE_NATIVE ] : false;
+					$is_using_native_editor = $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_GLOBAL_USE_NATIVE ] ?? false;
 				}
 			}
 		}
@@ -167,7 +166,7 @@ class WCML_Resources {
 		wp_register_script( 'wcml-messages', WCML_PLUGIN_URL . '/res/js/wcml-messages' . WCML_JS_MIN . '.js', [ 'jquery' ], WCML_VERSION, true );
 		wp_enqueue_script( 'wcml-messages' );
 
-		$is_attr_page = apply_filters( 'wcml_is_attributes_page', AdminPages::isPage( 'product_attributes' ) && Relation::propEq( 'post_type', 'product', $_GET ) );
+		$is_attr_page = apply_filters( 'wcml_is_attributes_page', AdminPages::isWcProductAttributesPage() );
 
 		if ( $is_attr_page ) {
 			wp_register_script( 'wcml-attributes', WCML_PLUGIN_URL . '/res/js/wcml-attributes' . WCML_JS_MIN . '.js', [ 'jquery' ], WCML_VERSION, true );
@@ -205,7 +204,7 @@ class WCML_Resources {
 
 		if ( self::$pagenow !== 'wp-login.php' ) {
 
-			$referer = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
+			$referer = $_SERVER['HTTP_REFERER'] ?? '';
 
 			wcml_register_script( 'cart-widget', 'res/js/cart_widget' . WCML_JS_MIN . '.js', [], [ 'strategy' => 'defer', 'in_footer' => true ] );
 			wp_enqueue_script( 'cart-widget' );
@@ -227,9 +226,16 @@ class WCML_Resources {
 			// After self::admin_scripts() at admin_enqueue_scripts:10
 			// After WC_Admin_Assets::admin_scripts at admin_enqueue_scripts:10
 			add_action( 'admin_enqueue_scripts', function() {
-				if ( wp_script_is( 'jquery-tiptip', 'registered' ) ) {
+				$jQueryTipTipHandler = 'wc-jquery-tiptip';
+
+				/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
+				if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '10.3', '<' ) ) {
+					$jQueryTipTipHandler = 'jquery-tiptip';
+				}
+
+				if ( wp_script_is( $jQueryTipTipHandler, 'registered' ) ) {
 					wp_register_script( 'wcml-tooltip-init', WCML_PLUGIN_URL . '/res/js/tooltip_init' . WCML_JS_MIN . '.js', [ 'jquery' ], WCML_VERSION, true );
-					wp_enqueue_script( 'jquery-tiptip' );
+					wp_enqueue_script( $jQueryTipTipHandler );
 					wp_enqueue_script( 'wcml-tooltip-init' );
 				}
 				if ( wp_style_is( 'woocommerce_admin_styles', 'registered') ) {
@@ -294,8 +300,6 @@ class WCML_Resources {
 		if ( ! isset( $_GET['lang'], $original_id ) ) {
 			return;
 		}
-
-		$language = Sanitize::stringProp( 'lang', $_GET );
 
 		echo '<h3 class="wcml_prod_hidden_notice">' .
 			sprintf(

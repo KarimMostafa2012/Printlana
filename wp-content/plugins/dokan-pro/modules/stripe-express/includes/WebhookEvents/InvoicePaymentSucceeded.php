@@ -130,22 +130,22 @@ class InvoicePaymentSucceeded extends WebhookEvent {
                 $interval_period     = $stripe_subscription->plan->interval ?? '';
 
                 // Check if transaction already recorded
-                add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', [ $this, 'handle_custom_query_var' ], 10, 2 );
-
-                $query  = new \WC_Order_Query(
+                $orders = wc_get_orders(
                     [
-                        'search_transaction' => $invoice->id,
-                        'customer_id'        => $order->get_customer_id(),
-                        'limit'              => 1,
-                        'type'               => 'shop_order',
-                        'orderby'            => 'date',
-                        'order'              => 'DESC',
-                        'return'             => 'ids',
+                        'customer_id' => $order->get_customer_id(),
+                        'limit'       => 1,
+                        'orderby'     => 'date',
+                        'order'       => 'DESC',
+                        'return'      => 'ids',
+                        'meta_query'  => [
+                            [
+                                'key'     => OrderMeta::payment_capture_id_key(),
+                                'value'   => $invoice->id,
+                                'compare' => '=',
+                            ],
+                        ],
                     ]
                 );
-                $orders = $query->get_orders();
-
-                remove_filter( 'woocommerce_order_data_store_cpt_get_orders_query', [ $this, 'handle_custom_query_var' ], 10 );
 
                 // Transaction is already recorded.
                 if ( ! empty( $orders ) ) {
@@ -218,27 +218,6 @@ class InvoicePaymentSucceeded extends WebhookEvent {
         }
     }
 
-    /**
-     * Modifies query params according to need.
-     *
-     * @since 3.7.8
-     *
-     * @param array $query
-     * @param array $query_vars
-     *
-     * @return array
-     */
-    public function handle_custom_query_var( $query, $query_vars ) {
-        if ( ! empty( $query_vars['search_transaction'] ) ) {
-            $query['meta_query'][] = [
-                'key'     => OrderMeta::payment_capture_id_key(),
-                'value'   => $query_vars['search_transaction'],
-                'compare' => '=',
-            ];
-        }
-
-        return $query;
-    }
     /**
      * Retrieve the Subscription ID from a Stripe Invoice object.
      *

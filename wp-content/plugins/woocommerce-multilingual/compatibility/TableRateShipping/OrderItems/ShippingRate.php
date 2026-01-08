@@ -51,7 +51,7 @@ class ShippingRate implements Translator {
 		}
 
 		$shippingTitle      = $item->get_method_title();
-		$shippingInstanceId = $item->get_instance_id();
+		$shippingInstanceId = (int) $item->get_instance_id();
 		$ratesPerInstance   = \WooCommerce\Shipping\Table_Rate\Helpers::get_shipping_rates( $shippingInstanceId, ARRAY_A );
 		if ( ! is_array( $ratesPerInstance ) || empty( $ratesPerInstance ) ) {
 			return;

@@ -6,6 +6,25 @@
         // $('#select#wcmmq_term_ids').select2();
         $('select#wcmmq_supported_terms').select2();
         
+
+        $(document).on('click', '.wcmmq-offer-notice .notice-dismiss', function () {
+
+            //For Coupon ajax
+            var wrap = $(this).closest('.wcmmq-offer-notice');
+            var coupon_ajax_url = wrap.data('coupon_ajax_url');
+            var coupon = wrap.data('coupon');
+            var nonce = wrap.data('nonce');
+            var action = wrap.data('action');
+
+            $.post(coupon_ajax_url, {
+                action: action,
+                coupon: coupon,
+                nonce: nonce
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+
         /**
          * Support terms -> on after change,
          * form will be submit

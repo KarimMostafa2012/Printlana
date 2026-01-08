@@ -14,14 +14,14 @@ namespace SW_WAPF_PRO\Includes\Classes {
         private $name        = '';
         private $key         = '';
         private $exp         = '';
-        private $cached_plugin_update = null;
+        private $cached_plugin_update = null;   
 
         public function __construct( ) {
 
-            $this->api_url     = 'https://api.studiowombat.com/';
-            $this->slug        = wapf_get_setting('slug');
-            $this->version     = wapf_get_setting('version');
-            $this->name        = wapf_get_setting('basename');
+            $this->api_url  = 'https://api.studiowombat.com/';
+            $this->slug     = wapf_get_setting('slug');
+            $this->version  = wapf_get_setting('version');
+            $this->name     = wapf_get_setting('basename');
 
 	        add_filter( 'pre_set_site_transient_update_plugins', [$this, 'check_update'] );
 	        add_filter( 'plugins_api', [$this, 'plugins_api_filter'], 10, 3 );
@@ -33,7 +33,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
         public function in_plugin_update_message($args, $response) {
 	        if($this->get_key() === false || empty( $response->package ))
-		        echo  '<br/>' . __('Updates are disabled because your license key is expired. To enable updates, please renew your license key.', 'sw-wapf');
+		        echo  '<br/>' . __( 'Updates are disabled because your license key is expired. To enable updates, please renew your license key.', 'sw-wapf' );
 	        if(!empty($response->upgrade_notice))
 		        echo '<div style="padding:12px 0;border-top:1px solid #ffb900;"><strong>Upgrade warning! </strong>' . wp_kses_post($response->upgrade_notice) . '</div><p style="display: none">';
         }
@@ -54,7 +54,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
         }
 
         public function activate_license() {
-            $key = $_POST['wapf_license'];
+            $key = sanitize_text_field( $_POST['wapf_license'] );
 
             $result = $this->api_request('license/activate',[ 'key' => $key ] );
 
@@ -120,9 +120,17 @@ namespace SW_WAPF_PRO\Includes\Classes {
 	        if(empty($this->exp))
 		        return $_transient_data;
 
+            $last_check = (int) get_option( 'wapf_last_update_check', 0 );
+
+                        if ( time() - $last_check < 300 && ! $this->wp_override ) { 
+                return $_transient_data;
+            }
+
+                        update_option('wapf_last_update_check', time());
+
 	        $exp = DateTime::createFromFormat("Y-m-d H:i:s",$this->exp);
 	        $now = new DateTime('now');
-	        $exp = $exp->add(new DateInterval('P3M'));
+	        $exp = $exp->add(new DateInterval('P4M'));
 	        if($exp < $now) return $_transient_data;
 
 	        if($this->cached_plugin_update != null)
@@ -183,6 +191,21 @@ namespace SW_WAPF_PRO\Includes\Classes {
                 'action'        => $action
             ];
 
+                        if( $action === 'plugin/update' ) {
+
+                                $current_theme = wp_get_theme();
+
+                                $api_params['info'] = wp_json_encode( [
+                    'wp_version'    => $wp_version,
+                    'php_version'   => PHP_VERSION,
+                    'site_language' => get_locale(),
+                    'active_plugins'=> array_values( get_option( 'active_plugins', [] ) ),
+                    'wc_version'    => defined('WC_VERSION') ? WC_VERSION : '',
+                    'multisite'     => is_multisite(),
+                    'theme'         => [ 'name' => $current_theme->get('Name') ?? '', 'version' => $current_theme->get( 'Version' ) ?? '' ]
+                ] );
+            }
+
 	        $data = [
 		        'timeout' 	=> apply_filters('wapf/licensing/timeout', 5),
 		        'body'		=> array_merge($api_params, $api_data )
@@ -199,9 +222,9 @@ namespace SW_WAPF_PRO\Includes\Classes {
             {
                 $return = json_decode($request['body']);
 
-                if( $action === 'update' && is_object($return)) {
-		                $return->plugin = $this->name;
-		                $return->id = $this->name;
+                if( $action === 'plugin/update' && is_object($return)) {
+                    $return->plugin = $this->name;
+                    $return->id = $this->name;
                 }
 
             }
@@ -217,7 +240,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 			    if($raw === false) return false;
 
                 			    $raw = json_decode(base64_decode($raw));
-			    if(empty($raw) || !is_string($raw->key) || strlen($raw->key) < 20 || strpos($raw->key,'-') === false)
+			    if( empty($raw) || !is_string($raw->key) || strlen($raw->key) < 20 || strpos($raw->key,'-') === false)
 				    return false;
 
 			    $this->key = $raw->key;

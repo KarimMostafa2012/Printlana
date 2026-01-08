@@ -411,10 +411,10 @@ class WCML_Product_Bundles implements \IWPML_Action {
 	/**
 	 * @deprecated This method is used by CTE only.
 	 *
-	 * @param array      $data
-	 * @param string|int $bundle_id
-	 * @param object     $translation
-	 * @param string     $lang
+	 * @param array        $data
+	 * @param string|int   $bundle_id
+	 * @param object|mixed $translation
+	 * @param string       $lang
 	 *
 	 * @return mixed
 	 */
@@ -422,7 +422,7 @@ class WCML_Product_Bundles implements \IWPML_Action {
 
 		$bundle_data = $this->get_product_bundle_data( $bundle_id );
 
-		if ( $translation ) {
+		if ( is_object( $translation ) ) {
 			$translated_bundle_id   = $translation->ID;
 			$translated_bundle_data = $this->get_product_bundle_data( $translated_bundle_id );
 		}
@@ -589,14 +589,14 @@ class WCML_Product_Bundles implements \IWPML_Action {
 	 * @param callable   $get_field_translation (int, int, string) -> string
 	 * @param string     $target_lang
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	private function apply_translation( $bundle_id, $translated_bundle_id, callable $get_field_translation, $target_lang ) {
 		$bundle_data            = $this->get_product_bundle_data( $bundle_id );
 		$translated_bundle_data = $this->get_product_bundle_data( $translated_bundle_id );
 
 		if ( empty( $bundle_data ) ) {
-			return;
+			return null;
 		}
 
 		$translate_bundled_item_ids = $this->wpdb->get_col(
@@ -792,12 +792,14 @@ class WCML_Product_Bundles implements \IWPML_Action {
 	 * @param string                  $cart_item_key
 	 */
 	public function resync_bundle( $cart_item, $session_values, $cart_item_key ) {
+		/* @phpstan-ignore booleanAnd.alwaysFalse, isset.offset  */
 		if ( isset( $cart_item['bundled_items'] ) && $cart_item['data']->get_type() === 'bundle' ) {
 			$current_bundle_id = apply_filters( 'wpml_object_id', $cart_item['product_id'], 'product', true );
 			if ( $cart_item['product_id'] != $current_bundle_id ) {
 				if ( isset( $cart_item['data']->bundle_data ) && is_array( $cart_item['data']->bundle_data ) ) {
 					$old_bundled_item_ids = array_keys( $cart_item['data']->bundle_data );
 					$cart_item['data']    = wc_get_product( $current_bundle_id );
+					/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 					if ( isset( $cart_item['data']->bundle_data ) && is_array( $cart_item['data']->bundle_data ) ) {
 						$new_bundled_item_ids      = array_keys( $cart_item['data']->bundle_data );
 						$remapped_bundled_item_ids = [];
@@ -805,6 +807,7 @@ class WCML_Product_Bundles implements \IWPML_Action {
 							$remapped_bundled_item_ids[ $old_item_id ] = $new_bundled_item_ids[ $old_item_id_index ];
 						}
 						$cart_item['remapped_bundled_item_ids'] = $remapped_bundled_item_ids;
+						/* @phpstan-ignore isset.offset */
 						if ( isset( $cart_item['stamp'] ) ) {
 							$new_stamp = [];
 							foreach ( $cart_item['stamp'] as $bundled_item_id => $stamp_data ) {
@@ -816,16 +819,18 @@ class WCML_Product_Bundles implements \IWPML_Action {
 				}
 			}
 		}
+		/* @phpstan-ignore booleanAnd.alwaysFalse, isset.offset */
 		if ( isset( $cart_item['bundled_by'] ) && isset( WC()->cart->cart_contents[ $cart_item['bundled_by'] ] ) ) {
 			$bundle_cart_item = WC()->cart->cart_contents[ $cart_item['bundled_by'] ];
 			if (
 				isset( $bundle_cart_item['remapped_bundled_item_ids'] ) &&
+				/* @phpstan-ignore isset.offset */
 				isset( $cart_item['bundled_item_id'] ) &&
 				isset( $bundle_cart_item['remapped_bundled_item_ids'][ $cart_item['bundled_item_id'] ] )
 			) {
-				$old_id                       = $cart_item['bundled_item_id'];
 				$remapped_bundled_item_ids    = $bundle_cart_item['remapped_bundled_item_ids'];
 				$cart_item['bundled_item_id'] = $remapped_bundled_item_ids[ $cart_item['bundled_item_id'] ];
+				/* @phpstan-ignore isset.offset */
 				if ( isset( $cart_item['stamp'] ) ) {
 					$new_stamp = [];
 					foreach ( $cart_item['stamp'] as $bundled_item_id => $stamp_data ) {

@@ -17,6 +17,7 @@ class MulticurrencyHooks implements \IWPML_Action {
 	public function add_hooks() {
 		// Price filters.
 		if ( ! is_admin() ) {
+			/* @phpstan-ignore booleanAnd.leftAlwaysTrue */
 			if ( is_callable( [ 'WC_Name_Your_Price_Compatibility', 'is_nyp_gte' ] ) && WC_Name_Your_Price_Compatibility::is_nyp_gte( '3.0' ) ) {
 				add_filter( 'wc_nyp_raw_suggested_price', [ $this, 'product_price_filter' ] );
 				add_filter( 'wc_nyp_raw_minimum_price', [ $this, 'product_price_filter' ] );

@@ -13,7 +13,7 @@ class CoreSetting extends Setting {
 
 	protected function initialize() {
 		$this->section->id          = 'email-log-core';
-		$this->section->title       = __( 'Core Email Log Settings', 'email-log' );
+		$this->section->title       = __( 'Email Log Settings', 'email-log' );
 		$this->section->option_name = 'email-log-core';
 
 		$this->section->field_labels = array(
@@ -21,6 +21,14 @@ class CoreSetting extends Setting {
 			'remove_on_uninstall'   => __( 'Remove Data on Uninstall?', 'email-log' ),
 			'hide_dashboard_widget' => __( 'Disable Dashboard Widget', 'email-log' ),
 			'db_size_notification'  => __( 'Database Size Notification', 'email-log' ),
+            'email_monitor_title'   => '<h2>' . __( 'Email Monitor', 'email-log' ) . '</h2>',
+            'monitor_emails'        => __( 'Alert Email <a title="This feature is available in the PRO version. Click for details." href="#" data-feature="email-monitor" class="open-upsell pro-label">PRO</a>', 'email-log' ),
+            'delete_log'            => '<h2>' . __( 'Auto Delete Logs', 'email-log' ) . '</h2>',
+            'interval'              => __( 'Interval <a title="This feature is available in the PRO version. Click for details." href="#" data-feature="autodelete-interval" class="open-upsell pro-label">PRO</a>', 'email-log' ),
+            'forward_email'         => '<h2>' . __( 'Forward Emails Settings', 'email-log' ) . '</h2>',
+            'to'                    => __( 'To <a title="This feature is available in the PRO version. Click for details." href="#" data-feature="email-to" class="open-upsell pro-label">PRO</a>', 'email-log' ),
+			'cc'                    => __( 'CC <a title="This feature is available in the PRO version. Click for details." href="#" data-feature="email-cc" class="open-upsell pro-label">PRO</a>', 'email-log' ),
+			'bcc'                   => __( 'BCC <a title="This feature is available in the PRO version. Click for details." href="#" data-feature="email-bcc" class="open-upsell pro-label">PRO</a>', 'email-log' ),
 		);
 
 		$this->section->default_value = array(
@@ -34,6 +42,15 @@ class CoreSetting extends Setting {
 				'log_threshold_met'         => false,
 				'threshold_email_last_sent' => false,
 			),
+            'monitor_emails' => array(
+                'notify' => false,
+                'alert_email' => '',
+            ),
+            'delete_log' => false,
+            'interval' => 365,
+            'to'  => '',
+			'cc'  => '',
+			'bcc' => '',
 		);
 
 		$this->load();
@@ -53,6 +70,33 @@ class CoreSetting extends Setting {
 		add_action( 'el_email_log_inserted', array( $this, 'verify_email_log_threshold' ) );
 		add_action( 'el_trigger_notify_email_when_log_threshold_met', array( $this, 'trigger_threshold_met_notification_email' ) );
 	}
+
+    /**
+	 * Renders the Auto Delete Section Title
+	 *
+	 * @param array $args
+	 */
+	public function render_delete_log_settings() {
+        echo '';
+    }
+
+    /**
+	 * Renders the Forward Email Section Title
+	 *
+	 * @param array $args
+	 */
+	public function render_forward_email_settings() {
+        echo '';
+    }
+
+    /**
+	 * Renders the Email Monitor Section Title
+	 *
+	 * @param array $args
+	 */
+	public function render_email_monitor_title_settings() {
+        echo '';
+    }
 
 	/**
 	 * Renders the Email Log `Allowed User Roles` settings.
@@ -85,7 +129,7 @@ class CoreSetting extends Setting {
 		<p>
 			<em>
 				<?php \EmailLog\Core\EmailLog::wp_kses_wf(__( '<strong>Note:</strong> Users with the above User Roles can view Email Logs.', 'email-log' )); ?>
-				<?php \EmailLog\Core\EmailLog::wp_kses_wf(__( 'Administrator role always has access and cannot be disabled.', 'email-log' )); ?>
+				<?php esc_html_e( 'Administrator role always has access and cannot be disabled.', 'email-log' ); ?>
 			</em>
 		</p>
 
@@ -121,16 +165,6 @@ class CoreSetting extends Setting {
 
 		<input type="checkbox" name="<?php echo esc_attr( $field_name ); ?>" value="true" <?php checked( 'true', $remove_data ); ?>>
 		<?php esc_html_e( 'Check this box if you would like to completely remove all of its data when the plugin is deleted.', 'email-log' ) ?>
-
-		<p>
-			<em>
-				<?php 
-                /* translators: %s export logs link */
-                \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( '<strong>Note:</strong> You can also export the Email Logs using our <a href="%s" rel="noopener noreferrer" target="_blank">Export Logs</a> add-on.', 'email-log' ),
-					'https://wpemaillog.com/addons/export-logs/?utm_campaign=Upsell&utm_medium=wpadmin&utm_source=settings&utm_content=el')); ?>
-			</em>
-		</p>
-
 		<?php
 	}
 
@@ -217,9 +251,7 @@ class CoreSetting extends Setting {
 
 		<p>
 			<em>
-				<?php \EmailLog\Core\EmailLog::wp_kses_wf(
-					__( '<strong>Note:</strong> Each users can also disable dashboard widget using screen options', 'email-log' )
-				); ?>
+				<?php \EmailLog\Core\EmailLog::wp_kses_wf(__( '<strong>Note:</strong> Each users can also disable dashboard widget using screen options', 'email-log' )); ?>
 			</em>
 		</p>
 
@@ -256,19 +288,19 @@ class CoreSetting extends Setting {
 		?>
 
         <input type="checkbox" name="<?php echo esc_attr( $db_size_notification_field_name ); ?>" value="true" <?php
-		checked( true, $db_size_notification_data['notify'] ); ?> />
+		checked( true, $db_size_notification_data['notify'] ?? false ); ?> />
 		<?php
 		// The values within each field are already escaped.
-        /* translators: %1$s admin email, %2$s number of logs */
-		\EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( 'Notify %1$s if there are more than %2$s logs.', 'email-log' ),
+        /* translators: %1$s is the admin email input field html, %2$s number of logs input field */
+		\EmailLog\Core\EmailLog::wp_kses_wf(sprintf( __( 'Notify %1$s if there are more than %2$s logs.', 'email-log' ),
 			$admin_email_input_field,
 			$logs_threshold_input_field
 		));
 		?>
         <p>
             <em>
-				<?php 
-                /* translators: %1$s bold Note HTML, %2$s number of logs */
+				<?php
+                /* translators: %1$s is the HTML bold "Note:", %2$s number of logs */
                 \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( '%1$s There are %2$s email logs currently logged in the database.', 'email-log' ),
 					'<strong>Note:</strong>',
 					'<strong>' . esc_attr( $logs_count ) . '</strong>'
@@ -277,9 +309,9 @@ class CoreSetting extends Setting {
         </p>
 		<?php if ( ! empty( $db_size_notification_data['threshold_email_last_sent'] ) ) : ?>
             <p>
-				<?php 
-                    /* translators: %1$s date, %2$s Save button html */
-                    \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( 'Last notification email was sent on %1$s. Click %2$s button to reset sending the notification.', 'email-log' ),
+				<?php
+                /* translators: %1$s is the last notification date, %2$s is the HTML Save in bold */
+                \EmailLog\Core\EmailLog::wp_kses_wf(sprintf(__( 'Last notification email was sent on %1$s. Click %2$s button to reset sending the notification.', 'email-log' ),
 					'<strong>' . get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $db_size_notification_data['threshold_email_last_sent'] ), \EmailLog\Util\get_user_defined_date_time_format() ) . '</strong>',
 					'<b>Save</b>'
 				)); ?>
@@ -440,9 +472,12 @@ class CoreSetting extends Setting {
 		$this->register_threshold_met_admin_notice();
 
 		if ( $is_notification_enabled && is_email( $admin_email ) ) {
-            /* translators: %s numer of emails */
+            /* translators: %s is the number of log entries */
 			$subject = sprintf( __( 'Email Log Plugin: Your log threshold of %s has been met', 'email-log' ), $logs_threshold );
-			$message = '<p>This email is generated by the Email Log plugin.</p><p>Your log threshold of $logs_threshold has been met. You may manually delete the logs to keep your database table in size.</p><p>Also, consider using our <a href="https://wpemaillog.com/addons/auto-delete-logs/">Auto Delete Logs</a> plugin to delete the logs automatically.</p>';
+			$message = '<p>This email is generated by the Email Log plugin.</p>';
+            $message .= '<p>Your log threshold of $logs_threshold has been met. You may manually delete the logs to keep your database table in size.</p>';
+            $message .= '<p>Also, consider using our <a href="https://wpemaillog.com/addons/auto-delete-logs/">Auto Delete Logs</a> plugin to delete the logs automatically.</p>';
+
 			$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
 			/**
@@ -489,17 +524,133 @@ class CoreSetting extends Setting {
 	public function render_log_threshold_met_notice() {
 		$email_log      = email_log();
 		$logs_count     = absint( $email_log->table_manager->get_logs_count() );
-        /* translators: %1$s number of emails, %2$s settings page name, %3$s addon name */
-		$notice_message = sprintf( __( 'Currently there are %1$s logged, which is more than the threshold that is set in the %2$s screen. You can delete some logs or increase the threshold. You can also use our %3$s add-on to automatically delete logs', 'email-log' ),
+        /* translators: %1$s is the number of log entries, %2$s admin settings link, %2$s wpemaillog.com website link */
+		$notice_message = sprintf( __( 'Currently there are %1$s logged, which is more than the threshold that is set in the %2$s screen. You can delete some logs or increase the threshold. You can also use our %3$s PRO version to automatically delete logs', 'email-log' ),
 			$logs_count . _n( ' email log', ' email logs', $logs_count, 'email-log' ),
 			'<a href="' . esc_url( admin_url( 'admin.php?page=' . SettingsPage::PAGE_SLUG ) ) . '">settings</a> screen',
 			'<a href="' . esc_url( 'https://wpemaillog.com/addons/auto-delete-logs/' ) . '">Auto Delete Logs</a>'
 			 );
 		?>
         <div class="notice notice-warning is-dismissible">
-            <p><?php echo esc_html($notice_message); ?></p>
+            <p><?php \EmailLog\Core\EmailLog::wp_kses_wf($notice_message); ?></p>
         </div>
 		<?php
+	}
+
+    public function render_interval_settings( $args ) {
+		$option = $this->get_value();
+		?>
+        <p><?php esc_html_e( 'Auto Delete Logs allows you to automatically delete logs that are older than specified interval (in days).', 'email-log' ); ?></p>
+		<p><?php esc_html_e( 'Specify the interval beyond which the logs are to be auto deleted.', 'email-log' ); ?></p>
+        <label>
+            <input class="open-pro-dialog" name="<?php echo esc_attr( $this->section->option_name . '[' . $args['id'] . ']' ); ?>"
+                   size="40"
+                   type="text" value="365" disabled>
+        </label>
+        <br>
+        <em> <?php esc_html_e( 'Specify the interval in days.', 'email-log' ); ?> </em>
+		<?php
+			/**
+			 * After the Next Run setting is rendered in the Auto Delete Logs add-on.
+			 *
+			 * @since 1.1.1
+			 */
+			do_action( 'el_auto_delete_logs_after_next_run_setting' );
+		?>
+
+		<?php
+	}
+
+    public function render_monitor_emails_settings( $args ) {
+		$options = get_option( 'email-log-core' );
+        ?>
+        <p><?php esc_html_e( 'This service checks that your WordPress site is able to send emails reliably. Once enabled, the plugin will automatically send a daily "heartbeat" email to our monitoring server. If no heartbeat is received within 24 hours, an alert will be sent to the email address you provide below. This way you\'ll know right away if your site\'s emails stop working (for example, due to SMTP misconfiguration or server issues). You can also use the "Test email delivery" button at any time to confirm that emails are being delivered correctly.', 'email-log' ); ?></p>
+        <br />
+		<label>
+            <input data-feature="test-email" type="checkbox" class="open-upsell" name="<?php echo esc_attr( $this->section->option_name . '[' . $args['id'] . '][notify]' ); ?>" value="true" <?php
+		checked( true, false ); ?> /> Notify
+
+            <input name="<?php echo esc_attr( $this->section->option_name . '[' . $args['id'] . '][alerts_email]' ); ?>"
+                   size="40"
+                   type="email" class="open-upsell" data-feature="test-email" value="<?php echo esc_html(get_option('admin_email')); ?>" disabled>
+        </label>
+        <a class="button button-primary open-upsell" data-feature="test-email">Test email delivery now</a>
+        <br>
+
+        <p><em> <?php esc_html_e( 'Enter the email where you want to receive an alert if the monitor does not receive emails from your website.', 'email-log' ); ?> </em></p>
+		<?php
+	}
+
+	public function sanitize_interval( $value ) {
+		$value = absint( $value );
+
+		return 0 !== $value ? $value : 365;
+	}
+
+    /**
+	 * Render To field.
+	 *
+	 * @since  2.0.2
+	 *
+	 * @param array $args Args.
+	 */
+	public function render_to_settings( $args ) {
+		$this->render_email_field( $args );
+	}
+
+	/**
+	 * Render CC field.
+	 *
+	 * @since  2.0.2
+	 *
+	 * @param array $args Args.
+	 */
+	public function render_cc_settings( $args ) {
+		$this->render_email_field( $args );
+	}
+
+	/**
+	 * Render BCC field.
+	 *
+	 * @since  2.0.2
+	 *
+	 * @param array $args Args.
+	 */
+	public function render_bcc_settings( $args ) {
+		$this->render_email_field( $args );
+	}
+
+	/**
+	 * Render email field.
+	 *
+	 * @since 2.0.2 Protected method.
+	 *
+	 * @param array $args Args.
+	 */
+	protected function render_email_field( $args ) {
+		$option = $this->get_value();
+		?>
+        <label>
+            <input  class="open-pro-dialog" name="<?php echo esc_attr( $this->section->option_name . '[' . $args['id'] . ']' ); ?>" size="40"
+                   type="text" value="" disabled>
+        </label>
+        <br>
+        <em> <?php esc_html_e( 'You can enter multiple email address by separating them with comma.', 'email-log' ); ?> </em>
+		<?php
+	}
+
+	public function sanitize( $values ) {
+		if ( ! is_array( $values ) ) {
+			return array();
+		}
+
+		foreach ( $values as $key => $value ) {
+            if(in_array($key, array('to', 'cc', 'bcc'))){
+			    $values[ $key ] = \EmailLog\Util\sanitize_email( $value );
+            }
+		}
+
+		return $values;
 	}
 
 }

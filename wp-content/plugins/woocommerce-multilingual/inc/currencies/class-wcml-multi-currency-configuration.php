@@ -344,7 +344,7 @@ class WCML_Multi_Currency_Configuration {
 				$save = true;
 			}
 
-			if ( ! empty( self::$multi_currency ) ) {
+			if ( self::$multi_currency instanceof WCML_Multi_Currency ) {
 				foreach ( self::$multi_currency->get_currency_codes() as $code ) {
 					$new_key = $key . '_' . $code;
 					$iclTranslationManagement->settings['custom_fields_readonly_config'][] = $new_key;
@@ -376,7 +376,7 @@ class WCML_Multi_Currency_Configuration {
 		self::verify_nonce();
 		$data = self::get_data();
 
-		if ( isset( WC()->integrations ) ) {
+		if ( WC()->integrations instanceof WC_Integrations) {
 			$integrations = WC()->integrations->get_integrations();
 
 			if ( isset( $integrations['maxmind_geolocation'] ) ) {

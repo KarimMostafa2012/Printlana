@@ -20,7 +20,7 @@ class Factory extends ComponentFactory {
 	 */
 	public function create() {
 		return [
-			new \WCML_YIKES_Custom_Product_Tabs( getWooCommerceWpml(), getSitePress(), self::getElementTranslationPackage() ),
+			new \WCML_YIKES_Custom_Product_Tabs( getSitePress(), self::getElementTranslationPackage() ),
 			new JobHooks(),
 		];
 	}

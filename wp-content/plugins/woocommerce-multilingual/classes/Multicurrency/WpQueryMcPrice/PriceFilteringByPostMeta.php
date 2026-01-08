@@ -68,8 +68,7 @@ class PriceFilteringByPostMeta extends AbstractPriceByPostMeta implements \IWPML
 				$matchesQueryVars = [];
 				$this->searchAndRemoveMetaQueryPrice( $needle, $wp_query->query['meta_query'], $matchesQuery );
 				$this->searchAndRemoveMetaQueryPrice( $needle, $wp_query->query_vars['meta_query'], $matchesQueryVars );
-
-				// @phpstan-ignore-next-line
+				/* @phpstan-ignore property.notFound */
 				$wp_query->wcml_filter_price = $this->findMinMax( $matchesQuery );
 			} else {
 				$query = [];
@@ -84,7 +83,7 @@ class PriceFilteringByPostMeta extends AbstractPriceByPostMeta implements \IWPML
 					unset( $wp_query->query['max_price'] );
 					unset( $wp_query->query_vars['max_price'] );
 				}
-				// @phpstan-ignore-next-line
+				/* @phpstan-ignore property.notFound */
 				$wp_query->wcml_filter_price = $query;
 			}
 		}

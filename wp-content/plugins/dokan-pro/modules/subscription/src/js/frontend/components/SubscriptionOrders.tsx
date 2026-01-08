@@ -95,14 +95,13 @@ const SubscriptionOrders = ( { vendorId } ) => {
     const actions = [
         {
             id: 'order-pay',
-            label: '',
             isPrimary: true,
             isEligible: ( item ) => !! item.actions.pay,
             callback: ( orders ) => {
                 const order = orders[ 0 ];
                 window.open( decodeURL( order?.actions?.pay?.url ), '_blank' );
             },
-            icon: () => (
+            label: () => (
                 <span
                     className={ `px-2 bg-transparent font-medium text-dokan-link hover:text-dokan-link-hover  pr-4 text-sm` }
                 >
@@ -112,14 +111,13 @@ const SubscriptionOrders = ( { vendorId } ) => {
         },
         {
             id: 'order-view',
-            label: '',
             isPrimary: true,
             isEligible: ( item ) => !! item.actions.view,
             callback: ( orders ) => {
                 const order = orders[ 0 ];
                 window.open( decodeURL( order?.actions?.view?.url ), '_blank' );
             },
-            icon: () => (
+            label: () => (
                 <span
                     className={ `px-2 bg-transparent font-medium text-dokan-link hover:text-dokan-link-hover pr-r text-sm` }
                 >
@@ -129,10 +127,9 @@ const SubscriptionOrders = ( { vendorId } ) => {
         },
         {
             id: 'order-cancel',
-            label: '',
             isPrimary: true,
             isEligible: ( item ) => !! item.actions.cancel,
-            icon: () => {
+            label: () => {
                 return (
                     <span
                         className={ `px-2 bg-transparent font-medium text-dokan-danger hover:text-dokan-danger-hover text-sm` }
@@ -179,10 +176,9 @@ const SubscriptionOrders = ( { vendorId } ) => {
 
     // Data view default layout.
     const defaultLayouts = {
-        table: {},
+        table: { density: 'comfortable' },
         grid: {},
         list: {},
-        density: 'comfortable', // Use density pre-defined values: comfortable, compact, cozy
     };
 
     // View state for handle the table view.

@@ -21,16 +21,11 @@ class WCML_Currencies_Payment_Gateways {
 	/** @var woocommerce_wpml */
 	private $woocommerce_wpml;
 
-	/** @var WPML_WP_API */
-	private $wp_api;
-
 	/**
 	 * @param woocommerce_wpml $woocommerce_wpml
-	 * @param WPML_WP_API      $wp_api
 	 */
-	public function __construct( woocommerce_wpml $woocommerce_wpml, WPML_WP_API $wp_api ) {
+	public function __construct( woocommerce_wpml $woocommerce_wpml ) {
 		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->wp_api           = $wp_api;
 	}
 
 	public function add_hooks() {

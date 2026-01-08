@@ -3,8 +3,6 @@
 namespace WCML\Options;
 
 use WPML\Settings\PostType\Automatic;
-use WPML\Setup\Option;
-
 class WPML {
 
 	/**

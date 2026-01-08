@@ -6,6 +6,12 @@ namespace SW_WAPF_PRO\Includes\Models {
     {
         public $rules = [];
 
+        public function __clone() {
+            foreach ($this->rules as $i => $rule) {
+                $this->rules[$i] = clone $rule;
+            }
+        }
+
         public function get_variation_rules(): array {
 
                     	if( empty( $this->rules ) ) {
@@ -13,9 +19,10 @@ namespace SW_WAPF_PRO\Includes\Models {
             }
 
             return array_filter( $this->rules, function( $rule ) {
-                return ! empty( $rule->subject ) && ( $rule->subject === 'product_variation' || $rule->subject === 'var_att' );
+                return ! empty( $rule->subject ) && ( $rule->subject === 'var_att' || $rule->subject === 'product_variation' );
             });
 
                     }
-    }
+
+            }
 }

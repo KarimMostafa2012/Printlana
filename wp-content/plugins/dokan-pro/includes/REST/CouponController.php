@@ -148,10 +148,6 @@ class CouponController extends DokanRESTController {
             return new WP_Error( "dokan_coupon_no_code_found", sprintf( __( 'Copoun code must be required', 'dokan' ), 'product' ), array( 'status' => 404 ) );
         }
 
-        if ( empty( $request['amount'] ) ) {
-            return new WP_Error( "dokan_coupon_amount", __( 'Coupon amount must be required', 'dokan' ), array( 'status' => 404 ) );
-        }
-
         return true;
     }
 

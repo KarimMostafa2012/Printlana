@@ -19,8 +19,8 @@ class WCML_Pointers{
 			return;
 		}
 
-		$tab        = isset( $_GET['tab'] ) ? $_GET['tab'] : '';
-		$section    = isset( $_GET['section'] ) ? $_GET['section'] : '';
+		$tab        = $_GET['tab'] ?? '';
+		$section    = $_GET['section'] ?? '';
 		$isFullMode = ! isStandAlone();
 		wp_register_style( 'wcml-pointers', WCML_PLUGIN_URL . '/res/css/wcml-pointers.css' );
 

@@ -6,10 +6,12 @@ use Exception;
 use Stripe\Token;
 use Stripe\Charge;
 use Stripe\BalanceTransaction;
+use WC_Order;
 use WeDevs\DokanPro\Modules\Stripe\Customer;
 use WeDevs\DokanPro\Modules\Stripe\Helper;
 use WeDevs\DokanPro\Modules\Stripe\StripeConnect;
 use WeDevs\DokanPro\Modules\Stripe\Interfaces\Payable;
+use WeDevs\DokanPro\Modules\Stripe\Validation;
 
 class StripeNon3DSPayment extends StripeConnect implements Payable {
 
@@ -34,6 +36,34 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
         parent::__construct();
     }
 
+    /**
+     * Check if the order has advertisement product
+     *
+     * @since 4.1.4
+     *
+     * @param int $product_id
+     *
+     * @return bool
+     */
+    public static function has_adv_product( $order ): bool {
+        if ( ! $order instanceof \WC_Order ) {
+            dokan_log( 'Order is not instance of WC_Order' );
+            return false;
+        }
+
+        foreach ( $order->get_items() as $item ) {
+            $product = $item->get_data();
+            if ( ! $product ) {
+                continue;
+            }
+            $product_id = $product['product_id'];
+
+            if ( Validation::is_adv_product( $product_id ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Pay for the order
      *
@@ -61,7 +91,7 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
                 $subscription = dokan()->subscription->get( $product_pack->get_id() );
 
                 if ( ! $subscription->is_recurring() ) {
-                    $currency   = strtolower( get_woocommerce_currency() );
+                    $currency = strtolower( get_woocommerce_currency() );
                     /* translators: 1) site name, 2) Order number */
                     $order_desc = sprintf( __( '%1$s - Order %2$s', 'dokan' ), esc_html( get_bloginfo( 'name' ) ), $order->get_order_number() );
                     $charge     = Charge::create(
@@ -86,6 +116,31 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
                 }
 
                 do_action( 'dokan_process_subscription_order', $order, $prepared_source, $subscription->is_recurring() );
+            } elseif ( self::has_adv_product( $order ) ) {
+                $currency = strtolower( get_woocommerce_currency() );
+                /* translators: 1) site name, 2) Order number */
+                $order_desc = sprintf( __( '%1$s - Order %2$s', 'dokan' ), esc_html( get_bloginfo( 'name' ) ), $order->get_order_number() );
+                $charge = Charge::create(
+                    [
+                        'amount'      => Helper::get_stripe_amount( $order->get_total() ),
+                        'currency'    => $currency,
+                        'description' => $order_desc,
+                        'customer'    => $prepared_source->customer,
+                    ]
+                );
+
+                $order->add_order_note(
+                    sprintf(
+                        // translators: 1: order number, 2: title, 3: charge id
+                        __( 'Advertisement payment for Order %1$s completed via %2$s on Charge ID: %3$s', 'dokan' ),
+                        $order->get_order_number(),
+                        $this->get_title(),
+                        $charge->id
+                    )
+                );
+                $order->payment_complete();
+
+                do_action( 'dokan_process_advertisement_order', $order, $prepared_source, $charge );
             } else {
                 $this->process_seller_payment( $order, $prepared_source );
             }
@@ -113,7 +168,7 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
      *
      * @return void
      * @throws \Stripe\Exception\ApiErrorException
-     * @throws \WeDevs\Dokan\Exceptions\DokanException
+     * @throws Exception
      * @since 1.3.3
      */
     public function process_seller_payment( $order, $prepared_source ) {
@@ -130,17 +185,14 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
         $added_source_id = $this->add_source_to_customer( $prepared_source );
 
         foreach ( $all_orders as $tmp_order ) {
+
+            /* @var WC_Order $tmp_order */
             $tmp_order_id = $tmp_order->get_id();
             $seller_id    = dokan_get_seller_id_by_order( $tmp_order_id );
-            $dokan_order  = $this->get_dokan_order( $tmp_order_id, $seller_id );
 
-            if ( ! $dokan_order ) {
-                throw new Exception( __( 'Something went wrong and the order can not be processed!', 'dokan' ) );
-            }
-
-            $order_total     = (float) $dokan_order->order_total;
-            $application_fee = $order_total - (float) $dokan_order->net_amount;
-            $vendor_earning  = $order_total - $application_fee;
+            $order_total     = $tmp_order->get_total();
+            $application_fee = dokan()->commission->get_earning_by_order( $tmp_order, 'admin' );
+            $vendor_earning  = dokan()->commission->get_earning_by_order( $tmp_order );
 
             if ( $order_total <= 0 ) {
                 /* translators: 1) order number */
@@ -220,12 +272,27 @@ class StripeNon3DSPayment extends StripeConnect implements Payable {
                 $balance_transaction = BalanceTransaction::retrieve( $charge->balance_transaction );
             }
 
-            if ( $balance_transaction ) {
-                $fee            = Helper::format_gateway_balance_fee( $balance_transaction );
-                $vendor_earning = $vendor_earning - $fee;
-
+            if ( isset( $balance_transaction ) ) {
+                $fee = Helper::format_gateway_balance_fee( $balance_transaction );
                 $tmp_order->update_meta_data( 'dokan_gateway_stripe_fee', $fee );
                 $tmp_order->update_meta_data( 'dokan_gateway_fee_paid_by', 'seller' );
+                $tmp_order->save();
+                /*
+                 * Deduct the gateway fee from vendor earning because gateway fee charge each suborder
+                 * when transaction is made and vendor earning is calculated based on the suborder total.
+                 * So, we need to deduct the gateway fee from vendor earning.
+                 */
+                $vendor_earning -= $fee;
+
+                /**
+                 * Process the gateway fee for the suborder
+                 *
+                 * @param float $processing_fee
+                 * @param WC_Order $tmp_order
+                 *
+                 * @since 4.1.1
+                 */
+                do_action( 'dokan_process_payment_gateway_fee', $fee, $tmp_order, Helper::get_gateway_id() );
             }
 
             $tmp_order->save();

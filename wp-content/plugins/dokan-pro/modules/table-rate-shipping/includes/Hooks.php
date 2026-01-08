@@ -2,6 +2,9 @@
 
 namespace WeDevs\DokanPro\Modules\TableRate;
 
+use WeDevs\DokanPro\Modules\TableRate\Models\DataStore\DistanceRateShippingStore;
+use WeDevs\DokanPro\Modules\TableRate\Models\DistanceRateShipping;
+
 /**
  * Table Rate Shipping Template Class
  */
@@ -119,7 +122,7 @@ class Hooks {
         $updated      = $wpdb->update( $table_name, $general_data, array( 'instance_id' => $instance_id ), array( '%s', '%d', '%d', '%s' ) );
 
         // Save table rate rows
-        $this->save_distance_rate_rows( $zone_id, $instance_id );
+        self::save_distance_rate_rows( $zone_id, $instance_id );
 
         if ( ! defined( 'DOING_AJAX' ) ) {
             wp_safe_redirect( add_query_arg( array( 'message' => 'distance_rate_saved' ) ) );
@@ -487,158 +490,133 @@ class Hooks {
         }
     }
 
-    /**
-     * Save/update distance rate rows
-     *
-     * @since 3.4.2
-     *
-     * @param int $instance_id
-     *
-     * @return void
-     */
-    public function save_distance_rate_rows( $zone_id, $instance_id ) {
-        if ( ! isset( $_POST['dokan_distance_rate_shipping_settings_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['dokan_distance_rate_shipping_settings_nonce'] ), 'dokan_distance_rate_shipping_settings' )
-        ) {
-            return;
-        }
+	/**
+	 * Save/update distance rate rows
+	 *
+	 * @since 3.4.2
+	 *
+	 * @param int $zone_id
+	 * @param int $instance_id
+	 *
+	 * @return void
+	 */
+	public static function save_distance_rate_rows( $zone_id, $instance_id ) {
+		if ( ! isset( $_POST['dokan_distance_rate_shipping_settings_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['dokan_distance_rate_shipping_settings_nonce'] ), 'dokan_distance_rate_shipping_settings' )
+		) {
+			return;
+		}
 
-        if ( ! $instance_id ) {
-            return;
-        }
+		if ( ! $instance_id ) {
+			return;
+		}
 
-        global $wpdb;
+		// Set dokan distance rates data.
+		$prepared_data = [
+			'zone_id'           => $zone_id,
+			'instance_id'       => $instance_id,
+			'rate_ids'          => isset( $_POST['rate_id'] ) ? array_map( 'intval', wp_unslash( $_POST['rate_id'] ) ) : [],
+			'rate_condition'    => isset( $_POST['rate_condition'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_condition'] ) ) : [],
+			'rate_min'          => isset( $_POST['rate_min'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_min'] ) ) : [],
+			'rate_max'          => isset( $_POST['rate_max'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_max'] ) ) : [],
+			'rate_cost'         => isset( $_POST['rate_cost'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_cost'] ) ) : [],
+			'rate_cost_unit'    => isset( $_POST['rate_cost_unit'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_cost_unit'] ) ) : [],
+			'rate_fee'          => isset( $_POST['rate_fee'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_fee'] ) ) : [],
+			'rate_break'        => isset( $_POST['rate_break'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_break'] ) ) : [],
+			'rate_abort'        => isset( $_POST['rate_abort'] ) ? array_map( 'wc_clean', wp_unslash( $_POST['rate_abort'] ) ) : [],
+		];
 
-        // Save dokan distance rates
-        // @codingStandardsIgnoreStart
-        $rate_ids           = isset( $_POST['rate_id'] ) ? array_map( 'intval', $_POST['rate_id'] ) : array();
-        $shipping_condition = isset( $_POST['rate_condition'] ) ? array_map( 'wc_clean', $_POST['rate_condition'] ) : array();
-        $shipping_min       = isset( $_POST['rate_min'] ) ? array_map( 'wc_clean', $_POST['rate_min'] ) : array();
-        $shipping_max       = isset( $_POST['rate_max'] ) ? array_map( 'wc_clean', $_POST['rate_max'] ) : array();
-        $shipping_cost      = isset( $_POST['rate_cost'] ) ? array_map( 'wc_clean', $_POST['rate_cost'] ) : array();
-        $shipping_cost_unit = isset( $_POST['rate_cost_unit'] ) ? array_map( 'wc_clean', $_POST['rate_cost_unit'] ) : array();
-        $shipping_fee       = isset( $_POST['rate_fee'] ) ? array_map( 'wc_clean', $_POST['rate_fee'] ) : array();
-        $shipping_break     = isset( $_POST['rate_break'] ) ? array_map( 'wc_clean', $_POST['rate_break'] ) : array();
-        $shipping_abort     = isset( $_POST['rate_abort'] ) ? array_map( 'wc_clean', $_POST['rate_abort'] ) : array();
-        // @codingStandardsIgnoreEnd
-        $max_key                  = ( $rate_ids ) ? max( array_keys( $rate_ids ) ) : 0;
-        $precision                = function_exists( 'wc_get_rounding_precision' ) ? wc_get_rounding_precision() : 4;
+		// Distance rate data save or update handler.
+		self::save_distance_rate_data( $prepared_data );
+	}
 
-        for ( $i = 0; $i <= $max_key; $i++ ) {
-            if ( ! isset( $rate_ids[ $i ] ) ) {
-                continue;
-            }
+	/**
+	 * Handle distance rate data creation or update.
+	 *
+	 * @since 4.1.3
+	 *
+	 * @param array $prepared_data Array of distance rate data
+	 *
+	 * @return void
+	 */
+	public static function save_distance_rate_data( array $prepared_data ) {
+		// Clear transient if have.
+        DistanceRateShippingStore::clear_shipping_transients();
 
-            $rate_id            = $rate_ids[ $i ];
-            $rate_condition     = $shipping_condition[ $i ];
-            $rate_min           = isset( $shipping_min[ $i ] ) ? $shipping_min[ $i ] : '';
-            $rate_max           = isset( $shipping_max[ $i ] ) ? $shipping_max[ $i ] : '';
-            $rate_cost          = isset( $shipping_cost[ $i ] ) ? wc_format_decimal( $shipping_cost[ $i ], $precision, true ) : '';
-            $rate_cost_unit     = isset( $shipping_cost_unit[ $i ] ) ? wc_format_decimal( $shipping_cost_unit[ $i ], $precision, true ) : '';
-            $rate_fee           = isset( $shipping_fee[ $i ] ) ? wc_format_decimal( $shipping_fee[ $i ], $precision, true ) : '';
-            $rate_break         = isset( $shipping_break[ $i ] ) ? 1 : 0;
-            $rate_abort         = isset( $shipping_abort[ $i ] ) ? 1 : 0;
+		$max_key   = ( $prepared_data['rate_ids'] ) ? max( array_keys( $prepared_data['rate_ids'] ) ) : 0;
+		$precision = function_exists( 'wc_get_rounding_precision' ) ? wc_get_rounding_precision() : 4;
 
-            // Format min and max
-            switch ( $rate_condition ) {
-                case 'weight':
-                case 'total':
-                    if ( $rate_min ) {
-                        $rate_min = wc_format_decimal( $rate_min, $precision, true );
-                    }
-                    if ( $rate_max ) {
-                        $rate_max = wc_format_decimal( $rate_max, $precision, true );
-                    }
-                    break;
-                case 'distance':
-                case 'time':
-                case 'quantity':
-                    if ( $rate_min ) {
-                        $rate_min = round( $rate_min );
-                    }
-                    if ( $rate_max ) {
-                        $rate_max = round( $rate_max );
-                    }
-                    break;
-                default:
-                    $rate_min = '';
-                    $rate_max = '';
-                    break;
-            }
+		for ( $i = 0; $i <= $max_key; $i++ ) {
+			if ( ! isset( $prepared_data['rate_ids'][ $i ] ) ) {
+				continue;
+			}
 
-            // Insert dokan table rate data if found rate_id
-            if ( $rate_id > 0 ) {
-                $wpdb->update(
-                    $wpdb->prefix . 'dokan_distance_rate_shipping',
-                    array(
-                        'vendor_id'      => dokan_get_current_user_id(),
-                        'zone_id'        => $zone_id,
-                        'instance_id'    => $instance_id,
-                        'rate_condition' => sanitize_title( $rate_condition ),
-                        'rate_min'       => $rate_min,
-                        'rate_max'       => $rate_max,
-                        'rate_cost'      => $rate_cost,
-                        'rate_cost_unit' => $rate_cost_unit,
-                        'rate_fee'       => $rate_fee,
-                        'rate_break'     => $rate_break,
-                        'rate_abort'     => $rate_abort,
-                        'rate_order'     => $i,
-                    ),
-                    array(
-                        'rate_id' => $rate_id,
-                    ),
-                    array(
-                        '%d',
-                        '%d',
-                        '%d',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%d',
-                        '%d',
-                        '%d',
-                    ),
-                    array(
-                        '%d',
-                    )
-                );
+			$rate_id   = $prepared_data['rate_ids'][ $i ];
+			$rate_data = [
+				'vendor_id'      => dokan_get_current_user_id(),
+				'zone_id'        => $prepared_data['zone_id'],
+				'instance_id'    => $prepared_data['instance_id'],
+				'rate_condition' => sanitize_title( $prepared_data['rate_condition'][ $i ] ?? '' ),
+				'rate_min'       => $prepared_data['rate_min'][ $i ] ?? '',
+				'rate_max'       => $prepared_data['rate_max'][ $i ] ?? '',
+				'rate_cost'      => ! empty( $prepared_data['rate_cost'][ $i ] ) ? wc_format_decimal( $prepared_data['rate_cost'][ $i ], $precision, true ) : '',
+				'rate_cost_unit' => ! empty( $prepared_data['rate_cost_unit'][ $i ] ) ? wc_format_decimal( $prepared_data['rate_cost_unit'][ $i ], $precision, true ) : '',
+				'rate_fee'       => ! empty( $prepared_data['rate_fee'][ $i ] ) ? wc_format_decimal( $prepared_data['rate_fee'][ $i ], $precision, true ) : '',
+				'rate_break'     => ! empty( $prepared_data['rate_break'][ $i ] ) ? 1 : 0,
+				'rate_abort'     => ! empty( $prepared_data['rate_abort'][ $i ] ) ? 1 : 0,
+				'rate_order'     => $i,
+			];
 
-                // Update dokan table rate data if not found rate_id
-            } else {
-                $result = $wpdb->insert(
-                    $wpdb->prefix . 'dokan_distance_rate_shipping',
-                    array(
-                        'vendor_id'      => dokan_get_current_user_id(),
-                        'zone_id'        => $zone_id,
-                        'instance_id'    => $instance_id,
-                        'rate_condition' => sanitize_title( $rate_condition ),
-                        'rate_min'       => $rate_min,
-                        'rate_max'       => $rate_max,
-                        'rate_cost'      => $rate_cost,
-                        'rate_cost_unit' => $rate_cost_unit,
-                        'rate_fee'       => $rate_fee,
-                        'rate_break'     => $rate_break,
-                        'rate_abort'     => $rate_abort,
-                        'rate_order'     => $i,
-                    ),
-                    array(
-                        '%d',
-                        '%d',
-                        '%d',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%d',
-                        '%d',
-                        '%d',
-                    )
-                );
-            }
-        }
-    }
+			// Format min and max
+			switch ( $rate_data['rate_condition'] ) {
+				case 'weight':
+				case 'total':
+					if ( $rate_data['rate_min'] ) {
+						$rate_data['rate_min'] = wc_format_decimal( $rate_data['rate_min'], $precision, true );
+					}
+					if ( $rate_data['rate_max'] ) {
+						$rate_data['rate_max'] = wc_format_decimal( $rate_data['rate_max'], $precision, true );
+					}
+					break;
+				case 'distance':
+				case 'time':
+				case 'quantity':
+					if ( $rate_data['rate_min'] ) {
+						$rate_data['rate_min'] = round( $rate_data['rate_min'] );
+					}
+					if ( $rate_data['rate_max'] ) {
+						$rate_data['rate_max'] = round( $rate_data['rate_max'] );
+					}
+					break;
+				default:
+					$rate_data['rate_min'] = '';
+					$rate_data['rate_max'] = '';
+					break;
+			}
+
+			/**
+			 * Filter distance rate shipping prepared data before save.
+			 *
+			 * @since 4.1.3
+			 *
+			 * @param array $rate_data
+			 * @param int   $zone_id
+			 * @param int   $instance_id
+			 */
+			$rate_data = apply_filters( 'dokan_distance_rate_shipping_args', $rate_data, $rate_data['zone_id'], $rate_data['instance_id'] );
+
+			// Save the rate using the store
+            DistanceRateShipping::save_rates( $rate_data, $rate_id );
+
+			/**
+			 * Fires after distance rate shipping rates are saved.
+			 *
+			 * @since 4.1.3
+			 *
+			 * @param array $rate_data
+			 * @param int   $zone_id
+			 * @param int   $instance_id
+			 */
+			do_action( 'dokan_distance_rate_shipping_rates_saved', $rate_data, $rate_data['zone_id'], $rate_data['instance_id'] );
+		}
+	}
 }

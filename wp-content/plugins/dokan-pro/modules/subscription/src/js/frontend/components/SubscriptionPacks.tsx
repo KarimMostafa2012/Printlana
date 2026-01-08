@@ -12,6 +12,8 @@ const SubscriptionPacks = ( {
     subscription,
     className = '',
     hasManagePermission,
+    showHeader = true,
+    cardClassname = '',
 } ) => {
     const toast = useToast();
     const [ loading, setLoading ] = useState( true );
@@ -82,12 +84,14 @@ const SubscriptionPacks = ( {
 
     return (
         <div className={ twMerge( 'dokan-layout', className ) }>
-            <Card className="mb-5">
-                <Card.Header>
-                    <Card.Title>
-                        { __( 'Subscription Packages', 'dokan' ) }
-                    </Card.Title>
-                </Card.Header>
+            <Card className={ twMerge( 'mb-5', cardClassname ) }>
+                { showHeader && (
+                    <Card.Header>
+                        <Card.Title>
+                            { __( 'Subscription Packages', 'dokan' ) }
+                        </Card.Title>
+                    </Card.Header>
+                ) }
                 <Card.Body>
                     <>
                         { loading ? (

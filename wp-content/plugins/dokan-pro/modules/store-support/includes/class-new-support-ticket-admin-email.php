@@ -23,6 +23,12 @@ if ( ! class_exists( 'DokanNewSupportTicketForAdmin' ) ) :
      */
     class DokanNewSupportTicketForAdmin extends WC_Email {
 
+        protected $store_info;
+
+        protected $topic_id;
+
+        protected $store_id;
+
         /**
          * Constructor.
          */

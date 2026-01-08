@@ -49,6 +49,7 @@ class Hooks {
             'icon'       => '<i class="fas fa-award"></i>',
             'url'        => dokan_get_navigation_url( $this->vendor_endpoint ),
             'pos'        => 73,
+            'icon_name'  => 'BadgeCheck',
             'permission' => 'dokan_view_badge_menu',
         ];
 

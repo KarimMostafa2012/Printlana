@@ -93,6 +93,8 @@ trait RMACommon {
                     'store_id'   => $vendor->get_id(),
                     'store_name' => $vendor->get_shop_name(),
                     'store_url'  => $vendor->get_shop_url(),
+                    'store_avatar' => $vendor->get_avatar(),
+                    'store_banner' => $vendor->get_banner(),
                 ],
                 'customer' => [
                     'id'   => $customer->ID,
@@ -108,7 +110,7 @@ trait RMACommon {
                 'created_at'       => $request['created_at'],
                 'items'            => $items,
                 'is_order_deleted' => false,
-                'is_refund_pending'=> $has_already_refund_request
+                'is_refund_pending' => $has_already_refund_request,
 
             ]
         );

@@ -9,6 +9,7 @@ use WeDevs\DokanPro\Modules\VendorVerification\Frontend\Dashboard;
 use WeDevs\DokanPro\Modules\VendorVerification\Frontend\Hooks as FrontendHooks;
 use WeDevs\DokanPro\Modules\VendorVerification\Frontend\HybridauthHooks;
 use WeDevs\DokanPro\Modules\VendorVerification\Frontend\SetupWizard;
+use WeDevs\DokanPro\Modules\VendorVerification\Models\VerificationRequest;
 use WeDevs\DokanPro\Modules\VendorVerification\REST\VendorVerification;
 use WeDevs\DokanPro\Modules\VendorVerification\REST\VerificationMethodsApi;
 use WeDevs\DokanPro\Modules\VendorVerification\REST\VerificationRequestsApi;
@@ -53,6 +54,8 @@ class Module {
 
         // init rest api
         add_filter( 'dokan_rest_api_class_map', [ $this, 'register_class_map' ] );
+        add_filter( 'dokan_rest_admin_dashboard_todo_data', [ $this, 'load_pending_verifications_count' ] );
+        add_filter( 'dokan_rest_admin_dashboard_vendor_metrics_data', [ $this, 'load_verified_vendors_count' ] );
     }
 
     /**
@@ -95,6 +98,52 @@ class Module {
 
         return $classes;
     }
+
+	/**
+	 * Load pending verifications count in the admin dashboard to-do data.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param array $data The existing to-do data.
+	 *
+	 * @return array The modified to-do data with pending verifications count.
+	 */
+	public function load_pending_verifications_count( array $data ): array {
+		$verification_request = new VerificationRequest();
+		$count                = $verification_request->count( [ 'status' => VerificationRequest::STATUS_PENDING ] );
+
+		// If the count is not an object, we assume it to be zero.
+		$data['pending_verifications'] = [
+			'icon'         => 'BadgeCheck',
+			'count'        => (int) ( $count[ VerificationRequest::STATUS_PENDING ] ?? 0 ),
+			'title'        => esc_html__( 'Pending Verifications', 'dokan' ),
+            'redirect_url' => admin_url( 'admin.php?page=dokan#/verifications?status=pending' ),
+            'position'     => 40,
+		];
+
+		return $data;
+	}
+
+	/**
+	 * Load verified vendors count in the admin dashboard vendor metrics data.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param array $data The existing vendor metrics data.
+	 *
+	 * @return array The modified vendor metrics data with verified vendors count.
+	 */
+	public function load_verified_vendors_count( array $data ): array {
+		$data['verified_vendors'] = [
+			'icon'     => 'UserRoundCheck',
+			'count'    => Helper::get_verified_vendor_count(),
+			'title'    => esc_html__( 'Verified Vendors', 'dokan' ),
+			'tooltip'  => esc_html__( 'Total vendors who got verified', 'dokan' ),
+			'position' => 2,
+		];
+
+		return $data;
+	}
 
     /**
      * Define module constants

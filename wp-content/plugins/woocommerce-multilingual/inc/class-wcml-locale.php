@@ -1,19 +1,13 @@
 <?php
 
 class WCML_Locale {
-
-	private $woocommerce_wpml;
 	private $sitepress;
 
 	/**
-	 * WCML_Locale constructor.
-	 *
-	 * @param woocommerce_wpml $woocommerce_wpml
 	 * @param SitePress        $sitepress
 	 */
-	public function __construct( $woocommerce_wpml, $sitepress ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->sitepress        = $sitepress;
+	public function __construct( $sitepress ) {
+		$this->sitepress = $sitepress;
 
 		add_filter( 'locale', [ $this, 'update_product_action_locale_check' ] );
 	}
@@ -89,7 +83,7 @@ class WCML_Locale {
 				$st_gettext_hooks->switch_language_hook( $lang_code );
 			}
 
-			$original_l10n = isset( $l10n['woocommerce-multilingual'] ) ? $l10n['woocommerce-multilingual'] : null;
+			$original_l10n = $l10n['woocommerce-multilingual'] ?? null;
 			if ( null !== $original_l10n ) {
 				unset( $l10n['woocommerce-multilingual'] );
 			}

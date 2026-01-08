@@ -62,6 +62,13 @@ class WcAdminPages {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public static function isAdvancedSettings() {
+		return self::isSettingsPage() && AdminPages::isTab( 'advanced' );
+	}
+
+	/**
 	 * @param string $page
 	 *
 	 * @return bool

@@ -79,7 +79,7 @@ class Assets {
         wp_register_style( 'dokan-verification-styles', DOKAN_VERFICATION_PLUGIN_ASSEST . '/css/style.css', [], $script_version );
         wp_register_script( 'dokan-verification-scripts', DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/script.js', [ 'jquery' ], $script_version, true );
 
-        $script_assets = DOKAN_VERFICATION_DIR . '/assets/js/dokan-vendor-verification.asset.php';
+        $script_assets = DOKAN_VERFICATION_DIR . '/assets/js/frontend/dashboard/index.asset.php';
 
         if ( file_exists( $script_assets ) ) {
             $assets                   = include $script_assets;
@@ -87,13 +87,13 @@ class Assets {
             $assets['dependencies'][] = $component_handler;
 
             wp_register_style(
-                'dokan-vendor-verification', DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/dokan-vendor-verification.css',
+                'dokan-vendor-verification', DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/frontend/dashboard/style-index.css',
                 [ $component_handler ],
                 $assets['version']
             );
 
             wp_register_script(
-                'dokan-vendor-verification', DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/dokan-vendor-verification.js',
+                'dokan-vendor-verification', DOKAN_VERFICATION_PLUGIN_ASSEST . '/js/frontend/dashboard/index.js',
                 $assets['dependencies'],
                 $assets['version'],
                 true

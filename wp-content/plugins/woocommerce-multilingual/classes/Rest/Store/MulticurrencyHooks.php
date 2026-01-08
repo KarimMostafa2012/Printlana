@@ -11,7 +11,7 @@ class MulticurrencyHooks implements \IWPML_Action {
 	}
 
 	public function initializeSession() {
-		if ( ! isset( WC()->session ) ) {
+		if ( ! ( WC()->session instanceof \WC_Session ) ) {
 			WC()->initialize_session();
 		}
 	}
