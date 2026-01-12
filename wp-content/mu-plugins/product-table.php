@@ -50,6 +50,7 @@ class Custom_Product_Table
     private function __construct()
     {
         add_action('init', array($this, 'init'));
+        add_action('init', array($this, 'register_wpml_strings'));
         add_shortcode('product_table', array($this, 'render_product_table'));
     }
 
@@ -60,6 +61,34 @@ class Custom_Product_Table
     {
         // Load text domain for translations
         load_plugin_textdomain('custom-product-table', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    }
+
+    /**
+     * Register strings with WPML String Translation
+     */
+    public function register_wpml_strings()
+    {
+        if (function_exists('icl_register_string')) {
+            // Register banner strings
+            icl_register_string('custom-product-table', 'Minimum Order', 'الحد الأدنى للطلب');
+            icl_register_string('custom-product-table', 'Piece', 'قطعة');
+            icl_register_string('custom-product-table', 'Price per piece decreases with increased order quantity', 'سعر القطعة ينخفض مع زيادة كمية الطلب');
+
+            // Register table headers
+            icl_register_string('custom-product-table', 'Product', 'Product');
+            icl_register_string('custom-product-table', 'Price of Piece', 'Price of Piece');
+            icl_register_string('custom-product-table', 'Time of Production', 'Time of Production');
+            icl_register_string('custom-product-table', 'Quantity', 'Quantity');
+
+            // Register button labels
+            icl_register_string('custom-product-table', 'Decrease quantity', 'Decrease quantity');
+            icl_register_string('custom-product-table', 'Increase quantity', 'Increase quantity');
+
+            // Register JavaScript strings
+            icl_register_string('custom-product-table', 'Loading...', 'Loading...');
+            icl_register_string('custom-product-table', 'No image', 'No image');
+            icl_register_string('custom-product-table', 'N/A', 'N/A');
+        }
     }
 
     /**
@@ -90,6 +119,22 @@ class Custom_Product_Table
     private function render_html()
     {
         ?>
+        <div class="product-banner-min-quantity">
+            <div class="product-icon"></div>
+            <div class="banner-info">
+                <?php esc_html_e('Minimum Order', 'custom-product-table'); ?>
+                <div class="quantity" id="acf-min-qty">
+                    --
+                </div>
+                <?php esc_html_e('Piece', 'custom-product-table'); ?>
+            </div>
+        </div>
+        <div class="product-banner-quantity-info">
+            <div class="product-icon"></div>
+            <div class="banner-info">
+                <?php esc_html_e('Price per piece decreases with increased order quantity', 'custom-product-table'); ?>
+            </div>
+        </div>
         <table class="acf-product-table">
             <thead>
                 <tr>
@@ -132,8 +177,16 @@ class Custom_Product_Table
      */
     private function render_scripts()
     {
+        // Localize script strings for WPML
+        $i18n_strings = array(
+            'loading' => function_exists('icl_t') ? icl_t('custom-product-table', 'Loading...', __('Loading...', 'custom-product-table')) : __('Loading...', 'custom-product-table'),
+            'no_image' => function_exists('icl_t') ? icl_t('custom-product-table', 'No image', __('No image', 'custom-product-table')) : __('No image', 'custom-product-table'),
+            'na' => function_exists('icl_t') ? icl_t('custom-product-table', 'N/A', __('N/A', 'custom-product-table')) : __('N/A', 'custom-product-table'),
+        );
         ?>
         <script>
+            var cptI18n = <?php echo wp_json_encode($i18n_strings); ?>;
+
             (function ($) {
                 'use strict';
 
@@ -142,6 +195,7 @@ class Custom_Product_Table
                     init: function () {
                         this.updateSelectedImage();
                         this.updateProductionTime();
+                        this.updateMinQuantity();
                         this.updateQtyDisplay();
                         this.bindEvents();
                         this.watchPriceChanges();
@@ -163,7 +217,7 @@ class Custom_Product_Table
                             var imgAlt = $selected.attr('alt') || 'Product';
                             $('#acf-selected-img').html('<img src="' + imgSrc + '" alt="' + imgAlt + '">');
                         } else {
-                            $('#acf-selected-img').html('<span>No image</span>');
+                            $('#acf-selected-img').html('<span>' + cptI18n.no_image + '</span>');
                         }
                     },
 
@@ -219,7 +273,16 @@ class Custom_Product_Table
                             $('.woocommerce-product-attributes-item--production-time .woocommerce-product-attributes-item__value').text().trim() ||
                             $('.woocommerce-product-attributes-item--production_time .woocommerce-product-attributes-item__value').text().trim();
 
-                        $('#acf-prod-time').text(time || 'N/A');
+                        $('#acf-prod-time').text(time || cptI18n.na);
+                    },
+
+                    updateMinQuantity: function () {
+                        var $qtyInput = $('input[name="quantity"]');
+                        var minQty = parseInt($qtyInput.attr('min')) || 1;
+
+                        // Format number with commas for thousands
+                        var formattedQty = minQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        $('#acf-min-qty').text(formattedQty);
                     },
 
                     updateQtyDisplay: function () {
