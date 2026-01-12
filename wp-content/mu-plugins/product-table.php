@@ -124,7 +124,7 @@ class Custom_Product_Table
             <div class="product-icon"></div>
             <div class="banner-info">
                 <?php esc_html_e('Minimum Order', 'custom-product-table'); ?>
-                <div class="quantity" id="banner-min-qty">
+                <div class="banner-quantity" id="banner-min-qty">
                     --
                 </div>
                 <?php esc_html_e('Piece', 'custom-product-table'); ?>
