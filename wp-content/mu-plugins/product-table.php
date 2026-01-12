@@ -278,30 +278,58 @@ class Custom_Product_Table
 
                     updateMinQuantity: function () {
                         var $qtyInput = $('input[name="quantity"]');
+                        var minQty = 1;
 
                         // Debug: Log all quantity input information
                         console.log('=== Debug: Minimum Quantity ===');
                         console.log('Quantity input element:', $qtyInput);
-                        console.log('Quantity input length:', $qtyInput.length);
-                        console.log('Quantity input HTML:', $qtyInput[0]);
                         console.log('Min attribute value:', $qtyInput.attr('min'));
-                        console.log('Current value:', $qtyInput.val());
-                        console.log('All attributes:', {
-                            min: $qtyInput.attr('min'),
-                            max: $qtyInput.attr('max'),
-                            step: $qtyInput.attr('step'),
-                            value: $qtyInput.attr('value'),
-                            name: $qtyInput.attr('name'),
-                            type: $qtyInput.attr('type')
-                        });
 
-                        var minQty = parseInt($qtyInput.attr('min')) || 1;
-                        console.log('Parsed minQty:', minQty);
+                        // Try multiple sources for minimum quantity
+                        // 1. Check for data-minimum_order_quantity attribute
+                        var dataMinOrder = $qtyInput.attr('data-minimum_order_quantity');
+                        console.log('data-minimum_order_quantity:', dataMinOrder);
+
+                        // 2. Check for custom attribute on product
+                        var attrMinOrder = $('[data-attribute="minimum-order"]').text().trim() ||
+                                          $('[data-attribute="minimum_order"]').text().trim() ||
+                                          $('.minimum-order-quantity').text().trim();
+                        console.log('Attribute minimum order:', attrMinOrder);
+
+                        // 3. Check product meta (if available in JS)
+                        var productMeta = $('.product').attr('data-min-order') ||
+                                         $('.product').attr('data-minimum-quantity');
+                        console.log('Product meta min order:', productMeta);
+
+                        // 4. Check for min/max quantity plugin data
+                        var wcmmqMin = $qtyInput.attr('data-min_value') ||
+                                      $qtyInput.attr('data-min-value') ||
+                                      $qtyInput.attr('data-minimum-quantity');
+                        console.log('WCMMQ or similar plugin data:', wcmmqMin);
+
+                        // Determine minimum quantity from available sources
+                        if (dataMinOrder && parseInt(dataMinOrder) > 1) {
+                            minQty = parseInt(dataMinOrder);
+                            console.log('Using data-minimum_order_quantity:', minQty);
+                        } else if (attrMinOrder && parseInt(attrMinOrder) > 1) {
+                            minQty = parseInt(attrMinOrder);
+                            console.log('Using attribute minimum order:', minQty);
+                        } else if (productMeta && parseInt(productMeta) > 1) {
+                            minQty = parseInt(productMeta);
+                            console.log('Using product meta:', minQty);
+                        } else if (wcmmqMin && parseInt(wcmmqMin) > 1) {
+                            minQty = parseInt(wcmmqMin);
+                            console.log('Using plugin data:', minQty);
+                        } else {
+                            minQty = parseInt($qtyInput.attr('min')) || 1;
+                            console.log('Using input min attribute:', minQty);
+                        }
+
+                        console.log('Final minQty:', minQty);
 
                         // Format number with commas for thousands
                         var formattedQty = minQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         console.log('Formatted quantity:', formattedQty);
-                        console.log('Target element #acf-min-qty:', $('#acf-min-qty'));
 
                         $('#acf-min-qty').text(formattedQty);
                         console.log('=== End Debug ===');
