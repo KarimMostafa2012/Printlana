@@ -25,7 +25,7 @@ msgid "Piece"
 msgstr "قطعة"
 
 #: product-table.php:106
-msgid "سعر القطعة ينخفض مع زيادة كمية الطلب"
+msgid "test"
 msgstr "Price per piece decreases with increased order quantity"
 
 #: product-table.php:112
