@@ -124,7 +124,7 @@ class Custom_Product_Table
             <div class="product-icon"></div>
             <div class="banner-info">
                 <?php esc_html_e('Minimum Order', 'custom-product-table'); ?>
-                <div class="quantity" id="acf-min-qty">
+                <div class="quantity" id="banner-min-qty">
                     --
                 </div>
                 <?php esc_html_e('Piece', 'custom-product-table'); ?>
@@ -214,7 +214,7 @@ class Custom_Product_Table
                     },
 
                     waitForMinQtyElement: function(callback) {
-                        var $target = $('#acf-min-qty');
+                        var $target = $('#banner-min-qty');
 
                         if ($target.length && $target.is(':visible')) {
                             // Element exists and is visible, call immediately with small delay
@@ -222,7 +222,7 @@ class Custom_Product_Table
                         } else {
                             // Wait for element to appear
                             var checkInterval = setInterval(function() {
-                                $target = $('#acf-min-qty');
+                                $target = $('#banner-min-qty');
                                 if ($target.length) {
                                     clearInterval(checkInterval);
                                     setTimeout(callback, 100);
@@ -337,7 +337,7 @@ class Custom_Product_Table
                         var formattedQty = minQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
                         // Update the element
-                        var $target = $('#acf-min-qty');
+                        var $target = $('#banner-min-qty');
                         console.log('Target element exists:', $target.length > 0);
                         console.log('Target element visible:', $target.is(':visible'));
 
