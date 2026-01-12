@@ -200,12 +200,41 @@ class Custom_Product_Table
                 var CustomProductTable = {
 
                     init: function () {
+                        var self = this;
                         this.updateSelectedImage();
                         this.updateProductionTime();
-                        this.updateMinQuantity();
                         this.updateQtyDisplay();
                         this.bindEvents();
                         this.watchPriceChanges();
+
+                        // Wait for min quantity element to be ready, then update with delay
+                        this.waitForMinQtyElement(function() {
+                            self.updateMinQuantity();
+                        });
+                    },
+
+                    waitForMinQtyElement: function(callback) {
+                        var $target = $('#acf-min-qty');
+
+                        if ($target.length && $target.is(':visible')) {
+                            // Element exists and is visible, call immediately with small delay
+                            setTimeout(callback, 100);
+                        } else {
+                            // Wait for element to appear
+                            var checkInterval = setInterval(function() {
+                                $target = $('#acf-min-qty');
+                                if ($target.length) {
+                                    clearInterval(checkInterval);
+                                    setTimeout(callback, 100);
+                                }
+                            }, 50);
+
+                            // Fallback: stop checking after 5 seconds
+                            setTimeout(function() {
+                                clearInterval(checkInterval);
+                                callback(); // Try anyway
+                            }, 5000);
+                        }
                     },
 
                     updateSelectedImage: function () {
@@ -284,92 +313,42 @@ class Custom_Product_Table
                     },
 
                     updateMinQuantity: function () {
-                        var $qtyInput = $('input[name="quantity"]');
+                        // Use class selector for quantity input (ID is variable)
+                        var $qtyInput = $('.wcmmq-qty-input-box, input[name="quantity"]').first();
                         var minQty = 1;
 
-                        // Debug: Log all quantity input information
                         console.log('=== Debug: Minimum Quantity ===');
+                        console.log('Quantity input found:', $qtyInput.length > 0);
                         console.log('Config minQuantity:', cptConfig.minQuantity);
 
                         // Check if manually set via shortcode
                         if (cptConfig.minQuantity && cptConfig.minQuantity > 0) {
                             minQty = cptConfig.minQuantity;
-                            console.log('Using shortcode min_quantity attribute:', minQty);
-                        } else {
-                            // Auto-detect from page
-                            console.log('Quantity input element:', $qtyInput);
-                            console.log('Min attribute value:', $qtyInput.attr('min'));
-
-                            // Inspect ALL data attributes on quantity input
-                            if ($qtyInput[0]) {
-                                console.log('All data-* attributes on quantity input:');
-                                var attrs = $qtyInput[0].attributes;
-                                for (var i = 0; i < attrs.length; i++) {
-                                    if (attrs[i].name.startsWith('data-')) {
-                                        console.log('  ' + attrs[i].name + ':', attrs[i].value);
-                                    }
-                                }
-                            }
-
-                            // Try multiple sources for minimum quantity
-                            // 1. Check for data-minimum_order_quantity attribute
-                            var dataMinOrder = $qtyInput.attr('data-minimum_order_quantity') ||
-                                              $qtyInput.attr('data-minimum-order-quantity') ||
-                                              $qtyInput.attr('data-min-order');
-                            console.log('data-minimum_order_quantity variations:', dataMinOrder);
-
-                            // 2. Check for custom attribute on product
-                            var attrMinOrder = $('[data-attribute="minimum-order"]').text().trim() ||
-                                              $('[data-attribute="minimum_order"]').text().trim() ||
-                                              $('.minimum-order-quantity').text().trim();
-                            console.log('Attribute minimum order:', attrMinOrder);
-
-                            // 3. Check product meta (if available in JS)
-                            var productMeta = $('.product').attr('data-min-order') ||
-                                             $('.product').attr('data-minimum-quantity');
-                            console.log('Product meta min order:', productMeta);
-
-                            // 4. Check for min/max quantity plugin data
-                            var wcmmqMin = $qtyInput.attr('data-min_value') ||
-                                          $qtyInput.attr('data-min-value') ||
-                                          $qtyInput.attr('data-minimum-quantity');
-                            console.log('WCMMQ or similar plugin data:', wcmmqMin);
-
-                            // 5. Search entire page for minimum quantity text
-                            var pageText = $('body').text();
-                            var minQtyMatch = pageText.match(/minimum.*?(\d{3,})/i) || pageText.match(/الحد الأدنى.*?(\d{3,})/);
-                            console.log('Page text search for minimum quantity:', minQtyMatch ? minQtyMatch[1] : 'not found');
-
-                            // Determine minimum quantity from available sources
-                            if (dataMinOrder && parseInt(dataMinOrder) > 1) {
-                                minQty = parseInt(dataMinOrder);
-                                console.log('Using data-minimum_order_quantity:', minQty);
-                            } else if (attrMinOrder && parseInt(attrMinOrder) > 1) {
-                                minQty = parseInt(attrMinOrder);
-                                console.log('Using attribute minimum order:', minQty);
-                            } else if (productMeta && parseInt(productMeta) > 1) {
-                                minQty = parseInt(productMeta);
-                                console.log('Using product meta:', minQty);
-                            } else if (wcmmqMin && parseInt(wcmmqMin) > 1) {
-                                minQty = parseInt(wcmmqMin);
-                                console.log('Using plugin data:', minQty);
-                            } else if (minQtyMatch && parseInt(minQtyMatch[1]) > 1) {
-                                minQty = parseInt(minQtyMatch[1]);
-                                console.log('Using page text search:', minQty);
-                            } else {
-                                minQty = parseInt($qtyInput.attr('min')) || 1;
-                                console.log('Using input min attribute:', minQty);
-                            }
+                            console.log('Using shortcode min_quantity:', minQty);
+                        } else if ($qtyInput.length) {
+                            // Get min attribute from input
+                            minQty = parseInt($qtyInput.attr('min')) || 1;
+                            console.log('Using input min attribute:', minQty);
                         }
 
                         console.log('Final minQty:', minQty);
 
                         // Format number with commas for thousands
                         var formattedQty = minQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                        console.log('Formatted quantity:', formattedQty);
 
-                        $('#acf-min-qty').text(formattedQty);
-                        console.log('Target element text set to:', $('#acf-min-qty').text());
+                        // Update the element
+                        var $target = $('#acf-min-qty');
+                        console.log('Target element exists:', $target.length > 0);
+                        console.log('Target element visible:', $target.is(':visible'));
+
+                        $target.text(formattedQty);
+
+                        // Force display and verify
+                        $target.css('display', '');
+
+                        console.log('Set text to:', formattedQty);
+                        console.log('Element text is now:', $target.text());
+                        console.log('Element HTML:', $target[0] ? $target[0].outerHTML : 'not found');
                         console.log('=== End Debug ===');
                     },
 
