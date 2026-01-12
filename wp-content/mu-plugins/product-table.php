@@ -278,11 +278,33 @@ class Custom_Product_Table
 
                     updateMinQuantity: function () {
                         var $qtyInput = $('input[name="quantity"]');
+
+                        // Debug: Log all quantity input information
+                        console.log('=== Debug: Minimum Quantity ===');
+                        console.log('Quantity input element:', $qtyInput);
+                        console.log('Quantity input length:', $qtyInput.length);
+                        console.log('Quantity input HTML:', $qtyInput[0]);
+                        console.log('Min attribute value:', $qtyInput.attr('min'));
+                        console.log('Current value:', $qtyInput.val());
+                        console.log('All attributes:', {
+                            min: $qtyInput.attr('min'),
+                            max: $qtyInput.attr('max'),
+                            step: $qtyInput.attr('step'),
+                            value: $qtyInput.attr('value'),
+                            name: $qtyInput.attr('name'),
+                            type: $qtyInput.attr('type')
+                        });
+
                         var minQty = parseInt($qtyInput.attr('min')) || 1;
+                        console.log('Parsed minQty:', minQty);
 
                         // Format number with commas for thousands
                         var formattedQty = minQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        console.log('Formatted quantity:', formattedQty);
+                        console.log('Target element #acf-min-qty:', $('#acf-min-qty'));
+
                         $('#acf-min-qty').text(formattedQty);
+                        console.log('=== End Debug ===');
                     },
 
                     updateQtyDisplay: function () {
