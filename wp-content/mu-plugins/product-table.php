@@ -260,35 +260,26 @@ class Custom_Product_Table
                     updatePricePerPiece: function () {
                         var qty = parseInt($('.input-text.qty.text.wcmmq-qty-input-box').val()) || 1;
                         var totalPrice = 0;
-                        console.log(qty)
-                        console.log(totalPrice)
 
                         // Try to get price from the main product price element
                         var priceElement = document.querySelector('.woocommerce:where(body:not(.woocommerce-uses-block-theme)) div.product span.price');
-                        console.log(priceElement)
 
                         if (priceElement) {
                             var priceText = priceElement.textContent.trim().replace(/,/g, '').replace(/[^0-9.]/g, '');
-                            console.log(priceText)
                             totalPrice = parseFloat(priceText);
                         } else {
                             // Fallback to jQuery selectors
                             var $price = $('.wapf-total-price').first();
-                            console.log($price)
                             if (!$price.length) {
                                 $price = $('.woocommerce-Price-amount').first();
-                                console.log($price)
                             }
                             if (!$price.length) {
                                 $price = $('.price .amount').first();
-                                console.log($price)
                             }
 
                             if ($price.length) {
                                 var priceText = $price.text().replace(/,/g, '').replace(/[^0-9.]/g, '');
-                                console.log(priceText)
                                 totalPrice = parseFloat(priceText);
-                                console.log(totalPrice)
                             }
                         }
 
@@ -387,12 +378,8 @@ class Custom_Product_Table
                             var $input = $('.input-text.qty.text.wcmmq-qty-input-box');
                             var current = parseInt($input.val()) || 1;
                             var max = parseInt($input.attr('max')) || 999999;
-                            console.log($input)
                             if (current < max) {
-                                console.log(max)
-                                console.log(current)
                                 $input.val(current + 1).trigger('change');
-                                console.log(current)
                             }
                         });
 
@@ -401,12 +388,8 @@ class Custom_Product_Table
                             var $input = $('input[name="quantity"]');
                             var current = parseInt($input.val()) || 1;
                             var min = parseInt($input.attr('min')) || 1;
-                            console.log($input)
                             if (current > min) {
-                                console.log(max)
-                                console.log(current)
                                 $input.val(current - 1).trigger('change');
-                                console.log(current)
                             }
                         });
 
