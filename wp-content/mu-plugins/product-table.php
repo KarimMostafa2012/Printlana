@@ -258,28 +258,37 @@ class Custom_Product_Table
                     },
 
                     updatePricePerPiece: function () {
-                        var qty = parseInt($('input[name="quantity"]').val()) || 1;
+                        var qty = parseInt($('.input-text.qty.text.wcmmq-qty-input-box').val()) || 1;
                         var totalPrice = 0;
+                        console.log(qty)
+                        console.log(totalPrice)
 
                         // Try to get price from the main product price element
                         var priceElement = document.querySelector('.woocommerce:where(body:not(.woocommerce-uses-block-theme)) div.product span.price');
+                        console.log(priceElement)
 
                         if (priceElement) {
                             var priceText = priceElement.textContent.trim().replace(/,/g, '').replace(/[^0-9.]/g, '');
+                            console.log(priceText)
                             totalPrice = parseFloat(priceText);
                         } else {
                             // Fallback to jQuery selectors
                             var $price = $('.wapf-total-price').first();
+                            console.log($price)
                             if (!$price.length) {
                                 $price = $('.woocommerce-Price-amount').first();
+                                console.log($price)
                             }
                             if (!$price.length) {
                                 $price = $('.price .amount').first();
+                                console.log($price)
                             }
 
                             if ($price.length) {
                                 var priceText = $price.text().replace(/,/g, '').replace(/[^0-9.]/g, '');
+                                console.log(priceText)
                                 totalPrice = parseFloat(priceText);
+                                console.log(totalPrice)
                             }
                         }
 
