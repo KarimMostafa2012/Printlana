@@ -384,12 +384,15 @@ class Custom_Product_Table
                         // Quantity buttons
                         $('.acf-qty-plus').on('click', function (e) {
                             e.preventDefault();
-                            var $input = $('input[name="quantity"]');
+                            var $input = $('.input-text.qty.text.wcmmq-qty-input-box');
                             var current = parseInt($input.val()) || 1;
                             var max = parseInt($input.attr('max')) || 999999;
-
+                            console.log($input)
                             if (current < max) {
+                                console.log(max)
+                                console.log(current)
                                 $input.val(current + 1).trigger('change');
+                                console.log(current)
                             }
                         });
 
@@ -398,9 +401,12 @@ class Custom_Product_Table
                             var $input = $('input[name="quantity"]');
                             var current = parseInt($input.val()) || 1;
                             var min = parseInt($input.attr('min')) || 1;
-
+                            console.log($input)
                             if (current > min) {
+                                console.log(max)
+                                console.log(current)
                                 $input.val(current - 1).trigger('change');
+                                console.log(current)
                             }
                         });
 
