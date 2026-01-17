@@ -659,7 +659,9 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         `;
                     }
 
-                    html += `</div>`
+                    if(columnContainer){
+                        html += `</div>`
+                    }
                 }
                 html += `</div>`
 
