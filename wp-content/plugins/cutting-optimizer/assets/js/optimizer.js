@@ -640,7 +640,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     // VERTICAL: Each column is a separate div with rows inside
                     for (let col = 0; col < detail.cols; col++) {
                         // Start column container
-                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(1*${detail.boxWidth} / ${detail.boxHeight}));">`;
+                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}),1);">`;
 
                         for (let row = 0; row < detail.rows; row++) {
                             html += `
