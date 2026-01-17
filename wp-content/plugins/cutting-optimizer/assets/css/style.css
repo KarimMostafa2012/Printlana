@@ -417,9 +417,9 @@
     font-size: 12px;
     font-weight: 600;
     color: #1565c0;
-    min-height: 30px;
     box-sizing: border-box;
     overflow: hidden;
+    flex: 1;
 }
 
 .co-box-number {

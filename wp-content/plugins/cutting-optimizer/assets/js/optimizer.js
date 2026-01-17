@@ -576,17 +576,14 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
                     const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
 
-                    html += `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: space-between;">`;
+                    html += `<div style="display: flex; flex-direction: column; justify-content: space-between; flex: 1; gap: 6px;">`;
 
                     for (let row = 0; row < layout.boxesPerStrip; row++) {
                         const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
                         const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
 
                         html += `
-                            <div class="co-box" style="
-                                width: ${colWidth}%;
-                                height: ${rowHeight}%;
-                            ">
+                            <div class="co-box">
                                 <span class="co-box-number">#${boxCounter++}</span>
                                 <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
                             </div>
@@ -601,17 +598,14 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
                     const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
 
-                    html += `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between;">`;
+                    html += `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; gap: 6px;">`;
 
                     for (let col = 0; col < layout.boxesPerStrip; col++) {
                         const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
                         const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
 
                         html += `
-                            <div class="co-box" style="
-                                width: ${colWidth}%;
-                                height: ${rowHeight}%;
-                            ">
+                            <div class="co-box">
                                 <span class="co-box-number">#${boxCounter++}</span>
                                 <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
                             </div>
@@ -655,10 +649,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
 
                         html += `
-                            <div class="co-box co-box-rotated" style="
-                                width: ${boxWidth}%;
-                                height: ${boxHeight}%;
-                            ">
+                            <div class="co-box co-box-rotated">
                                 <span class="co-box-number">#${boxCounter++}</span>
                                 <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
                             </div>
