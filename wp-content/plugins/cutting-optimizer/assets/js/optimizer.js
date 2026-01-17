@@ -576,7 +576,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
                     const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
 
-                    html += `<div style="display: flex; flex-direction: column; justify-content: space-between; flex: 1; gap: 6px;">`;
+                    html += `<div style="display: flex; flex-direction: column; justify-content: space-between; flex: 1; gap: 6px; flex: 1;">`;
 
                     for (let row = 0; row < layout.boxesPerStrip; row++) {
                         const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
