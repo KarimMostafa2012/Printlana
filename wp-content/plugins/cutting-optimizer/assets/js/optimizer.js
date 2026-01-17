@@ -1,6 +1,5 @@
 (function ($) {
     "use strict";
-    // refresh the flow
 
     class CuttingOptimizer {
         constructor(boxWidth, boxHeight, sheetWidth, sheetHeight, gap = 0.3) {
@@ -623,48 +622,56 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Calculate offset based on main layout
             let offsetLeft = 0;
             let offsetTop = 0;
-            let columnContainer = '';
-            let rowContainer = '';
+
             if (layout.layoutType === 'vertical') {
                 // Main boxes are vertical strips, remaining space is on the right
                 offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
                 offsetTop = 0;
-                columnContainer = `<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 6px; flex: 1;">`;
             } else {
                 // Main boxes are horizontal strips, remaining space is on the bottom
                 offsetLeft = 0;
                 offsetTop = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxHeight + optimizer.gap)) : 0;
-                rowContainer = `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
             }
 
             // Render each detail area
             layout.remainingDetails.forEach((detail, detailIndex) => {
-                // For simplicity, we'll render the first level of recursive details
-                // More complex layouts would need a full recursive rendering approach
+                if (layout.layoutType === 'vertical') {
+                    // VERTICAL: Each column is a separate div with rows inside
+                    for (let col = 0; col < detail.cols; col++) {
+                        // Start column container
+                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">`;
 
-                html += rowContainer;
-                for (let col = 0; col < detail.cols; col++) {
-                    html += columnContainer;
-                    for (let row = 0; row < detail.rows; row++) {
-                        const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
-                        const boxTop = ((offsetTop + row * (detail.boxHeight + optimizer.gap)) / actualSheetHeight) * 100;
-                        const boxWidth = (detail.boxWidth / actualSheetWidth) * 100;
-                        const boxHeight = (detail.boxHeight / actualSheetHeight) * 100;
+                        for (let row = 0; row < detail.rows; row++) {
+                            html += `
+                                <div class="co-box co-box-rotated" style="flex: 1;">
+                                    <span class="co-box-number">#${boxCounter++}</span>
+                                    <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                </div>
+                            `;
+                        }
 
-
-                        html += `
-                            <div class="co-box co-box-rotated">
-                                <span class="co-box-number">#${boxCounter++}</span>
-                                <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
-                            </div>
-                        `;
+                        // Close column container
+                        html += `</div>`;
                     }
+                } else {
+                    // HORIZONTAL: Each row is a separate div with columns inside
+                    for (let row = 0; row < detail.rows; row++) {
+                        // Start row container
+                        html += `<div style="display: flex; flex-direction: row; gap: 6px; width: 100%;">`;
 
-                    if(columnContainer){
-                        html += `</div>`
+                        for (let col = 0; col < detail.cols; col++) {
+                            html += `
+                                <div class="co-box co-box-rotated" style="flex: 1;">
+                                    <span class="co-box-number">#${boxCounter++}</span>
+                                    <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                </div>
+                            `;
+                        }
+
+                        // Close row container
+                        html += `</div>`;
                     }
                 }
-                html += `</div>`
 
                 // Update offset for next detail (simple stacking - may need refinement)
                 if (layout.layoutType === 'vertical') {
