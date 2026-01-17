@@ -1,5 +1,6 @@
 (function ($) {
     "use strict";
+    // refresh the flow
 
     class CuttingOptimizer {
         constructor(boxWidth, boxHeight, sheetWidth, sheetHeight, gap = 0.3) {
