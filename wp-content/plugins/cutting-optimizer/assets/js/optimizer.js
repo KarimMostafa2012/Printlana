@@ -37,12 +37,14 @@
                     totalBoxes: boxes1,
                     details: [{
                         boxes: boxes1,
-                        strips: cols1,
-                        boxesPerStrip: rows1,
+                        cols: cols1,
+                        rows: rows1,
                         orientation: `${boxW}×${boxH}`,
                         isRotated: false,
                         usedWidth: usedW1,
                         usedHeight: usedH1,
+                        boxWidth: boxW,
+                        boxHeight: boxH,
                     }]
                 };
 
@@ -91,12 +93,14 @@
                     totalBoxes: boxes2,
                     details: [{
                         boxes: boxes2,
-                        strips: cols2,
-                        boxesPerStrip: rows2,
+                        cols: cols2,
+                        rows: rows2,
                         orientation: `${boxH}×${boxW}`,
                         isRotated: true,
                         usedWidth: usedW2,
                         usedHeight: usedH2,
+                        boxWidth: boxH,
+                        boxHeight: boxW,
                     }]
                 };
 
@@ -188,6 +192,10 @@
                         usedHeight: totalUsedHeight,
                         mainOrientation: `${boxW}×${boxH}`,
                         layoutType: 'vertical',
+                        cols: numStrips,
+                        rows: boxesPerStrip,
+                        boxWidth: boxW,
+                        boxHeight: boxH,
                     });
                 }
             } else {
@@ -236,6 +244,10 @@
                         usedHeight: totalUsedHeight,
                         mainOrientation: `${boxW}×${boxH}`,
                         layoutType: 'horizontal',
+                        cols: boxesPerStrip,
+                        rows: numStrips,
+                        boxWidth: boxW,
+                        boxHeight: boxH,
                     });
                 }
             }
@@ -251,8 +263,6 @@
             layout1A.forEach(layout => {
                 layouts.push({
                     name: `Box ${this.boxWidth}×${this.boxHeight} - Vertical Strips`,
-                    boxWidth: this.boxWidth,
-                    boxHeight: this.boxHeight,
                     ...layout,
                 });
             });
@@ -261,8 +271,6 @@
             layout1B.forEach(layout => {
                 layouts.push({
                     name: `Box ${this.boxWidth}×${this.boxHeight} - Horizontal Strips`,
-                    boxWidth: this.boxWidth,
-                    boxHeight: this.boxHeight,
                     ...layout,
                 });
             });
@@ -272,8 +280,6 @@
             layout2A.forEach(layout => {
                 layouts.push({
                     name: `Box ${this.boxHeight}×${this.boxWidth} - Vertical Strips`,
-                    boxWidth: this.boxHeight,
-                    boxHeight: this.boxWidth,
                     ...layout,
                 });
             });
@@ -282,8 +288,6 @@
             layout2B.forEach(layout => {
                 layouts.push({
                     name: `Box ${this.boxHeight}×${this.boxWidth} - Horizontal Strips`,
-                    boxWidth: this.boxHeight,
-                    boxHeight: this.boxWidth,
                     ...layout,
                 });
             });
@@ -390,7 +394,7 @@
                             </div>
                             <div class="co-layout-boxes">${layout.totalBoxes} boxes</div>
                         </div>
-                        
+
                         <div class="co-layout-stats">
                             <div class="co-stat">
                                 <label>Used Area</label>
@@ -405,7 +409,7 @@
                                 <div class="value">${layout.efficiency.toFixed(2)}%</div>
                             </div>
                         </div>
-                        
+
                         <div class="co-efficiency-bar">
                             <label>Material Efficiency</label>
                             <div class="co-efficiency-track">
@@ -414,7 +418,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="co-layout-details">
                             <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
                             ${layout.mainBoxes > 0 ? `<p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>` : ''}
@@ -422,7 +426,7 @@
                                 <p><strong>Additional Boxes in Remaining Space:</strong></p>
                                 <ul style="margin: 5px 0; padding-left: 20px;">
                                     ${layout.remainingDetails.map(detail =>
-                    `<li>${detail.boxes} boxes (${detail.strips} strips × ${detail.boxesPerStrip} boxes) - ${detail.orientation} ${detail.isRotated ? '(rotated)' : ''}</li>`
+                    `<li>${detail.boxes} boxes (${detail.cols} cols × ${detail.rows} rows) - ${detail.orientation} ${detail.isRotated ? '(rotated)' : ''}</li>`
                 ).join('')}
                                 </ul>
                             ` : ''}
@@ -451,7 +455,7 @@
                             </div>
                             <div class="co-layout-boxes">${layout.totalBoxes} boxes</div>
                         </div>
-                        
+
                         <div class="co-layout-stats">
                             <div class="co-stat">
                                 <label>Used Area</label>
@@ -466,7 +470,7 @@
                                 <div class="value">${layout.efficiency.toFixed(2)}%</div>
                             </div>
                         </div>
-                        
+
                         <div class="co-efficiency-bar">
                             <label>Material Efficiency</label>
                             <div class="co-efficiency-track">
@@ -475,7 +479,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="co-layout-details">
                             <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
                             ${layout.mainBoxes > 0 ? `<p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>` : ''}
@@ -494,58 +498,97 @@
     }
 
     function renderVisualDiagram(layout, optimizer, layoutIndex) {
-        // [Visual diagram rendering - unchanged]
         let html = `
         <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
             <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 0 ? " (Optimal)" : ""}</h3>
             <div class="co-diagram-container">
         `;
 
-        const actualSheetWidth = layout.sheetRotated ? optimizer.sheetHeight : optimizer.sheetWidth;
-        const actualSheetHeight = layout.sheetRotated ? optimizer.sheetWidth : optimizer.sheetHeight;
+        const actualSheetWidth = optimizer.sheetWidth;
+        const actualSheetHeight = optimizer.sheetHeight;
         const totalUsedWidth = layout.usedWidth;
         const totalUsedHeight = layout.usedHeight;
         const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
         const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
-        const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
-        const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
-        const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
-        const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
 
-        html += `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
-                <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
-                <div class="co-sheet-label-width-left-line"></div>
-                <div class="co-sheet-label-width-right-line"></div>
-                <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
-                <div class="co-sheet-label-height-bottom-line"></div>
-                <div class="co-sheet-label-height-top-line"></div>
-                <div class="co-box-grid" style="
-                    grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
-                    grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
-                    gap: ${gapHeightPercent}% ${gapWidthPercent}%;
-                    width: ${usedWidthPercent}%;
-                    height: ${usedHeightPercent}%;
-                ">
-        `;
+        // Check if we have a simple layout (only main boxes, no recursive details)
+        const isSimpleLayout = !layout.remainingDetails || layout.remainingDetails.length === 0;
 
-        for (let i = 0; i < layout.totalBoxes; i++) {
+        if (isSimpleLayout && layout.mainBoxes > 0) {
+            // Simple grid layout
+            const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
+            const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+            const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
+            const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
+
             html += `
-                <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
-                    <span class="co-box-number">#${i + 1}</span>
+                <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
+                    <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
+                    <div class="co-sheet-label-width-left-line"></div>
+                    <div class="co-sheet-label-width-right-line"></div>
+                    <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
+                    <div class="co-sheet-label-height-bottom-line"></div>
+                    <div class="co-sheet-label-height-top-line"></div>
+                    <div class="co-box-grid" style="
+                        grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                        grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                        gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                        width: ${usedWidthPercent}%;
+                        height: ${usedHeightPercent}%;
+                    ">
+            `;
+
+            for (let i = 0; i < layout.totalBoxes; i++) {
+                html += `
+                    <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                        <span class="co-box-number">#${i + 1}</span>
+                    </div>
+                `;
+            }
+
+            html += `
+                    </div>
+                </div>
+                <div class="co-waste-info">
+                    <p><strong>Waste Areas:</strong></p>
+                    <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
+                    <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
+                </div>
+            `;
+        } else {
+            // Complex recursive layout - show summary
+            html += `
+                <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight}; position: relative; border: 2px solid #333; background: #f5f5f5;">
+                    <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
+                    <div class="co-sheet-label-width-left-line"></div>
+                    <div class="co-sheet-label-width-right-line"></div>
+                    <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
+                    <div class="co-sheet-label-height-bottom-line"></div>
+                    <div class="co-sheet-label-height-top-line"></div>
+
+                    <div style="padding: 20px; color: #666;">
+                        <p><strong>Complex Recursive Layout</strong></p>
+                        <p><strong>Total Boxes:</strong> ${layout.totalBoxes}</p>
+                        ${layout.mainBoxes > 0 ? `<p><strong>Main Grid:</strong> ${layout.mainBoxes} boxes (${layout.cols} × ${layout.rows})</p>` : ''}
+                        ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `
+                            <p><strong>Additional Areas:</strong></p>
+                            <ul style="margin: 5px 0; padding-left: 20px; font-size: 12px;">
+                                ${layout.remainingDetails.map(detail =>
+                                `<li>${detail.boxes} boxes (${detail.cols}×${detail.rows}) - ${detail.orientation}</li>`
+                            ).join('')}
+                            </ul>
+                        ` : ''}
+                        <p style="margin-top: 10px; font-size: 11px; font-style: italic;">Click on layout card to update visualization</p>
+                    </div>
+                </div>
+                <div class="co-waste-info">
+                    <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical' : 'Horizontal'} Strips with Recursive Filling</p>
+                    <p><strong>Waste Areas:</strong></p>
+                    <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
+                    <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
                 </div>
             `;
         }
-
-        html += `
-                </div>
-            </div>
-            <div class="co-waste-info">
-                <p><strong>Waste Areas:</strong></p>
-                <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
-                <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
-            </div>
-        `;
 
         html += `
             </div>
