@@ -1,6 +1,5 @@
 (function ($) {
     "use strict";
-    // reload flow
 
     class CuttingOptimizer {
         constructor(boxWidth, boxHeight, sheetWidth, sheetHeight, gap = 0.3) {
@@ -11,6 +10,129 @@
             this.gap = gap;
             this.boxArea = boxWidth * boxHeight;
             this.sheetArea = sheetWidth * sheetHeight;
+        }
+
+        // Recursively fill remaining space
+        fillRemainingSpace(remainingWidth, remainingHeight, boxW, boxH, depth = 0) {
+            if (depth > 3 || remainingWidth < Math.min(boxW, boxH) + this.gap ||
+                remainingHeight < Math.min(boxW, boxH) + this.gap) {
+                return [];
+            }
+
+            const effectiveBoxW = boxW + this.gap;
+            const effectiveBoxH = boxH + this.gap;
+
+            let bestConfig = { totalBoxes: 0, details: [] };
+
+            // Try original orientation (boxW × boxH)
+            const cols1 = Math.floor(remainingWidth / effectiveBoxW);
+            const rows1 = Math.floor(remainingHeight / effectiveBoxH);
+            const boxes1 = cols1 * rows1;
+
+            if (boxes1 > 0) {
+                const usedW1 = cols1 * effectiveBoxW - this.gap;
+                const usedH1 = rows1 * effectiveBoxH - this.gap;
+
+                const config1 = {
+                    totalBoxes: boxes1,
+                    details: [{
+                        boxes: boxes1,
+                        strips: cols1,
+                        boxesPerStrip: rows1,
+                        orientation: `${boxW}×${boxH}`,
+                        isRotated: false,
+                        usedWidth: usedW1,
+                        usedHeight: usedH1,
+                    }]
+                };
+
+                // Try to fill remaining spaces recursively
+                const rightSpace = this.fillRemainingSpace(
+                    remainingWidth - usedW1 - this.gap,
+                    usedH1,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                const bottomSpace = this.fillRemainingSpace(
+                    usedW1,
+                    remainingHeight - usedH1 - this.gap,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                const cornerSpace = this.fillRemainingSpace(
+                    remainingWidth - usedW1 - this.gap,
+                    remainingHeight - usedH1 - this.gap,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                config1.totalBoxes += rightSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config1.totalBoxes += bottomSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config1.totalBoxes += cornerSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config1.details = [...config1.details, ...rightSpace, ...bottomSpace, ...cornerSpace];
+
+                if (config1.totalBoxes > bestConfig.totalBoxes) {
+                    bestConfig = config1;
+                }
+            }
+
+            // Try rotated orientation (boxH × boxW)
+            const cols2 = Math.floor(remainingWidth / effectiveBoxH);
+            const rows2 = Math.floor(remainingHeight / effectiveBoxW);
+            const boxes2 = cols2 * rows2;
+
+            if (boxes2 > 0) {
+                const usedW2 = cols2 * effectiveBoxH - this.gap;
+                const usedH2 = rows2 * effectiveBoxW - this.gap;
+
+                const config2 = {
+                    totalBoxes: boxes2,
+                    details: [{
+                        boxes: boxes2,
+                        strips: cols2,
+                        boxesPerStrip: rows2,
+                        orientation: `${boxH}×${boxW}`,
+                        isRotated: true,
+                        usedWidth: usedW2,
+                        usedHeight: usedH2,
+                    }]
+                };
+
+                // Try to fill remaining spaces recursively
+                const rightSpace = this.fillRemainingSpace(
+                    remainingWidth - usedW2 - this.gap,
+                    usedH2,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                const bottomSpace = this.fillRemainingSpace(
+                    usedW2,
+                    remainingHeight - usedH2 - this.gap,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                const cornerSpace = this.fillRemainingSpace(
+                    remainingWidth - usedW2 - this.gap,
+                    remainingHeight - usedH2 - this.gap,
+                    boxW, boxH,
+                    depth + 1
+                );
+
+                config2.totalBoxes += rightSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config2.totalBoxes += bottomSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config2.totalBoxes += cornerSpace.reduce((sum, d) => sum + d.boxes, 0);
+                config2.details = [...config2.details, ...rightSpace, ...bottomSpace, ...cornerSpace];
+
+                if (config2.totalBoxes > bestConfig.totalBoxes) {
+                    bestConfig = config2;
+                }
+            }
+
+            return bestConfig.details;
         }
 
         // Calculate layout with specific number of main strips
@@ -26,43 +148,45 @@
                 const boxesPerStrip = Math.floor(this.sheetHeight / effectiveBoxH);
 
                 // Try different numbers of strips
-                for (let numStrips = 1; numStrips <= maxStrips; numStrips++) {
-                    const usedWidth = numStrips * effectiveBoxW - this.gap;
-                    const usedHeight = boxesPerStrip * effectiveBoxH - this.gap;
+                for (let numStrips = 0; numStrips <= maxStrips; numStrips++) {
+                    const usedWidth = numStrips > 0 ? numStrips * effectiveBoxW - this.gap : 0;
+                    const usedHeight = boxesPerStrip > 0 ? boxesPerStrip * effectiveBoxH - this.gap : 0;
                     const mainBoxes = numStrips * boxesPerStrip;
 
-                    const remainingWidth = this.sheetWidth - usedWidth - this.gap;
-                    const remainingHeight = this.sheetHeight; // FIX: Use full sheet height!
+                    const remainingWidth = this.sheetWidth - (usedWidth > 0 ? usedWidth + this.gap : 0);
+                    const remainingHeight = this.sheetHeight;
 
-                    // Try to fit rotated boxes in remaining space
-                    let rotatedBoxes = 0;
-                    let rotatedStrips = 0;
-                    let rotatedBoxesPerStrip = 0;
-                    let rotatedUsedWidth = 0;
+                    // Recursively fill remaining space
+                    const remainingDetails = this.fillRemainingSpace(
+                        remainingWidth,
+                        remainingHeight,
+                        boxW,
+                        boxH,
+                        0
+                    );
 
-                    if (remainingWidth >= effectiveBoxH) {
-                        rotatedStrips = Math.floor(remainingWidth / effectiveBoxH);
-                        rotatedBoxesPerStrip = Math.floor(remainingHeight / effectiveBoxW);
-                        rotatedBoxes = rotatedStrips * rotatedBoxesPerStrip;
-                        rotatedUsedWidth = rotatedStrips * effectiveBoxH - (rotatedStrips > 0 ? this.gap : 0);
-                    }
-
+                    const rotatedBoxes = remainingDetails.reduce((sum, d) => sum + d.boxes, 0);
                     const totalBoxes = mainBoxes + rotatedBoxes;
-                    const totalUsedWidth = usedWidth + (rotatedStrips > 0 ? this.gap : 0) + rotatedUsedWidth;
-                    const rotatedUsedHeight = rotatedBoxesPerStrip * effectiveBoxW - (rotatedBoxesPerStrip > 0 ? this.gap : 0);
+
+                    // Calculate total used dimensions
+                    let totalUsedWidth = usedWidth;
+                    let totalUsedHeight = usedHeight;
+
+                    remainingDetails.forEach(detail => {
+                        totalUsedWidth = Math.max(totalUsedWidth, usedWidth + (usedWidth > 0 ? this.gap : 0) + detail.usedWidth);
+                        totalUsedHeight = Math.max(totalUsedHeight, detail.usedHeight);
+                    });
 
                     allResults.push({
                         numStrips,
                         boxesPerStrip,
                         mainBoxes,
-                        rotatedStrips,
-                        rotatedBoxesPerStrip,
+                        remainingDetails,
                         rotatedBoxes,
                         totalBoxes,
                         usedWidth: totalUsedWidth,
-                        usedHeight: Math.max(usedHeight, rotatedUsedHeight),
+                        usedHeight: totalUsedHeight,
                         mainOrientation: `${boxW}×${boxH}`,
-                        rotatedOrientation: `${boxH}×${boxW}`,
                         layoutType: 'vertical',
                     });
                 }
@@ -72,49 +196,50 @@
                 const boxesPerStrip = Math.floor(this.sheetWidth / effectiveBoxW);
 
                 // Try different numbers of strips
-                for (let numStrips = 1; numStrips <= maxStrips; numStrips++) {
-                    const usedWidth = boxesPerStrip * effectiveBoxW - this.gap;
-                    const usedHeight = numStrips * effectiveBoxH - this.gap;
+                for (let numStrips = 0; numStrips <= maxStrips; numStrips++) {
+                    const usedWidth = boxesPerStrip > 0 ? boxesPerStrip * effectiveBoxW - this.gap : 0;
+                    const usedHeight = numStrips > 0 ? numStrips * effectiveBoxH - this.gap : 0;
                     const mainBoxes = numStrips * boxesPerStrip;
 
-                    const remainingWidth = this.sheetWidth; // FIX: Use full sheet width!
-                    const remainingHeight = this.sheetHeight - usedHeight - this.gap;
+                    const remainingWidth = this.sheetWidth;
+                    const remainingHeight = this.sheetHeight - (usedHeight > 0 ? usedHeight + this.gap : 0);
 
-                    // Try to fit rotated boxes in remaining space
-                    let rotatedBoxes = 0;
-                    let rotatedStrips = 0;
-                    let rotatedBoxesPerStrip = 0;
-                    let rotatedUsedHeight = 0;
+                    // Recursively fill remaining space
+                    const remainingDetails = this.fillRemainingSpace(
+                        remainingWidth,
+                        remainingHeight,
+                        boxW,
+                        boxH,
+                        0
+                    );
 
-                    if (remainingHeight >= effectiveBoxW) {
-                        rotatedStrips = Math.floor(remainingHeight / effectiveBoxW);
-                        rotatedBoxesPerStrip = Math.floor(remainingWidth / effectiveBoxH);
-                        rotatedBoxes = rotatedStrips * rotatedBoxesPerStrip;
-                        rotatedUsedHeight = rotatedStrips * effectiveBoxW - (rotatedStrips > 0 ? this.gap : 0);
-                    }
-
+                    const rotatedBoxes = remainingDetails.reduce((sum, d) => sum + d.boxes, 0);
                     const totalBoxes = mainBoxes + rotatedBoxes;
-                    const totalUsedHeight = usedHeight + (rotatedStrips > 0 ? this.gap : 0) + rotatedUsedHeight;
-                    const rotatedUsedWidth = rotatedBoxesPerStrip * effectiveBoxH - (rotatedBoxesPerStrip > 0 ? this.gap : 0);
+
+                    // Calculate total used dimensions
+                    let totalUsedWidth = usedWidth;
+                    let totalUsedHeight = usedHeight;
+
+                    remainingDetails.forEach(detail => {
+                        totalUsedWidth = Math.max(totalUsedWidth, detail.usedWidth);
+                        totalUsedHeight = Math.max(totalUsedHeight, usedHeight + (usedHeight > 0 ? this.gap : 0) + detail.usedHeight);
+                    });
 
                     allResults.push({
                         numStrips,
                         boxesPerStrip,
                         mainBoxes,
-                        rotatedStrips,
-                        rotatedBoxesPerStrip,
+                        remainingDetails,
                         rotatedBoxes,
                         totalBoxes,
-                        usedWidth: Math.max(usedWidth, rotatedUsedWidth),
+                        usedWidth: totalUsedWidth,
                         usedHeight: totalUsedHeight,
                         mainOrientation: `${boxW}×${boxH}`,
-                        rotatedOrientation: `${boxH}×${boxW}`,
                         layoutType: 'horizontal',
                     });
                 }
             }
 
-            // Return ALL results (not just the best one)
             return allResults;
         }
 
@@ -122,7 +247,6 @@
             const layouts = [];
 
             // Combination 1: Original box orientation (boxWidth × boxHeight)
-            // Option A: Vertical strips
             const layout1A = this.calculateStripLayout(this.boxWidth, this.boxHeight, true);
             layout1A.forEach(layout => {
                 layouts.push({
@@ -133,7 +257,6 @@
                 });
             });
 
-            // Option B: Horizontal strips
             const layout1B = this.calculateStripLayout(this.boxWidth, this.boxHeight, false);
             layout1B.forEach(layout => {
                 layouts.push({
@@ -145,7 +268,6 @@
             });
 
             // Combination 2: Rotated box orientation (boxHeight × boxWidth)
-            // Option A: Vertical strips
             const layout2A = this.calculateStripLayout(this.boxHeight, this.boxWidth, true);
             layout2A.forEach(layout => {
                 layouts.push({
@@ -156,7 +278,6 @@
                 });
             });
 
-            // Option B: Horizontal strips
             const layout2B = this.calculateStripLayout(this.boxHeight, this.boxWidth, false);
             layout2B.forEach(layout => {
                 layouts.push({
@@ -209,10 +330,7 @@
         const optimal = layouts[0];
         const maxBoxCount = optimal.totalBoxes;
 
-        // Find ALL optimal solutions (same box count as the best)
         const optimalLayouts = layouts.filter(layout => layout.totalBoxes === maxBoxCount);
-
-        // Filter remaining layouts with efficiency > 70%
         const efficientLayouts = layouts.filter(layout =>
             layout.efficiency > 70 && layout.totalBoxes < maxBoxCount
         );
@@ -249,7 +367,6 @@
             </div>
         `;
 
-        // Show ALL optimal layouts
         if (optimalLayouts.length > 0) {
             html += `
                 <div class="co-optimal-badge">
@@ -258,9 +375,7 @@
                 </div>
             `;
 
-            // Add visual diagram for FIRST optimal layout
             html += renderVisualDiagram(optimalLayouts[0], optimizer, 0);
-
             html += `<div class="co-layouts"><h3>Optimal Solutions (${maxBoxCount} boxes)</h3>`;
 
             optimalLayouts.forEach((layout, index) => {
@@ -302,8 +417,15 @@
                         
                         <div class="co-layout-details">
                             <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
-                            <p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>
-                            ${layout.rotatedBoxes > 0 ? `<p><strong>Rotated Boxes:</strong> ${layout.rotatedBoxes} boxes (${layout.rotatedStrips} strips × ${layout.rotatedBoxesPerStrip} boxes per strip) - Orientation: ${layout.rotatedOrientation}</p>` : ''}
+                            ${layout.mainBoxes > 0 ? `<p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>` : ''}
+                            ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `
+                                <p><strong>Additional Boxes in Remaining Space:</strong></p>
+                                <ul style="margin: 5px 0; padding-left: 20px;">
+                                    ${layout.remainingDetails.map(detail =>
+                    `<li>${detail.boxes} boxes (${detail.strips} strips × ${detail.boxesPerStrip} boxes) - ${detail.orientation} ${detail.isRotated ? '(rotated)' : ''}</li>`
+                ).join('')}
+                                </ul>
+                            ` : ''}
                             <p><strong>Used Dimensions:</strong> ${layout.usedWidth.toFixed(1)} × ${layout.usedHeight.toFixed(1)} mm</p>
                             <p><strong>Waste:</strong> ${layout.wasteWidth.toFixed(1)} mm (width) × ${layout.wasteHeight.toFixed(1)} mm (height)</p>
                         </div>
@@ -314,12 +436,11 @@
             html += "</div>";
         }
 
-        // Show other efficient layouts
         if (efficientLayouts.length > 0) {
             html += `<div class="co-layouts"><h3>Other Efficient Options (>70% Efficiency)</h3>`;
             html += `<p style="color: #666; margin-bottom: 20px;">Showing ${efficientLayouts.length} additional efficient layouts</p>`;
 
-            efficientLayouts.forEach((layout, index) => {
+            efficientLayouts.slice(0, 10).forEach((layout, index) => {
                 const layoutIndex = layouts.indexOf(layout);
 
                 html += `
@@ -357,8 +478,8 @@
                         
                         <div class="co-layout-details">
                             <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
-                            <p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>
-                            ${layout.rotatedBoxes > 0 ? `<p><strong>Rotated Boxes:</strong> ${layout.rotatedBoxes} boxes (${layout.rotatedStrips} strips × ${layout.rotatedBoxesPerStrip} boxes per strip) - Orientation: ${layout.rotatedOrientation}</p>` : ''}
+                            ${layout.mainBoxes > 0 ? `<p><strong>Main Boxes:</strong> ${layout.mainBoxes} boxes (${layout.numStrips} strips × ${layout.boxesPerStrip} boxes per strip) - Orientation: ${layout.mainOrientation}</p>` : ''}
+                            ${layout.rotatedBoxes > 0 ? `<p><strong>Additional Boxes:</strong> ${layout.rotatedBoxes} boxes</p>` : ''}
                             <p><strong>Used Dimensions:</strong> ${layout.usedWidth.toFixed(1)} × ${layout.usedHeight.toFixed(1)} mm</p>
                             <p><strong>Waste:</strong> ${layout.wasteWidth.toFixed(1)} mm (width) × ${layout.wasteHeight.toFixed(1)} mm (height)</p>
                         </div>
@@ -373,130 +494,19 @@
     }
 
     function renderVisualDiagram(layout, optimizer, layoutIndex) {
+        // Simplified rendering - will need to be enhanced for complex recursive layouts
         let html = `
         <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
-            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 0 ? " (Optimal)" : ""}</h3>
+            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout Preview</h3>
             <div class="co-diagram-container">
-        `;
-
-        const actualSheetWidth = optimizer.sheetWidth;
-        const actualSheetHeight = optimizer.sheetHeight;
-        const totalUsedWidth = layout.usedWidth;
-        const totalUsedHeight = layout.usedHeight;
-        const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
-        const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
-
-        html += `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
-                <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
-                <div class="co-sheet-label-width-left-line"></div>
-                <div class="co-sheet-label-width-right-line"></div>
-                <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
-                <div class="co-sheet-label-height-bottom-line"></div>
-                <div class="co-sheet-label-height-top-line"></div>
-                <div style="display: flex; flex-direction: ${layout.layoutType === 'vertical' ? 'row' : 'column'}; width: ${usedWidthPercent}%; height: ${usedHeightPercent}%; padding: 10px; box-sizing: border-box; gap: ${optimizer.gap}px;">
-        `;
-
-        let boxCounter = 1;
-
-        if (layout.layoutType === 'vertical') {
-            // Render main vertical strips
-            const stripWidth = (layout.boxWidth / totalUsedWidth) * 100;
-            const boxHeight = (layout.boxHeight / totalUsedHeight) * 100;
-            const gapPercent = (optimizer.gap / totalUsedWidth) * 100;
-
-            for (let s = 0; s < layout.numStrips; s++) {
-                html += `<div style="display: flex; flex-direction: column; width: ${stripWidth}%; height: 100%; gap: ${(optimizer.gap / totalUsedHeight) * 100}%;">`;
-
-                for (let b = 0; b < layout.boxesPerStrip; b++) {
-                    html += `
-                        <div class="co-box" style="width: 100%; height: ${boxHeight}%; flex-shrink: 0;">
-                            <span class="co-box-number">#${boxCounter++}</span>
-                            <div style="font-size: 9px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
-                        </div>
-                    `;
-                }
-
-                html += `</div>`;
-            }
-
-            // Render rotated vertical strips
-            if (layout.rotatedBoxes > 0) {
-                const rotatedStripWidth = (layout.boxHeight / totalUsedWidth) * 100;
-                const rotatedBoxHeight = (layout.boxWidth / totalUsedHeight) * 100;
-
-                for (let s = 0; s < layout.rotatedStrips; s++) {
-                    html += `<div style="display: flex; flex-direction: column; width: ${rotatedStripWidth}%; height: 100%; gap: ${(optimizer.gap / totalUsedHeight) * 100}%;">`;
-
-                    for (let b = 0; b < layout.rotatedBoxesPerStrip; b++) {
-                        html += `
-                            <div class="co-box co-box-rotated" style="width: 100%; height: ${rotatedBoxHeight}%; flex-shrink: 0;">
-                                <span class="co-box-number">#${boxCounter++}</span>
-                                <div style="font-size: 9px; margin-top: 2px;">${layout.boxHeight}×${layout.boxWidth}</div>
-                            </div>
-                        `;
-                    }
-
-                    html += `</div>`;
-                }
-            }
-        } else {
-            // Render main horizontal strips
-            const stripHeight = (layout.boxHeight / totalUsedHeight) * 100;
-            const boxWidth = (layout.boxWidth / totalUsedWidth) * 100;
-            const gapPercent = (optimizer.gap / totalUsedHeight) * 100;
-
-            for (let s = 0; s < layout.numStrips; s++) {
-                html += `<div style="display: flex; flex-direction: row; width: 100%; height: ${stripHeight}%; gap: ${(optimizer.gap / totalUsedWidth) * 100}%;">`;
-
-                for (let b = 0; b < layout.boxesPerStrip; b++) {
-                    html += `
-                        <div class="co-box" style="width: ${boxWidth}%; height: 100%; flex-shrink: 0;">
-                            <span class="co-box-number">#${boxCounter++}</span>
-                            <div style="font-size: 9px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
-                        </div>
-                    `;
-                }
-
-                html += `</div>`;
-            }
-
-            // Render rotated horizontal strips
-            if (layout.rotatedBoxes > 0) {
-                const rotatedStripHeight = (layout.boxWidth / totalUsedHeight) * 100;
-                const rotatedBoxWidth = (layout.boxHeight / totalUsedWidth) * 100;
-
-                for (let s = 0; s < layout.rotatedStrips; s++) {
-                    html += `<div style="display: flex; flex-direction: row; width: 100%; height: ${rotatedStripHeight}%; gap: ${(optimizer.gap / totalUsedWidth) * 100}%;">`;
-
-                    for (let b = 0; b < layout.rotatedBoxesPerStrip; b++) {
-                        html += `
-                            <div class="co-box co-box-rotated" style="width: ${rotatedBoxWidth}%; height: 100%; flex-shrink: 0;">
-                                <span class="co-box-number">#${boxCounter++}</span>
-                                <div style="font-size: 9px; margin-top: 2px;">${layout.boxHeight}×${layout.boxWidth}</div>
-                            </div>
-                        `;
-                    }
-
-                    html += `</div>`;
-                }
-            }
-        }
-
-        html += `
-                </div>
-            </div>
-            <div class="co-waste-info">
-                <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
-                <p><strong>Main Boxes:</strong> ${layout.mainBoxes} (${layout.mainOrientation})</p>
-                ${layout.rotatedBoxes > 0 ? `<p><strong>Rotated Boxes:</strong> ${layout.rotatedBoxes} (${layout.rotatedOrientation})</p>` : ''}
-                <p><strong>Waste Areas:</strong></p>
-                <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
-                <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
-            </div>
-        `;
-
-        html += `
+                <p style="color: #666; padding: 20px;">
+                    <strong>Layout Summary:</strong><br/>
+                    Total Boxes: ${layout.totalBoxes}<br/>
+                    Main Area: ${layout.mainBoxes} boxes<br/>
+                    Additional Areas: ${layout.rotatedBoxes} boxes<br/>
+                    <br/>
+                    <em>Complex recursive layouts - detailed visualization coming soon</em>
+                </p>
             </div>
         </div>
         `;
