@@ -52,23 +52,29 @@ if( isset( $this->topbar_sub_title ) && ! empty( $this->topbar_sub_title ) ){
         </div>
         <div class="col-lg-5">
             <div class="header-button-wrapper">
-                <?php if( ! $this->is_pro){ ?>
+                <?php if( ! wcmmq_is_premium_installed() && ! wcmmq_is_old_dir() ){ ?>
                     <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
-                        href="https://codeastrology.com/min-max-quantity/pricing/" 
+                        href="https://checkout.freemius.com/plugin/21522/" 
                         target="_blank">
                         <i class="wcmmq_icon-spin5 animate-spin"></i>
-                        Get Premium
+                        Freemius Checkout
                     </a>
-                <?php }else if($license_direct){ ?>
+                <?php }else if( $this->is_pro && $license_direct && wcmmq_is_old_dir() ){ ?>
                     <a class="wcmmq-btn wcmmq-has-icon wcmmq-btn-tiny" 
                         href="<?php esc_attr( admin_url() ) ?>admin.php?page=wcmmq-license">
                         <span><i class="wcmmq_icon-plug"></i></span>
                         License
                     </a>
-                <?php } ?>
+                <?php }else if( ! wcmmq_is_old_dir() ){ ?>
+                <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
+                    href="https://customers.freemius.com/store/9916/websites" 
+                    target="_blank">
+                    <i class="wcmmq_icon-user"></i>Login Store
+                </a>    
+                    <?php } ?>
                 
                 <a class="wcmmq-btn wcmmq-btn-tiny" 
-                    href="https://codeastrology.com/my-support/?utm=Plugin_Social" 
+                    href="<?php echo esc_url( admin_url('admin.php?page=wcmmq-min-max-control-contact') ) ?>" 
                     target="_blank">
                     <i class="wcmmq_icon-user"></i>Support
                 </a>

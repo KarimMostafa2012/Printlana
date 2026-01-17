@@ -8,8 +8,8 @@ class WCML_Install {
 	const CHUNK_SIZE = 1000;
 
 	/**
-	 * @param woocommerce_wpml $woocommerce_wpml
-	 * @param SitePress        $sitepress
+	 * @param woocommerce_wpml      $woocommerce_wpml
+	 * @param \WPML\Core\ISitePress $sitepress
 	 */
 	public static function initialize( $woocommerce_wpml, $sitepress ) {
 		if ( is_admin() ) {
@@ -26,7 +26,7 @@ class WCML_Install {
 	 * @param woocommerce_wpml $woocommerce_wpml
 	 * @param SitePress        $sitepress
 	 */
-	private static function initialize_full( $woocommerce_wpml, $sitepress ) {
+	private static function initialize_full( $woocommerce_wpml, SitePress $sitepress ) {
 		// Install routine.
 		if ( empty( $woocommerce_wpml->settings['set_up'] ) ) { // from 3.2.
 
@@ -106,7 +106,7 @@ class WCML_Install {
 			]
 		);
 
-		$WCML_Setup_UI = new WCML_Setup_UI( $woocommerce_wpml );
+		$WCML_Setup_UI = new WCML_Setup_UI();
 		$WCML_Setup_UI->add_hooks();
 		$WCML_Setup = new WCML_Setup( $WCML_Setup_UI, new WCML_Setup_Handlers( $woocommerce_wpml ), $woocommerce_wpml, $sitepress );
 		$WCML_Setup->setup_redirect();
@@ -312,7 +312,7 @@ class WCML_Install {
 		$settings = $woocommerce_wpml->get_settings();
 
 		$default_language   = $sitepress->get_default_language();
-		$default_categories = isset( $settings['default_categories'] ) ? $settings['default_categories'] : [];
+		$default_categories = $settings['default_categories'] ?? [];
 
 		foreach ( $sitepress->get_active_languages() as $language ) {
 			if ( isset( $default_categories[ $language['code'] ] ) ) {
@@ -330,7 +330,7 @@ class WCML_Install {
 				$translated_term = wp_insert_term( $translated_cat_name, 'product_cat' );
 			}
 
-			if ( $translated_term && ! is_wp_error( $translated_term ) ) {
+			if ( ! is_wp_error( $translated_term ) && is_array( $translated_term ) ) {
 				// add it to settings.
 				$settings['default_categories'][ $language['code'] ] = $translated_term['term_taxonomy_id'];
 

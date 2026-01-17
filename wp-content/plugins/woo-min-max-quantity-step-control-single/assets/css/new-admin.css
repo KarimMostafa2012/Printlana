@@ -5,6 +5,9 @@
 body #wpcontent {
     padding-left: 0;
 }
+.wrap,.wrap.fs-section{
+    margin: 30px 50px;
+}
 body.tracker-added.allow-tracker-body #wpbody-content {
     display: none;
 }

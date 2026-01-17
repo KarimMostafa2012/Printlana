@@ -5,6 +5,7 @@ use CA_Framework\App\Notice as Notice;
 use CA_Framework\App\Require_Control as Require_Control;
 
 include_once __DIR__ . '/ca-framework/framework.php';
+include_once __DIR__ . '/offr-manage.php';
 
 if( ! class_exists( 'Plugin_Required' ) ){
 
@@ -48,7 +49,21 @@ if( ! class_exists( 'Plugin_Required' ) ){
             self::$stop_next += $req_wc_next;
             
             if( ! $req_wc_next ){
-                self::display_notice();
+                // self::display_notice();
+
+                new \WCMMQ_Offer_Management( array(
+                    'coupon_code' => 'BLACKFRIDAY50',
+                    'pricing_url'  => 'https://codeastrology.com/min-max-quantity/pricing/', // coupon অটো-অ্যাড হবে
+                    'last_date'    => '15 Dec 2025',
+                    'plugin_name' => 'Min Max Control (Premium)',
+                    // 'message'      => '🎉 <strong>Limited Time:</strong> Use {coupon} to get 50% off until {last_date}. <a href="{pricing_url}" target="_blank">See pricing</a>.',
+                    'message'      => '<h3>BLACK FRIDAY OFFER</h3> For <strong>{plugin_name}</strong> | Claim {coupon} and enjoy 50% discount before {last_date}. <a href="{pricing_url}" target="_blank">Get Offer</a>',
+                    'claim_text'   => 'Get 50% OFF Now →',
+                    // bundle_one / bundle_two optional if you want to override defaults:
+                    // 'bundle_one' => array( 'label' => '3 IN 1 Bundle', 'url' => 'https://checkout...' ),
+                    // 'bundle_two' => array( 'label' => 'All IN 1 Bundle', 'url' => 'https://checkout...' ),
+                    'logo'         => 'https://ps.w.org/woo-min-max-quantity-step-control-single/assets/icon-128x128.png',
+                ) );
             }
 
             return self::$stop_next;

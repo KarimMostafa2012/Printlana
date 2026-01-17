@@ -9,7 +9,7 @@ if(File_Upload::can_upload()) {
         $allows_multiple    = isset($model['field']->options['multiple']) && $model['field']->options['multiple'];
         $base_url           = File_Upload::get_base_upload_url();
         $dropzone_options   = [
-	        'maxFiles'              => $allows_multiple ? 99 : 1,
+	        'maxFiles'              => $allows_multiple ? 9999 : 1,
 	        'thumbnailWidth'        => 1000,
 	        'thumbnailHeight'       => 1000,
 	        'dictFileTooBig'        => __('File is too big ({{filesize}}MB). Max filesize is {{maxFilesize}}MB.','sw-wapf'),

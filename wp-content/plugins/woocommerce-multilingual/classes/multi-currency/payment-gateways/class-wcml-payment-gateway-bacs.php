@@ -51,7 +51,7 @@ class WCML_Payment_Gateway_Bacs extends WCML_Payment_Gateway {
 			}
 		}
 
-		return $allowed_accounts ? $allowed_accounts : $accounts;
+		return $allowed_accounts ?: $accounts;
 	}
 
 }

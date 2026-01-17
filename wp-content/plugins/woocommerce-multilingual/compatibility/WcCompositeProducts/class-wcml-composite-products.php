@@ -261,7 +261,7 @@ class WCML_Composite_Products extends WCML_Compatibility_Helper implements \IWPM
 				}
 			}
 
-			if( $translation ){
+			if ( is_object( $translation ) ) {
 				$translated_composite_data = $this->get_composite_data( $translation->ID );
 
 				foreach( $composite_data as $component_id => $component ){

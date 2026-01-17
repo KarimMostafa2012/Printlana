@@ -289,6 +289,35 @@ class Frontend {
                 /* translators: %s: store name */
                 $errors->add( 'dokan_store_pickup_location_error', sprintf( __( 'Please make sure you have selected the store pickup location for %1$s.', 'dokan' ), $data['store_name'] ) );
             }
+
+            // Additional validation for hour-based buffer
+            if ( ! empty( $data['vendor_id'] ) && ! empty( $data['delivery_date'] ) && ! empty( $data['delivery_time_slot'] ) ) {
+                $vendor_id = (int) $data['vendor_id'];
+                $settings  = Helper::get_delivery_time_settings( $vendor_id );
+                $unit      = isset( $settings['delivery_buffer_unit'] ) ? $settings['delivery_buffer_unit'] : 'days';
+
+                if ( 'hours' === $unit ) {
+                    $earliest     = Helper::get_earliest_delivery_datetime( $vendor_id, dokan_current_datetime() );
+                    $earliest_date = $earliest->format( 'Y-m-d' );
+                    $earliest_time = $earliest->format( 'g:i a' );
+
+                    $selected_date = $data['delivery_date'];
+                    $selected_slot = $data['delivery_time_slot'];
+                    $parts        = explode( ' - ', $selected_slot );
+                    $slot_start    = isset( $parts[0] ) ? trim( $parts[0] ) : '';
+
+                    if ( $selected_date < $earliest_date ) {
+                        /* translators: 1: store name, 2: earliest datetime */
+                        $errors->add( 'dokan_delivery_time_earliest_error', sprintf( __( 'The selected time for %1$s is too soon. Earliest available is %2$s.', 'dokan' ), $data['store_name'], Helper::get_formatted_delivery_date_time_string( $earliest_date, $earliest_time . ' - ' . $earliest_time ) ) );
+                    } elseif ( $selected_date === $earliest_date && ! empty( $slot_start ) ) {
+                        $slot_end = isset( $parts[1] ) ? trim( $parts[1] ) : '';
+                        if ( ! empty( $slot_end ) && strtotime( $slot_end ) <= strtotime( $earliest_time ) ) {
+                            /* translators: 1: store name, 2: earliest time */
+                            $errors->add( 'dokan_delivery_time_earliest_error', sprintf( __( 'Please select a time on or after %2$s for %1$s.', 'dokan' ), $data['store_name'], $earliest_time ) );
+                        }
+                    }
+                }
+            }
         }
     }
 

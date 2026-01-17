@@ -69,13 +69,6 @@ class Payment {
         $stripe_fee                 = self::get_stripe_fee( $intent );
         $sellers_pay_processing_fee = Settings::sellers_pay_processing_fees();
 
-        if ( $order->get_meta( 'has_sub_order' ) ) {
-            OrderMeta::update_dokan_gateway_fee( $order, $stripe_fee );
-            OrderMeta::save( $order );
-            /* translators: 1) gateway title, 2) processing fee with currency */
-            $order->add_order_note( sprintf( __( '[%1$s] Gateway processing fee: %2$s', 'dokan' ), Helper::get_gateway_title(), wc_price( $stripe_fee, [ 'currency' => $order->get_currency() ] ) ) );
-        }
-
         foreach ( $all_orders as $sub_order ) {
             if ( ! $sub_order instanceof WC_Order ) {
                 continue;
@@ -111,7 +104,6 @@ class Payment {
             }
 
             if ( $sellers_pay_processing_fee ) {
-                $vendor_raw_earning = $vendor_raw_earning - $stripe_fee_for_vendor;
                 OrderMeta::update_gateway_fee_paid_by( $sub_order, 'seller' );
             } else {
                 OrderMeta::update_gateway_fee_paid_by( $sub_order, 'admin' );
@@ -756,6 +748,21 @@ class Payment {
         if ( 'yes' === $captured ) {
             switch ( $response->status ) {
                 case 'succeeded':
+                    // save the gateway fee provider
+                    $order->update_meta_data( 'dokan_gateway_fee_paid_by', Settings::sellers_pay_processing_fees() ? 'seller' : 'admin' );
+                    $order->save();
+                    $processing_fee = self::get_gateway_fee_from_charge( $response->id );
+
+                    /**
+                     * Process the gateway fee for the suborder
+                     *
+                     * @param float $processing_fee
+                     * @param WC_Order $order
+                     *
+                     * @since 4.1.1
+                     */
+                    do_action( 'dokan_process_payment_gateway_fee', $processing_fee, $order, Helper::get_gateway_id() );
+
                     OrderMeta::update_transaction_id( $order, $response->id );
                     OrderMeta::save( $order );
 
@@ -821,14 +828,6 @@ class Payment {
                     $response->id
                 )
             );
-        }
-
-        $processing_fee = self::get_gateway_fee_from_charge( $response->id );
-        dokan_log( print_r( $processing_fee, 1 ) );
-        if ( $processing_fee ) {
-            OrderMeta::update_stripe_fee( $order, $processing_fee );
-            OrderMeta::update_dokan_gateway_fee( $order, $processing_fee );
-            OrderMeta::save( $order );
         }
 
         do_action( 'dokan_stripe_express_process_response', $response, $order );

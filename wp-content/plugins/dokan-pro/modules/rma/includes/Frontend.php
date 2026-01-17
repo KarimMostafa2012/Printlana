@@ -4,6 +4,7 @@ namespace WeDevs\DokanPro\Modules\RMA;
 
 use WeDevs\Dokan\CatalogMode\Helper as CatalogModeHelper;
 use WeDevs\DokanPro\Modules\RMA\Traits\RMACommon;
+use WP_REST_Request;
 
 /**
 * Frontend product and cart management
@@ -35,7 +36,28 @@ class Frontend {
 
         // Dokan Catalog Mode Integration
         add_filter( 'dokan_rma_addons_add_to_cart_text', [ $this, 'change_rma_add_to_cart_text' ], 10, 2 );
+        add_filter( 'woocommerce_store_api_add_to_cart_data', [ $this, 'rma_add_to_cart_data' ], 10, 2 );
     }
+
+    /**
+     * Add RMA-related data from the Store API request to the global $_REQUEST array.
+     * This ensures compatibility with Dokan RMA Addons, allowing it to process the
+     * warranty details correctly when the item is added to the cart.
+     *
+     * @param $add_to_cart_data
+     * @param WP_REST_Request $request
+     *
+     * @return mixed
+     */
+    public function rma_add_to_cart_data( $cart_data, WP_REST_Request $request ) {
+        $dokan_warranty = $request->get_param( 'dokan_warranty' );
+        if ( ! isset( $dokan_warranty ) ) {
+            return $cart_data;
+        }
+        $_REQUEST['dokan_warranty'] = $dokan_warranty;
+        $cart_data['cart_item_data']['dokan_warranty_index'] = $dokan_warranty;
+		return $cart_data;
+	}
 
     /**
      * Show a product's warranty information

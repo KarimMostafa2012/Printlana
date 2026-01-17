@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "de"
          },
          "WPML has detected changed or new MO files": [
             "WPML hat geänderte oder neue MO-DATEIEN entdeckt"

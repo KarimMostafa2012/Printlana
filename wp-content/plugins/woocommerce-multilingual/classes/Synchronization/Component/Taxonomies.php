@@ -4,9 +4,7 @@ namespace WCML\Synchronization\Component;
 
 use WCML\Terms\SuspendWpmlFiltersFactory;
 use WCML\Utilities\DB;
-use WPML\FP\Fns;
 use WPML_Non_Persistent_Cache;
-
 class Taxonomies extends Synchronizer {
 
 	/**
@@ -20,7 +18,6 @@ class Taxonomies extends Synchronizer {
 			$this->runForTranslation( $product->ID, $translationId, $language );
 		}
 		$filtersSuspend->resume();
-		$ekGlobalFlag = false;
 	}
 
 	/**

@@ -1,0 +1,26 @@
+{
+  "name":"wpserveur/wps-bidouille",
+  "description":"WPS Bidouille provides information about your WordPress and contains optimization tools.",
+  "keywords":[
+    "admin",
+    "tools",
+    "error",
+    "login",
+    "transient"
+  ],
+  "homepage":"https://www.wpserveur.net/",
+  "authors":[
+    {
+      "name":"WPServeur",
+      "email":"nicolas@wpserveur.net",
+      "homepage":"https://www.wpserveur.net/",
+      "role": "Lead Developer"
+    }
+  ],
+  "type":"wordpress-plugin",
+  "minimum-stability":"stable",
+  "license":"GPL-3.0+",
+  "require":{
+    "php":">=5.6.0"
+  }
+}

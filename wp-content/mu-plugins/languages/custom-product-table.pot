@@ -1,0 +1,68 @@
+# Copyright (C) 2025 Printlana
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Product Table 1.0.0\n"
+"Report-Msgid-Bugs-To: https://printlana.com\n"
+"POT-Creation-Date: 2025-01-12 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Manual\n"
+"X-Domain: custom-product-table\n"
+
+#: product-table.php:96
+msgid "Minimum Order"
+msgstr ""
+
+#: product-table.php:100
+msgid "Piece"
+msgstr ""
+
+#: product-table.php:106
+msgid "Price per piece decreases with increased order quantity"
+msgstr ""
+
+#: product-table.php:112
+msgid "Product"
+msgstr ""
+
+#: product-table.php:113
+msgid "Price of Piece"
+msgstr ""
+
+#: product-table.php:114
+msgid "Time of Production"
+msgstr ""
+
+#: product-table.php:115
+msgid "Quantity"
+msgstr ""
+
+#: product-table.php:163
+msgid "Decrease quantity"
+msgstr ""
+
+#: product-table.php:166
+msgid "Increase quantity"
+msgstr ""
+
+#: product-table.php:182
+msgid "Loading..."
+msgstr ""
+
+#: product-table.php:183
+msgid "No image"
+msgstr ""
+
+#: product-table.php:184
+msgid "N/A"
+msgstr ""
+
+#: product-table.php:321
+msgid "Documentation"
+msgstr ""

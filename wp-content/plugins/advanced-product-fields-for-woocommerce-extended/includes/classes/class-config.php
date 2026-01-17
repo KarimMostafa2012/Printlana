@@ -18,6 +18,15 @@ namespace SW_WAPF_PRO\Includes\Classes {
                     ]
                 ],
                 [
+                    'type'          => 'calc',
+                    'conditions'    => [
+                        ['value' => '==', 'label' => __('Result is equal to','sw-wapf'), 'type' => 'text'],
+                        ['value' => '!=', 'label' => __('Result is not equal to','sw-wapf'), 'type' => 'text'],
+                        ['value' => 'gt', 'label' => __('Result is greater than','sw-wapf'), 'type' => 'number'],
+                        ['value' => 'lt', 'label' => __('Result is lesser than','sw-wapf'), 'type' => 'number'],
+                    ]
+                ],
+                [
                     'type'          => 'email',
                     'conditions'    => [
                         ['value' => '==', 'label' => __('Value is equal to','sw-wapf'), 'type' => 'text'],
@@ -199,7 +208,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
                     }
 
-        public static function get_fieldgroup_visibility_conditions(): array {
+                public static function get_fieldgroup_visibility_conditions(): array {
 
             $product_options = [
 
@@ -226,14 +235,14 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'conditions'    => [
                                 [
                                     'id'    => 'role',
-                                    'label' => __('Is equal to', 'sw-wapf'),
+                                    'label' => __('Is', 'sw-wapf'),
                                     'value' => [
                                         'type'          => 'select',
                                         'data'          => Helper::get_all_roles()
                                     ]
                                 ], [
                                     'id'    => '!role',
-                                    'label' => __('Is not equal to', 'sw-wapf'),
+                                    'label' => __('Is not', 'sw-wapf'),
                                     'value' => [
                                         'type'          => 'select',
                                         'data'          => Helper::get_all_roles()
@@ -251,40 +260,20 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'label'         => __('Product', 'sw-wapf'),
                             'conditions'    => [
                                 [
-                                    'id'    => 'product',
-                                    'label' => __('Is equal to','sw-wapf'),
-                                    'value' => [
-                                        'type'          => 'select2',
-                                        'placeholder'   => __("Search a product...",'sw-wapf'),
-                                        'action'        => 'wapf_search_products_conditional',
-                                        'single'        => true
-                                    ]
-                                ],
-                                [
-                                    'id'    => '!product',
-                                    'label' => __('Is not equal to','sw-wapf'),
-                                    'value' => [
-                                        'type'          => 'select2',
-                                        'placeholder'   => __("Search a product...",'sw-wapf'),
-                                        'action'        => 'wapf_search_products_conditional',
-                                        'single'        => true
-                                    ]
-                                ],
-                                [
                                     'id'    => 'products',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a product...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more products",'sw-wapf'),
                                         'action'        => 'wapf_search_products_conditional',
                                     ]
                                 ],
                                 [
                                     'id'    => '!products',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a product...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more products",'sw-wapf'),
                                         'action'        => 'wapf_search_products_conditional',
                                     ]
                                 ],
@@ -297,19 +286,19 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'conditions'    => [
                                 [
                                     'id'    => 'product_var',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a product variation...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more variations",'sw-wapf'),
                                         'action'        => 'wapf_search_variations'
                                     ]
                                 ],
                                 [
                                     'id'    => '!product_var',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a product variation...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more variations",'sw-wapf'),
                                         'action'        => 'wapf_search_variations'
                                     ]
                                 ],
@@ -319,41 +308,21 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'label'         => __('Product category', 'sw-wapf'),
                             'conditions'    => [
                                 [
-                                    'id'    => 'product_cat',
-                                    'label' => __('Is equal to','sw-wapf'),
-                                    'value' => [
-                                        'type'          => 'select2',
-                                        'placeholder'   => __("Search a category...",'sw-wapf'),
-                                        'action'        => 'wapf_search_cat',
-                                        'single'        => true
-                                    ]
-                                ],
-                                [
-                                    'id'    => '!product_cat',
-                                    'label' => __('Is not equal to','sw-wapf'),
-                                    'value' => [
-                                        'type'          => 'select2',
-                                        'placeholder'   => __("Search a category...",'sw-wapf'),
-                                        'action'        => 'wapf_search_cat',
-                                        'single'        => true
-                                    ]
-                                ],
-                                [
                                     'id'    => 'product_cats',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a category...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more categories",'sw-wapf'),
                                         'action'        => 'wapf_search_cat',
                                         'single'        => false
                                     ]
                                 ],
                                 [
                                     'id'    => '!product_cats',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a category...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more categories",'sw-wapf'),
                                         'action'        => 'wapf_search_cat',
                                         'single'        => false
                                     ]
@@ -366,19 +335,19 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'conditions'    => [
                                 [
                                     'id'    => 'patts',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __('Search a product attribute...','sw-wapf'),
+                                        'placeholder'   => __('Search 1 or more attributes','sw-wapf'),
                                         'action'        => 'wapf_search_attributes'
                                     ]
                                 ],
                                 [
                                     'id'    => '!patts',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __('Search a product attribute...','sw-wapf'),
+                                        'placeholder'   => __('Search 1 or more attributes','sw-wapf'),
                                         'action'        => 'wapf_search_attributes'
                                     ]
                                 ]
@@ -390,20 +359,20 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'conditions'    => [
                                 [
                                     'id'    => 'p_tags',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a tag...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more tags",'sw-wapf'),
                                         'action'        => 'wapf_search_tag',
                                         'single'        => false
                                     ]
                                 ],
                                 [
                                     'id'    => '!p_tags',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Search a tag...",'sw-wapf'),
+                                        'placeholder'   => __("Search 1 or more tags",'sw-wapf'),
                                         'action'        => 'wapf_search_tag',
                                         'single'        => false
                                     ]
@@ -416,10 +385,10 @@ namespace SW_WAPF_PRO\Includes\Classes {
                             'conditions'    => [
                                 [
                                     'id'    => 'product_type',
-                                    'label' => __('Any in list','sw-wapf'),
+                                    'label' => __('Is','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Select a type",'sw-wapf'),
+                                        'placeholder'   => __("Select 1 or more types",'sw-wapf'),
                                         'data'          => [
                                             ['id' => 'simple', 'text' => 'Simple product'],
                                             ['id' => 'variable', 'text' => 'Variable product'],
@@ -429,10 +398,10 @@ namespace SW_WAPF_PRO\Includes\Classes {
                                 ],
                                 [
                                     'id'    => '!product_type',
-                                    'label' => __('Not in list','sw-wapf'),
+                                    'label' => __('Is not','sw-wapf'),
                                     'value' => [
                                         'type'          => 'select2',
-                                        'placeholder'   => __("Select a type",'sw-wapf'),
+                                        'placeholder'   => __("Select 1 or more types",'sw-wapf'),
                                         'data'          => [
                                             ['id' => 'simple', 'text' => 'Simple product'],
                                             ['id' => 'variable', 'text' => 'Variable product'],
@@ -447,11 +416,11 @@ namespace SW_WAPF_PRO\Includes\Classes {
                 ]
             ];
 
-            $system = ['group' => __('System','sw-wapf'), 'children' => [] ];
+            $system = ['group' => __( 'System','sw-wapf' ), 'children' => [] ];
 
             $languages = Helper::get_available_languages();
 
-            if ( !empty($languages)) {
+            if ( ! empty( $languages ) ) {
                 $system['children'][] = [
                     'id'            => 'lang',
                     'label'         => __('Language','sw-wapf'),
@@ -470,9 +439,8 @@ namespace SW_WAPF_PRO\Includes\Classes {
                 $product_options[] = $system;
             }
 
-            $product_options = apply_filters('wapf/field_group/condition_options', $product_options);
+            return apply_filters('wapf/field_group/condition_options', $product_options);
 
-            return [ 'wapf_product' => $product_options ];
         }
 
         public static function get_pricing_options($field_type = '') {

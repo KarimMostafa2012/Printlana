@@ -4,7 +4,6 @@ import baseConfig from '../../../base-tailwind.config';
 const updatedConfig = {
     ...baseConfig,
     content: [
-        ...baseConfig.content,
         './modules/table-rate-shipping/src/js/vendor-dashboard/**/*.{js,jsx,ts,tsx}',
     ],
 };

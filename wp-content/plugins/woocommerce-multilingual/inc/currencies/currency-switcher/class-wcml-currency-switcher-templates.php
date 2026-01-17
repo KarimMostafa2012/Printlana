@@ -20,7 +20,7 @@ class WCML_Currency_Switcher_Templates {
 	private $wp_api;
 
 	/**
-	 * @var string $uploads_path
+	 * @var ?string $uploads_path
 	 */
 	private $uploads_path;
 
@@ -80,7 +80,7 @@ class WCML_Currency_Switcher_Templates {
 	/**
 	 * @param string $template_slug
 	 *
-	 * @return WCML_Currency_Switcher_Template
+	 * @return false|WCML_Currency_Switcher_Template
 	 */
 	public function get_template( $template_slug ) {
 		$ret = false;
@@ -149,7 +149,7 @@ class WCML_Currency_Switcher_Templates {
 		if ( ! $this->uploads_path ) {
 			$uploads = wp_upload_dir( null, false );
 
-			if ( isset( $uploads['basedir'] ) ) {
+			if ( !empty( $uploads['basedir'] ) ) {
 				$this->uploads_path = $uploads['basedir'];
 			}
 		}
@@ -282,9 +282,9 @@ class WCML_Currency_Switcher_Templates {
 	 * @param string $template_path
 	 * @param array  $config
 	 *
-	 * @return array|null
+	 * @return array
 	 */
-	private function get_files( $ext, $template_path, $config ) {
+	private function get_files( $ext, $template_path, $config ): array {
 		$resources = [];
 
 		if ( isset( $config[ $ext ] ) ) {
@@ -533,7 +533,7 @@ class WCML_Currency_Switcher_Templates {
 		$config = $this->parse_template_config( $template_path );
 
 		$tpl['path'] = $template_path;
-		$tpl['name'] = isset( $config['name'] ) ? $config['name'] : null;
+		$tpl['name'] = $config['name'] ?? null;
 		$tpl['name'] = $this->get_unique_name( $tpl['name'], $template_path );
 		$tpl['slug'] = sanitize_title_with_dashes( $tpl['name'] );
 		$tpl['css']  = $this->get_files( 'css', $template_path, $config );
@@ -541,10 +541,10 @@ class WCML_Currency_Switcher_Templates {
 
 		if ( $this->is_core_template( $template_path ) ) {
 			$tpl['is_core'] = true;
-			$tpl['slug']    = isset( $config['slug'] ) ? $config['slug'] : $tpl['slug'];
+			$tpl['slug']    = $config['slug'] ?? $tpl['slug'];
 		}
 
-		$currencySwitcher = new $className( $this->woocommerce_wpml, $tpl );
+		$currencySwitcher = new $className( $tpl );
 
 		if ( $currencySwitcher instanceof CurrencySwitcherTemplateInterface ) {
 			$templates[ $tpl['slug'] ] = $currencySwitcher;

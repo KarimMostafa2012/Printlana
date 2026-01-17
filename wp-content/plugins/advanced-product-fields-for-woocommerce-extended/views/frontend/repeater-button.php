@@ -19,55 +19,52 @@ $max_repetitions = isset( $model['field']->clone['max']) ? intval( $model['field
     <input type="hidden" id="field_<?php echo $field ?>_qty" name="wapf[field_<?php echo $field ?>_qty]" value="0" />
 </div>
 <script>
-    (function($) {
 
-        $(document).on('wapf/init', function(e, $parent) {
+    document.addEventListener( 'wapf:init', function(e) {
+        
+        var $parent = jQuery( e.detail.wrapper );
 
-            var $element = $parent.find('.field-<?php echo $field ?>');
-            var isSection = $element.hasClass('wapf-section');
-            var $cloner = $parent.find('.cloner-<?php echo $field ?>');
-            var $qty = $parent.find('#field_<?php echo $field ?>_qty');
-            var l = function(){return ($element.data('dupe') || []).length;};
-            var $add = $('#add_clone_<?php echo $field ?>');
-            var $del = $('#del_clone_<?php echo $field ?>');
-
-            var after = function() {
-                var q = l();
-                $qty.val(q);
-                $del[q > 0 ? 'show':'hide']();
-                $add[q >= <?php echo $max_repetitions ?> ? 'hide':'show']();
-                WAPF.Pricing.calculateAll($parent);
-            };
-
-            var add = function(values) {
-                var $clone = WAPF.Util.repeat($parent, $element);
-                $cloner.appendTo($clone);
-                if( values ) {
-                    if (isSection) {
-                        $clone.find('.wapf-input').each(function (i, e) {
-                            if (values[i]) WAPF.Util.setFieldValue($(e), values[i]);
-                        });
-                    } else {
-                        WAPF.Util.setFieldValue($clone.find('.wapf-input').first(), values);
-                    }
+        var $element = $parent.find('.field-<?php echo $field ?>');
+        var isSection = $element.hasClass('wapf-section');
+        var $cloner = $parent.find('.cloner-<?php echo $field ?>');
+        var $qty = $parent.find('#field_<?php echo $field ?>_qty');
+        var l = function(){return ($element.data('dupe') || []).length;};
+        var $add = jQuery('#add_clone_<?php echo $field ?>');
+        var $del = jQuery('#del_clone_<?php echo $field ?>');
+        var after = function() {
+            var q = l();
+            $qty.val(q);
+            $del[q > 0 ? 'show':'hide']();
+            $add[q >= <?php echo $max_repetitions ?> ? 'hide':'show']();
+            WAPF.Pricing.calculateAll($parent);
+        };
+        var add = function(values) {
+            var $clone = WAPF.Util.repeat($parent, $element);
+            $cloner.appendTo($clone);
+            if( values ) {
+                if (isSection) {
+                    $clone.find('.wapf-input').each(function (i, e) {
+                        if (values[i]) WAPF.Util.setFieldValue(jQuery(e), values[i]);
+                    });
+                } else {
+                    WAPF.Util.setFieldValue($clone.find('.wapf-input').first(), values);
                 }
+            }
 
-                after();
-            };
+            after();
+        };
+        $cloner.on('click', '.wapf-add-clone', function(e){ e.preventDefault(); add(); });
 
-            $cloner.on('click', '.wapf-add-clone', function(e){ e.preventDefault(); add(); });
-
-            $cloner.on('click', '.wapf-del-clone', function(e){
-                e.preventDefault();
-                var cache = $element.data('dupe') || [];
-                if( !cache.length ) return;
-                $cloner.appendTo( cache.length > 1 ? cache[cache.length-2] : $element);
-                WAPF.Util.unrepeat($parent, $element, 1);
-                after();
-            });
-
-            ($add.data('edit-cart')||[]).forEach( function(vals) { add(vals); });
-
+        $cloner.on('click', '.wapf-del-clone', function(e) {
+            e.preventDefault();
+            var cache = $element.data('dupe') || [];
+            if( !cache.length ) return;
+            $cloner.appendTo( cache.length > 1 ? cache[cache.length-2] : $element);
+            WAPF.Util.unrepeat($parent, $element, 1);
+            after();
         });
-    })(jQuery);
+
+        ($add.data('edit-cart')||[]).forEach( function(vals) { add(vals); });
+    });
+    
 </script>

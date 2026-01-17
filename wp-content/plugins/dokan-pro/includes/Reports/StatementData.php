@@ -219,6 +219,12 @@ class StatementData {
                     ),
                 ];
                 break;
+            case 'gateway_fee':
+                $type_data = [
+                    'title' => esc_html__( 'Gateway Fee', 'dokan' ),
+                    'url'   => '',
+                ];
+                break;
 
             default:
                 $type_data = [

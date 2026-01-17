@@ -2,6 +2,12 @@
 
 use WeDevs\DokanPro\Modules\Razorpay\Helper;
 
+/**
+ * @var array $bank_account_types
+ * @var array $razorpay_business_types
+ * @var string $ajax_url
+ */
+
 $existing_razorpay_id = get_user_meta( get_current_user_id(), Helper::get_seller_account_id_key_trashed(), true );
 ?>
 
@@ -40,31 +46,31 @@ $existing_razorpay_id = get_user_meta( get_current_user_id(), Helper::get_seller
                 <div id="dokan-razorpay-new-connect">
                     <div class="dokan-form-group dokan-clearfix">
                         <div class="content-half-part">
-                            <label class="dokan-control-label" for="razorpay_account_name">
-                                <?php esc_html_e( 'Account Name', 'dokan' ); ?>
-                                <span class="dokan-text-required">*</span>
-                            </label>
-                            <input
-                                name="razorpay_account_name"
-                                class="dokan-form-control"
-                                id="razorpay_account_name"
-                                placeholder="<?php esc_html_e( 'Your Razorpay Account Name', 'dokan' ); ?>"
-                                type="text"
-                                required
-                            >
-                        </div>
-
-                        <div class="content-half-part">
                             <label class="dokan-control-label" for="razorpay_account_email">
-                                <?php esc_html_e( 'Account Email', 'dokan' ); ?>
+                                <?php esc_html_e( 'Email', 'dokan' ); ?>
                                 <span class="dokan-text-required">*</span>
                             </label>
                             <input
                                 name="razorpay_account_email"
                                 class="dokan-form-control"
                                 id="razorpay_account_email"
-                                placeholder="<?php esc_html_e( 'Your Razorpay Account Email', 'dokan' ); ?>"
+                                placeholder="<?php esc_html_e( 'Your Email', 'dokan' ); ?>"
                                 type="email"
+                                required
+                            >
+                        </div>
+
+                        <div class="content-half-part">
+                            <label class="dokan-control-label" for="razorpay_account_phone">
+                                <?php esc_html_e( 'Phone', 'dokan' ); ?>
+                                <span class="dokan-text-required">*</span>
+                            </label>
+                            <input
+                                name="razorpay_account_phone"
+                                class="dokan-form-control"
+                                id="razorpay_account_phone"
+                                placeholder="<?php esc_html_e( 'Your Phone', 'dokan' ); ?>"
+                                type="text"
                                 required
                             >
                         </div>
@@ -101,76 +107,109 @@ $existing_razorpay_id = get_user_meta( get_current_user_id(), Helper::get_seller
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="dokan-clearfix"></div>
                         </div>
+                        <div class="dokan-clearfix"></div>
                     </div>
-
                     <div class="dokan-razorpay-form-group">
-                        <p><b><?php esc_html_e( 'Bank Information', 'dokan' ); ?></b></p>
+                        <p><b><?php esc_html_e( 'Address', 'dokan' ); ?></b></p>
                         <div class="dokan-form-group dokan-clearfix">
-                            <div>
                                 <div class="content-half-part">
-                                    <label for="razorpay_beneficiary_name" class="dokan-control-label">
-                                        <?php esc_html_e( 'Bank Account Name', 'dokan' ); ?>
+                                    <label for="razorpay_address_line1" class="dokan-control-label">
+                                        <?php esc_html_e( 'Address Line 1', 'dokan' ); ?>
                                         <span class="dokan-text-required">*</span>
                                     </label>
                                     <input
-                                        name="razorpay_beneficiary_name"
+                                        name="razorpay_address_line1"
                                         class="dokan-form-control"
-                                        id="razorpay_beneficiary_name"
-                                        placeholder="<?php esc_html_e( 'Your Bank Account Name', 'dokan' ); ?>"
+                                        id="razorpay_address_line1"
+                                        placeholder="<?php esc_html_e( 'Address Line 1', 'dokan' ); ?>"
                                         type="text"
                                         required
                                     >
                                 </div>
 
                                 <div class="content-half-part">
-                                    <label for="razorpay_account_number" class="dokan-control-label">
-                                        <?php esc_html_e( 'Bank Account Number', 'dokan' ); ?>
+                                    <label for="razorpay_address_line2" class="dokan-control-label">
+                                        <?php esc_html_e( 'Address Line 2', 'dokan' ); ?>
                                         <span class="dokan-text-required">*</span>
                                     </label>
                                     <input
-                                        name="razorpay_account_number"
+                                        name="razorpay_address_line2"
                                         class="dokan-form-control"
-                                        id="razorpay_account_number"
-                                        placeholder="<?php esc_html_e( 'Your Bank Account Number', 'dokan' ); ?>"
+                                        id="razorpay_address_line2"
+                                        placeholder="<?php esc_html_e( 'Address Line 2', 'dokan' ); ?>"
                                         type="text"
                                         required
                                     >
-                                </div>
-
-                                <div>
-                                    <div class="content-half-part">
-                                        <label for="razorpay_ifsc_code" class="dokan-control-label">
-                                            <?php esc_html_e( 'Bank IFSC Code', 'dokan' ); ?>
-                                            <span class="dokan-text-required">*</span>
-                                        </label>
-                                        <input
-                                            name="razorpay_ifsc_code"
-                                            class="dokan-form-control"
-                                            id="razorpay_ifsc_code"
-                                            placeholder="<?php esc_html_e( 'Your Bank IFSC Code', 'dokan' ); ?>"
-                                            type="text"
-                                            required
-                                        >
-                                    </div>
-
-                                    <div class="content-half-part">
-                                        <label for="razorpay_account_type" class="dokan-control-label">
-                                            <?php esc_html_e( 'Bank Account type', 'dokan' ); ?>
-                                        </label>
-                                        <select name="razorpay_account_type" id="razorpay_account_type">
-                                            <?php foreach ( $bank_account_types as $key => $account_type ) : ?>
-                                                <option value="<?php echo esc_attr( $key ); ?>">
-                                                    <?php echo esc_attr( $account_type ); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="dokan-clearfix"></div>
+                        <div class="dokan-form-group dokan-clearfix">
+                            <div class="content-half-part">
+                                <label for="razorpay_city" class="dokan-control-label">
+                                    <?php esc_html_e( 'City', 'dokan' ); ?>
+                                    <span class="dokan-text-required">*</span>
+                                </label>
+                                <input
+                                    name="razorpay_city"
+                                    class="dokan-form-control"
+                                    id="razorpay_city"
+                                    placeholder="<?php esc_html_e( 'City', 'dokan' ); ?>"
+                                    type="text"
+                                    required
+                                >
+                            </div>
+
+                            <div class="content-half-part">
+                                <label for="razorpay_state" class="dokan-control-label">
+                                    <?php esc_html_e( 'State', 'dokan' ); ?>
+                                    <span class="dokan-text-required">*</span>
+                                </label>
+                                <input
+                                    name="razorpay_state"
+                                    class="dokan-form-control"
+                                    id="razorpay_state"
+                                    placeholder="<?php esc_html_e( 'State', 'dokan' ); ?>"
+                                    type="text"
+                                    required
+                                >
+                            </div>
                         </div>
+                        <div class="dokan-form-group dokan-clearfix">
+                            <div class="content-half-part">
+                                <label for="razorpay_postal_code" class="dokan-control-label">
+                                    <?php esc_html_e( 'Postal Code', 'dokan' ); ?>
+                                    <span class="dokan-text-required">*</span>
+                                </label>
+                                <input
+                                    name="razorpay_postal_code"
+                                    class="dokan-form-control"
+                                    id="razorpay_postal_code"
+                                    placeholder="<?php esc_html_e( 'Postal Code', 'dokan' ); ?>"
+                                    type="text"
+                                    required
+                                >
+                            </div>
+
+                            <div class="content-half-part">
+                                <label for="razorpay_account_type" class="dokan-control-label">
+                                    <?php esc_html_e( 'Country', 'dokan' ); ?>
+                                    <span class="dokan-text-required">*</span>
+                                </label>
+                                <input
+                                    name="razorpay_country"
+                                    class="dokan-form-control"
+                                    id="razorpay_country"
+                                    placeholder="<?php esc_html_e( 'Country, e.g.: IN or india', 'dokan' ); ?>"
+                                    type="text"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <small>
+                            <?php esc_html_e( 'The country. The minimum length is 2 and the maximum length is 64. This can either be a country code in capital letters or the full name of the country in lower case letters. For example, for India, you must write either IN or india.', 'dokan' ); ?>
+                        </small>
+                        <div class="dokan-clearfix"></div>
                     </div>
 
                     <div>

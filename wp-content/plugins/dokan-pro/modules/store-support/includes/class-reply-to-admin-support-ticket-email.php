@@ -23,6 +23,8 @@ if ( ! class_exists( 'DokanReplyToAdminSupportTicket' ) ) :
      */
     class DokanReplyToAdminSupportTicket extends WC_Email {
 
+        protected $email_data;
+
         /**
          * Constructor.
          */

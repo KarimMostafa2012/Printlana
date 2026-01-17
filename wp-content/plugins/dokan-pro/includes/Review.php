@@ -22,6 +22,7 @@ class Review {
      */
     public function __construct() {
         add_filter( 'dokan_get_dashboard_nav', array( $this, 'add_review_menu' ) );
+	    add_filter( 'dokan_rest_admin_dashboard_monthly_overview_data', [ $this, 'load_monthly_review_count' ], 10, 2 );
         add_action( 'dokan_load_custom_template', array( $this, 'load_review_template' ) );
 
         add_action( 'dokan_review_content_inside_before', array( $this, 'show_seller_enable_message' ) );
@@ -76,12 +77,61 @@ class Review {
             'icon'       => '<i class="far fa-comments"></i>',
             'url'        => dokan_get_navigation_url( 'reviews' ),
             'pos'        => 65,
+            'icon_name'  => 'Star',
             'permission' => 'dokan_view_review_menu',
             'react_route' => 'reviews',
         );
 
         return $urls;
     }
+
+	/**
+	 * Load monthly reviews count for the dashboard.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param array $data
+	 * @param array $date_range
+     *
+	 * @return mixed
+	 */
+	public function load_monthly_review_count( $data, $date_range ) {
+		global $wpdb;
+
+		$reviews_data = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT 
+                    SUM(CASE WHEN comment_date >= %s THEN 1 ELSE 0 END) AS current_reviews,
+                    SUM(CASE WHEN comment_date < %s THEN 1 ELSE 0 END) AS previous_reviews
+                FROM $wpdb->comments 
+                WHERE comment_type = 'review' 
+                AND comment_approved = 1
+                AND comment_date BETWEEN %s AND %s",
+				$date_range['current_month_start'],
+				$date_range['current_month_start'],
+				$date_range['previous_month_start'],
+				$date_range['current_month_end']
+			)
+		);
+
+		$reviews_current  = $reviews_data->current_reviews ?? 0;
+		$reviews_previous = $reviews_data->previous_reviews ?? 0;
+
+		// Apply filters to modify the review count data.
+		$data['reviews'] = apply_filters(
+			'dokan_dashboard_monthly_reviews_count',
+			[
+				'icon'     => 'Star',
+				'current'  => (int) $reviews_current,
+				'previous' => (int) $reviews_previous,
+				'title'    => esc_html__( 'Reviews', 'dokan' ),
+				'tooltip'  => esc_html__( 'Total new reviews in the time period', 'dokan' ),
+                'position' => 70,
+			]
+		);
+
+		return $data;
+	}
 
     /**
      * Load Review template

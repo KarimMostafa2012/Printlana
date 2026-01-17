@@ -25,6 +25,7 @@ class Admin {
         add_action( 'woocommerce_process_shop_order_meta', [ $this, 'save_admin_delivery_time_meta_box' ], 10, 1 );
         // Active days for delivery
         add_action( 'wp_ajax_dokan_get_delivery_days', [ $this, 'get_vendor_delivery_days' ] );
+        add_filter( 'dokan_get_settings_values', [ $this, 'filter_delivery_time_settings_values' ], 10, 2 );
     }
 
     /**
@@ -249,5 +250,25 @@ class Admin {
                 'default_date'       => dokan_current_datetime()->format( wc_date_format() ),
 			], 201
         );
+    }
+
+    /**
+     * Filters delivery time settings values for a preorder_date section.
+     *
+     * @since 4.1.4
+     *
+     * @param array  $settings   Associative array of settings values.
+     * @param string $section_id Identifier for the settings section.
+     *
+     * @return array Modified settings values.
+     */
+    public function filter_delivery_time_settings_values( $settings, $section_id ) {
+        if ( 'dokan_delivery_time' !== $section_id ) {
+            return $settings;
+        }
+
+        $settings['preorder_date'] = Helper::get_mepped_preorder( $settings );
+
+        return $settings;
     }
 }

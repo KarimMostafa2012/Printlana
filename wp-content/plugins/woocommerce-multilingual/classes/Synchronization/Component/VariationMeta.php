@@ -51,7 +51,7 @@ class VariationMeta extends SynchronizerForMeta {
 			}
 
 			$metaValue = reset( $meta );
-			if ( ! $metaValue ) {
+			if ( false === $metaValue ) {
 				$metaValue = '';
 			}
 
@@ -178,7 +178,7 @@ class VariationMeta extends SynchronizerForMeta {
 			// For each meta key, data is made of pairs [ meta value => list of affected post IDs ] so it is easier to compose IN statements.
 			$dataToUpdate = Obj::propOr( [], 'update', $delayedFieldMetaData );
 			if ( ! empty( $dataToUpdate ) ) {
-				foreach ( $dataToUpdate as $metaValueHash => $itemsPerValue ) {
+				foreach ( $dataToUpdate as $itemsPerValue ) {
 					$idsToUpdate     = array_values( array_unique( array_map( 'intval', array_keys( $itemsPerValue ) ) ) );
 					$updateMetaValue = reset( $itemsPerValue );
 					$this->unifyMeta( $delayedFieldMetaKey, $updateMetaValue, $idsToUpdate );
@@ -202,7 +202,7 @@ class VariationMeta extends SynchronizerForMeta {
 				continue;
 			}
 			$metaValue = reset( $meta );
-			if ( ! $metaValue ) {
+			if ( false === $metaValue ) {
 				continue;
 			}
 			$trn_post_meta               = $this->woocommerceWpml->attributes->get_translated_variation_attribute_post_meta( $metaValue, $metaKey, $variationId, $translationId, $language );

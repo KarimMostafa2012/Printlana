@@ -2,11 +2,9 @@
 
 namespace WCML\OrderItems\Shipping;
 
-use WCML\OrderItems\Shipping\StoreInDefaultLanguage;
 use WCML\OrderItems\Translator;
 use woocommerce_wpml;
 use wpdb;
-
 class ShippingMethod implements Translator {
 
 	use StoreInDefaultLanguage;

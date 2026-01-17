@@ -8,8 +8,6 @@ class WCML_Status_Store_Pages_UI extends WCML_Templates_Factory {
 	private $sitepress;
 
 	/**
-	 * WCML_Status_Store_Pages_UI constructor.
-	 *
 	 * @param SitePress        $sitepress
 	 * @param woocommerce_wpml $woocommerce_wpml
 	 */

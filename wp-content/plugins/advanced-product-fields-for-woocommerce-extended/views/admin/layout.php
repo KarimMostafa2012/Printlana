@@ -11,7 +11,7 @@ use SW_WAPF_PRO\Includes\Classes\Html;
 
     <div class="wapf-layout-list">
 
-        <div class="wapf-conditions-list__body">
+        <div class="apf-conditions-list__body">
 
             <?php
 
@@ -59,7 +59,37 @@ use SW_WAPF_PRO\Includes\Classes\Html;
 
             ?>
 
+            <div class="wapf-field__setting">
+                <div class="wapf-setting__label">
+                    <label><?php esc_html_e( 'Design settings', 'sw-wapf' ) ?></label>
+                </div>
+                <div class="wapf-setting__input">
+                    <div class="apf-info-note">
+                        <div class="dashicon dashicons dashicons-info"></div>
+                        <div>
+                            <?php
+                            $design_url = add_query_arg(
+                                [
+                                    'page'    => 'wc-settings',
+                                    'tab'     => 'wapf_settings',
+                                    'section' => 'design',
+                                ],
+                                admin_url('admin.php')
+                            );
+                            printf(
+                                esc_html__( 'Want to style your fields? %s', 'sw-wapf' ),
+                                sprintf(
+                                    '<a target="_blank" href="%s">%s</a>',
+                                    esc_url( $design_url ),
+                                    esc_html__( 'Go to design the settings.', 'sw-wapf' )
+                                )
+                            );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-
     </div>
 </div>

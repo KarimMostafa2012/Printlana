@@ -4,18 +4,6 @@ class WCML_Setup_UI {
 
 	const SLUG = 'wcml-setup';
 
-	/** @var  woocommerce_wpml */
-	private $woocommerce_wpml;
-
-	/**
-	 * WCML_Setup_UI constructor.
-	 *
-	 * @param woocommerce_wpml $woocommerce_wpml
-	 */
-	public function __construct( woocommerce_wpml $woocommerce_wpml ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-	}
-
 	public function add_hooks() {
 		if ( current_user_can( 'manage_options' ) && $this->is_wcml_setup_page() ) {
 			add_action( 'admin_menu', [ $this, 'admin_menus' ] );

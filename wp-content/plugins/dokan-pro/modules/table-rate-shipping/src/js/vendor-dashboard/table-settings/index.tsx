@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { NotFound } from '@dokan/components';
 import { useEffect, useState } from '@wordpress/element';
-import TableRateShippingSettingsSkeleton from './TableRateShippingSettingsSkeleton';
 import { Button, DokanToaster, useToast } from '@getdokan/dokan-ui';
 import {
     TableRateSettingsData,
@@ -14,6 +13,7 @@ import RateSettings from './RateSettings';
 import ClassPrioritySettings from './ClassPrioritySettings';
 import TableRates from '../table-rates';
 import ShippingHeader from '@dokan-pro/features/shipping/ShippingHeader';
+import SettingsSkeleton from '../common/SettingsSkeleton';
 
 const TableRateShippingSettings = ( { params }: RouterProps ) => {
     const { zoneID: zoneId, instanceID: instanceId } = params;
@@ -97,7 +97,7 @@ const TableRateShippingSettings = ( { params }: RouterProps ) => {
     }
 
     if ( isLoading ) {
-        return <TableRateShippingSettingsSkeleton />;
+        return <SettingsSkeleton />;
     }
 
     return (

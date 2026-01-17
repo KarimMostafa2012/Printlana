@@ -24,32 +24,27 @@ namespace SW_WAPF_PRO\Includes\Classes {
                 return false;
             }
 
-            $quantity           = $cart_item[ 'quantity' ] ?? 1;
-            $product_id         = empty( $cart_item['variation_id'] ) ? $cart_item['product_id'] : $cart_item['variation_id'];
-            $product            = wc_get_product( $product_id );
+            $quantity   = $cart_item[ 'quantity' ] ?? 1;
+            $product_id = empty( $cart_item['variation_id'] ) ? $cart_item['product_id'] : $cart_item['variation_id'];
+            $product    = wc_get_product( $product_id );
 
-            if( empty( $product) ) {
+            if( empty( $product ) ) {
                 return false;
             }
 
                         $base               = self::get_cart_item_base_price( $product, $quantity, $cart_item );
             $show_pricing_hints = Util::show_pricing_hints();
-            $formula_base       = apply_filters('wapf/pricing/cart_item_base_for_formulas', $base, $product, $quantity, $cart_item );
+            $formula_base       = apply_filters( 'wapf/pricing/cart_item_base_for_formulas', $base, $product, $quantity, $cart_item );
+            $options_total      = 0;
+            $data               = [ 'options_total' => 0, 'base' => $base ];
 
-            $data = [
-                'options_total' => 0,
-                'base'          => $base,
-            ];
-
-            $options_total = 0;
-
-            foreach ( $cart_item['wapf'] as $field_idx => $field ) {
+                        foreach ( $cart_item['wapf'] as $field_idx => $field ) {
 
                 if( ! Util::should_use_cart_field( $field ) ) {
                     continue;
                 }
 
-                $clone_idx = isset( $field['clone_idx'] ) ? $field['clone_idx'] : ( isset( $cart_item['wapf_clone'] ) ? $cart_item['wapf_clone'] : 0 ); 
+                $clone_idx = $field[ 'clone_idx' ] ?? ( $cart_item[ 'wapf_clone' ] ?? 0 ); 
                 $show_hints = $show_pricing_hints && empty( $field['hide_price_hint'] );
 
                 if( ! empty( $field['values'] ) ) {
@@ -58,16 +53,13 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
                         if( $value['price'] === 0 || $value['price_type'] === 'none' ) continue;
 
-                        $qty_based = ( isset( $field['clone_type'] ) && $field['clone_type'] === 'qty' )  || ! empty( $field['qty_based']); 
-                        $v = isset( $value['label'] ) ? $value['label'] : $field['raw'];
+                        $qty_based      = ( isset( $field['clone_type'] ) && $field['clone_type'] === 'qty' )  || ! empty( $field['qty_based'] ); 
+                        $v              = $value[ 'label' ] ?? $field[ 'raw' ];
+                        $price          = Fields::do_pricing( $qty_based, $value['price_type'], $value['price'], $base, $formula_base, $quantity, $v, $product_id, $cart_item['wapf'], $cart_item['wapf_field_groups'], $clone_idx, $options_total );
+                        $options_total  = $options_total + $price;
 
-
-                                                $price = Fields::do_pricing( $qty_based, $value['price_type'], $value['price'], $base, $formula_base, $quantity, $v, $product_id, $cart_item['wapf'], $cart_item['wapf_field_groups'], $clone_idx, $options_total );
-
-                                                $options_total = $options_total + $price;
-
-                        $cart_item['wapf'][$field_idx]['values'][$idx]['calc_price'] = $price;
-                        $cart_item['wapf'][$field_idx]['values'][$idx]['pricing_hint'] = $show_hints ? Helper::format_pricing_hint($value['price_type'], $price, $product, 'cart') : '';
+                                                $cart_item['wapf'][$field_idx]['values'][$idx]['calc_price'] = $price;
+                        $cart_item['wapf'][$field_idx]['values'][$idx]['pricing_hint'] = $show_hints ? Helper::format_pricing_hint( $value['price_type'], $price, $product, 'cart' ) : '';
 
                                                 if( ! $add_on_item ) { 
                             WC()->cart->cart_contents[ $cart_item['key'] ]['wapf'][$field_idx]['values'][$idx]['calc_price'] = $price;

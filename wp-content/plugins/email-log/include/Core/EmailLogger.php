@@ -68,9 +68,9 @@ class EmailLogger implements Loadie {
 			'subject'         => $mail_info['subject'],
 			'message'         => $mail_info['message'],
 			'headers'         => \EmailLog\Util\stringify( $mail_info['headers'], "\n" ),
-			'attachment_name' => \EmailLog\Util\stringify( $mail_info['attachments'] ),
+			'attachment_name' => '',
 			'sent_date'       => current_time( 'mysql' ),
-			'ip_address'      => sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'] ?? '')),
+			'ip_address'      => '',
 			'result'          => 1,
 		);
 

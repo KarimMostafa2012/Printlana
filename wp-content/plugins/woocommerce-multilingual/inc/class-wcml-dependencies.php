@@ -44,10 +44,14 @@ class WCML_Dependencies {
 			$st_ok   = true;
 			$wc_ok   = true;
 
+			/* @phpstan-ignore booleanOr.rightAlwaysFalse */
 			if ( ! defined( 'ICL_SITEPRESS_VERSION' ) || ICL_PLUGIN_INACTIVE || is_null( $sitepress ) || ! class_exists( 'SitePress' ) ) {
 				$missing['WPML'] = $this->tracking_link->getWpmlHome();
 				$core_ok         = false;
-			} elseif ( version_compare( ICL_SITEPRESS_VERSION, self::MIN_WPML, '<' ) ) {
+			} elseif (
+				/* @phpstan-ignore elseif.alwaysFalse */
+				version_compare( ICL_SITEPRESS_VERSION, self::MIN_WPML, '<' )
+			) {
 				add_action( 'admin_notices', [ $this, '_old_wpml_warning' ] );
 				$core_ok = false;
 			} elseif ( ! $sitepress->setup() ) {
@@ -62,6 +66,7 @@ class WCML_Dependencies {
 				$missing['WooCommerce'] = 'http://www.woothemes.com/woocommerce/';
 				$wc_ok                  = false;
 			} elseif (
+				/* @phpstan-ignore booleanAnd.rightAlwaysFalse */
 				defined( 'WC_VERSION' ) && version_compare( WC_VERSION, self::MIN_WOOCOMMERCE, '<' ) ||
 				isset( $woocommerce->version ) && version_compare( $woocommerce->version, self::MIN_WOOCOMMERCE, '<' )
 			) {
@@ -92,7 +97,8 @@ class WCML_Dependencies {
 				add_action( 'init', [ $this, 'check_for_translatable_default_taxonomies' ] );
 			}
 
-			if ( isset( $sitepress ) ) {
+			if ( $sitepress instanceof SitePress ) {
+				/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 				$this->allok = $full_mode && $sitepress->setup();
 			}
 		}
@@ -253,7 +259,7 @@ class WCML_Dependencies {
 	 * if none of these are true, display a warning message
 	 */
 	private function check_for_incompatible_permalinks() {
-		global $sitepress, $sitepress_settings, $pagenow;
+		global $sitepress_settings, $pagenow;
 
 		// WooCommerce 2.x specific checks
 		$permalinks = get_option( 'woocommerce_permalinks', [ 'product_base' => '' ] );

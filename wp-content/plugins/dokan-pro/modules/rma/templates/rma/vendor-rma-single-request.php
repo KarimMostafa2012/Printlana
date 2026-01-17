@@ -148,7 +148,7 @@
                                     <form method="post" action="" id="dokan-update-request-status">
                                         <div class="dokan-form-group">
                                             <label for="request-status"><?php _e( 'Change Status', 'dokan' ) ?></label>
-                                            <select name="status" id="status" class="dokan-form-control" disabled="<?php echo $request['status'] === 'info_removed' ? 'disabled' : ''; ?>">
+                                            <select name="status" id="status" class="dokan-form-control" <?php echo $request['status'] === 'info_removed' ? 'disabled' : ''; ?> >
                                                 <?php foreach ( dokan_warranty_request_status() as $status_key => $status_value ):
                                                     if ( 'info_removed' === $status_key ) {
                                                         continue;

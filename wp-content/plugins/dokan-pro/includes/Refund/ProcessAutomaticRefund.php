@@ -66,7 +66,6 @@ class ProcessAutomaticRefund {
         $this->excluded_payment_gateways = apply_filters(
             'dokan_excluded_gateways_from_auto_process_api_refund',
             [
-                'dokan-moip-connect'    => __( 'Dokan Wirecard Connect', 'dokan' ),
                 'dokan-stripe-connect'  => __( 'Dokan Stripe Connect', 'dokan' ),
                 'dokan_paypal_adaptive' => __( 'Dokan Paypal Adaptive Payment', 'dokan' ),
             ]

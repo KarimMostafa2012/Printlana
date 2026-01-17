@@ -46,30 +46,9 @@ class AdminUIEnhancer {
 	 *
 	 */
 	public function load() {
-		add_filter( 'plugin_row_meta', array( $this, 'insert_addon_store_link' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . $this->plugin_basename, array( $this, 'insert_view_logs_link' ) );
 
 		add_action( 'el_admin_footer', array( $this, 'hook_footer_links' ) );
-	}
-
-    /**
-	 * Add link to Add-ons store.
-	 *
-	 * @see  Additional links in the Plugin listing is based on
-	 * @link http://zourbuth.com/archives/751/creating-additional-wordpress-plugin-links-row-meta/
-	 *
-	 * @param array  $links Array with default links to display in plugins page.
-	 * @param string $file  The name of the plugin file.
-	 *
-	 * @return array Modified list of links to display in plugins page.
-	 */
-	public function insert_addon_store_link( $links, $file ) {
-		if ( $file === $this->plugin_basename ) {
-			$links[] = '<a href="https://wpemaillog.com/store/?utm_campaign=Upsell&utm_medium=wpadmin&utm_source=plugin-page" rel="noopener" target="_blank">' .
-			           __( 'Buy Addons', 'email-log' ) . '</a>';
-		}
-
-		return $links;
 	}
 
 	/**
@@ -83,8 +62,10 @@ class AdminUIEnhancer {
 	 */
 	public function insert_view_logs_link( $links ) {
 		$view_logs_link = '<a href="admin.php?page=email-log">' . __( 'View Logs', 'email-log' ) . '</a>';
-		$settings_link  = '<a href="admin.php?page=email-log-settings">' . __( 'Settings', 'email-log' ) . '</a>';
-		array_unshift( $links, $view_logs_link, $settings_link );
+		$pro_link  = '<a href="admin.php?page=email-log#open-pro-dialog"><b>' . __( 'Get PRO', 'email-log' ) . '</b></a>';
+
+		array_unshift( $links, $view_logs_link );
+    $links[] = $pro_link;
 
 		return $links;
 	}
@@ -93,7 +74,7 @@ class AdminUIEnhancer {
 	 * Hook Footer links.
 	 */
 	public function hook_footer_links() {
-		add_action( 'in_admin_footer', array( $this, 'add_credit_links' ) );
+		//add_action( 'in_admin_footer', array( $this, 'add_credit_links' ) );
 	}
 
 	/**
@@ -106,7 +87,7 @@ class AdminUIEnhancer {
 	public function add_credit_links() {
 		$plugin_data = get_plugin_data( $this->plugin_file );
 		\EmailLog\Core\EmailLog::wp_kses_wf(sprintf(
-			'%1$s ' . __( 'plugin', 'email-log' ) . ' | ' . __( 'Version', 'email-log' ) . ' %2$s | ' . __( 'by', 'email-log' ) . ' %3$s<br />',
+			'%1$s ' . __( 'plugin', 'email-log' ) . ' | ' . __( 'Version', 'email-log' ) . ' %2$s | ' . __( 'by', 'email-log' ) . ' %3$s <br />',
 			$plugin_data['Title'],
 			$plugin_data['Version'],
 			$plugin_data['Author']

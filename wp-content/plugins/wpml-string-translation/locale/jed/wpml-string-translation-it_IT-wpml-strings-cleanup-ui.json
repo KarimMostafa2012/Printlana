@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "it"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
             "Pulisce la tabella di traduzione delle stringhe rimuovendo le stringhe non tradotte per dominio."

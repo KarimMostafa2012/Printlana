@@ -14,7 +14,7 @@
     </div>
     <?php } ?>
     <div>
-        <span class="price-heading"><?php _e('Total','sw-wapf'); ?></span>
+        <span><?php _e('Grand total','sw-wapf'); ?></span>
         <span class="wapf-total wapf-grand-total price amount"></span>
     </div>
 </div>

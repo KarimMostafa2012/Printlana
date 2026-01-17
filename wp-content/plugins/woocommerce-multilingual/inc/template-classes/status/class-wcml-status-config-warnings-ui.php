@@ -9,8 +9,6 @@ class WCML_Status_Config_Warnings_UI extends WCML_Templates_Factory {
 	private $sitepress_settings;
 
 	/**
-	 * WCML_Status_Config_Warnings_UI constructor.
-	 *
 	 * @param SitePress        $sitepress
 	 * @param woocommerce_wpml $woocommerce_wpml
 	 * @param array            $sitepress_settings
@@ -35,12 +33,15 @@ class WCML_Status_Config_Warnings_UI extends WCML_Templates_Factory {
 	public function get_model() {
 		$this->init_twig_functions();
 
+		/** @var WCML_Dependencies $wcml_dependencies */
+		$wcml_dependencies = \WPML\Container\make( WCML_Dependencies::class );
+
 		$model = [
 			'default_language'    => $this->sitepress->get_default_language(),
 			'miss_slug_lang'      => $this->get_missed_product_slug_translations_languages(),
 			'prod_slug'           => $this->woocommerce_wpml->strings->product_permalink_slug(),
-			'dismiss_non_default' => isset( $this->woocommerce_wpml->settings['dismiss_non_default_language_warning'] ) ? true : false,
-			'xml_config_errors'   => ! empty( $this->woocommerce_wpml->dependencies->xml_config_errors ) ? $this->woocommerce_wpml->dependencies->xml_config_errors : false,
+			'dismiss_non_default' => isset( $this->woocommerce_wpml->settings['dismiss_non_default_language_warning'] ),
+			'xml_config_errors'   => ! empty( $wcml_dependencies->xml_config_errors ) ? $wcml_dependencies->xml_config_errors : false,
 			'slugs_tab'           => \WCML\Utilities\AdminUrl::getStoreURLTab(),
 			'st_lang'             => $this->sitepress_settings['st']['strings_language'],
 			'not_en_doc_page'     => 'https://wpml.org/?page_id=355545',

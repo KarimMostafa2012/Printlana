@@ -1,5 +1,8 @@
 <?php
 
+
+
+$saved_data = WC_MMQ::getOptions();
 $nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 if ( ! empty($nonce) && wp_verify_nonce( $nonce, WC_MMQ_PLUGIN_BASE_FOLDER ) ) {
     
@@ -34,14 +37,12 @@ if ( ! empty($nonce) && wp_verify_nonce( $nonce, WC_MMQ_PLUGIN_BASE_FOLDER ) ) {
         //plus minus checkbox data fixer
         $data[ $_qty_plus_minus_btn_name ] = !isset( $data[ $_qty_plus_minus_btn_name ] ) ? 0 : 1;
         
-
+        $data = apply_filters( 'wcmmq_before_save_settings', $data );
+        $saved_data = $data;
         update_option( WC_MMQ_KEY, $data);
         ?><div class="updated"><p>Successfully Updated</p></div><?php
     }
 }
-
-$saved_data = WC_MMQ::getOptions();
-
 
 
 //TOPBAR INCLUDE HERE

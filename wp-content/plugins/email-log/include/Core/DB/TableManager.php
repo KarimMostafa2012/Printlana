@@ -198,7 +198,7 @@ class TableManager implements Loadie {
 	 * @since 2.3.0 Implemented Advanced Search. Search queries could look like the following.
 	 *              Example:
 	 *              id: 2
-	 *              to: sudar@sudarmuthu.com
+	 *              to: test@test.com
 	 *
 	 * @param array $request         Request object.
 	 * @param int   $per_page        Entries per page.

@@ -29,10 +29,6 @@ namespace SW_WAPF_PRO\Includes\Models {
 
         public $pricing;
 
-        public $qty_based; 
-        public $clone_txt; 
-	    public $parent_qty_based = false; 
-
 	    public $parent_clone = [];
 
 	    public $clone = [ 'enabled' => false ];
@@ -46,21 +42,30 @@ namespace SW_WAPF_PRO\Includes\Models {
             $this->pricing = new FieldPricing();
         }
 
-        public function from_array( $a ): Field {
+        public function __clone()
+        {
+            $this->pricing = clone $this->pricing;
 
-        	$this->id               = $a['id'];
-        	$this->label            = $a['label'];
-        	$this->description      = $a['description'];
-        	$this->type             = $a['type'];
-        	$this->required         = $a['required'];
-        	$this->class            = $a['class'];
-        	$this->width            = $a['width'];
-            $this->options          = empty( $a['options'] ) ? [] : $a['options'];
-        	$this->qty_based        = $a[ 'qty_based' ] ?? false; 
-        	$this->parent_qty_based = $a[ 'parent_qty_based' ] ?? false; 
-	        if( !empty($a['clone_txt'])) $this->clone_txt = $a['clone_txt']; 
+            foreach ( $this->conditionals as $i => $cond ) {
+                $this->conditionals[$i] = clone $cond;
+            }
 
-            if( isset( $a['subtype'] ) ) $this->subtype = $a['subtype'];
+            $this->choices_have_pricing = null;
+
+                    }
+
+        public function from_array( $a, $include_meta = true ): Field {
+
+        	$this->id           = $a['id'];
+        	$this->label        = $a['label'];
+        	$this->description  = $a['description'];
+        	$this->type         = $a['type'];
+        	$this->required     = $a['required'];
+        	$this->class        = $a['class'];
+        	$this->width        = $a['width'];
+            $this->options      = empty( $a['options'] ) ? [] : $a['options'];
+
+                        if( isset( $a['subtype'] ) ) $this->subtype = $a['subtype'];
 
                     	if( isset( $a['clone'] ) ) $this->clone = $a['clone'];
 
@@ -93,11 +98,12 @@ namespace SW_WAPF_PRO\Includes\Models {
 
                 	        }
 
-            $the_type = $this->type . ( isset( $a['subtype'] ) ? ( '-' . $a['subtype'] ) : '' );
+            if( $include_meta ) {
+                $the_type = $this->type . ( $this->subtype ? ( '-' . $this->subtype ) : '' );
+                $this->meta = Config::get_field_definition_for( $the_type );
+            }
 
-            $this->meta = Config::get_field_definition_for( $the_type );
-
-        	return $this;
+                    	return $this;
 
         }
 
@@ -188,10 +194,6 @@ namespace SW_WAPF_PRO\Includes\Models {
 
         public function get_clone_label() {
 
-        	if( ! empty( $this->clone_txt) ) {
-                return $this->clone_txt;
-            }
-
 	        return ! $this->clone['enabled'] || empty( $this->clone['label'] ) ? '' : $this->clone['label'];
 
         }
@@ -199,9 +201,6 @@ namespace SW_WAPF_PRO\Includes\Models {
         public function get_clone_type( $include_parent = false ) {
 
         	if( ! $this->clone['enabled'] ) {
-        		if( $this->qty_based ) { 
-        			return 'qty';
-		        }
         		return $include_parent ? self::get_parent_clone_type() : '';
 	        }
 
@@ -209,11 +208,6 @@ namespace SW_WAPF_PRO\Includes\Models {
         }
 
 	    public function get_parent_clone_type() {
-
-        	if( empty( $this->parent_clone ) && $this->parent_qty_based ) { 
-        		return 'qty';
-	        }
-
         	return empty( $this->parent_clone ) ? '' : $this->parent_clone['type'];
 	    }
 

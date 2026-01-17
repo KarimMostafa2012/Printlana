@@ -95,13 +95,13 @@ const ClassPrioritySettings = ( {
                                                     <td className="py-4 px-6 text-gray-900 align-middle">
                                                         { item.className }
                                                     </td>
-                                                    <td className="py-4 px-6 text-end">
+                                                    <td className="py-4 px-6 text-end w-48">
                                                         <SimpleInput
                                                             type="number"
                                                             value={ getPriority(
                                                                 item?.slug
                                                             ) }
-                                                            className="w-24 bg-white focus:bg-white text-end"
+                                                            className="bg-white focus:bg-white text-end"
                                                             onChange={ (
                                                                 e
                                                             ) => {

@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\ProductSubscription;
 
+use DokanPro\Modules\Subscription\AdminDashboard;
 use DokanPro\Modules\Subscription\Helper;
 use DokanPro\Modules\Subscription\SubscriptionInvoice;
 use DokanPro\Modules\Subscription\SubscriptionPack;
@@ -32,6 +33,7 @@ class Module {
         // load subscription class
         add_filter( 'dokan_get_class_container', [ __CLASS__, 'load_subscription_class' ] );
         add_action( 'dokan_vendor', [ __CLASS__, 'add_vendor_subscription' ] );
+        add_filter( 'dokan_rest_admin_dashboard_vendor_metrics_data', [ $this, 'load_subscribed_vendors_count' ] );
 
         // Activation and Deactivation hook
         add_action( 'dokan_activated_module_product_subscription', [ $this, 'activate' ] );
@@ -40,6 +42,7 @@ class Module {
         add_action( 'woocommerce_flush_rewrite_rules', [ $this, 'flush_rewrite_rules' ] );
         // Add localize script.
         add_filter( 'dokan_admin_localize_script', array( $this, 'add_subscription_packs_to_localize_script' ) );
+        add_filter( 'dokan_admin_dashboard_localize_scripts', array( $this, 'add_subscription_packs_to_localize_script' ) );
         add_filter( 'dokan_get_dashboard_nav_template_dependency', [ $this, 'get_subscription_nav_template_dependency' ] );
 
         // Loads frontend scripts and styles
@@ -174,6 +177,9 @@ class Module {
         add_filter( 'dokan_manual_orders_is_enabled', [ $this, 'is_manual_order_enabled' ], 10, 3 );
 
         add_filter( 'dokan_rest_vendor_subscription_packages_query_args', [ $this, 'display_only_admin_exclusive_package' ], 10, 2 );
+
+        // Load subscription info to the Vendor Dashboard.
+        add_filter( 'dokan_vendor_dashboard_layout_config', [ $this, 'load_vendon_subscription_info' ], 10, 2 );
     }
 
     /**
@@ -320,6 +326,8 @@ class Module {
     function file_includes() {
         if ( is_admin() ) {
             require_once DPS_PATH . '/includes/admin/admin.php';
+            require_once DPS_PATH . '/includes/AdminDashboard.php';
+            ( new AdminDashboard() )->register_hooks();
         }
 
         require_once DPS_PATH . '/includes/classes/Helper.php';
@@ -557,6 +565,7 @@ class Module {
             'icon'        => '<i class="fas fa-book"></i>',
             'url'         => $permalink,
             'pos'         => 180,
+            'icon_name'   => 'Crown',
             'react_route' => 'subscription',
         );
 
@@ -1096,6 +1105,7 @@ class Module {
         update_user_meta( $customer_id, 'product_pack_startdate', dokan_current_datetime()->format( 'Y-m-d H:i:s' ) );
         update_user_meta( $customer_id, 'can_post_product', '1' );
         update_user_meta( $customer_id, '_customer_recurring_subscription', '' );
+        update_user_meta( $customer_id, 'dokan_has_active_cancelled_subscrption', false);
 
         $vendor = dokan()->vendor->get( $customer_id );
         $vendor->save_commission_settings(
@@ -1508,7 +1518,7 @@ class Module {
     public static function register_email_class( $wc_emails ) {
         $wc_emails['Dokan_Subscription_Cancelled']        = require_once DPS_PATH . '/includes/emails/subscription-cancelled.php';
         $wc_emails['Dokan_Subscription_Cancelled_vendor'] = require_once DPS_PATH . '/includes/emails/subscription-cancelled-vendor.php';
-        
+
         require_once DPS_PATH . '/includes/emails/subscription-expiry-alert-vendor.php';
         $wc_emails['Dokan_Subscription_Expiry_Alert_Vendor'] = new SubscriptionExpiryAlertVendor();
 
@@ -2399,7 +2409,6 @@ class Module {
                 'dokan-stripe-connect',
                 'dokan_paypal_adaptive',
                 'dokan_paypal_marketplace',
-                'dokan-moip-connect',
                 'paypal',
             ]
         );
@@ -2534,6 +2543,26 @@ class Module {
         return $is_enabled;
     }
 
+    /**
+     * Load subscribed vendors count in the admin dashboard vendor metrics data.
+     *
+     * @since 4.1.0
+     *
+     * @param array $data The existing vendor metrics data.
+     *
+     * @return array The modified vendor metrics data with subscribed vendors count.
+     */
+    public function load_subscribed_vendors_count( array $data ): array {
+        $data['subscribed_vendors'] = [
+            'icon'     => 'SquareUserRound',
+            'count'    => Helper::get_subscribed_vendor_count(),
+            'title'    => esc_html__( 'Subscribed Vendors', 'dokan' ),
+            'tooltip'  => esc_html__( 'Total vendors who have subscriptions', 'dokan' ),
+            'position' => 3,
+        ];
+
+        return $data;
+    }
 
     /**
      * Display only admin exclusive package in product listing.
@@ -2554,11 +2583,12 @@ class Module {
             return $args;
         }
 
-        $args['meta_query'] = [
+        // Add meta query to exclude admin exclusive packages.
+        $meta_query = [
             'relation' => 'OR',
             [
                 'key'     => '_exclusive_for_admin_only',
-                'value' => 'yes',
+                'value'   => 'yes',
                 'compare' => '!=',
             ],
             [
@@ -2567,6 +2597,73 @@ class Module {
             ],
         ];
 
+        $args['meta_query'][] = $meta_query;
         return $args;
+    }
+
+    /**
+     * Provide Vendor Dashboard subscription information via filter.
+     *
+     * This keeps Dokan Lite untouched; when Lite applies the
+     * `dokan_vendor_dashboard_subscription` filter, this callback returns
+     * the current vendor subscription name and a simple status (active|expired).
+     *
+     * @since 4.2.0
+     *
+     * @param array                            $info   Vendor dashboard layout info.
+     * @param \WeDevs\Dokan\Vendor\Vendor|null $vendor Vendor instance.
+     *
+     * @return array
+     */
+    public function load_vendon_subscription_info( $info, $vendor ) {
+        // If the vendor not exists, return default info.
+        $vendor_id = $vendor->get_id() ?? 0;
+        if ( ! $vendor_id ) {
+            return $info;
+        }
+
+        // Get subscription package ID.
+        $pack_id = (int) get_user_meta( $vendor_id, 'product_package_id', true );
+        if ( ! $pack_id ) {
+            return $info;
+        }
+
+        // Get subscription package.
+        $pack_end_date = Helper::get_pack_end_date( $vendor_id ); // 'unlimited' or Y-m-d H:i:s
+        if ( ! $pack_end_date ) {
+            return $info;
+        }
+
+        try {
+            // Determine status: Active or Expired.
+            $status = esc_html__( 'Active', 'dokan' );
+
+            if ( $pack_end_date && 'unlimited' !== $pack_end_date ) {
+                $now = dokan_current_datetime();
+                $end = dokan_current_datetime()->modify( $pack_end_date );
+
+                if ( $end && $now > $end ) {
+                    $status = esc_html__( 'Expired', 'dokan' );
+                }
+            }
+
+            $info['subscription'] = [
+                'name'   => get_the_title( $pack_id ),
+                'status' => $status,
+            ];
+
+            return $info;
+        } catch ( \Throwable $e ) {
+            // Log subscription info didn't find message.
+            dokan_log(
+                sprintf(
+                    /* translators: 1) vendor id */
+                    esc_html__( 'Unable to find subscription info for: #%s', 'dokan' ),
+                    $e
+                )
+            );
+
+            return $info;
+        }
     }
 }
