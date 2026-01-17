@@ -561,7 +561,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         html += `</div>`;
     } else {
         // Complex recursive layout - render with absolute positioning
-        html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 1.1%;">`;
+        html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 6px;">`;
 
         // Render main grid area if it exists
         if (layout.mainBoxes > 0) {
