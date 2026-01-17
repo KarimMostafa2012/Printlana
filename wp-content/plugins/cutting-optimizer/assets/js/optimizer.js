@@ -622,17 +622,18 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Calculate offset based on main layout
             let offsetLeft = 0;
             let offsetTop = 0;
-            let lastContainer = '';
+            let columnContainer = '';
+            let rowContainer = '';
             if (layout.layoutType === 'vertical') {
                 // Main boxes are vertical strips, remaining space is on the right
                 offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
                 offsetTop = 0;
-                lastContainer = `<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
+                rowContainer = `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
             } else {
                 // Main boxes are horizontal strips, remaining space is on the bottom
                 offsetLeft = 0;
                 offsetTop = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxHeight + optimizer.gap)) : 0;
-                lastContainer = `<div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 6px;">`;
+                columnContainer = `<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 6px;">`;
             }
 
             // Render each detail area
@@ -640,8 +641,9 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 // For simplicity, we'll render the first level of recursive details
                 // More complex layouts would need a full recursive rendering approach
 
+                html += rowContainer;
                 for (let col = 0; col < detail.cols; col++) {
-                    html += lastContainer;
+                    html += columnContainer;
                     for (let row = 0; row < detail.rows; row++) {
                         const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
                         const boxTop = ((offsetTop + row * (detail.boxHeight + optimizer.gap)) / actualSheetHeight) * 100;
