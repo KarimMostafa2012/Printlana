@@ -661,6 +661,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                     html += `</div>`
                 }
+                html += `</div>`
 
                 // Update offset for next detail (simple stacking - may need refinement)
                 if (layout.layoutType === 'vertical') {
