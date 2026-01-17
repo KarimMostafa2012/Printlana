@@ -632,7 +632,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 // Main boxes are horizontal strips, remaining space is on the bottom
                 offsetLeft = 0;
                 offsetTop = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxHeight + optimizer.gap)) : 0;
-                lastContainer = `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; gap: 6px;">`;
+                lastContainer = `<div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 6px;">`;
             }
 
             // Render each detail area
