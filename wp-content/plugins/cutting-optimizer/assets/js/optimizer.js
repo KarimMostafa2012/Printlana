@@ -657,7 +657,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     // HORIZONTAL: Each row is a separate div with columns inside
                     for (let row = 0; row < detail.rows; row++) {
                         // Start row container
-                        html += `<div style="display: flex; flex-direction: row; gap: 6px; width: ${((detail.boxHeight*detail.rows.length) / actualSheetHeight) * 100}%;">`;
+                        html += `<div style="display: flex; flex-direction: row; gap: 6px; width: ${((detail.boxWidth*detail.cols.length) / actualSheetHeight) * 100}%;">`;
 
                         for (let col = 0; col < detail.cols; col++) {
                             html += `
