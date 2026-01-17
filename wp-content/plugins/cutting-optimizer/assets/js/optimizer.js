@@ -584,9 +584,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                         html += `
                             <div class="co-box" style="
-                                position: absolute;
-                                left: ${colLeft}%;
-                                top: ${rowTop}%;
                                 width: ${colWidth}%;
                                 height: ${rowHeight}%;
                             ">
@@ -612,9 +609,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                         html += `
                             <div class="co-box" style="
-                                position: absolute;
-                                left: ${colLeft}%;
-                                top: ${rowTop}%;
                                 width: ${colWidth}%;
                                 height: ${rowHeight}%;
                             ">
@@ -652,6 +646,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                 for (let col = 0; col < detail.cols; col++) {
                     html += `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: space-between;">`;
+
                     for (let row = 0; row < detail.rows; row++) {
                         const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
                         const boxTop = ((offsetTop + row * (detail.boxHeight + optimizer.gap)) / actualSheetHeight) * 100;
@@ -661,9 +656,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                         html += `
                             <div class="co-box co-box-rotated" style="
-                                position: absolute;
-                                left: ${boxLeft}%;
-                                top: ${boxTop}%;
                                 width: ${boxWidth}%;
                                 height: ${boxHeight}%;
                             ">
@@ -672,6 +664,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                             </div>
                         `;
                     }
+
                     html += `</div>`
                 }
 
