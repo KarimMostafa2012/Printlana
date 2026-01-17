@@ -332,7 +332,7 @@
 
         const optimalLayouts = layouts.filter(layout => layout.totalBoxes === maxBoxCount);
         const efficientLayouts = layouts.filter(layout =>
-            layout.efficiency > 70 && layout.totalBoxes < maxBoxCount
+            layout.efficiency > 80 && layout.totalBoxes < maxBoxCount
         );
 
         let html = `
@@ -437,7 +437,7 @@
         }
 
         if (efficientLayouts.length > 0) {
-            html += `<div class="co-layouts"><h3>Other Efficient Options (>70% Efficiency)</h3>`;
+            html += `<div class="co-layouts"><h3>Other Efficient Options (>80% Efficiency)</h3>`;
             html += `<p style="color: #666; margin-bottom: 20px;">Showing ${efficientLayouts.length} additional efficient layouts</p>`;
 
             efficientLayouts.slice(0, 10).forEach((layout, index) => {
