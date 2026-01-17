@@ -622,7 +622,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Calculate offset based on main layout
             let offsetLeft = 0;
             let offsetTop = 0;
-            const lastContainer = '';
+            let lastContainer = '';
             if (layout.layoutType === 'vertical') {
                 // Main boxes are vertical strips, remaining space is on the right
                 offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
