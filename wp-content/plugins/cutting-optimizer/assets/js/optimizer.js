@@ -624,17 +624,16 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             let offsetTop = 0;
             let columnContainer = '';
             let rowContainer = '';
-            console.log(layout.layoutType)
             if (layout.layoutType === 'vertical') {
                 // Main boxes are vertical strips, remaining space is on the right
                 offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
                 offsetTop = 0;
-                rowContainer = `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
+                columnContainer = `<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 6px; flex: 1;">`;
             } else {
                 // Main boxes are horizontal strips, remaining space is on the bottom
                 offsetLeft = 0;
                 offsetTop = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxHeight + optimizer.gap)) : 0;
-                columnContainer = `<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 6px; flex: 1;">`;
+                rowContainer = `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
             }
 
             // Render each detail area
