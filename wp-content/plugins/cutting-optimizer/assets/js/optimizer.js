@@ -494,19 +494,60 @@
     }
 
     function renderVisualDiagram(layout, optimizer, layoutIndex) {
-        // Simplified rendering - will need to be enhanced for complex recursive layouts
+        // [Visual diagram rendering - unchanged]
         let html = `
         <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
-            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout Preview</h3>
+            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 0 ? " (Optimal)" : ""}</h3>
             <div class="co-diagram-container">
-                <p style="color: #666; padding: 20px;">
-                    <strong>Layout Summary:</strong><br/>
-                    Total Boxes: ${layout.totalBoxes}<br/>
-                    Main Area: ${layout.mainBoxes} boxes<br/>
-                    Additional Areas: ${layout.rotatedBoxes} boxes<br/>
-                    <br/>
-                    <em>Complex recursive layouts - detailed visualization coming soon</em>
-                </p>
+        `;
+
+        const actualSheetWidth = layout.sheetRotated ? optimizer.sheetHeight : optimizer.sheetWidth;
+        const actualSheetHeight = layout.sheetRotated ? optimizer.sheetWidth : optimizer.sheetHeight;
+        const totalUsedWidth = layout.usedWidth;
+        const totalUsedHeight = layout.usedHeight;
+        const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
+        const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
+        const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
+        const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+        const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
+        const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
+
+        html += `
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
+                <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
+                <div class="co-sheet-label-width-left-line"></div>
+                <div class="co-sheet-label-width-right-line"></div>
+                <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height-bottom-line"></div>
+                <div class="co-sheet-label-height-top-line"></div>
+                <div class="co-box-grid" style="
+                    grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                    grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                    gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                    width: ${usedWidthPercent}%;
+                    height: ${usedHeightPercent}%;
+                ">
+        `;
+
+        for (let i = 0; i < layout.totalBoxes; i++) {
+            html += `
+                <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                    <span class="co-box-number">#${i + 1}</span>
+                </div>
+            `;
+        }
+
+        html += `
+                </div>
+            </div>
+            <div class="co-waste-info">
+                <p><strong>Waste Areas:</strong></p>
+                <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
+                <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
+            </div>
+        `;
+
+        html += `
             </div>
         </div>
         `;
