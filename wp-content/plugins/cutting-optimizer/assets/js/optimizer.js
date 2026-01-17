@@ -639,7 +639,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 // More complex layouts would need a full recursive rendering approach
 
                 for (let col = 0; col < detail.cols; col++) {
-                    html += `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: space-between;">`;
+                    html += `<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: space-between; flex: 1; gap: 6px;">`;
 
                     for (let row = 0; row < detail.rows; row++) {
                         const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
