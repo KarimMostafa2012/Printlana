@@ -624,6 +624,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             let offsetTop = 0;
             let columnContainer = '';
             let rowContainer = '';
+            console.log(layout.layoutType)
             if (layout.layoutType === 'vertical') {
                 // Main boxes are vertical strips, remaining space is on the right
                 offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
