@@ -561,7 +561,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         html += `</div>`;
     } else {
         // Complex recursive layout - render with absolute positioning
-        html += `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
+        html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 1.1%;">`;
 
         // Render main grid area if it exists
         if (layout.mainBoxes > 0) {
@@ -575,6 +575,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 for (let col = 0; col < layout.numStrips; col++) {
                     const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
                     const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
+
+                    html += `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: space-between;">`;
 
                     for (let row = 0; row < layout.boxesPerStrip; row++) {
                         const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
@@ -593,12 +595,16 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                             </div>
                         `;
                     }
+
+                    html += `</div>`
                 }
             } else {
                 // Horizontal strips layout
                 for (let row = 0; row < layout.numStrips; row++) {
                     const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
                     const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
+
+                    html += `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: space-between;">`;
 
                     for (let col = 0; col < layout.boxesPerStrip; col++) {
                         const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
@@ -617,6 +623,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                             </div>
                         `;
                     }
+
+                    html += `</div>`
                 }
             }
         }
