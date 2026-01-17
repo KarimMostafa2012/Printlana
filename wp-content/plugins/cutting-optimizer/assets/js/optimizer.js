@@ -497,106 +497,205 @@
         return html;
     }
 
-    function renderVisualDiagram(layout, optimizer, layoutIndex) {
-        let html = `
-        <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
-            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 0 ? " (Optimal)" : ""}</h3>
-            <div class="co-diagram-container">
-        `;
+function renderVisualDiagram(layout, optimizer, layoutIndex) {
+    let html = `
+    <div class="co-visual-diagram" id="visual-diagram-${layoutIndex}">
+        <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 0 ? " (Optimal)" : ""}</h3>
+        <div class="co-diagram-container">
+    `;
 
-        const actualSheetWidth = optimizer.sheetWidth;
-        const actualSheetHeight = optimizer.sheetHeight;
+    const actualSheetWidth = optimizer.sheetWidth;
+    const actualSheetHeight = optimizer.sheetHeight;
+
+    html += `
+        <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight}; position: relative; border: 2px solid #333; background: #f9f9f9;">
+            <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
+            <div class="co-sheet-label-width-left-line"></div>
+            <div class="co-sheet-label-width-right-line"></div>
+            <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
+            <div class="co-sheet-label-height-bottom-line"></div>
+            <div class="co-sheet-label-height-top-line"></div>
+    `;
+
+    let boxCounter = 1;
+
+    // Check if we have a simple layout (only main boxes, no recursive details)
+    const isSimpleLayout = !layout.remainingDetails || layout.remainingDetails.length === 0;
+
+    if (isSimpleLayout && layout.mainBoxes > 0) {
+        // Simple grid layout - use CSS Grid
         const totalUsedWidth = layout.usedWidth;
         const totalUsedHeight = layout.usedHeight;
         const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
         const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
+        const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
+        const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+        const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
+        const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
 
-        // Check if we have a simple layout (only main boxes, no recursive details)
-        const isSimpleLayout = !layout.remainingDetails || layout.remainingDetails.length === 0;
+        html += `
+            <div class="co-box-grid" style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: grid;
+                grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                width: ${usedWidthPercent}%;
+                height: ${usedHeightPercent}%;
+                padding: 5px;
+                box-sizing: border-box;
+            ">
+        `;
 
-        if (isSimpleLayout && layout.mainBoxes > 0) {
-            // Simple grid layout
-            const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
-            const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
-            const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
-            const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
-
+        for (let i = 0; i < layout.totalBoxes; i++) {
             html += `
-                <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight};">
-                    <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
-                    <div class="co-sheet-label-width-left-line"></div>
-                    <div class="co-sheet-label-width-right-line"></div>
-                    <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
-                    <div class="co-sheet-label-height-bottom-line"></div>
-                    <div class="co-sheet-label-height-top-line"></div>
-                    <div class="co-box-grid" style="
-                        grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
-                        grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
-                        gap: ${gapHeightPercent}% ${gapWidthPercent}%;
-                        width: ${usedWidthPercent}%;
-                        height: ${usedHeightPercent}%;
-                    ">
-            `;
-
-            for (let i = 0; i < layout.totalBoxes; i++) {
-                html += `
-                    <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
-                        <span class="co-box-number">#${i + 1}</span>
-                    </div>
-                `;
-            }
-
-            html += `
-                    </div>
-                </div>
-                <div class="co-waste-info">
-                    <p><strong>Waste Areas:</strong></p>
-                    <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
-                    <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
-                </div>
-            `;
-        } else {
-            // Complex recursive layout - show summary
-            html += `
-                <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight}; position: relative; border: 2px solid #333; background: #f5f5f5;">
-                    <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
-                    <div class="co-sheet-label-width-left-line"></div>
-                    <div class="co-sheet-label-width-right-line"></div>
-                    <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
-                    <div class="co-sheet-label-height-bottom-line"></div>
-                    <div class="co-sheet-label-height-top-line"></div>
-
-                    <div style="padding: 20px; color: #666;">
-                        <p><strong>Complex Recursive Layout</strong></p>
-                        <p><strong>Total Boxes:</strong> ${layout.totalBoxes}</p>
-                        ${layout.mainBoxes > 0 ? `<p><strong>Main Grid:</strong> ${layout.mainBoxes} boxes (${layout.cols} × ${layout.rows})</p>` : ''}
-                        ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `
-                            <p><strong>Additional Areas:</strong></p>
-                            <ul style="margin: 5px 0; padding-left: 20px; font-size: 12px;">
-                                ${layout.remainingDetails.map(detail =>
-                                `<li>${detail.boxes} boxes (${detail.cols}×${detail.rows}) - ${detail.orientation}</li>`
-                            ).join('')}
-                            </ul>
-                        ` : ''}
-                        <p style="margin-top: 10px; font-size: 11px; font-style: italic;">Click on layout card to update visualization</p>
-                    </div>
-                </div>
-                <div class="co-waste-info">
-                    <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical' : 'Horizontal'} Strips with Recursive Filling</p>
-                    <p><strong>Waste Areas:</strong></p>
-                    <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
-                    <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
+                <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                    <span class="co-box-number">#${boxCounter++}</span>
+                    <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
                 </div>
             `;
         }
 
-        html += `
-            </div>
-        </div>
-        `;
+        html += `</div>`;
+    } else {
+        // Complex recursive layout - render with absolute positioning
+        html += `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
 
-        return html;
+        // Render main grid area if it exists
+        if (layout.mainBoxes > 0) {
+            const mainUsedWidth = layout.numStrips > 0 ? layout.numStrips * (layout.boxWidth + optimizer.gap) - optimizer.gap : 0;
+            const mainUsedHeight = layout.boxesPerStrip > 0 ? layout.boxesPerStrip * (layout.boxHeight + optimizer.gap) - optimizer.gap : 0;
+            const mainWidthPercent = (mainUsedWidth / actualSheetWidth) * 100;
+            const mainHeightPercent = (mainUsedHeight / actualSheetHeight) * 100;
+
+            if (layout.layoutType === 'vertical') {
+                // Vertical strips layout
+                for (let col = 0; col < layout.numStrips; col++) {
+                    const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
+                    const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
+
+                    for (let row = 0; row < layout.boxesPerStrip; row++) {
+                        const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
+                        const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
+
+                        html += `
+                            <div class="co-box" style="
+                                position: absolute;
+                                left: ${colLeft}%;
+                                top: ${rowTop}%;
+                                width: ${colWidth}%;
+                                height: ${rowHeight}%;
+                            ">
+                                <span class="co-box-number">#${boxCounter++}</span>
+                                <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                            </div>
+                        `;
+                    }
+                }
+            } else {
+                // Horizontal strips layout
+                for (let row = 0; row < layout.numStrips; row++) {
+                    const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
+                    const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
+
+                    for (let col = 0; col < layout.boxesPerStrip; col++) {
+                        const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
+                        const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
+
+                        html += `
+                            <div class="co-box" style="
+                                position: absolute;
+                                left: ${colLeft}%;
+                                top: ${rowTop}%;
+                                width: ${colWidth}%;
+                                height: ${rowHeight}%;
+                            ">
+                                <span class="co-box-number">#${boxCounter++}</span>
+                                <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                            </div>
+                        `;
+                    }
+                }
+            }
+        }
+
+        // Render remaining details (recursive boxes)
+        if (layout.remainingDetails && layout.remainingDetails.length > 0) {
+            // Calculate offset based on main layout
+            let offsetLeft = 0;
+            let offsetTop = 0;
+
+            if (layout.layoutType === 'vertical') {
+                // Main boxes are vertical strips, remaining space is on the right
+                offsetLeft = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxWidth + optimizer.gap)) : 0;
+                offsetTop = 0;
+            } else {
+                // Main boxes are horizontal strips, remaining space is on the bottom
+                offsetLeft = 0;
+                offsetTop = layout.mainBoxes > 0 ? (layout.numStrips * (layout.boxHeight + optimizer.gap)) : 0;
+            }
+
+            // Render each detail area
+            layout.remainingDetails.forEach((detail, detailIndex) => {
+                // For simplicity, we'll render the first level of recursive details
+                // More complex layouts would need a full recursive rendering approach
+
+                for (let col = 0; col < detail.cols; col++) {
+                    for (let row = 0; row < detail.rows; row++) {
+                        const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
+                        const boxTop = ((offsetTop + row * (detail.boxHeight + optimizer.gap)) / actualSheetHeight) * 100;
+                        const boxWidth = (detail.boxWidth / actualSheetWidth) * 100;
+                        const boxHeight = (detail.boxHeight / actualSheetHeight) * 100;
+
+                        html += `
+                            <div class="co-box co-box-rotated" style="
+                                position: absolute;
+                                left: ${boxLeft}%;
+                                top: ${boxTop}%;
+                                width: ${boxWidth}%;
+                                height: ${boxHeight}%;
+                            ">
+                                <span class="co-box-number">#${boxCounter++}</span>
+                                <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                            </div>
+                        `;
+                    }
+                }
+
+                // Update offset for next detail (simple stacking - may need refinement)
+                if (layout.layoutType === 'vertical') {
+                    offsetLeft += detail.cols * (detail.boxWidth + optimizer.gap);
+                } else {
+                    offsetTop += detail.rows * (detail.boxHeight + optimizer.gap);
+                }
+            });
+        }
+
+        html += `</div>`;
     }
+
+    html += `
+        </div>
+        <div class="co-waste-info">
+            <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical' : 'Horizontal'} Strips ${!isSimpleLayout ? 'with Recursive Filling' : ''}</p>
+            <p><strong>Total Boxes:</strong> ${layout.totalBoxes}</p>
+            ${layout.mainBoxes > 0 ? `<p><strong>Main Grid:</strong> ${layout.mainBoxes} boxes (${layout.cols || layout.numStrips} × ${layout.rows || layout.boxesPerStrip})</p>` : ''}
+            ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `<p><strong>Additional Areas:</strong> ${layout.rotatedBoxes} boxes in ${layout.remainingDetails.length} area(s)</p>` : ''}
+            <p><strong>Waste Areas:</strong></p>
+            <p>Right edge: ${layout.wasteWidth.toFixed(1)} mm</p>
+            <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} mm</p>
+        </div>
+    `;
+
+    html += `
+        </div>
+    </div>
+    `;
+
+    return html;
+}
 
     let currentOptimizer = null;
     let currentLayouts = null;
