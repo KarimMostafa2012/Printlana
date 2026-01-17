@@ -583,7 +583,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
 
                         html += `
-                            <div class="co-box">
+                            <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
                                 <span class="co-box-number">#${boxCounter++}</span>
                                 <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
                             </div>
@@ -597,15 +597,16 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 for (let row = 0; row < layout.numStrips; row++) {
                     const rowTop = (row * (layout.boxHeight + optimizer.gap) / actualSheetHeight) * 100;
                     const rowHeight = (layout.boxHeight / actualSheetHeight) * 100;
+                    const rowWidthPercent = ((layout.boxWidth * layout.boxesPerStrip) + (optimizer.gap * (layout.boxesPerStrip + 1))) / actualSheetWidth * 100;
 
-                    html += `<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; gap: 6px;">`;
+                    html += `<div style="width: ${rowWidthPercent}%; display: flex; flex-direction: row; justify-content: space-between; gap: 6px;">`;
 
                     for (let col = 0; col < layout.boxesPerStrip; col++) {
                         const colLeft = (col * (layout.boxWidth + optimizer.gap) / actualSheetWidth) * 100;
                         const colWidth = (layout.boxWidth / actualSheetWidth) * 100;
 
                         html += `
-                            <div class="co-box">
+                            <div class="co-box" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
                                 <span class="co-box-number">#${boxCounter++}</span>
                                 <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
                             </div>
@@ -643,7 +644,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                         for (let row = 0; row < detail.rows; row++) {
                             html += `
-                                <div class="co-box co-box-rotated" style="flex: 1;">
+                                <div class="co-box co-box-rotated" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
                                     <span class="co-box-number">#${boxCounter++}</span>
                                     <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
                                 </div>
@@ -656,12 +657,14 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 } else {
                     // HORIZONTAL: Each row is a separate div with columns inside
                     for (let row = 0; row < detail.rows; row++) {
+                        const detailRowWidthPercent = ((detail.boxWidth * detail.cols) + (optimizer.gap * (detail.cols + 1))) / actualSheetWidth * 100;
+
                         // Start row container
-                        html += `<div style="display: flex; flex-direction: row; gap: 6px; width: ${((detail.boxWidth*detail.cols.length) / actualSheetHeight) * 100}%;">`;
+                        html += `<div style="display: flex; flex-direction: row; gap: 6px; width: ${detailRowWidthPercent}%;">`;
 
                         for (let col = 0; col < detail.cols; col++) {
                             html += `
-                                <div class="co-box co-box-rotated" style="flex: 1;">
+                                <div class="co-box co-box-rotated" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
                                     <span class="co-box-number">#${boxCounter++}</span>
                                     <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
                                 </div>
@@ -705,7 +708,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
     return html;
 }
-
     let currentOptimizer = null;
     let currentLayouts = null;
 
