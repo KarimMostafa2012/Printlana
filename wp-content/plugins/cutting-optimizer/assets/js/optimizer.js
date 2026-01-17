@@ -651,11 +651,13 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 // More complex layouts would need a full recursive rendering approach
 
                 for (let col = 0; col < detail.cols; col++) {
+                    html += `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: space-between;">`;
                     for (let row = 0; row < detail.rows; row++) {
                         const boxLeft = ((offsetLeft + col * (detail.boxWidth + optimizer.gap)) / actualSheetWidth) * 100;
                         const boxTop = ((offsetTop + row * (detail.boxHeight + optimizer.gap)) / actualSheetHeight) * 100;
                         const boxWidth = (detail.boxWidth / actualSheetWidth) * 100;
                         const boxHeight = (detail.boxHeight / actualSheetHeight) * 100;
+
 
                         html += `
                             <div class="co-box co-box-rotated" style="
@@ -670,6 +672,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                             </div>
                         `;
                     }
+                    html += `</div>`
                 }
 
                 // Update offset for next detail (simple stacking - may need refinement)
