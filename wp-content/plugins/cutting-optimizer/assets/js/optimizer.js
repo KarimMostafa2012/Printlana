@@ -1682,12 +1682,12 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             const region2HeightPercent = (region2Layout.usedHeight / sheetHeight) * 100;
 
             // Render Region 1
-            html += `<div style="width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;">`;
+            html += `<div style="width: ${region1WidthPercent}%;">`;
             html += renderCombinedRegionGrid(region1Layout, region1Type, region1Layout.usedWidth, region1Layout.usedHeight, gap);
             html += `</div>`;
 
             // Render Region 2
-            html += `<div style="width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;">`;
+            html += `<div style="width: ${region2WidthPercent}%;">`;
             html += renderCombinedRegionGrid(region2Layout, region2Type, region2Layout.usedWidth, region2Layout.usedHeight, gap);
             html += `</div>`;
 
@@ -1781,7 +1781,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             const totalUsedWidth = layout.usedWidth;
             const totalUsedHeight = layout.usedHeight;
 
-            html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start;">`;
+            html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; align-content: space-between;">`;
 
             // Render main boxes
             if (layout.mainBoxes > 0) {
@@ -1792,7 +1792,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const mainColHeightPercent = ((layout.boxesPerStrip * layout.boxHeight) + ((layout.boxesPerStrip - 1) * gap)) / totalUsedHeight * 100;
 
                     for (let col = 0; col < layout.numStrips; col++) {
-                        html += `<div style="display: flex; flex-direction: column; gap: 6px; width: ${mainColWidthPercent}%; height: ${mainColHeightPercent}%;">`;
+                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: 1; height: ${mainColHeightPercent}%;">`;
                         for (let row = 0; row < layout.boxesPerStrip; row++) {
                             html += `
                                 <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
@@ -1810,7 +1810,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const mainRowHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
 
                     for (let row = 0; row < layout.numStrips; row++) {
-                        html += `<div style="width: ${mainRowWidthPercent}%; height: ${mainRowHeightPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
+                        html += `<div style="width: ${mainRowWidthPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
                         for (let col = 0; col < layout.boxesPerStrip; col++) {
                             html += `
                                 <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
