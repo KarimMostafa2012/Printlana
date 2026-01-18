@@ -1610,7 +1610,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
             return `
                 <div class="co-mini-sheet" style="aspect-ratio: ${sheetWidth}/${sheetHeight};">
-                    <div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>
                     <div style="${isVertical ? `width: ${splitPos}%` : `height: ${splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
                         ${renderMiniBoxes(result.swapped ? result.lidCount : result.boxCount, result.swapped ? 'lid' : 'box')}
                     </div>
@@ -1712,9 +1711,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                 splitLinePos = region1HeightPercent;
             }
-
-            // Split line positioned at actual boundary
-            html += `<div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitLinePos}%` : `top: ${splitLinePos}%`}"></div>`;
 
             // Render Region 1 with actual used dimensions
             const region1Style = isVertical
