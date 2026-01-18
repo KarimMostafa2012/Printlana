@@ -1611,10 +1611,10 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             return `
                 <div class="co-mini-sheet" style="aspect-ratio: ${sheetWidth}/${sheetHeight};">
                     <div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>
-                    <div style="position: absolute; ${isVertical ? `left: 0; width: ${splitPos}%` : `top: 0; height: ${splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
+                    <div style="${isVertical ? `width: ${splitPos}%` : `height: ${splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
                         ${renderMiniBoxes(result.swapped ? result.lidCount : result.boxCount, result.swapped ? 'lid' : 'box')}
                     </div>
-                    <div style="position: absolute; ${isVertical ? `right: 0; width: ${100 - splitPos}%` : `bottom: 0; height: ${100 - splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
+                    <div style="${isVertical ? `width: ${100 - splitPos}%` : `height: ${100 - splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
                         ${renderMiniBoxes(result.swapped ? result.boxCount : result.lidCount, result.swapped ? 'box' : 'lid')}
                     </div>
                 </div>
@@ -1664,11 +1664,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         `;
 
         if (result.approach === 'split') {
-            const splitPos = result.splitRatio * 100;
             const isVertical = result.splitType === 'vertical';
-
-            // Split line
-            html += `<div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>`;
 
             // Get layouts for each region
             const boxLayout = result.boxLayout;
@@ -1677,31 +1673,65 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Region 1 - Boxes or Lids based on swapped
             const region1Layout = result.swapped ? lidLayout : boxLayout;
             const region1Type = result.swapped ? 'lid' : 'box';
-            const region1Width = result.region1.width;
-            const region1Height = result.region1.height;
 
             // Region 2 - The other type
             const region2Layout = result.swapped ? boxLayout : lidLayout;
             const region2Type = result.swapped ? 'box' : 'lid';
-            const region2Width = result.region2.width;
-            const region2Height = result.region2.height;
 
-            // Render Region 1
+            // Calculate actual used dimensions for each region
+            const region1UsedWidth = region1Layout.usedWidth;
+            const region1UsedHeight = region1Layout.usedHeight;
+            const region2UsedWidth = region2Layout.usedWidth;
+            const region2UsedHeight = region2Layout.usedHeight;
+
+            // Calculate percentages based on actual used dimensions
+            let region1WidthPercent, region1HeightPercent;
+            let region2LeftPercent, region2TopPercent, region2WidthPercent, region2HeightPercent;
+            let splitLinePos;
+
+            if (isVertical) {
+                // Vertical split - regions side by side
+                region1WidthPercent = (region1UsedWidth / sheetWidth) * 100;
+                region1HeightPercent = (region1UsedHeight / sheetHeight) * 100;
+
+                region2WidthPercent = (region2UsedWidth / sheetWidth) * 100;
+                region2HeightPercent = (region2UsedHeight / sheetHeight) * 100;
+                region2LeftPercent = ((region1UsedWidth + gap) / sheetWidth) * 100;
+                region2TopPercent = 0;
+
+                splitLinePos = region1WidthPercent;
+            } else {
+                // Horizontal split - regions stacked
+                region1WidthPercent = (region1UsedWidth / sheetWidth) * 100;
+                region1HeightPercent = (region1UsedHeight / sheetHeight) * 100;
+
+                region2WidthPercent = (region2UsedWidth / sheetWidth) * 100;
+                region2HeightPercent = (region2UsedHeight / sheetHeight) * 100;
+                region2LeftPercent = 0;
+                region2TopPercent = ((region1UsedHeight + gap) / sheetHeight) * 100;
+
+                splitLinePos = region1HeightPercent;
+            }
+
+            // Split line positioned at actual boundary
+            html += `<div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitLinePos}%` : `top: ${splitLinePos}%`}"></div>`;
+
+            // Render Region 1 with actual used dimensions
             const region1Style = isVertical
-                ? `position: absolute; left: 0; top: 0; width: ${splitPos}%; height: 100%;`
-                : `position: absolute; left: 0; top: 0; width: 100%; height: ${splitPos}%;`;
+                ? `position: absolute; left: 0; top: 0; width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`
+                : `position: absolute; left: 0; top: 0; width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`;
 
             html += `<div style="${region1Style} padding: 5px; box-sizing: border-box;">`;
-            html += renderCombinedRegionGrid(region1Layout, region1Type, region1Width, region1Height, gap);
+            html += renderCombinedRegionGrid(region1Layout, region1Type, region1UsedWidth, region1UsedHeight, gap);
             html += `</div>`;
 
-            // Render Region 2
+            // Render Region 2 with actual used dimensions
             const region2Style = isVertical
-                ? `position: absolute; right: 0; top: 0; width: ${100 - splitPos}%; height: 100%;`
-                : `position: absolute; left: 0; bottom: 0; width: 100%; height: ${100 - splitPos}%;`;
+                ? `position: absolute; left: ${region2LeftPercent}%; top: 0; width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`
+                : `position: absolute; left: 0; top: ${region2TopPercent}%; width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`;
 
             html += `<div style="${region2Style} padding: 5px; box-sizing: border-box;">`;
-            html += renderCombinedRegionGrid(region2Layout, region2Type, region2Width, region2Height, gap);
+            html += renderCombinedRegionGrid(region2Layout, region2Type, region2UsedWidth, region2UsedHeight, gap);
             html += `</div>`;
 
         } else {
