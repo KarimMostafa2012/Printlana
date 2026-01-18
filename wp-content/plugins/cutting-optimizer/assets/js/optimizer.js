@@ -586,17 +586,20 @@
                     this.lidWidth, this.lidHeight,
                     rightWidth, rightHeight, this.gap
                 );
-                const rightLayouts = rightOptimizer.findOptimalLayout();
-                if (rightLayouts.length > 0 && rightLayouts[0].totalBoxes > 0) {
-                    maxLids += rightLayouts[0].totalBoxes;
+                // FIXED: Use ALL layouts, not just first
+                const allRightLayouts = rightOptimizer.findOptimalLayout();
+                if (allRightLayouts.length > 0) {
+                    // Get the best one (already sorted)
+                    const bestRight = allRightLayouts[0];
+                    maxLids += bestRight.totalBoxes; // This includes recursive fills
                     placements.push({
                         region: 'right',
                         offsetX: boxUsedWidth + this.gap,
                         offsetY: 0,
                         width: rightWidth,
                         height: rightHeight,
-                        layout: rightLayouts[0],
-                        count: rightLayouts[0].totalBoxes
+                        layout: bestRight,
+                        count: bestRight.totalBoxes
                     });
                 }
             }
@@ -610,17 +613,48 @@
                     this.lidWidth, this.lidHeight,
                     bottomWidth, bottomHeight, this.gap
                 );
-                const bottomLayouts = bottomOptimizer.findOptimalLayout();
-                if (bottomLayouts.length > 0 && bottomLayouts[0].totalBoxes > 0) {
-                    maxLids += bottomLayouts[0].totalBoxes;
+                // FIXED: Use ALL layouts to get the best one with recursive filling
+                const allBottomLayouts = bottomOptimizer.findOptimalLayout();
+                if (allBottomLayouts.length > 0) {
+                    // Get the best one (already sorted)
+                    const bestBottom = allBottomLayouts[0];
+                    maxLids += bestBottom.totalBoxes; // This includes recursive fills
                     placements.push({
                         region: 'bottom',
                         offsetX: 0,
                         offsetY: boxUsedHeight + this.gap,
                         width: bottomWidth,
                         height: bottomHeight,
-                        layout: bottomLayouts[0],
-                        count: bottomLayouts[0].totalBoxes
+                        layout: bestBottom,
+                        count: bestBottom.totalBoxes
+                    });
+                }
+            }
+
+            // Try placing lids in corner remaining space (right-bottom corner)
+            const cornerWidth = this.sheetWidth - boxUsedWidth - this.gap;
+            const cornerHeight = this.sheetHeight - boxUsedHeight - this.gap;
+
+            if (cornerWidth >= Math.min(this.lidWidth, this.lidHeight) &&
+                cornerHeight >= Math.min(this.lidWidth, this.lidHeight)) {
+                const cornerOptimizer = new CuttingOptimizer(
+                    this.lidWidth, this.lidHeight,
+                    cornerWidth, cornerHeight, this.gap
+                );
+                // FIXED: Use ALL layouts to get the best one with recursive filling
+                const allCornerLayouts = cornerOptimizer.findOptimalLayout();
+                if (allCornerLayouts.length > 0) {
+                    // Get the best one (already sorted)
+                    const bestCorner = allCornerLayouts[0];
+                    maxLids += bestCorner.totalBoxes; // This includes recursive fills
+                    placements.push({
+                        region: 'corner',
+                        offsetX: boxUsedWidth + this.gap,
+                        offsetY: boxUsedHeight + this.gap,
+                        width: cornerWidth,
+                        height: cornerHeight,
+                        layout: bestCorner,
+                        count: bestCorner.totalBoxes
                     });
                 }
             }
@@ -1853,7 +1887,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         const detailRowHeightPercent = (detail.boxHeight / totalUsedHeight) * 100;
 
                         for (let row = 0; row < detail.rows; row++) {
-                            html += `<div style="width: ${detailRowWidthPercent}%; height: ${detailRowHeightPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
+                            html += `<div style="width: ${detailRowWidthPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
                             for (let col = 0; col < detail.cols; col++) {
                                 html += `
                                     <div class="${boxClass} ${rotatedClass}" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
