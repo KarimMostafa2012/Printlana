@@ -628,10 +628,99 @@
             return { maxLids, placements };
         }
 
+        // Get all valid combined configurations (for showing alternatives)
+        getAllCombinedConfigurations() {
+            const allConfigs = [];
+
+            // Try all vertical splits
+            for (let splitRatio = 0.1; splitRatio <= 0.9; splitRatio += 0.05) {
+                const result = this.evaluateSplit('vertical', splitRatio);
+                if (result && result.pairs > 0) {
+                    allConfigs.push(result);
+                }
+
+                const resultSwapped = this.evaluateSplit('vertical', splitRatio, true);
+                if (resultSwapped && resultSwapped.pairs > 0) {
+                    allConfigs.push(resultSwapped);
+                }
+            }
+
+            // Try all horizontal splits
+            for (let splitRatio = 0.1; splitRatio <= 0.9; splitRatio += 0.05) {
+                const result = this.evaluateSplit('horizontal', splitRatio);
+                if (result && result.pairs > 0) {
+                    allConfigs.push(result);
+                }
+
+                const resultSwapped = this.evaluateSplit('horizontal', splitRatio, true);
+                if (resultSwapped && resultSwapped.pairs > 0) {
+                    allConfigs.push(resultSwapped);
+                }
+            }
+
+            // Try mixed placements
+            const boxOptimizer = new CuttingOptimizer(
+                this.boxWidth, this.boxHeight,
+                this.sheetWidth, this.sheetHeight, this.gap
+            );
+            const boxLayouts = boxOptimizer.findOptimalLayout();
+
+            for (const boxLayout of boxLayouts.slice(0, 20)) {
+                const boxCount = boxLayout.totalBoxes;
+                if (boxCount === 0) continue;
+
+                const remaining = this.calculateRemainingSpaceForLids(boxLayout);
+
+                if (remaining.maxLids > 0) {
+                    const pairs = Math.min(boxCount, remaining.maxLids);
+                    const usedArea = pairs * this.boxArea + pairs * this.lidArea;
+                    const efficiency = (usedArea / this.sheetArea) * 100;
+
+                    allConfigs.push({
+                        type: 'combined',
+                        approach: 'mixed',
+                        pairs: pairs,
+                        boxCount: boxCount,
+                        lidCount: remaining.maxLids,
+                        boxLayout: boxLayout,
+                        lidPlacements: remaining.placements,
+                        efficiency: efficiency,
+                        sheetsNeeded: 1,
+                        usedArea: usedArea,
+                        wastedArea: this.sheetArea - usedArea,
+                        boxOptimizer: boxOptimizer
+                    });
+                }
+            }
+
+            // Sort by pairs (descending), then efficiency (descending)
+            allConfigs.sort((a, b) => {
+                if (b.pairs !== a.pairs) return b.pairs - a.pairs;
+                return b.efficiency - a.efficiency;
+            });
+
+            // Remove duplicates (same pairs and very similar efficiency)
+            const uniqueConfigs = [];
+            for (const config of allConfigs) {
+                const isDuplicate = uniqueConfigs.some(c =>
+                    c.pairs === config.pairs &&
+                    Math.abs(c.efficiency - config.efficiency) < 0.1 &&
+                    c.approach === config.approach &&
+                    c.splitType === config.splitType
+                );
+                if (!isDuplicate) {
+                    uniqueConfigs.push(config);
+                }
+            }
+
+            return uniqueConfigs;
+        }
+
         // Compare Case 1 and Case 2 and determine the best option
         findOptimalStrategy() {
             const separateResult = this.calculateSeparateSheets();
             const combinedResult = this.calculateCombinedSheet();
+            const allCombinedConfigs = this.getAllCombinedConfigurations();
 
             let recommendation = null;
             let reason = '';
@@ -672,6 +761,7 @@
             return {
                 combined: combinedResult,
                 separate: separateResult,
+                allCombinedConfigs: allCombinedConfigs,
                 recommendation: recommendation,
                 reason: reason
             };
@@ -1071,7 +1161,12 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             return `<div class="co-summary"><h2>${strategy.error}</h2></div>`;
         }
 
-        const { combined, separate, recommendation, reason } = strategy;
+        const { combined, separate, allCombinedConfigs, recommendation, reason } = strategy;
+
+        // Store for click handling
+        currentStrategy = strategy;
+        currentSelectedMode = recommendation;
+        currentCombinedConfigs = allCombinedConfigs;
 
         let html = `
             <div class="co-lid-summary">
@@ -1105,34 +1200,151 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             </div>
         `;
 
-        // Comparison view
+        // Comparison view with clickable options
         html += `<div class="co-comparison-view">`;
 
-        // Combined sheet option
+        // Combined sheet option (clickable)
         if (combined) {
             html += renderCombinedOption(combined, lidOptimizer, recommendation === 'combined');
         }
 
-        // Separate sheets option
+        // Separate sheets option (clickable)
         if (separate) {
             html += renderSeparateOption(separate, lidOptimizer, recommendation === 'separate');
         }
 
         html += `</div>`;
 
-        // Show detailed diagram of recommended option
+        // Dynamic content container for mode-specific content
+        html += `<div class="co-mode-content">`;
+
+        // Show detailed diagram and configurations based on selected mode
         if (recommendation === 'combined' && combined) {
-            html += renderCombinedSheetDiagram(combined, lidOptimizer);
+            html += renderCombinedModeContent(combined, allCombinedConfigs, lidOptimizer);
         } else if (recommendation === 'separate' && separate) {
-            html += renderSeparateSheetsDiagram(separate, lidOptimizer);
+            html += renderSeparateModeContent(separate, lidOptimizer);
         }
 
-        // Show all efficient layouts for boxes and lids (>80% efficiency)
-        if (separate) {
-            html += renderEfficientLayoutsForLidMode(separate, lidOptimizer);
+        html += `</div>`;
+
+        return html;
+    }
+
+    // Render content for combined mode (diagram + configurations)
+    function renderCombinedModeContent(combinedResult, allConfigs, lidOptimizer) {
+        let html = '';
+
+        // Show the main combined sheet diagram
+        html += renderCombinedSheetDiagram(combinedResult, lidOptimizer);
+
+        // Show all combined configurations
+        if (allConfigs && allConfigs.length > 0) {
+            const maxPairs = allConfigs[0].pairs;
+            const optimalConfigs = allConfigs.filter(c => c.pairs === maxPairs);
+            const efficientConfigs = allConfigs.filter(c => c.pairs < maxPairs && c.efficiency > 60);
+
+            html += `
+                <div class="co-layouts co-combined-layouts">
+                    <h3><span class="dashicons dashicons-format-gallery"></span> Combined Sheet Configurations</h3>
+                    <div class="co-optimal-badge co-combined-badge">
+                        <span class="dashicons dashicons-star-filled"></span>
+                        ${optimalConfigs.length} Optimal Configuration${optimalConfigs.length > 1 ? 's' : ''} (${maxPairs} pairs each)
+                    </div>
+            `;
+
+            // Optimal configurations
+            optimalConfigs.forEach((config, index) => {
+                html += renderCombinedConfigItem(config, index, index, true, lidOptimizer);
+            });
+
+            // Other efficient configurations
+            if (efficientConfigs.length > 0) {
+                html += `<h4 style="margin-top: 25px; color: #646970;">Other Configurations</h4>`;
+                html += `<p style="color: #666; margin-bottom: 20px;">Showing ${Math.min(efficientConfigs.length, 10)} additional configurations</p>`;
+
+                efficientConfigs.slice(0, 10).forEach((config, index) => {
+                    html += renderCombinedConfigItem(config, optimalConfigs.length + index, index, false, lidOptimizer);
+                });
+            }
+
+            html += `</div>`;
         }
 
         return html;
+    }
+
+    // Render content for separate mode (diagram + box/lid layouts)
+    function renderSeparateModeContent(separateResult, lidOptimizer) {
+        let html = '';
+
+        // Show the separate sheets diagram
+        html += renderSeparateSheetsDiagram(separateResult, lidOptimizer);
+
+        // Show all efficient layouts for boxes and lids
+        html += renderEfficientLayoutsForLidMode(separateResult, lidOptimizer);
+
+        return html;
+    }
+
+    // Render a combined configuration item
+    function renderCombinedConfigItem(config, globalIndex, displayIndex, isOptimal, lidOptimizer) {
+        const approachLabel = config.approach === 'split'
+            ? `${config.splitType === 'vertical' ? 'Vertical' : 'Horizontal'} Split at ${(config.splitRatio * 100).toFixed(0)}%${config.swapped ? ' (swapped)' : ''}`
+            : 'Mixed Placement';
+
+        return `
+            <div class="co-layout-item co-combined-item ${isOptimal ? 'optimal' : ''}" data-config-index="${globalIndex}" data-type="combined-config">
+                <div class="co-layout-header">
+                    <div class="co-layout-title">
+                        ${isOptimal ? '<span class="dashicons dashicons-star-filled" style="color: #2271b1;"></span>' : ''}
+                        ${approachLabel} (Config ${displayIndex + 1})
+                    </div>
+                    <div class="co-layout-boxes">${config.pairs} pairs</div>
+                </div>
+
+                <div class="co-layout-stats">
+                    <div class="co-stat">
+                        <label>Boxes</label>
+                        <div class="value">${config.boxCount}</div>
+                    </div>
+                    <div class="co-stat">
+                        <label>Lids</label>
+                        <div class="value">${config.lidCount}</div>
+                    </div>
+                    <div class="co-stat">
+                        <label>Efficiency</label>
+                        <div class="value">${config.efficiency.toFixed(2)}%</div>
+                    </div>
+                    <div class="co-stat">
+                        <label>Sheets</label>
+                        <div class="value">1</div>
+                    </div>
+                </div>
+
+                <div class="co-efficiency-bar">
+                    <label>Material Efficiency</label>
+                    <div class="co-efficiency-track">
+                        <div class="co-efficiency-fill co-combined-fill" style="width: ${config.efficiency}%">
+                            ${config.efficiency.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="co-layout-details co-combined-details">
+                    <p><strong>Approach:</strong> ${config.approach === 'split' ? 'Sheet Split' : 'Mixed Placement'}</p>
+                    ${config.approach === 'split' ? `
+                        <p><strong>Split:</strong> ${config.splitType} at ${(config.splitRatio * 100).toFixed(0)}%</p>
+                        <p><strong>Region 1:</strong> ${config.swapped ? 'Lids' : 'Boxes'} (${config.swapped ? config.lidCount : config.boxCount})</p>
+                        <p><strong>Region 2:</strong> ${config.swapped ? 'Boxes' : 'Lids'} (${config.swapped ? config.boxCount : config.lidCount})</p>
+                    ` : `
+                        <p><strong>Boxes:</strong> ${config.boxCount} in main area</p>
+                        <p><strong>Lids:</strong> ${config.lidCount} in remaining space</p>
+                    `}
+                    <p><strong>Used Area:</strong> ${config.usedArea.toFixed(0)} cm²</p>
+                    <p><strong>Wasted Area:</strong> ${config.wastedArea.toFixed(0)} cm²</p>
+                </div>
+            </div>
+        `;
     }
 
     // Render efficient layouts for both boxes and lids in lid mode
@@ -1309,7 +1521,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
     function renderCombinedOption(result, lidOptimizer, isRecommended) {
         return `
-            <div class="co-comparison-option ${isRecommended ? 'recommended' : ''}">
+            <div class="co-comparison-option co-option-clickable ${isRecommended ? 'recommended' : ''} ${currentSelectedMode === 'combined' ? 'selected' : ''}" data-mode="combined">
                 ${isRecommended ? '<div class="co-recommended-badge"><span class="dashicons dashicons-star-filled"></span> Recommended</div>' : ''}
                 <h4><span class="dashicons dashicons-format-gallery"></span> Combined Sheet</h4>
                 <div class="co-option-stats">
@@ -1344,7 +1556,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
     function renderSeparateOption(result, lidOptimizer, isRecommended) {
         return `
-            <div class="co-comparison-option ${isRecommended ? 'recommended' : ''}">
+            <div class="co-comparison-option co-option-clickable ${isRecommended ? 'recommended' : ''} ${currentSelectedMode === 'separate' ? 'selected' : ''}" data-mode="separate">
                 ${isRecommended ? '<div class="co-recommended-badge"><span class="dashicons dashicons-star-filled"></span> Recommended</div>' : ''}
                 <h4><span class="dashicons dashicons-images-alt2"></span> Separate Sheets</h4>
                 <div class="co-option-stats">
@@ -1738,6 +1950,112 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
     let currentLidLayouts = null;
     let currentBoxOptimizerForLidMode = null;
     let currentLidOptimizerForLidMode = null;
+    let currentStrategy = null;
+    let currentSelectedMode = null; // 'combined' or 'separate'
+    let currentCombinedConfigs = null;
+
+    // Bind all event handlers for lid mode
+    function bindLidModeEventHandlers() {
+        // 1. Click handler for switching between combined and separate modes
+        $(".co-option-clickable").on("click", function () {
+            const mode = $(this).data("mode");
+
+            if (mode === currentSelectedMode) return; // Already selected
+
+            currentSelectedMode = mode;
+
+            // Update selected state on comparison options
+            $(".co-comparison-option").removeClass("selected");
+            $(this).addClass("selected");
+
+            // Update mode content
+            let newContent = '';
+            if (mode === 'combined' && currentStrategy.combined) {
+                newContent = renderCombinedModeContent(currentStrategy.combined, currentCombinedConfigs, currentLidOptimizer);
+            } else if (mode === 'separate' && currentStrategy.separate) {
+                newContent = renderSeparateModeContent(currentStrategy.separate, currentLidOptimizer);
+            }
+
+            $(".co-mode-content").html(newContent);
+
+            // Re-bind event handlers for the new content
+            bindLayoutItemClicks();
+            bindCombinedConfigClicks();
+
+            // Scroll to the mode content
+            $("html, body").animate({
+                scrollTop: $(".co-mode-content").offset().top - 100,
+            }, 500);
+        });
+
+        // Bind layout item clicks and combined config clicks
+        bindLayoutItemClicks();
+        bindCombinedConfigClicks();
+    }
+
+    // Bind click handlers for box/lid layout items
+    function bindLayoutItemClicks() {
+        $(".co-layout-item[data-type='box'], .co-layout-item[data-type='lid']").off("click").on("click", function () {
+            const layoutIndex = $(this).data("layout-index");
+            const type = $(this).data("type");
+
+            if (type === 'box' && currentBoxLayouts && currentBoxOptimizerForLidMode) {
+                const selectedLayout = currentBoxLayouts[layoutIndex];
+                const newDiagram = renderVisualDiagram(selectedLayout, currentBoxOptimizerForLidMode, 'box-' + layoutIndex);
+
+                // Replace the box visual diagram
+                $(".co-box-diagram-container").html(newDiagram);
+
+                // Scroll to the diagram
+                $("html, body").animate({
+                    scrollTop: $(".co-box-diagram-container").offset().top - 100,
+                }, 500);
+
+                // Update selected state for box items only
+                $(".co-layout-item[data-type='box']").removeClass("selected");
+                $(this).addClass("selected");
+            } else if (type === 'lid' && currentLidLayouts && currentLidOptimizerForLidMode) {
+                const selectedLayout = currentLidLayouts[layoutIndex];
+                const newDiagram = renderVisualDiagramForLids(selectedLayout, currentLidOptimizerForLidMode, 'lid-' + layoutIndex);
+
+                // Replace the lid visual diagram
+                $(".co-lid-diagram-container").html(newDiagram);
+
+                // Scroll to the diagram
+                $("html, body").animate({
+                    scrollTop: $(".co-lid-diagram-container").offset().top - 100,
+                }, 500);
+
+                // Update selected state for lid items only
+                $(".co-layout-item[data-type='lid']").removeClass("selected");
+                $(this).addClass("selected");
+            }
+        });
+    }
+
+    // Bind click handlers for combined configuration items
+    function bindCombinedConfigClicks() {
+        $(".co-layout-item[data-type='combined-config']").off("click").on("click", function () {
+            const configIndex = $(this).data("config-index");
+
+            if (currentCombinedConfigs && currentCombinedConfigs[configIndex]) {
+                const selectedConfig = currentCombinedConfigs[configIndex];
+
+                // Update the combined sheet diagram
+                const newDiagram = renderCombinedSheetDiagram(selectedConfig, currentLidOptimizer);
+                $("#visual-diagram-combined").closest(".co-visual-diagram").replaceWith(newDiagram);
+
+                // Scroll to the diagram
+                $("html, body").animate({
+                    scrollTop: $("#visual-diagram-combined").offset().top - 100,
+                }, 500);
+
+                // Update selected state
+                $(".co-layout-item[data-type='combined-config']").removeClass("selected");
+                $(this).addClass("selected");
+            }
+        });
+    }
 
     $(document).ready(function () {
         $("#calculate-btn").on("click", function () {
@@ -1811,43 +2129,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         $(this).addClass("selected");
                     });
                 } else {
-                    // Lid mode - bind layout clicks for both boxes and lids
-                    $(".co-layout-item").on("click", function () {
-                        const layoutIndex = $(this).data("layout-index");
-                        const type = $(this).data("type");
-
-                        if (type === 'box' && currentBoxLayouts && currentBoxOptimizerForLidMode) {
-                            const selectedLayout = currentBoxLayouts[layoutIndex];
-                            const newDiagram = renderVisualDiagram(selectedLayout, currentBoxOptimizerForLidMode, 'box-' + layoutIndex);
-
-                            // Replace the box visual diagram
-                            $(".co-box-diagram-container").html(newDiagram);
-
-                            // Scroll to the diagram
-                            $("html, body").animate({
-                                scrollTop: $(".co-box-diagram-container").offset().top - 100,
-                            }, 500);
-
-                            // Update selected state for box items only
-                            $(".co-layout-item[data-type='box']").removeClass("selected");
-                            $(this).addClass("selected");
-                        } else if (type === 'lid' && currentLidLayouts && currentLidOptimizerForLidMode) {
-                            const selectedLayout = currentLidLayouts[layoutIndex];
-                            const newDiagram = renderVisualDiagramForLids(selectedLayout, currentLidOptimizerForLidMode, 'lid-' + layoutIndex);
-
-                            // Replace the lid visual diagram
-                            $(".co-lid-diagram-container").html(newDiagram);
-
-                            // Scroll to the diagram
-                            $("html, body").animate({
-                                scrollTop: $(".co-lid-diagram-container").offset().top - 100,
-                            }, 500);
-
-                            // Update selected state for lid items only
-                            $(".co-layout-item[data-type='lid']").removeClass("selected");
-                            $(this).addClass("selected");
-                        }
-                    });
+                    // Lid mode - bind all event handlers
+                    bindLidModeEventHandlers();
                 }
             }, 500);
         });

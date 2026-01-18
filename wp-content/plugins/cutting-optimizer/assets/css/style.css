@@ -806,3 +806,86 @@
 .co-lid-diagram-container {
     margin-bottom: 20px;
 }
+
+/* Clickable comparison options */
+.co-option-clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.co-option-clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.co-option-clickable.selected {
+    border-color: #2271b1;
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.3);
+}
+
+.co-option-clickable.selected.recommended {
+    border-color: #46b450;
+    box-shadow: 0 4px 12px rgba(70, 180, 80, 0.3);
+}
+
+.co-option-clickable::before {
+    content: "Click to view";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    color: #999;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.co-option-clickable:hover::before {
+    opacity: 1;
+}
+
+/* Mode content container */
+.co-mode-content {
+    margin-top: 20px;
+}
+
+/* Combined configurations section */
+.co-combined-layouts {
+    border-top: 3px solid #2271b1;
+    padding-top: 25px;
+    margin-top: 30px;
+}
+
+.co-combined-layouts h3 {
+    color: #1d2327;
+}
+
+.co-combined-layouts h3 .dashicons {
+    color: #2271b1;
+}
+
+.co-combined-badge {
+    background: #2271b1 !important;
+}
+
+.co-combined-item.optimal {
+    border-color: #2271b1;
+    background: #f0f6fc;
+}
+
+.co-combined-item .co-layout-title .dashicons {
+    color: #2271b1;
+}
+
+.co-combined-fill {
+    background: linear-gradient(90deg, #2271b1 0%, #135e96 100%) !important;
+}
+
+.co-combined-details {
+    border-left-color: #2271b1 !important;
+}
+
+.co-combined-item.selected {
+    border-color: #2271b1;
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.3);
+    background: #f0f6fc;
+}
