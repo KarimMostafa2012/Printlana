@@ -1718,8 +1718,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
             // Render Region 1 with actual used dimensions
             const region1Style = isVertical
-                ? `position: absolute; left: 0; top: 0; width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`
-                : `position: absolute; left: 0; top: 0; width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`;
+                ? `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`
+                : `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`;
 
             html += `<div style="${region1Style} padding: 5px; box-sizing: border-box;">`;
             html += renderCombinedRegionGrid(region1Layout, region1Type, region1UsedWidth, region1UsedHeight, gap);
@@ -1727,8 +1727,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
             // Render Region 2 with actual used dimensions
             const region2Style = isVertical
-                ? `position: absolute; left: ${region2LeftPercent}%; top: 0; width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`
-                : `position: absolute; left: 0; top: ${region2TopPercent}%; width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`;
+                ? `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`
+                : `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`;
 
             html += `<div style="${region2Style} padding: 5px; box-sizing: border-box;">`;
             html += renderCombinedRegionGrid(region2Layout, region2Type, region2UsedWidth, region2UsedHeight, gap);
@@ -1738,7 +1738,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Mixed placement - render boxes in main area, lids in remaining spaces
             const boxLayout = result.boxLayout;
 
-            html += `<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
+            html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
 
             // Render boxes using grid layout
             html += renderCombinedRegionGrid(boxLayout, 'box', sheetWidth, sheetHeight, gap);
@@ -1751,7 +1751,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const widthPercent = (placement.width / sheetWidth) * 100;
                     const heightPercent = (placement.height / sheetHeight) * 100;
 
-                    html += `<div style="position: absolute; left: ${offsetXPercent}%; top: ${offsetYPercent}%; width: ${widthPercent}%; height: ${heightPercent}%; padding: 2px; box-sizing: border-box;">`;
+                    html += `<div style="width: ${widthPercent}%; height: ${heightPercent}%; padding: 2px; box-sizing: border-box;">`;
                     html += renderCombinedRegionGrid(placement.layout, 'lid', placement.width, placement.height, gap);
                     html += `</div>`;
                 });
@@ -1820,13 +1820,13 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             html += `</div>`;
         } else {
             // Complex layout with flexbox
-            html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 4px; align-content: flex-start;">`;
+            html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start;">`;
 
             // Render main boxes
             if (layout.mainBoxes > 0) {
                 if (layout.layoutType === 'vertical') {
                     for (let col = 0; col < layout.numStrips; col++) {
-                        html += `<div style="display: flex; flex-direction: column; gap: 4px; flex: max(calc(${layout.boxWidth} / ${layout.boxHeight}), 1);">`;
+                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${layout.boxWidth} / ${layout.boxHeight}), 1);">`;
                         for (let row = 0; row < layout.boxesPerStrip; row++) {
                             html += `
                                 <div class="${boxClass}" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
@@ -1839,7 +1839,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     }
                 } else {
                     for (let row = 0; row < layout.numStrips; row++) {
-                        html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 4px;">`;
+                        html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 6px;">`;
                         for (let col = 0; col < layout.boxesPerStrip; col++) {
                             html += `
                                 <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
@@ -1859,7 +1859,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                     const rotatedClass = isLid ? 'co-box-rotated-lid' : 'co-box-rotated';
                     if (layout.layoutType === 'vertical') {
                         for (let col = 0; col < detail.cols; col++) {
-                            html += `<div style="display: flex; flex-direction: column; gap: 4px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}), 1);">`;
+                            html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}), 1);">`;
                             for (let row = 0; row < detail.rows; row++) {
                                 html += `
                                     <div class="${boxClass} ${rotatedClass}" style="aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
@@ -1872,7 +1872,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         }
                     } else {
                         for (let row = 0; row < detail.rows; row++) {
-                            html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 4px;">`;
+                            html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 6px;">`;
                             for (let col = 0; col < detail.cols; col++) {
                                 html += `
                                     <div class="${boxClass} ${rotatedClass}" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
