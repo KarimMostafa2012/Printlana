@@ -1777,16 +1777,25 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             html += `</div>`;
         } else {
             // Complex layout with flexbox
+            // Calculate the total used width of the region for percentage calculations
+            const totalUsedWidth = layout.usedWidth;
+            const totalUsedHeight = layout.usedHeight;
+
             html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start;">`;
 
             // Render main boxes
             if (layout.mainBoxes > 0) {
                 if (layout.layoutType === 'vertical') {
+                    // Calculate width for each column based on actual box dimensions
+                    const mainColWidth = layout.boxWidth;
+                    const mainColWidthPercent = (mainColWidth / totalUsedWidth) * 100;
+                    const mainColHeightPercent = ((layout.boxesPerStrip * layout.boxHeight) + ((layout.boxesPerStrip - 1) * gap)) / totalUsedHeight * 100;
+
                     for (let col = 0; col < layout.numStrips; col++) {
-                        html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${layout.boxWidth} / ${layout.boxHeight}), 1);">`;
+                        html += `<div style="display: flex; flex-direction: column; gap: 6px; width: ${mainColWidthPercent}%; height: ${mainColHeightPercent}%;">`;
                         for (let row = 0; row < layout.boxesPerStrip; row++) {
                             html += `
-                                <div class="${boxClass}" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                                <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
                                     <span class="co-box-number">${label}${counter++}</span>
                                     <div style="font-size: 7px;">${layout.boxWidth}×${layout.boxHeight}</div>
                                 </div>
@@ -1795,8 +1804,13 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                         html += `</div>`;
                     }
                 } else {
+                    // Calculate width for each row based on actual box dimensions
+                    const mainRowWidth = (layout.boxesPerStrip * layout.boxWidth) + ((layout.boxesPerStrip - 1) * gap);
+                    const mainRowWidthPercent = (mainRowWidth / totalUsedWidth) * 100;
+                    const mainRowHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+
                     for (let row = 0; row < layout.numStrips; row++) {
-                        html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 6px;">`;
+                        html += `<div style="width: ${mainRowWidthPercent}%; height: ${mainRowHeightPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
                         for (let col = 0; col < layout.boxesPerStrip; col++) {
                             html += `
                                 <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
@@ -1815,11 +1829,16 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 layout.remainingDetails.forEach(detail => {
                     const rotatedClass = isLid ? 'co-box-rotated-lid' : 'co-box-rotated';
                     if (layout.layoutType === 'vertical') {
+                        // Calculate width for each column based on actual box dimensions
+                        const detailColWidth = detail.boxWidth;
+                        const detailColWidthPercent = (detailColWidth / totalUsedWidth) * 100;
+                        const detailColHeightPercent = ((detail.rows * detail.boxHeight) + ((detail.rows - 1) * gap)) / totalUsedHeight * 100;
+
                         for (let col = 0; col < detail.cols; col++) {
-                            html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}), 1);">`;
+                            html += `<div style="display: flex; flex-direction: column; gap: 6px; width: ${detailColWidthPercent}%; height: ${detailColHeightPercent}%;">`;
                             for (let row = 0; row < detail.rows; row++) {
                                 html += `
-                                    <div class="${boxClass} ${rotatedClass}" style="aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
+                                    <div class="${boxClass} ${rotatedClass}" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
                                         <span class="co-box-number">${label}${counter++}</span>
                                         <div style="font-size: 7px;">${detail.boxWidth}×${detail.boxHeight}</div>
                                     </div>
@@ -1828,8 +1847,13 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                             html += `</div>`;
                         }
                     } else {
+                        // Calculate width for each row based on actual box dimensions
+                        const detailRowWidth = (detail.cols * detail.boxWidth) + ((detail.cols - 1) * gap);
+                        const detailRowWidthPercent = (detailRowWidth / totalUsedWidth) * 100;
+                        const detailRowHeightPercent = (detail.boxHeight / totalUsedHeight) * 100;
+
                         for (let row = 0; row < detail.rows; row++) {
-                            html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 6px;">`;
+                            html += `<div style="width: ${detailRowWidthPercent}%; height: ${detailRowHeightPercent}%; display: flex; flex-direction: row; gap: 6px;">`;
                             for (let col = 0; col < detail.cols; col++) {
                                 html += `
                                     <div class="${boxClass} ${rotatedClass}" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
