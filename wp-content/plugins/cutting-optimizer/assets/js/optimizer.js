@@ -324,6 +324,360 @@
         }
     }
 
+    // Separate Lid Optimizer class
+    class SeparateLidOptimizer {
+        constructor(boxWidth, boxHeight, lidWidth, lidHeight, sheetWidth, sheetHeight, gap = 0.3) {
+            this.boxWidth = boxWidth;
+            this.boxHeight = boxHeight;
+            this.lidWidth = lidWidth;
+            this.lidHeight = lidHeight;
+            this.sheetWidth = sheetWidth;
+            this.sheetHeight = sheetHeight;
+            this.gap = gap;
+            this.boxArea = boxWidth * boxHeight;
+            this.lidArea = lidWidth * lidHeight;
+            this.sheetArea = sheetWidth * sheetHeight;
+        }
+
+        // Case 2: Separate sheets for boxes and lids
+        calculateSeparateSheets() {
+            const boxOptimizer = new CuttingOptimizer(
+                this.boxWidth, this.boxHeight,
+                this.sheetWidth, this.sheetHeight, this.gap
+            );
+            const lidOptimizer = new CuttingOptimizer(
+                this.lidWidth, this.lidHeight,
+                this.sheetWidth, this.sheetHeight, this.gap
+            );
+
+            const boxLayouts = boxOptimizer.findOptimalLayout();
+            const lidLayouts = lidOptimizer.findOptimalLayout();
+
+            if (boxLayouts.length === 0 || lidLayouts.length === 0) {
+                return null;
+            }
+
+            const bestBoxLayout = boxLayouts[0];
+            const bestLidLayout = lidLayouts[0];
+
+            const maxBoxes = bestBoxLayout.totalBoxes;
+            const maxLids = bestLidLayout.totalBoxes;
+            const pairs = Math.min(maxBoxes, maxLids);
+
+            const usedArea = pairs * this.boxArea + pairs * this.lidArea;
+            const totalSheetArea = 2 * this.sheetArea;
+            const efficiency = (usedArea / totalSheetArea) * 100;
+
+            return {
+                type: 'separate',
+                pairs: pairs,
+                maxBoxes: maxBoxes,
+                maxLids: maxLids,
+                boxLayout: bestBoxLayout,
+                lidLayout: bestLidLayout,
+                efficiency: efficiency,
+                sheetsNeeded: 2,
+                usedArea: usedArea,
+                wastedArea: totalSheetArea - usedArea,
+                boxOptimizer: boxOptimizer,
+                lidOptimizer: lidOptimizer
+            };
+        }
+
+        // Case 1: Combined sheet (boxes + lids on same sheet)
+        calculateCombinedSheet() {
+            let bestResult = null;
+
+            // Try both split approaches and mixed placement
+            const splitResults = this.trySplitApproach();
+            const mixedResults = this.tryMixedPlacement();
+
+            // Get best from split approach
+            if (splitResults && (!bestResult || splitResults.pairs > bestResult.pairs ||
+                (splitResults.pairs === bestResult.pairs && splitResults.efficiency > bestResult.efficiency))) {
+                bestResult = splitResults;
+            }
+
+            // Get best from mixed placement
+            if (mixedResults && (!bestResult || mixedResults.pairs > bestResult.pairs ||
+                (mixedResults.pairs === bestResult.pairs && mixedResults.efficiency > bestResult.efficiency))) {
+                bestResult = mixedResults;
+            }
+
+            return bestResult;
+        }
+
+        // Split sheet into two regions
+        trySplitApproach() {
+            let bestResult = null;
+
+            // Try vertical splits
+            for (let splitRatio = 0.1; splitRatio <= 0.9; splitRatio += 0.05) {
+                const result = this.evaluateSplit('vertical', splitRatio);
+                if (result && result.pairs > 0) {
+                    if (!bestResult || result.pairs > bestResult.pairs ||
+                        (result.pairs === bestResult.pairs && result.efficiency > bestResult.efficiency)) {
+                        bestResult = result;
+                    }
+                }
+
+                // Try swapped (lids in region1, boxes in region2)
+                const resultSwapped = this.evaluateSplit('vertical', splitRatio, true);
+                if (resultSwapped && resultSwapped.pairs > 0) {
+                    if (!bestResult || resultSwapped.pairs > bestResult.pairs ||
+                        (resultSwapped.pairs === bestResult.pairs && resultSwapped.efficiency > bestResult.efficiency)) {
+                        bestResult = resultSwapped;
+                    }
+                }
+            }
+
+            // Try horizontal splits
+            for (let splitRatio = 0.1; splitRatio <= 0.9; splitRatio += 0.05) {
+                const result = this.evaluateSplit('horizontal', splitRatio);
+                if (result && result.pairs > 0) {
+                    if (!bestResult || result.pairs > bestResult.pairs ||
+                        (result.pairs === bestResult.pairs && result.efficiency > bestResult.efficiency)) {
+                        bestResult = result;
+                    }
+                }
+
+                // Try swapped
+                const resultSwapped = this.evaluateSplit('horizontal', splitRatio, true);
+                if (resultSwapped && resultSwapped.pairs > 0) {
+                    if (!bestResult || resultSwapped.pairs > bestResult.pairs ||
+                        (resultSwapped.pairs === bestResult.pairs && resultSwapped.efficiency > bestResult.efficiency)) {
+                        bestResult = resultSwapped;
+                    }
+                }
+            }
+
+            return bestResult;
+        }
+
+        evaluateSplit(splitType, splitRatio, swapped = false) {
+            let region1Width, region1Height, region2Width, region2Height;
+            let region2OffsetX = 0, region2OffsetY = 0;
+
+            if (splitType === 'vertical') {
+                region1Width = this.sheetWidth * splitRatio - this.gap / 2;
+                region1Height = this.sheetHeight;
+                region2Width = this.sheetWidth * (1 - splitRatio) - this.gap / 2;
+                region2Height = this.sheetHeight;
+                region2OffsetX = this.sheetWidth * splitRatio + this.gap / 2;
+            } else {
+                region1Width = this.sheetWidth;
+                region1Height = this.sheetHeight * splitRatio - this.gap / 2;
+                region2Width = this.sheetWidth;
+                region2Height = this.sheetHeight * (1 - splitRatio) - this.gap / 2;
+                region2OffsetY = this.sheetHeight * splitRatio + this.gap / 2;
+            }
+
+            // Determine what goes in each region
+            const box1W = swapped ? this.lidWidth : this.boxWidth;
+            const box1H = swapped ? this.lidHeight : this.boxHeight;
+            const box2W = swapped ? this.boxWidth : this.lidWidth;
+            const box2H = swapped ? this.boxHeight : this.lidHeight;
+
+            // Calculate how many fit in each region
+            const region1Optimizer = new CuttingOptimizer(box1W, box1H, region1Width, region1Height, this.gap);
+            const region2Optimizer = new CuttingOptimizer(box2W, box2H, region2Width, region2Height, this.gap);
+
+            const layouts1 = region1Optimizer.findOptimalLayout();
+            const layouts2 = region2Optimizer.findOptimalLayout();
+
+            if (layouts1.length === 0 || layouts2.length === 0) {
+                return null;
+            }
+
+            const count1 = layouts1[0].totalBoxes;
+            const count2 = layouts2[0].totalBoxes;
+
+            // Pairs = minimum of both counts (since we need equal boxes and lids)
+            const pairs = Math.min(count1, count2);
+
+            if (pairs === 0) return null;
+
+            const usedArea = pairs * this.boxArea + pairs * this.lidArea;
+            const efficiency = (usedArea / this.sheetArea) * 100;
+
+            return {
+                type: 'combined',
+                approach: 'split',
+                splitType: splitType,
+                splitRatio: splitRatio,
+                swapped: swapped,
+                pairs: pairs,
+                boxCount: swapped ? count2 : count1,
+                lidCount: swapped ? count1 : count2,
+                boxLayout: swapped ? layouts2[0] : layouts1[0],
+                lidLayout: swapped ? layouts1[0] : layouts2[0],
+                region1: { width: region1Width, height: region1Height, offsetX: 0, offsetY: 0 },
+                region2: { width: region2Width, height: region2Height, offsetX: region2OffsetX, offsetY: region2OffsetY },
+                efficiency: efficiency,
+                sheetsNeeded: 1,
+                usedArea: usedArea,
+                wastedArea: this.sheetArea - usedArea,
+                boxOptimizer: swapped ? region2Optimizer : region1Optimizer,
+                lidOptimizer: swapped ? region1Optimizer : region2Optimizer
+            };
+        }
+
+        // Try mixed placement - fit lids in gaps after placing boxes
+        tryMixedPlacement() {
+            let bestResult = null;
+
+            // Get all box layouts
+            const boxOptimizer = new CuttingOptimizer(
+                this.boxWidth, this.boxHeight,
+                this.sheetWidth, this.sheetHeight, this.gap
+            );
+            const boxLayouts = boxOptimizer.findOptimalLayout();
+
+            // Try different numbers of boxes and see how many lids fit
+            for (const boxLayout of boxLayouts.slice(0, 20)) { // Check top layouts
+                const boxCount = boxLayout.totalBoxes;
+                if (boxCount === 0) continue;
+
+                // Calculate remaining space after placing boxes
+                const remaining = this.calculateRemainingSpaceForLids(boxLayout);
+
+                if (remaining.maxLids > 0) {
+                    const pairs = Math.min(boxCount, remaining.maxLids);
+                    const usedArea = pairs * this.boxArea + pairs * this.lidArea;
+                    const efficiency = (usedArea / this.sheetArea) * 100;
+
+                    if (!bestResult || pairs > bestResult.pairs ||
+                        (pairs === bestResult.pairs && efficiency > bestResult.efficiency)) {
+                        bestResult = {
+                            type: 'combined',
+                            approach: 'mixed',
+                            pairs: pairs,
+                            boxCount: boxCount,
+                            lidCount: remaining.maxLids,
+                            boxLayout: boxLayout,
+                            lidPlacements: remaining.placements,
+                            efficiency: efficiency,
+                            sheetsNeeded: 1,
+                            usedArea: usedArea,
+                            wastedArea: this.sheetArea - usedArea,
+                            boxOptimizer: boxOptimizer
+                        };
+                    }
+                }
+            }
+
+            return bestResult;
+        }
+
+        calculateRemainingSpaceForLids(boxLayout) {
+            const placements = [];
+            let maxLids = 0;
+
+            // Calculate the area used by boxes
+            const boxUsedWidth = boxLayout.usedWidth;
+            const boxUsedHeight = boxLayout.usedHeight;
+
+            // Try placing lids in right remaining space
+            const rightWidth = this.sheetWidth - boxUsedWidth - this.gap;
+            const rightHeight = this.sheetHeight;
+
+            if (rightWidth >= Math.min(this.lidWidth, this.lidHeight)) {
+                const rightOptimizer = new CuttingOptimizer(
+                    this.lidWidth, this.lidHeight,
+                    rightWidth, rightHeight, this.gap
+                );
+                const rightLayouts = rightOptimizer.findOptimalLayout();
+                if (rightLayouts.length > 0 && rightLayouts[0].totalBoxes > 0) {
+                    maxLids += rightLayouts[0].totalBoxes;
+                    placements.push({
+                        region: 'right',
+                        offsetX: boxUsedWidth + this.gap,
+                        offsetY: 0,
+                        width: rightWidth,
+                        height: rightHeight,
+                        layout: rightLayouts[0],
+                        count: rightLayouts[0].totalBoxes
+                    });
+                }
+            }
+
+            // Try placing lids in bottom remaining space
+            const bottomWidth = boxUsedWidth;
+            const bottomHeight = this.sheetHeight - boxUsedHeight - this.gap;
+
+            if (bottomHeight >= Math.min(this.lidWidth, this.lidHeight)) {
+                const bottomOptimizer = new CuttingOptimizer(
+                    this.lidWidth, this.lidHeight,
+                    bottomWidth, bottomHeight, this.gap
+                );
+                const bottomLayouts = bottomOptimizer.findOptimalLayout();
+                if (bottomLayouts.length > 0 && bottomLayouts[0].totalBoxes > 0) {
+                    maxLids += bottomLayouts[0].totalBoxes;
+                    placements.push({
+                        region: 'bottom',
+                        offsetX: 0,
+                        offsetY: boxUsedHeight + this.gap,
+                        width: bottomWidth,
+                        height: bottomHeight,
+                        layout: bottomLayouts[0],
+                        count: bottomLayouts[0].totalBoxes
+                    });
+                }
+            }
+
+            return { maxLids, placements };
+        }
+
+        // Compare Case 1 and Case 2 and determine the best option
+        findOptimalStrategy() {
+            const separateResult = this.calculateSeparateSheets();
+            const combinedResult = this.calculateCombinedSheet();
+
+            let recommendation = null;
+            let reason = '';
+
+            // Decision logic
+            if (!combinedResult && !separateResult) {
+                return { error: 'No valid layouts found for boxes or lids' };
+            }
+
+            if (!combinedResult) {
+                recommendation = 'separate';
+                reason = 'Combined sheet layout not possible with these dimensions';
+            } else if (!separateResult) {
+                recommendation = 'combined';
+                reason = 'Separate sheet layout not possible';
+            } else {
+                // Compare both options
+                // Priority: 1. More pairs with same/fewer sheets
+                //          2. Same pairs with fewer sheets
+                //          3. Same pairs, same sheets -> higher efficiency
+
+                const combinedPairs = combinedResult.pairs;
+                const separatePairs = separateResult.pairs;
+
+                if (combinedPairs > separatePairs) {
+                    recommendation = 'combined';
+                    reason = `Combined sheet yields ${combinedPairs} pairs vs ${separatePairs} pairs on separate sheets`;
+                } else if (separatePairs > combinedPairs) {
+                    recommendation = 'separate';
+                    reason = `Separate sheets yield ${separatePairs} pairs vs ${combinedPairs} pairs on combined sheet`;
+                } else {
+                    // Same pairs - prefer combined (uses 1 sheet instead of 2)
+                    recommendation = 'combined';
+                    reason = `Same ${combinedPairs} pairs, but combined uses only 1 sheet vs 2 sheets`;
+                }
+            }
+
+            return {
+                combined: combinedResult,
+                separate: separateResult,
+                recommendation: recommendation,
+                reason: reason
+            };
+        }
+    }
+
     function renderResults(optimizer) {
         const layouts = optimizer.findOptimalLayout();
 
@@ -708,8 +1062,399 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
     return html;
 }
+
+    // Render results for separate lid mode
+    function renderSeparateLidResults(lidOptimizer) {
+        const strategy = lidOptimizer.findOptimalStrategy();
+
+        if (strategy.error) {
+            return `<div class="co-summary"><h2>${strategy.error}</h2></div>`;
+        }
+
+        const { combined, separate, recommendation, reason } = strategy;
+
+        let html = `
+            <div class="co-lid-summary">
+                <h4><span class="dashicons dashicons-archive"></span> Separate Lid Mode</h4>
+                <p><strong>Box:</strong> ${lidOptimizer.boxWidth} × ${lidOptimizer.boxHeight} cm</p>
+                <p><strong>Lid:</strong> ${lidOptimizer.lidWidth} × ${lidOptimizer.lidHeight} cm</p>
+                <p><strong>Sheet:</strong> ${lidOptimizer.sheetWidth} × ${lidOptimizer.sheetHeight} cm</p>
+            </div>
+
+            <div class="co-summary">
+                <h2><span class="dashicons dashicons-yes-alt"></span> Optimal Strategy Found</h2>
+                <div class="co-summary-grid">
+                    <div class="co-summary-item">
+                        <label>Recommendation</label>
+                        <div class="value">${recommendation === 'combined' ? 'Combined Sheet' : 'Separate Sheets'}</div>
+                    </div>
+                    <div class="co-summary-item">
+                        <label>Max Pairs</label>
+                        <div class="value">${recommendation === 'combined' ? combined.pairs : separate.pairs}</div>
+                    </div>
+                    <div class="co-summary-item">
+                        <label>Sheets Needed</label>
+                        <div class="value">${recommendation === 'combined' ? '1' : '2'}</div>
+                    </div>
+                    <div class="co-summary-item">
+                        <label>Efficiency</label>
+                        <div class="value">${(recommendation === 'combined' ? combined.efficiency : separate.efficiency).toFixed(2)}%</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; opacity: 0.9;"><em>${reason}</em></p>
+            </div>
+        `;
+
+        // Comparison view
+        html += `<div class="co-comparison-view">`;
+
+        // Combined sheet option
+        if (combined) {
+            html += renderCombinedOption(combined, lidOptimizer, recommendation === 'combined');
+        }
+
+        // Separate sheets option
+        if (separate) {
+            html += renderSeparateOption(separate, lidOptimizer, recommendation === 'separate');
+        }
+
+        html += `</div>`;
+
+        // Show detailed diagram of recommended option
+        if (recommendation === 'combined' && combined) {
+            html += renderCombinedSheetDiagram(combined, lidOptimizer);
+        } else if (recommendation === 'separate' && separate) {
+            html += renderSeparateSheetsDiagram(separate, lidOptimizer);
+        }
+
+        return html;
+    }
+
+    function renderCombinedOption(result, lidOptimizer, isRecommended) {
+        return `
+            <div class="co-comparison-option ${isRecommended ? 'recommended' : ''}">
+                ${isRecommended ? '<div class="co-recommended-badge"><span class="dashicons dashicons-star-filled"></span> Recommended</div>' : ''}
+                <h4><span class="dashicons dashicons-format-gallery"></span> Combined Sheet</h4>
+                <div class="co-option-stats">
+                    <div class="co-option-stat">
+                        <label>Pairs</label>
+                        <div class="value">${result.pairs}</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Sheets</label>
+                        <div class="value">1</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Efficiency</label>
+                        <div class="value">${result.efficiency.toFixed(1)}%</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Approach</label>
+                        <div class="value">${result.approach === 'split' ? 'Split' : 'Mixed'}</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666;">
+                    ${result.approach === 'split'
+                        ? `Sheet split ${result.splitType}ly at ${(result.splitRatio * 100).toFixed(0)}%`
+                        : 'Lids placed in remaining space after boxes'}
+                </p>
+                <div class="co-mini-diagram">
+                    ${renderCombinedMiniDiagram(result, lidOptimizer)}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderSeparateOption(result, lidOptimizer, isRecommended) {
+        return `
+            <div class="co-comparison-option ${isRecommended ? 'recommended' : ''}">
+                ${isRecommended ? '<div class="co-recommended-badge"><span class="dashicons dashicons-star-filled"></span> Recommended</div>' : ''}
+                <h4><span class="dashicons dashicons-images-alt2"></span> Separate Sheets</h4>
+                <div class="co-option-stats">
+                    <div class="co-option-stat">
+                        <label>Pairs</label>
+                        <div class="value">${result.pairs}</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Sheets</label>
+                        <div class="value">2</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Efficiency</label>
+                        <div class="value">${result.efficiency.toFixed(1)}%</div>
+                    </div>
+                    <div class="co-option-stat">
+                        <label>Max Boxes/Lids</label>
+                        <div class="value">${result.maxBoxes}/${result.maxLids}</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666;">
+                    Sheet 1: ${result.maxBoxes} boxes, Sheet 2: ${result.maxLids} lids
+                </p>
+                <div class="co-mini-diagram">
+                    <div class="co-separate-sheets">
+                        <div>
+                            <div class="co-mini-sheet" style="aspect-ratio: ${lidOptimizer.sheetWidth}/${lidOptimizer.sheetHeight};">
+                                ${renderMiniBoxes(result.maxBoxes, 'box')}
+                            </div>
+                            <div class="co-sheet-label">Boxes (${result.maxBoxes})</div>
+                        </div>
+                        <div>
+                            <div class="co-mini-sheet" style="aspect-ratio: ${lidOptimizer.sheetWidth}/${lidOptimizer.sheetHeight};">
+                                ${renderMiniBoxes(result.maxLids, 'lid')}
+                            </div>
+                            <div class="co-sheet-label">Lids (${result.maxLids})</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderCombinedMiniDiagram(result, lidOptimizer) {
+        const sheetWidth = lidOptimizer.sheetWidth;
+        const sheetHeight = lidOptimizer.sheetHeight;
+
+        if (result.approach === 'split') {
+            const splitPos = result.splitRatio * 100;
+            const isVertical = result.splitType === 'vertical';
+
+            return `
+                <div class="co-mini-sheet" style="aspect-ratio: ${sheetWidth}/${sheetHeight};">
+                    <div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>
+                    <div style="position: absolute; ${isVertical ? `left: 0; width: ${splitPos}%` : `top: 0; height: ${splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
+                        ${renderMiniBoxes(result.swapped ? result.lidCount : result.boxCount, result.swapped ? 'lid' : 'box')}
+                    </div>
+                    <div style="position: absolute; ${isVertical ? `right: 0; width: ${100 - splitPos}%` : `bottom: 0; height: ${100 - splitPos}%`}; ${isVertical ? 'height: 100%' : 'width: 100%'}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; box-sizing: border-box;">
+                        ${renderMiniBoxes(result.swapped ? result.boxCount : result.lidCount, result.swapped ? 'box' : 'lid')}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Mixed placement
+            return `
+                <div class="co-mini-sheet" style="aspect-ratio: ${sheetWidth}/${sheetHeight}; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; align-content: flex-start;">
+                    ${renderMiniBoxes(result.boxCount, 'box')}
+                    ${renderMiniBoxes(result.lidCount, 'lid')}
+                </div>
+            `;
+        }
+    }
+
+    function renderMiniBoxes(count, type) {
+        let html = '';
+        const displayCount = Math.min(count, 50); // Limit for display
+        for (let i = 0; i < displayCount; i++) {
+            html += `<div class="co-mini-${type}"></div>`;
+        }
+        if (count > 50) {
+            html += `<div style="font-size: 8px; color: #666;">+${count - 50}</div>`;
+        }
+        return html;
+    }
+
+    function renderCombinedSheetDiagram(result, lidOptimizer) {
+        let html = `
+            <div class="co-visual-diagram" id="visual-diagram-combined">
+                <h3><span class="dashicons dashicons-visibility"></span> Combined Sheet Layout (Recommended)</h3>
+                <div class="co-diagram-container">
+        `;
+
+        const sheetWidth = lidOptimizer.sheetWidth;
+        const sheetHeight = lidOptimizer.sheetHeight;
+
+        html += `
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${sheetWidth} / ${sheetHeight}; position: relative;">
+                <div class="co-sheet-label-width">${sheetWidth} cm</div>
+                <div class="co-sheet-label-width-left-line"></div>
+                <div class="co-sheet-label-width-right-line"></div>
+                <div class="co-sheet-label-height">${sheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height-bottom-line"></div>
+                <div class="co-sheet-label-height-top-line"></div>
+        `;
+
+        if (result.approach === 'split') {
+            const splitPos = result.splitRatio * 100;
+            const isVertical = result.splitType === 'vertical';
+
+            // Split line
+            html += `<div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>`;
+
+            // Render boxes in region 1
+            const region1Style = isVertical
+                ? `position: absolute; left: 0; top: 0; width: ${splitPos}%; height: 100%;`
+                : `position: absolute; left: 0; top: 0; width: 100%; height: ${splitPos}%;`;
+
+            html += `<div style="${region1Style} display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
+            const type1 = result.swapped ? 'lid' : 'box';
+            const count1 = result.swapped ? result.lidCount : result.boxCount;
+            for (let i = 0; i < Math.min(count1, result.pairs); i++) {
+                html += `<div class="co-box ${type1 === 'lid' ? 'co-box-lid' : ''}" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
+                    <span class="co-box-number">${type1 === 'lid' ? 'L' : 'B'}${i + 1}</span>
+                </div>`;
+            }
+            html += `</div>`;
+
+            // Render lids in region 2
+            const region2Style = isVertical
+                ? `position: absolute; right: 0; top: 0; width: ${100 - splitPos}%; height: 100%;`
+                : `position: absolute; left: 0; bottom: 0; width: 100%; height: ${100 - splitPos}%;`;
+
+            html += `<div style="${region2Style} display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
+            const type2 = result.swapped ? 'box' : 'lid';
+            const count2 = result.swapped ? result.boxCount : result.lidCount;
+            for (let i = 0; i < Math.min(count2, result.pairs); i++) {
+                html += `<div class="co-box ${type2 === 'lid' ? 'co-box-lid' : ''}" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
+                    <span class="co-box-number">${type2 === 'lid' ? 'L' : 'B'}${i + 1}</span>
+                </div>`;
+            }
+            html += `</div>`;
+        } else {
+            // Mixed placement
+            html += `<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
+
+            // Render boxes first
+            for (let i = 0; i < result.pairs; i++) {
+                html += `<div class="co-box" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
+                    <span class="co-box-number">B${i + 1}</span>
+                </div>`;
+            }
+
+            // Render lids
+            for (let i = 0; i < result.pairs; i++) {
+                html += `<div class="co-box co-box-lid" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
+                    <span class="co-box-number">L${i + 1}</span>
+                </div>`;
+            }
+
+            html += `</div>`;
+        }
+
+        html += `</div>`; // Close sheet
+
+        html += `
+            <div class="co-waste-info">
+                <p><strong>Layout Approach:</strong> ${result.approach === 'split' ? `Split ${result.splitType} at ${(result.splitRatio * 100).toFixed(0)}%` : 'Mixed placement'}</p>
+                <p><strong>Pairs:</strong> ${result.pairs} (${result.pairs} boxes + ${result.pairs} lids)</p>
+                <p><strong>Efficiency:</strong> ${result.efficiency.toFixed(2)}%</p>
+                <p><strong>Used Area:</strong> ${result.usedArea.toFixed(0)} cm²</p>
+                <p><strong>Wasted Area:</strong> ${result.wastedArea.toFixed(0)} cm²</p>
+            </div>
+        `;
+
+        html += `</div></div>`;
+        return html;
+    }
+
+    function renderSeparateSheetsDiagram(result, lidOptimizer) {
+        let html = `
+            <div class="co-visual-diagram" id="visual-diagram-separate">
+                <h3><span class="dashicons dashicons-visibility"></span> Separate Sheets Layout (Recommended)</h3>
+                <p style="color: #666; margin-bottom: 15px;">Two sheets required: one for boxes, one for lids</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        `;
+
+        // Box sheet diagram
+        html += `
+            <div class="co-diagram-container" style="padding: 20px;">
+                <h4 style="margin: 0 0 10px 0;">Sheet 1: Boxes</h4>
+        `;
+        html += renderVisualDiagram(result.boxLayout, result.boxOptimizer, 'boxes');
+        html += `</div>`;
+
+        // Lid sheet diagram
+        html += `
+            <div class="co-diagram-container" style="padding: 20px;">
+                <h4 style="margin: 0 0 10px 0;">Sheet 2: Lids</h4>
+        `;
+        html += renderVisualDiagramForLids(result.lidLayout, result.lidOptimizer);
+        html += `</div>`;
+
+        html += `</div>`;
+
+        html += `
+            <div class="co-waste-info">
+                <p><strong>Total Pairs:</strong> ${result.pairs}</p>
+                <p><strong>Boxes per sheet:</strong> ${result.maxBoxes} (using ${result.pairs})</p>
+                <p><strong>Lids per sheet:</strong> ${result.maxLids} (using ${result.pairs})</p>
+                <p><strong>Combined Efficiency:</strong> ${result.efficiency.toFixed(2)}%</p>
+                <p><strong>Total Used Area:</strong> ${result.usedArea.toFixed(0)} cm² (across 2 sheets)</p>
+            </div>
+        `;
+
+        html += `</div>`;
+        return html;
+    }
+
+    function renderVisualDiagramForLids(layout, optimizer) {
+        // Similar to renderVisualDiagram but with lid styling
+        let html = `
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight}; position: relative;">
+        `;
+
+        let boxCounter = 1;
+        const isSimpleLayout = !layout.remainingDetails || layout.remainingDetails.length === 0;
+
+        if (isSimpleLayout && layout.mainBoxes > 0) {
+            const totalUsedWidth = layout.usedWidth;
+            const totalUsedHeight = layout.usedHeight;
+            const usedWidthPercent = (totalUsedWidth / optimizer.sheetWidth) * 100;
+            const usedHeightPercent = (totalUsedHeight / optimizer.sheetHeight) * 100;
+            const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
+            const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
+            const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
+            const gapHeightPercent = (optimizer.gap / totalUsedHeight) * 100;
+
+            html += `
+                <div class="co-box-grid" style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: grid;
+                    grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                    grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                    gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                    width: ${usedWidthPercent}%;
+                    height: ${usedHeightPercent}%;
+                    padding: 5px;
+                    box-sizing: border-box;
+                ">
+            `;
+
+            for (let i = 0; i < layout.totalBoxes; i++) {
+                html += `
+                    <div class="co-box co-box-lid" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                        <span class="co-box-number">L${boxCounter++}</span>
+                        <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+        } else {
+            html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 6px;">`;
+
+            // Render main boxes with lid styling
+            if (layout.mainBoxes > 0) {
+                for (let i = 0; i < layout.mainBoxes; i++) {
+                    html += `
+                        <div class="co-box co-box-lid" style="flex: 1; min-width: 20px; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                            <span class="co-box-number">L${boxCounter++}</span>
+                        </div>
+                    `;
+                }
+            }
+
+            html += `</div>`;
+        }
+
+        html += `</div>`;
+        return html;
+    }
+
     let currentOptimizer = null;
     let currentLayouts = null;
+    let currentLidOptimizer = null;
 
     $(document).ready(function () {
         $("#calculate-btn").on("click", function () {
@@ -718,6 +1463,11 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             const sheetWidth = parseFloat($("#sheet-width").val());
             const sheetHeight = parseFloat($("#sheet-height").val());
             const gap = parseFloat($("#gap").val());
+
+            // Check for separate lid dimensions
+            const lidWidth = parseFloat($("#lid-width").val()) || 0;
+            const lidHeight = parseFloat($("#lid-height").val()) || 0;
+            const hasSeparateLid = lidWidth > 0 && lidHeight > 0;
 
             if (isNaN(boxWidth) || isNaN(boxHeight) || isNaN(sheetWidth) || isNaN(sheetHeight) || isNaN(gap)) {
                 alert("Please enter valid numbers for all fields");
@@ -729,35 +1479,59 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 return;
             }
 
+            // Validate lid dimensions if provided
+            if (hasSeparateLid && (lidWidth <= 0 || lidHeight <= 0)) {
+                alert("Lid dimensions must be positive numbers");
+                return;
+            }
+
             $("#loading").show();
             $("#results").hide();
 
             setTimeout(function () {
-                currentOptimizer = new CuttingOptimizer(boxWidth, boxHeight, sheetWidth, sheetHeight, gap);
-                currentLayouts = currentOptimizer.findOptimalLayout();
-                const resultsHtml = renderResults(currentOptimizer);
+                let resultsHtml;
+
+                if (hasSeparateLid) {
+                    // Separate lid mode
+                    currentLidOptimizer = new SeparateLidOptimizer(
+                        boxWidth, boxHeight, lidWidth, lidHeight,
+                        sheetWidth, sheetHeight, gap
+                    );
+                    currentOptimizer = null;
+                    currentLayouts = null;
+                    resultsHtml = renderSeparateLidResults(currentLidOptimizer);
+                } else {
+                    // Standard mode (attached lid or no lid)
+                    currentOptimizer = new CuttingOptimizer(boxWidth, boxHeight, sheetWidth, sheetHeight, gap);
+                    currentLayouts = currentOptimizer.findOptimalLayout();
+                    currentLidOptimizer = null;
+                    resultsHtml = renderResults(currentOptimizer);
+                }
 
                 $("#results").html(resultsHtml).fadeIn();
                 $("#loading").hide();
 
-                $(".co-layout-item").on("click", function () {
-                    const layoutIndex = $(this).data("layout-index");
-                    const selectedLayout = currentLayouts[layoutIndex];
+                // Only bind layout clicks for standard mode
+                if (!hasSeparateLid) {
+                    $(".co-layout-item").on("click", function () {
+                        const layoutIndex = $(this).data("layout-index");
+                        const selectedLayout = currentLayouts[layoutIndex];
 
-                    const newDiagram = renderVisualDiagram(selectedLayout, currentOptimizer, layoutIndex);
-                    $(".co-visual-diagram").replaceWith(newDiagram);
+                        const newDiagram = renderVisualDiagram(selectedLayout, currentOptimizer, layoutIndex);
+                        $(".co-visual-diagram").replaceWith(newDiagram);
 
-                    $("html, body").animate({
-                        scrollTop: $(".co-visual-diagram").offset().top - 100,
-                    }, 500);
+                        $("html, body").animate({
+                            scrollTop: $(".co-visual-diagram").offset().top - 100,
+                        }, 500);
 
-                    $(".co-layout-item").removeClass("selected");
-                    $(this).addClass("selected");
-                });
+                        $(".co-layout-item").removeClass("selected");
+                        $(this).addClass("selected");
+                    });
+                }
             }, 500);
         });
 
-        $(".co-input-group input").on("keypress", function (e) {
+        $(".co-input-group input, .co-lid-section input").on("keypress", function (e) {
             if (e.which === 13) {
                 $("#calculate-btn").click();
             }

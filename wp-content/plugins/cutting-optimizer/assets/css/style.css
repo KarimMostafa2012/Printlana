@@ -473,3 +473,229 @@
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     border-color: #5a67d8 !important;
 }
+
+/* Lid Section Styles */
+.co-lid-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #ccd0d4;
+}
+
+.co-lid-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: #1d2327;
+}
+
+.co-lid-section h3 .dashicons {
+    color: #f0a000;
+}
+
+.co-lid-section .description {
+    color: #646970;
+    font-size: 12px;
+    margin: 0 0 15px 0;
+    font-style: italic;
+}
+
+/* Lid boxes in diagram */
+.co-box-lid {
+    border: 2px solid #f0a000 !important;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%) !important;
+    color: #e65100 !important;
+}
+
+.co-box-lid .co-box-number {
+    background: #f0a000;
+}
+
+/* Comparison View */
+.co-comparison-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1200px) {
+    .co-comparison-view {
+        grid-template-columns: 1fr;
+    }
+}
+
+.co-comparison-option {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.co-comparison-option:hover {
+    border-color: #2271b1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.co-comparison-option.recommended {
+    border-color: #46b450;
+    background: #f7fcf7;
+}
+
+.co-comparison-option h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.co-comparison-option .co-option-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.co-comparison-option .co-option-stat {
+    background: #f6f7f7;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.co-comparison-option .co-option-stat label {
+    display: block;
+    font-size: 10px;
+    color: #646970;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.co-comparison-option .co-option-stat .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+/* Recommended Badge */
+.co-recommended-badge {
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #46b450;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.co-recommended-badge .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* Mini diagrams for comparison */
+.co-mini-diagram {
+    margin-top: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+}
+
+.co-mini-sheet {
+    width: 100%;
+    aspect-ratio: 99 / 69;
+    border: 2px solid #333;
+    background: #fff;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.co-mini-box {
+    border: 1px solid #2271b1;
+    background: #bbdefb;
+    flex: 1;
+    min-width: 8px;
+    min-height: 8px;
+}
+
+.co-mini-lid {
+    border: 1px solid #f0a000;
+    background: #ffecb3;
+    flex: 1;
+    min-width: 8px;
+    min-height: 8px;
+}
+
+/* Separate sheets diagram container */
+.co-separate-sheets {
+    display: flex;
+    gap: 10px;
+}
+
+.co-separate-sheets .co-mini-sheet {
+    flex: 1;
+}
+
+.co-sheet-label {
+    font-size: 10px;
+    color: #646970;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Lid summary info */
+.co-lid-summary {
+    background: linear-gradient(135deg, #f0a000 0%, #ff6d00 100%);
+    color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.co-lid-summary h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.co-lid-summary p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+/* Split region indicator in combined sheet */
+.co-split-line {
+    position: absolute;
+    background: #ff5722;
+    z-index: 10;
+}
+
+.co-split-line.vertical {
+    width: 3px;
+    height: 100%;
+    top: 0;
+}
+
+.co-split-line.horizontal {
+    width: 100%;
+    height: 3px;
+    left: 0;
+}

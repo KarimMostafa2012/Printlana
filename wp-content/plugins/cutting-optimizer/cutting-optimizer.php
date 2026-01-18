@@ -105,7 +105,29 @@ class CuttingOptimizerPlugin {
                             </label>
                             <input type="number" id="gap" value="0.3" step="0.1" min="0">
                         </div>
-                        
+
+                        <!-- Separate Lid Section (optional) -->
+                        <div class="co-lid-section">
+                            <h3><span class="dashicons dashicons-archive"></span> Separate Lid (Optional)</h3>
+                            <p class="description">Leave empty if lid is attached to box</p>
+
+                            <div class="co-input-group">
+                                <label for="lid-width">
+                                    <span class="dashicons dashicons-admin-page"></span>
+                                    Lid Width (cm)
+                                </label>
+                                <input type="number" id="lid-width" value="" step="0.1" min="0.1" placeholder="Optional">
+                            </div>
+
+                            <div class="co-input-group">
+                                <label for="lid-height">
+                                    <span class="dashicons dashicons-admin-page"></span>
+                                    Lid Length (cm)
+                                </label>
+                                <input type="number" id="lid-height" value="" step="0.1" min="0.1" placeholder="Optional">
+                            </div>
+                        </div>
+
                         <button type="button" id="calculate-btn" class="button button-primary button-large">
                             <span class="dashicons dashicons-calculator"></span>
                             Calculate Optimal Layout
