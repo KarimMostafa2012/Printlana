@@ -699,3 +699,71 @@
     height: 3px;
     left: 0;
 }
+
+/* Lid Layouts Section */
+.co-lid-layouts {
+    border-top: 3px solid #f0a000;
+    padding-top: 25px;
+    margin-top: 30px;
+}
+
+.co-lid-layouts h3 {
+    color: #e65100;
+}
+
+.co-lid-layouts h3 .dashicons {
+    color: #f0a000;
+}
+
+.co-lid-badge {
+    background: #f0a000 !important;
+}
+
+.co-lid-item.optimal {
+    border-color: #f0a000;
+    background: #fffbf0;
+}
+
+.co-lid-item .co-layout-title .dashicons {
+    color: #f0a000;
+}
+
+.co-lid-count {
+    background: #f0a000 !important;
+}
+
+.co-lid-fill {
+    background: linear-gradient(90deg, #f0a000 0%, #ff6d00 100%) !important;
+}
+
+.co-lid-details {
+    border-left-color: #f0a000 !important;
+}
+
+/* Lid diagram styling */
+.co-lid-diagram h3 {
+    color: #e65100;
+}
+
+.co-lid-diagram h3 .dashicons {
+    color: #f0a000;
+}
+
+.co-lid-waste-info {
+    background: #fff8e1 !important;
+    border-left-color: #f0a000 !important;
+}
+
+.co-lid-waste-info p {
+    color: #e65100 !important;
+}
+
+/* Rotated lid boxes */
+.co-box-rotated-lid {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%) !important;
+    border-color: #ff9800 !important;
+}
+
+.co-box-rotated-lid .co-box-number {
+    background: #ff9800;
+}

@@ -1127,7 +1127,174 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             html += renderSeparateSheetsDiagram(separate, lidOptimizer);
         }
 
+        // Show all efficient layouts for boxes and lids (>80% efficiency)
+        if (separate) {
+            html += renderEfficientLayoutsForLidMode(separate, lidOptimizer);
+        }
+
         return html;
+    }
+
+    // Render efficient layouts for both boxes and lids in lid mode
+    function renderEfficientLayoutsForLidMode(separateResult, lidOptimizer) {
+        let html = '';
+
+        // Get all box layouts
+        const boxOptimizer = new CuttingOptimizer(
+            lidOptimizer.boxWidth, lidOptimizer.boxHeight,
+            lidOptimizer.sheetWidth, lidOptimizer.sheetHeight, lidOptimizer.gap
+        );
+        const boxLayouts = boxOptimizer.findOptimalLayout();
+
+        // Get all lid layouts
+        const lidOptimizerCalc = new CuttingOptimizer(
+            lidOptimizer.lidWidth, lidOptimizer.lidHeight,
+            lidOptimizer.sheetWidth, lidOptimizer.sheetHeight, lidOptimizer.gap
+        );
+        const lidLayouts = lidOptimizerCalc.findOptimalLayout();
+
+        // Filter efficient box layouts (>80%)
+        const maxBoxCount = boxLayouts.length > 0 ? boxLayouts[0].totalBoxes : 0;
+        const optimalBoxLayouts = boxLayouts.filter(layout => layout.totalBoxes === maxBoxCount);
+        const efficientBoxLayouts = boxLayouts.filter(layout =>
+            layout.efficiency > 80 && layout.totalBoxes < maxBoxCount
+        );
+
+        // Filter efficient lid layouts (>80%)
+        const maxLidCount = lidLayouts.length > 0 ? lidLayouts[0].totalBoxes : 0;
+        const optimalLidLayouts = lidLayouts.filter(layout => layout.totalBoxes === maxLidCount);
+        const efficientLidLayouts = lidLayouts.filter(layout =>
+            layout.efficiency > 80 && layout.totalBoxes < maxLidCount
+        );
+
+        // Render Box Layouts Section
+        if (optimalBoxLayouts.length > 0) {
+            html += `
+                <div class="co-layouts">
+                    <h3><span class="dashicons dashicons-grid-view"></span> Box Layouts (${lidOptimizer.boxWidth} × ${lidOptimizer.boxHeight} cm)</h3>
+                    <div class="co-optimal-badge">
+                        <span class="dashicons dashicons-star-filled"></span>
+                        ${optimalBoxLayouts.length} Optimal Solution${optimalBoxLayouts.length > 1 ? 's' : ''} (${maxBoxCount} boxes each)
+                    </div>
+            `;
+
+            // Show visual diagram for best box layout
+            html += renderVisualDiagram(optimalBoxLayouts[0], boxOptimizer, 'box-0');
+
+            // Optimal box layouts
+            optimalBoxLayouts.forEach((layout, index) => {
+                const layoutIndex = boxLayouts.indexOf(layout);
+                html += renderLayoutItem(layout, layoutIndex, index, true, 'box');
+            });
+
+            // Efficient box layouts
+            if (efficientBoxLayouts.length > 0) {
+                html += `<h4 style="margin-top: 25px; color: #646970;">Other Efficient Options (>80% Efficiency)</h4>`;
+                html += `<p style="color: #666; margin-bottom: 20px;">Showing ${efficientBoxLayouts.length} additional efficient layouts</p>`;
+
+                efficientBoxLayouts.slice(0, 10).forEach((layout, index) => {
+                    const layoutIndex = boxLayouts.indexOf(layout);
+                    html += renderLayoutItem(layout, layoutIndex, index, false, 'box');
+                });
+            }
+
+            html += `</div>`;
+        }
+
+        // Render Lid Layouts Section
+        if (optimalLidLayouts.length > 0) {
+            html += `
+                <div class="co-layouts co-lid-layouts">
+                    <h3><span class="dashicons dashicons-archive"></span> Lid Layouts (${lidOptimizer.lidWidth} × ${lidOptimizer.lidHeight} cm)</h3>
+                    <div class="co-optimal-badge co-lid-badge">
+                        <span class="dashicons dashicons-star-filled"></span>
+                        ${optimalLidLayouts.length} Optimal Solution${optimalLidLayouts.length > 1 ? 's' : ''} (${maxLidCount} lids each)
+                    </div>
+            `;
+
+            // Show visual diagram for best lid layout
+            html += renderVisualDiagramForLids(optimalLidLayouts[0], lidOptimizerCalc, 'lid-0');
+
+            // Optimal lid layouts
+            optimalLidLayouts.forEach((layout, index) => {
+                const layoutIndex = lidLayouts.indexOf(layout);
+                html += renderLayoutItem(layout, layoutIndex, index, true, 'lid');
+            });
+
+            // Efficient lid layouts
+            if (efficientLidLayouts.length > 0) {
+                html += `<h4 style="margin-top: 25px; color: #646970;">Other Efficient Options (>80% Efficiency)</h4>`;
+                html += `<p style="color: #666; margin-bottom: 20px;">Showing ${efficientLidLayouts.length} additional efficient layouts</p>`;
+
+                efficientLidLayouts.slice(0, 10).forEach((layout, index) => {
+                    const layoutIndex = lidLayouts.indexOf(layout);
+                    html += renderLayoutItem(layout, layoutIndex, index, false, 'lid');
+                });
+            }
+
+            html += `</div>`;
+        }
+
+        return html;
+    }
+
+    // Render a layout item (reusable for both boxes and lids)
+    function renderLayoutItem(layout, layoutIndex, displayIndex, isOptimal, type) {
+        const itemClass = type === 'lid' ? 'co-layout-item co-lid-item' : 'co-layout-item';
+        const optimalClass = isOptimal ? 'optimal' : '';
+        const label = type === 'lid' ? 'lids' : 'boxes';
+        const starColor = type === 'lid' ? '#f0a000' : '#46b450';
+
+        return `
+            <div class="${itemClass} ${optimalClass}" data-layout-index="${layoutIndex}" data-type="${type}">
+                <div class="co-layout-header">
+                    <div class="co-layout-title">
+                        ${isOptimal ? `<span class="dashicons dashicons-star-filled" style="color: ${starColor};"></span>` : ''}
+                        ${layout.name} (Config ${displayIndex + 1})
+                    </div>
+                    <div class="co-layout-boxes ${type === 'lid' ? 'co-lid-count' : ''}">${layout.totalBoxes} ${label}</div>
+                </div>
+
+                <div class="co-layout-stats">
+                    <div class="co-stat">
+                        <label>Used Area</label>
+                        <div class="value">${layout.usedArea.toFixed(2)} cm²</div>
+                    </div>
+                    <div class="co-stat">
+                        <label>Wasted Area</label>
+                        <div class="value">${layout.wastedArea.toFixed(2)} cm²</div>
+                    </div>
+                    <div class="co-stat">
+                        <label>Efficiency</label>
+                        <div class="value">${layout.efficiency.toFixed(2)}%</div>
+                    </div>
+                </div>
+
+                <div class="co-efficiency-bar">
+                    <label>Material Efficiency</label>
+                    <div class="co-efficiency-track">
+                        <div class="co-efficiency-fill ${type === 'lid' ? 'co-lid-fill' : ''}" style="width: ${layout.efficiency}%">
+                            ${layout.efficiency.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="co-layout-details ${type === 'lid' ? 'co-lid-details' : ''}">
+                    <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical Strips' : 'Horizontal Strips'}</p>
+                    ${layout.mainBoxes > 0 ? `<p><strong>Main ${type === 'lid' ? 'Lids' : 'Boxes'}:</strong> ${layout.mainBoxes} ${label} (${layout.numStrips} strips × ${layout.boxesPerStrip} ${label} per strip) - Orientation: ${layout.mainOrientation}</p>` : ''}
+                    ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `
+                        <p><strong>Additional ${type === 'lid' ? 'Lids' : 'Boxes'} in Remaining Space:</strong></p>
+                        <ul style="margin: 5px 0; padding-left: 20px;">
+                            ${layout.remainingDetails.map(detail =>
+                                `<li>${detail.boxes} ${label} (${detail.cols} cols × ${detail.rows} rows) - ${detail.orientation} ${detail.isRotated ? '(rotated)' : ''}</li>`
+                            ).join('')}
+                        </ul>
+                    ` : ''}
+                    <p><strong>Used Dimensions:</strong> ${layout.usedWidth.toFixed(1)} × ${layout.usedHeight.toFixed(1)} cm</p>
+                    <p><strong>Waste:</strong> ${layout.wasteWidth.toFixed(1)} cm (width) × ${layout.wasteHeight.toFixed(1)} cm (height)</p>
+                </div>
+            </div>
+        `;
     }
 
     function renderCombinedOption(result, lidOptimizer, isRecommended) {
@@ -1386,10 +1553,25 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         return html;
     }
 
-    function renderVisualDiagramForLids(layout, optimizer) {
+    function renderVisualDiagramForLids(layout, optimizer, layoutIndex = 0) {
         // Similar to renderVisualDiagram but with lid styling
+        const actualSheetWidth = optimizer.sheetWidth;
+        const actualSheetHeight = optimizer.sheetHeight;
+
         let html = `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${optimizer.sheetWidth} / ${optimizer.sheetHeight}; position: relative;">
+        <div class="co-visual-diagram co-lid-diagram" id="visual-diagram-${layoutIndex}">
+            <h3><span class="dashicons dashicons-visibility"></span> Visual Layout${layoutIndex === 'lid-0' ? " (Optimal)" : ""}</h3>
+            <div class="co-diagram-container">
+        `;
+
+        html += `
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${actualSheetWidth} / ${actualSheetHeight}; position: relative; border: 2px solid #333; background: #f9f9f9;">
+                <div class="co-sheet-label-width">${actualSheetWidth} cm</div>
+                <div class="co-sheet-label-width-left-line"></div>
+                <div class="co-sheet-label-width-right-line"></div>
+                <div class="co-sheet-label-height">${actualSheetHeight}<br/>cm</div>
+                <div class="co-sheet-label-height-bottom-line"></div>
+                <div class="co-sheet-label-height-top-line"></div>
         `;
 
         let boxCounter = 1;
@@ -1398,8 +1580,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         if (isSimpleLayout && layout.mainBoxes > 0) {
             const totalUsedWidth = layout.usedWidth;
             const totalUsedHeight = layout.usedHeight;
-            const usedWidthPercent = (totalUsedWidth / optimizer.sheetWidth) * 100;
-            const usedHeightPercent = (totalUsedHeight / optimizer.sheetHeight) * 100;
+            const usedWidthPercent = (totalUsedWidth / actualSheetWidth) * 100;
+            const usedHeightPercent = (totalUsedHeight / actualSheetHeight) * 100;
             const boxWidthPercent = (layout.boxWidth / totalUsedWidth) * 100;
             const boxHeightPercent = (layout.boxHeight / totalUsedHeight) * 100;
             const gapWidthPercent = (optimizer.gap / totalUsedWidth) * 100;
@@ -1432,23 +1614,110 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
             html += `</div>`;
         } else {
+            // Complex recursive layout - render with flexbox like boxes
             html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 6px;">`;
 
-            // Render main boxes with lid styling
+            // Render main grid area if it exists
             if (layout.mainBoxes > 0) {
-                for (let i = 0; i < layout.mainBoxes; i++) {
-                    html += `
-                        <div class="co-box co-box-lid" style="flex: 1; min-width: 20px; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
-                            <span class="co-box-number">L${boxCounter++}</span>
-                        </div>
-                    `;
+                if (layout.layoutType === 'vertical') {
+                    // Vertical strips layout
+                    for (let col = 0; col < layout.numStrips; col++) {
+                        html += `<div style="display: flex; flex-direction: column; justify-content: space-between; flex: max(calc( ${layout.boxWidth} / ${layout.boxHeight}),1); gap: 6px;">`;
+
+                        for (let row = 0; row < layout.boxesPerStrip; row++) {
+                            html += `
+                                <div class="co-box co-box-lid" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                                    <span class="co-box-number">L${boxCounter++}</span>
+                                    <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                                </div>
+                            `;
+                        }
+
+                        html += `</div>`;
+                    }
+                } else {
+                    // Horizontal strips layout
+                    for (let row = 0; row < layout.numStrips; row++) {
+                        const rowWidthPercent = ((layout.boxWidth * layout.boxesPerStrip) + (optimizer.gap * (layout.boxesPerStrip + 1))) / actualSheetWidth * 100;
+
+                        html += `<div style="width: ${rowWidthPercent}%; display: flex; flex-direction: row; justify-content: space-between; gap: 6px;">`;
+
+                        for (let col = 0; col < layout.boxesPerStrip; col++) {
+                            html += `
+                                <div class="co-box co-box-lid" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                                    <span class="co-box-number">L${boxCounter++}</span>
+                                    <div style="font-size: 8px; margin-top: 2px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                                </div>
+                            `;
+                        }
+
+                        html += `</div>`;
+                    }
                 }
+            }
+
+            // Render remaining details (recursive lids)
+            if (layout.remainingDetails && layout.remainingDetails.length > 0) {
+                layout.remainingDetails.forEach((detail, detailIndex) => {
+                    if (layout.layoutType === 'vertical') {
+                        // VERTICAL: Each column is a separate div with rows inside
+                        for (let col = 0; col < detail.cols; col++) {
+                            html += `<div style="display: flex; flex-direction: column; gap: 6px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}),1);">`;
+
+                            for (let row = 0; row < detail.rows; row++) {
+                                html += `
+                                    <div class="co-box co-box-lid co-box-rotated-lid" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
+                                        <span class="co-box-number">L${boxCounter++}</span>
+                                        <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                    </div>
+                                `;
+                            }
+
+                            html += `</div>`;
+                        }
+                    } else {
+                        // HORIZONTAL: Each row is a separate div with columns inside
+                        for (let row = 0; row < detail.rows; row++) {
+                            const detailRowWidthPercent = ((detail.boxWidth * detail.cols) + (optimizer.gap * (detail.cols + 1))) / actualSheetWidth * 100;
+
+                            html += `<div style="display: flex; flex-direction: row; gap: 6px; width: ${detailRowWidthPercent}%;">`;
+
+                            for (let col = 0; col < detail.cols; col++) {
+                                html += `
+                                    <div class="co-box co-box-lid co-box-rotated-lid" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
+                                        <span class="co-box-number">L${boxCounter++}</span>
+                                        <div style="font-size: 8px; margin-top: 2px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                    </div>
+                                `;
+                            }
+
+                            html += `</div>`;
+                        }
+                    }
+                });
             }
 
             html += `</div>`;
         }
 
-        html += `</div>`;
+        html += `
+            </div>
+            <div class="co-waste-info co-lid-waste-info">
+                <p><strong>Layout Type:</strong> ${layout.layoutType === 'vertical' ? 'Vertical' : 'Horizontal'} Strips ${!isSimpleLayout ? 'with Recursive Filling' : ''}</p>
+                <p><strong>Total Lids:</strong> ${layout.totalBoxes}</p>
+                ${layout.mainBoxes > 0 ? `<p><strong>Main Grid:</strong> ${layout.mainBoxes} lids (${layout.cols || layout.numStrips} × ${layout.rows || layout.boxesPerStrip})</p>` : ''}
+                ${layout.remainingDetails && layout.remainingDetails.length > 0 ? `<p><strong>Additional Areas:</strong> ${layout.rotatedBoxes} lids in ${layout.remainingDetails.length} area(s)</p>` : ''}
+                <p><strong>Waste Areas:</strong></p>
+                <p>Right edge: ${layout.wasteWidth.toFixed(1)} cm</p>
+                <p>Bottom edge: ${layout.wasteHeight.toFixed(1)} cm</p>
+            </div>
+        `;
+
+        html += `
+            </div>
+        </div>
+        `;
+
         return html;
     }
 
