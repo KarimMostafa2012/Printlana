@@ -1654,7 +1654,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         const gap = lidOptimizer.gap;
 
         html += `
-            <div class="co-sheet" style="width: 100%; aspect-ratio: ${sheetWidth} / ${sheetHeight}; position: relative;">
+            <div class="co-sheet" style="width: 100%; aspect-ratio: ${sheetWidth} / ${sheetHeight}; position: relative; display: flex; gap: 6px;">
                 <div class="co-sheet-label-width">${sheetWidth} cm</div>
                 <div class="co-sheet-label-width-left-line"></div>
                 <div class="co-sheet-label-width-right-line"></div>
@@ -1721,7 +1721,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 ? `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`
                 : `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`;
 
-            html += `<div style="${region1Style} padding: 5px; box-sizing: border-box;">`;
+            html += `<div style="${region1Style} box-sizing: border-box;">`;
             html += renderCombinedRegionGrid(region1Layout, region1Type, region1UsedWidth, region1UsedHeight, gap);
             html += `</div>`;
 
@@ -1730,7 +1730,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 ? `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`
                 : `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`;
 
-            html += `<div style="${region2Style} padding: 5px; box-sizing: border-box;">`;
+            html += `<div style="${region2Style} box-sizing: border-box;">`;
             html += renderCombinedRegionGrid(region2Layout, region2Type, region2UsedWidth, region2UsedHeight, gap);
             html += `</div>`;
 
@@ -1738,7 +1738,7 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Mixed placement - render boxes in main area, lids in remaining spaces
             const boxLayout = result.boxLayout;
 
-            html += `<div style="width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
+            html += `<div style="width: 100%; height: 100%; box-sizing: border-box;">`;
 
             // Render boxes using grid layout
             html += renderCombinedRegionGrid(boxLayout, 'box', sheetWidth, sheetHeight, gap);
