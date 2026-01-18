@@ -1153,6 +1153,12 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         );
         const lidLayouts = lidOptimizerCalc.findOptimalLayout();
 
+        // Store for click handling
+        currentBoxLayouts = boxLayouts;
+        currentLidLayouts = lidLayouts;
+        currentBoxOptimizerForLidMode = boxOptimizer;
+        currentLidOptimizerForLidMode = lidOptimizerCalc;
+
         // Filter efficient box layouts (>80%)
         const maxBoxCount = boxLayouts.length > 0 ? boxLayouts[0].totalBoxes : 0;
         const optimalBoxLayouts = boxLayouts.filter(layout => layout.totalBoxes === maxBoxCount);
@@ -1179,7 +1185,9 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             `;
 
             // Show visual diagram for best box layout
+            html += `<div class="co-box-diagram-container">`;
             html += renderVisualDiagram(optimalBoxLayouts[0], boxOptimizer, 'box-0');
+            html += `</div>`;
 
             // Optimal box layouts
             optimalBoxLayouts.forEach((layout, index) => {
@@ -1213,7 +1221,9 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             `;
 
             // Show visual diagram for best lid layout
+            html += `<div class="co-lid-diagram-container">`;
             html += renderVisualDiagramForLids(optimalLidLayouts[0], lidOptimizerCalc, 'lid-0');
+            html += `</div>`;
 
             // Optimal lid layouts
             optimalLidLayouts.forEach((layout, index) => {
@@ -1724,6 +1734,10 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
     let currentOptimizer = null;
     let currentLayouts = null;
     let currentLidOptimizer = null;
+    let currentBoxLayouts = null;
+    let currentLidLayouts = null;
+    let currentBoxOptimizerForLidMode = null;
+    let currentLidOptimizerForLidMode = null;
 
     $(document).ready(function () {
         $("#calculate-btn").on("click", function () {
@@ -1780,8 +1794,8 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
                 $("#results").html(resultsHtml).fadeIn();
                 $("#loading").hide();
 
-                // Only bind layout clicks for standard mode
                 if (!hasSeparateLid) {
+                    // Standard mode - bind layout clicks
                     $(".co-layout-item").on("click", function () {
                         const layoutIndex = $(this).data("layout-index");
                         const selectedLayout = currentLayouts[layoutIndex];
@@ -1795,6 +1809,44 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
 
                         $(".co-layout-item").removeClass("selected");
                         $(this).addClass("selected");
+                    });
+                } else {
+                    // Lid mode - bind layout clicks for both boxes and lids
+                    $(".co-layout-item").on("click", function () {
+                        const layoutIndex = $(this).data("layout-index");
+                        const type = $(this).data("type");
+
+                        if (type === 'box' && currentBoxLayouts && currentBoxOptimizerForLidMode) {
+                            const selectedLayout = currentBoxLayouts[layoutIndex];
+                            const newDiagram = renderVisualDiagram(selectedLayout, currentBoxOptimizerForLidMode, 'box-' + layoutIndex);
+
+                            // Replace the box visual diagram
+                            $(".co-box-diagram-container").html(newDiagram);
+
+                            // Scroll to the diagram
+                            $("html, body").animate({
+                                scrollTop: $(".co-box-diagram-container").offset().top - 100,
+                            }, 500);
+
+                            // Update selected state for box items only
+                            $(".co-layout-item[data-type='box']").removeClass("selected");
+                            $(this).addClass("selected");
+                        } else if (type === 'lid' && currentLidLayouts && currentLidOptimizerForLidMode) {
+                            const selectedLayout = currentLidLayouts[layoutIndex];
+                            const newDiagram = renderVisualDiagramForLids(selectedLayout, currentLidOptimizerForLidMode, 'lid-' + layoutIndex);
+
+                            // Replace the lid visual diagram
+                            $(".co-lid-diagram-container").html(newDiagram);
+
+                            // Scroll to the diagram
+                            $("html, body").animate({
+                                scrollTop: $(".co-lid-diagram-container").offset().top - 100,
+                            }, 500);
+
+                            // Update selected state for lid items only
+                            $(".co-layout-item[data-type='lid']").removeClass("selected");
+                            $(this).addClass("selected");
+                        }
                     });
                 }
             }, 500);

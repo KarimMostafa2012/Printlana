@@ -767,3 +767,42 @@
 .co-box-rotated-lid .co-box-number {
     background: #ff9800;
 }
+
+/* Selected state for lid items */
+.co-lid-item.selected {
+    border-color: #f0a000;
+    box-shadow: 0 4px 12px rgba(240, 160, 0, 0.3);
+    background: #fffbf0;
+}
+
+/* Hover state for lid items */
+.co-lid-item:hover {
+    border-color: #f0a000;
+    box-shadow: 0 2px 8px rgba(240, 160, 0, 0.2);
+}
+
+/* Click hint for layout items */
+.co-layout-item::after {
+    content: "Click to view";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 10px;
+    color: #999;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.co-layout-item {
+    position: relative;
+}
+
+.co-layout-item:hover::after {
+    opacity: 1;
+}
+
+/* Diagram containers */
+.co-box-diagram-container,
+.co-lid-diagram-container {
+    margin-bottom: 20px;
+}
