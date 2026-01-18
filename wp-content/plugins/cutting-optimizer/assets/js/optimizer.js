@@ -1645,12 +1645,13 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
     function renderCombinedSheetDiagram(result, lidOptimizer) {
         let html = `
             <div class="co-visual-diagram" id="visual-diagram-combined">
-                <h3><span class="dashicons dashicons-visibility"></span> Combined Sheet Layout (Recommended)</h3>
+                <h3><span class="dashicons dashicons-visibility"></span> Combined Sheet Layout</h3>
                 <div class="co-diagram-container">
         `;
 
         const sheetWidth = lidOptimizer.sheetWidth;
         const sheetHeight = lidOptimizer.sheetHeight;
+        const gap = lidOptimizer.gap;
 
         html += `
             <div class="co-sheet" style="width: 100%; aspect-ratio: ${sheetWidth} / ${sheetHeight}; position: relative;">
@@ -1669,51 +1670,61 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             // Split line
             html += `<div class="co-split-line ${result.splitType}" style="${isVertical ? `left: ${splitPos}%` : `top: ${splitPos}%`}"></div>`;
 
-            // Render boxes in region 1
+            // Get layouts for each region
+            const boxLayout = result.boxLayout;
+            const lidLayout = result.lidLayout;
+
+            // Region 1 - Boxes or Lids based on swapped
+            const region1Layout = result.swapped ? lidLayout : boxLayout;
+            const region1Type = result.swapped ? 'lid' : 'box';
+            const region1Width = result.region1.width;
+            const region1Height = result.region1.height;
+
+            // Region 2 - The other type
+            const region2Layout = result.swapped ? boxLayout : lidLayout;
+            const region2Type = result.swapped ? 'box' : 'lid';
+            const region2Width = result.region2.width;
+            const region2Height = result.region2.height;
+
+            // Render Region 1
             const region1Style = isVertical
                 ? `position: absolute; left: 0; top: 0; width: ${splitPos}%; height: 100%;`
                 : `position: absolute; left: 0; top: 0; width: 100%; height: ${splitPos}%;`;
 
-            html += `<div style="${region1Style} display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
-            const type1 = result.swapped ? 'lid' : 'box';
-            const count1 = result.swapped ? result.lidCount : result.boxCount;
-            for (let i = 0; i < Math.min(count1, result.pairs); i++) {
-                html += `<div class="co-box ${type1 === 'lid' ? 'co-box-lid' : ''}" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
-                    <span class="co-box-number">${type1 === 'lid' ? 'L' : 'B'}${i + 1}</span>
-                </div>`;
-            }
+            html += `<div style="${region1Style} padding: 5px; box-sizing: border-box;">`;
+            html += renderCombinedRegionGrid(region1Layout, region1Type, region1Width, region1Height, gap);
             html += `</div>`;
 
-            // Render lids in region 2
+            // Render Region 2
             const region2Style = isVertical
                 ? `position: absolute; right: 0; top: 0; width: ${100 - splitPos}%; height: 100%;`
                 : `position: absolute; left: 0; bottom: 0; width: 100%; height: ${100 - splitPos}%;`;
 
-            html += `<div style="${region2Style} display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
-            const type2 = result.swapped ? 'box' : 'lid';
-            const count2 = result.swapped ? result.boxCount : result.lidCount;
-            for (let i = 0; i < Math.min(count2, result.pairs); i++) {
-                html += `<div class="co-box ${type2 === 'lid' ? 'co-box-lid' : ''}" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
-                    <span class="co-box-number">${type2 === 'lid' ? 'L' : 'B'}${i + 1}</span>
-                </div>`;
-            }
+            html += `<div style="${region2Style} padding: 5px; box-sizing: border-box;">`;
+            html += renderCombinedRegionGrid(region2Layout, region2Type, region2Width, region2Height, gap);
             html += `</div>`;
+
         } else {
-            // Mixed placement
-            html += `<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; box-sizing: border-box; align-content: flex-start;">`;
+            // Mixed placement - render boxes in main area, lids in remaining spaces
+            const boxLayout = result.boxLayout;
 
-            // Render boxes first
-            for (let i = 0; i < result.pairs; i++) {
-                html += `<div class="co-box" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
-                    <span class="co-box-number">B${i + 1}</span>
-                </div>`;
-            }
+            html += `<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding: 5px; box-sizing: border-box;">`;
 
-            // Render lids
-            for (let i = 0; i < result.pairs; i++) {
-                html += `<div class="co-box co-box-lid" style="flex: 0 0 auto; min-width: 30px; min-height: 20px; padding: 2px; font-size: 9px;">
-                    <span class="co-box-number">L${i + 1}</span>
-                </div>`;
+            // Render boxes using grid layout
+            html += renderCombinedRegionGrid(boxLayout, 'box', sheetWidth, sheetHeight, gap);
+
+            // Render lids in remaining placements
+            if (result.lidPlacements && result.lidPlacements.length > 0) {
+                result.lidPlacements.forEach(placement => {
+                    const offsetXPercent = (placement.offsetX / sheetWidth) * 100;
+                    const offsetYPercent = (placement.offsetY / sheetHeight) * 100;
+                    const widthPercent = (placement.width / sheetWidth) * 100;
+                    const heightPercent = (placement.height / sheetHeight) * 100;
+
+                    html += `<div style="position: absolute; left: ${offsetXPercent}%; top: ${offsetYPercent}%; width: ${widthPercent}%; height: ${heightPercent}%; padding: 2px; box-sizing: border-box;">`;
+                    html += renderCombinedRegionGrid(placement.layout, 'lid', placement.width, placement.height, gap);
+                    html += `</div>`;
+                });
             }
 
             html += `</div>`;
@@ -1735,12 +1746,129 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         return html;
     }
 
+    // Render a grid of boxes/lids for a combined sheet region
+    function renderCombinedRegionGrid(layout, type, regionWidth, regionHeight, gap) {
+        if (!layout || layout.totalBoxes === 0) return '';
+
+        let html = '';
+        let counter = 1;
+        const isLid = type === 'lid';
+        const label = isLid ? 'L' : 'B';
+        const boxClass = isLid ? 'co-box co-box-lid' : 'co-box';
+
+        const isSimpleLayout = !layout.remainingDetails || layout.remainingDetails.length === 0;
+
+        if (isSimpleLayout && layout.mainBoxes > 0) {
+            // Simple grid layout using CSS Grid
+            const usedWidthPercent = (layout.usedWidth / regionWidth) * 100;
+            const usedHeightPercent = (layout.usedHeight / regionHeight) * 100;
+            const boxWidthPercent = (layout.boxWidth / layout.usedWidth) * 100;
+            const boxHeightPercent = (layout.boxHeight / layout.usedHeight) * 100;
+            const gapWidthPercent = (gap / layout.usedWidth) * 100;
+            const gapHeightPercent = (gap / layout.usedHeight) * 100;
+
+            html += `
+                <div class="co-box-grid" style="
+                    display: grid;
+                    grid-template-columns: repeat(${layout.cols}, ${boxWidthPercent}%);
+                    grid-template-rows: repeat(${layout.rows}, ${boxHeightPercent}%);
+                    gap: ${gapHeightPercent}% ${gapWidthPercent}%;
+                    width: ${usedWidthPercent}%;
+                    height: ${usedHeightPercent}%;
+                ">
+            `;
+
+            for (let i = 0; i < layout.totalBoxes; i++) {
+                html += `
+                    <div class="${boxClass}" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                        <span class="co-box-number">${label}${counter++}</span>
+                        <div style="font-size: 7px; margin-top: 1px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+        } else {
+            // Complex layout with flexbox
+            html += `<div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 4px; align-content: flex-start;">`;
+
+            // Render main boxes
+            if (layout.mainBoxes > 0) {
+                if (layout.layoutType === 'vertical') {
+                    for (let col = 0; col < layout.numStrips; col++) {
+                        html += `<div style="display: flex; flex-direction: column; gap: 4px; flex: max(calc(${layout.boxWidth} / ${layout.boxHeight}), 1);">`;
+                        for (let row = 0; row < layout.boxesPerStrip; row++) {
+                            html += `
+                                <div class="${boxClass}" style="aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                                    <span class="co-box-number">${label}${counter++}</span>
+                                    <div style="font-size: 7px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                                </div>
+                            `;
+                        }
+                        html += `</div>`;
+                    }
+                } else {
+                    for (let row = 0; row < layout.numStrips; row++) {
+                        html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 4px;">`;
+                        for (let col = 0; col < layout.boxesPerStrip; col++) {
+                            html += `
+                                <div class="${boxClass}" style="flex: 1; aspect-ratio: ${layout.boxWidth} / ${layout.boxHeight};">
+                                    <span class="co-box-number">${label}${counter++}</span>
+                                    <div style="font-size: 7px;">${layout.boxWidth}×${layout.boxHeight}</div>
+                                </div>
+                            `;
+                        }
+                        html += `</div>`;
+                    }
+                }
+            }
+
+            // Render remaining details
+            if (layout.remainingDetails && layout.remainingDetails.length > 0) {
+                layout.remainingDetails.forEach(detail => {
+                    const rotatedClass = isLid ? 'co-box-rotated-lid' : 'co-box-rotated';
+                    if (layout.layoutType === 'vertical') {
+                        for (let col = 0; col < detail.cols; col++) {
+                            html += `<div style="display: flex; flex-direction: column; gap: 4px; flex: max(calc(${detail.boxWidth} / ${detail.boxHeight}), 1);">`;
+                            for (let row = 0; row < detail.rows; row++) {
+                                html += `
+                                    <div class="${boxClass} ${rotatedClass}" style="aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
+                                        <span class="co-box-number">${label}${counter++}</span>
+                                        <div style="font-size: 7px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                    </div>
+                                `;
+                            }
+                            html += `</div>`;
+                        }
+                    } else {
+                        for (let row = 0; row < detail.rows; row++) {
+                            html += `<div style="width: 100%; display: flex; flex-direction: row; gap: 4px;">`;
+                            for (let col = 0; col < detail.cols; col++) {
+                                html += `
+                                    <div class="${boxClass} ${rotatedClass}" style="flex: 1; aspect-ratio: ${detail.boxWidth} / ${detail.boxHeight};">
+                                        <span class="co-box-number">${label}${counter++}</span>
+                                        <div style="font-size: 7px;">${detail.boxWidth}×${detail.boxHeight}</div>
+                                    </div>
+                                `;
+                            }
+                            html += `</div>`;
+                        }
+                    }
+                });
+            }
+
+            html += `</div>`;
+        }
+
+        return html;
+    }
+
     function renderSeparateSheetsDiagram(result, lidOptimizer) {
         let html = `
             <div class="co-visual-diagram" id="visual-diagram-separate">
                 <h3><span class="dashicons dashicons-visibility"></span> Separate Sheets Layout (Recommended)</h3>
                 <p style="color: #666; margin-bottom: 15px;">Two sheets required: one for boxes, one for lids</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
         `;
 
         // Box sheet diagram
