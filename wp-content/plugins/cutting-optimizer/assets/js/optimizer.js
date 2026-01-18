@@ -1663,8 +1663,6 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
         `;
 
         if (result.approach === 'split') {
-            const isVertical = result.splitType === 'vertical';
-
             // Get layouts for each region
             const boxLayout = result.boxLayout;
             const lidLayout = result.lidLayout;
@@ -1677,57 +1675,20 @@ function renderVisualDiagram(layout, optimizer, layoutIndex) {
             const region2Layout = result.swapped ? boxLayout : lidLayout;
             const region2Type = result.swapped ? 'box' : 'lid';
 
-            // Calculate actual used dimensions for each region
-            const region1UsedWidth = region1Layout.usedWidth;
-            const region1UsedHeight = region1Layout.usedHeight;
-            const region2UsedWidth = region2Layout.usedWidth;
-            const region2UsedHeight = region2Layout.usedHeight;
-
             // Calculate percentages based on actual used dimensions
-            let region1WidthPercent, region1HeightPercent;
-            let region2LeftPercent, region2TopPercent, region2WidthPercent, region2HeightPercent;
-            let splitLinePos;
+            const region1WidthPercent = (region1Layout.usedWidth / sheetWidth) * 100;
+            const region1HeightPercent = (region1Layout.usedHeight / sheetHeight) * 100;
+            const region2WidthPercent = (region2Layout.usedWidth / sheetWidth) * 100;
+            const region2HeightPercent = (region2Layout.usedHeight / sheetHeight) * 100;
 
-            if (isVertical) {
-                // Vertical split - regions side by side
-                region1WidthPercent = (region1UsedWidth / sheetWidth) * 100;
-                region1HeightPercent = (region1UsedHeight / sheetHeight) * 100;
-
-                region2WidthPercent = (region2UsedWidth / sheetWidth) * 100;
-                region2HeightPercent = (region2UsedHeight / sheetHeight) * 100;
-                region2LeftPercent = ((region1UsedWidth + gap) / sheetWidth) * 100;
-                region2TopPercent = 0;
-
-                splitLinePos = region1WidthPercent;
-            } else {
-                // Horizontal split - regions stacked
-                region1WidthPercent = (region1UsedWidth / sheetWidth) * 100;
-                region1HeightPercent = (region1UsedHeight / sheetHeight) * 100;
-
-                region2WidthPercent = (region2UsedWidth / sheetWidth) * 100;
-                region2HeightPercent = (region2UsedHeight / sheetHeight) * 100;
-                region2LeftPercent = 0;
-                region2TopPercent = ((region1UsedHeight + gap) / sheetHeight) * 100;
-
-                splitLinePos = region1HeightPercent;
-            }
-
-            // Render Region 1 with actual used dimensions
-            const region1Style = isVertical
-                ? `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`
-                : `width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;`;
-
-            html += `<div style="${region1Style} box-sizing: border-box;">`;
-            html += renderCombinedRegionGrid(region1Layout, region1Type, region1UsedWidth, region1UsedHeight, gap);
+            // Render Region 1
+            html += `<div style="width: ${region1WidthPercent}%; height: ${region1HeightPercent}%;">`;
+            html += renderCombinedRegionGrid(region1Layout, region1Type, region1Layout.usedWidth, region1Layout.usedHeight, gap);
             html += `</div>`;
 
-            // Render Region 2 with actual used dimensions
-            const region2Style = isVertical
-                ? `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`
-                : `width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;`;
-
-            html += `<div style="${region2Style} box-sizing: border-box;">`;
-            html += renderCombinedRegionGrid(region2Layout, region2Type, region2UsedWidth, region2UsedHeight, gap);
+            // Render Region 2
+            html += `<div style="width: ${region2WidthPercent}%; height: ${region2HeightPercent}%;">`;
+            html += renderCombinedRegionGrid(region2Layout, region2Type, region2Layout.usedWidth, region2Layout.usedHeight, gap);
             html += `</div>`;
 
         } else {
