@@ -71,7 +71,7 @@ class CuttingOptimizerPlugin {
                                 <span class="dashicons dashicons-admin-page"></span>
                                 Box Width (cm)
                             </label>
-                            <input type="number" id="box-width" value="1" step="0.1" min="0.1">
+                            <input type="number" id="box-width" value="10" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
@@ -79,7 +79,7 @@ class CuttingOptimizerPlugin {
                                 <span class="dashicons dashicons-admin-page"></span>
                                 Box Length (cm)
                             </label>
-                            <input type="number" id="box-height" value="1" step="0.1" min="0.1">
+                            <input type="number" id="box-height" value="15" step="0.1" min="0.1">
                         </div>
                         
                         <div class="co-input-group">
@@ -116,7 +116,7 @@ class CuttingOptimizerPlugin {
                                     <span class="dashicons dashicons-admin-page"></span>
                                     Lid Width (cm)
                                 </label>
-                                <input type="number" id="lid-width" value="" step="0.1" min="0.1" placeholder="Optional">
+                                <input type="number" id="lid-width" value="8" step="0.1" min="0.1" placeholder="Optional">
                             </div>
 
                             <div class="co-input-group">
@@ -124,7 +124,7 @@ class CuttingOptimizerPlugin {
                                     <span class="dashicons dashicons-admin-page"></span>
                                     Lid Length (cm)
                                 </label>
-                                <input type="number" id="lid-height" value="" step="0.1" min="0.1" placeholder="Optional">
+                                <input type="number" id="lid-height" value="10" step="0.1" min="0.1" placeholder="Optional">
                             </div>
                         </div>
 
