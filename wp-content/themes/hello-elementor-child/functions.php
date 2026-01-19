@@ -3,7 +3,8 @@
 
 add_filter('woocommerce_get_breadcrumb', 'remove_shop_from_breadcrumb', 10, 2);
 
-function remove_shop_from_breadcrumb($crumbs, $breadcrumb) {
+function remove_shop_from_breadcrumb($crumbs, $breadcrumb)
+{
     // Remove the "Shop" breadcrumb
     foreach ($crumbs as $key => $crumb) {
         if ($crumb[1] === wc_get_page_permalink('shop')) {
@@ -22,74 +23,77 @@ function remove_shop_from_breadcrumb($crumbs, $breadcrumb) {
 add_action('woocommerce_before_calculate_totals', 'fix_wapf_qty_formula', 99999);
 add_action('woocommerce_cart_loaded_from_session', 'fix_wapf_cart_session', 99999);
 
-function fix_wapf_cart_session($cart) {
+function fix_wapf_cart_session($cart)
+{
     fix_wapf_qty_formula($cart);
 }
 
-function fix_wapf_qty_formula($cart) {
-    if (is_admin() && !defined('DOING_AJAX')) return;
-    
+function fix_wapf_qty_formula($cart)
+{
+    if (is_admin() && !defined('DOING_AJAX'))
+        return;
+
     static $run_count = 0;
     $run_count++;
-    
+
     error_log("=== WAPF FIX RUN #$run_count ===");
     error_log("Context: " . (is_cart() ? 'Cart Page' : (is_checkout() ? 'Checkout Page' : 'Other')));
-    
+
     foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
         error_log("Processing cart item: " . $cart_item['data']->get_name());
-        
+
         if (!isset($cart_item['wapf'])) {
             error_log("No WAPF data found, skipping");
             continue;
         }
-        
+
         $current_price = $cart_item['data']->get_price();
         $qty = $cart_item['quantity'];
-        
+
         error_log("Current price: $current_price, Qty: $qty");
-        
+
         if ($qty <= 0) {
             error_log("Qty is 0 or negative, skipping");
             continue;
         }
-        
+
         // Skip if price is still 0 or negative (WAPF hasn't run yet)
         if ($current_price <= 0) {
             error_log("WAPF: Price is $current_price, skipping (WAPF hasn't calculated yet)");
             continue;
         }
-        
+
         $adjustment = 0;
         $found_qty_formula = false;
-        
+
         foreach ($cart_item['wapf'] as $field) {
             error_log("Checking field: " . $field['id']);
-            
+
             if (empty($field['values'])) {
                 error_log("Field has no values, skipping");
                 continue;
             }
-            
+
             foreach ($field['values'] as $value) {
                 if (!isset($value['price_type']) || !isset($value['price'])) {
                     error_log("Missing price_type or price");
                     continue;
                 }
-                
+
                 error_log("Price type: " . $value['price_type'] . ", Price: " . $value['price']);
-                
+
                 if ($value['price_type'] === 'fx') {
                     $formula = $value['price'];
                     error_log("Found formula: $formula");
-                    
+
                     if (strpos($formula, '[qty]') !== false) {
                         $found_qty_formula = true;
                         error_log("Formula contains [qty]");
-                        
+
                         if (preg_match('/\[price\.(\w+)\]/', $formula, $matches)) {
                             $ref_id = $matches[1];
                             error_log("Looking for reference field: $ref_id");
-                            
+
                             $divisor = 0;
                             foreach ($cart_item['wapf'] as $ref_field) {
                                 if ($ref_field['id'] === $ref_id && !empty($ref_field['values'])) {
@@ -98,11 +102,11 @@ function fix_wapf_qty_formula($cart) {
                                     break;
                                 }
                             }
-                            
+
                             if ($divisor > 0) {
                                 $formula_result = $qty / $divisor;
                                 $adjustment = $formula_result - ($formula_result / $qty);
-                                
+
                                 error_log("SUCCESS: Qty=$qty, Divisor=$divisor, Formula=$formula_result, Adjustment=$adjustment");
                             } else {
                                 error_log("ERROR: Divisor is zero or not found");
@@ -114,16 +118,16 @@ function fix_wapf_qty_formula($cart) {
                 }
             }
         }
-        
+
         if ($found_qty_formula && $adjustment > 0) {
             $new_price = $current_price - $adjustment;
-            
+
             // Safety check - don't set negative prices
             if ($new_price < 0) {
                 error_log("WAPF: Would result in negative price ($new_price), skipping");
                 continue;
             }
-            
+
             $cart_item['data']->set_price($new_price);
             error_log("APPLIED: Price adjusted from $current_price to $new_price (removed $adjustment)");
         } elseif ($found_qty_formula) {
@@ -132,7 +136,7 @@ function fix_wapf_qty_formula($cart) {
             error_log("SKIPPED: No qty formula found");
         }
     }
-    
+
     error_log("=== WAPF FIX: Finished ===");
 }
 
@@ -493,7 +497,7 @@ add_action('save_post_product', function ($post_id, $post, $update) {
  * Flush permalinks after new product is created
  * This fixes the issue where new products return 404
  */
-add_action('init', function() {
+add_action('init', function () {
     if (get_transient('pl_flush_permalinks')) {
         flush_rewrite_rules(false);
         delete_transient('pl_flush_permalinks');
@@ -2254,3 +2258,37 @@ function pl_fix_dokan_dashboard_loading()
         });
     ');
 }
+
+
+// profile image
+
+/**
+ * Shortcode: [user_profile_image size="96" class="el-user-avatar"]
+ */
+add_shortcode('user_profile_image', function ($atts) {
+    if (!is_user_logged_in())
+        return '';
+
+    $atts = shortcode_atts([
+        'size' => 96,
+        'class' => 'el-user-avatar',
+        'alt' => 'Profile picture',
+    ], $atts);
+
+    $user_id = get_current_user_id();
+
+    // WP 6.2+ local profile picture meta (attachment ID)
+    $attachment_id = (int) get_user_meta($user_id, 'profile_picture', true);
+
+    if ($attachment_id) {
+        return wp_get_attachment_image($attachment_id, 'thumbnail', false, [
+            'class' => esc_attr($atts['class']),
+            'alt' => esc_attr($atts['alt']),
+        ]);
+    }
+
+    // Fallback (uses WP profile picture / gravatar behavior)
+    return get_avatar($user_id, (int) $atts['size'], '', $atts['alt'], [
+        'class' => esc_attr($atts['class']),
+    ]);
+});
