@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const G = {
         // DOM Elements
         showcase: wrapper.querySelector('#productShowcase'),
-        dotsContainer: wrapper.querySelector('#dotsContainer'),
         navArrows: wrapper.querySelectorAll('.nav-arrow'),
 
         // Carousel State
@@ -172,28 +171,6 @@ document.addEventListener('DOMContentLoaded', function () {
             x: G.POSITIONS[entranceSlotIndex],
             opacity: 1
         }, 0);
-        
-        updateDots();
-    }
-
-    function createDots() {
-        if (!G.dotsContainer) return;
-        G.dotsContainer.innerHTML = '';
-        for (let i = 0; i < products.length; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => goToSlide(i));
-            G.dotsContainer.appendChild(dot);
-        }
-        updateDots();
-    }
-
-    function updateDots() {
-        if (!G.dotsContainer) return;
-        const dots = G.dotsContainer.children;
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].classList.toggle('active', i === G.currentIndex);
-        }
     }
 
     function slide(direction) {
@@ -205,14 +182,12 @@ document.addEventListener('DOMContentLoaded', function () {
         G.currentIndex = index;
         G.showcase.innerHTML = '';
         renderCards();
-        updateDots();
     }
 
     function init() {
         if (!G.showcase) return;
         calculatePositions();
         renderCards(true);
-        createDots();
 
         G.navArrows.forEach(arrow => {
             const direction = arrow.classList.contains('nav-arrow-left') ? -1 : 1;
