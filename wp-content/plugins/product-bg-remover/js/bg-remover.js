@@ -313,9 +313,20 @@
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 img.crossOrigin = 'Anonymous';
+
                 img.onload = () => resolve(img);
-                img.onerror = () => reject(new Error('Failed to load image'));
-                img.src = url;
+                img.onerror = (error) => {
+                    console.error('Image load error:', error);
+                    // Try without CORS as fallback
+                    const img2 = new Image();
+                    img2.onload = () => resolve(img2);
+                    img2.onerror = () => reject(new Error('Failed to load image. Please ensure the image is accessible.'));
+                    img2.src = url;
+                };
+
+                // Add timestamp to avoid cache issues
+                const separator = url.includes('?') ? '&' : '?';
+                img.src = url + separator + '_t=' + Date.now();
             });
         }
 
@@ -366,10 +377,12 @@
         uploadImage(blob, originalId) {
             return new Promise((resolve, reject) => {
                 const formData = new FormData();
-                formData.append('action', 'upload-attachment');
-                formData.append('async-upload', blob, 'bg-removed.png');
-                formData.append('name', 'bg-removed.png');
-                formData.append('_wpnonce', $('#_wpnonce').val() || '');
+                const filename = 'bg-removed-' + Date.now() + '.png';
+
+                formData.append('action', 'upload_bg_removed_image');
+                formData.append('nonce', bgRemoverSettings.nonce);
+                formData.append('file', blob, filename);
+                formData.append('original_id', originalId);
 
                 $.ajax({
                     url: bgRemoverSettings.ajaxUrl,
@@ -378,13 +391,16 @@
                     processData: false,
                     contentType: false,
                     success: (response) => {
-                        if (response.success && response.data.id) {
-                            resolve(response.data.id);
+                        if (response.success && response.data.attachment_id) {
+                            resolve(response.data.attachment_id);
                         } else {
-                            reject(new Error('Upload failed'));
+                            reject(new Error(response.data?.message || 'Upload failed'));
                         }
                     },
-                    error: () => reject(new Error('Upload error'))
+                    error: (xhr) => {
+                        console.error('Upload error:', xhr);
+                        reject(new Error('Upload error: ' + xhr.statusText));
+                    }
                 });
             });
         }
