@@ -328,3 +328,10 @@ register_activation_hook(__FILE__, function () {
     add_option('pbr_feather', 1);
     add_option('pbr_output_quality', 0.8);
 });
+
+/**
+ * Deactivation hook
+ */
+register_deactivation_hook(__FILE__, function () {
+    // Clean up if needed
+});
