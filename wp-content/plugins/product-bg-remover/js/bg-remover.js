@@ -72,8 +72,13 @@
                 // Check if already processed
                 const existingCheck = await this.checkExistingProcessed(fileHash);
                 if (existingCheck.exists) {
-                    this.showNotification('Using existing processed image', 'success');
-                    this.replaceImage(attachmentId, existingCheck.url);
+                    this.showNotification('This image was already processed!', 'success');
+                    // Just refresh to show the existing processed image
+                    setTimeout(() => {
+                        if (window.location.href.indexOf('upload.php') > -1) {
+                            window.location.reload();
+                        }
+                    }, 1500);
                     return;
                 }
 
@@ -91,10 +96,17 @@
 
                 this.showNotification('Background removed successfully!', 'success');
 
-                // Refresh media library
+                // Refresh media library if it's open
                 setTimeout(() => {
-                    if (wp.media.frame) {
-                        wp.media.frame.content.get().collection.props.set({ignore: (+ new Date())});
+                    if (wp.media && wp.media.frame && wp.media.frame.content) {
+                        const view = wp.media.frame.content.get();
+                        if (view && view.collection && view.collection.props) {
+                            view.collection.props.set({ignore: (+ new Date())});
+                        }
+                    }
+                    // Also reload the page if we're on the upload.php page
+                    if (window.location.href.indexOf('upload.php') > -1) {
+                        window.location.reload();
                     }
                 }, 1000);
 
@@ -450,15 +462,6 @@
                         $(this).remove();
                     });
                 }, 3000);
-            }
-        }
-
-        /**
-         * Replace image in media library
-         */
-        replaceImage(oldId, newUrl) {
-            if (wp.media.frame) {
-                wp.media.frame.content.get().collection.props.set({ignore: (+ new Date())});
             }
         }
     }

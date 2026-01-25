@@ -27,6 +27,25 @@ class Client_Side_BG_Remover {
         add_action('wp_ajax_upload_bg_removed_image', array($this, 'upload_bg_removed_image'));
         add_action('admin_menu', array($this, 'add_settings_page'));
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), array($this, 'add_settings_link'));
+
+        // Fix for upload directory
+        add_filter('upload_dir', array($this, 'fix_upload_dir'));
+    }
+
+    /**
+     * Fix upload directory to use correct date
+     */
+    public function fix_upload_dir($upload) {
+        // Only fix for our plugin's uploads
+        if (isset($_POST['action']) && $_POST['action'] === 'upload_bg_removed_image') {
+            $current_date = current_time('mysql');
+            $time = strtotime($current_date);
+
+            $upload['path'] = str_replace($upload['subdir'], '/' . date('Y/m', $time), $upload['path']);
+            $upload['url'] = str_replace($upload['subdir'], '/' . date('Y/m', $time), $upload['url']);
+            $upload['subdir'] = '/' . date('Y/m', $time);
+        }
+        return $upload;
     }
 
     /**
@@ -218,19 +237,31 @@ class Client_Side_BG_Remover {
         $file = $_FILES['file'];
         $upload_overrides = array(
             'test_form' => false,
-            'test_type' => false
+            'test_type' => false,
+            'test_size' => false
         );
 
         // Move uploaded file
         $movefile = wp_handle_upload($file, $upload_overrides);
 
         if ($movefile && !isset($movefile['error'])) {
+            // Get original image ID if provided
+            $original_id = isset($_POST['original_id']) ? intval($_POST['original_id']) : 0;
+
             // Create attachment
+            $filename = pathinfo($movefile['file'], PATHINFO_FILENAME);
+            if ($original_id) {
+                $original_title = get_the_title($original_id);
+                $filename = $original_title ? $original_title . '-bg-removed' : $filename;
+            }
+
             $attachment = array(
                 'post_mime_type' => $movefile['type'],
-                'post_title' => sanitize_file_name(pathinfo($movefile['file'], PATHINFO_FILENAME)),
+                'post_title' => sanitize_text_field($filename),
                 'post_content' => '',
-                'post_status' => 'inherit'
+                'post_status' => 'inherit',
+                'post_date' => current_time('mysql'),
+                'post_date_gmt' => current_time('mysql', 1)
             );
 
             $attachment_id = wp_insert_attachment($attachment, $movefile['file']);
@@ -240,15 +271,20 @@ class Client_Side_BG_Remover {
                 $attachment_data = wp_generate_attachment_metadata($attachment_id, $movefile['file']);
                 wp_update_attachment_metadata($attachment_id, $attachment_data);
 
+                // Link to original if provided
+                if ($original_id) {
+                    update_post_meta($attachment_id, '_bg_removed_from', $original_id);
+                }
+
                 wp_send_json_success(array(
                     'attachment_id' => $attachment_id,
                     'url' => wp_get_attachment_url($attachment_id)
                 ));
             } else {
-                wp_send_json_error(array('message' => 'Failed to create attachment'));
+                wp_send_json_error(array('message' => 'Failed to create attachment: ' . $attachment_id->get_error_message()));
             }
         } else {
-            wp_send_json_error(array('message' => $movefile['error'] ?? 'Upload failed'));
+            wp_send_json_error(array('message' => isset($movefile['error']) ? $movefile['error'] : 'Upload failed'));
         }
     }
 
