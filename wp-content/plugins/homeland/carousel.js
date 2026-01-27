@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
         isAnimating: false,
 
         // Animation Parameters
-        ANIM_DURATION: 0.6,
-        EASE_TYPE: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        ANIM_DURATION: 0.45, // Slightly faster for responsiveness
+        EASE_TYPE: 'power2.out', // Snappier ease for continuous clicking
 
         // Card Layout Parameters
         CARD_WIDTH: 290,
@@ -72,11 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function createProductCard(product, index, position, scale, zIndex) {
         const hasLink = product.link && product.link !== '#';
         const cardTag = hasLink ? 'a' : 'div';
-        const cardAttrs = hasLink ? `href="${product.link}"` : '';
 
         const card = document.createElement(cardTag);
         if (hasLink) card.href = product.link;
-        card.className = 'card-wrapper'; // Outer wrapper for positioning
+        card.className = 'card-wrapper';
 
         card.innerHTML = `
             <div class="card" data-index="${index}">
@@ -125,10 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- ANIMATION CONTROLS ---
 
     function slide(direction) {
+        // We still check isAnimating to prevent DOM collision, 
+        // but we'll reset it faster and won't disable buttons.
         if (G.isAnimating || products.length < 5) return;
         G.isAnimating = true;
-
-        G.navArrows.forEach(arrow => arrow.disabled = true);
 
         G.currentIndex = getWrappedIndex(G.currentIndex + direction);
 
@@ -139,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 G.showcase.innerHTML = '';
                 renderInitialSet();
                 G.isAnimating = false;
-                G.navArrows.forEach(arrow => arrow.disabled = false);
             }
         });
 
@@ -170,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 timeline.to(card, {
                     x: exitPosition,
                     opacity: 0,
-                    scale: G.SCALES.small * 0.9,
+                    scale: G.SCALES.small * 0.8,
                     zIndex: G.Z_INDICES.exit
                 }, 0);
             } else {
@@ -197,8 +195,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         G.navArrows.forEach(arrow => {
             arrow.addEventListener('click', function () {
-                const direction = this.classList.contains('nav-arrow-left') ? -1 : 1;
-                slide(direction);
+                // Direction Inversed logic: 
+                // In RTL, "nav-arrow-left" is usually the 2nd one in DOM/Visual order.
+                // We'll map them literally to their names to ensure Left = Scroll Left, Right = Scroll Right.
+                const isLeft = this.classList.contains('nav-arrow-left');
+                // Flip previous logic: -1 for left, 1 for right
+                slide(isLeft ? -1 : 1);
             });
         });
 
@@ -207,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
             window.resizeTimer = setTimeout(() => {
                 calculatePositions();
                 renderInitialSet();
-            }, 150);
+            }, 100);
         });
     }
 

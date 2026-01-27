@@ -3,6 +3,8 @@
 .homeland-carousel-wrapper {
     direction: rtl;
     width: 100%;
+    overflow-x: clip;
+    /* Fix for horizontal scroll on hover */
 }
 
 .homeland-carousel-wrapper .slider-container {
