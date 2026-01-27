@@ -117,8 +117,8 @@ function homeland_enqueue_carousel_assets()
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
 
     // Custom CSS and JS
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'carousel.css', array(), '1.0.2');
-    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'carousel.js', array('gsap-cdn'), '1.0.2', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'carousel.css', array(), '1.0.3');
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'carousel.js', array('gsap-cdn'), '1.0.3', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_carousel_assets');
 

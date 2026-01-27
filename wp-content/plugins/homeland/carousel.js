@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
         isAnimating: false,
 
         // Animation Parameters
-        ANIM_DURATION: 0.45, // Slightly faster for responsiveness
-        EASE_TYPE: 'power2.out', // Snappier ease for continuous clicking
+        ANIM_DURATION: 0.35, // Snappy animation
+        EASE_TYPE: 'power2.inOut',
 
         // Card Layout Parameters
         CARD_WIDTH: 290,
@@ -124,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- ANIMATION CONTROLS ---
 
     function slide(direction) {
-        // We still check isAnimating to prevent DOM collision, 
-        // but we'll reset it faster and won't disable buttons.
+        // Reduced lock time for better responsiveness
         if (G.isAnimating || products.length < 5) return;
         G.isAnimating = true;
 
@@ -144,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentCards = Array.from(G.showcase.children);
         const sizePattern = ['small', 'medium', 'large', 'medium', 'small'];
 
-        // 1. Prepare New Card (Entrance)
         const newCardIndex = getWrappedIndex(G.currentIndex + (direction === 1 ? 2 : -2));
         const entranceSlot = direction === 1 ? 4 : 0;
         const entranceStartPosition = G.POSITIONS[entranceSlot] + (direction * (G.CARD_WIDTH * G.SCALES.small + G.GAP));
@@ -159,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
         gsap.set(newCard, { opacity: 0 });
         G.showcase.appendChild(newCard);
 
-        // 2. Animate Existing Cards
         currentCards.forEach((card, i) => {
             const targetSlot = i - direction;
 
@@ -180,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // 3. Animate New Card in
         timeline.to(newCard, {
             x: G.POSITIONS[entranceSlot],
             opacity: 1
@@ -195,12 +191,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         G.navArrows.forEach(arrow => {
             arrow.addEventListener('click', function () {
-                // Direction Inversed logic: 
-                // In RTL, "nav-arrow-left" is usually the 2nd one in DOM/Visual order.
-                // We'll map them literally to their names to ensure Left = Scroll Left, Right = Scroll Right.
                 const isLeft = this.classList.contains('nav-arrow-left');
-                // Flip previous logic: -1 for left, 1 for right
-                slide(isLeft ? -1 : 1);
+                // RIGHT arrow (not Left) should scroll content to the RIGHT.
+                // Scroll Right means direction = -1.
+                // Scroll Left means direction = 1.
+                slide(isLeft ? 1 : -1);
             });
         });
 
