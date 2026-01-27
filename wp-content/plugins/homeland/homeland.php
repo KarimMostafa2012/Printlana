@@ -118,7 +118,7 @@ function homeland_enqueue_carousel_assets()
 
     // Custom CSS and JS
     wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'carousel.css', array(), '1.0.5');
-    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'carousel.js', array('gsap-cdn'), '1.0.5', true);
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'carousel.js', array('gsap-cdn'), '1.0.6', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_carousel_assets');
 

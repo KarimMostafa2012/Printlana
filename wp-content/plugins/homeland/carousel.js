@@ -182,6 +182,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 G.currentIndex = getWrappedIndex(G.currentIndex + direction);
                 syncCarousel(direction);
             });
+
+            // Prevent focus state from persisting after click
+            arrow.addEventListener('mouseup', function () {
+                this.blur();
+            });
+            arrow.addEventListener('mouseleave', function () {
+                this.blur();
+            });
         });
 
         window.addEventListener('resize', () => {
