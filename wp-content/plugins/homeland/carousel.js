@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Carousel State
         currentIndex: 0,
         isAnimating: false,
+        moveQueue: 0, // Queue for multiple rapid clicks
 
         // Animation Parameters
-        ANIM_DURATION: 0.35, // Snappy animation
+        ANIM_DURATION: 0.3, // Even snappier for queue processing
         EASE_TYPE: 'power2.inOut',
 
         // Card Layout Parameters
@@ -123,9 +124,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- ANIMATION CONTROLS ---
 
-    function slide(direction) {
-        // Reduced lock time for better responsiveness
-        if (G.isAnimating || products.length < 5) return;
+    function processQueue() {
+        if (G.isAnimating || G.moveQueue === 0 || products.length < 5) return;
+
+        const direction = Math.sign(G.moveQueue);
+        G.moveQueue -= direction;
+
+        executeSlide(direction);
+    }
+
+    function executeSlide(direction) {
         G.isAnimating = true;
 
         G.currentIndex = getWrappedIndex(G.currentIndex + direction);
@@ -137,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 G.showcase.innerHTML = '';
                 renderInitialSet();
                 G.isAnimating = false;
+                processQueue(); // Check for more moves
             }
         });
 
@@ -192,10 +201,13 @@ document.addEventListener('DOMContentLoaded', function () {
         G.navArrows.forEach(arrow => {
             arrow.addEventListener('click', function () {
                 const isLeft = this.classList.contains('nav-arrow-left');
-                // RIGHT arrow (not Left) should scroll content to the RIGHT.
-                // Scroll Right means direction = -1.
-                // Scroll Left means direction = 1.
-                slide(isLeft ? 1 : -1);
+                // Direction Logic (v1.0.3 verified): 
+                // Left arrow -> content moves Left (reveals right) -> direction 1.
+                // Right arrow -> content moves Right (reveals left) -> direction -1.
+                const direction = isLeft ? 1 : -1;
+
+                G.moveQueue += direction;
+                processQueue();
             });
         });
 
