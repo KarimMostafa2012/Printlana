@@ -3,11 +3,8 @@
 namespace WCML\Importer;
 
 use WPML\LIB\WP\Hooks;
-
 use function WPML\FP\spreadArgs;
 use function WCML\functions\getId;
-use function WCML\functions\getWooCommerceWpml;
-
 class Products implements \IWPML_Backend_Action {
 
 	public function add_hooks() {

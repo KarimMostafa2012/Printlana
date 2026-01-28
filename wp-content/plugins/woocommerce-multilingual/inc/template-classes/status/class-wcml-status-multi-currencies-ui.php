@@ -5,8 +5,6 @@ class WCML_Status_Multi_Currencies_UI extends WCML_Templates_Factory {
 	private $woocommerce_wpml;
 
 	/**
-	 * WCML_Status_Multi_Currencies_UI constructor.
-	 *
 	 * @param woocommerce_wpml $woocommerce_wpml
 	 */
 	public function __construct( $woocommerce_wpml ) {
@@ -18,7 +16,6 @@ class WCML_Status_Multi_Currencies_UI extends WCML_Templates_Factory {
 
 	public function get_model() {
 
-		$sec_currencies       = [];
 		$sec_currencies_codes = [];
 
 		if ( $this->woocommerce_wpml->settings['enable_multi_currency'] == WCML_MULTI_CURRENCIES_INDEPENDENT ) {

@@ -197,7 +197,6 @@ namespace SW_WAPF_PRO\Includes\Classes
             	'data-product-id'           => $product->get_id(),
 	            'data-product-type'         => $product->get_type() === 'variation' ? 'variable' : $product->get_type(),
 	            'data-product-price'        => apply_filters('wapf/pricing/product', wc_get_price_to_display($product), $product), 
-	            'data-product-price-net'    => apply_filters('wapf/pricing/product_net', wc_get_price_to_display($product), $product), 
                 'data-tax'                  => wc_get_price_to_display( $product, ['qty' => 1, 'price' => 1] ),
                 'data-tax-factor'           => Helper::get_tax_multiplier( $product ), 
             ], $product, $field_groups );
@@ -270,7 +269,7 @@ namespace SW_WAPF_PRO\Includes\Classes
 
         public static function field_group( $product, FieldGroup $field_group, $cart_item_fields = [] ) {
 
-            if( empty( $field_group ) || ( empty( $field_group->fields ) && empty( $field_group->variables ) ) ) {
+            if( empty( $field_group->fields ) && empty( $field_group->variables ) ) {
                 return '';
             }
 
@@ -426,16 +425,20 @@ namespace SW_WAPF_PRO\Includes\Classes
             return apply_filters('wapf/html/field_description', $field_description, $field);
         }
 
-        public static function section_container_classes(Field $field) {
-	        $extra_classes = apply_filters('wapf/section_classes/' . $field->id, []);
+        public static function section_container_classes( Field $field ): string {
+
+            	        $extra_classes = apply_filters( 'wapf/section_classes/' . $field->id, [] ); 
+            $extra_classes = apply_filters( 'wapf/html/section_container_classes', $extra_classes, $field ); 
 
 	        $classes = [ 'wapf-section', 'field-' . $field->id ];
 
-	        if(!empty($field->class))
-		        $classes[] = $field->class;
+	        if( ! empty( $field->class ) ) {
+                $classes[] = $field->class;
+            }
 
-	        if($field->has_conditionals())
-	        	$classes[] = 'wapf-hide has-conditions';
+	        if( $field->has_conditionals() ) {
+                $classes[] = 'wapf-hide has-conditions';
+            }
 
 	        $clone_type = $field->get_clone_type();
 	        if( ! empty( $clone_type ) ) {
@@ -447,39 +450,42 @@ namespace SW_WAPF_PRO\Includes\Classes
                 $classes[] = 'has-parent-repeat';
             }
 
-	        return implode(' ', array_merge(array_map('sanitize_html_class', $extra_classes), $classes));
-        }
+	        return implode( ' ', array_merge( array_map( 'sanitize_html_class', $extra_classes ), $classes ) );
 
-        public static function field_container_classes(Field $field, $product) {
+                    }
+
+        public static function field_container_classes( Field $field, $product ): string {
 
             $extra_classes = apply_filters( 'wapf/html/field_container_classes', [], $field );
-            $classes = ['wapf-field-container','wapf-field-' . $field->type, 'field-' . $field->id];
+            $classes = [ 'wapf-field-container', 'wapf-field-' . $field->type, 'field-' . $field->id ];
 
-            if(!empty($field->class))
+            if( ! empty( $field->class ) ) {
                 $classes[] = $field->class;
-
-            if( $field->required )
-                $classes[] = 'wapf-required';
-
-            if( $field->has_conditionals() )
-                $classes[] = 'wapf-hide';
-
-            if( ($field->type === 'select' && $field->pricing_enabled() ) || ( ! $field->is( 'multi_choice' ) && $field->pricing_enabled() ) ) {
-                $classes[] = 'has-pricing';
-	            Cache::set( 'pricing_' . $product->get_id(), true );
-            } else if( $field->type === 'calc' && isset( $field->options['calc_type'] ) && $field->options['calc_type'] === 'cost' ) {
-                $classes[] = 'has-pricing';
-                Cache::set( 'pricing_' . $product->get_id(), true );
             }
 
-	        if( isset( $field->options['min_choices'] ) || isset( $field->options['max_choices'] ) )
-	            $classes[] = 'has-minmax';
+            if( $field->required ) {
+                $classes[] = 'wapf-required';
+            }
 
-	        if( ! empty($field->conditionals ) ) {
-		        $classes[] = 'has-conditions';
-	        }
+            if( $field->has_conditionals() ) {
+                $classes[] = 'wapf-hide has-conditions';
+            }
 
-	        $clone_type = $field->get_clone_type();
+            if( ( $field->type === 'select' && $field->pricing_enabled() ) || ( ! $field->is( 'multi_choice' ) && $field->pricing_enabled() ) ) {
+                $classes[] = 'has-pricing';
+	            Cache::set( 'pricing_' . $product->get_id(), true );
+            } else if( $field->type === 'calc' ) {
+                if( isset( $field->options['calc_type'] ) && $field->options['calc_type'] === 'cost' ) {
+                    $classes[] = 'has-pricing';
+                    Cache::set( 'pricing_' . $product->get_id(), true );
+                }
+            }
+
+	        if( isset( $field->options['min_choices'] ) || isset( $field->options['max_choices'] ) ) {
+                $classes[] = 'has-minmax';
+            }
+
+            	        $clone_type = $field->get_clone_type();
 	        if( ! empty( $clone_type ) ) {
 	        	$classes[] = 'has-repeat';
 	        }
@@ -490,16 +496,12 @@ namespace SW_WAPF_PRO\Includes\Classes
             }
 
             return implode( ' ', array_merge( array_map( 'sanitize_html_class', $extra_classes ), $classes ) );
-        }
 
-        public static function field_container_attributes(Field $field){
+                    }
 
-            $attributes = ['for' => $field->id];
+                public static function field_container_attributes( Field $field, array $attributes = [] ): string {
 
-	        if( ! empty( $field->conditionals ) ) {
-		        $dependencies = Util::to_html_attribute_string( $field->conditionals );
-		        $attributes['data-wapf-d'] = $dependencies;
-	        }
+                        $attributes[ 'for' ] = $field->id;
 
 	        $clone_type = $field->get_clone_type();
 
@@ -517,10 +519,10 @@ namespace SW_WAPF_PRO\Includes\Classes
 
             $attributes = apply_filters( 'wapf/html/field_container_attributes', $attributes, $field );
 
-            return Enumerable::from($attributes)->join(function($value,$key) {
-                if($value)
-                    return sanitize_text_field($key) . '="' . esc_attr($value) .'"';
-                else return sanitize_text_field($key);
+            return Enumerable::from( $attributes )->join( function( $value, $key ) {
+                if( $value )
+                    return sanitize_text_field( $key ) . '="' . esc_attr( $value ) .'"';
+                else return sanitize_text_field( $key );
             },' ');
 
         }
@@ -762,7 +764,7 @@ namespace SW_WAPF_PRO\Includes\Classes
 
         }
 
-	    public static function swatch_tooltip($option, Field $field, $product) {
+	    public static function swatch_tooltip($option, Field $field, $product): string {
 
             $pricing_hint = self::frontend_option_pricing_hint($option, $field, $product);
 
@@ -774,7 +776,7 @@ namespace SW_WAPF_PRO\Includes\Classes
 
 	    }
 
-	    public static function swatch_label(Field $field,$image_swatch_option,$product, $default = 'default') {
+	    public static function swatch_label(Field $field,$image_swatch_option,$product, $default = 'default'): string {
 
             $label_position = $field->options[ 'label_pos' ] ?? $default;
 
@@ -842,7 +844,7 @@ namespace SW_WAPF_PRO\Includes\Classes
 
 	    #endregion
 
-	    public static function get_swatch_image_html( $field, $product, $choice ) {
+	    public static function get_swatch_image_html( $field, $product, $choice ): string {
 
             $desired_size = apply_filters( 'wapf/html/image_swatch_size', 'medium', $field, $product, $choice );
 

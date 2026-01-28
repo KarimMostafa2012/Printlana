@@ -4,6 +4,268 @@
  */
 $changelog = [
     [
+        'version'  => 'Version 4.2.0',
+        'released' => '2025-11-24',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Vendors can now add their TikTok profile in their social settings to connect with more customers.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Introduced a weekly email digest for "New Product Added" notifications, reducing email clutter by sending customers a single, clean summary of updates from their followed stores.',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => 'Redesigned the Admin\'s Abuse Report page for a cleaner and more intuitive user experience.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Modernized the Admin\'s Subscription List page, making it faster and easier to manage subscriptions.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Updated the Announcements section in the Admin Panel with a fresh, user-friendly layout.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Redesigned the Wholesale management section in the Admin Panel for improved usability.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Improved the Product Advertisement section in the Admin Panel with a modern and intuitive design.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Revamped the Admin\'s Refunds page with a modern UI for a smoother workflow.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Upgraded the Seller Badge management pages (list, create, and edit) with a modern design for an improved user experience.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Modernized the Vendor Store Categories UI in the Admin Dashboard for better navigation and management.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Redesigned the License page UI in the Admin Dashboard for enhanced clarity and ease of use.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Integrated RMA (Return Merchandise Authorization) data with the WooCommerce Store API for better developer access.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Ensured full compatibility for Pro features with the new vendor full-width dashboard layout.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Strengthened security by adding authorization checks to the wholesale customer registration process as a security patch.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Fixed a map rendering issue in Live Search results when the \'Replace Current Content\' option was enabled.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolved an issue where the \'Place Order\' button appeared incorrectly while the PayPal Smart Button was loading.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.1.4',
+        'released' => '2025-11-12',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Vendors can now set an order preparation "buffer time" in hours for more precise delivery scheduling',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => 'Redesigned the Admin\'s Vendor Verification page with a modern look, making it easier and faster to manage new vendor applications.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'The Vendor Support module is now available on all subscription plans, allowing more vendors to connect directly with admin for any problem.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Wrapped the store review title and content fields with `Tooltip` to display the full text on hover. Improved text wrapping and line clamping for better readability and user experience.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Improved the layout and button consistency on the manual order creation pop-up for a more intuitive experience.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolved an issue where renewal orders were not being created correctly for vendor subscriptions, ensuring billing cycles now process reliably.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Vendors can now successfully purchase product advertisements even if the admin has not connected their Stripe account.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Corrected an issue where images were not displaying correctly in the "Image" choice type for Product Add-ons.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'The "Full day" option in the store time settings now works correctly, ensuring accurate store availability.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'The vendor dashboard now displays the correct subscription status message after changing plans.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'All Products" option is now displayed correctly when editing Product Add-ons.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolved an issue that prevented admins from uploading product images while Dokan Pro was active.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.1.3',
+        'released' => '2025-10-28',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Redesigned the Store Reviews section in the Admin Panel for a more intuitive and user-friendly layout.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Redesigned the distance rate shipping with modern UI for a better user experience',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => "Load login modal on the single store page when a guest user clicks on the 'Chat Now' button",
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Admin Dashboard vendor list UI with Modern Design and Improved User Experience.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Updating a coupon’s description now also updates legacy content fields for better integration and display compatibility.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => '0% discount is no longer flagged as an error when free shipping is enabled on vendor coupons.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Enable status selection for warranty request based on current status',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.1.2',
+        'released' => '2025-10-16',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Introduced Vendor Support Module to establish a dedicated, centralized system for Vendor-to-Admin communication, issue discussion and track via ticket system.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Added Auction Anti-Sniping functionality with configurable time extension settings, accessible directly from the Vendor Dashboard for improved auction fairness.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Resolved an issue ensuring that Admin-only subscription packages remain correctly hidden from the vendor dashboard when the WooCommerce Simple Auctions plugin is active.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Corrected a problem where booking products were not properly displayed for selection on the coupon creation/update forms within the vendor dashboard.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.1.1',
+        'released' => '2025-10-09',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Introduced Dokan Paystack, a dedicated payment gateway designed to unlock the African market by enabling seamless customer payments, automated commission handling, and direct vendor withdrawals.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Store the gateway fee in the dokan_vendor_balance table as a debit entry, with the gateway provider reference.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Redesigned Store Support interface using React for real-time updates, advanced filtering (customer, date range, keyword), and improved performance. Replaced full page reloads with a responsive, modern user experience.',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => 'Capture PayPal standard button payment on order processed.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Display the vendor gateway fee in the vendor dashboard report statement',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Correctly calculate the vendor balance after a refund, considering the gateway fee.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.1.0',
+        'released' => '2025-09-30',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'AI-powered Product Image Enhancement for Vendors with AI Engines such as Gemini (Supported Model: 2.5 Flash Image aka Nano Banana) and BRIA AI (Supported Model: BRIA 2.3 Image-Prompt).',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => 'Razorpay vendor registration to use v2 API with enhanced address validation.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Automatically update product geolocation data when vendor store location changes.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
         'version'  => 'Version 4.0.10',
         'released' => '2025-09-26',
         'changes'  => [

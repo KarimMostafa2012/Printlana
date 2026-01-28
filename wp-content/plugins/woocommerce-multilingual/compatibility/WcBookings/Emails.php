@@ -181,8 +181,9 @@ class Emails implements \IWPML_Action {
 			} else {
 				$emailObject->enabled = $this->initialStates[ $class ];
 			}
-			/* @phpstan-ignore-next-line */
-			$emailObject->trigger( $bookingId );
+			if ( method_exists( $emailObject, 'trigger' ) ) {
+				$emailObject->trigger( $bookingId );
+			}
 			$emailObject->enabled = 'no';
 		}
 	}

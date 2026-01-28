@@ -18,9 +18,10 @@
 
         function get_div_id() {
             var div_id = dokanLiveSearch.themeTags[dokanLiveSearch.currentTheme];
-
             if ( div_id === undefined ) {
-                return '#content';
+                return $( '#content' ).find( 'ul.products' ).length
+                    ? 'ul.products'
+                    : '#content';
             }
 
             return div_id;
@@ -155,9 +156,16 @@
                 $('.dokan-ajax-search-category').val( selectfield );
                 $(get_div_id()).html(dom);
 
+                const p_selector = 'nav.woocommerce-pagination, .woocommerce-pagination';
+                const p_html = $(resp).find(p_selector).html() || null;
+                p_html ? $( p_selector ).html( p_html ).css({ 'opacity': '1' }) : $( p_selector ).css({ 'opacity': '0' });
+                const count_selector = '.woocommerce-result-count';
+                const count_html = $(resp).find(count_selector).html() || null;
+                count_html ? $( count_selector ).html( count_html ).css({ 'opacity': '1' }) : $( count_selector ).css({ 'opacity': '0' });
                 $('#loading').hide();
                 $('.dokan-geolocation-filters-loading').hide();
                 $(get_div_id()).css({'opacity':1,'position':'auto'});
+                $('#content').css({'opacity':'1'});
 
                 $('.woocommerce-ordering').on('change','.orderby',function(e){
                     e.preventDefault();

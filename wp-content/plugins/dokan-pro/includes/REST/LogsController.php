@@ -277,6 +277,13 @@ class LogsController extends DokanBaseAdminController {
             $gateway_fee_paid_by = $order->get_meta( 'dokan_gateway_fee_paid_by', true );
             $gateway_fee      = (float) $order->get_meta( 'dokan_gateway_fee' );
 
+            $admin_gateway_fee = (float) $order->get_meta( 'dokan_admin_gateway_fee', true );
+            if ( $admin_gateway_fee > 0 ) {
+                $gateway_fee += $admin_gateway_fee;
+                // if admin and seller both are paying gateway fee then consider it as shared
+                $gateway_fee_paid_by = $gateway_fee_paid_by === 'seller' ? 'shared' : 'admin';
+            }
+
             if ( ! empty( $gateway_fee ) && empty( $gateway_fee_paid_by ) ) {
                 /**
                  * @since 3.7.15 dokan_gateway_fee_paid_by meta key returns empty value if gateway fee is paid admin

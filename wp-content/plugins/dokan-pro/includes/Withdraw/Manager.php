@@ -26,7 +26,8 @@ class Manager {
     public function __construct() {
         if ( is_user_logged_in() ) {
             add_filter( 'dokan_withdraw_methods', [ $this, 'load_withdraw_method' ], 10 );
-            add_filter( 'dokan_settings_fields', [ $this, 'withdraw_disbursement_schedule_settings' ], 40 );
+            add_filter( 'dokan_vendor_payment_withdraw_methods', [ $this, 'add_description_for_skrill_method' ], 10, 2 );
+            add_filter( 'dokan_settings_fields', [ $this, 'withdraw_disbursement_schedule_settings' ], 10 );
             add_action( 'dokan_withdraw_content_after_last_payment_section', [ $this, 'add_withdraw_schedule_section' ], 5 );
             add_action( 'dokan_withdraw_content_after', [ $this, 'add_withdraw_schedule_popup_template' ], 10 );
             add_action( 'dokan_before_saving_settings', [ $this, 'validate_withdraw_schedule_option' ], 30, 2 );
@@ -58,6 +59,7 @@ class Manager {
         add_filter( 'dokan_withdraw_method_settings_title', [ $this, 'get_heading' ], 10, 2 );
         add_filter( 'dokan_withdraw_method_icon', [ $this, 'get_icon' ], 10, 2 );
         add_action( 'dokan_store_profile_saved', [ $this, 'save_skrill_progress' ], 10, 2 );
+        add_action( 'dokan_rest_store_settings_after_update', [ $this, 'save_api_skrill_progress' ], 10, 2 );
         add_filter( 'dokan_payment_settings_required_fields', [ $this, 'map_required_fields' ], 10, 3 );
         add_filter( 'dokan_withdraw_withdrawable_payment_methods', [ $this, 'include_skrill_to_payment_methods' ] );
         add_filter( 'dokan_withdraw_method_additional_info', [ $this, 'mask_custom_withdraw_method' ], 10, 2 );
@@ -948,7 +950,7 @@ class Manager {
      * @return void
      */
     public function process_announcement_schedule( $options ) {
-        list( $methods, $admin_id ) = $options;
+        [ $methods, $admin_id ] = $options;
 
         // @codingStandardsIgnoreStart
         $args = [
@@ -992,7 +994,7 @@ class Manager {
      * @return void
      */
     public function process_schedule_change_announcement_schedule( $options ) {
-        list( $methods, $admin_id ) = $options;
+        [ $methods, $admin_id ] = $options;
 
         // @codingStandardsIgnoreStart
         $args = [
@@ -1277,6 +1279,31 @@ class Manager {
     }
 
     /**
+     * Save Skrill data.
+     *
+     * @param \WeDevs\Dokan\Vendor\Vendor $store
+     * @param \WP_REST_Request            $request
+     *
+     * @return void
+     */
+    public function save_api_skrill_progress( $store, $request ) {
+        $params = $request->get_params();
+        $dokan_profile_settings = $store->get_meta( 'dokan_profile_settings', true );
+
+        $upcomming_payment = $params['payment'];
+        $saved_payment = $dokan_profile_settings['payment'];
+
+        if ( empty( $upcomming_payment['skrill'] ) ) {
+            return;
+        }
+
+        $saved_payment['skrill'] = $upcomming_payment['skrill'] ?? [];
+        $dokan_profile_settings['payment'] = $saved_payment;
+
+        update_user_meta( $store->get_id(), 'dokan_profile_settings', $dokan_profile_settings );
+    }
+
+    /**
      * Get the Withdrawal method icon
      *
      * @since 3.5.6
@@ -1367,5 +1394,20 @@ class Manager {
         }
 
         return $method_info;
+    }
+
+    /**
+     * Add description.
+     *
+     * @param $methods
+     * @param $gateways
+     *
+     * @return array
+     */
+    public function add_description_for_skrill_method( $methods, $gateways ) {
+        if ( isset( $methods['skrill'] ) ) {
+            $methods['skrill']['description'] = __( 'Accept payments securely online with Skrill.', 'dokan' );
+        }
+        return $methods;
     }
 }

@@ -140,7 +140,7 @@ class ReportStatement {
             AND DATE(balance_date) >= %s
             AND DATE(balance_date) <= %s
             AND ( ( trn_type = 'dokan_orders' AND status IN ('{$status}') )
-            OR trn_type IN ( 'dokan_withdraw', 'dokan_refund' ) )
+            OR trn_type IN ( 'dokan_withdraw', 'dokan_refund', 'gateway_fee' ) )
             ORDER BY balance_date {$limit}",
             $this->statement_data->get_vendor_id(),
             $this->statement_data->get_start_date(),
@@ -205,7 +205,7 @@ class ReportStatement {
             AND DATE(balance_date) >= %s
             AND DATE(balance_date) <= %s
             AND ( ( trn_type = 'dokan_orders' AND status IN ('{$status}') )
-            OR trn_type IN ( 'dokan_withdraw', 'dokan_refund' ) )",
+            OR trn_type IN ( 'dokan_withdraw', 'dokan_refund', 'gateway_fee' ) )",
             $this->statement_data->get_vendor_id(),
             $this->statement_data->get_start_date(),
             $this->statement_data->get_end_date()

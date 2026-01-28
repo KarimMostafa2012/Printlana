@@ -48,7 +48,7 @@ class WCML_WC_Admin_Duplicate_Product {
 		$orig_lang = $this->woocommerce_wpml->products->get_original_product_language( $product_id );
 
 		if ( $orig_id == $product_id ) {
-			$this->sitepress->set_element_language_details( $new_id, $element_type, false, $orig_lang );
+			$this->sitepress->set_element_language_details( $new_id, $element_type, null, $orig_lang );
 			$new_trid    = $this->sitepress->get_element_trid( $new_id, $element_type );
 			$new_orig_id = $new_id;
 		} else {
@@ -58,7 +58,7 @@ class WCML_WC_Admin_Duplicate_Product {
 				$new_orig_id = $this->wc_duplicate_product( $post_to_duplicate );
 
 				do_action( 'wcml_after_duplicate_product', $new_id, $post_to_duplicate );
-				$this->sitepress->set_element_language_details( $new_orig_id, $element_type, false, $orig_lang );
+				$this->sitepress->set_element_language_details( $new_orig_id, $element_type, null, $orig_lang );
 				$new_trid = $this->sitepress->get_element_trid( $new_orig_id, $element_type );
 				if ( get_post_meta( $orig_id, '_icl_lang_duplicate_of' ) ) {
 					update_post_meta( $new_id, '_icl_lang_duplicate_of', $new_orig_id );
@@ -74,7 +74,7 @@ class WCML_WC_Admin_Duplicate_Product {
 		// Set language info for variations.
 		if ( $children_products = get_children( 'post_parent=' . $new_orig_id . '&post_type=product_variation' ) ) {
 			foreach ( $children_products as $child ) {
-				$this->sitepress->set_element_language_details( $child->ID, 'post_product_variation', false, $orig_lang );
+				$this->sitepress->set_element_language_details( $child->ID, 'post_product_variation', null, $orig_lang );
 			}
 		}
 

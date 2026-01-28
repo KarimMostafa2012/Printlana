@@ -28,6 +28,8 @@ class Admin {
 
         // custom fields label for js
         add_filter( 'dokan_admin_localize_script', [ $this, 'add_localized_data' ], 10, 1 );
+        add_filter( 'dokan_admin_dashboard_localize_scripts', [ $this, 'add_localized_data' ], 10, 1 );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_scripts' ] );
     }
 
     /**
@@ -113,6 +115,37 @@ class Admin {
         if ( $enabled_fields['dokan_bank_iban'] ) {
             $bank_iban = isset( $data['bank_iban'] ) ? sanitize_text_field( $data['bank_iban'] ) : '';
             $vendor->update_meta( 'dokan_bank_iban', $bank_iban );
+        }
+    }
+
+    /**
+     * Enqueue admin scripts for vendor single page Eu fields.
+     *
+     * @since 4.1.3
+     *
+     * @return void
+     */
+    public function enqueue_admin_scripts() {
+        $admin_dashboard_file = DOKAN_GERMANIZED_DIR . '/assets/js/vendor-single.asset.php';
+        if ( file_exists( $admin_dashboard_file ) ) {
+            $dashboard_script = require $admin_dashboard_file;
+            $dependencies     = $dashboard_script['dependencies'] ?? [];
+            $version          = $dashboard_script['version'] ?? '';
+
+            wp_enqueue_script(
+                'dokan-admin-dashboard-vendor-single-germanized',
+                DOKAN_GERMANIZED_ASSETS_DIR . '/js/vendor-single.js',
+                $dependencies,
+                $version,
+                true
+            );
+
+            wp_enqueue_style(
+                'dokan-admin-dashboard-vendor-single-germanized',
+                DOKAN_GERMANIZED_ASSETS_DIR . '/js/vendor-single.css',
+                [],
+                $version
+            );
         }
     }
 }

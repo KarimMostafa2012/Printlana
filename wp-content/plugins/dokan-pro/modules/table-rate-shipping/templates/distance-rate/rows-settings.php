@@ -20,7 +20,7 @@
         <th class="cost">
             <?php esc_html_e( 'Base cost', 'dokan' ); ?>
             <i class="fas fa-question-circle tips"
-                data-original-title="<?php esc_attr_e( 'Base cost for rule, exluding tax. Other calculations will be added on top of this cost.', 'dokan' ); ?>"></i>
+                data-original-title="<?php esc_attr_e( 'Base cost for rule, excluding tax. Other calculations will be added on top of this cost.', 'dokan' ); ?>"></i>
         </th>
         <th class="cost">
             <?php esc_html_e( 'Cost Per Distance / Minute', 'dokan' ); ?>

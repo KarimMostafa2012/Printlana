@@ -183,6 +183,7 @@ class Hooks {
             'icon'        => '<i class="fas fa-gift"></i>',
             'url'         => dokan_get_navigation_url( 'coupons' ),
             'pos'         => 55,
+            'icon_name'   => 'CirclePercent',
             'permission'  => 'dokan_view_coupon_menu',
             'react_route' => 'coupons',
         );

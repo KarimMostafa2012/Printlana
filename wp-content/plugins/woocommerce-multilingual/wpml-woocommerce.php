@@ -6,10 +6,10 @@
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
  * Text Domain: woocommerce-multilingual
- * Version: 5.5.2.1
+ * Version: 5.5.3
  * Plugin Slug: woocommerce-multilingual
  * WC requires at least: 3.9
- * WC tested up to: 10.2
+ * WC tested up to: 10.3
  *
  * @package WCML
  * @author  OnTheGoSystems
@@ -23,19 +23,7 @@ if (
 	return;
 }
 
-require_once 'vendor/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-php-version-check.php'; // We cannot use composer here.
-
-$wpml_php_version_check = new WPML_PHP_Version_Check(
-	'5.6',
-	'WPML Multilingual & Multicurrency for WooCommerce',
-	__FILE__,
-	'woocommerce-multilingual'
-);
-if ( ! $wpml_php_version_check->is_ok() ) {
-	return;
-}
-
-define( 'WCML_VERSION', '5.5.2.1' );
+define( 'WCML_VERSION', '5.5.3' );
 define( 'WCML_PLUGIN_PATH', dirname( __FILE__ ) );
 define( 'WCML_PLUGIN_FOLDER', basename( WCML_PLUGIN_PATH ) );
 define( 'WCML_LOCALE_PATH', WCML_PLUGIN_PATH . '/locale' );
@@ -61,6 +49,7 @@ WCML_Locale::load_locale();
 if ( WPML_Core_Version_Check::is_ok( WCML_PLUGIN_PATH . '/wpml-dependencies.json' ) ) {
 	global $woocommerce_wpml;
 
+	/* @phpstan-ignore booleanNot.alwaysTrue */
 	if ( defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE && class_exists( 'SitePress' ) ) {
 		( new WPML_Action_Filter_Loader() )->load( [
 			WCML_Switch_Lang_Request::class,
@@ -80,6 +69,8 @@ if ( WPML_Core_Version_Check::is_ok( WCML_PLUGIN_PATH . '/wpml-dependencies.json
  */
 function wcml_loader() {
 	if ( ! class_exists( 'WooCommerce' ) ) {
+		\WPML\Container\share( \WCML\Container\Config::getSharedClassesWhenWooCommerceIsInactive() );
+
 		return;
 	}
 
@@ -92,8 +83,8 @@ function wcml_loader() {
 		WCML_xDomain_Data::class,
 		'WCML_Privacy_Content_Factory',
 		\WCML\RewriteRules\Hooks::class,
-		\WCML\RewriteRules\ChildMyAccountHooks::class,
 		\WCML\Email\Factory::class,
+		\WCML\Endpoints\Factory::class,
 		\WCML\Block\Convert\Hooks::class,
 		\WCML\CacheInvalidate\Hooks::class,
 		\WCML\MO\Hooks::class,

@@ -1,4 +1,3 @@
-/*! elementor - v3.32.0 - 29-09-2025 */
 "use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["styleguide-app"],{
 

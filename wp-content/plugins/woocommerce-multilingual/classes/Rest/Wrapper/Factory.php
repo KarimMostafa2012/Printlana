@@ -26,10 +26,9 @@ class Factory {
 		 * @var \WPML_Post_Translation $wpml_post_translations
 		 * @var \WPML_Term_Translation $wpml_term_translations
 		 * @var \SitePress             $sitepress
-		 * @var \WPML_Query_Filter     $wpml_query_filter
 		 * @var \wpdb                  $wpdb
 		 */
-		global $woocommerce_wpml, $wpml_post_translations, $wpml_term_translations, $sitepress, $wpml_query_filter, $wpdb;
+		global $woocommerce_wpml, $wpml_post_translations, $wpml_term_translations, $sitepress, $wpdb;
 
 		$isMultiCurrencyOn = wcml_is_multi_currency_on();
 

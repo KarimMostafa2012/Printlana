@@ -2,8 +2,6 @@
 
 namespace WCML\Synchronization;
 
-use function WCML\functions\isCli;
-
 class Manager {
 
 	/** @var \WPML_Post_Translation */
@@ -25,7 +23,7 @@ class Manager {
 	/**
 	 * @param \WP_Post $product
 	 *
-	 * @return \WP_Post
+	 * @return \WP_Post|array|null
 	 */
 	public function getOriginalProduct( $product ) {
 		$originalProduct   = $product;

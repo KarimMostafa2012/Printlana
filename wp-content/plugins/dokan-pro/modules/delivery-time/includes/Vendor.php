@@ -74,10 +74,11 @@ class Vendor {
      */
     public function register_delivery_calender_menu( $urls ) {
         $urls['delivery-time-dashboard'] = [
-            'title'      => __( 'Delivery Time', 'dokan' ),
-            'icon'       => '<i class="far fa-clock"></i>',
-            'url'        => dokan_get_navigation_url( 'delivery-time-dashboard' ),
-            'pos'        => 61,
+            'title'       => esc_html__( 'Delivery Time', 'dokan' ),
+            'icon'        => '<i class="far fa-clock"></i>',
+            'url'         => dokan_get_navigation_url( 'delivery-time-dashboard' ),
+            'pos'         => 61,
+            'icon_name'   => 'Truck',
             'react_route' => 'delivery-time-dashboard',
             'permission'  => 'dokandar',
         ];
@@ -307,6 +308,16 @@ class Vendor {
         $data['time_slot_minutes']            = isset( $_POST['delivery_time_slot'] ) ? sanitize_text_field( wp_unslash( $_POST['delivery_time_slot'] ) ) : '';
         $data['delivery_prep_date']           = isset( $_POST['delivery_prep_date'] ) ? sanitize_text_field( wp_unslash( $_POST['delivery_prep_date'] ) ) : 0;
         $data['enable_delivery_notification'] = isset( $_POST['enable_delivery_notification'] ) ? sanitize_text_field( wp_unslash( $_POST['enable_delivery_notification'] ) ) : 'off';
+
+        // New buffer settings (unit and hours value)
+        $data['delivery_buffer_unit']  = isset( $_POST['delivery_buffer_unit'] ) ? sanitize_text_field( wp_unslash( $_POST['delivery_buffer_unit'] ) ) : 'days';
+        $data['delivery_buffer_value'] = isset( $_POST['delivery_buffer_value'] ) ? absint( wp_unslash( $_POST['delivery_buffer_value'] ) ) : 0;
+
+        // Sanitize buffer unit/value
+        if ( ! in_array( $data['delivery_buffer_unit'], [ 'days', 'hours' ], true ) ) {
+            $data['delivery_buffer_unit'] = 'days';
+        }
+        $data['delivery_buffer_value'] = max( 0, (int) $data['delivery_buffer_value'] );
 
         // Check if delivery day is empty then throw an error msg.
         if ( empty( $data['delivery_day'] ) ) {

@@ -175,9 +175,7 @@ class WCML_Store_Pages {
 				];
 				$page_id   = wp_insert_post( $page_data );
 
-				if ( 'woocommerce_' . $key . '_page_id' ) {
-					update_option( 'woocommerce_' . $key . '_page_id', $page_id );
-				}
+				update_option( 'woocommerce_' . $key . '_page_id', $page_id );
 			}
 
 			unset( $pages[ $key ] );
@@ -250,8 +248,8 @@ class WCML_Store_Pages {
 		) {
 			// do not alter query_object and query_object_id (part 1 of 2)
 			global $wp_query;
-			$queried_object_original    = isset( $wp_query->queried_object ) ? $wp_query->queried_object : null;
-			$queried_object_id_original = isset( $wp_query->queried_object_id ) ? $wp_query->queried_object_id : null;
+			$queried_object_original    = $wp_query->queried_object ?? null;
+			$queried_object_id_original = $wp_query->queried_object_id ?? null;
 
 			$q->set( 'post_type', 'product' );
 			$q->set( 'page_id', '' );
@@ -506,7 +504,6 @@ class WCML_Store_Pages {
 			$store_page_id               = wc_get_page_id( $page );
 			$trid                        = $this->sitepress->get_element_trid( $store_page_id, 'post_page' );
 			$translations                = $this->sitepress->get_element_translations( $trid, 'post_page', true );
-			$pages_in_progress_miss_lang = '';
 			foreach ( $languages as $language ) {
 				if ( ! in_array( $language['code'], $missing_lang_codes ) &&
 					 ( ! isset( $translations[ $language['code'] ] ) || ( ! is_null( $translations[ $language['code'] ]->element_id ) && get_post_status( $translations[ $language['code'] ]->element_id ) !== 'publish' ) ) ) {

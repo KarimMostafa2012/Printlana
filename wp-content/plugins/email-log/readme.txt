@@ -4,7 +4,7 @@ Tags: email, log, log email, resend email, email log
 Requires PHP: 5.6
 Requires at least: 4.0
 Tested up to: 6.8
-Stable tag: 2.61
+Stable tag: 2.62
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,11 +12,11 @@ Log and view all outgoing emails from WordPress. Very useful if you have to debu
 
 == Description ==
 
-Email Log is a WordPress plugin that allows you to easily log and view all emails that were sent from WordPress.
+<a href="https://wpemaillog.com/">Email Log</a> is a WordPress plugin that allows you to easily log and view all emails that were sent from WordPress.
 
 This would be very useful for debugging email related problems in your WordPress site or for storing sent emails for auditing purposes, especially on ecommerce sites that are setup with either WooCommerce or Easy Digital Downloads.
 
-You can perform advanced actions like re-sending email, automatically forwarding emails or export logs with our [premium add-ons](https://wpemaillog.com/store/).
+You can perform advanced actions like re-sending email, automatically forwarding emails, export logs and automatically monitor email deliverability with the <a href="https://wpemaillog.com/">PRO version</a>.
 
 Works with WordPress Multisite as well.
 ### Viewing logged emails
@@ -29,19 +29,15 @@ While viewing the logs, the emails can be filtered or sorted based on the date, 
 
 In the admin interface, all the logged emails can be delete in bulk or can also be selectively deleted based on date, email and subject.
 
-If you want to automatically delete the email logs after some days, then you can use the [Auto Delete Logs](https://wpemaillog.com/addons/auto-delete-logs/) add-on.
+If you want to automatically delete the email logs after some days upgrade to the PRO version.
 
-### Resend email (Pro addon)
+### Resend email (PRO version)
 
-You can [buy the Resend email pro add-on](https://wpemaillog.com/addons/resend-email/),
-which allows you to resend the email directly from the email log.
+Resend the email directly from the email log. You can modify the different fields of the email before resending it.
 
-The add-on allows you to modify the different fields of the email before resending it.
+### More Fields (PRO version)
 
-### More Fields (Pro addon)
-
-You can [buy the More Fields pro add-on](https://wpemaillog.com/addons/more-fields/),
-which shows additional fields in the email log page. The following are the additional fields that are added by this addon.
+Get access to additional fields in the email log page. The following are the additional fields that are added in the pro version.
 
 - From
 - CC
@@ -49,18 +45,17 @@ which shows additional fields in the email log page. The following are the addit
 - Reply To
 - Attachment
 
-### Forward email (Pro addon)
+### Forward email (PRO version)
 
-You can [buy the Forward email pro add-on](https://wpemaillog.com/addons/more-fields/),
-which allows you to send a copy of all the emails send from WordPress to another email address.
+Pro version allows you to send a copy of all the emails send from WordPress to another email address.
 
-The addon allows you to choose whether you want to forward through to, cc or bcc fields.
+You can choose whether you want to forward through to, cc or bcc fields.
 
 This can be extremely useful when you want to debug by analyzing the emails that are sent from WordPress.
 
-### Export email logs (Pro addon)
+### Export email logs (PRO version)
 
-You can buy the [Export Email Logs add-on](https://wpemaillog.com/addons/export-logs/), which allows you to export the email logs as a csv file for further processing or record keeping.
+Export the email logs as a CSV file for further processing or record keeping.
 
 
 ### Documentation
@@ -100,6 +95,11 @@ Meanwhile, I have added a hack to handle this condition in v1.7.3 of my plugin. 
 
 
 == Changelog ==
+= v2.62 – 2025-10-30 =
+- new prices for PRO version
+- minor fixes
+- furthure code cleanup
+
 = v2.61 – 2025-09-08 =
 - System info bug fix
 

@@ -1,0 +1,1226 @@
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*:where(.dokan-layout,.dokan-layout *),
+:where(.dokan-layout,.dokan-layout *)::before,
+:where(.dokan-layout,.dokan-layout *)::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+:where(.dokan-layout,.dokan-layout *)::before,
+:where(.dokan-layout,.dokan-layout *)::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+.dokan-layout {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+.dokan-layout {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr:where(.dokan-layout,.dokan-layout *) {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]):where(.dokan-layout,.dokan-layout *) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1:where(.dokan-layout,.dokan-layout *),
+h2:where(.dokan-layout,.dokan-layout *),
+h3:where(.dokan-layout,.dokan-layout *),
+h4:where(.dokan-layout,.dokan-layout *),
+h5:where(.dokan-layout,.dokan-layout *),
+h6:where(.dokan-layout,.dokan-layout *) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a:where(.dokan-layout,.dokan-layout *) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b:where(.dokan-layout,.dokan-layout *),
+strong:where(.dokan-layout,.dokan-layout *) {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code:where(.dokan-layout,.dokan-layout *),
+kbd:where(.dokan-layout,.dokan-layout *),
+samp:where(.dokan-layout,.dokan-layout *),
+pre:where(.dokan-layout,.dokan-layout *) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small:where(.dokan-layout,.dokan-layout *) {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub:where(.dokan-layout,.dokan-layout *),
+sup:where(.dokan-layout,.dokan-layout *) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub:where(.dokan-layout,.dokan-layout *) {
+  bottom: -0.25em;
+}
+
+sup:where(.dokan-layout,.dokan-layout *) {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table:where(.dokan-layout,.dokan-layout *) {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+input:where(.dokan-layout,.dokan-layout *),
+optgroup:where(.dokan-layout,.dokan-layout *),
+select:where(.dokan-layout,.dokan-layout *),
+textarea:where(.dokan-layout,.dokan-layout *) {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+select:where(.dokan-layout,.dokan-layout *) {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+input:where([type='button']):where(.dokan-layout,.dokan-layout *),
+input:where([type='reset']):where(.dokan-layout,.dokan-layout *),
+input:where([type='submit']):where(.dokan-layout,.dokan-layout *) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring:where(.dokan-layout,.dokan-layout *) {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid:where(.dokan-layout,.dokan-layout *) {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress:where(.dokan-layout,.dokan-layout *) {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-inner-spin-button,
+:where(.dokan-layout,.dokan-layout *) ::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search']:where(.dokan-layout,.dokan-layout *) {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+:where(.dokan-layout,.dokan-layout *) ::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary:where(.dokan-layout,.dokan-layout *) {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote:where(.dokan-layout,.dokan-layout *),
+dl:where(.dokan-layout,.dokan-layout *),
+dd:where(.dokan-layout,.dokan-layout *),
+h1:where(.dokan-layout,.dokan-layout *),
+h2:where(.dokan-layout,.dokan-layout *),
+h3:where(.dokan-layout,.dokan-layout *),
+h4:where(.dokan-layout,.dokan-layout *),
+h5:where(.dokan-layout,.dokan-layout *),
+h6:where(.dokan-layout,.dokan-layout *),
+hr:where(.dokan-layout,.dokan-layout *),
+figure:where(.dokan-layout,.dokan-layout *),
+p:where(.dokan-layout,.dokan-layout *),
+pre:where(.dokan-layout,.dokan-layout *) {
+  margin: 0;
+}
+
+fieldset:where(.dokan-layout,.dokan-layout *) {
+  margin: 0;
+  padding: 0;
+}
+
+legend:where(.dokan-layout,.dokan-layout *) {
+  padding: 0;
+}
+
+ol:where(.dokan-layout,.dokan-layout *),
+ul:where(.dokan-layout,.dokan-layout *),
+menu:where(.dokan-layout,.dokan-layout *) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog:where(.dokan-layout,.dokan-layout *) {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea:where(.dokan-layout,.dokan-layout *) {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+:where(.dokan-layout,.dokan-layout *) input::-moz-placeholder, :where(.dokan-layout,.dokan-layout *) textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+:where(.dokan-layout,.dokan-layout *) input::placeholder,
+:where(.dokan-layout,.dokan-layout *) textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button:where(.dokan-layout,.dokan-layout *),
+[role="button"]:where(.dokan-layout,.dokan-layout *) {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled:where(.dokan-layout,.dokan-layout *) {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img:where(.dokan-layout,.dokan-layout *),
+svg:where(.dokan-layout,.dokan-layout *),
+video:where(.dokan-layout,.dokan-layout *),
+canvas:where(.dokan-layout,.dokan-layout *),
+audio:where(.dokan-layout,.dokan-layout *),
+iframe:where(.dokan-layout,.dokan-layout *),
+embed:where(.dokan-layout,.dokan-layout *),
+object:where(.dokan-layout,.dokan-layout *) {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img:where(.dokan-layout,.dokan-layout *),
+video:where(.dokan-layout,.dokan-layout *) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])):where(.dokan-layout,.dokan-layout *) {
+  display: none;
+}
+
+[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+  border-radius: 0px;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-shadow: 0 0 #0000;
+}
+
+[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #2563eb;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  border-color: #2563eb;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+input::placeholder,textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+::-webkit-date-and-time-value {
+  min-height: 1.5em;
+  text-align: inherit;
+}
+
+::-webkit-datetime-edit {
+  display: inline-flex;
+}
+
+::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+}
+
+[multiple],[size]:where(select:not([size="1"])) {
+  background-image: initial;
+  background-position: initial;
+  background-repeat: unset;
+  background-size: initial;
+  padding-right: 0.75rem;
+  -webkit-print-color-adjust: unset;
+          print-color-adjust: unset;
+}
+
+[type='checkbox'],[type='radio'] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0;
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+  color: #2563eb;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+  --tw-shadow: 0 0 #0000;
+}
+
+[type='checkbox'] {
+  border-radius: 0px;
+}
+
+[type='radio'] {
+  border-radius: 100%;
+}
+
+[type='checkbox']:focus,[type='radio']:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 2px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #2563eb;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+
+[type='checkbox']:checked,[type='radio']:checked {
+  border-color: transparent;
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[type='checkbox']:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e");
+}
+
+@media (forced-colors: active)  {
+
+  [type='checkbox']:checked {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='radio']:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e");
+}
+
+@media (forced-colors: active)  {
+
+  [type='radio']:checked {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+[type='checkbox']:indeterminate {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 16 16%27%3e%3cpath stroke=%27white%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27M4 8h8%27/%3e%3c/svg%3e");
+  border-color: transparent;
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (forced-colors: active)  {
+
+  [type='checkbox']:indeterminate {
+    -webkit-appearance: auto;
+       -moz-appearance: auto;
+            appearance: auto;
+  }
+}
+
+[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+[type='file'] {
+  background: unset;
+  border-color: inherit;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: unset;
+  line-height: inherit;
+}
+
+[type='file']:focus {
+  outline: 1px solid ButtonText;
+  outline: 1px auto -webkit-focus-ring-color;
+}.dokan-layout table:not(.dataviews-view-table),.dokan-layout table:not(.dataviews-view-table) th,.dokan-layout table:not(.dataviews-view-table) td{margin:0;padding:0;border:0;border-spacing:0;border-collapse:collapse;font-size:inherit;font-weight:inherit;text-align:inherit;vertical-align:inherit;box-sizing:border-box}.dokan-layout .visible {
+  visibility: visible;
+}.dokan-layout .absolute {
+  position: absolute;
+}.dokan-layout .relative {
+  position: relative;
+}.dokan-layout .sticky {
+  position: sticky;
+}.dokan-layout .bottom-0 {
+  bottom: 0px;
+}.dokan-layout .left-\[2px\] {
+  left: 2px;
+}.dokan-layout .top-6 {
+  top: 1.5rem;
+}.dokan-layout .z-\[9999\] {
+  z-index: 9999;
+}.dokan-layout .\!m-\[-1px\] {
+  margin: -1px !important;
+}.dokan-layout .m-0 {
+  margin: 0px;
+}.dokan-layout .m-\[10px\] {
+  margin: 10px;
+}.dokan-layout .mb-2 {
+  margin-bottom: 0.5rem;
+}.dokan-layout .mb-3 {
+  margin-bottom: 0.75rem;
+}.dokan-layout .mb-4 {
+  margin-bottom: 1rem;
+}.dokan-layout .mb-6 {
+  margin-bottom: 1.5rem;
+}.dokan-layout .mb-\[10px\] {
+  margin-bottom: 10px;
+}.dokan-layout .mb-\[13px\] {
+  margin-bottom: 13px;
+}.dokan-layout .mb-\[20px\] {
+  margin-bottom: 20px;
+}.dokan-layout .mb-\[24px\] {
+  margin-bottom: 24px;
+}.dokan-layout .mb-\[4px\] {
+  margin-bottom: 4px;
+}.dokan-layout .mt-0\.5 {
+  margin-top: 0.125rem;
+}.dokan-layout .mt-1 {
+  margin-top: 0.25rem;
+}.dokan-layout .mt-3 {
+  margin-top: 0.75rem;
+}.dokan-layout .mt-\[11px\] {
+  margin-top: 11px;
+}.dokan-layout .mt-\[24px\] {
+  margin-top: 24px;
+}.dokan-layout .mt-\[6px\] {
+  margin-top: 6px;
+}.dokan-layout .inline-block {
+  display: inline-block;
+}.dokan-layout .flex {
+  display: flex;
+}.dokan-layout .inline-flex {
+  display: inline-flex;
+}.dokan-layout .table {
+  display: table;
+}.dokan-layout .grid {
+  display: grid;
+}.dokan-layout .\!h-9 {
+  height: 2.25rem !important;
+}.dokan-layout .\!h-\[42px\] {
+  height: 42px !important;
+}.dokan-layout .h-10 {
+  height: 2.5rem;
+}.dokan-layout .h-12 {
+  height: 3rem;
+}.dokan-layout .h-4 {
+  height: 1rem;
+}.dokan-layout .h-64 {
+  height: 16rem;
+}.dokan-layout .h-8 {
+  height: 2rem;
+}.dokan-layout .h-\[15px\] {
+  height: 15px;
+}.dokan-layout .h-\[1px\] {
+  height: 1px;
+}.dokan-layout .h-\[28px\] {
+  height: 28px;
+}.dokan-layout .h-\[32px\] {
+  height: 32px;
+}.dokan-layout .h-\[3px\] {
+  height: 3px;
+}.dokan-layout .h-\[92\.5px\] {
+  height: 92.5px;
+}.dokan-layout .h-auto {
+  height: auto;
+}.dokan-layout .max-h-80 {
+  max-height: 20rem;
+}.dokan-layout .max-h-\[500px\] {
+  max-height: 500px;
+}.dokan-layout .\!w-9 {
+  width: 2.25rem !important;
+}.dokan-layout .w-10 {
+  width: 2.5rem;
+}.dokan-layout .w-12 {
+  width: 3rem;
+}.dokan-layout .w-4 {
+  width: 1rem;
+}.dokan-layout .w-8 {
+  width: 2rem;
+}.dokan-layout .w-\[141px\] {
+  width: 141px;
+}.dokan-layout .w-\[15px\] {
+  width: 15px;
+}.dokan-layout .w-\[214px\] {
+  width: 214px;
+}.dokan-layout .w-\[30px\] {
+  width: 30px;
+}.dokan-layout .w-\[43px\] {
+  width: 43px;
+}.dokan-layout .w-\[92\.5px\] {
+  width: 92.5px;
+}.dokan-layout .w-\[98px\] {
+  width: 98px;
+}.dokan-layout .w-auto {
+  width: auto;
+}.dokan-layout .w-full {
+  width: 100%;
+}.dokan-layout .\!min-w-48 {
+  min-width: 12rem !important;
+}.dokan-layout .\!min-w-\[150px\] {
+  min-width: 150px !important;
+}.dokan-layout .min-w-0 {
+  min-width: 0px;
+}.dokan-layout .min-w-\[560px\] {
+  min-width: 560px;
+}.dokan-layout .flex-1 {
+  flex: 1 1 0%;
+}.dokan-layout .flex-auto {
+  flex: 1 1 auto;
+}.dokan-layout .flex-shrink-0 {
+  flex-shrink: 0;
+}.dokan-layout .shrink-0 {
+  flex-shrink: 0;
+}.dokan-layout .translate-x-\[5px\] {
+  --tw-translate-x: 5px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}.dokan-layout .translate-y-\[10px\] {
+  --tw-translate-y: 10px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}.dokan-layout .transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}.dokan-layout .\!animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}.dokan-layout .\!cursor-pointer {
+  cursor: pointer !important;
+}.dokan-layout .cursor-not-allowed {
+  cursor: not-allowed;
+}.dokan-layout .cursor-pointer {
+  cursor: pointer;
+}.dokan-layout .list-none {
+  list-style-type: none;
+}.dokan-layout .grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}.dokan-layout .flex-row {
+  flex-direction: row;
+}.dokan-layout .flex-col {
+  flex-direction: column;
+}.dokan-layout .items-start {
+  align-items: flex-start;
+}.dokan-layout .items-end {
+  align-items: flex-end;
+}.dokan-layout .items-center {
+  align-items: center;
+}.dokan-layout .items-stretch {
+  align-items: stretch;
+}.dokan-layout .justify-start {
+  justify-content: flex-start;
+}.dokan-layout .justify-center {
+  justify-content: center;
+}.dokan-layout .justify-between {
+  justify-content: space-between;
+}.dokan-layout .gap-1 {
+  gap: 0.25rem;
+}.dokan-layout .gap-1\.5 {
+  gap: 0.375rem;
+}.dokan-layout .gap-2 {
+  gap: 0.5rem;
+}.dokan-layout .gap-2\.5 {
+  gap: 0.625rem;
+}.dokan-layout .gap-3 {
+  gap: 0.75rem;
+}.dokan-layout .gap-4 {
+  gap: 1rem;
+}.dokan-layout .gap-\[20px\] {
+  gap: 20px;
+}.dokan-layout .gap-\[22\.46px\] {
+  gap: 22.46px;
+}.dokan-layout .gap-\[28px\] {
+  gap: 28px;
+}.dokan-layout .gap-\[63px\] {
+  gap: 63px;
+}.dokan-layout .gap-\[6px\] {
+  gap: 6px;
+}.dokan-layout :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}.dokan-layout :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}.dokan-layout :is(.space-y-\[20px\] > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(20px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(20px * var(--tw-space-y-reverse));
+}.dokan-layout .overflow-hidden {
+  overflow: hidden;
+}.dokan-layout .overflow-y-auto {
+  overflow-y: auto;
+}.dokan-layout .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}.dokan-layout .whitespace-normal {
+  white-space: normal;
+}.dokan-layout .break-words {
+  overflow-wrap: break-word;
+}.dokan-layout .\!rounded {
+  border-radius: 0.25rem !important;
+}.dokan-layout .rounded {
+  border-radius: 0.25rem;
+}.dokan-layout .rounded-2xl {
+  border-radius: 1rem;
+}.dokan-layout .rounded-\[5px\] {
+  border-radius: 5px;
+}.dokan-layout .rounded-full {
+  border-radius: 9999px;
+}.dokan-layout .rounded-lg {
+  border-radius: 0.5rem;
+}.dokan-layout .rounded-l-md {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}.dokan-layout .\!border {
+  border-width: 1px !important;
+}.dokan-layout .border {
+  border-width: 1px;
+}.dokan-layout .border-r-0 {
+  border-right-width: 0px;
+}.dokan-layout .\!border-none {
+  border-style: none !important;
+}.dokan-layout .\!border-\[\#E9E9E9\] {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(233 233 233 / var(--tw-border-opacity, 1)) !important;
+}.dokan-layout .border-\[\#E9E9E9\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(233 233 233 / var(--tw-border-opacity, 1));
+}.dokan-layout .border-\[\#e2e2e2\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(226 226 226 / var(--tw-border-opacity, 1));
+}.dokan-layout .\!bg-\[\#F1F1F4\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(241 241 244 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .\!bg-neutral-200 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .\!bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .bg-\[\#D4FBEF\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 251 239 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-\[\#E9E9E9\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(233 233 233 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-\[\#F1F1F4\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 241 244 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-\[\#F6F6F7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 246 247 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-\[\#f5f5f5\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1));
+}.dokan-layout .bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}.dokan-layout .\!fill-none {
+  fill: none !important;
+}.dokan-layout .object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}.dokan-layout .\!p-0 {
+  padding: 0px !important;
+}.dokan-layout .p-0 {
+  padding: 0px;
+}.dokan-layout .p-3 {
+  padding: 0.75rem;
+}.dokan-layout .p-6 {
+  padding: 1.5rem;
+}.dokan-layout .px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}.dokan-layout .px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}.dokan-layout .px-3\.5 {
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+}.dokan-layout .px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}.dokan-layout .py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}.dokan-layout .py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}.dokan-layout .py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}.dokan-layout .py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}.dokan-layout .pb-0 {
+  padding-bottom: 0px;
+}.dokan-layout .pr-1 {
+  padding-right: 0.25rem;
+}.dokan-layout .pt-0 {
+  padding-top: 0px;
+}.dokan-layout .align-middle {
+  vertical-align: middle;
+}.dokan-layout .text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}.dokan-layout .text-\[0\.6875rem\] {
+  font-size: 0.6875rem;
+}.dokan-layout .text-\[12px\] {
+  font-size: 12px;
+}.dokan-layout .text-\[14px\] {
+  font-size: 14px;
+}.dokan-layout .text-\[24px\] {
+  font-size: 24px;
+}.dokan-layout .text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}.dokan-layout .text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}.dokan-layout .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}.dokan-layout .text-sm\/6 {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}.dokan-layout .text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}.dokan-layout .font-\[400\] {
+  font-weight: 400;
+}.dokan-layout .font-\[500\] {
+  font-weight: 500;
+}.dokan-layout .font-\[600\] {
+  font-weight: 600;
+}.dokan-layout .font-\[700\] {
+  font-weight: 700;
+}.dokan-layout .font-\[800\] {
+  font-weight: 800;
+}.dokan-layout .font-bold {
+  font-weight: 700;
+}.dokan-layout .font-light {
+  font-weight: 300;
+}.dokan-layout .font-medium {
+  font-weight: 500;
+}.dokan-layout .font-semibold {
+  font-weight: 600;
+}.dokan-layout .leading-3 {
+  line-height: .75rem;
+}.dokan-layout .leading-5 {
+  line-height: 1.25rem;
+}.dokan-layout .leading-\[16px\] {
+  line-height: 16px;
+}.dokan-layout .leading-\[21px\] {
+  line-height: 21px;
+}.dokan-layout .\!text-\[\#25252D\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(37 37 45 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .\!text-\[\#575757\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(87 87 87 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .\!text-\[\#828282\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(130 130 130 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .\!text-\[\#A5A5AA\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(165 165 170 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .\!text-dokan-primary {
+  color: var(--dokan-button-background-color, #7047EB) !important;
+}.dokan-layout .\!text-transparent {
+  color: transparent !important;
+}.dokan-layout .text-\[\#00563F\] {
+  --tw-text-opacity: 1;
+  color: rgb(0 86 63 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#25252D\] {
+  --tw-text-opacity: 1;
+  color: rgb(37 37 45 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#393939\] {
+  --tw-text-opacity: 1;
+  color: rgb(57 57 57 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#575757\] {
+  --tw-text-opacity: 1;
+  color: rgb(87 87 87 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#6B6B6B\] {
+  --tw-text-opacity: 1;
+  color: rgb(107 107 107 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#6B7280\] {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#78818f\] {
+  --tw-text-opacity: 1;
+  color: rgb(120 129 143 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#7A7A7A\] {
+  --tw-text-opacity: 1;
+  color: rgb(122 122 122 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#828282\] {
+  --tw-text-opacity: 1;
+  color: rgb(130 130 130 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#A5A5AA\] {
+  --tw-text-opacity: 1;
+  color: rgb(165 165 170 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-\[\#b3b3b3\] {
+  --tw-text-opacity: 1;
+  color: rgb(179 179 179 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}.dokan-layout .text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
+}.dokan-layout .opacity-50 {
+  opacity: 0.5;
+}.dokan-layout .shadow-\[0px_3px_6px_rgba\(0\2c _0\2c _0\2c _0\.25\)\] {
+  --tw-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  --tw-shadow-colored: 0px 3px 6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}.dokan-layout .shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}.dokan-layout .\!outline-0 {
+  outline-width: 0px !important;
+}.dokan-layout .\!ring-0 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}.dokan-layout .\!ring-\[\#E9E9E9\] {
+  --tw-ring-opacity: 1 !important;
+  --tw-ring-color: rgb(233 233 233 / var(--tw-ring-opacity, 1)) !important;
+}.dokan-layout .filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}.dokan-seller-badge-input-event-popover .components-popover__content{box-shadow:0 6px 20px 0 rgba(0,0,0,.0784313725);border:1px solid #e9e9e9}span:has(svg.dokan-seller-badge-event-input-chevrond-down){background:#fff !important;cursor:pointer}span:has(svg.dokan-seller-badge-event-input-crown){cursor:pointer}.dokan-seller-badge-input-event-popover .components-popover__content{box-shadow:0 6px 20px 0 rgba(0,0,0,.0784313725);border:1px solid #e9e9e9}span:has(svg.dokan-seller-badge-event-input-chevrond-down){background:#fff !important;cursor:pointer}span:has(svg.dokan-seller-badge-event-input-crown){cursor:pointer}.dokan-seller-badge-scroll{scrollbar-width:thin;scrollbar-color:var(--dokan-button-background-color, #7047EB) rgba(0,0,0,0)}.dokan-seller-badge-scroll::-webkit-scrollbar{width:8px}.dokan-seller-badge-scroll::-webkit-scrollbar-track{background:rgba(0,0,0,0)}.dokan-seller-badge-scroll::-webkit-scrollbar-thumb{background-color:var(--dokan-button-background-color, #7047EB);border-radius:8px;border:2px solid rgba(0,0,0,0);background-clip:content-box}.dokan-seller-badge-scroll::-webkit-scrollbar-thumb:hover{background-color:#bdbdc1}.dokan-layout .checked\:\!border:checked {
+  border-width: 1px !important;
+}.dokan-layout .checked\:\!border-dokan-btn:checked {
+  border-color: var(--dokan-button-border-color, #7047EB) !important;
+}.dokan-layout .checked\:bg-\[white\]:checked {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}.dokan-layout .checked\:before\:\!bg-dokan-btn:checked::before {
+  content: var(--tw-content);
+  background-color: var(--dokan-button-background-color, #7047EB) !important;
+}.dokan-layout .read-only\:\!bg-white:-moz-read-only {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .read-only\:\!bg-white:read-only {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .hover\:\!bg-\[\#E4E4EB\]:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(228 228 235 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .hover\:\!bg-white:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .hover\:bg-\[\#F6F6F7\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 246 247 / var(--tw-bg-opacity, 1));
+}.dokan-layout .hover\:\!text-\[\#828282\]:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(130 130 130 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout .hover\:\!underline:hover {
+  text-decoration-line: underline !important;
+}.dokan-layout .focus\:\!bg-white:focus {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .disabled\:\!border-none:disabled {
+  border-style: none !important;
+}.dokan-layout .disabled\:\!bg-\[\#A5A5AA\]:disabled {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(165 165 170 / var(--tw-bg-opacity, 1)) !important;
+}.dokan-layout .disabled\:\!text-white:disabled {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
+}.dokan-layout :is(.group:hover .group-hover\:\!text-dokan-primary) {
+  color: var(--dokan-button-background-color, #7047EB) !important;
+}@media (min-width: 1024px) {
+
+  .dokan-layout .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .dokan-layout .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .dokan-layout .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

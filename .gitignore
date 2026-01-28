@@ -59,6 +59,18 @@ composer.lock
 *.swp
 *.bak
 *.old
+COMMIT_MSG.txt
+orders_snapshot/
+
+# Deployment and utility scripts
+pull_to_server.py
+check_logs.py
+reinstall_plugins.py
+reinstall_plugins_direct.py
+server_error_log.txt
+*.tar.gz
+*.zip
+temp_*/
 
 # Env and sensitive config
 .env

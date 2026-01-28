@@ -38,8 +38,7 @@ class PriceOrderByPostMeta extends AbstractPriceByPostMeta implements \IWPML_Bac
 	 */
 	public function pre_get_posts( $wp_query ) {
 		if ( isset( $wp_query->query['orderby'] ) && in_array( $wp_query->query['orderby'], self::ORDER_BY_VALUE ) && isset( $wp_query->query_vars['wc_query'] ) && $wp_query->query_vars['wc_query'] === 'product_query' ) {
-
-			// @phpstan-ignore-next-line
+			/* @phpstan-ignore property.notFound */
 			$wp_query->wcml_orderby_price = $wp_query->query['orderby'];
 
 			unset( $wp_query->query['orderby'] );

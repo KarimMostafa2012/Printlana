@@ -11,6 +11,7 @@ use WeDevs\Dokan\Traits\ChainableContainer;
  * @property Modules\ProductQA\Module $product_qa Product Qa Module.
  * @property Modules\PayPalMarketplace\Module $paypal_marketplace PayPal.
  * @property Modules\OrderMinMax\Module $order_min_max Order Min Max Module.
+ * @property Modules\StoreSupport\Module $store_support Store Support Module.
  */
 class Module {
 
@@ -299,19 +300,6 @@ class Module {
                         'video_id'     => 'lvuR-QCJDIo',
                         'categories'   => [ 'Product Management' ],
                     ],
-                    'moip' => [
-                        'id'           => 'moip',
-                        'name'         => __( 'Wirecard', 'dokan' ),
-                        'description'  => __( 'Wirecard payment gateway for Dokan.', 'dokan' ),
-                        'thumbnail'    => $thumbnail_dir . '/wirecard-connect.svg',
-                        'module_file'  => DOKAN_PRO_MODULE_DIR . '/moip/module.php',
-                        'module_class' => 'WeDevs\DokanPro\Modules\Moip\Module',
-                        'plan'         => [ 'professional', 'business', 'enterprise' ],
-                        'doc_id'       => 138385,
-                        'doc_link'     => 'https://dokan.co/docs/wordpress/modules/dokan-moip-connect/',
-                        'mod_link'     => 'https://dokan.co/wordpress/modules/moip/',
-                        'categories'   => [ 'Payment' ],
-                    ],
                     'paypal_marketplace' => [
                         'id'           => 'paypal_marketplace',
                         'name'         => __( 'PayPal Marketplace', 'dokan' ),
@@ -571,6 +559,17 @@ class Module {
                         'categories'     => [ 'Product Management', 'Integration' ],
                         'video_id'       => '9fvPywanWfM',
                     ],
+                    'vendor_support' => [
+                        'id'           => 'vendor_support',
+                        'name'         => __( 'Vendor Support', 'dokan' ),
+                        'description'  => __( 'Communicate with vendors in your marketplace by queries and responses.', 'dokan' ),
+                        'thumbnail'    => $thumbnail_dir . '/vendor-support.svg',
+                        'module_file'  => DOKAN_PRO_MODULE_DIR . '/vendor-support/Module.php',
+                        'module_class' => 'WeDevs\DokanPro\Modules\VendorSupport\Module',
+                        'plan'         => [ 'starter', 'liquidweb', 'professional', 'business', 'enterprise' ],
+                        'categories'   => [ 'Vendor Management', 'Store Management' ],
+                        'doc_link'     => 'https://dokan.co/docs/wordpress/modules/vendor-support/',
+                    ],
                     'vendor_verification' => [
                         'id'           => 'vendor_verification',
                         'name'         => __( 'Vendor Verification', 'dokan' ),
@@ -701,6 +700,19 @@ class Module {
                         'mod_link'     => 'https://dokan.co/wordpress/modules/dokan-request-for-quotation-module/',
                         'categories'   => [ 'Product Management' ],
                     ],
+                    'paystack' => [
+                        'id'           => 'paystack',
+                        'name'         => __( 'Paystack', 'dokan' ),
+                        'description'  => __( 'Enable Split payments, Multi-seller payments and all Paystack Commerce Platform features.', 'dokan' ),
+                        'thumbnail'    => $thumbnail_dir . '/paystack.svg',
+                        'module_file'  => DOKAN_PRO_MODULE_DIR . '/paystack/module.php',
+                        'module_class' => 'WeDevs\DokanPro\Modules\Paystack\Module',
+                        'plan'         => [ 'professional', 'business', 'enterprise' ],
+                        'doc_id'       => 1527997,
+                        'doc_link'     => 'https://dokan.co/docs/wordpress/modules/paystack/',
+                        'mod_link'     => 'https://dokan.co/wordpress/modules/paystack-module/',
+                        'categories'   => [ 'Payment' ],
+                    ],
                 ]
             );
         }
@@ -823,7 +835,6 @@ class Module {
             'geolocation/geolocation.php'                                       => 'geolocation',
             'live-chat/live-chat.php'                                           => 'live_chat',
             'live-search/live-search.php'                                       => 'live_search',
-            'moip/moip.php'                                                     => 'moip',
             'product-enquiry/enquiry.php'                                       => 'product_enquiry',
             'report-abuse/report-abuse.php'                                     => 'report_abuse',
             'rma/rma.php'                                                       => 'rma',
@@ -952,6 +963,6 @@ class Module {
         $license_plan = dokan_pro()->license->get_plan();
         $module_plan_scope = $module['plan'];
 
-        return in_array( $license_plan, $module_plan_scope );
+        return in_array( $license_plan, $module_plan_scope, true );
     }
 }

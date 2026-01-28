@@ -1,6 +1,5 @@
 <?php
 
-use WCML\Utilities\SyncHash;
 use WPML\Translation\TranslationElements\FieldCompression;
 
 class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
@@ -15,8 +14,6 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 	private $tm_instance;
 	/** @var wpdb */
 	private $wpdb;
-	/** @var SyncHash */
-	private $syncHashManager;
 	/** @var array */
 	private $job_details;
 	/** @var WC_Product */
@@ -48,16 +45,14 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 	 * @param woocommerce_wpml $woocommerce_wpml
 	 * @param SitePress        $sitepress
 	 * @param wpdb             $wpdb
-	 * @param SyncHash         $syncHashManager
 	 */
-	public function __construct( $job_details, $woocommerce_wpml, $sitepress, $wpdb, $syncHashManager ) {
+	public function __construct( $job_details, $woocommerce_wpml, $sitepress, $wpdb ) {
 		global $iclTranslationManagement;
 
 		$this->woocommerce_wpml = $woocommerce_wpml;
 		$this->sitepress        = $sitepress;
 		$this->tm_instance      = $iclTranslationManagement;
 		$this->wpdb             = $wpdb;
-		$this->syncHashManager  = $syncHashManager;
 
 		$this->not_display_fields_for_variables_product = [
 			'_purchase_note',
@@ -135,7 +130,8 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 					$product_translations[ $this->get_target_language() ]->translation_id
 				)
 			);
-
+			// @todo debug
+			/* @phpstan-ignore identical.alwaysFalse */
 			$translation_complete = $tr_status === ICL_TM_COMPLETE;
 		}
 
@@ -361,11 +357,11 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			$key_index                          = $custom_field . '-' . $custom_field_index;
 			$cf                                 = 'field-' . $key_index;
 			$element_data[ $cf ]                = [ 'original' => $custom_field_val ];
-			$element_data[ $cf ]['translation'] = ( $trnsl_custom_field_value ) ? $trnsl_custom_field_value : '';
+			$element_data[ $cf ]['translation'] = ( $trnsl_custom_field_value ) ?: '';
 
 		} else {
 			foreach ( $custom_field_val as $ind => $value ) {
-				$translated_value = isset( $trnsl_custom_field_value[ $ind ] ) ? $trnsl_custom_field_value[ $ind ] : '';
+				$translated_value = $trnsl_custom_field_value[ $ind ] ?? '';
 				$element_data     = $this->add_single_custom_field_content_value( $element_data, $custom_field, $custom_field_index . '-' . str_replace( '-', ':::', $ind ), $value, $translated_value );
 			}
 		}
@@ -445,11 +441,11 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 		foreach ( $this->product_images_ids as $image_id ) {
 			/** @var stdClass */
 			$attachment_data = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT post_title, post_excerpt, post_content FROM {$this->wpdb->posts} WHERE ID = %d", $image_id ) );
-			if ( ! $attachment_data ) {
+			if ( ! is_object( $attachment_data ) ) {
 				continue;
 			}
 			$alt_text = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-			$alt_text = $alt_text ? $alt_text : '';
+			$alt_text = $alt_text ?: '';
 			$element_data[ 'image-id-' . $image_id . '-title' ]       = [ 'original' => $attachment_data->post_title ];
 			$element_data[ 'image-id-' . $image_id . '-caption' ]     = [ 'original' => $attachment_data->post_excerpt ];
 			$element_data[ 'image-id-' . $image_id . '-description' ] = [ 'original' => $attachment_data->post_content ];
@@ -460,7 +456,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 				/** @var stdClass */
 				$trnsl_attachment_data = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT post_title,post_excerpt,post_content FROM {$this->wpdb->posts} WHERE ID = %d", $trnsl_prod_image ) );
 				$alt_text              = get_post_meta( $trnsl_prod_image, '_wp_attachment_image_alt', true );
-				$alt_text              = $alt_text ? $alt_text : '';
+				$alt_text              = $alt_text ?: '';
 				$element_data[ 'image-id-' . $image_id . '-title' ]['translation']       = $trnsl_attachment_data->post_title;
 				$element_data[ 'image-id-' . $image_id . '-caption' ]['translation']     = $trnsl_attachment_data->post_excerpt;
 				$element_data[ 'image-id-' . $image_id . '-description' ]['translation'] = $trnsl_attachment_data->post_content;
@@ -483,7 +479,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 
 		$element_data = $this->add_taxonomies_to_element_data( $element_data );
 
-		$element_data = $this->add_custom_field_to_element_data( $element_data, $this->product_id, isset( $translation->ID ) ? $translation->ID : false, false );
+		$element_data = $this->add_custom_field_to_element_data( $element_data, $this->product_id, $translation->ID ?? false, false );
 
 		if ( $this->product_is_variable ) {
 			$variations = $this->woocommerce_wpml->sync_variations_data->get_product_variations( $this->product_id );
@@ -589,7 +585,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 							$element_data[ $data_custom_field_key ]['translation'] = ( $translation_id && isset( $translated_custom_field_value[ $val_key ] ) ) ? $translated_custom_field_value[ $val_key ] : '';
 						} else {
 
-							$custom_field_key = $data_custom_field_key . ':' . ( isset( $trnsl_mid_ids[ $val_key ] ) ? $trnsl_mid_ids[ $val_key ] : 'new_' . $val_key );
+							$custom_field_key = $data_custom_field_key . ':' . ( $trnsl_mid_ids[ $val_key ] ?? 'new_' . $val_key );
 
 							$element_data[ $data_custom_field_key ][ $custom_field_key ]                = [ 'original' => $orig_custom_field_value ];
 							$element_data[ $data_custom_field_key ][ $custom_field_key ]['translation'] = ( $translation_id && isset( $translated_custom_field_value[ $val_key ] ) ) ? $translated_custom_field_value[ $val_key ] : '';
@@ -607,7 +603,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 
 							$i = 0;
 							foreach ( array_filter( $custom_fields ) as $key => $field_value ) {
-								$translated_custom_field_value = isset( $translated_custom_fields[ $key ] ) ? $translated_custom_fields[ $key ] : '';
+								$translated_custom_field_value = $translated_custom_fields[ $key ] ?? '';
 								$element_data                  = $this->add_single_custom_field_content_value( $element_data, $data_custom_field_key, $i, $field_value, $translated_custom_field_value );
 								$i ++;
 							}
@@ -648,9 +644,9 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			// insert new post.
 			$args                 = [];
 			$args['post_title']   = $translations[ md5( 'title' ) ];
-			$args['post_name']    = isset( $translations[ md5( 'slug' ) ] ) ? $translations[ md5( 'slug' ) ] : '';
+			$args['post_name']    = $translations[ md5( 'slug' ) ] ?? '';
 			$args['post_type']    = $this->original_post->post_type;
-			$args['post_content'] = isset( $translations[ md5( 'product_content' ) ] ) ? $translations[ md5( 'product_content' ) ] : '';
+			$args['post_content'] = $translations[ md5( 'product_content' ) ] ?? '';
 			$args['post_excerpt'] = $translations[ md5( 'product_excerpt' ) ];
 
 			if ( ! $args['post_title'] && ! $args['post_content'] && ! $args['post_excerpt'] ) {
@@ -704,13 +700,12 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			} else {
 				$this->sitepress->set_element_language_details( $tr_product_id, 'post_' . $this->original_post->post_type, $product_trid, $this->get_target_language() );
 			}
-			$this->syncHashManager->initialize( $tr_product_id, SyncHash::SOURCE_EMPTY, true );
 		} else {
 			// update post.
 			$args                   = [];
 			$args['ID']             = $tr_product_id;
 			$args['post_title']     = $translations[ md5( 'title' ) ];
-			$args['post_content']   = isset( $translations[ md5( 'product_content' ) ] ) ? $translations[ md5( 'product_content' ) ] : '';
+			$args['post_content']   = $translations[ md5( 'product_content' ) ] ?? '';
 			$args['post_excerpt']   = $translations[ md5( 'product_excerpt' ) ];
 			$args['post_author']    = $this->original_post->post_author;
 			$args['post_status']    = $this->original_post->post_status;
@@ -728,7 +723,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			if ( isset( $translations[ md5( 'slug' ) ] ) && $translations[ md5( 'slug' ) ] !== $post_name ) {
 				// update post_name.
 				// need set POST variable ( WPML used them when filtered this function).
-				$new_post_name      = sanitize_title( $translations[ md5( 'slug' ) ] ? $translations[ md5( 'slug' ) ] : $translations[ md5( 'title' ) ] );
+				$new_post_name      = sanitize_title( $translations[ md5( 'slug' ) ] ?: $translations[ md5( 'title' ) ] );
 				$_POST['new_title'] = $translations[ md5( 'title' ) ];
 				$_POST['new_slug']  = $new_post_name;
 				$new_slug           = wp_unique_post_slug( $new_post_name, $tr_product_id, $this->original_post->post_status, $this->original_post->post_type, $args['post_parent'] );
@@ -742,7 +737,6 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			}
 
 			$this->sitepress->set_element_language_details( $tr_product_id, 'post_' . $this->original_post->post_type, $product_trid, $this->get_target_language() );
-			$this->syncHashManager->initialize( $tr_product_id, SyncHash::SOURCE_META );
 		}
 
 		$product_translations = $this->sitepress->get_element_translations( $product_trid, 'post_product', false, false, true );
@@ -852,7 +846,6 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 
 		// no longer a duplicate.
 		delete_post_meta( $tr_product_id, '_icl_lang_duplicate_of', $this->product_id );
-		$this->syncHashManager->saveHash( $tr_product_id, true );
 
 		return $return;
 

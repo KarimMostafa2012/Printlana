@@ -21,22 +21,9 @@ class WCML_YIKES_Custom_Product_Tabs implements \IWPML_Action {
 	 */
 	private $sitepress;
 
-	/**
-	 * @var woocommerce_wpml
-	 */
-	private $woocommerce_wpml;
-
-	/**
-	 * WCML_Tab_Manager constructor.
-	 *
-	 * @param woocommerce_wpml                 $woocommerce_wpml
-	 * @param SitePress                        $sitepress
-	 * @param WPML_Element_Translation_Package $tp
-	 */
-	public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, WPML_Element_Translation_Package $tp ) {
-		$this->sitepress        = $sitepress;
-		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->tp               = $tp;
+	public function __construct( SitePress $sitepress, WPML_Element_Translation_Package $tp ) {
+		$this->sitepress = $sitepress;
+		$this->tp        = $tp;
 	}
 
 	public function add_hooks() {
@@ -109,7 +96,7 @@ class WCML_YIKES_Custom_Product_Tabs implements \IWPML_Action {
 				}
 			}
 
-			if ( $translation ) {
+			if ( is_object( $translation ) ) {
 				$tr_prod_tabs = $this->get_product_tabs( $translation->ID );
 				if ( $tr_prod_tabs ) {
 					foreach ( $tr_prod_tabs as $key => $prod_tab ) {

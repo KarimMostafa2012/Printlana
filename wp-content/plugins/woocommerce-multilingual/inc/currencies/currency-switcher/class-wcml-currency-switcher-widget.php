@@ -14,7 +14,7 @@ class WCML_Currency_Switcher_Widget extends WP_Widget {
 
 		echo $args['before_widget'];
 
-		if ( isset( $instance['settings']['widget_title'] ) && ! empty( $instance['settings']['widget_title'] ) ) {
+		if ( ! empty( $instance['settings']['widget_title'] ) ) {
 			$widget_title = apply_filters( 'widget_title', $instance['settings']['widget_title'] );
 			echo $args['before_title'] . $widget_title . $args['after_title'];
 		}

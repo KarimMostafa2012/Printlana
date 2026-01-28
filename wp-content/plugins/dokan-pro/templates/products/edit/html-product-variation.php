@@ -36,7 +36,9 @@ $now = dokan_current_datetime();
                 $post_terms = wp_get_post_terms( $parent_data['id'], $attribute['name'] );
 
                 foreach ( $post_terms as $post_term ) {
-                    echo '<option ' . selected( $variation_selected_value, $post_term->slug, false ) . ' value="' . esc_attr( $post_term->slug ) . '">' . esc_html( apply_filters( 'woocommerce_variation_option_name', $post_term->name ) ) . '</option>';
+                    $slug = is_object( $post_term ) ? $post_term->slug : ( $post_term['slug'] ?? '' );
+                    $name = is_object( $post_term ) ? $post_term->name : ( $post_term['name'] ?? '' );
+                    echo '<option ' . selected( $variation_selected_value, $slug, false ) . ' value="' . esc_attr( $slug ) . '">' . esc_html( apply_filters( 'woocommerce_variation_option_name', $name ) ) . '</option>';
                 }
             } else {
                 $options = wc_get_text_attributes( $attribute['value'] );

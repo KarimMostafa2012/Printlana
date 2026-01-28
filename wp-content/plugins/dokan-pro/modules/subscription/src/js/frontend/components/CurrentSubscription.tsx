@@ -6,6 +6,7 @@ import { Card, useToast } from '@getdokan/dokan-ui';
 import { DokanButton, DokanAlert, DokanModal } from '@dokan/components';
 import CurrentSubscriptionSkeleton from './skeleton/CurrentSubscriptionSkeleton';
 import { VendorSubscription } from '../definition/VendorSubscription';
+import { cancelVendorSubscription } from '../Util';
 
 const CurrentSubscription = ( {
     vendorId,
@@ -191,15 +192,7 @@ const CurrentSubscription = ( {
     // Cancel Subscription Handler.
     const handleCancelSubscription = async () => {
         try {
-            const data = {
-                action: 'cancel',
-            };
-
-            const updatedSubscription: VendorSubscription = await apiFetch( {
-                path: `dokan/v1/vendor-subscription/update/${ vendorId }`,
-                method: 'PUT',
-                data,
-            } );
+            const updatedSubscription: VendorSubscription = await cancelVendorSubscription( vendorId );
 
             setSubscription( updatedSubscription );
             toast( {

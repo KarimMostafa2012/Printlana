@@ -43,6 +43,23 @@ class Dokan_REST_Vendor_Subscription_Packages_Controller extends Dokan_REST_Vend
                 ],
             ]
         );
+
+        register_rest_route(
+            $this->namespace, '/' . $this->base . '/(?P<id>[\d]+)', [
+                [
+                    'methods'             => WP_REST_Server::READABLE,
+                    'callback'            => [ $this, 'get_item' ],
+                    'permission_callback' => [ $this, 'check_permission' ],
+                    'args'                => [
+                        'id' => [
+                            'description' => __( 'Unique identifier for the subscription package.', 'dokan' ),
+                            'type'        => 'integer',
+                            'required'    => true,
+                        ],
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
@@ -90,6 +107,33 @@ class Dokan_REST_Vendor_Subscription_Packages_Controller extends Dokan_REST_Vend
         $response = rest_ensure_response( $data );
 
         return $this->format_collection_response( $response, $request, $total_packages );
+    }
+
+    /**
+     * Get Single Vendor Subscription Package.
+     *
+     * @since 4.1.3
+     *
+     * @param WP_REST_Request $request
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_item( $request ) {
+        $id = (int) $request->get_param( 'id' );
+
+        if ( ! $id ) {
+            return new WP_Error( 'dokan_rest_invalid_package_id', __( 'Invalid package ID.', 'dokan' ), [ 'status' => 404 ] );
+        }
+
+        $product = wc_get_product( $id );
+
+        if ( ! $product || ! $product->is_type( 'product_pack' ) ) {
+            return new WP_Error( 'dokan_rest_package_not_found', __( 'Package not found.', 'dokan' ), [ 'status' => 404 ] );
+        }
+
+        $data = $this->prepare_item_for_response( $product, $request );
+
+        return rest_ensure_response( $data );
     }
 
     /**

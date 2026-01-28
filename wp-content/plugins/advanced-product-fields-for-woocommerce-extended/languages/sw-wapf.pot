@@ -244,6 +244,18 @@ msgstr ""
 msgid "Value contains"
 msgstr ""
 
+msgid "Result is equal to"
+msgstr ""
+
+msgid "Result is not equal to"
+msgstr ""
+
+msgid "Result is greater than"
+msgstr ""
+
+msgid "Result is lesser than"
+msgstr ""
+
 msgid "Value is any email"
 msgstr ""
 
@@ -325,46 +337,46 @@ msgstr ""
 msgid "User role"
 msgstr ""
 
+msgid "Is"
+msgstr ""
+
+msgid "Is not"
+msgstr ""
+
 msgid "Product"
 msgstr ""
 
-msgid "Search a product..."
-msgstr ""
-
-msgid "Any in list"
-msgstr ""
-
-msgid "Not in list"
+msgid "Search 1 or more products"
 msgstr ""
 
 msgid "Product variation"
 msgstr ""
 
-msgid "Search a product variation..."
+msgid "Search 1 or more variations"
 msgstr ""
 
 msgid "Product category"
 msgstr ""
 
-msgid "Search a category..."
+msgid "Search 1 or more categories"
 msgstr ""
 
 msgid "Product attribute"
 msgstr ""
 
-msgid "Search a product attribute..."
+msgid "Search 1 or more attributes"
 msgstr ""
 
 msgid "Product tag"
 msgstr ""
 
-msgid "Search a tag..."
+msgid "Search 1 or more tags"
 msgstr ""
 
 msgid "Product type"
 msgstr ""
 
-msgid "Select a type"
+msgid "Select 1 or more types"
 msgstr ""
 
 msgid "System"
@@ -1402,10 +1414,7 @@ msgstr ""
 msgid "Add custom fields to this group."
 msgstr ""
 
-msgid "Layout settings"
-msgstr ""
-
-msgid "Field group layout settings"
+msgid "Layout & design settings"
 msgstr ""
 
 msgid "Custom variables"
@@ -1568,6 +1577,12 @@ msgid "Conditions"
 msgstr ""
 
 msgid "When should this field group be displayed?"
+msgstr ""
+
+msgid "Layout & design"
+msgstr ""
+
+msgid "Field group layout settings"
 msgstr ""
 
 msgid "Help with conditions"
@@ -1870,22 +1885,34 @@ msgstr ""
 msgid "Rules"
 msgstr ""
 
-msgid "Add rules to determine where the fields should appear."
+msgid "Add rules to determine for which products the fields should show."
 msgstr ""
 
 msgid "Add your first rule"
 msgstr ""
 
-msgid "If you don't add rules, this field group will display on all products."
+msgid "If you don't add any rules, this field group will display on all products."
+msgstr ""
+
+msgid "If you create multiple rules using the 'or' button, the first group that evaluates to true will be used."
 msgstr ""
 
 msgid "or"
 msgstr ""
 
+msgid "User is"
+msgstr ""
+
 msgid "And"
 msgstr ""
 
+msgid "Delete"
+msgstr ""
+
 msgid "Or"
+msgstr ""
+
+msgid "It seems you've created multiple 'OR' conditions that should be grouped into 1 condition. <a href=\"https://www.studiowombat.com/wp-content/uploads/2025/10/grouping-rules-together-correctly.png\" target=\"_blank\">See this screenshot</a> on how to fix it."
 msgstr ""
 
 msgid "A field group is a collection of fields that belong together."
@@ -2044,6 +2071,12 @@ msgstr ""
 msgid "Change the main product image depending on selected options."
 msgstr ""
 
+msgid "Want to style your fields? %s"
+msgstr ""
+
+msgid "Go to design the settings."
+msgstr ""
+
 msgid "Deactivate"
 msgstr ""
 
@@ -2126,9 +2159,6 @@ msgid "Duplicate variable"
 msgstr ""
 
 msgid "Delete variable"
-msgstr ""
-
-msgid "Delete"
 msgstr ""
 
 msgid "Variable name"
@@ -2230,6 +2260,9 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
+msgid "Search a category..."
+msgstr ""
+
 msgid "Max. limit"
 msgstr ""
 
@@ -2258,6 +2291,9 @@ msgid "Select"
 msgstr ""
 
 msgid "Disable"
+msgstr ""
+
+msgid "Search a product..."
 msgstr ""
 
 msgid "more"
@@ -2296,10 +2332,13 @@ msgstr ""
 msgid "You need atleast 2 fields to create conditional rules. Add another field first."
 msgstr ""
 
+msgid "Add new rule group"
+msgstr ""
+
 msgid "Show this field if"
 msgstr ""
 
-msgid "Add new rule group"
+msgid "Or add new rule group"
 msgstr ""
 
 msgid "Learn about all field types"

@@ -2,18 +2,10 @@
 
 namespace WCML\Permalinks\Settings;
 
-use SitePress;
 use WCML\Permalinks\Strings;
-use WCML\StandAlone\NullSitePress;
 use WCML\TranslationControls\Hooks as TranslationControlsBase;
 use WCML\Utilities\AdminUrl;
 use WCML\Utilities\WpAdminPages;
-use WCML_Url_Translation;
-use WCML_WC_Strings;
-use wpdb;
-use WPML\Core\ISitePress;
-use WPML\FP\Obj;
-use WPML\FP\Str;
 
 class TranslationControls extends TranslationControlsBase {
 

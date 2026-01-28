@@ -33,6 +33,8 @@ class Settings {
 
         // update rest api schema
         add_filter( 'dokan_rest_api_store_update_params', [ $this, 'update_rest_api_schema' ] );
+
+        add_filter( 'dokan_admin_dashboard_vendors_settings', [ $this, 'add_manual_order_setting_to_dashboard_data' ] );
     }
 
 	/**
@@ -187,5 +189,20 @@ class Settings {
         ];
 
         return $schema;
+    }
+
+    /**
+     * Adds the manual order setting to the vendor dashboard data.
+     *
+     * @since 4.2.1
+     *
+     * @param array $settings Existing dashboard settings data.
+     *
+     * @return array
+     */
+    public function add_manual_order_setting_to_dashboard_data( $settings ) {
+        $settings['allow_vendor_create_manual_order'] = dokan_pro()->manual_orders->is_enabled_globally();
+
+        return $settings;
     }
 }

@@ -39,7 +39,8 @@ class Dokan_Follow_Store_Vendor_Dashboard {
             'icon'       => '<i class="fas fa-heart"></i>',
             'url'        => dokan_get_navigation_url( 'followers' ),
             'pos'        => 175,
-            'permission' => 'dokan_view_overview_menu'
+            'icon_name'  => 'UserStar',
+            'permission' => 'dokan_view_overview_menu',
         );
 
         return $settings;

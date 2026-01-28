@@ -4,6 +4,7 @@ namespace WeDevs\DokanPro\Announcement;
 
 use WeDevs\Dokan\Cache;
 use WeDevs\Dokan\Traits\ChainableContainer;
+use WeDevs\DokanPro\Announcement\Admin\Announcements;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -38,6 +39,7 @@ class Announcement {
         $this->container['manager']   = new Manager();
         $this->container['mails']     = new Mails();
         $this->container['processor'] = new BackgroundProcess();
+        $this->container['announcements'] = new Announcements();
     }
 
     /**

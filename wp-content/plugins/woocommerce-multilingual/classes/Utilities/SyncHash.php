@@ -113,7 +113,6 @@ class SyncHash {
 		if ( $hasChanges ) {
 			unset( $hash[ self::HAS_CHANGES_FLAG ] );
 			update_post_meta( $objectId, self::META_KEY, $hash );
-			$hash[ self::HAS_CHANGES_FLAG ] = false;
 		}
 		if ( $clear ) {
 			unset( $this->hashes[ $objectId ] );

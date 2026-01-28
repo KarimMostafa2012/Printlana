@@ -21,16 +21,15 @@ class WCML_WC_Gateways {
 	/** @var SitePress|NullSitePress */
 	private $sitepress;
 
-	/**
-	 * @param woocommerce_wpml        $woocommerce_wpml
-	 * @param SitePress|NullSitePress $sitepress
-	 */
 	public function __construct( woocommerce_wpml $woocommerce_wpml, ISitePress $sitepress ) {
+		/* @phpstan-ignore assign.propertyType */
 		$this->sitepress        = $sitepress;
 		$this->woocommerce_wpml = $woocommerce_wpml;
 
+		/* @phpstan-ignore method.notFound */
 		$this->current_language = $this->sitepress->get_current_language();
 		if ( 'all' === $this->current_language ) {
+			/* @phpstan-ignore method.notFound */
 			$this->current_language = $this->sitepress->get_default_language();
 		}
 	}
@@ -108,28 +107,25 @@ class WCML_WC_Gateways {
 	 * @param WC_Payment_Gateway $gateway
 	 */
 	public function payment_gateways_filters( $gateway ) {
-
+		/* @phpstan-ignore isset.property */
 		if ( isset( $gateway->id ) ) {
 			$this->translate_gateway_strings( $gateway );
 		}
 
 	}
 
-	/**
-	 * @param WC_Payment_Gateway $gateway
-	 */
-	public function translate_gateway_strings( $gateway ) {
-
+	public function translate_gateway_strings( WC_Payment_Gateway $gateway ) {
+		// @todo debug
+		/* @phpstan-ignore isset.property */
 		if ( isset( $gateway->enabled ) && 'no' !== $gateway->enabled ) {
-
 			if ( isset( $gateway->instructions ) ) {
 				$gateway->instructions = $this->translate_gateway_instructions( $gateway->instructions, $gateway->id );
 			}
-
+			/* @phpstan-ignore isset.property */
 			if ( isset( $gateway->description ) ) {
 				$gateway->description = $this->translate_gateway_description( $gateway->description, $gateway->id );
 			}
-
+			/* @phpstan-ignore isset.property */
 			if ( isset( $gateway->title ) ) {
 				$gateway->title = $this->translate_gateway_title( $gateway->title, $gateway->id );
 			}

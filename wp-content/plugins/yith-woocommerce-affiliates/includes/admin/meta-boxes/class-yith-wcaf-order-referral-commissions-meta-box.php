@@ -38,6 +38,10 @@ if ( ! class_exists( 'YITH_WCAF_Order_Referral_Commissions_Meta_Box' ) ) {
 			$user_email = '';
 			$username   = '';
 
+			if ( ! $order || ! $order instanceof WC_Order ) {
+    			return;
+			}
+
 			// define variables to be used on template.
 			$affiliate = YITH_WCAF_Affiliate_Factory::get_affiliate_by_order_id( $order );
 

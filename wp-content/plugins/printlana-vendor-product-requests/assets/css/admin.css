@@ -1,0 +1,13 @@
+.pl-status-approved {
+    color: #10b981;
+    font-weight: bold;
+}
+
+.pl-status-rejected {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.pl-approve-btn {
+    margin-right: 5px;
+}

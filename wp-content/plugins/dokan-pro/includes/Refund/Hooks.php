@@ -27,6 +27,7 @@ class Hooks {
         new RefundCache();
 
         $this->container['non_dokan_auto_refund'] = ProcessAutomaticRefund::instance();
+        $this->container['refunds'] = new AdminMenu();
     }
 
     /**

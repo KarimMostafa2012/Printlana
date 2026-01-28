@@ -81,7 +81,7 @@ class Discount {
                     [
                         'type'   => 'primary',
                         'text'   => __( 'Renew Plan', 'dokan' ),
-                        'action' => admin_url( 'admin.php?page=dokan_updates' ),
+                        'action' => admin_url( 'admin.php?page=dokan-dashboard#/license' ),
                     ],
                 ],
             ];
@@ -99,7 +99,7 @@ class Discount {
                     [
                         'type'   => 'primary',
                         'text'   => __( 'Renew Now!', 'dokan' ),
-                        'action' => admin_url( 'admin.php?page=dokan_updates' ),
+                        'action' => admin_url( 'admin.php?page=dokan-dashboard#/license' ),
                     ],
                 ],
             ];
