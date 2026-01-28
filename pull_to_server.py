@@ -35,8 +35,8 @@ def deploy_to_server():
         print(f"[+] Connected successfully!")
 
         # Execute git pull command
-        print(f"\n[*] Pulling latest changes from GitHub...")
-        command = f"cd {REMOTE_PATH} && git pull origin master"
+        print(f"\n[*] Resetting and pulling latest changes from GitHub...")
+        command = f"cd {REMOTE_PATH} && git fetch origin master && git reset --hard origin/master"
 
         stdin, stdout, stderr = ssh.exec_command(command)
 
