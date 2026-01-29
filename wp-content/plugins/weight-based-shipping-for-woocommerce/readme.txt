@@ -3,9 +3,9 @@ Contributors: dangoodman
 Tags: woocommerce shipping, table rate shipping, woocommerce free shipping, weight-based shipping, rule-based shipping
 Requires PHP: 7.3
 Requires at least: 5.8
-Tested up to: 6.8
+Tested up to: 6.9
 WC requires at least: 7.0
-WC tested up to: 10.3
+WC tested up to: 10.4
 
 
 Weight Based Shipping is a flexible and widely-used solution to calculate shipping costs based on the total cart weight and value.
@@ -38,6 +38,18 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 
 
 == Changelog ==
+
+= 6.12.1 =
+* Don't show the legacy global config tab by default for new installations.
+
+= 6.12.0 =
+* PRO: Support automatic multi-currency conversion provided by the plugins: CURCY Multi Currency for WooCommerce, WooCommerce Multilingual & Multicurrency (WCML), Booster for WooCommerce, FOX Currency Switcher Professional for WooCommerce (WOOCS).
+* Tested with WooCommerce 10.4.
+
+= 6.11.0 =
+* Redesign Save, Undo, Redo buttons.
+* Replace unicode symbols for kg, cm, mm, with plain texts for better rendering.
+* Tested with WordPress 6.9.
 
 = 6.10.1 =
 * No longer test with PHP 7.2 (end-of-life reached 2020-11-30), WooCommerce prior to 7.0 (released in 2022-10-11), WordPress prior to 5.8 (released in 2021-07-20).
@@ -188,7 +200,7 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 
 = 5.4.0 =
 * Use the cart price provided by WooCommerce by default for fresh installations of the plugin. It makes Order Subtotal accounting for virtual items' prices and increases compatibility with third-party plugins.
-* Make sure a user has manage_woocommerce capability in order to update the shipping rules.
+* Make sure a user has manage_woocommerce capability to update the shipping rules.
 * Tested with PHP 8.2.
 
 = 5.3.27 =
@@ -300,10 +312,10 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 * Fix appearance with WordPress 5.3.
 
 = 5.3.2.2 =
-* Update supported WooCommerce version to 3.8, WordPress to 5.3.
+* Update the supported WooCommerce version to 3.8, WordPress to 5.3.
 
 = 5.3.2.1 =
-* Update supported WooCommerce version to 3.7.
+* Update the supported WooCommerce version to 3.7.
 
 = 5.3.2 =
 * Workaround VaultPress false-positive.
@@ -312,7 +324,7 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 * Fix '400 Bad Request' error on saving settings.
 
 = 5.3.0 =
-* Add 'after discount applied' option to the Order Subtotal condition to match against order price with coupons and other discounts applied.
+* Add the 'after discount applied' option to the Order Subtotal condition to match against order price with coupons and other discounts applied.
 
 = 5.2.6 =
 * Fix WooCommerce 3.6.0+ compatibility issue causing no shipping options shown to a customer under some circumstances.
@@ -321,37 +333,37 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 * Fix PHP 5.3 compatibility issue.
 
 = 5.2.4.1 =
-* Update supported WordPress version to 5.1.
+* Update the supported WordPress version to 5.1.
 
 = 5.2.4 =
 * Partial support for decimal quantities.
 
 = 5.2.3 =
-* Update supported WordPress version to 5.0.
+* Update the supported WordPress version to 5.0.
 
 = 5.2.2 =
-* Improve prerequisites checking.
-* Update supported WooCommerce version to 3.5.
+* Improve prerequisite checking.
+* Update the supported WooCommerce version to 3.5.
 
 = 5.2.1 =
 * Update supported WooCommerce version.
 
 = 5.2.0 =
-* Don't ignore duplicate shipping classes entries. When multiple rates specified for a class in a rule, they all will be in effect starting from this version.
+* Don't ignore duplicate shipping classes entries. When multiple rates are specified for a class in a rule, they all will be in effect starting from this version.
 
 = 5.1.5 =
 * Fix issue with Weight Rate causing zero price in case of a small order weight and large step ("per each") value.
 * Fix appearance issues with WooCommerce 3.2.
 
 = 5.1.4 =
-* Fix blank settings page in Safari when Yoast SEO is active.
+* Fix the blank settings page in Safari when Yoast SEO is active.
 
 = 5.1.3 =
 * Fix WooCommerce pre-2.6 compatibility.
 * Minor appearance fixes.
 
 = 5.1.2 =
-* Fix blank settings page in Firefox when Yoast SEO is active.
+* Fix the blank settings page in Firefox when Yoast SEO is active.
 
 = 5.1.1 =
 * Fix settings not saved on hosts overriding arg_separator.output php.ini option.
@@ -383,7 +395,7 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 * Fix 'fatal error: call to undefined function Wbs\wc_get_shipping_method_count()'.
 
 = 5.0.2-beta =
-* Avoid conflicts with other plugins using same libraries.
+* Avoid conflicts with other plugins using the same libraries.
 * Deactivate other active versions of the plugin upon activation.
 
 = 5.0.1-beta =
@@ -403,7 +415,7 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 * Fix saving rules order.
 
 = 4.2.0 =
-* Allow sorting rules by drag'n'drop in admin panel.
+* Allow sorting rules by drag'n'drop in the admin panel.
 
 = 4.1.4 =
 * WooCommerce 2.6 compatibility fixes.
@@ -501,13 +513,13 @@ Fix "parse error: syntax error, unexpected T_FUNCTION in woocommerce-weight-base
 
 = 2.2.1 =
 
-Allow zero weight shipping. Thus, only Handling Fee is added to the final price.
+Allow zero-weight shipping. Thus, only Handling Fee is added to the final price.
 
-Previously, weight based shipping option has not been shown to user if total weight of their cart is zero. Since version 2.2.1 this is changed so shipping option is available to user with price set to Handling Fee. If it does not suite your needs well you can return previous behavior by setting Min Weight to something a bit greater zero, e.g. 0.001, so that zero-weight orders will not match constraints and the shipping option will not be shown.
+Previously, the weight-based shipping option has not been shown to the user if the total weight of their cart is zero. Since version 2.2.1 this is changed, so the shipping option is available to user with price set to Handling Fee. If this does not suite your needs well, you can return previous behavior by setting Min Weight to something a bit greater than zero, e.g., 0.001, so that zero-weight orders will not match constraints and the shipping option will not be shown.
 
 
 == Screenshots ==
 
 1. Tiered weight-based shipping configuration
-2. Free shipping over threshold and tiered weight-based shipping
+2. Free shipping over a threshold, and tiered weight-based shipping
 3. Per-product shipping with shipping classes

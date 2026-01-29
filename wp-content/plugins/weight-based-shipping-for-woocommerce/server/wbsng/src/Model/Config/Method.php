@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\T;
-use Gzp\WbsNg\Model\Calc\Shipment;
-use Gzp\WbsNg\Model\Config\Method\Settings;
-use Gzp\WbsNg\Model\Order\Bundle;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Destination;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\T;
+use Aikinomi\Wbsng\Model\Calc\Shipment;
+use Aikinomi\Wbsng\Model\Config\Method\Settings;
+use Aikinomi\Wbsng\Model\Order\Bundle;
+use WbsngVendors\Dgm\Shengine\Model\Destination;
 use Iterator;
 use Traversable;
 

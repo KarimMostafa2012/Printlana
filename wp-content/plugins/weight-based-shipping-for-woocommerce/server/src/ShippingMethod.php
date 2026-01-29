@@ -236,10 +236,10 @@ class ShippingMethod extends WC_Shipping_Method
             'wcpre441' => !Plugin::wc441plus(),
             'wcpre10' => version_compare(WC()->version, '10.0', '<'),
 
-            'globalMethods' => ($this->instance_id || !class_exists(\Gzp\WbsNg\Plugin::class)) ? null : [
+            'globalMethods' => ($this->instance_id || !class_exists(\Aikinomi\Wbsng\Plugin::class)) ? null : [
                 'state' => Plugin::globalMethods(),
                 'endpoint' => Api::$globalSwitch->url(),
-                'wbsngRedirectUrl' => Plugin::shippingUrl(\Gzp\WbsNg\Plugin::ID),
+                'wbsngRedirectUrl' => Plugin::shippingUrl(\Aikinomi\Wbsng\Plugin::ID),
             ],
         ]);
     }

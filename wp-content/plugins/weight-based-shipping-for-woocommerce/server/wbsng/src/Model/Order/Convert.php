@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Order;
+namespace Aikinomi\Wbsng\Model\Order;
 
 
-use Gzp\WbsNg\Common\Decimal;
-use GzpWbsNgVendors\Dgm\Shengine\Attributes\ProductVariationAttribute;
-use GzpWbsNgVendors\Dgm\Shengine\Grouping\AttributeGrouping;
-use GzpWbsNgVendors\Dgm\Shengine\Interfaces\IItem;
-use GzpWbsNgVendors\Dgm\Shengine\Interfaces\IItemAggregatables;
-use GzpWbsNgVendors\Dgm\Shengine\Interfaces\IPackage;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Destination;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Price as ShenginePrice;
+use Aikinomi\Wbsng\Common\Decimal;
+use WbsngVendors\Dgm\Shengine\Attributes\ProductVariationAttribute;
+use WbsngVendors\Dgm\Shengine\Grouping\AttributeGrouping;
+use WbsngVendors\Dgm\Shengine\Interfaces\IItem;
+use WbsngVendors\Dgm\Shengine\Interfaces\IItemAggregatables;
+use WbsngVendors\Dgm\Shengine\Interfaces\IPackage;
+use WbsngVendors\Dgm\Shengine\Model\Destination;
+use WbsngVendors\Dgm\Shengine\Model\Price as ShenginePrice;
 
 
 class Convert

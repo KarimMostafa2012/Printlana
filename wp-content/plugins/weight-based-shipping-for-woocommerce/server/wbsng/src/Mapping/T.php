@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Mapping;
+namespace Aikinomi\Wbsng\Mapping;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Mapping\Exceptions\Invalid;
-use Gzp\WbsNg\Mapping\Exceptions\InvalidType;
-use Gzp\WbsNg\Mapping\Exceptions\Required;
-use GzpWbsNgVendors\Brick\Math\Exception\NumberFormatException;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Mapping\Exceptions\Invalid;
+use Aikinomi\Wbsng\Mapping\Exceptions\InvalidType;
+use Aikinomi\Wbsng\Mapping\Exceptions\Required;
+use WbsngVendors\Brick\Math\Exception\NumberFormatException;
 
 
 class T

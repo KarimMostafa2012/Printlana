@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common;
+namespace Aikinomi\Wbsng\Common;
 
 use Countable;
-use Gzp\WbsNg\Common\Equality\Equality;
-use Gzp\WbsNg\Common\Equality\Traits\StandardEquality;
-use Gzp\WbsNg\Common\Hashing\UnorderedHash;
+use Aikinomi\Wbsng\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Traits\StandardEquality;
+use Aikinomi\Wbsng\Common\Hashing\UnorderedHash;
 use IteratorAggregate;
 use Traversable;
 

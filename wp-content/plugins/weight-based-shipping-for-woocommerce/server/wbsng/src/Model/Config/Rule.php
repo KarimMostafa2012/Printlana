@@ -1,13 +1,14 @@
 <?php declare(strict_types=1);
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\Exceptions\Invalid;
-use Gzp\WbsNg\Mapping\T;
-use Gzp\WbsNg\Model\Config\Method\PriceSettings;
-use Gzp\WbsNg\Model\Order\Bundle;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Destination;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\Exceptions\Invalid;
+use Aikinomi\Wbsng\Mapping\T;
+use Aikinomi\Wbsng\Model\Config\Method\PriceSettings;
+use Aikinomi\Wbsng\Model\Order\Bundle;
+use Aikinomi\Wbsng\Multicurrency;
+use WbsngVendors\Dgm\Shengine\Model\Destination;
 
 
 /**
@@ -164,8 +165,15 @@ trait RuleMapping
                 return $this->ctx['shclasses']->map([ShclassCond::class, 'unserialize']);
 
             case 'weight':
+                return $this->ctx[$prop]->map(function($v) {
+                    return Range::unserialize($v);
+                });
+
             case 'price':
-                return $this->ctx[$prop]->map([Range::class, 'unserialize']);
+                return $this->ctx[$prop]->map(function($v) {
+                    $convert = $this->ctx->convert() ? [Multicurrency::class, 'convert'] : null;
+                    return Range::unserialize($v, $convert);
+                });
 
             case 'charge':
                 return $this->ctx['charge']->map([Charge::class, 'unserialize']);

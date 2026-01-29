@@ -6,4 +6,4 @@
 require_once(__DIR__.'/vendor/autoload.php');
 
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
-\Gzp\WbsNg\Plugin::setupOnce(wp_normalize_path(__FILE__));
+\Aikinomi\Wbsng\Plugin::setupOnce(wp_normalize_path(__FILE__));

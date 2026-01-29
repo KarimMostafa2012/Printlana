@@ -898,45 +898,8 @@
     grid-column: span 2;
   }
 }
-.dataviews-field-control__field {
-  height: 32px;
-}
-
-.dataviews-field-control__actions {
-  position: absolute;
-  top: -9999em;
-}
-
-.dataviews-field-control__actions.dataviews-field-control__actions {
-  gap: 4px;
-}
-
-.dataviews-field-control__field:hover .dataviews-field-control__actions,
-.dataviews-field-control__field:focus-within .dataviews-field-control__actions,
-.dataviews-field-control__field.is-interacting .dataviews-field-control__actions {
-  position: unset;
-  top: unset;
-}
-
-.dataviews-field-control__icon {
-  display: flex;
-  width: 24px;
-}
-
-.dataviews-field-control__label-sub-label-container {
-  flex-grow: 1;
-}
-
-.dataviews-field-control__label {
-  display: block;
-}
-
-.dataviews-field-control__sub-label {
-  margin-top: 8px;
-  margin-bottom: 0;
-  font-size: 11px;
-  font-style: normal;
-  color: #757575;
+.dataviews-view-config__label {
+  text-wrap: nowrap;
 }
 
 .dataviews-view-grid-items {
@@ -1375,7 +1338,6 @@ div.dataviews-view-list {
 .dataviews-view-table td.dataviews-view-table__checkbox-column,
 .dataviews-view-table th.dataviews-view-table__checkbox-column {
   padding-left: 0;
-  width: 1%;
 }
 .dataviews-view-table td.dataviews-view-table__checkbox-column .dataviews-view-table__cell-content-wrapper,
 .dataviews-view-table th.dataviews-view-table__checkbox-column .dataviews-view-table__cell-content-wrapper {
@@ -1473,6 +1435,7 @@ div.dataviews-view-list {
   min-height: 32px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 .dataviews-view-table tbody .dataviews-view-table__cell-content-wrapper.dataviews-view-table__cell-align-end {
   justify-content: flex-end;
@@ -1579,6 +1542,11 @@ div.dataviews-view-list {
   font-weight: 499;
   padding: 12px 48px;
   color: #1e1e1e;
+}
+
+/* Column width intents via colgroup: make non-primary columns shrink-to-fit */
+.dataviews-view-table col[class^=dataviews-view-table__col-]:not(.dataviews-view-table__col-primary) {
+  width: 1%;
 }
 
 .dataviews-view-picker-grid .dataviews-view-picker-grid__card {
@@ -1720,6 +1688,29 @@ div.dataviews-view-list {
   padding: 0 48px;
 }
 
+.dataviews-view-picker-table tbody:focus-visible[aria-activedescendant] {
+  outline: none;
+}
+.dataviews-view-picker-table tbody:focus-visible [data-active-item=true] {
+  outline: 2px solid var(--wp-admin-theme-color);
+}
+.dataviews-view-picker-table .dataviews-selection-checkbox .components-checkbox-control__input.components-checkbox-control__input {
+  pointer-events: none;
+  opacity: 1;
+}
+.dataviews-view-picker-table .dataviews-view-table__row {
+  cursor: pointer;
+}
+.dataviews-view-picker-table .dataviews-view-table__row.is-selected {
+  background-color: rgba(var(--wp-admin-theme-color--rgb), 0.04);
+}
+.dataviews-view-picker-table .dataviews-view-table__row.is-hovered {
+  background-color: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+}
+.dataviews-view-picker-table .dataviews-view-table__row.is-selected.is-hovered {
+  background-color: rgba(var(--wp-admin-theme-color--rgb), 0.12);
+}
+
 .dataviews-controls__datetime {
   border: none;
   padding: 0;
@@ -1850,6 +1841,10 @@ div.dataviews-view-list {
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+.dataforms-layouts-details__content {
+  padding-top: 12px;
 }
 
 .dataforms-layouts-row__field-control {

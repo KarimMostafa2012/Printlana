@@ -60,7 +60,7 @@ class Plugin
 
         /** @noinspection PhpUndefinedClassInspection */
         /** @noinspection PhpUndefinedNamespaceInspection */
-        if (($v === 'only-wbsng' || $v === 'both') && !class_exists(\Gzp\WbsNg\Plugin::class)) {
+        if (($v === 'only-wbsng' || $v === 'both') && !class_exists(\Aikinomi\Wbsng\Plugin::class)) {
             $v = 'only-wbs';
         }
 

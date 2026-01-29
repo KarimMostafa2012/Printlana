@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common\Hashing;
+namespace Aikinomi\Wbsng\Common\Hashing;
 
-use Gzp\WbsNg\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Equality;
 
 
 class OrderedHash

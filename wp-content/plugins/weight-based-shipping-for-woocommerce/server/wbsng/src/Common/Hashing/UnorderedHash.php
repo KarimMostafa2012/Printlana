@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common\Hashing;
+namespace Aikinomi\Wbsng\Common\Hashing;
 
 
 class UnorderedHash

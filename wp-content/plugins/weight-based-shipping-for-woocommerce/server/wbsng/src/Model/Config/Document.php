@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Mapping\Context;
-use function Gzp\WbsNg\Common\any;
+use Aikinomi\Wbsng\Mapping\Context;
+use function Aikinomi\Wbsng\Common\any;
 
 
 class Document

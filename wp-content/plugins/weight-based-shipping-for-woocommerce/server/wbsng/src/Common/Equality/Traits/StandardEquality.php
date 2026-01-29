@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common\Equality\Traits;
+namespace Aikinomi\Wbsng\Common\Equality\Traits;
 
-use Gzp\WbsNg\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Equality;
 
 
 trait StandardEquality

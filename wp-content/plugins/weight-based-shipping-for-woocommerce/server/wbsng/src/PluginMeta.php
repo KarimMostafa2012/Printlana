@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
-use GzpWbsNgVendors\Dgm\SimpleProperties\SimpleProperties;
+use WbsngVendors\Dgm\SimpleProperties\SimpleProperties;
 
 
 /**

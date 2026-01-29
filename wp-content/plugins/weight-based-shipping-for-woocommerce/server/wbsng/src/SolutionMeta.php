@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Model\Calc\Solution;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Model\Calc\Solution;
 use Throwable;
 
 

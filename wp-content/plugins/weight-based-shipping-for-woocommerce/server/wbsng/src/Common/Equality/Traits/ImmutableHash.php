@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common\Equality\Traits;
+namespace Aikinomi\Wbsng\Common\Equality\Traits;
 
 
 trait ImmutableHash

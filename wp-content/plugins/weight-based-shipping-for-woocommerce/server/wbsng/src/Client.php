@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
+namespace Aikinomi\Wbsng;
 
-namespace Gzp\WbsNg;
-
-use Gzp\WbsNg\Model\Order\Item;
-use GzpWbsNgVendors\Dgm\Arrays\Arrays;
+use Aikinomi\Wbsng\Model\Order\Item;
 use WP_Term;
 
 
@@ -14,58 +12,26 @@ class Client
         $this->method = $method;
     }
 
-    public function html(): string
+    public function html(): void
     {
-        $this->init();
-
-        $html = '';
-
-        {
-            $hide = "#mainform p.submit";
-            if (!$this->method->instance_id) { // global instance
-                $hide .= ",#mainform>h2";
-            }
-            $html .= "<style>
-                $hide {display:none}
-                .woocommerce-recommended-shipping-extensions {
-                    display: none !important;
-                }
-            </style>";
-        }
-
-        $styles = Arrays::map($this->css, static function($css) {
-            $css = htmlspecialchars($css);
-            return '<link rel="stylesheet" href="'.$css.'">';
-        });
-        $styles = join('', $styles);
-
-        $html .= '<div id="gzp_wbsng_root">'.$styles.'</div>';
-        $html .= '<script>document.getElementById("gzp_wbsng_root").attachShadow({mode: "open"})</script>';
-
-
-        return $html;
+        $paths = Plugin::instance()->meta->paths;
+        Client\hide(!$this->method->instance_id);
+        Client\root($paths->serverAssetUrl('client.css'));
+        Client\review();
     }
 
     public function enqueueAssets(): void
     {
-        $this->init();
-
         // @font-face doesn't work inside shadow dom in Chrome, so define it globally
         wp_enqueue_style('gzp-wbsng-roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=block');
 
-        if (!$this->js) {
-            return;
-        }
+        // the header save button uses the wordpress react component library
+        wp_enqueue_style('wp-components');
 
-        $jsid = null;
-        foreach ($this->js as $js) {
-            $id = 'gzp-wbsng-'.$js;
-            if (!isset($jsid)) {
-                $jsid = $id;
-            }
-            wp_enqueue_script($id, $js, [], null);
-        }
-
+        $paths = Plugin::instance()->meta->paths;
+        $clientjsid = 'gzp-wbsng-client-js';
+        wp_enqueue_script($clientjsid, $paths->serverAssetUrl('client.js'));
+        
         $currencyPlacement = explode('_', get_option('woocommerce_currency_pos'));
 
         $globalMethods = null;
@@ -79,7 +45,7 @@ class Client
 
         $config = $this->method->configData();
 
-        wp_localize_script($jsid, 'gzp_wbsng_js_data', [
+        wp_localize_script($clientjsid, 'gzp_wbsng_js_data', [
 
             'config' => $config,
 
@@ -115,20 +81,6 @@ class Client
                 ? admin_url('admin.php?page=wc-settings&tab=shipping')
                 : null,
         ]);
-    }
-
-    private function init(): void
-    {
-        if ($this->inited) {
-            return;
-        }
-
-        $paths = Plugin::instance()->meta->paths;
-
-        $this->js[] = $paths->serverAssetUrl('client.js');
-        $this->css[] = $paths->serverAssetUrl('client.css');
-
-        $this->inited = true;
     }
 
     private function showGlobalMethodStub(): bool
@@ -192,7 +144,72 @@ class Client
     }
 
     private $inited = false;
-    private $css;
-    private $js;
     private $method;
+}
+
+
+namespace Aikinomi\Wbsng\Client;
+
+use Aikinomi\Wbsng\Api;
+use Aikinomi\Wbsng\ReviewEndpoint;
+
+
+function hide(bool $globalInstance): void {
+
+    $hide = "#mainform p.submit";
+    if ($globalInstance) { // global instance
+        $hide .= ",#mainform>h2";
+    }
+    
+    ?>
+        <style>
+            <?= $hide ?> {display:none}
+            .woocommerce-recommended-shipping-extensions {display: none !important}
+        </style>
+    <?php
+}
+
+function root(string $styles): void {
+    ?>
+        <div id="gzp_wbsng_root">
+            <link rel="stylesheet" href="<?= htmlspecialchars($styles) ?>">
+        </div>
+        <script>document.getElementById("gzp_wbsng_root").attachShadow({mode: "open"})</script>
+    <?php
+}
+
+function review(): void {
+
+    if (!ReviewEndpoint::active()) {
+        ?><style>#wpfooter{display:none}</style><?php
+        return;
+    }
+
+    ?>
+        <style>#wpfooter { bottom: -2em; }</style>
+        <template>
+            <div style="font-size: 110%">
+                If you like <b>Weight Based Shipping</b> please leave us a
+                <a
+                    href="https://wordpress.org/support/plugin/weight-based-shipping-for-woocommerce/reviews/?rate=5#new-post"
+                    target="_blank"
+                    aria-label="five star"
+                >&#9733;&#9733;&#9733;&#9733;&#9733;</a>
+                rating. A huge thanks in advance!
+            </div>
+        </template>
+        <script>
+            /** @type {HTMLTemplateElement} */
+            const tmpl = document.currentScript.previousElementSibling
+            document.addEventListener('DOMContentLoaded', function() {
+                /** @type {HTMLElement} */
+                const footer = document.querySelector('#wpfooter')
+                footer.replaceChildren(tmpl.content)
+                footer.querySelector('a').addEventListener('click', function() {
+                    fetch(<?= json_encode(Api::reviewEndpointUrl(), JSON_HEX_TAG) ?>, {method: 'POST'})
+                    footer.innerText = 'Thank you for your review!'
+                })
+            })
+        </script>
+    <?php
 }

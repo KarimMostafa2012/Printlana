@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\T;
-use Gzp\WbsNg\Model\Order\Bundle;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\T;
+use Aikinomi\Wbsng\Model\Order\Bundle;
 
 
 /**

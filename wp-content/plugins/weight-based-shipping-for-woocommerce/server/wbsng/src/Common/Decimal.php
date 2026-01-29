@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common;
+namespace Aikinomi\Wbsng\Common;
 
-use Gzp\WbsNg\Common\Equality\Equality;
-use Gzp\WbsNg\Common\Equality\Traits\StandardEquality;
-use Gzp\WbsNg\Common\Hashing\OrderedHash;
-use GzpWbsNgVendors\Brick\Math\BigDecimal;
-use GzpWbsNgVendors\Brick\Math\Exception\NumberFormatException;
+use Aikinomi\Wbsng\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Traits\StandardEquality;
+use Aikinomi\Wbsng\Common\Hashing\OrderedHash;
+use WbsngVendors\Brick\Math\BigDecimal;
+use WbsngVendors\Brick\Math\Exception\NumberFormatException;
 use InvalidArgumentException;
 
 
@@ -105,6 +105,11 @@ class Decimal implements Equality
     public function isGreaterThanOrEqualTo(self $other): bool
     {
         return $this->d->isGreaterThanOrEqualTo($other->d);
+    }
+
+    public function toFloat(): float
+    {
+        return $this->d->toFloat();
     }
 
     public function __toString(): string

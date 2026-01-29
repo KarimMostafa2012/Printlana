@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Calc;
+namespace Aikinomi\Wbsng\Model\Calc;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Common\Equality\Equality;
-use Gzp\WbsNg\Common\Equality\Traits\ImmutableHash;
-use Gzp\WbsNg\Common\Equality\Traits\StandardEquality;
-use Gzp\WbsNg\Common\Hashing\UnorderedHash;
-use Gzp\WbsNg\Common\Set;
-use Gzp\WbsNg\Mapping\Context;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Traits\ImmutableHash;
+use Aikinomi\Wbsng\Common\Equality\Traits\StandardEquality;
+use Aikinomi\Wbsng\Common\Hashing\UnorderedHash;
+use Aikinomi\Wbsng\Common\Set;
+use Aikinomi\Wbsng\Mapping\Context;
 
 
 /**

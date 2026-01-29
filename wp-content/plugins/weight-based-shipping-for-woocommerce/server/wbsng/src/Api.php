@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
-use GzpWbsNgVendors\Dgm\WpAjaxApi\Endpoint;
-use GzpWbsNgVendors\Dgm\WpAjaxApi\RegisteredEndpoint;
-use GzpWbsNgVendors\Dgm\WpAjaxApi\Request;
-use GzpWbsNgVendors\Dgm\WpAjaxApi\Response;
-use GzpWbsNgVendors\Dgm\WpAjaxApi\WpAjaxApi;
+use WbsngVendors\Dgm\WpAjaxApi\Endpoint;
+use WbsngVendors\Dgm\WpAjaxApi\RegisteredEndpoint;
+use WbsngVendors\Dgm\WpAjaxApi\Request;
+use WbsngVendors\Dgm\WpAjaxApi\Response;
+use WbsngVendors\Dgm\WpAjaxApi\WpAjaxApi;
 
 
 class Api
@@ -15,7 +15,13 @@ class Api
     public static function init(): void
     {
         $wpAjaxApi = new WpAjaxApi();
+
         self::$config = $wpAjaxApi->register(new ConfigEndpoint());
+
+        if (ReviewEndpoint::active()) {
+            self::$reviewed = $wpAjaxApi->register(new ReviewEndpoint());
+        }
+
         $wpAjaxApi->install();
     }
 
@@ -24,10 +30,20 @@ class Api
         return self::$config->url([ConfigEndpoint::InstanceIdArg => $instanceId]);
     }
 
+    public static function reviewEndpointUrl(): string
+    {
+        return self::$reviewed ? self::$reviewed->url() : '';
+    }
+
     /**
      * @var RegisteredEndpoint
      */
     private static $config;
+
+    /**
+     * @var ?RegisteredEndpoint
+     */
+    private static $reviewed;
 }
 
 
@@ -64,6 +80,22 @@ class ConfigEndpoint extends Endpoint
             return Response::text($e->getMessage(), Response::BadRequest);
         }
 
+        return Response::empty();
+    }
+}
+
+class ReviewEndpoint extends Endpoint
+{
+    public $permissions = [];
+    
+    public static function active(): bool
+    {
+        return !get_option('wbsng_reviewed');
+    }
+    
+    public function post(Request $request): Response
+    {
+        update_option('wbsng_reviewed', true);
         return Response::empty();
     }
 }

@@ -30,7 +30,7 @@ class Api
     {
         $wpAjaxApi = new WpAjaxApi();
         self::$config = $wpAjaxApi->register(new ConfigEndpoint());
-        self::$globalSwitch = $wpAjaxApi->register(new WbsNgGlobalSwitchEndpoint());
+        self::$globalSwitch = $wpAjaxApi->register(new WbsngGlobalSwitchEndpoint());
         $wpAjaxApi->install();
     }
 }
@@ -63,7 +63,7 @@ class ConfigEndpoint extends Endpoint
 }
 
 
-class WbsNgGlobalSwitchEndpoint extends Endpoint
+class WbsngGlobalSwitchEndpoint extends Endpoint
 {
     public $permissions = ['manage_woocommerce'];
 

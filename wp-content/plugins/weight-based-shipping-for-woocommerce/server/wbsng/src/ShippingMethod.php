@@ -1,16 +1,16 @@
 <?php
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Model\Config\Document;
-use Gzp\WbsNg\Model\Config\Method;
-use Gzp\WbsNg\Model\Order\Convert;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Rate as ShengineRate;
-use GzpWbsNgVendors\Dgm\Shengine\Woocommerce\Converters\PackageConverter;
-use GzpWbsNgVendors\Dgm\Shengine\Woocommerce\Converters\RateConverter;
-use GzpWbsNgVendors\Dgm\WcTools\WcTools;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Model\Config\Document;
+use Aikinomi\Wbsng\Model\Config\Method;
+use Aikinomi\Wbsng\Model\Order\Convert;
+use WbsngVendors\Dgm\Shengine\Model\Rate as ShengineRate;
+use WbsngVendors\Dgm\Shengine\Woocommerce\Converters\PackageConverter;
+use WbsngVendors\Dgm\Shengine\Woocommerce\Converters\RateConverter;
+use WbsngVendors\Dgm\WcTools\WcTools;
 use WC_Shipping_Method;
-use function Gzp\WbsNg\Common\map;
+use function Aikinomi\Wbsng\Common\map;
 
 
 class ShippingMethod extends WC_Shipping_Method
@@ -52,7 +52,7 @@ class ShippingMethod extends WC_Shipping_Method
         if ($instanceId) {
             try {
                 // Displaying the list of internal shipping methods via $this->title might be looking better
-                // in the list of a zone's shipping methods, but it breaks the zones page since it escapes html.
+                // in the list of a zone's shipping methods, but it breaks the zone list page since it escapes html.
                 $this->method_description = join('', map($this->config()->methods, function(Method $m) {
                     return '<div '.($m->active() ? '' : 'style="color: #a7aaad"').' >'.esc_html($m->name).'</div>';
                 }));
@@ -64,7 +64,7 @@ class ShippingMethod extends WC_Shipping_Method
         // When instance_id is empty, this text is shown to a user choosing a new shipping method from the list.
         // Otherwise, it's shown next to an existing shipping method instance.
         if (!$this->method_description) {
-            $this->method_description = 'Lets you define flat, progressive, and free shipping options based on cart weight, price, and contents.';
+            $this->method_description = 'Lets you define flat, incremental, and free shipping options based on cart weight, price, and contents.';
         }
     }
 
@@ -92,7 +92,7 @@ class ShippingMethod extends WC_Shipping_Method
      * @throws ConfigError
      * @noinspection PhpDocRedundantThrowsInspection
      */
-    public function config(?array $data = null): Document
+    public function config(?array $data = null, bool $convert = false): Document
     {
         $data = $data ?? $this->configData();
         if (!isset($data)) {
@@ -106,7 +106,8 @@ class ShippingMethod extends WC_Shipping_Method
                     $e = new ConfigError("config loading error at {$ctx->origin($e)->path()}: {$e->getMessage()}", 0, $e);
                 }
                 return $e;
-            }
+            },
+            $convert,
         );
 
         return $ctx->map([Document::class, 'unserialize']);
@@ -126,7 +127,7 @@ class ShippingMethod extends WC_Shipping_Method
     {
         try {
 
-            $config = $this->config();
+            $config = $this->config(null, true);
             if (!$config->active()) {
                 return;
             }
@@ -166,7 +167,7 @@ class ShippingMethod extends WC_Shipping_Method
     {
         $client = new Client($this);
         WpTools::addActionOrCall('admin_enqueue_scripts', [$client, 'enqueueAssets'], PHP_INT_MAX);
-        echo $client->html();
+        $client->html();
     }
 
     public function get_instance_id(): int
@@ -188,13 +189,13 @@ class ShippingMethod extends WC_Shipping_Method
 
     public function get_option($key, $empty_value = null)
     {
-        // Issue: The shipping tax is excluded from the shippping total after an order is placed
+        // Issue: The shipping tax is excluded from the shipping total after an order is placed
         //
         // Areas affected:
         //  — The total amount to pay.
         //  — The shipping total displayed on the "order received" page.
-        //  — The order details in the backend. The shipping tax clause is presented in the order details but isn't
-        //    actually included to the order total.
+        //  — The order details in the backend. The shipping tax clause is presented in the order details
+        //    but isn't added to the order total.
         //
         // Cause: WC_Order_Item_Shipping::calculate_taxes() (since WC 9.7) checks a shipping method's tax_status as an
         // optimization, despite the fact that tax status is a property of a shipping option rather than a shipping

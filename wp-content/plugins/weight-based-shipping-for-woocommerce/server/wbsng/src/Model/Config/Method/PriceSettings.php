@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Config\Method;
+namespace Aikinomi\Wbsng\Model\Config\Method;
 
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\T;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\T;
 
 
 class PriceSettings

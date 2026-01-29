@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Common\Equality;
+namespace Aikinomi\Wbsng\Common\Equality;
 
 
 class EqualityUtils

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\T;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\T;
 
 
 /**
@@ -45,7 +45,7 @@ class Range
 
 trait RangeMapping
 {
-    public static function unserialize(?array $data): self
+    public static function unserialize(?array $data, ?callable $convert = null): self
     {
         if (!isset($data)) {
             self::$noop = new self(null, null);
@@ -54,9 +54,14 @@ trait RangeMapping
 
         $data = Context::of($data);
 
+        $convert = $convert ?? function($x) { return $x; };
+        $bound = function($v) use($convert) {
+            return $v === null ? null : $convert(T::decimal($v));
+        };
+        
         return new self(
-            $data['min']->map([T::class, 'optionalDecimal']),
-            $data['max']->map([T::class, 'optionalDecimal'])
+            $data['min']->map($bound),
+            $data['max']->map($bound)
         );
     }
 

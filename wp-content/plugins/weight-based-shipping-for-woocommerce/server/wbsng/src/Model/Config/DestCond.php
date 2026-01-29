@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Config;
+namespace Aikinomi\Wbsng\Model\Config;
 
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\Exceptions\InvalidType;
-use Gzp\WbsNg\Mapping\T;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Destination;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\Exceptions\InvalidType;
+use Aikinomi\Wbsng\Mapping\T;
+use WbsngVendors\Dgm\Shengine\Model\Destination;
 
 
 /**

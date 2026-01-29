@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Homeland
- * Description:       A custom plugin for Homepage Carousel and Highlighted Elements.
- * Version:           1.2.0
+ * Plugin Name:       Homeland Carousel
+ * Description:       A custom carousel for the Homepage.
+ * Version:           1.0.0
  * Author:            Yahya AlQersh
  */
 
@@ -14,14 +14,14 @@ if (!defined('ABSPATH')) {
 function homeland_register_carousel_slide_cpt()
 {
     $labels = array(
-        'name' => _x('Homeland', 'Post Type General Name', 'homeland'),
+        'name' => _x('Carousel Slides', 'Post Type General Name', 'homeland'),
         'singular_name' => _x('Carousel Slide', 'Post Type Singular Name', 'homeland'),
-        'menu_name' => __('Homeland', 'homeland'),
+        'menu_name' => __('Carousel Slides', 'homeland'),
         'name_admin_bar' => __('Carousel Slide', 'homeland'),
         'archives' => __('Slide Archives', 'homeland'),
         'attributes' => __('Slide Attributes', 'homeland'),
         'parent_item_colon' => __('Parent Slide:', 'homeland'),
-        'all_items' => __('Carousel Slides', 'homeland'),
+        'all_items' => __('All Slides', 'homeland'),
         'add_new_item' => __('Add New Slide', 'homeland'),
         'add_new' => __('Add New', 'homeland'),
         'new_item' => __('New Slide', 'homeland'),
@@ -52,7 +52,7 @@ function homeland_register_carousel_slide_cpt()
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_position' => 5,
-        'menu_icon' => 'dashicons-admin-home',
+        'menu_icon' => 'dashicons-slides',
         'show_in_admin_bar' => true,
         'show_in_nav_menus' => true,
         'can_export' => true,
@@ -111,225 +111,18 @@ function homeland_save_link_meta_box_data($post_id)
 add_action('save_post', 'homeland_save_link_meta_box_data');
 
 // 3. Register Scripts and Styles
-function homeland_enqueue_assets()
+function homeland_enqueue_carousel_assets()
 {
     // GSAP from CDN
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
 
     // Custom CSS and JS
-    wp_enqueue_style('homeland-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '1.2.0');
-    wp_register_script('homeland-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '1.2.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'carousel.css', array(), '1.0.11');
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'carousel.js', array('gsap-cdn'), '1.0.12', true);
 }
-add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
+add_action('wp_enqueue_scripts', 'homeland_enqueue_carousel_assets');
 
-// 4. Settings Page for Highlighted Elements
-function homeland_add_settings_page()
-{
-    add_submenu_page(
-        'edit.php?post_type=carousel_slide',
-        'Highlighted Elements',
-        'Highlighted Elements',
-        'manage_options',
-        'homeland-highlighted',
-        'homeland_render_highlighted_settings'
-    );
-}
-add_action('admin_menu', 'homeland_add_settings_page');
-
-function homeland_render_highlighted_settings()
-{
-    ?>
-    <style>
-        .homeland-admin-card {
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 20px;
-            max-width: 1000px;
-        }
-
-        .homeland-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .homeland-element {
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        .homeland-preview-box {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            background: #F1F5FD;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-
-        .homeland-preview-img {
-            width: 60px;
-            transition: transform 0.3s;
-        }
-
-        .homeland-preview-img:hover {
-            transform: scale(1.1);
-        }
-
-        .homeland-label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-    </style>
-
-    <div class="wrap">
-        <h1>Homeland Settings - Highlighted Elements (New & Hot)</h1>
-        <p>Customize the content for the 4 highlighted elements and generate the Elementor HTML code.</p>
-
-        <div class="homeland-admin-card">
-            <h3>Customization</h3>
-            <form id="homeland-form">
-                <div class="homeland-grid">
-                    <!-- Card 1 (Large Left) -->
-                    <div class="homeland-element">
-                        <h4>Element 1 (Large Left - Bag)</h4>
-                        <label class="homeland-label">Title/Content</label>
-                        <textarea id="h_card_1" class="regular-text" rows="2"
-                            style="width:100%">Enjoy discounts on all types of groceries and frozen products</textarea>
-                    </div>
-
-                    <!-- Card 2 (Small Mid Top) -->
-                    <div class="homeland-element">
-                        <h4>Element 2 (Small Mid Top - Bag)</h4>
-                        <label class="homeland-label">Title/Content</label>
-                        <textarea id="h_card_2" class="regular-text" rows="2"
-                            style="width:100%">Enjoy discounts on all groceries and frozen products</textarea>
-                    </div>
-
-                    <!-- Card 3 (Small Mid Bottom) -->
-                    <div class="homeland-element">
-                        <h4>Element 3 (Small Mid Bottom - Bag)</h4>
-                        <label class="homeland-label">Title/Content</label>
-                        <textarea id="h_card_3" class="regular-text" rows="2"
-                            style="width:100%">Enjoy discounts on all groceries and frozen products</textarea>
-                    </div>
-
-                    <!-- Card 4 (Large Right - Fries) -->
-                    <div class="homeland-element">
-                        <h4>Element 4 (Large Right - Fries)</h4>
-                        <label class="homeland-label">Title/Content</label>
-                        <textarea id="h_card_4" class="regular-text" rows="2"
-                            style="width:100%">Enjoy discounts on all types of groceries and frozen products</textarea>
-                    </div>
-                </div>
-
-                <p class="submit">
-                    <input type="button" class="button button-primary" value="Generate Elementor Code"
-                        onclick="generateHomelandCode()">
-                </p>
-            </form>
-
-            <div id="homeland-code-result" style="display:none; margin-top: 20px;">
-                <hr>
-                <h3>Copy this code and use it in a (HTML) element in Elementor:</h3>
-                <textarea id="homeland-textarea" style="width:100%; height:300px; font-family: monospace; font-size: 12px;"
-                    readonly></textarea>
-                <p>
-                    <button class="button button-secondary" onclick="copyHomelandCode()">Copy Code</button>
-                </p>
-            </div>
-        </div>
-
-        <div class="homeland-admin-card">
-            <h3>Preview (Placeholder Mode)</h3>
-            <div class="homeland-preview-box">
-                <img src="<?php echo plugin_dir_url(__FILE__) . 'assets/bag.png'; ?>" class="homeland-preview-img">
-                <div>
-                    <strong>Lorem Ipsum</strong>
-                    <p style="font-size: 14px; color: #666; margin: 5px 0 0;">Placeholder text with bag.png</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function generateHomelandCode() {
-            const c1 = document.getElementById('h_card_1').value;
-            const c2 = document.getElementById('h_card_2').value;
-            const c3 = document.getElementById('h_card_3').value;
-            const c4 = document.getElementById('h_card_4').value;
-
-            const bagUrl = "<?php echo plugin_dir_url(__FILE__) . 'assets/bag.png'; ?>";
-            const friesUrl = "<?php echo plugin_dir_url(__FILE__) . 'assets/fries.png'; ?>";
-
-            const code = `
-<style>
-.h-wrapper { display: flex; flex-direction: row; gap: 32px; width: 100%; max-width: 1280px; margin: 0 auto; font-family: 'Beiruti', sans-serif; background: #000; padding: 20px; }
-.h-card { background: #F1F5FD; border-radius: 16px; position: relative; overflow: hidden; height: 544px; flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; }
-.h-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.h-img { max-width: 80%; max-height: 60%; object-fit: contain; transition: transform 0.3s; margin-top: 40px; }
-.h-card:hover .h-img { transform: scale(1.05) translateY(-10px); }
-.h-text-group { position: absolute; bottom: 40px; text-align: center; width: 100%; padding: 0 24px; direction: rtl; }
-.h-promo { font-size: 24px; font-weight: 600; color: #000014; line-height: 1.2; }
-.h-mid-col { display: flex; flex-direction: column; gap: 32px; flex: 1; }
-.h-small-card { background: #F1F5FD; border-radius: 16px; height: 256px; position: relative; padding: 15px; overflow: hidden; transition: box-shadow 0.3s; display: flex; flex-direction: column; align-items: center; }
-.h-small-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.h-small-img { max-width: 50%; max-height: 55%; object-fit: contain; transition: transform 0.3s; margin-top: 10px; }
-.h-small-card:hover .h-small-img { transform: scale(1.05) translateY(-5px); }
-.h-small-text { position: absolute; bottom: 24px; text-align: center; width: 100%; padding: 0 15px; font-weight: 600; color: #000014; direction: rtl; font-size: 20px; line-height: 1.2; }
-@media (max-width: 1024px) { .h-wrapper { flex-direction: column; align-items: center; } .h-card, .h-mid-col { width: 100%; max-width: 405px; } }
-</style>
-
-<div class="h-wrapper">
-    <!-- Card 1 (Large Left) -->
-    <div class="h-card">
-        <img src="${bagUrl}" class="h-img">
-        <div class="h-text-group"><div class="h-promo">${c1}</div></div>
-    </div>
-    
-    <!-- Middle Column -->
-    <div class="h-mid-col">
-        <!-- Card 2 (Top) -->
-        <div class="h-small-card">
-            <img src="${bagUrl}" class="h-small-img">
-            <div class="h-small-text">${c2}</div>
-        </div>
-        <!-- Card 3 (Bottom) -->
-        <div class="h-small-card">
-            <img src="${bagUrl}" class="h-small-img">
-            <div class="h-small-text">${c3}</div>
-        </div>
-    </div>
-
-    <!-- Card 4 (Large Right) -->
-    <div class="h-card">
-        <img src="${friesUrl}" class="h-img">
-        <div class="h-text-group"><div class="h-promo">${c4}</div></div>
-    </div>
-</div>
-        `;
-
-        document.getElementById('homeland-textarea').value = code.trim();
-        document.getElementById('homeland-code-result').style.display = 'block';
-    }
-
-    function copyHomelandCode() {
-        const copyText = document.getElementById("homeland-textarea");
-        copyText.select();
-        document.execCommand("copy");
-        alert("Code copied to clipboard successfully!");
-    }
-</script>
-    <?php
-}
-
-// 5. Create the Shortcode for Carousel
+// 4. Create the Shortcode
 function homeland_carousel_shortcode()
 {
     $args = array(
@@ -360,17 +153,18 @@ function homeland_carousel_shortcode()
     wp_reset_postdata();
 
     // Pass the data to JavaScript
-    wp_localize_script('homeland-script', 'homeland_carousel_data', array(
+    wp_localize_script('homeland-carousel-script', 'homeland_carousel_data', array(
         'slides' => $slides_data,
     ));
 
     // Enqueue the script now that data is localized
-    wp_enqueue_script('homeland-script');
+    wp_enqueue_script('homeland-carousel-script');
 
     // The HTML structure for the carousel
     ob_start();
     ?>
     <div class="homeland-carousel-wrapper">
+        <h1>منتجاتنا</h1>
         <div class="slider-container">
             <button class="nav-arrow nav-arrow-left">
                 <svg viewBox="0 0 24 24">

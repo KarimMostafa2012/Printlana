@@ -1,9 +1,9 @@
 <?php /** @noinspection PhpPropertyOnlyWrittenInspection */
 declare(strict_types=1);
 
-namespace Gzp\WbsNg\Mapping;
+namespace Aikinomi\Wbsng\Mapping;
 
-use Gzp\WbsNg\Mapping\Exceptions\InvalidType;
+use Aikinomi\Wbsng\Mapping\Exceptions\InvalidType;
 use Throwable;
 use Traversable;
 
@@ -17,28 +17,24 @@ class Context implements \ArrayAccess, \IteratorAggregate
      * @param mixed $value
      * @param ?callable(self, Throwable): Throwable $mapError
      */
-    public static function of($value, ?callable $mapError = null): self
+    public static function of($value, ?callable $mapError = null, ?bool $convert = null): self
     {
-        $frame = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
-        $label = "{$frame['file']}:{$frame['line']}";
-
-        return new self($value, self::$implicitParent, '', $label, $mapError);
+        return new self($value, self::$implicitParent, '', $mapError, $convert);
     }
 
     /**
      * @param mixed $value
      * @param ?callable(self, Throwable): Throwable $mapError
      */
-    private function __construct($value, ?self $parent, string $subpath, string $label, ?callable $mapError = null)
+    private function __construct($value, ?self $parent, string $subpath, ?callable $mapError = null, ?bool $convert = null)
     {
         $this->parent = $parent;
         $this->value = $value;
         $this->subpath = $subpath;
-
-        /** @noinspection UnusedConstructorDependenciesInspection */
-        $this->label = $label;
-
+        
         $this->mapError = $mapError;
+
+        $this->convert = $convert ?? ($parent ? $parent->convert : false);
 
         self::$rc++;
     }
@@ -90,18 +86,22 @@ class Context implements \ArrayAccess, \IteratorAggregate
         return $p;
     }
 
+    public function convert(): bool
+    {
+        return $this->convert;
+    }
+
     /**
      * @throws InvalidType
      */
     public function offsetGet($offset): self
     {
         $this->requireArray();
-        return new self($this->value[$offset] ?? null, $this, (string)$offset, 'offsetGet');
+        return new self($this->value[$offset] ?? null, $this, (string)$offset);
     }
 
     public function offsetExists($offset): bool
     {
-//        throw new \LogicException('no need to check for a key existence in unserialize data');
         return array_key_exists($offset, $this->value);
     }
 
@@ -140,11 +140,6 @@ class Context implements \ArrayAccess, \IteratorAggregate
     private $subpath;
 
     /**
-     * @var string
-     */
-    private $label;
-
-    /**
      * @var ?self
      */
     private $parent;
@@ -153,6 +148,11 @@ class Context implements \ArrayAccess, \IteratorAggregate
      * @var ?callable(self, Throwable): Throwable
      */
     private $mapError;
+
+    /**
+     * @var bool
+     */
+    private $convert;
 
 
     private function doRun(callable $f, ...$args)

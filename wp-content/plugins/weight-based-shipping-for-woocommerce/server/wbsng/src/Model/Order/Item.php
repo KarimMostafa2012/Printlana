@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg\Model\Order;
+namespace Aikinomi\Wbsng\Model\Order;
 
-use Gzp\WbsNg\Common\Decimal;
-use Gzp\WbsNg\Common\Equality\Equality;
-use Gzp\WbsNg\Common\Equality\Traits\StandardEquality;
-use Gzp\WbsNg\Mapping\Context;
-use Gzp\WbsNg\Mapping\T;
+use Aikinomi\Wbsng\Common\Decimal;
+use Aikinomi\Wbsng\Common\Equality\Equality;
+use Aikinomi\Wbsng\Common\Equality\Traits\StandardEquality;
+use Aikinomi\Wbsng\Mapping\Context;
+use Aikinomi\Wbsng\Mapping\T;
 
 
 /**

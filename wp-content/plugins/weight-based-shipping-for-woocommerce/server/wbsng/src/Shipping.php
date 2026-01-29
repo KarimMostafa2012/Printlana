@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
-use Gzp\WbsNg\Common\Equality\EqualityUtils;
-use Gzp\WbsNg\Common\Set;
-use Gzp\WbsNg\Model\Calc\Shipment;
-use Gzp\WbsNg\Model\Calc\Solution;
-use Gzp\WbsNg\Model\Config\Document;
-use Gzp\WbsNg\Model\Config\Method;
-use Gzp\WbsNg\Model\Order\Bundle;
-use GzpWbsNgVendors\Dgm\Shengine\Model\Destination;
-use function Gzp\WbsNg\Common\filter;
+use Aikinomi\Wbsng\Common\Equality\EqualityUtils;
+use Aikinomi\Wbsng\Common\Set;
+use Aikinomi\Wbsng\Model\Calc\Shipment;
+use Aikinomi\Wbsng\Model\Calc\Solution;
+use Aikinomi\Wbsng\Model\Config\Document;
+use Aikinomi\Wbsng\Model\Config\Method;
+use Aikinomi\Wbsng\Model\Order\Bundle;
+use WbsngVendors\Dgm\Shengine\Model\Destination;
+use function Aikinomi\Wbsng\Common\filter;
 
 
 class Shipping
@@ -41,7 +41,7 @@ class Shipping
         foreach ($solutions as $idx => $solution) {
             $pos[spl_object_id($solution)] = $idx;
         }
-        usort($solutions, static function(Solution $a, Solution $b) use ($pos): int {
+        usort($solutions, static function(Solution $a, Solution $b) use($pos): int {
             return
                 [count($a->shipments), $pos[spl_object_id($a)]]
                 <=>

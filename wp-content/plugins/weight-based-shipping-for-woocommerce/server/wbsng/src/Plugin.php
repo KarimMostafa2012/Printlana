@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Gzp\WbsNg;
+namespace Aikinomi\Wbsng;
 
 use WC_Order_Item;
 use WC_Order_Item_Shipping;
@@ -16,6 +16,7 @@ class Plugin
      * @var PluginMeta
      */
     public $meta;
+    
 
     public static function setupOnce(string $entrypoint): void
     {
@@ -35,6 +36,8 @@ class Plugin
     {
         Api::init();
 
+        Multicurrency::install();
+        
         add_filter('woocommerce_shipping_methods', static function($shippingMethods) {
 
             $idx = array_search('wbs', array_keys($shippingMethods));
