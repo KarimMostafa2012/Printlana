@@ -1,7 +1,7 @@
-@import url('./custom-style.css');
-@import url('./dokan-custom-style.css');
-@import url('./favorites-custom-style.css');
-@import url('./order-confirmation-custom-style.css');
-@import url('./product-list-custom-style.css');
-@import url('./reviews-custom-style.css');
-@import url('./user-profile-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/dokan-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/favorites-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/order-confirmation-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/product-list-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/reviews-custom-style.css');
+@import url('/wp-content/themes/hello-elementor-child/assets/style/user-profile-custom-style.css');
