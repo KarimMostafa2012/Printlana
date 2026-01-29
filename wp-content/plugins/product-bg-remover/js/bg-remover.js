@@ -450,7 +450,7 @@
             const existingNotification = $('.bg-remover-notification, .bg-remover-processing, .bg-remover-error');
             existingNotification.remove();
 
-            const className = type === 'processing' ? 'bg-remover-processing' :
+            const classNamzge = type === 'processing' ? 'bg-remover-processing' :
                             type === 'error' ? 'bg-remover-error' : 'bg-remover-notification';
 
             const notification = $(`<div class="${className}">${message}</div>`);
