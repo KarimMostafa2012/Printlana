@@ -62,7 +62,7 @@ function homeland_register_carousel_slide_cpt()
         'capability_type' => 'post',
         'show_in_rest' => true,
     );
-    register_post_type('carousel_slide', $args);
+    register_post_type('hp_carousel_slide', $args);
 }
 add_action('init', 'homeland_register_carousel_slide_cpt', 0);
 
@@ -73,7 +73,7 @@ function homeland_add_link_meta_box()
         'homeland_slide_link',
         'Slide Link',
         'homeland_render_link_meta_box',
-        'carousel_slide',
+        'hp_carousel_slide',
         'normal',
         'high'
     );
@@ -126,7 +126,7 @@ add_action('wp_enqueue_scripts', 'homeland_enqueue_carousel_assets');
 function homeland_carousel_shortcode()
 {
     $args = array(
-        'post_type' => 'carousel_slide',
+        'post_type' => 'hp_carousel_slide',
         'posts_per_page' => -1,
         'orderby' => 'date',
         'order' => 'ASC',
