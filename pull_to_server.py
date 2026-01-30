@@ -48,20 +48,6 @@ def deploy_to_server():
         if error:
             print(f"[*] Stderr:\n{error.strip()}")
 
-        # Check for debug files
-        print(f"\n[*] Checking for Homeland debug files...")
-        debug_check = f"ls -l {REMOTE_PATH}/wp-content/plugins/homeland/debug_load.txt"
-        stdin, stdout, stderr = ssh.exec_command(debug_check)
-        debug_out = stdout.read().decode('utf-8').strip()
-        debug_err = stderr.read().decode('utf-8').strip()
-        if debug_out:
-            print(f"[+] Debug File Found: {debug_out}")
-            cat_debug = f"cat {REMOTE_PATH}/wp-content/plugins/homeland/debug_load.txt"
-            stdin, stdout, stderr = ssh.exec_command(cat_debug)
-            print(f"[+] Debug Content:\n{stdout.read().decode('utf-8').strip()}")
-        else:
-            print(f"[-] Debug File NOT Found: {debug_err}")
-
         # Final Check: List active plugins
         print(f"\n[*] Checking final plugin status...")
         wp_final = f"cd {REMOTE_PATH} && wp plugin list --status=active"
