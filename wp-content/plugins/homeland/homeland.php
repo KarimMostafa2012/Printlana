@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Homeland
  * Description:       A custom plugin for Homepage Carousel and Highlighted Elements.
- * Version:           2.2.0
+ * Version:           2.3.0
  * Author:            Yahya AlQersh
  */
 
@@ -195,8 +195,8 @@ add_action('save_post', 'homeland_save_link_meta_box_data');
 function homeland_enqueue_assets() {
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.2.0');
-    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '2.2.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.0');
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '2.3.0', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
 
@@ -204,9 +204,9 @@ function homeland_admin_assets($hook) {
     if (strpos($hook, 'homeland') === false && strpos($hook, 'hp_carousel_slide') === false) return;
     wp_enqueue_media();
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.2.0');
-    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.2.0');
-    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.2.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.0');
+    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.3.0');
+    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.3.0', true);
     wp_localize_script('homeland-admin-script', 'homeland_admin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('homeland_admin_nonce'),
