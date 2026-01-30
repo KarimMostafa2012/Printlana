@@ -36,7 +36,7 @@ def deploy_to_server():
 
         # Execute git pull command
         print(f"\n[*] Resetting and pulling latest changes from GitHub...")
-        command = f"cd {REMOTE_PATH} && git fetch origin master && git reset --hard origin/master"
+        command = f"cd {REMOTE_PATH} && git fetch origin master && git reset --hard FETCH_HEAD && git log -n 1"
 
         stdin, stdout, stderr = ssh.exec_command(command)
 
@@ -44,24 +44,16 @@ def deploy_to_server():
         output = stdout.read().decode('utf-8')
         error = stderr.read().decode('utf-8')
 
-        # Combine output and error (git uses stderr for progress info)
-        full_output = output + error
+        print(f"[+] Output:\n{output.strip()}")
+        if error:
+            print(f"[*] Stderr:\n{error.strip()}")
 
-        # Check for actual errors (not just git progress messages)
-        if "fatal:" in error or "error:" in error:
-            print(f"[-] Error: {error}")
-            return False
-
-        print(f"[+] Output:\n{full_output.strip()}")
-
-        # Read homeland.php
-        print(f"\n[*] Reading remote homeland.php...")
-        cat_command = f"cat {REMOTE_PATH}/wp-content/plugins/homeland/homeland.php"
-        stdin, stdout, stderr = ssh.exec_command(cat_command)
-        remote_content = stdout.read().decode('utf-8')
-        print(f"[+] Remote Content Length: {len(remote_content)} bytes")
-        # Print first 20 lines to verify
-        print(f"[+] Remote Content Preview (First 20 lines):\n{remote_content[:500]}")
+        # Check for error logs
+        print(f"\n[*] Looking for latest error logs...")
+        find_log_command = f"find {REMOTE_PATH} -name 'error_log' -o -name 'debug.log' | xargs ls -t | head -n 3 | xargs tail -n 20"
+        stdin, stdout, stderr = ssh.exec_command(find_log_command)
+        log_output = stdout.read().decode('utf-8')
+        print(f"[+] Recent Log Entries:\n{log_output.strip()}")
 
         # Close connection
         ssh.close()

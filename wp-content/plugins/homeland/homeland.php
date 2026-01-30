@@ -14,6 +14,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+file_put_contents(dirname(__FILE__) . '/debug_load.txt', "LOADED AT " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 error_log("[HOMELAND] Plugin file loading...");
 
 // 1. Register Custom Post Type for Carousel Slides
