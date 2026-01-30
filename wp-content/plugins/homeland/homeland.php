@@ -101,8 +101,11 @@ function homeland_render_highlights_page()
         <h1>Homeland - Highlighted Elements</h1>
         
         <div class="homeland-admin-preview-section">
-            <p>Click on an element below to customize it.</p>
-            <div class="homeland-preview-container">
+            <div class="homeland-preview-header">
+                <p>Click on an element below to customize it.</p>
+                <button type="button" class="button homeland-reset-btn">Reset to Defaults</button>
+            </div>
+            <div class="homeland-preview-container homeland-admin-preview">
                 <?php echo do_shortcode('[homeland_highlights]'); ?>
             </div>
         </div>
@@ -128,7 +131,7 @@ function homeland_render_highlights_page()
                         <div class="homeland-field">
                             <label>Image:</label>
                             <div class="homeland-image-preview-wrap">
-                                <img id="modal-preview-img" src="" style="max-width:150px; display:none; margin-bottom:10px;">
+                                <img id="modal-preview-img" src="" style="max-width:150px; display:none; margin-bottom:10px; margin-left:auto; margin-right:auto;">
                                 <button type="button" class="button homeland-modal-upload-btn">Select Image</button>
                             </div>
                         </div>
@@ -339,32 +342,33 @@ function homeland_highlights_shortcode()
 add_shortcode('homeland_highlights', 'homeland_highlights_shortcode');
 
 // 7. Carousel List Enhancements
-function homeland_carousel_list_ui() {
+function homeland_carousel_list_buttons() {
     $screen = get_current_screen();
     if ($screen->id !== 'edit-hp_carousel_slide') return;
     ?>
-    <div class="homeland-carousel-admin-header">
-        <div class="homeland-shortcode-info">
-            <strong>Shortcode:</strong> <code>[homeland_carousel]</code>
-            <button class="button button-small homeland-copy-btn" data-code="[homeland_carousel]">Copy</button>
+    <button type="button" class="button action homeland-bulk-add">Bulk Add Slides</button>
+    <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button action">Add New Slide</a>
+    <?php
+}
+add_action('restrict_manage_posts', 'homeland_carousel_list_buttons');
+
+function homeland_carousel_admin_footer() {
+    $screen = get_current_screen();
+    if ($screen->id !== 'edit-hp_carousel_slide') return;
+    ?>
+    <div class="wrap">
+        <div class="homeland-shortcode-box">
+            <h3>Shortcode</h3>
+            <p>Use this shortcode to display the carousel on any page:</p>
+            <code>[homeland_carousel]</code>
+            <button class="button button-secondary homeland-copy-btn" data-code="[homeland_carousel]">Copy Shortcode</button>
         </div>
-        <div class="homeland-bulk-actions">
-            <button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button>
-        </div>
-    </div>
-    <style>
-        .homeland-carousel-admin-header { margin: 15px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 10px 15px; border: 1px solid #ccd0d4; border-radius: 4px; }
-        .homeland-add-bottom-right { position: fixed; bottom: 30px; right: 30px; z-index: 99; }
-        .homeland-add-bottom-right a { padding: 10px 20px !important; height: auto !important; line-height: 1 !important; font-size: 14px !important; border-radius: 25px !important; box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important; }
-    </style>
-    <div class="homeland-add-bottom-right">
-        <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button button-primary">Add New Slide</a>
     </div>
     <?php
 }
-add_action('admin_notices', 'homeland_carousel_list_ui');
+add_action('admin_footer', 'homeland_carousel_admin_footer');
 
-// 8. AJX Provider for Bulk Add
+// 8. AJX Providers
 function homeland_bulk_add_slides() {
     check_ajax_referer('homeland_admin_nonce', 'nonce');
     if (!current_user_can('manage_options')) wp_send_json_error('Permission denied');
@@ -389,6 +393,15 @@ function homeland_bulk_add_slides() {
     wp_send_json_success(array('count' => $created));
 }
 add_action('wp_ajax_homeland_bulk_add', 'homeland_bulk_add_slides');
+
+function homeland_reset_highlights() {
+    check_ajax_referer('homeland_admin_nonce', 'nonce');
+    if (!current_user_can('manage_options')) wp_send_json_error('Permission denied');
+
+    delete_option('homeland_highlights');
+    wp_send_json_success();
+}
+add_action('wp_ajax_homeland_reset_highlights', 'homeland_reset_highlights');
 
 // Pass nonce to JS
 function homeland_admin_footer_nonce() {

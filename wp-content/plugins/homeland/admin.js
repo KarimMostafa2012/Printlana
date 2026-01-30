@@ -1,21 +1,18 @@
 jQuery(document).ready(function ($) {
-    // 1. Highlighted Elements Modal Logic
+    // 1. Highlighted Elements Preview & Modal
     var $modal = $('#homeland-modal');
     var currentElementIndex = null;
 
-    $('.homeland-preview-container').on('click', '.h-card, .h-small-card', function (e) {
+    // Disable all links in admin preview
+    $('.homeland-admin-preview').on('click', 'a', function (e) {
         e.preventDefault();
-        // Determine index based on position if not explicitly set
-        var $el = $(this);
-        var index = $el.index() + 1;
-        if ($el.closest('.h-mid-col').length) {
-            index = $el.index() + 2; // Card 2 and 3 are in mid-col
-        } else if ($el.next('.h-mid-col').length === 0 && index > 1) {
-            index = 4; // Last card
-        }
+        e.stopPropagation();
+    });
 
-        // Simpler index detection based on order in DOM
-        var allCards = $('.homeland-preview-container').find('.h-card, .h-small-card');
+    $('.homeland-admin-preview').on('click', '.h-card, .h-small-card', function (e) {
+        e.preventDefault();
+
+        var allCards = $('.homeland-admin-preview').find('.h-card, .h-small-card');
         currentElementIndex = allCards.index(this) + 1;
 
         $('#homeland-element-index').text(currentElementIndex);
@@ -42,6 +39,21 @@ jQuery(document).ready(function ($) {
 
     $(window).click(function (e) {
         if ($(e.target).is($modal)) $modal.fadeOut();
+    });
+
+    // Reset Elements
+    $('.homeland-reset-btn').click(function (e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to reset all highlighted elements to defaults?')) {
+            $.post(homeland_admin.ajax_url, {
+                action: 'homeland_reset_highlights',
+                nonce: homeland_admin.nonce
+            }, function (response) {
+                if (response.success) {
+                    location.reload();
+                }
+            });
+        }
     });
 
     // Modal Image Upload
@@ -80,7 +92,8 @@ jQuery(document).ready(function ($) {
             });
 
             if (ids.length > 0) {
-                $('.homeland-bulk-add').prop('disabled', true).text('Adding...');
+                var $btn = $('.homeland-bulk-add');
+                $btn.prop('disabled', true).text('Adding...');
                 $.post(homeland_admin.ajax_url, {
                     action: 'homeland_bulk_add',
                     nonce: homeland_admin.nonce,
@@ -90,7 +103,7 @@ jQuery(document).ready(function ($) {
                         location.reload();
                     } else {
                         alert('Error: ' + response.data);
-                        $('.homeland-bulk-add').prop('disabled', false).text('Bulk Add Slides');
+                        $btn.prop('disabled', false).text('Bulk Add Slides');
                     }
                 });
             }
@@ -101,7 +114,7 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '.homeland-copy-btn', function (e) {
         e.preventDefault();
         var code = $(this).data('code');
-        var $temp = $('<input>');
+        var $temp = $('<input style="position: absolute; left: -9999px;">');
         $('body').append($temp);
         $temp.val(code).select();
         document.execCommand('copy');

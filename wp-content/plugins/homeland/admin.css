@@ -1,17 +1,34 @@
 /* Highlighted Elements Settings */
+.homeland-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    border: 1px solid #ccd0d4;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+}
+
+.homeland-preview-header p {
+    margin: 0;
+    font-weight: 600;
+    color: #1d2327;
+}
+
 .homeland-preview-container {
     background: #fcfcfc;
     padding: 30px;
     border: 1px solid #ccd0d4;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     margin-bottom: 30px;
     overflow-x: auto;
 }
 
 .homeland-preview-container .h-wrapper {
-    transform: scale(0.8);
+    transform: scale(0.85);
     transform-origin: top center;
-    margin-bottom: -100px;
+    margin-bottom: -60px;
     /* Offset scale shrinkage */
 }
 
@@ -25,76 +42,97 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .homeland-modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 30px;
-    border: 1px solid #888;
-    width: 500px;
-    border-radius: 12px;
+    background-color: #fff;
+    margin: 3% auto;
+    padding: 40px;
+    border: none;
+    width: 550px;
+    border-radius: 16px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .homeland-modal-close {
-    color: #aaa;
+    color: #64748b;
     position: absolute;
     right: 20px;
     top: 15px;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 300;
     cursor: pointer;
+    line-height: 1;
 }
 
 .homeland-modal-close:hover {
-    color: #000;
+    color: #0f172a;
+}
+
+.homeland-modal h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #1e293b;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .homeland-field {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .homeland-field label {
     display: block;
     font-weight: 600;
     margin-bottom: 8px;
-}
-
-.homeland-field input[type="text"],
-.homeland-field input[type="url"],
-.homeland-field textarea {
-    width: 100%;
+    color: #475569;
 }
 
 .homeland-image-preview-wrap {
-    background: #f0f0f1;
-    padding: 15px;
-    border-radius: 6px;
+    background: #f8fafc;
+    padding: 20px;
+    border: 2px dashed #e2e8f0;
+    border-radius: 12px;
     text-align: center;
 }
 
-/* Utility */
+/* Common Admin UI */
 .homeland-shortcode-box {
-    margin-top: 30px;
-    padding: 20px;
-    background: #f0f0f1;
+    margin-top: 40px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
     border-left: 4px solid #2271b1;
+    border-radius: 4px;
+}
+
+.homeland-shortcode-box h3 {
+    margin-top: 0;
+    font-size: 18px;
 }
 
 .homeland-shortcode-box code {
     display: inline-block;
-    padding: 5px 10px;
-    background: #fff;
+    padding: 8px 15px;
+    background: #f0f0f1;
     border: 1px solid #ccd0d4;
-    margin-right: 10px;
-    font-size: 14px;
+    margin-right: 15px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+/* Carousel Page Buttons */
+.wp-admin .restrict_manage_posts .button.action {
+    margin-left: 5px;
 }
 
 @media (max-width: 600px) {
     .homeland-modal-content {
-        width: 90%;
+        width: 95%;
+        margin-top: 10%;
+        padding: 20px;
     }
 }
