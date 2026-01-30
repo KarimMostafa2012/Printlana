@@ -99,39 +99,47 @@
     text-align: center;
 }
 
-/* Common Admin UI */
+/* Standardized Shortcode Box */
 .homeland-shortcode-box {
-    margin-top: 40px;
+    margin: 40px 0;
     padding: 30px;
     background: #fff;
     border: 1px solid #ccd0d4;
-    border-left: 4px solid #2271b1;
-    border-radius: 4px;
+    border-left: 5px solid #2271b1;
+    border-radius: 6px;
     clear: both;
 }
 
 .homeland-shortcode-box h3 {
     margin-top: 0;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+.homeland-code-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .homeland-shortcode-box code {
-    display: inline-block;
-    padding: 8px 15px;
-    background: #f0f0f1;
-    border: 1px solid #ccd0d4;
-    margin-right: 15px;
-    font-size: 15px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 16px;
+    border-radius: 6px;
+    font-family: monospace;
 }
 
-/* Carousel Page Buttons */
+/* Carousel Page Actions */
 .homeland-carousel-actions {
     margin: 10px 0;
     display: inline-block;
 }
 
 .homeland-carousel-actions .button.action {
+    height: 30px;
+    line-height: 28px;
     margin-right: 5px;
 }
 

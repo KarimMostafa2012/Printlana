@@ -5,13 +5,13 @@ jQuery(document).ready(function ($) {
     var $modal = $('#homeland-modal');
     var currentElementIndex = null;
 
-    // Disable all links in admin preview
+    // Aggressive link disabling in preview
     $(document).on('click', '.homeland-admin-preview a', function (e) {
         e.preventDefault();
         e.stopPropagation();
     });
 
-    // Delegate click to cards
+    // Modal Trigger
     $(document).on('click', '.homeland-admin-preview .h-card, .homeland-admin-preview .h-small-card', function (e) {
         e.preventDefault();
 
@@ -47,7 +47,7 @@ jQuery(document).ready(function ($) {
     // Reset Elements
     $(document).on('click', '.homeland-reset-btn', function (e) {
         e.preventDefault();
-        if (confirm('Are you sure you want to reset all highlighted elements to defaults?')) {
+        if (confirm('هل أنت متأكد من أنك تريد إعادة تعيين جميع العناصر المميزة إلى الوضع الافتراضي؟')) {
             $.post(homeland_admin.ajax_url, {
                 action: 'homeland_reset_highlights',
                 nonce: homeland_admin.nonce
@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Modal Image Upload
-    $('.homeland-modal-upload-btn').click(function (e) {
+    $(document).on('click', '.homeland-modal-upload-btn', function (e) {
         e.preventDefault();
         var custom_uploader = wp.media({
             title: 'Select Image',
@@ -73,7 +73,7 @@ jQuery(document).ready(function ($) {
         }).open();
     });
 
-    // Update hidden fields when modal fields change
+    // Update hidden fields
     $('#modal-field-text').on('input', function () {
         $('#h_text_' + currentElementIndex).val($(this).val());
     });
@@ -114,7 +114,7 @@ jQuery(document).ready(function ($) {
         }).open();
     });
 
-    // 3. Copy Shortcode Utility
+    // 3. Copy Shortcode
     $(document).on('click', '.homeland-copy-btn', function (e) {
         e.preventDefault();
         var code = $(this).data('code');

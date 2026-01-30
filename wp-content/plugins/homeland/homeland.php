@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Homeland
  * Description:       A custom plugin for Homepage Carousel and Highlighted Elements.
- * Version:           1.8.0
+ * Version:           1.9.0
  * Author:            Yahya AlQersh
  */
 
@@ -75,9 +75,22 @@ function homeland_admin_menu()
 }
 add_action('admin_menu', 'homeland_admin_menu');
 
+// Helper to render shortcode info box (Standardized)
+function homeland_render_shortcode_box($code) {
+    ?>
+    <div class="homeland-shortcode-box">
+        <h3>Shortcode</h3>
+        <p>Use this shortcode to display this feature on any page:</p>
+        <div class="homeland-code-wrap">
+            <code><?php echo esc_html($code); ?></code>
+            <button class="button button-secondary homeland-copy-btn" data-code="<?php echo esc_attr($code); ?>">Copy Shortcode</button>
+        </div>
+    </div>
+    <?php
+}
+
 function homeland_render_highlights_page()
 {
-    // Save logic
     if (isset($_POST['homeland_save_highlights']) && check_admin_referer('homeland_highlights_action', 'homeland_highlights_nonce')) {
         $highlights = array();
         for ($i = 1; $i <= 4; $i++) {
@@ -147,27 +160,15 @@ function homeland_render_highlights_page()
             </div>
         </div>
 
-        <div class="homeland-shortcode-box">
-            <h3>Shortcode</h3>
-            <p>Use this shortcode to display the highlighted elements on any page:</p>
-            <code>[homeland_highlights]</code>
-            <button class="button button-secondary homeland-copy-btn" data-code="[homeland_highlights]">Copy Shortcode</button>
-        </div>
+        <?php homeland_render_shortcode_box('[homeland_highlights]'); ?>
     </div>
     <?php
 }
 
-// 3. Add Meta Box for the Link
+// 3. Meta Box for Slide Link
 function homeland_add_link_meta_box()
 {
-    add_meta_box(
-        'homeland_slide_link',
-        'Slide Link',
-        'homeland_render_link_meta_box',
-        'hp_carousel_slide',
-        'normal',
-        'high'
-    );
+    add_meta_box('homeland_slide_link', 'Slide Link', 'homeland_render_link_meta_box', 'hp_carousel_slide', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'homeland_add_link_meta_box');
 
@@ -176,7 +177,7 @@ function homeland_render_link_meta_box($post)
     wp_nonce_field('homeland_save_link_meta_box_data', 'homeland_link_meta_box_nonce');
     $value = get_post_meta($post->ID, '_slide_link', true);
     echo '<label for="homeland_slide_link_field">Destination URL:</label> ';
-    echo '<input type="url" id="homeland_slide_link_field" name="homeland_slide_link_field" value="' . esc_attr($value) . '" size="25" />';
+    echo '<input type="url" id="homeland_slide_link_field" name="homeland_slide_link_field" value="' . esc_attr($value) . '" style="width:100%;" />';
 }
 
 function homeland_save_link_meta_box_data($post_id)
@@ -186,30 +187,23 @@ function homeland_save_link_meta_box_data($post_id)
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (!current_user_can('edit_post', $post_id)) return;
     if (!isset($_POST['homeland_slide_link_field'])) return;
-
     update_post_meta($post_id, '_slide_link', sanitize_text_field($_POST['homeland_slide_link_field']));
 }
 add_action('save_post', 'homeland_save_link_meta_box_data');
 
-// 4. Enqueue Frontend Scripts and Styles
-function homeland_enqueue_assets()
-{
+// 4. Assets
+function homeland_enqueue_assets() {
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '1.8.0');
-    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '1.8.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '1.9.0');
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '1.9.0', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
 
-// 5. Enqueue Admin Scripts and Styles
-function homeland_admin_assets($hook)
-{
-    if (strpos($hook, 'homeland') === false && strpos($hook, 'hp_carousel_slide') === false) {
-        return;
-    }
+function homeland_admin_assets($hook) {
+    if (strpos($hook, 'homeland') === false && strpos($hook, 'hp_carousel_slide') === false) return;
     wp_enqueue_media();
-    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '1.9.0');
-    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '1.9.0', true);
-
+    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.0.0');
+    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.0.0', true);
     wp_localize_script('homeland-admin-script', 'homeland_admin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('homeland_admin_nonce'),
@@ -217,69 +211,15 @@ function homeland_admin_assets($hook)
 }
 add_action('admin_enqueue_scripts', 'homeland_admin_assets');
 
-// 6. Shortcode for Carousel
-function homeland_carousel_shortcode()
-{
-    $args = array(
-        'post_type' => 'hp_carousel_slide',
-        'posts_per_page' => -1,
-        'orderby' => 'date',
-        'order' => 'ASC',
-    );
-    $slides_query = new WP_Query($args);
-
-    $slides_data = array();
-    if ($slides_query->have_posts()) {
-        while ($slides_query->have_posts()) {
-            $slides_query->the_post();
-            $post_id = get_the_ID();
-            $image_url = get_the_post_thumbnail_url($post_id, 'full');
-            $link_url = get_post_meta($post_id, '_slide_link', true);
-
-            if ($image_url) {
-                $slides_data[] = array(
-                    'name' => get_the_title(),
-                    'image' => $image_url,
-                    'link' => $link_url ? esc_url($link_url) : '#',
-                );
-            }
-        }
-    }
-    wp_reset_postdata();
-
-    wp_localize_script('homeland-carousel-script', 'homeland_carousel_data', array(
-        'slides' => $slides_data,
-    ));
-
-    wp_enqueue_script('homeland-carousel-script');
-
-    ob_start();
-    ?>
-    <div class="homeland-carousel-wrapper">
-        <div class="slider-container">
-            <button class="nav-arrow nav-arrow-left">
-                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg>
-            </button>
-            <div class="product-showcase" id="productShowcase"></div>
-            <button class="nav-arrow nav-arrow-right">
-                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" /></svg>
-            </button>
-        </div>
-    </div>
-    <?php
-    return ob_get_clean();
-}
-add_shortcode('homeland_carousel', 'homeland_carousel_shortcode');
-
-// 7. Shortcode for Highlighted Elements
+// 6. Highlighted Elements Shortcode
 function homeland_highlights_shortcode()
 {
     $highlights = get_option('homeland_highlights', array());
     $defaults = array(
-        1 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'Enjoy discounts on all types of groceries and frozen products', 'link' => '#'),
-        2 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'Enjoy discounts on all groceries and frozen products', 'link' => '#'),
-        3 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'Enjoy discounts on all groceries and frozen products', 'link' => '#'),
-        4 => array('image' => plugin_dir_url(__FILE__) . 'assets/fries.png', 'text' => 'Enjoy discounts on all types of groceries and frozen products', 'link' => '#'),
+        1 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'استمتع بخصومات على جميع أنواع البقالة والمنتجات المجمدة', 'link' => '#'),
+        2 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'استمتع بخصومات على جميع البقالة والمنتجات المجمدة', 'link' => '#'),
+        3 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'استمتع بخصومات على جميع البقالة والمنتجات المجمدة', 'link' => '#'),
+        4 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'استمتع بخصومات على جميع أنواع البقالة والمنتجات المجمدة', 'link' => '#'),
     );
 
     $h = array();
@@ -305,7 +245,7 @@ function homeland_highlights_shortcode()
     .h-small-card:hover .h-small-img { transform: scale(1.05) translateY(-5px); }
     .h-small-text { position: absolute; bottom: 24px; text-align: center; width: 100%; padding: 0 15px; font-weight: 600; color: #000014; direction: rtl; font-size: 20px; line-height: 1.2; box-sizing: border-box; }
     @media (max-width: 1024px) { .h-wrapper { flex-direction: column; align-items: center; } .h-card, .h-mid-col { width: 100%; max-width: 405px; flex: none; } }
-    .homeland-preview-container .h-card, .homeland-preview-container .h-small-card { cursor: pointer; }
+    .homeland-preview-container .h-card, .homeland-preview-container .h-small-card { cursor: pointer; box-shadow: none !important; }
     </style>
 
     <div class="h-wrapper">
@@ -333,8 +273,32 @@ function homeland_highlights_shortcode()
 }
 add_shortcode('homeland_highlights', 'homeland_highlights_shortcode');
 
-// 8. Carousel List Enhancements
-function homeland_carousel_list_buttons() {
+// 7. Carousel Shortcode
+function homeland_carousel_shortcode() {
+    $args = array('post_type' => 'hp_carousel_slide', 'posts_per_page' => -1, 'orderby' => 'date', 'order' => 'ASC');
+    $query = new WP_Query($args); $slides = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post(); $url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+            if ($url) $slides[] = array('name' => get_the_title(), 'image' => $url, 'link' => get_post_meta(get_the_ID(), '_slide_link', true) ?: '#');
+        }
+    }
+    wp_reset_postdata();
+    wp_localize_script('homeland_carousel_data', 'slides', $slides); wp_enqueue_script('homeland-carousel-script');
+    ob_start(); ?>
+    <div class="homeland-carousel-wrapper">
+        <div class="slider-container">
+            <button class="nav-arrow nav-arrow-left"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg></button>
+            <div class="product-showcase" id="productShowcase"></div>
+            <button class="nav-arrow nav-arrow-right"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" /></svg></button>
+        </div>
+    </div>
+    <?php return ob_get_clean();
+}
+add_shortcode('homeland_carousel', 'homeland_carousel_shortcode');
+
+// 8. Carousel Admin UI
+function homeland_carousel_admin_buttons() {
     $screen = get_current_screen();
     if (!$screen || $screen->id !== 'edit-hp_carousel_slide') return;
     ?>
@@ -345,53 +309,31 @@ function homeland_carousel_list_buttons() {
     </script>
     <?php
 }
-add_action('admin_head', 'homeland_carousel_list_buttons');
+add_action('admin_head', 'homeland_carousel_admin_buttons');
 
 function homeland_carousel_admin_footer() {
     $screen = get_current_screen();
     if (!$screen || $screen->id !== 'edit-hp_carousel_slide') return;
-    ?>
-    <div class="wrap">
-        <div class="homeland-shortcode-box">
-            <h3>Shortcode</h3>
-            <p>Use this shortcode to display the carousel on any page:</p>
-            <code>[homeland_carousel]</code>
-            <button class="button button-secondary homeland-copy-btn" data-code="[homeland_carousel]">Copy Shortcode</button>
-        </div>
-    </div>
-    <?php
+    homeland_render_shortcode_box('[homeland_carousel]');
 }
 add_action('admin_footer', 'homeland_carousel_admin_footer');
 
-// 9. AJX Providers
+// 9. AJAX
 function homeland_bulk_add_ajax() {
     check_ajax_referer('homeland_admin_nonce', 'nonce');
     if (!current_user_can('manage_options')) wp_send_json_error('Permission denied');
-
-    $image_ids = isset($_POST['image_ids']) ? (array)$_POST['image_ids'] : array();
-    $created = 0;
-
-    foreach ($image_ids as $id) {
-        $title = get_the_title($id);
-        $new_post = array(
-            'post_title'    => $title,
-            'post_status'   => 'publish',
-            'post_type'     => 'hp_carousel_slide'
-        );
-        $post_id = wp_insert_post($new_post);
-        if ($post_id) {
-            set_post_thumbnail($post_id, $id);
-            $created++;
-        }
+    $ids = isset($_POST['image_ids']) ? (array)$_POST['image_ids'] : array(); $count = 0;
+    foreach ($ids as $id) {
+        $pid = wp_insert_post(array('post_title' => get_the_title($id), 'post_status' => 'publish', 'post_type' => 'hp_carousel_slide'));
+        if ($pid) { set_post_thumbnail($pid, $id); $count++; }
     }
-    wp_send_json_success(array('count' => $created));
+    wp_send_json_success(array('count' => $count));
 }
 add_action('wp_ajax_homeland_bulk_add', 'homeland_bulk_add_ajax');
 
 function homeland_reset_highlights_ajax() {
     check_ajax_referer('homeland_admin_nonce', 'nonce');
     if (!current_user_can('manage_options')) wp_send_json_error('Permission denied');
-
     delete_option('homeland_highlights');
     wp_send_json_success();
 }
