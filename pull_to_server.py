@@ -62,22 +62,14 @@ def deploy_to_server():
         else:
             print(f"[-] Debug File NOT Found: {debug_err}")
 
-        # Temporarily disable plugin by renaming folder
-        print(f"\n[*] Temporarily disabling homeland plugin for testing...")
-        disable_cmd = f"mv {REMOTE_PATH}/wp-content/plugins/homeland {REMOTE_PATH}/wp-content/plugins/homeland_disabled"
-        stdin, stdout, stderr = ssh.exec_command(disable_cmd)
-        
-        # Check if site still errors
-        print(f"\n[*] Checking if error persists after disabling...")
-        wp_status = f"cd {REMOTE_PATH} && wp core is-installed"
-        stdin, stdout, stderr = ssh.exec_command(wp_status)
-        print(f"[+] Site Status after disable: {stdout.read().decode('utf-8').strip()}")
-        print(f"[*] Stderr: {stderr.read().decode('utf-8').strip()}")
-
-        # Restore plugin
-        print(f"\n[*] Restoring homeland plugin...")
-        restore_cmd = f"mv {REMOTE_PATH}/wp-content/plugins/homeland_disabled {REMOTE_PATH}/wp-content/plugins/homeland"
-        stdin, stdout, stderr = ssh.exec_command(restore_cmd)
+        # Final Check: List active plugins
+        print(f"\n[*] Checking final plugin status...")
+        wp_final = f"cd {REMOTE_PATH} && wp plugin list --status=active"
+        stdin, stdout, stderr = ssh.exec_command(wp_final)
+        print(f"[+] Active Plugins:\n{stdout.read().decode('utf-8').strip()}")
+        wp_err = stderr.read().decode('utf-8').strip()
+        if wp_err:
+            print(f"[*] WP-CLI Stderr:\n{wp_err}")
 
         # Close connection
         ssh.close()
