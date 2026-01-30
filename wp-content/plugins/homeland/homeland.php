@@ -47,30 +47,33 @@ add_action('init', 'homeland_register_carousel_slide_cpt');
 // 2. Custom Admin Menu
 function homeland_admin_menu()
 {
+    // Main Menu Item pointing to Carousel Slides
     add_menu_page(
         'Homeland',
         'Homeland',
         'manage_options',
-        'homeland',
-        'homeland_render_highlights_page', // Default to highlights page
+        'edit.php?post_type=hp_carousel_slide',
+        '',
         'dashicons-admin-home',
         5
     );
 
+    // Submenu for Carousel Slides (re-add to ensure name is correct under Homeland)
     add_submenu_page(
-        'homeland',
+        'edit.php?post_type=hp_carousel_slide',
         'Carousel Slides',
         'Carousel Slides',
         'manage_options',
         'edit.php?post_type=hp_carousel_slide'
     );
 
+    // Submenu for Highlighted Elements
     add_submenu_page(
-        'homeland',
+        'edit.php?post_type=hp_carousel_slide',
         'Highlighted Elements',
         'Highlighted Elements',
         'manage_options',
-        'homeland', // Same as parent slug to avoid double entry, or use it for the second page
+        'homeland_highlights',
         'homeland_render_highlights_page'
     );
 }
@@ -96,41 +99,59 @@ function homeland_render_highlights_page()
     ?>
     <div class="wrap">
         <h1>Homeland - Highlighted Elements</h1>
-        <form method="post">
-            <?php wp_nonce_field('homeland_highlights_action', 'homeland_highlights_nonce'); ?>
-            <div class="homeland-admin-grid">
-                <?php for ($i = 1; $i <= 4; $i++) : 
-                    $data = isset($highlights[$i]) ? $highlights[$i] : array('image' => '', 'text' => '', 'link' => '');
-                ?>
-                    <div class="homeland-admin-card">
-                        <h3>Element <?php echo $i; ?></h3>
+        
+        <div class="homeland-admin-preview-section">
+            <p>Click on an element below to customize it.</p>
+            <div class="homeland-preview-container">
+                <?php echo do_shortcode('[homeland_highlights]'); ?>
+            </div>
+        </div>
+
+        <!-- Customization Modal -->
+        <div id="homeland-modal" class="homeland-modal">
+            <div class="homeland-modal-content">
+                <span class="homeland-modal-close">&times;</span>
+                <h2>Customize Element <span id="homeland-element-index"></span></h2>
+                <form method="post" id="homeland-highlights-form">
+                    <?php wp_nonce_field('homeland_highlights_action', 'homeland_highlights_nonce'); ?>
+                    
+                    <!-- Hidden inputs for all 4 elements to preserve data on save -->
+                    <?php for ($i = 1; $i <= 4; $i++) : 
+                        $data = isset($highlights[$i]) ? $highlights[$i] : array('image' => '', 'text' => '', 'link' => '');
+                    ?>
+                        <input type="hidden" name="h_img_<?php echo $i; ?>" id="h_img_<?php echo $i; ?>" value="<?php echo esc_attr($data['image']); ?>">
+                        <input type="hidden" name="h_text_<?php echo $i; ?>" id="h_text_<?php echo $i; ?>" value="<?php echo esc_attr($data['text']); ?>">
+                        <input type="hidden" name="h_link_<?php echo $i; ?>" id="h_link_<?php echo $i; ?>" value="<?php echo esc_attr($data['link']); ?>">
+                    <?php endfor; ?>
+
+                    <div class="homeland-modal-fields">
                         <div class="homeland-field">
                             <label>Image:</label>
-                            <input type="text" name="h_img_<?php echo $i; ?>" id="h_img_<?php echo $i; ?>" value="<?php echo esc_attr($data['image']); ?>" class="regular-text">
-                            <button type="button" class="button homeland-upload-btn" data-target="h_img_<?php echo $i; ?>">Select Image</button>
-                            <div class="homeland-preview" id="preview_h_img_<?php echo $i; ?>">
-                                <?php if ($data['image']) : ?><img src="<?php echo esc_url($data['image']); ?>" style="max-width:100px;display:block;margin-top:10px;"><?php endif; ?>
+                            <div class="homeland-image-preview-wrap">
+                                <img id="modal-preview-img" src="" style="max-width:150px; display:none; margin-bottom:10px;">
+                                <button type="button" class="button homeland-modal-upload-btn">Select Image</button>
                             </div>
                         </div>
                         <div class="homeland-field">
                             <label>Description:</label>
-                            <textarea name="h_text_<?php echo $i; ?>" class="regular-text" rows="3"><?php echo esc_textarea($data['text']); ?></textarea>
+                            <textarea id="modal-field-text" class="regular-text" rows="3"></textarea>
                         </div>
                         <div class="homeland-field">
                             <label>Link:</label>
-                            <input type="url" name="h_link_<?php echo $i; ?>" value="<?php echo esc_url($data['link']); ?>" class="regular-text">
+                            <input type="url" id="modal-field-link" value="" class="regular-text">
                         </div>
                     </div>
-                <?php endfor; ?>
+                    
+                    <p class="submit">
+                        <input type="submit" name="homeland_save_highlights" class="button button-primary" value="Save Changes">
+                    </p>
+                </form>
             </div>
-            <p class="submit">
-                <input type="submit" name="homeland_save_highlights" class="button button-primary" value="Save Changes">
-            </p>
-        </form>
+        </div>
 
         <div class="homeland-shortcode-box">
             <h3>Shortcode</h3>
-            <p>Use this shortcode to display the highlighted elements:</p>
+            <p>Use this shortcode to display the highlighted elements on any page:</p>
             <code>[homeland_highlights]</code>
             <button class="button button-secondary homeland-copy-btn" data-code="[homeland_highlights]">Copy Shortcode</button>
         </div>
@@ -276,19 +297,20 @@ function homeland_highlights_shortcode()
     ?>
     <style>
     .h-wrapper { display: flex; flex-direction: row; gap: 32px; width: 100%; max-width: 1280px; margin: 0 auto; font-family: 'Beiruti', sans-serif; background: transparent; padding: 20px; box-sizing: border-box; }
-    .h-card { background: #F1F5FD; border-radius: 16px; position: relative; overflow: hidden; height: 544px; flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; box-sizing: border-box; text-decoration: none; color: inherit; }
-    .h-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .h-card { background: #F1F5FD; border-radius: 16px; position: relative; overflow: hidden; height: 544px; flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; transition: all 0.3s; box-sizing: border-box; text-decoration: none; color: inherit; }
     .h-img { max-width: 80%; max-height: 60%; object-fit: contain; transition: transform 0.3s; margin-top: 40px; }
     .h-card:hover .h-img { transform: scale(1.05) translateY(-10px); }
     .h-text-group { position: absolute; bottom: 40px; text-align: center; width: 100%; padding: 0 24px; direction: rtl; box-sizing: border-box; }
     .h-promo { font-size: 24px; font-weight: 600; color: #000014; line-height: 1.2; }
     .h-mid-col { display: flex; flex-direction: column; gap: 32px; flex: 1; box-sizing: border-box; }
-    .h-small-card { background: #F1F5FD; border-radius: 16px; height: 256px; position: relative; padding: 15px; overflow: hidden; transition: box-shadow 0.3s; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; text-decoration: none; color: inherit; }
-    .h-small-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .h-small-card { background: #F1F5FD; border-radius: 16px; height: 256px; position: relative; padding: 15px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; text-decoration: none; color: inherit; }
     .h-small-img { max-width: 50%; max-height: 55%; object-fit: contain; transition: transform 0.3s; margin-top: 10px; }
     .h-small-card:hover .h-small-img { transform: scale(1.05) translateY(-5px); }
     .h-small-text { position: absolute; bottom: 24px; text-align: center; width: 100%; padding: 0 15px; font-weight: 600; color: #000014; direction: rtl; font-size: 20px; line-height: 1.2; box-sizing: border-box; }
     @media (max-width: 1024px) { .h-wrapper { flex-direction: column; align-items: center; } .h-card, .h-mid-col { width: 100%; max-width: 405px; flex: none; } }
+    
+    /* Admin specificity */
+    .homeland-preview-container .h-card, .homeland-preview-container .h-small-card { cursor: pointer; }
     </style>
 
     <div class="h-wrapper">
@@ -316,23 +338,67 @@ function homeland_highlights_shortcode()
 }
 add_shortcode('homeland_highlights', 'homeland_highlights_shortcode');
 
-// 7. Add columns to Slide list
-function homeland_set_custom_edit_hp_carousel_slide_columns($columns) {
-    $new_columns = array();
-    foreach ($columns as $key => $value) {
-        $new_columns[$key] = $value;
-        if ($key == 'title') {
-            $new_columns['shortcode'] = 'Shortcode';
+// 7. Carousel List Enhancements
+function homeland_carousel_list_ui() {
+    $screen = get_current_screen();
+    if ($screen->id !== 'edit-hp_carousel_slide') return;
+    ?>
+    <div class="homeland-carousel-admin-header">
+        <div class="homeland-shortcode-info">
+            <strong>Shortcode:</strong> <code>[homeland_carousel]</code>
+            <button class="button button-small homeland-copy-btn" data-code="[homeland_carousel]">Copy</button>
+        </div>
+        <div class="homeland-bulk-actions">
+            <button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button>
+        </div>
+    </div>
+    <style>
+        .homeland-carousel-admin-header { margin: 15px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 10px 15px; border: 1px solid #ccd0d4; border-radius: 4px; }
+        .homeland-add-bottom-right { position: fixed; bottom: 30px; right: 30px; z-index: 99; }
+        .homeland-add-bottom-right a { padding: 10px 20px !important; height: auto !important; line-height: 1 !important; font-size: 14px !important; border-radius: 25px !important; box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important; }
+    </style>
+    <div class="homeland-add-bottom-right">
+        <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button button-primary">Add New Slide</a>
+    </div>
+    <?php
+}
+add_action('admin_notices', 'homeland_carousel_list_ui');
+
+// 8. AJX Provider for Bulk Add
+function homeland_bulk_add_slides() {
+    check_ajax_referer('homeland_admin_nonce', 'nonce');
+    if (!current_user_can('manage_options')) wp_send_json_error('Permission denied');
+
+    $image_ids = isset($_POST['image_ids']) ? (array)$_POST['image_ids'] : array();
+    $created = 0;
+
+    foreach ($image_ids as $id) {
+        $title = get_the_title($id);
+        $new_post = array(
+            'post_title'    => $title,
+            'post_status'   => 'publish',
+            'post_type'     => 'hp_carousel_slide'
+        );
+        $post_id = wp_insert_post($new_post);
+        if ($post_id) {
+            set_post_thumbnail($post_id, $id);
+            $created++;
         }
     }
-    return $new_columns;
-}
-add_filter('manage_hp_carousel_slide_posts_columns', 'homeland_set_custom_edit_hp_carousel_slide_columns');
 
-function homeland_custom_hp_carousel_slide_column($column, $post_id) {
-    if ($column == 'shortcode') {
-        echo '<code>[homeland_carousel]</code>';
-        echo '<br><button class="button button-small homeland-copy-btn" data-code="[homeland_carousel]">Copy</button>';
-    }
+    wp_send_json_success(array('count' => $created));
 }
-add_action('manage_hp_carousel_slide_posts_custom_column', 'homeland_custom_hp_carousel_slide_column', 10, 2);
+add_action('wp_ajax_homeland_bulk_add', 'homeland_bulk_add_slides');
+
+// Pass nonce to JS
+function homeland_admin_footer_nonce() {
+    ?>
+    <script type="text/javascript">
+        var homeland_admin = {
+            nonce: '<?php echo wp_create_nonce("homeland_admin_nonce"); ?>',
+            ajax_url: '<?php echo admin_url("admin-ajax.php"); ?>'
+        };
+    </script>
+    <?php
+}
+add_action('admin_footer', 'homeland_admin_footer_nonce');
