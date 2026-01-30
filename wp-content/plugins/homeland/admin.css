@@ -29,6 +29,7 @@
     transform: scale(0.85);
     transform-origin: top center;
     margin-bottom: -60px;
+    direction: ltr !important;
 }
 
 /* Local-style Text Properties for Admin Preview */
