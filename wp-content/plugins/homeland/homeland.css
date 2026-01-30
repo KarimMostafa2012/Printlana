@@ -12,7 +12,7 @@
     background: transparent;
     padding: 20px;
     box-sizing: border-box;
-    direction: rtl;
+    direction: ltr !important;
 }
 
 .h-card {
@@ -54,12 +54,14 @@
     box-sizing: border-box;
 }
 
+.h-wrapper .h-promo,
+html[lang="ar"] .h-wrapper .h-promo,
 .h-promo {
     font-size: 24px;
     font-weight: 600;
     color: #000014;
     line-height: 1.2;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     margin: 0;
 }
 
@@ -109,12 +111,14 @@
     box-sizing: border-box;
 }
 
+.h-wrapper .h-small-promo,
+html[lang="ar"] .h-wrapper .h-small-promo,
 .h-small-promo {
     font-size: 20px;
     font-weight: 600;
     color: #000014;
     line-height: 1.2;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     margin: 0;
 }
 
