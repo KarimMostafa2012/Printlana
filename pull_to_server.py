@@ -37,16 +37,15 @@ def deploy_to_server():
         # Execute git pull command
         print(f"\n[*] Resetting and pulling latest changes from GitHub...")
         command = f"cd {REMOTE_PATH} && git fetch origin master && git reset --hard FETCH_HEAD && git log -n 1"
-
         stdin, stdout, stderr = ssh.exec_command(command)
+        print(f"[+] Git Output:\n{stdout.read().decode('utf-8').strip()}")
 
-        # Get output
-        output = stdout.read().decode('utf-8')
-        error = stderr.read().decode('utf-8')
-
-        print(f"[+] Output:\n{output.strip()}")
-        if error:
-            print(f"[*] Stderr:\n{error.strip()}")
+        # Run emergency fix
+        print(f"\n[*] Running emergency fix script...")
+        fix_cmd = f"cd {REMOTE_PATH} && php emergency_fix.php"
+        stdin, stdout, stderr = ssh.exec_command(fix_cmd)
+        print(f"[+] Output:\n{stdout.read().decode('utf-8').strip()}")
+        print(f"[*] Stderr:\n{stderr.read().decode('utf-8').strip()}")
 
         # Final Check: List active plugins
         print(f"\n[*] Checking final plugin status...")
