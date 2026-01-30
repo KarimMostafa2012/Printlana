@@ -15,8 +15,10 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '.homeland-admin-preview .h-card, .homeland-admin-preview .h-small-card', function (e) {
         e.preventDefault();
 
-        var allCards = $('.homeland-admin-preview').find('.h-card, .h-small-card');
-        currentElementIndex = allCards.index(this) + 1;
+        currentElementIndex = $(this).data('index');
+        console.log('Homeland: Clicked element index:', currentElementIndex);
+
+        if (!currentElementIndex) return;
 
         $('#homeland-element-index').text(currentElementIndex);
 
@@ -75,10 +77,14 @@ jQuery(document).ready(function ($) {
 
     // Update hidden fields
     $('#modal-field-text').on('input', function () {
-        $('#h_text_' + currentElementIndex).val($(this).val());
+        if (currentElementIndex) {
+            $('#h_text_' + currentElementIndex).val($(this).val());
+        }
     });
     $('#modal-field-link').on('input', function () {
-        $('#h_link_' + currentElementIndex).val($(this).val());
+        if (currentElementIndex) {
+            $('#h_link_' + currentElementIndex).val($(this).val());
+        }
     });
 
     // 2. Carousel Bulk Add
@@ -95,7 +101,7 @@ jQuery(document).ready(function ($) {
             });
 
             if (ids.length > 0) {
-                var $btn = $('.homeland-bulk-add');
+                var $btn = $(this);
                 var originalText = $btn.text();
                 $btn.prop('disabled', true).text('Adding...');
                 $.post(homeland_admin.ajax_url, {

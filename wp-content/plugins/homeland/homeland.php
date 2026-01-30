@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Homeland
  * Description:       A custom plugin for Homepage Carousel and Highlighted Elements.
- * Version:           1.9.0
+ * Version:           2.2.0
  * Author:            Yahya AlQersh
  */
 
@@ -193,19 +193,20 @@ add_action('save_post', 'homeland_save_link_meta_box_data');
 
 // 4. Assets
 function homeland_enqueue_assets() {
+    wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '1.9.0');
-    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '1.9.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.2.0');
+    wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '2.2.0', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
 
 function homeland_admin_assets($hook) {
     if (strpos($hook, 'homeland') === false && strpos($hook, 'hp_carousel_slide') === false) return;
     wp_enqueue_media();
-    // Enqueue Beiruti font for admin preview
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
-    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.1.0');
-    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.1.0', true);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.2.0');
+    wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.2.0');
+    wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.2.0', true);
     wp_localize_script('homeland-admin-script', 'homeland_admin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('homeland_admin_nonce'),
@@ -216,6 +217,7 @@ add_action('admin_enqueue_scripts', 'homeland_admin_assets');
 // 6. Highlighted Elements Shortcode
 function homeland_highlights_shortcode()
 {
+    wp_enqueue_style('homeland-carousel-style');
     $highlights = get_option('homeland_highlights', array());
     $defaults = array(
         1 => array('image' => plugin_dir_url(__FILE__) . 'assets/bag.png',   'text' => 'استمتع بخصومات على جميع أنواع البقالة والمنتجات المجمدة', 'link' => '#'),
@@ -234,40 +236,22 @@ function homeland_highlights_shortcode()
 
     ob_start();
     ?>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap');
-    .h-wrapper { display: flex; flex-direction: row; gap: 32px; width: 100%; max-width: 1280px; margin: 0 auto; font-family: 'Beiruti', sans-serif; background: transparent; padding: 20px; box-sizing: border-box; }
-    .h-card { background: #F1F5FD; border-radius: 16px; position: relative; overflow: hidden; height: 544px; flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; transition: all 0.3s; box-sizing: border-box; text-decoration: none; color: inherit; }
-    .h-img { max-width: 80%; max-height: 60%; object-fit: contain; transition: transform 0.3s; margin-top: 40px; }
-    .h-card:hover .h-img { transform: scale(1.05) translateY(-10px); }
-    .h-text-group { position: absolute; bottom: 40px; left: 24px; right: 24px; text-align: center; direction: rtl; box-sizing: border-box; }
-    .h-promo { font-size: 24px; font-weight: 600; color: #000014; line-height: 1.2; font-family: 'Beiruti', sans-serif; }
-    .h-mid-col { display: flex; flex-direction: column; gap: 32px; flex: 1; box-sizing: border-box; }
-    .h-small-card { background: #F1F5FD; border-radius: 16px; height: 256px; position: relative; padding: 15px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; text-decoration: none; color: inherit; }
-    .h-small-img { max-width: 50%; max-height: 55%; object-fit: contain; transition: transform 0.3s; margin-top: 10px; }
-    .h-small-card:hover .h-small-img { transform: scale(1.05) translateY(-5px); }
-    .h-small-text-group { position: absolute; bottom: 24px; left: 24px; right: 24px; text-align: center; direction: rtl; box-sizing: border-box; }
-    .h-small-promo { font-size: 20px; font-weight: 600; color: #000014; line-height: 1.2; font-family: 'Beiruti', sans-serif; }
-    @media (max-width: 1024px) { .h-wrapper { flex-direction: column; align-items: center; } .h-card, .h-mid-col { width: 100%; max-width: 405px; flex: none; } }
-    .homeland-preview-container .h-card, .homeland-preview-container .h-small-card { cursor: pointer; box-shadow: none !important; }
-    </style>
-
     <div class="h-wrapper">
-        <a href="<?php echo esc_url($h[1]['link']); ?>" class="h-card">
+        <a href="<?php echo esc_url($h[1]['link']); ?>" class="h-card" data-index="1">
             <img src="<?php echo esc_url($h[1]['image']); ?>" class="h-img">
             <div class="h-text-group"><p class="h-promo"><?php echo esc_html($h[1]['text']); ?></p></div>
         </a>
         <div class="h-mid-col">
-            <a href="<?php echo esc_url($h[2]['link']); ?>" class="h-small-card">
+            <a href="<?php echo esc_url($h[2]['link']); ?>" class="h-small-card" data-index="2">
                 <img src="<?php echo esc_url($h[2]['image']); ?>" class="h-small-img">
                 <div class="h-small-text-group"><p class="h-small-promo"><?php echo esc_html($h[2]['text']); ?></p></div>
             </a>
-            <a href="<?php echo esc_url($h[3]['link']); ?>" class="h-small-card">
+            <a href="<?php echo esc_url($h[3]['link']); ?>" class="h-small-card" data-index="3">
                 <img src="<?php echo esc_url($h[3]['image']); ?>" class="h-small-img">
                 <div class="h-small-text-group"><p class="h-small-promo"><?php echo esc_html($h[3]['text']); ?></p></div>
             </a>
         </div>
-        <a href="<?php echo esc_url($h[4]['link']); ?>" class="h-card">
+        <a href="<?php echo esc_url($h[4]['link']); ?>" class="h-card" data-index="4">
             <img src="<?php echo esc_url($h[4]['image']); ?>" class="h-img">
             <div class="h-text-group"><p class="h-promo"><?php echo esc_html($h[4]['text']); ?></p></div>
         </a>
@@ -288,7 +272,9 @@ function homeland_carousel_shortcode() {
         }
     }
     wp_reset_postdata();
-    wp_localize_script('homeland_carousel_data', 'slides', $slides); wp_enqueue_script('homeland-carousel-script');
+    wp_localize_script('homeland-carousel-script', 'homeland_carousel_data', array('slides' => $slides)); 
+    wp_enqueue_script('homeland-carousel-script');
+    wp_enqueue_style('homeland-carousel-style');
     ob_start(); ?>
     <div class="homeland-carousel-wrapper">
         <div class="slider-container">

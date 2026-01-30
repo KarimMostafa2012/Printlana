@@ -1,5 +1,139 @@
 /* --- Homeland Carousel Refined Styles --- */
 
+/* Highlighted Elements Shared Styles */
+.h-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 40px auto;
+    font-family: 'Beiruti', sans-serif;
+    background: transparent;
+    padding: 20px;
+    box-sizing: border-box;
+    direction: rtl;
+}
+
+.h-card {
+    background: #F1F5FD;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    height: 544px;
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+.h-img {
+    max-width: 80%;
+    max-height: 60%;
+    object-fit: contain;
+    transition: transform 0.3s;
+    margin-top: 40px;
+}
+
+.h-card:hover .h-img {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.h-text-group {
+    position: absolute;
+    bottom: 40px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+.h-promo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000014;
+    line-height: 1.2;
+    font-family: 'Beiruti', sans-serif;
+    margin: 0;
+}
+
+.h-mid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.h-small-card {
+    background: #F1F5FD;
+    border-radius: 16px;
+    height: 256px;
+    position: relative;
+    padding: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+.h-small-img {
+    max-width: 50%;
+    max-height: 55%;
+    object-fit: contain;
+    transition: transform 0.3s;
+    margin-top: 10px;
+}
+
+.h-small-card:hover .h-small-img {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.h-small-text-group {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+.h-small-promo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000014;
+    line-height: 1.2;
+    font-family: 'Beiruti', sans-serif;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .h-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .h-card,
+    .h-mid-col {
+        width: 100%;
+        max-width: 405px;
+        flex: none;
+    }
+}
+
+/* --- Carousel Refined Styles --- */
+
 .homeland-carousel-wrapper {
     direction: rtl;
     width: 100%;
