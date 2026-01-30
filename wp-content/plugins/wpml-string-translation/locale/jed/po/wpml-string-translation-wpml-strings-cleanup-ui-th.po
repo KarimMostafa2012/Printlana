@@ -2,8 +2,6 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/strings-cleanup/App.js:17
 msgid ""

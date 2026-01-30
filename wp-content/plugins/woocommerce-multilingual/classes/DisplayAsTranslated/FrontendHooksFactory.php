@@ -20,6 +20,10 @@ class FrontendHooksFactory implements \IWPML_Frontend_Action_Loader {
 			}
 		}
 
+		if ( $sitepress->is_display_as_translated_post_type( 'product' ) ) {
+			$hooks[] = make( ProductHooks::class );
+		}
+
 		return $hooks;
 	}
 }

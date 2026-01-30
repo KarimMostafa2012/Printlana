@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -19,15 +19,15 @@ msgstr "para:"
 
 #: src/js/components/language/LanguagePairs.js:93
 msgid "Select %s"
-msgstr "Seleciona %s"
+msgstr "Selecionar %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "Definir par(es) de idioma para tradutor %s:"
+msgstr "Definir par(es) de idiomas para o tradutor %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
-msgstr "+ Adicionar mais pares de idioma a esse tradutor"
+msgstr "+ Adicionar mais pares de idiomas para este tradutor"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
 msgid "Translation Memory was successfully copied to Advanced Translation Editor."
@@ -41,11 +41,11 @@ msgstr "Desativar ICanLocalize.com como Serviço de Tradução neste site"
 msgid ""
 "Missing a translator? Or were new jobs since the last copy of the "
 "Translation Memory?"
-msgstr "Falta um tradutor? Ou foram novos trabalhos desde a última cópia da Memória de Tradução?"
+msgstr "Faltando um tradutor? Ou houve novos trabalhos desde a última cópia da Memória de Tradução?"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:25
 msgid "Enter here your ICanLocalize authentication details."
-msgstr "Insira aqui seus detalhes de autenticação da ICanLocalize."
+msgstr "Insira aqui seus detalhes de autenticação do ICanLocalize."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:33
 msgid "API Token:"
@@ -53,11 +53,11 @@ msgstr "Token da API:"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:43
 msgid "Please enter valid value for ICL token."
-msgstr "Insira um valor válido para o token da ICL."
+msgstr "Por favor, insira um valor válido para o token ICL."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:50
 msgid "Enter ICL API token here"
-msgstr "Insira o token da API da ICL aqui"
+msgstr "Insira o token da API ICL aqui"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:62
 msgid "Submit"
@@ -65,11 +65,11 @@ msgstr "Enviar"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:78
 msgid "Sign up"
-msgstr "Inscreva-se"
+msgstr "Inscrever-se"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:84
 msgid "to ICanLocalize to receive your API token."
-msgstr "para a ICanLocalize para receber seu token da API."
+msgstr "no ICanLocalize para receber seu token da API."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:91
 msgid "Already have an account? Login and"
@@ -81,7 +81,7 @@ msgstr "obtenha seu token."
 
 #: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
 msgid "Copy new Translation Memory to Advanced Translation Memory"
-msgstr "Copiar a nova Memória de Tradução para a Memória de Tradução Avançada"
+msgstr "Copiar nova Memória de Tradução para a Memória de Tradução Avançada"
 
 #: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
 msgid "Import translation memory"
@@ -89,7 +89,7 @@ msgstr "Importar memória de tradução"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
 msgid "ICanLocalize is already deactivated on this site"
-msgstr "A ICanLocalize já está desativada neste site"
+msgstr "ICanLocalize já está desativado neste site"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
 msgid ""
@@ -99,7 +99,7 @@ msgstr "Você ainda pode importar Tradutores ou Copiar Memória de Tradução pa
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
 msgid "Move from ICanLocalize.com to Advanced Translation Editor"
-msgstr "Mudar de ICanLocalize.com para o Editor de Tradução Avançado"
+msgstr "Mover de ICanLocalize.com para o editor de tradução avançado"
 
 #: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
 #: src/js/icl-to-ate-migration/components/Translators/Button.js:21
@@ -131,7 +131,7 @@ msgstr "Pares de idiomas"
 
 #: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
 msgid "Not supported pairs:"
-msgstr "Pares não suportados"
+msgstr "Pares não suportados:"
 
 #: src/js/icl-to-ate-migration/model/deactivateICL.js:18
 msgid "ICanLocalize.com deactivated"
@@ -139,11 +139,11 @@ msgstr "ICanLocalize.com desativado"
 
 #: src/js/icl-to-ate-migration/model/translationMemory.js:12
 msgid "Translate memory is imported"
-msgstr "A memória de tradução foi importada"
+msgstr "Memória de tradução importada"
 
 #: src/js/icl-to-ate-migration/model/translators.js:26
 msgid "There is no translators in ICL"
-msgstr "Não há tradutores na ICL"
+msgstr "Não há tradutores no ICL"
 
 #: src/js/icl-to-ate-migration/model/translators.js:45
 msgid "Translators saved"
@@ -151,7 +151,7 @@ msgstr "Tradutores salvos"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
-msgstr "Falha no upload do arquivo %s"
+msgstr "Falha no upload do arquivo %s."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:69
 msgid "Flag"
@@ -159,13 +159,13 @@ msgstr "Bandeira"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:87
 msgid "Flag file"
-msgstr "Arquivo de bandeira"
+msgstr "Arquivo da bandeira"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:160
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "Você acabou de adicionar um idioma. Agora, selecione-o como o idioma padrão do site ou como um idioma de tradução."
+msgstr "Você acabou de adicionar um idioma. Em seguida, selecione-o como o idioma padrão do site ou um idioma de tradução."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -177,13 +177,13 @@ msgstr "O valor “%s” já existe"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:215
 msgid "Add a new language"
-msgstr "Adicionar novo idioma"
+msgstr "Adicionar um novo idioma"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:224
 msgid ""
 "Create a country-specific language by choosing the general language from "
 "the list below. Then, choose the country it should be localized for."
-msgstr "Crie um idioma específico de um país escolhendo um idioma geral da lista abaixo. Depois, escolha o país de localização dele."
+msgstr "Crie um idioma específico do país escolhendo o idioma geral na lista abaixo. Em seguida, escolha o país para o qual ele deve ser localizado."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:229
 msgid ""
@@ -204,7 +204,7 @@ msgstr "Clique aqui"
 msgid ""
 "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
 ", \"pt-br\", \"zh-hans\""
-msgstr "O formato está incorreto. Pode conter apenas letras minúsculas e “-”. Por exemplo: “fr”, “pt-br”, “zh-hans”"
+msgstr "Formato incorreto. Pode conter apenas letras minúsculas e “-”. Ex: “fr”, “pt-br”, “zh-hans”"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:308
 msgid "Language"
@@ -224,21 +224,21 @@ msgstr "O idioma não será compatível com traduções automáticas"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:392
 msgid "Language mapping"
-msgstr "Mapeamento de idiomas"
+msgstr "Mapeamento de idioma"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:404
 msgid "Don't map this language"
-msgstr "Não mapear esse idioma"
+msgstr "Não mapear este idioma"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:418
 msgid "Default locale"
-msgstr "Locale padrão"
+msgstr "Localidade padrão"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:423
 msgid ""
 "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
 ", \"de_DE\", \"zh_Hant_TW\""
-msgstr "O formato está incorreto. Pode conter apenas letras minúsculas e “_”. Por exemplo: “de”, “de_DE”, “zh_Hant_TW”"
+msgstr "Formato incorreto. Pode conter apenas letras minúsculas e “_”. Ex: “de”, “de_DE”, “zh_Hant_TW”"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:435
 msgid "hreflang"
@@ -250,7 +250,7 @@ msgstr "Codificar URL?"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:45
 msgid "Flags must be:"
-msgstr "Os sinalizadores devem ser:"
+msgstr "As bandeiras devem ser:"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:453
 msgid "NO"
@@ -262,11 +262,11 @@ msgstr "SIM"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:460
 msgid " (required)"
-msgstr "(obrigatório)"
+msgstr " (obrigatório)"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:483
 msgid "Please fill in the field"
-msgstr "Preencha o campo, por favor"
+msgstr "Preencha o campo"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:49
 msgid "PNG, SVG, or JPG files"
@@ -288,13 +288,13 @@ msgstr "Leia mais sobre "
 msgid ""
 "The name of your language as it will appear on your site's language "
 "switcher."
-msgstr "O nome do seu idioma como aparecerá no seletor de idiomas do seu site."
+msgstr "O nome do seu idioma como aparecerá no seletor de idioma do seu site."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:61
 msgid ""
 "A unique value that identifies the language in the database and URL. Once "
 "saved, the language code cannot be changed."
-msgstr "Um valor único que identifica o idioma no banco de dados e na URL. Uma vez salvo, o código do idioma não pode ser alterado."
+msgstr "Um valor exclusivo que identifica o idioma no banco de dados e na URL. Uma vez salvo, o código do idioma não pode ser alterado."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:62
 msgid ""
@@ -304,20 +304,20 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "Se o seu idioma personalizado for semelhante a um idioma existente, você pode usar a verificação ortográfica e a tradução automática do idioma existente. Por exemplo, se o seu idioma personalizado for o alemão suíço, você pode mapear para o alemão como o idioma a ser usado para verificação ortográfica e tradução automática. Se você não mapear seu idioma personalizado para um idioma existente, os recursos de verificação ortográfica e tradução automática não estarão disponíveis nesse idioma."
+msgstr "Se o seu idioma personalizado for semelhante a um idioma existente, você pode usar a verificação ortográfica e a tradução automática do idioma existente. Por exemplo, se o seu idioma personalizado for suíço-alemão, você pode mapear para o alemão como o idioma a ser usado para verificação ortográfica e tradução automática. Se você não mapear seu idioma personalizado para um idioma existente, os recursos de verificação ortográfica e tradução automática não estarão disponíveis nesse idioma."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
 "The value WPML checks when loading translations from MO and PO files. The "
 "default locale is included in the filenames in your /wp-content/languages/ "
 "folder in your WordPress setup."
-msgstr "O valor que o WPML verifica ao carregar traduções de arquivos MO e PO. O local padrão está incluído nos nomes dos arquivos em sua pasta /wp-content/languages/ na sua configuração do WordPress."
+msgstr "O valor que o WPML verifica ao carregar traduções de arquivos MO e PO. A localidade padrão está incluída nos nomes de arquivo na sua pasta /wp-content/languages/ na sua configuração do WordPress."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:69
 msgid ""
 "Google uses the hreflang attribute to direct users to sites in their "
 "relevant language and location. Examples:"
-msgstr "O Google usa o atributo hreflang para direcionar os usuários para sites em seu idioma e localização relevantes. Exemplos:"
+msgstr "O Google usa o atributo hreflang para direcionar os usuários a sites em seu idioma e localização relevantes. Exemplos:"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:71
 msgid "All English-speaking users: en"
@@ -339,7 +339,7 @@ msgstr "Determina se as URLs neste idioma são codificadas ou usam caracteres AS
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:98
 msgid "adding a custom language"
-msgstr "adicionando um idioma personalizado"
+msgstr "adicionar um idioma personalizado"
 
 #: src/js/setup/components/Steps/Languages.js:110
 msgid "What are the languages of your site?"
@@ -362,8 +362,8 @@ msgid "Which languages do you want to translate your site into?"
 msgstr "Para quais idiomas você deseja traduzir seu site?"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
-msgstr "Se você não conseguir encontrar os idiomas necessários na lista"
+msgid "If you cannot find languages that you need in the list,"
+msgstr "Se não conseguir encontrar os idiomas de que precisa na lista,"
 
 #: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"

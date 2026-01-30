@@ -15,7 +15,7 @@ msgstr "HTML 앵커"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "\"#anchor\" URL을 사용하여 페이지를 로드할 때 이 블록에 바로 가기를 추가합니다."
+msgstr "“#anchor” URL을 사용하여 페이지를 로드할 때 이 블록에 대한 바로 가기를 추가합니다."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -23,7 +23,7 @@ msgstr "추가 CSS 클래스"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "여러 클래스를 공백으로 구분합니다."
+msgstr "여러 클래스는 공백으로 구분합니다."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -49,7 +49,7 @@ msgstr "블록"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "블록 마진"
+msgstr "블록 여백"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
@@ -73,7 +73,7 @@ msgstr "표시"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
-msgstr "국기 표시"
+msgstr "깃발 표시"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
@@ -81,7 +81,7 @@ msgstr "언어 이름 표시"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "언어 이름 표시:"
+msgstr "언어 이름 표시 위치"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -89,11 +89,11 @@ msgstr "스타일"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
-msgstr "국기 설정"
+msgstr "깃발 설정"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
 msgid "Width"
-msgstr "폭"
+msgstr "너비"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
 msgid "Height"
@@ -121,7 +121,7 @@ msgstr "레이아웃"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "양쪽 맞춤"
+msgstr "정렬"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
@@ -163,19 +163,19 @@ msgstr "코드"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "아이템을 왼쪽 정렬"
+msgstr "항목 왼쪽 정렬"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "아이템을 가운데 정렬"
+msgstr "항목 가운데 정렬"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "아이템을 오른쪽 정렬"
+msgstr "항목 오른쪽 정렬"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "아이템을 양 끝에 배치하고 동일한 간격 유지"
+msgstr "항목 간격 균등"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -187,19 +187,19 @@ msgstr "세로"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
 msgid "Normal"
-msgstr "기본"
+msgstr "보통"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
 msgid "Medium"
-msgstr "보통"
+msgstr "중간"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
 msgid "Large"
-msgstr "큼"
+msgstr "크게"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "아주 큼"
+msgstr "아주 크게"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -215,31 +215,31 @@ msgstr "ab"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
 msgid "Small"
-msgstr "작음"
+msgstr "작게"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "WPML 언어 변환기를 표시합니다."
+msgstr "WPML 언어 전환기를 표시합니다."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "언어 변환기"
+msgstr "언어 전환기"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "WPML 언어 변환기를 표시합니다"
+msgstr "WPML 언어 전환기를 표시합니다."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "WPML 언어 변환기를 표시합니다. <br/> <a>이 블록을 번역하는 방법</a>을 알아보세요."
+msgstr "WPML 언어 전환기를 표시합니다. <br/> <a>이 블록을 번역하는 방법</a>을 알아보세요."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "탐색 언어 변환기"
+msgstr "탐색 언어 전환기"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

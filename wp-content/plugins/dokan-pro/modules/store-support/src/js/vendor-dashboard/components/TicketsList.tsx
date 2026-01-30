@@ -95,7 +95,7 @@ export default function TicketsList( { navigate }: TicketsListProps ) {
                                 navigate( `/support/${ item.id }/` );
                             }
                         } }
-                        className="font-bold hover:underline cursor-pointer text-dokan-link"
+                        className="font-bold hover:underline cursor-pointer text-dokan-link relative z-10"
                     >
                         #{ item.id }
                     </span>
@@ -121,7 +121,7 @@ export default function TicketsList( { navigate }: TicketsListProps ) {
                                 navigate( `/support/${ item.id }/` );
                             }
                         } }
-                        className="text-dokan-link hover:underline cursor-pointer"
+                        className="text-dokan-link hover:underline cursor-pointer relative z-10"
                         title={ item.title }
                     >
                         { item.title }

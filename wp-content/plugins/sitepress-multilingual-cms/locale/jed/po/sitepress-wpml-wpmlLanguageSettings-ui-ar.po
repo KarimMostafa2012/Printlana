@@ -13,11 +13,11 @@ msgstr "اختر نوع ملف الصورة للأعلام"
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "هذا الخيار يؤثر فقط على أعلام WPML المدمجة، وليس الأعلام المخصصة التي يتم تحميلها."
+msgstr "يؤثر هذا الخيار على أعلام WPML المضمنة فقط، وليس الأعلام المخصصة التي تم تحميلها."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
-msgstr "التنسيق %s"
+msgstr "تنسيق %s"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:63
 msgid "Save"

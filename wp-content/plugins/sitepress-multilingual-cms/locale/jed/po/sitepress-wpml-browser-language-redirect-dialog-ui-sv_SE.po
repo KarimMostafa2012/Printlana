@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "Hur språkbaserad webbläsaromdirigering påverkar Google-indexering"
+msgstr "Hur webbläsarens språkomdirigering påverkar Googles indexering"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
@@ -15,11 +15,11 @@ msgstr "Dokumentation"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "Webbläsaromdirigering påverkar Google-indexering"
+msgstr "Webbläsaromdirigering påverkar Googles indexering och sökresultat"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
-msgstr "Förstått, aktivera ändå"
+msgstr "Jag förstår, aktivera ändå"
 
 #: src/js/browser-language-redirect-dialog/texts.js:5
 msgid "Cancel"
@@ -30,14 +30,14 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "Språkbaserad omdirigering påverkar Google-indexering."
+msgstr "När du omdirigerar besökare baserat på deras språk, omdirigerar du även Google. Google vill se din webbplats exakt som besökarna ser den, inklusive alla omdirigeringar du tillämpar."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "Språkomdirigering OK, men påverkar SEO."
+msgstr "Det är okej att omdirigera besökare baserat på deras språk, men du måste inse att denna funktion påverkar SEO."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"
-msgstr "Läs dessa sidor innan du fortsätter:"
+msgstr "Innan du fortsätter rekommenderar vi att du läser dessa två sidor:"

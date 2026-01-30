@@ -234,20 +234,20 @@ class WCML_Orders {
 				</select>
 			</li>
 			<?php
-			$wcml_set_dashboard_order_language_nonce = wp_create_nonce( 'set_dashboard_order_language' );
-			wc_enqueue_js(
-				"
+			$wcml_set_dashboard_order_language_nonce   = esc_js( wp_create_nonce( 'set_dashboard_order_language' ) );
+			$wcml_set_dashboard_order_language_message = esc_js( __( 'All the products will be removed from the current order in order to change the language', 'woocommerce-multilingual' ) );
+			$wcml_set_dashboard_order_language_script  = <<<JS
                  var order_lang_current_value = jQuery('#dropdown_shop_order_language option:selected').val();
 
                  jQuery('#dropdown_shop_order_language').on('change', function(){
-                    if(confirm('" . esc_js( __( 'All the products will be removed from the current order in order to change the language', 'woocommerce-multilingual' ) ) . "')){
+                    if(confirm('$wcml_set_dashboard_order_language_message')){
                         var lang = jQuery(this).val();
 
                         jQuery.ajax({
                             url: ajaxurl,
                             type: 'post',
                             dataType: 'json',
-                            data: {action: 'wcml_order_delete_items', order_id: woocommerce_admin_meta_boxes.post_id, lang: lang , wcml_nonce: '" . $wcml_set_dashboard_order_language_nonce . "' },
+                            data: {action: 'wcml_order_delete_items', order_id: woocommerce_admin_meta_boxes.post_id, lang: lang , wcml_nonce: '$wcml_set_dashboard_order_language_nonce' },
                             success: function( response ){
                                 if(typeof response.error !== 'undefined'){
                                     alert(response.error);
@@ -261,9 +261,12 @@ class WCML_Orders {
                         return false;
                     }
                 });
+JS;
 
-            "
-			);
+			$handle = 'wcml_set_dashboard_order_language_dropdown';
+			wp_register_script( $handle, '', [ 'jquery' ], WCML_VERSION, true );
+			wp_enqueue_script( $handle );
+			wp_add_inline_script( $handle, $wcml_set_dashboard_order_language_script );
 		} else {
 			$this->remove_dashboard_order_language_cookie();
 		}

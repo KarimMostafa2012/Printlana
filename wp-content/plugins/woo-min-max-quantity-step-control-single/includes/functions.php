@@ -102,32 +102,6 @@ function wcmmq_get_message( $keyword, $prefix = WC_MMQ_PREFIX ){
 }
 
 
-if( ! function_exists( 'wcmmq_fs' ) ){
-    function wcmmq_fs(){
-        return new class {
-                public function __call($name, $arguments)
-                {
-                    return null;
-                }
-
-            };
-    }
-}
-
-/**
- * Check old pro dir exit or not
- * Specifically check 'WC_Min_Max_Quantity' folder/dir in plugins path
- *
- * @return boolean
- */
-function wcmmq_is_old_dir(){
-    global $old_pro_dir;
-    if( is_dir( $old_pro_dir ) ){
-        return true;
-    }
-    return false;
-}
-
 /**
  * Check is premium version active or not
  * 
@@ -136,9 +110,9 @@ function wcmmq_is_old_dir(){
  * @return boolean
  */
 function wcmmq_is_premium(){
-    if( wcmmq_is_old_dir() && defined( 'WC_MMQ_PRO_VERSION' ) ) return true;
+    if( defined( 'WC_MMQ_PRO_VERSION' ) ) return true;
     
-    return wcmmq_fs()->can_use_premium_code__premium_only();
+    return false;
 }
 /**
  * Check is premium version installed or not
@@ -146,5 +120,5 @@ function wcmmq_is_premium(){
  * @return boolean
  */
 function wcmmq_is_premium_installed(){
-    return wcmmq_fs()->is_premium();
+    return wcmmq_is_premium();
 }

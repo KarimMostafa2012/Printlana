@@ -166,7 +166,7 @@ class WPML_TM_ICL20_Migration_Notices {
 	/**
 	 * Builds the notice shown when the migration is required
 	 */
-	private function build_migration_required() {
+	public function build_migration_required() {
 		$message = array();
 		$actions = array();
 

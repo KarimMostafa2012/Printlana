@@ -8,10 +8,10 @@
             "lang": "fr_FR"
          },
          "Choose the image file type for flags": [
-            "Choisir le type de fichier image pour les indicateurs "
+            "Choisissez le type de fichier image pour les drapeaux"
          ],
          "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
-            "Cette option s’applique uniquement aux indicateurs WPML intégrés, pas aux indicateurs personnalisés transférés."
+            "Cette option n’affecte que les drapeaux WPML intégrés, pas ceux téléchargés personnalisés."
          ],
          "%s format": [
             "Format %s"
@@ -23,7 +23,7 @@
             "Le nouveau format a été enregistré."
          ],
          "Failed to save the new format": [
-            "Échec de l'enregistrement du nouveau format"
+            "Échec de l’enregistrement du nouveau format"
          ]
       }
    }

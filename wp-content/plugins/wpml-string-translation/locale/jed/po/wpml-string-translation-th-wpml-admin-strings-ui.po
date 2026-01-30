@@ -11,7 +11,7 @@ msgstr "ไม่รวมอยู่ในการแปลสตริง"
 
 #: src/js/admin-strings/texts.js:11
 msgid "Registered and locked"
-msgstr "ลงทะเบียนและล็อคแล้ว"
+msgstr "ลงทะเบียนและล็อกแล้ว"
 
 #: src/js/admin-strings/texts.js:13
 msgid "Text"
@@ -63,7 +63,7 @@ msgstr "ค่า"
 
 #: src/js/admin-strings/texts.js:30
 msgid "Type"
-msgstr "พิมพ์"
+msgstr "ประเภท"
 
 #: src/js/admin-strings/texts.js:31
 msgid "State"
@@ -79,7 +79,7 @@ msgstr "ยกเลิก"
 
 #: src/js/admin-strings/texts.js:36
 msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr "บันทึกสิ่งต่อไปนี้ลงใน wpml-config.xml ในรูทของธีมหรือปลั๊กอินของคุณ"
+msgstr "บันทึกสิ่งต่อไปนี้ลงใน wpml-config.xml ในไดเรกทอรีรากของธีมหรือปลั๊กอินของคุณ"
 
 #: src/js/admin-strings/texts.js:38
 msgid "No options found."
@@ -90,7 +90,7 @@ msgid ""
 "Make sure you saved your theme options at least once. Some themes only add "
 "these to the wp_options table after the user explicitly saves changes to "
 "the theme defaults."
-msgstr "ตรวจสอบให้แน่ใจว่าคุณได้บันทึกตัวเลือกธีมของคุณอย่างน้อยหนึ่งครั้ง บางธีมจะเพิ่มสิ่งเหล่านี้ลงในเท่านั้นwp_options ตารางหลังจากที่ผู้ใช้บันทึกการเปลี่ยนแปลงค่าเริ่มต้นของธีมอย่างชัดเจน"
+msgstr "ตรวจสอบให้แน่ใจว่าคุณได้บันทึกตัวเลือกธีมของคุณอย่างน้อยหนึ่งครั้ง ธีมบางธีมจะเพิ่มสิ่งเหล่านี้ลงในตาราง wp_options หลังจากที่ผู้ใช้บันทึกการเปลี่ยนแปลงค่าเริ่มต้นของธีมอย่างชัดเจนเท่านั้น"
 
 #: src/js/admin-strings/texts.js:6
 msgid "Add to String Translation"

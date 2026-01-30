@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,12 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.3 (2026/01/05) =
+* Add: New option in the settings to control whether protected content can be deleted.
+
+= 1.3.2 (2025/12/16) =
+* Add: Expanded compatibility with additional plugins.
 
 = 1.3.1 (2025/12/03) =
 * Add: Expanded compatibility with additional plugins.

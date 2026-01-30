@@ -40,7 +40,7 @@ class Moyasar_Controller_Order_Details
             return new WP_REST_Response(array(
                 'success' => true,
                 'order' => [
-                    'total_row' => WC()->cart->get_total( 'raw' )
+                    'total_row' => WC()->cart->get_totals()['total']
                 ],
                 'message' => 'Cart total retrieved successfully'
             ), 200);

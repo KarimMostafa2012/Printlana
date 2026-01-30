@@ -849,38 +849,40 @@ class CompressX_Settings_Display
         }
 
         // Handle cache_control_setting
-        if (isset($settings['cache_control_setting'])) {
-            $reset_rewrite = false;
-
-            if (isset($settings['cache_control_setting']['disable_cache_control'])) {
+        $reset_rewrite = false;
+        if (isset($settings['cache_control_setting']))
+        {
+            if (isset($settings['cache_control_setting']['disable_cache_control']))
+            {
                 $old_value = isset($options['disable_cache_control']) ? $options['disable_cache_control'] : false;
                 $new_value = $settings['cache_control_setting']['disable_cache_control'] == '1';
 
-                if ($old_value != $new_value) {
+                if ($old_value != $new_value)
+                {
                     $reset_rewrite = true;
                     $options['disable_cache_control'] = $new_value;
-                }
-            }
-
-            if ($reset_rewrite)
-            {
-                $image_load = isset($options['image_load']) ? $options['image_load'] : 'htaccess';
-                if ($image_load == 'htaccess')
-                {
-                    include_once COMPRESSX_DIR . '/includes/class-compressx-webp-rewrite.php';
-                    $rewrite = new CompressX_Webp_Rewrite();
-                    $rewrite->create_rewrite_rules();
-                }
-                else if ($image_load == 'compat_htaccess')
-                {
-                    include_once COMPRESSX_DIR . '/includes/class-compressx-webp-rewrite.php';
-                    $rewrite = new CompressX_Webp_Rewrite();
-                    $rewrite->create_rewrite_rules_ex();
                 }
             }
         }
 
         CompressX_Options::update_option('compressx_general_settings', $options);
+
+        if ($reset_rewrite)
+        {
+            $image_load = isset($options['image_load']) ? $options['image_load'] : 'htaccess';
+            if ($image_load == 'htaccess')
+            {
+                include_once COMPRESSX_DIR . '/includes/class-compressx-webp-rewrite.php';
+                $rewrite = new CompressX_Webp_Rewrite();
+                $rewrite->create_rewrite_rules();
+            }
+            else if ($image_load == 'compat_htaccess')
+            {
+                include_once COMPRESSX_DIR . '/includes/class-compressx-webp-rewrite.php';
+                $rewrite = new CompressX_Webp_Rewrite();
+                $rewrite->create_rewrite_rules_ex();
+            }
+        }
 
         if (isset($_POST['excludes']) && !empty($_POST['excludes']))
         {
@@ -941,8 +943,15 @@ class CompressX_Settings_Display
         delete_transient('compressx_set_global_stats');
 
         $table_name = $wpdb->prefix . "compressx_files_opt_meta";
-        $wpdb->get_results("TRUNCATE TABLE $table_name", ARRAY_A);
+        $exists = $wpdb->get_var(
+            $wpdb->prepare("SHOW TABLES LIKE %s", $table_name)
+        );
+        if ($exists == $table_name)
+        {
+            $wpdb->get_results("TRUNCATE TABLE $table_name", ARRAY_A);
+        }
 
+        CompressX_Image_Meta_V2::delete_all_image_meta();
         $this->_delete_files();
 
         $ret['result'] = "success";

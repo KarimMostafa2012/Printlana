@@ -29,11 +29,11 @@ use WPML\UIPage;
 class TranslationMethodSettings {
 
 	public static function addHooks() {
-		if ( UIPage::isMainSettingsTab( $_GET ) ) {
-			if ( Obj::prop( 'disable_translate_everything', $_GET ) ) {
+		if ( Obj::prop( 'disable_translate_everything', $_GET ) ) {
+			if ( \WPML\LIB\WP\User::currentUserIsTranslationManagerOrHigher() ) {
 				Hooks::onAction( 'wp_loaded' )
-				     ->then( Fns::tap( partial( [ Option::class, 'setTranslateEverything' ], false ) ) )
-				     ->then( Fns::tap( partial( 'do_action', 'wpml_set_translate_everything', false ) ) );
+						->then( Fns::tap( partial( [ Option::class, 'setTranslateEverything' ], false ) ) )
+						->then( Fns::tap( partial( 'do_action', 'wpml_set_translate_everything', false ) ) );
 			}
 		}
 	}

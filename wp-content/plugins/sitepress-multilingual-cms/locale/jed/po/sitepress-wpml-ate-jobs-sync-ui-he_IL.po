@@ -7,13 +7,13 @@ msgstr ""
 
 #: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
-msgstr "שליחה לתרגום"
+msgstr "שולח לתרגום"
 
 #: src/js/ate/TranslationDashboardJobsActions.js:23
 msgid ""
 "This content is being automatically translated. If you want to do something "
 "different with it cancel translation jobs first."
-msgstr "תוכן זה מתורגם באופן אוטומטי. אם ברצונך לעשות משהו אחר עם זה, בטל תחילה את משימות התרגום."
+msgstr "תוכן זה מתורגם אוטומטית. אם ברצונכם לעשות איתו משהו אחר, בטלו תחילה את משימות התרגום."
 
 #: src/js/ate/enable/init.js:53
 msgid "Connecting to WPML’s Advanced Translation Editor"
@@ -21,11 +21,11 @@ msgstr "מתחבר לעורך התרגום המתקדם של WPML"
 
 #: src/js/ate/enable/init.js:67
 msgid "Try again"
-msgstr "נסה שוב"
+msgstr "נסו שוב"
 
 #: src/js/ate/review/init.js:17
 msgid "You don't have the rights to review this language"
-msgstr "אין לך זכויות לבדיקת שפה זו"
+msgstr "אין לכם הרשאות לסקור שפה זו"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:33
 msgid "translations"
@@ -37,7 +37,7 @@ msgstr "נותרו בתור"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:43
 msgid "Translation on hold"
-msgstr "התרגום בהשהייה"
+msgstr "תרגום בהמתנה"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:45
 #: src/js/ate/status-bar/components/constants.js:16
@@ -50,11 +50,18 @@ msgstr "%d תרגומים נותרו"
 
 #: src/js/ate/status-bar/components/StatusBar/Notifications.js:38
 msgid "%d min remaining"
-msgstr "%d דק' נותרו"
+msgstr "%d דקות נותרו"
 
 #: src/js/ate/status-bar/components/StatusBar/Notifications.js:39
 msgid "less than 1 min remaining"
-msgstr "נותרה פחות מדקה אחת"
+msgstr "פחות מדקה נותרה"
+
+#: src/js/ate/status-bar/components/constants.js:105
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] "%d תרגום ממתין לבדיקה"
+msgstr[1] "%d תרגומים ממתינים לבדיקה"
 
 #: src/js/ate/status-bar/components/constants.js:14
 #: src/js/ate/translate-everything/components/Status/index.js:50
@@ -63,86 +70,83 @@ msgstr "סטטוס תרגום אוטומטי"
 
 #: src/js/ate/status-bar/components/constants.js:18
 msgid "Translate Everything Automatically"
-msgstr "תרגם הכל באופן אוטומטי"
+msgstr "תרגם הכל אוטומטית"
 
 #: src/js/ate/status-bar/components/constants.js:20
 msgid "Translate Everything Automatically is active"
-msgstr "'תרגם הכל באופן אוטמטי' פעיל"
-
-#: src/js/ate/status-bar/components/constants.js:22
-msgid "Translate Everything Automatically is paused"
-msgstr "'תרגם הכל באופן אוטומטי' מושהה"
+msgstr "תרגם הכל אוטומטית פעיל"
 
 #: src/js/ate/status-bar/components/constants.js:24
-msgid "Translate Everything Automatically is stopped"
-msgstr "תרגום אוטומטי של הכל הופסק"
+msgid "Translate Everything Automatically is paused — payment required"
+msgstr "תרגם הכל אוטומטית מושהה — נדרש תשלום"
 
 #: src/js/ate/status-bar/components/constants.js:26
-msgid "Out of Credits for Automatic Translation"
-msgstr "אין יתרת קרדיטים לתרגום אוטומטי"
+msgid "Automatic translation is paused — payment required"
+msgstr "תרגום אוטומטי מושהה — נדרש תשלום"
 
-#: src/js/ate/status-bar/components/constants.js:29
-msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgstr[0] "יש לך <b>1</b> קרדיט תרגום משולם מראש בחשבון wpml.org שלך. הקצה קרדיטים אלה לאתר שלך כדי להתחיל להשתמש בתרגום אוטומטי"
-msgstr[1] "יש לך <b>%s</b> קרדיטי תרגום משולמים מראש בחשבון wpml.org שלך. הקצה קרדיטים אלה לאתר שלך כדי להתחיל להשתמש בתרגום אוטומטי"
+#: src/js/ate/status-bar/components/constants.js:28
+msgid ""
+"We couldn’t process your payment. Click “Pay now” to complete the "
+"transaction and resume automatic translation."
+msgstr "לא הצלחנו לעבד את התשלום שלכם. לחצו על \"שלמו עכשיו\" כדי להשלים את העסקה ולחדש את התרגום האוטומטי."
 
-#: src/js/ate/status-bar/components/constants.js:41
+#: src/js/ate/status-bar/components/constants.js:32
+msgid "Translate Everything automatically is paused - not enough credits"
+msgstr "תרגם הכל אוטומטית מושהה - אין מספיק קרדיטים"
+
+#: src/js/ate/status-bar/components/constants.js:34
+msgid "Automatic translation is paused — not enough credits"
+msgstr "תרגום אוטומטי מושהה — אין מספיק קרדיטים"
+
+#: src/js/ate/status-bar/components/constants.js:36
+msgid "Translation will resume automatically once you assign more credits."
+msgstr "התרגום יתחדש אוטומטית ברגע שתקצו קרדיטים נוספים."
+
+#: src/js/ate/status-bar/components/constants.js:38
+msgid "You have %s prepaid translation credit in your WPML account. Assign these credits to this site to resume automatic translation"
+msgid_plural "You have %s prepaid translation credits in your WPML account. Assign these credits to this site to resume automatic translation"
+msgstr[0] "יש לכם %s קרדיט לתרגום ששולם מראש בחשבון ה-WPML שלכם. הקצו קרדיטים אלה לאתר זה כדי לחדש את התרגום האוטומטי"
+msgstr[1] "יש לכם %s קרדיטים לתרגום ששולמו מראש בחשבון ה-WPML שלכם. הקצו קרדיטים אלה לאתר זה כדי לחדש את התרגום האוטומטי"
+
+#: src/js/ate/status-bar/components/constants.js:72
 #: src/js/ate/status-bar/components/sending/index.js:10
 msgid "Preparing content for translation"
 msgstr "מכין תוכן לתרגום"
 
-#: src/js/ate/status-bar/components/constants.js:43
+#: src/js/ate/status-bar/components/constants.js:74
 #: src/js/ate/status-bar/components/sending/index.js:9
 msgid "Preparing more content for translation"
-msgstr "מכין עוד תוכן לתרגום"
+msgstr "מכין תוכן נוסף לתרגום"
 
-#: src/js/ate/status-bar/components/constants.js:45
-msgid "An error occured, fix it to continue."
-msgstr "אירה שגיאה. תקן אותה כדי להמשיך."
-
-#: src/js/ate/status-bar/components/constants.js:47
-msgid ""
-"There is an issue with automatic translation that needs your attention. Fix "
-"it to continue."
-msgstr "יש בעיה בתרגום האוטומטי שזקוקה לתשומת הלב שלך. תקן אותה כדי להמשיך."
-
-#: src/js/ate/status-bar/components/constants.js:50
+#: src/js/ate/status-bar/components/constants.js:77
 #. %s is replaced by the name of the language.
 msgid ""
 "Your default language, %s, must be mapped to a supported language in order "
 "to use automatic translation."
-msgstr "על שפת ברירת המחדל שלך, %s, להיות ממופית לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
+msgstr "שפת ברירת המחדל שלכם, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
 
-#: src/js/ate/status-bar/components/constants.js:58
+#: src/js/ate/status-bar/components/constants.js:85
 #. %s is replaced by the language(s) name.
 msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
 msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
-msgstr[0] "השפה שלך, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
-msgstr[1] "השפות הבאות באתר שלך חייבות להיות ממופות לשפה נתמכת כדי להשתמש בתרגום אוטומטי: %s"
+msgstr[0] "השפה שלכם, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
+msgstr[1] "השפות הבאות באתר שלכם חייבות להיות ממופות לשפה נתמכת כדי להשתמש בתרגום אוטומטי: %s"
 
-#: src/js/ate/status-bar/components/constants.js:68
+#: src/js/ate/status-bar/components/constants.js:95
 msgid ""
 "Content in those languages: %s, cannot be automatically translated unless "
 "you map them to a language that's different from the default."
-msgstr "תוכן בשפות אלו: %s, לא מתאימים לתרגום אוטומטי אלא אם תמפה אותם לשפה השונה מברירת המחדל."
-
-#: src/js/ate/status-bar/components/constants.js:78
-#. %d is replaced by the number of jobs to review.
-msgid "%d translation waiting for review"
-msgid_plural "%d translations waiting for review"
-msgstr[0] "%d תרגום ממתין לבדיקה"
-msgstr[1] "%d תרגומים ממתינים לבדיקה"
+msgstr "תוכן בשפות אלו: %s, לא ניתן לתרגום אוטומטי אלא אם תמפו אותן לשפה שונה משפת ברירת המחדל."
 
 #: src/js/ate/status-bar/components/credit/index.js:100
 msgid "Account credits used"
-msgstr "נקודות זכות של החשבון שנעשה בהן שימוש"
+msgstr "קרדיטים בחשבון שנוצלו"
 
 #: src/js/ate/status-bar/components/credit/index.js:110
 msgid ""
 "Once you’ve used all your prepaid credits, we’ll invoice you for any "
 "additional credits you use after the end of the month"
-msgstr "לאחר שתשתמש בכל נקודות הזכות ששולמו מראש, אנו נחייב אותך עבור כל נקות זכות נוספת שבה תשתמש אחרי סוף החודש."
+msgstr "לאחר שתשתמשו בכל הקרדיטים ששולמו מראש, נחייב אתכם עבור כל קרדיט נוסף שתשתמשו בו לאחר סוף החודש"
 
 #: src/js/ate/status-bar/components/credit/index.js:115
 msgid "Payment limit:"
@@ -150,22 +154,22 @@ msgstr "מגבלת תשלום:"
 
 #: src/js/ate/status-bar/components/credit/index.js:116
 msgid "%s credits"
-msgstr "%s נקודות זכות"
+msgstr "%s קרדיטים"
 
 #: src/js/ate/status-bar/components/credit/index.js:119
 msgid "Credits used:"
-msgstr "נקודות זכות שנעשה בהן שימוש:"
+msgstr "קרדיטים שנוצלו:"
 
 #: src/js/ate/status-bar/components/credit/index.js:123
 msgid "Credits left:"
-msgstr "נקודות זכות שנותרו:"
+msgstr "קרדיטים שנותרו:"
 
 #: src/js/ate/status-bar/components/credit/index.js:133
 msgid ""
 "The number of credit you will receive an invoice for at the end of the "
 "month. View your pay-as-you-go details in your site’s automatic translation "
 "settings."
-msgstr "מספר נקודות הזכות שתקבל עבורן חשבונית בסוף כל חודש. הצג את פרטי התשלום בהתאם להתקדמות בהגדרות התרגום האוטומטי של האתר שלך."
+msgstr "מספר הקרדיטים שעבורם תקבלו חשבונית בסוף החודש. צפו בפרטי התשלום לפי שימוש שלכם בהגדרות התרגום האוטומטי של האתר שלכם."
 
 #: src/js/ate/status-bar/components/credit/index.js:139
 msgid "Calculating"
@@ -173,70 +177,85 @@ msgstr "מחשב"
 
 #: src/js/ate/status-bar/components/credit/index.js:59
 msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
-msgstr "יתרות נקודות זכות ששולמו מראש שמוקצות לאתר זה ב-WPML.org."
+msgstr "קרדיטים ששולמו מראש שנותרו ושהוקצו לאתר זה ב-WPML.org."
 
 #: src/js/ate/status-bar/components/credit/index.js:73
 msgid "Prepaid credits left"
-msgstr "נקודות זכות ששולמו מראש שנותרו"
+msgstr "קרדיטים ששולמו מראש שנותרו"
 
 #: src/js/ate/status-bar/components/credit/index.js:99
 msgid "Pay-as-you-go credits used"
-msgstr "נקודות זיכוי של תרגום בהתאם להתקדמות שנעשה בהן שימוש"
+msgstr "קרדיטים שנוצלו בתשלום לפי שימוש"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:25
 msgid "Your site doesn't meet WPML's minimum requirements"
-msgstr "האתר שלך אינו עומד בדרישות המינימום של WPML"
+msgstr "האתר שלכם אינו עומד בדרישות המינימום של WPML"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:31
-#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
 msgid "Fix it"
-msgstr "תקן זאת"
+msgstr "תקן את זה"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:17
 msgid "Stop"
 msgstr "עצור"
 
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+#: src/js/ate/status-icons/StatusUpdater.js:133
+msgid "Pay now"
+msgstr "שלמו עכשיו"
+
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:34
-msgid "Assign credits now"
-msgstr "הקצה קרדיטים כעת"
+#: src/js/ate/status-icons/StatusUpdater.js:134
+msgid "Get more credits"
+msgstr "קבלו עוד קרדיטים"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:42
+msgid "Assign credits"
+msgstr "הקצו קרדיטים"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:8
 msgid "Resume"
 msgstr "המשך"
 
+#: src/js/ate/status-icons/StatusUpdater.js:159
+msgid ""
+"This translation couldn't be completed due to an unexpected error. Please "
+"try resending it."
+msgstr "התרגום לא הושלם עקב שגיאה בלתי צפויה. אנא נסה לשלוח אותו שוב."
+
 #: src/js/ate/status-icons/StatusUpdater.js:80
 msgid "Refreshing translation status"
-msgstr "מרענן את סטטוס התרגום"
+msgstr "מרענן סטטוס תרגום"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:26
 msgid ""
 "Read more about how to translate your content in the <a>Getting Started "
 "Guide</a>"
-msgstr "ניתן למצוא מידע נוסף אודות תרגום התוכן שלך ב<a>מדריך לתחילת העבודה</a>"
+msgstr "קראו עוד על איך לתרגם את התוכן שלכם ב<a>מדריך תחילת העבודה</a>"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
 msgid "Let's Start Translating!"
-msgstr "הבה נתחיל לתרגם!"
+msgstr "בואו נתחיל לתרגם!"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
 msgid ""
 "Choose your content from the Translation Dashboard below and create your "
 "first translation job!"
-msgstr "בחר את התוכן שלך מ'לוח הבקרה של התרגום' להלן וצור את משימת התרגום הראשונה שלך!"
+msgstr "בחרו את התוכן שלכם מלוח המחוונים של התרגום למטה וצרו את משימת התרגום הראשונה שלכם!"
 
 #: src/js/ate/translate-everything/components/Status/index.js:105
 msgid ""
 "Change your <a>automatic translation settings</a> (in-progress translation "
 "jobs will be completed with the current settings)."
-msgstr "שנה את <a>הגדרות התרגום האוטומטי</a> (משימות תרגום בביצוע יושלמו עם ההגדרות הנוכחיות)."
+msgstr "שנה את <a>הגדרות התרגום האוטומטי</a> שלך (משימות תרגום שנמצאות בתהליך יושלמו עם ההגדרות הנוכחיות)."
 
 #: src/js/ate/translate-everything/components/Status/index.js:115
 msgid "Read more about translating your site automatically."
-msgstr "מידע נוסף אודות תרגום האתר שלך באופן אוטומטי."
+msgstr "קראו עוד על תרגום האתר שלכם באופן אוטומטי."
 
 #: src/js/ate/translate-everything/components/Status/index.js:49
 msgid "Your site is being automatically translated!"
-msgstr "האתר שלך מתורגם באופן אוטומטי!"
+msgstr "האתר שלכם מתורגם באופן אוטומטי!"
 
 #: src/js/ate/translate-everything/components/Status/index.js:58
 msgid "Calculating..."
@@ -244,7 +263,7 @@ msgstr "מחשב..."
 
 #: src/js/ate/translate-everything/components/Status/index.js:88
 msgid "Do not close WP admin!"
-msgstr "אלתסגור את WP admin!"
+msgstr "אל תסגרו את לוח הבקרה של וורדפרס!"
 
 #: src/js/ate/translate-everything/components/Status/index.js:96
 msgid "The number of translations"

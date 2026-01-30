@@ -44,7 +44,7 @@ class LandingPages implements \IWPML_Frontend_Action, \IWPML_Backend_Action, \IW
 		$homeUrl          = get_home_url();
 		$urlParts         = wp_parse_url( $homeUrl );
 		$urlParts['path'] = trailingslashit( Obj::prop( 'path', $urlParts ) ) . $post->post_name . '/';
-		$newPostUrl       = http_build_url( null, $urlParts );
+		$newPostUrl       = http_build_url( '', $urlParts );
 		$postLangCode     = $this->sitepress->get_language_for_element( $post->ID, 'post_' . self::POST_TYPE );
 
 		return $this->sitepress->convert_url( $newPostUrl, $postLangCode );
@@ -98,11 +98,13 @@ class LandingPages implements \IWPML_Frontend_Action, \IWPML_Backend_Action, \IW
 				$wpQueryBackup = clone $wp_query;
 				$priority      = (int) apply_filters( 'wpml_sub_setting', 1, 'seo', 'head_langs_priority' );
 				Hooks::onAction( 'wp_head', $priority + 1 )
-					->then( function() use ( $wpQueryBackup ) {
-						 global $wp_query;
+					->then(
+						function () use ( $wpQueryBackup ) {
+							global $wp_query;
 
-						 $wp_query = $wpQueryBackup; //phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited
-					} );
+							$wp_query = $wpQueryBackup; //phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+						}
+					);
 			}
 		}
 

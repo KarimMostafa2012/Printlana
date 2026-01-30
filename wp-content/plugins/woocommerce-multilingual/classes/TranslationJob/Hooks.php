@@ -58,7 +58,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_REST_Action {
 			$field = $this->handleAttribute( 'Value', $field );
 		} elseif ( $typeStartsWith( 'wc_variation_field:' ) ) {
 			$field = $this->handleVariationField( $field );
-		} elseif ( $typeStartsWith( 'image-id-' ) ) {
+		} elseif ( $typeStartsWith( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX ) ) {
 			$field = $this->handleImage( $field );
 		} elseif ( $typeStartsWith( 'field-_downloadable_files-' ) ) {
 			$field = $this->handleDownloadableFile( $field );
@@ -108,7 +108,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_REST_Action {
 	 * @return array
 	 */
 	private function handleImage( $field ) {
-		list( , $imageId, $title ) = Str::match( '/^image-id-(\d+)-(.*)$/', $field['field_type'] );
+		list( , $imageId, $title ) = Str::match( '/^' . preg_quote( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX, '/' ) . '(\d+)-(.*)$/', $field['field_type'] );
 
 		$field['title'] = $title;
 		$field['image'] = wp_get_attachment_url( $imageId );

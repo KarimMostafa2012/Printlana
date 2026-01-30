@@ -81,6 +81,16 @@ if ( ! class_exists( 'Dokan_Reply_To_Store_Support_Ticket' ) ) :
                 return;
             }
 
+            $result = StoreSupportHelper::get_single_topic(
+                array(
+                    'id'        => $email_data['ticket_id'],
+                    'vendor_id' => $store_id,
+                )
+            );
+            if ( $result['dokan_admin_email_notification'] === 'off' ) {
+                return;
+            }
+
             $this->setup_locale();
             $this->email_data                  = $email_data;
             $this->placeholders['{ticket_id}'] = $email_data['ticket_id'];

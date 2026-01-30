@@ -130,6 +130,11 @@ class Meow_WPMC_Rest
 				'permission_callback' => array( $this->core, 'can_access_features' ),
 				'callback' => array( $this, 'rest_retrieve_files' )
 			) );
+			register_rest_route( $this->namespace, '/save_progress', array(
+				'methods' => 'POST',
+				'permission_callback' => array( $this->core, 'can_access_features' ),
+				'callback' => array( $this, 'rest_save_progress' )
+			) );
 			register_rest_route( $this->namespace, '/retrieve_hash_duplicates', array(
 				'methods' => 'POST',
 				'permission_callback' => array( $this->core, 'can_access_features' ),
@@ -317,6 +322,8 @@ class Meow_WPMC_Rest
 			$finished = $this->engine->extractRefsFromLibrary( $limit, $limitsize, $message, $post_id );
 		}else if ( $source === 'duplicates' ) {
 			$finished = $this->engine->extractRefsFromDuplicates( $limit, $limitsize );
+		} else if( $source === 'thumbnails' ) {
+			$finished = $this->engine->extractRefsFromThumbnails( $limit, $limitsize, $message, $post_id );
 		}
 		else {
 			return new WP_REST_Response( [ 
@@ -361,6 +368,39 @@ class Meow_WPMC_Rest
 			],
 		];
 
+		$this->core->save_progress( 'retrieveDuplicates_finished', array(
+			'type' => 'duplicates',
+			'targets' => $hashes,
+		) );
+
+		return new WP_REST_Response( $response, 200 );
+	}
+
+	function rest_save_progress( $request ) {
+		$params = $request->get_json_params();
+
+		$save = isset( $params['data'] ) ? $params['data'] : null;
+		$step = isset( $params['step'] ) ? $params['step'] : null;
+
+		if( !is_array( $save ) || !$step ) {
+			return new WP_REST_Response( [ 
+				'success' => false, 
+				'message' => __( 'Invalid parameters for saving progress.', 'media-cleaner' ),
+			], 400 );
+		}
+
+		$this->core->save_progress( $step, $save );
+
+		$response = [ 
+			'success' => true, 
+			'message' => __( 'Progress saved successfully.', 'media-cleaner' ),
+		];
+
+		$new_token = $this->verify_token();
+		if( $new_token ) {
+			$response['new_token'] = $new_token;
+		}
+
 		return new WP_REST_Response( $response, 200 );
 	}
 
@@ -372,13 +412,8 @@ class Meow_WPMC_Rest
 	    // 	return new WP_REST_Response( [ 'success' => false, 'message' => 'Test Service Unavailable!' ], 503 );
 		// }
 
-
 		$params = $request->get_json_params();
 		$path = isset( $params['path'] ) ? ltrim( $params['path'], '/\\' ) : null;
-		$save = isset( $params['save'] ) ? $params['save'] : null;
-
-		$this->core->save_progress( 'retrieveFiles', array( 'targets' => $save['targets'] ?? [], 'processedDirs' => $save['processedDirs'] ?? [], 'totalDirs' => $save['totalDirs'] ?? 1, 'processedCount' => $save['processedCount'] ?? 0, 'directoriesToProcess' => $save['directoriesToProcess'] ?? [] ) );
-
 
 		$files = $this->engine->get_files( $path );
 		$files_count = count( $files );
@@ -519,6 +554,13 @@ class Meow_WPMC_Rest
 			} else if( $method == 'duplicates' ) {
 				$this->core->log( "🔎 Checking Duplicate #{$piece}..." );
 				$result = ( $this->engine->check_duplicates( $piece ) ? 1 : 0 );
+				if ( $result ) {
+					$success += $result;
+				}
+			}
+			else if ( $method == 'optimize_thumbnails' ) {
+				$this->core->log( "🔎 Checking Thumbnail File: {$piece}..." );
+				$result = ( $this->engine->check_file( $piece ) ? 1 : 0 );
 				if ( $result ) {
 					$success += $result;
 				}

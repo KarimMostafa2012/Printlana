@@ -34,7 +34,7 @@ class CompressX_Bulk_Optimization_Display
 
         $start_row=isset($_POST['offset'])?sanitize_key($_POST['offset']):0;
 
-        $ret=CompressX_Image_Scanner::scan_unoptimized_images_ex($force,$start_row);
+        $ret=CompressX_Image_Scanner::scan_unoptimized_images_v2($force,$start_row);
 
         echo wp_json_encode($ret);
 
@@ -697,11 +697,12 @@ class CompressX_Bulk_Optimization_Display
     public function get_latest_image_data()
     {
         global $compressx;
-        $compressx->ajax_check_security();
+        $compressx->ajax_check_security('compressx-can-use-image-optimization');
 
         $current_image_id=CompressX_Options::get_option('compressx_latest_bulk_image',null);//
 
-        $meta=CompressX_Image_Meta::get_image_meta($current_image_id);
+
+        $meta=CompressX_Image_Meta_V2::get_image_meta($current_image_id);
         if(empty($current_image_id))
         {
             $default_image_data=true;
@@ -716,8 +717,18 @@ class CompressX_Bulk_Optimization_Display
         }
         else
         {
-            $default_image_data=false;
+            if($this->webp_converted_exist($current_image_id)||$this->avif_converted_exist($current_image_id))
+            {
+                $default_image_data=false;
+            }
+            else
+            {
+                $default_image_data=true;
+            }
         }
+
+        $ret['compressx_latest_bulk_image']=$current_image_id;
+        $ret['default_image_data']=$default_image_data;
 
         if($default_image_data)
         {
@@ -768,8 +779,9 @@ class CompressX_Bulk_Optimization_Display
             $og_url=wp_get_attachment_url($current_image_id);
             $current_image['original_url']=$og_url.'?original';
             $current_image['original_path'] = get_attached_file($current_image_id);
+            $meta=CompressX_Image_Meta_V2::get_image_meta($current_image_id);
 
-            $current_image['original_size']=size_format($meta['og_file_size'],2);
+            $current_image['original_size']=size_format($meta['og_file_size']);
 
             if($meta['webp_converted'])
             {
@@ -778,8 +790,17 @@ class CompressX_Bulk_Optimization_Display
                 $savings = round((( $meta['og_file_size'] -  $meta['webp_converted_size']) / $meta['og_file_size']) * 100);
 
                 $output_path=CompressX_Image_Method::get_output_path($current_image['original_path']);
-                $current_image['webp_path']=$output_path.'.webp';
-                $current_image['webp_url']=$this->get_nextgen_url($og_url).'.webp?original';
+                if(isset($meta['mime_type'])&&$meta['mime_type']=="image/webp")
+                {
+                    $current_image['webp_path']=$output_path;
+                    $current_image['webp_url']=$this->get_nextgen_url($og_url).'?original';
+                }
+                else
+                {
+                    $current_image['webp_path']=$output_path.'.webp';
+                    $current_image['webp_url']=$this->get_nextgen_url($og_url).'.webp?original';
+                }
+
                 $current_image['webp_savings'] ="~{$savings}% smaller";
             }
             else
@@ -791,24 +812,21 @@ class CompressX_Bulk_Optimization_Display
                 $current_image['webp_savings'] =0;
             }
 
-            if($meta['compressed'])
-            {
-                $current_image['webp_disabled'] = false;
-                $current_image['webp_size'] = size_format($meta['compressed_size'],2);
-                $savings = round((( $meta['og_file_size'] -  $meta['compressed_size']) /  $meta['og_file_size']) * 100);
-
-                $output_path=CompressX_Image_Method::get_output_path($current_image['original_path']);
-                $current_image['webp_path']=$output_path;
-                $current_image['webp_url']=$this->get_nextgen_url($og_url).'.webp?original';
-                $current_image['webp_savings'] ="~{$savings}% smaller";
-            }
-
             if($meta['avif_converted'])
             {
                 $current_image['avif_disabled'] = false;
                 $output_path=CompressX_Image_Method::get_output_path($current_image['original_path']);
-                $current_image['avif_path']=$output_path.'.avif';
-                $current_image['avif_url']=$this->get_nextgen_url($og_url).'.avif?original';
+                if(isset($meta['mime_type'])&&$meta['mime_type']=="image/avif")
+                {
+                    $current_image['avif_path']=$output_path;
+                    $current_image['avif_url']=$this->get_nextgen_url($og_url).'?original';
+                }
+                else
+                {
+                    $current_image['avif_path']=$output_path.'.avif';
+                    $current_image['avif_url']=$this->get_nextgen_url($og_url).'.avif?original';
+                }
+
                 $current_image['avif_size'] = size_format($meta['avif_converted_size'],2);
                 $savings = round((( $meta['og_file_size'] -  $meta['avif_converted_size']) /  $meta['og_file_size']) * 100);
                 $current_image['avif_savings'] ="~{$savings}% smaller";
@@ -827,6 +845,69 @@ class CompressX_Bulk_Optimization_Display
         $ret['current_image']=$current_image;
         echo json_encode($ret);
         die();
+    }
+
+    public function webp_converted_exist($image_id)
+    {
+        $original_path = get_attached_file($image_id);
+        $meta=CompressX_Image_Meta_V2::get_image_meta($image_id);
+        if($meta['webp_converted'])
+        {
+            $output_path=CompressX_Image_Method::get_output_path($original_path);
+            if(isset($meta['mime_type'])&&$meta['mime_type']=="image/webp")
+            {
+                $webp_path=$output_path;
+            }
+            else
+            {
+                $webp_path=$output_path.'.webp';
+            }
+
+            if(file_exists($webp_path))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function avif_converted_exist($image_id)
+    {
+        $original_path = get_attached_file($image_id);
+        $meta=CompressX_Image_Meta_V2::get_image_meta($image_id);
+
+        if($meta['avif_converted'])
+        {
+            $output_path=CompressX_Image_Method::get_output_path($original_path);
+            if(isset($meta['mime_type'])&&$meta['mime_type']=="image/avif")
+            {
+                $avif_path=$output_path;
+            }
+            else
+            {
+                $avif_path=$output_path.'.avif';
+            }
+
+            if(file_exists($avif_path))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function get_nextgen_url( $orig_url )

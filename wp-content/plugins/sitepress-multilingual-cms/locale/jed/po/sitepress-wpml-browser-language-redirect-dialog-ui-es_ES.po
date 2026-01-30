@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "Cómo la redirección por idioma del navegador afecta la indexación de Google"
+msgstr "Cómo afecta la redirección de idioma del navegador a la indexación de Google"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
@@ -15,7 +15,7 @@ msgstr "Documentación"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "La redirección del navegador afecta la indexación y los resultados de búsqueda de Google"
+msgstr "La redirección del navegador afecta a la indexación de Google y a los resultados de búsqueda"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
@@ -30,13 +30,13 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "Cuando rediriges a los visitantes según su idioma, también rediriges a Google. Google quiere ver tu sitio exactamente como lo ven los visitantes, incluyendo cualquier redirección que apliques."
+msgstr "Cuando rediriges a los visitantes en función de su idioma, también rediriges a Google. Google quiere ver tu sitio exactamente como lo ven los visitantes, incluidas las redirecciones que apliques."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "Está bien redirigir a los visitantes según su idioma, pero debes tener en cuenta que esta función afecta al SEO."
+msgstr "Está bien redirigir a los visitantes en función de su idioma, pero debes darte cuenta de que esta función afecta al SEO."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"

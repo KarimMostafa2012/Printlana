@@ -9,7 +9,7 @@ msgstr ""
 msgid ""
 "You must use the Advanced Translation Editor if you want to translate your "
 "content automatically."
-msgstr "יש להשתמש ב'עורך התרגום המתקדם' אם אתה רוצה לתרגם את התוכן שלך באופן אוטומטי."
+msgstr "עליך להשתמש בעורך התרגום המתקדם אם ברצונך לתרגם את התוכן שלך באופן אוטומטי."
 
 #: src/js/settings/UI/Troubleshooting.js:26
 msgid "Synchronize translators and translation managers with ATE"
@@ -19,32 +19,32 @@ msgstr "סנכרן מתרגמים ומנהלי תרגום עם ATE"
 msgid ""
 "Please try again in a few minutes. If the problem persists, please contact "
 "%sWPML support%s."
-msgstr "נסה שוב עוד מספר דקות. אם הבעיה ממשיכה, צור קשר עם %sהתמיכה של WPML%s."
+msgstr "אנא נסה שוב בעוד כמה דקות. אם הבעיה נמשכת, אנא צור קשר עם %sתמיכת WPML%s."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:104
 msgid "Save"
-msgstr "שמור"
+msgstr "שמירה"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:73
 msgid "Please confirm this translation setting"
-msgstr "אשר זאת בהגדרת התרגום"
+msgstr "אנא אשר הגדרת תרגום זו"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:76
 msgid "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item."
 msgid_plural "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing items."
-msgstr[0] "האתר שלך מוגדר לתרגם את כל התוכן באופן אוטומטי. כשאתה מכין<PostTypesNames /> ניתן לתרגום, WPML יתרגם אוטומטית את%1$d פריט קיים."
-msgstr[1] "האתר שלך מוגדר לתרגם את כל התוכן באופן אוטומטי. כשאתה מכין<PostTypesNames /> ניתן לתרגום, WPML יתרגם אוטומטית את%1$d פריטים קיימים."
+msgstr[0] "האתר שלך מוגדר לתרגם את כל התוכן באופן אוטומטי. כאשר תהפוך את <PostTypesNames /> לניתן לתרגום, WPML יתרגם באופן אוטומטי את הפריט הקיים %1$d."
+msgstr[1] "האתר שלך מוגדר לתרגם את כל התוכן באופן אוטומטי. כאשר תהפוך את <PostTypesNames /> לניתן לתרגום, WPML יתרגם באופן אוטומטי את %1$d הפריטים הקיימים."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
 msgid ""
 "Your site is set to translate all content automatically. When you make "
 "<PostTypesNames /> translatable, WPML will automatically translate all "
 "future content."
-msgstr "האתר שלך מוגדר לתרגום אוטומטי של כל התוכן. כשתהפוך את <PostTypesNames /> לבר-תרגום, WPML יתרגם באופן אוטומטי את כל התוכן העתידי."
+msgstr "האתר שלך מוגדר לתרגם את כל התוכן באופן אוטומטי. כאשר תהפוך את <PostTypesNames /> לניתן לתרגום, WPML יתרגם באופן אוטומטי את כל התוכן העתידי."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:88
 msgid "Are you OK with paying for this?"
-msgstr "האם אתה מסכים לשלם עבור זה?"
+msgstr "האם אתה מסכים לשלם על כך?"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:90
 msgid "Cancel"
@@ -52,7 +52,7 @@ msgstr "ביטול"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
 msgid "Make translatable"
-msgstr "הפוך לברי-תרגום"
+msgstr "הפוך לניתן לתרגום"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:49
 msgid "Yes, translate <b>existing</b> and <b>future</b> content automatically"
@@ -60,7 +60,7 @@ msgstr "כן, תרגם תוכן <b>קיים</b> ו<b>עתידי</b> באופן �
 
 #: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:64
 msgid "Yes, but only translate <b>future</b> content automatically"
-msgstr "כן, אבל תרגם רק תוכן <b>עתידי</b> באופן אוטומטי"
+msgstr "כן, אך תרגם רק תוכן <b>עתידי</b> באופן אוטומטי"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:65
 msgid "Yes, translate <b>future</b> content automatically"

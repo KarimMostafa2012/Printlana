@@ -4,6 +4,7 @@ use \WPML\FP\Obj;
 use WPML\TM\API\Jobs;
 use WPML\TM\Menu\TranslationQueue\PostTypeFilters;
 use WPML\Translation\TranslationElements\FieldCompression;
+use WPML\TM\Translations\TranslationElements\FilterJobUrlMigration;
 
 /**
  * Class WPML_Translation_Job_Factory
@@ -433,6 +434,12 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 
 		// allow adding custom elements
 		$job->elements = apply_filters( 'icl_job_elements', $elements, $job->original_doc_id, $job->job_id );
+
+		$filter_job_url_migration = new FilterJobUrlMigration();
+
+		if ( $filter_job_url_migration->isSiteMigrated( $sitepress ) ) {
+			$job = $filter_job_url_migration->maybeFilterJobElementsAfterMigration( $job, $sitepress );
+		}
 
 		return $job;
 	}

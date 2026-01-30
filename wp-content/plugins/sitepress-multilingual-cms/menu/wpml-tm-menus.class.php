@@ -39,6 +39,9 @@ abstract class WPML_TM_Menus {
 
 	private function build_tabs() {
 		$tm_sub_menu = $this->get_current_shown_item();
+		?>
+		<div class="wpml-tab-wrapper">
+		<?php
 		foreach ( $this->tab_items as $id => $tab_item ) {
 			if ( ! isset( $tab_item['caption'] ) ) {
 				continue;
@@ -60,18 +63,6 @@ abstract class WPML_TM_Menus {
 				'nav-tab-' . $id,
 			);
 
-			if ( WPML_TM_AMS_Translation_Quality_Console_Section::SLUG === $id ) {
-				// Check if we have cached content for the Translation Quality tab
-				$factory        = new WPML_TM_AMS_Translation_Quality_Console_Section_Factory();
-				$section        = $factory->create();
-				$cachingManager = $section->getCachingManager();
-
-				// Only hide the tab if there's no cached content
-				if ( ! $cachingManager || ! $cachingManager->hasCachedApp() ) {
-					$classes[] = 'hidden-translation-quality';
-				}
-			}
-
 			if ( $tm_sub_menu === $id ) {
 				$classes[] = 'nav-tab-active';
 			}
@@ -81,10 +72,16 @@ abstract class WPML_TM_Menus {
 
 			?>
 			<a class="<?php echo esc_attr( $class ); ?>" href="<?php echo esc_attr( $href ); ?>">
-				<?php echo $caption; ?>
+				<span><?php echo $caption; ?></span>
+				<?php if ( isset( $tab_item['description'] ) && ! empty( $tab_item['description'] ) ) : ?>
+					<?php echo wp_kses_post( $tab_item['description'] ); ?>
+				<?php endif; ?>
 			</a>
 			<?php
 		}
+		?>
+		</div>
+		<?php
 	}
 
 	private function build_content() {

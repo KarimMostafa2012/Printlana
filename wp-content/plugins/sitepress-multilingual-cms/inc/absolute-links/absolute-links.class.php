@@ -164,20 +164,27 @@ class AbsoluteLinks {
 
 			$home_url = $sitepress->language_url( $test_language );
 
+			// Remove language parameter from home url.
 			if ( 3 === $sitepress_settings['language_negotiation_type'] ) {
 				$home_url = preg_replace( '#\?lang=([a-z-]+)#i', '', $home_url );
 			}
+			// Escape question mark from home url.
 			$home_url = str_replace( '?', '\?', $home_url );
 
+			// Remove language directory from default language's home url.
 			if ( $sitepress_settings['urls']['directory_for_default_language'] && $test_language === $default_language ) {
 				$home_url = $this->get_home_url_with_no_lang_directory( $home_url );
 			}
 
-			$int1 = preg_match_all( '@<a([^>]*)href="((' . rtrim( $home_url, '/' ) . ')?/([^"^>^\[^\]]+))"([^>]*)>@i', $text, $alp_matches1 );
-			$int2 = preg_match_all( '@<a([^>]*)href=\'((' . rtrim( $home_url, '/' ) . ')?/([^\'^>^\[^\]]+))\'([^>]*)>@i', $text, $alp_matches2 );
+			$site_domain = $this->get_url_without_scheme( $home_url ); // e.g. "example.com".
+
+			// For links with double quotes href. e.g. "<a href="http://example.com/path/">Link</a>".
+			$int1 = preg_match_all( '@<a([^>]*)href="((https?://' . $site_domain . ')?/([^"^>^\[^\]]+))"([^>]*)>@i', $text, $alp_matches1 );
+			// For links with single quotes href. e.g. '<a href='http://example.com/path/'>Link</a>'.
+			$int2 = preg_match_all( '@<a([^>]*)href=\'((https?://' . $site_domain . ')?/([^\'^>^\[^\]]+))\'([^>]*)>@i', $text, $alp_matches2 );
 
 			$alp_matches = [];
-			for ( $i = 0; $i < 6; $i ++ ) {
+			for ( $i = 0; $i < 6; $i++ ) {
 				$alp_matches[ $i ] = array_merge( (array) $alp_matches1[ $i ], (array) $alp_matches2[ $i ] );
 			}
 
@@ -186,7 +193,7 @@ class AbsoluteLinks {
 				$url_parts         = wp_parse_url( $this->get_home_url_with_no_lang_directory() );
 				$url_parts['path'] = isset( $url_parts['path'] ) ? $url_parts['path'] : '';
 				foreach ( $alp_matches[4] as $k => $dir_path ) {
-					if ( 0 === strpos( $dir_path, WP_CONTENT_DIR ) ) {
+					if ( $this->is_content_directory_path( $dir_path ) ) {
 						continue;
 					}
 
@@ -264,6 +271,16 @@ class AbsoluteLinks {
 							// Parse the query.
 							parse_str( $query, $permalink_query_vars );
 
+							/**
+							 * Allows to correct links added by plugins, taking into account the language.
+							 *
+							 * @since 4.9.0
+							 *
+							 * @param array  $permalink_query_vars
+							 * @param string $query
+							 * @param string $language
+							 */
+							$permalink_query_vars = apply_filters( 'wpml_absolute_links_permalink_query_vars', $permalink_query_vars, $query, $test_language );
 							break;
 						}
 					}
@@ -334,6 +351,7 @@ class AbsoluteLinks {
 						}
 
 						if ( $p ) {
+							// Handle the case of CMS Nav Plugin for external links.
 							$offsite_url = get_post_meta( $p->ID, '_cms_nav_offsite_url', true );
 							if ( 'page' === $p->post_type && $offsite_url ) {
 								$def_url = $this->get_regex_replacement_offline(
@@ -342,7 +360,7 @@ class AbsoluteLinks {
 									$sitepress_settings['language_negotiation_type'],
 									$lang,
 									$dir_path,
-									$home_url,
+									$site_domain,
 									$anchor_output
 								);
 							} elseif ( ! $this->is_pagination_in_post( $dir_path, $post_name ) ) {
@@ -356,7 +374,7 @@ class AbsoluteLinks {
 									$sitepress_settings['language_negotiation_type'],
 									$lang,
 									$dir_path,
-									$home_url,
+									$site_domain,
 									$url_parts,
 									$req_uri_params,
 									$anchor_output
@@ -402,7 +420,7 @@ class AbsoluteLinks {
 								$sitepress_settings['language_negotiation_type'],
 								$lang,
 								$dir_path,
-								$home_url,
+								$site_domain,
 								$url_parts,
 								$req_uri_params,
 								$anchor_output
@@ -438,7 +456,7 @@ class AbsoluteLinks {
 							$sitepress_settings['language_negotiation_type'],
 							$lang,
 							$dir_path,
-							$home_url,
+							$site_domain,
 							$url_parts,
 							$req_uri_params,
 							$anchor_output
@@ -452,10 +470,10 @@ class AbsoluteLinks {
 
 				$tx_qvs   = ! empty( $this->taxonomies_query_vars ) && is_array( $this->taxonomies_query_vars ) ? '|' . join( '|', $this->taxonomies_query_vars ) : '';
 				$post_qvs = ! empty( $this->custom_posts_query_vars ) && is_array( $this->custom_posts_query_vars ) ? '|' . join( '|', $this->custom_posts_query_vars ) : '';
-				$int      = preg_match_all( '@href=[\'"](' . rtrim( get_home_url(), '/' ) . '/?\?(p|page_id' . $tx_qvs . $post_qvs . ')=([0-9a-z-]+)(#.+)?)[\'"]@i', $text, $matches2 );
+				$int      = preg_match_all( '@href=[\'"](https?://' . $this->get_url_without_scheme( get_home_url() ) . '/?\?(p|page_id' . $tx_qvs . $post_qvs . ')=([0-9a-z-]+)(#.+)?)[\'"]@i', $text, $matches2 );
 				if ( $int ) {
 					$url_parts = wp_parse_url( rtrim( get_home_url(), '/' ) . '/' );
-					$text      = preg_replace( '@href=[\'"](' . rtrim( get_home_url(), '/' ) . '/?\?(p|page_id' . $tx_qvs . $post_qvs . ')=([0-9a-z-]+)(#.+)?)[\'"]@i', 'href="/' . ltrim( $url_parts['path'], '/' ) . '?$2=$3$4"', $text );
+					$text      = preg_replace( '@href=[\'"](https?://' . $url_parts['host'] . '/?\?(p|page_id' . $tx_qvs . $post_qvs . ')=([0-9a-z-]+)(#.+)?)[\'"]@i', 'href="/' . ltrim( $url_parts['path'], '/' ) . '?$2=$3$4"', $text );
 				}
 			}
 		}
@@ -494,6 +512,12 @@ class AbsoluteLinks {
 
 	private function does_lang_exist( $lang ) {
 		return in_array( $lang, $this->active_languages, true );
+	}
+
+	private function is_content_directory_path( $path ) {
+		$wp_content_path = wp_parse_url( WP_CONTENT_URL, PHP_URL_PATH );
+
+		return $wp_content_path && 0 === strpos( '/' . $path, $wp_content_path );
 	}
 
 	public function _get_ids_and_post_types( $name ) {
@@ -589,7 +613,6 @@ class AbsoluteLinks {
 		WPML_Non_Persistent_Cache::set( $cache_key, $final_rules, $cache_group );
 
 		return $final_rules;
-
 	}
 
 	private function get_regex_replacement(
@@ -599,7 +622,7 @@ class AbsoluteLinks {
 		$lang_negotiation,
 		$lang,
 		$dir_path,
-		$home_url,
+		$site_domain,
 		$url_parts,
 		$req_uri_params,
 		$anchor_output
@@ -612,9 +635,10 @@ class AbsoluteLinks {
 		} else {
 			$langprefix = '';
 		}
-		$perm_url = '(' . rtrim( $home_url, '/' ) . ')?' . $langprefix . '/' . str_replace( '?', '\?', $dir_path );
-		$regk     = '@href=[\'"](' . self::escapePlusSign( $perm_url ) . ')[\'"]@i';
-		$regv     = 'href="/' . ltrim( $url_parts['path'], '/' ) . '?' . $type . '=' . $type_id;
+		$perm_url  = '(https?://' . $site_domain . ')?';
+		$perm_url .= $langprefix . '/' . str_replace( '?', '\?', $dir_path );
+		$regk      = '@href=[\'"](' . self::escapePlusSign( $perm_url ) . ')[\'"]@i';
+		$regv      = 'href="/' . ltrim( $url_parts['path'], '/' ) . '?' . $type . '=' . $type_id;
 		if ( '' !== $req_uri_params ) {
 			$regv .= '&' . $req_uri_params;
 		}
@@ -649,7 +673,7 @@ class AbsoluteLinks {
 		$lang_negotiation,
 		$lang,
 		$dir_path,
-		$home_url,
+		$site_domain,
 		$anchor_output
 	) {
 		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY === (int) $lang_negotiation && $lang ) {
@@ -657,9 +681,10 @@ class AbsoluteLinks {
 		} else {
 			$langprefix = '';
 		}
-		$perm_url = '(' . rtrim( $home_url, '/' ) . ')?' . $langprefix . '/' . str_replace( '?', '\?', $dir_path );
-		$regk     = '@href=["\'](' . self::escapePlusSign( $perm_url ) . ')["\']@i';
-		$regv     = 'href="' . $offsite_url . $anchor_output . '"';
+		$perm_url  = '(https?://' . $site_domain . ')?';
+		$perm_url .= $langprefix . '/' . str_replace( '?', '\?', $dir_path );
+		$regk      = '@href=["\'](' . self::escapePlusSign( $perm_url ) . ')["\']@i';
+		$regv      = 'href="' . $offsite_url . $anchor_output . '"';
 
 		$def_url[ $regk ] = $regv;
 
@@ -737,7 +762,12 @@ class AbsoluteLinks {
 		$sitepress->switch_lang( $current_language );
 
 		if ( $post_content !== $post->post_content ) {
-			$wpdb->update( $wpdb->posts, [ 'post_content' => $post_content ], [ 'ID' => $post_id ] );
+			$updated = $wpdb->update( $wpdb->posts, [ 'post_content' => $post_content ], [ 'ID' => $post_id ] );
+
+			// Delete the post cache because we are updating the post via SQL directly.
+			if ( false !== $updated ) {
+				clean_post_cache( $post_id );
+			}
 		}
 
 		update_post_meta( $post_id, '_alp_processed', time() );
@@ -764,8 +794,18 @@ class AbsoluteLinks {
 		return $absolute_url;
 	}
 
+	/**
+	 * @param string $url
+	 *
+	 * @return bool
+	 */
 	public function is_home( $url ) {
-		return untrailingslashit( get_home_url() ) === untrailingslashit( $url );
+		if ( preg_match( '/^https?:\/\//', $url ) !== 1 ) {
+			// Avoid case where $url is relative path with site domain name e.g. "example.com".
+			return false;
+		}
+
+		return $this->get_url_without_scheme( get_home_url() ) === $this->get_url_without_scheme( $url );
 	}
 
 	/**
@@ -835,5 +875,16 @@ class AbsoluteLinks {
 			$wpdb->prepare( "SELECT post_type, post_name FROM {$wpdb->posts} WHERE id=%d", $post_id ),
 			ARRAY_N
 		);
+	}
+
+	/**
+	 * Remove protocol and trailing slash from the given URL.
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	private function get_url_without_scheme( string $url ): string {
+		return rtrim( preg_replace( '/^https?:\/\//', '', $url ), '/' );
 	}
 }

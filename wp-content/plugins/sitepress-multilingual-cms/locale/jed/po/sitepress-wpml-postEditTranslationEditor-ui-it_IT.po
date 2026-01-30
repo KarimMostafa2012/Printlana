@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:116
 msgid "WPML Translation Editor"
-msgstr "Editor di traduzione di WPML "
+msgstr "Editor di traduzione WPML"
 
 #: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:123
 #: src/js/postEditTranslationEditor/components/SaveModal.js:22
@@ -24,13 +24,13 @@ msgstr "Dashboard di traduzione"
 msgid ""
 "Also, switching back to WPML's Translation Editor later will require "
 "re-translating content that you translated with the WordPress editor."
-msgstr "Inoltre, tornare successivamente all'Editor di Traduzione di WPML richiederà di ritradurre i contenuti che hai tradotto con l'editor di WordPress."
+msgstr "Inoltre, tornare in seguito all'Editor di traduzione di WPML richiederà di ritradurre i contenuti che hai tradotto con l'Editor di WordPress."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:107
 msgid ""
 "This will overwrite content you translated with the WordPress Editor. If "
 "you switch now, you'll have to translate selected content again."
-msgstr "Questo sovrascriverà i contenuti che hai tradotto con l'Editor di WordPress. Se cambi ora, dovrai tradurre nuovamente i contenuti selezionati."
+msgstr "Questo sovrascriverà i contenuti che hai tradotto con l'Editor di WordPress. Se cambi ora, dovrai tradurre di nuovo i contenuti selezionati."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:35
 msgid "You are about to translate with the %s"
@@ -40,7 +40,7 @@ msgstr "Stai per tradurre con il %s"
 msgid ""
 "Translate with the WordPress Editor if you need different designs per "
 "language or if the content isn't compatible with WPML's Translation Editor."
-msgstr "Traduci con l'Editor di WordPress se hai bisogno di design diversi per lingua o se il contenuto non è compatibile con l'Editor di Traduzione di WPML."
+msgstr "Traduci con l'Editor di WordPress se hai bisogno di design diversi per lingua o se il contenuto non è compatibile con l'Editor di traduzione di WPML."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:51
 msgid "What do you want to translate?"
@@ -48,7 +48,7 @@ msgstr "Cosa vuoi tradurre?"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:7
 msgid "I understand, switch to the WordPress Editor"
-msgstr "Ho capito, passa all'Editor di WordPress"
+msgstr "Capisco, passa all'Editor di WordPress"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:75
 msgid "Apply"
@@ -60,7 +60,7 @@ msgstr "Annulla"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:8
 msgid "I understand, switch to %s"
-msgstr "Ho capito, passa a %s"
+msgstr "Capisco, passa a %s"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:85
 msgid "Only this %s"
@@ -72,22 +72,22 @@ msgstr "Consigliato"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:86
 msgid "All %s"
-msgstr "Tutto %s"
+msgstr "Tutti i %s"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:87
 msgid "All the site's content"
-msgstr "Tutto il contenuto del sito"
+msgstr "Tutti i contenuti del sito"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:9
 msgid "I understand, switch to Translation Dashboard"
-msgstr "Ho capito, passa al Dashboard di traduzione"
+msgstr "Capisco, passa alla Dashboard di traduzione"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:97
 msgid ""
 "The WordPress Editor doesn't offer Automatic Translation, Translation "
 "Memory and other features that make translation easier."
-msgstr "L'Editor di WordPress non offre la Traduzione Automatica, la Memoria di Traduzione e altre funzionalità che rendono la traduzione più semplice."
+msgstr "L'Editor di WordPress non offre la traduzione automatica, la memoria di traduzione e altre funzionalità che semplificano la traduzione."
 
 #: src/js/postEditTranslationEditor/components/showDashboardEditor.js:9
 msgid "Translate items in batch after reviewing the cost of AI translation"
-msgstr "Traduci elementi in batch dopo aver esaminato il costo della traduzione AI"
+msgstr "Traduci gli elementi in blocco dopo aver esaminato il costo della traduzione IA"

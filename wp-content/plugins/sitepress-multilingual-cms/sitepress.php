@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML Multilingual CMS
  * Plugin URI: https://wpml.org/
- * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-8-5/">WPML 4.8.5 release notes</a>
+ * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-9-0-b-3/">WPML 4.9.0-b.3 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 4.8.5
+ * Version: 4.9.0-b.3
  * Plugin Slug: sitepress-multilingual-cms
  *
  * @package WPML\Core
@@ -32,11 +32,11 @@ if ( ! \WPML\Requirements\WordPress::checkMinimumRequiredVersion() ) {
 	return;
 }
 
-define( 'ICL_SITEPRESS_VERSION', '4.8.5' );
+define( 'ICL_SITEPRESS_VERSION', '4.9.0' );
 
 // Script version, first 3 digits are the same as the plugin version.
 // Increase the last 3 digits by 1 for intermediate packages (i.e. beta, rc, internal).
-define( 'ICL_SITEPRESS_SCRIPT_VERSION', '485900' );
+define( 'ICL_SITEPRESS_SCRIPT_VERSION', '490001' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -269,6 +269,7 @@ if ( $sitepress->is_setup_complete() ) {
 		Display_Notice_Minimum_Requirements_If_Needed::class,
 		\WPML\Notices\SiteKey\Factory::class,
 		'WPML_Media_Attachments_Query_Factory',
+		\WPML\Request\Hooks::class,
 	];
 	$action_filter_loader->load( $actions );
 

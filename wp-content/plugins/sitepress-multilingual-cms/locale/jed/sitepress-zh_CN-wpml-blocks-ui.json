@@ -14,19 +14,19 @@
             "HTML 锚点"
          ],
          "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            "使用 \"#anchor\" URL 加载页面时，为该区块添加快捷方式。"
+            "使用 “#anchor” URL 加载页面时，为此区块添加快捷方式。"
          ],
          "Additional CSS class(es)": [
             "附加 CSS 类"
          ],
          "Separate multiple classes with spaces.": [
-            "用空格分隔多个班级。"
+            "用空格分隔多个类。"
          ],
          "Color": [
             "颜色"
          ],
          "px": [
-            "px"
+            "像素"
          ],
          "%": [
             "%"
@@ -38,10 +38,10 @@
             "区块"
          ],
          "Block margin": [
-            "块边距"
+            "区块外边距"
          ],
          "Block padding": [
-            "区块填充"
+            "区块内边距"
          ],
          "LANGUAGE": [
             "语言"
@@ -50,10 +50,10 @@
             "语言间距"
          ],
          "Language padding": [
-            "语言填充"
+            "语言内边距"
          ],
          "Display": [
-            "显示器"
+            "显示"
          ],
          "Show flag": [
             "显示旗帜"
@@ -62,10 +62,10 @@
             "显示语言名称"
          ],
          "Display language name in": [
-            "显示语言名称"
+            "以以下形式显示语言名称"
          ],
          "Style": [
-            "风格"
+            "样式"
          ],
          "Flag settings": [
             "旗帜设置"
@@ -80,7 +80,7 @@
             "间距"
          ],
          "Allow wrapping to multiple lines": [
-            "允许多行包装"
+            "允许换行"
          ],
          "Open on click": [
             "点击打开"
@@ -92,10 +92,10 @@
             "布局"
          ],
          "Justification": [
-            "理由"
+            "对齐"
          ],
          "Orientation": [
-            "定向"
+            "方向"
          ],
          "Typography": [
             "排版"
@@ -122,19 +122,19 @@
             "代码"
          ],
          "Justify items left": [
-            "左对齐项目"
+            "项目左对齐"
          ],
          "Justify items center": [
-            "证明项目中心"
+            "项目居中对齐"
          ],
          "Justify items right": [
-            "证明项目正确"
+            "项目右对齐"
          ],
          "Justify items space between": [
-            "说明项目之间的空间"
+            "项目两端对齐"
          ],
          "Horizontal": [
-            "横向"
+            "水平"
          ],
          "Vertical": [
             "垂直"
@@ -149,10 +149,10 @@
             "大"
          ],
          "X-Large": [
-            "特大号"
+            "特大"
          ],
          "Ab": [
-            "腹肌"
+            "Ab"
          ],
          "AB": [
             "AB"
@@ -161,25 +161,25 @@
             "ab"
          ],
          "Small": [
-            "小号"
+            "小"
          ],
          "Displays the WPML Language Switcher.": [
-            "显示WPML语言切换器。"
+            "显示 WPML 语言切换器。"
          ],
          "Language Switcher": [
             "语言切换器"
          ],
          "displays the WPML Language Switcher": [
-            "显示WPML语言切换器"
+            "显示 WPML 语言切换器"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "显示WPML语言切换器。<br/>了解<a>如何翻译此区块</a>。"
+            "显示 WPML 语言切换器。<br/> 了解 <a>如何翻译此区块</a>。"
          ],
          "Navigation Language Switcher": [
             "导航语言切换器"
          ],
          "Reset all": [
-            "重置全部"
+            "全部重置"
          ]
       }
    }

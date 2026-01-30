@@ -2,10 +2,9 @@
 
 namespace WeDevs\DokanPro\Emails;
 
-use WC_Email;
 use WeDevs\Dokan\Vendor\Vendor;
 
-class RefundVendor extends WC_Email {
+class RefundVendor extends AbstractRefund {
 
     /**
      * Constructor.
@@ -79,7 +78,7 @@ class RefundVendor extends WC_Email {
         $this->placeholders['{amount}']      = dokan()->email->currency_symbol( wc_format_decimal( $refund_amount, false, true ) );
         $this->placeholders['{reason}']      = $refund_reason;
         $this->placeholders['{order_id}']    = $order_id;
-        $this->placeholders['{status}']      = $status;
+        $this->placeholders['{status}']      = $this->get_translated_status( $status );
         $this->placeholders['{order_link}']  = dokan_get_navigation_url( 'orders' ) . '?order_status=wc-refunded';
 
         $this->send( $seller_mail, $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );

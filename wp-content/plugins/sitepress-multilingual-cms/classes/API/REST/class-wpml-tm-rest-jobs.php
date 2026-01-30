@@ -10,6 +10,7 @@ use WPML\FP\Fns;
 use WPML\FP\Maybe;
 use WPML\LIB\WP\User;
 use WPML\TM\ATE\Review\Cancel;
+use WPML\Translation\CancelJobsServiceFactory;
 use function WPML\FP\pipe;
 use function WPML\FP\partial;
 use function WPML\FP\invoke;
@@ -278,8 +279,16 @@ class WPML_TM_REST_Jobs extends WPML_REST_Base {
 				->filter( $validateParameter )
 				->map( $getJob )
 				->filter()
-				->map( Fns::tap( invoke( 'set_status' )->with( ICL_TM_NOT_TRANSLATED ) ) )
-				->map( Fns::tap( [ $this->update_jobs, 'update_state' ] ) );
+				->filter( function ( $job ) {
+					// All modern jobs use this class type. Only old fashioned "string" jobs did not.
+					// So, this condition is true as long as a user does not try to cancel some archaic string jobs.
+					return $job instanceof WPML_TM_Post_Job_Entity;
+				} );
+
+			$jobIds = $jobs->map( invoke( 'get_translate_job_id' ) )->values()->toArray();
+
+			$cancelJobsService = CancelJobsServiceFactory::create();
+			$result            = $cancelJobsService->cancelJobs( $jobIds );
 
 			do_action( 'wpml_tm_jobs_cancelled', $jobs->toArray() );
 

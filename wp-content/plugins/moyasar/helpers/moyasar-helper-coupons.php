@@ -25,11 +25,24 @@ class Moyasar_Helper_Coupons
         }
         $target_grand_total = Moyasar_Currency_Helper::amount_to_major($payment['amount'], $payment['currency']);
         $order_total = $order->get_total();
+        $coupon_name = $payment['metadata']['#coupon_code'] . " (" . $payment['metadata']['#coupon_discount'] . "%)";
 
         // Calculate needed discount
         $discount_amount = $order_total - $target_grand_total;
+        // If Order has discounted item drop
+        $items = $order->get_items();
+        foreach ($items as $item) {
+           if ($item->get_name() === $coupon_name) {
+               moyasar_logger(sprintf(
+                   "[Moyasar] [Coupons] Coupon %s already applied to order #%d",
+                   $payment['metadata']['#coupon_code'],
+                   $order->get_id()
+               ), 'info', $order->get_id());
+               return;
+           }
+        }
         $prod = new WC_Order_Item_Product();
-        $prod->set_name($payment['metadata']['#coupon_code'] . " (" . $payment['metadata']['#coupon_discount'] . "%)");
+        $prod->set_name($coupon_name);
         $prod->set_tax_class('0');
         $prod->set_total(-$discount_amount);
         $prod->set_subtotal(-$discount_amount);

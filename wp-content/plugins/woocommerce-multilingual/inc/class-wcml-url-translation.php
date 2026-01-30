@@ -4,6 +4,7 @@ use WCML\Permalinks\Strings;
 use WCML\Utilities\WCTaxonomies;
 
 class WCML_Url_Translation {
+	const WC_STRING_CONTEXT = 'WooCommerce Endpoints';
 	
 
 	/** @var woocommerce_wpml */
@@ -910,9 +911,11 @@ class WCML_Url_Translation {
 	}
 
 	private function get_endpoint_string_context() {
+		return self::get_endpoints_string_context();
+	}
 
-		return class_exists( 'WPML_Endpoints_Support' ) ? WPML_Endpoints_Support::STRING_CONTEXT : 'WooCommerce Endpoints';
-
+	public static function get_endpoints_string_context(): string {
+		return class_exists( WPML_Endpoints_Support::class ) ? WPML_Endpoints_Support::STRING_CONTEXT : self::WC_STRING_CONTEXT;
 	}
 
 	/**

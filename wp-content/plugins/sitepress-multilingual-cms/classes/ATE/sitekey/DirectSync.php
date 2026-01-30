@@ -82,8 +82,6 @@ class DirectSync implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 			make( Endpoint::class ),
 			wpml_collect( [] )
 		);
-
-		error_log( 'WPML: Direct site key sync failed, scheduled background task as fallback' );
 	}
 
 	/**

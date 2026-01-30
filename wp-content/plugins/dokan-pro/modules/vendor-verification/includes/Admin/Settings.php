@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\VendorVerification\Admin;
 
+use WeDevs\DokanPro\Modules\VendorVerification\Frontend\HybridauthHooks;
 use WeDevs\DokanPro\Modules\VendorVerification\Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -67,7 +68,7 @@ class Settings {
      * @return array
      */
     public function settings_fields( $settings_fields ): array {
-        $callback = dokan_get_navigation_url( 'settings/verification' );
+        $callback = WC()->api_request_url( HybridauthHooks::$callback_url );
 
         $settings_fields['dokan_verification'] = [
             'verified_icon'                      => [

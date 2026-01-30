@@ -41,7 +41,7 @@ if( isset( $this->topbar_sub_title ) && ! empty( $this->topbar_sub_title ) ){
                     <img src="<?php echo esc_url( $min_max_img ); ?>" class="wcmmq-brand-logo">
                 </div>
                 <div class="wcmmq-main-title">
-                    <h2 class="wcmmq-ntitle"><?php esc_html__("Min Max Control", 'woo-min-max-quantity-step-control-single');?></h2>
+                    <h2 class="wcmmq-ntitle"><?php echo esc_html__("Min Max Control", 'woo-min-max-quantity-step-control-single');?></h2>
                 </div>
                 
                 <div class="wcmmq-main-title wcmmq-main-title-secondary">
@@ -52,25 +52,19 @@ if( isset( $this->topbar_sub_title ) && ! empty( $this->topbar_sub_title ) ){
         </div>
         <div class="col-lg-5">
             <div class="header-button-wrapper">
-                <?php if( ! wcmmq_is_premium_installed() && ! wcmmq_is_old_dir() ){ ?>
-                    <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
-                        href="https://checkout.freemius.com/plugin/21522/" 
-                        target="_blank">
-                        <i class="wcmmq_icon-spin5 animate-spin"></i>
-                        Freemius Checkout
-                    </a>
-                <?php }else if( $this->is_pro && $license_direct && wcmmq_is_old_dir() ){ ?>
+                <?php if( $this->is_pro && $license_direct  ){ ?>
                     <a class="wcmmq-btn wcmmq-has-icon wcmmq-btn-tiny" 
                         href="<?php esc_attr( admin_url() ) ?>admin.php?page=wcmmq-license">
                         <span><i class="wcmmq_icon-plug"></i></span>
                         License
                     </a>
-                <?php }else if( ! wcmmq_is_old_dir() ){ ?>
-                <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
-                    href="https://customers.freemius.com/store/9916/websites" 
-                    target="_blank">
-                    <i class="wcmmq_icon-user"></i>Login Store
-                </a>    
+                <?php }else{ ?>
+                    <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
+                        href="https://codeastrology.com/min-max-quantity/pricing/" 
+                        target="_blank">
+                        <i class="wcmmq_icon-spin5 animate-spin"></i>
+                        Get Premium Features
+                    </a>  
                     <?php } ?>
                 
                 <a class="wcmmq-btn wcmmq-btn-tiny" 

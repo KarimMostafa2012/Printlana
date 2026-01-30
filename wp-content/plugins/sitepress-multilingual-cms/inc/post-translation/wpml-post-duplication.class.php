@@ -149,6 +149,11 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		do_action( 'icl_make_duplicate', $master_post_id, $lang, $post_array, $id );
 		clean_post_cache( $id );
 
+		// See WPML_Query_Parser::maybe_adjust_name_var() and WPML_Name_Query_Filter::get_single_slug_adjusted_IDs()
+		if ( function_exists( 'wp_cache_supports' ) && wp_cache_supports( 'flush_group' ) ) {
+			wp_cache_flush_group( 'WPML_Page_Name_Query_Filter' );
+		}
+
 		return $id;
 	}
 

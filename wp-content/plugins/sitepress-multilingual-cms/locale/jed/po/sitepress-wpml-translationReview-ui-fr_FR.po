@@ -11,7 +11,7 @@ msgstr "Accepté"
 
 #: src/js/translationReview/components/AcceptedText.js:8
 msgid "Approved!"
-msgstr "Approuvée !"
+msgstr "Approuvé!"
 
 #: src/js/translationReview/components/AcceptedText.js:9
 #: src/js/translationReview/components/PublishedText.js:9
@@ -26,11 +26,11 @@ msgstr "Retour"
 msgid ""
 "Turn off to not automatically load the next translation after finishing "
 "this review."
-msgstr "Désactivez cette option pour ne pas charger automatiquement la traduction suivante après avoir achevé cette relecture."
+msgstr "Désactiver pour ne pas charger automatiquement la prochaine traduction après avoir terminé cette révision."
 
 #: src/js/translationReview/components/ContinueReviewToggle.js:18
 msgid "Turn on to automatically load the next translation after finishing this  ."
-msgstr "Activer pour charger automatiquement la traduction suivante après avoir achevé celle-ci."
+msgstr "Activer pour charger automatiquement la prochaine traduction après avoir terminé cette révision."
 
 #: src/js/translationReview/components/EditButton.js:10
 msgid "Edit"
@@ -42,7 +42,7 @@ msgstr "Modifier la traduction"
 
 #: src/js/translationReview/components/NextTranslationReview.js:22
 msgid "Next review"
-msgstr "Relecture suivante"
+msgstr "Prochaine révision"
 
 #: src/js/translationReview/components/PublishButton.js:10
 msgid "Publish this translation"
@@ -54,16 +54,16 @@ msgstr "Accepter cette traduction"
 
 #: src/js/translationReview/components/PublishedText.js:8
 msgid "Published!"
-msgstr "Publiée !"
+msgstr "Publié!"
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Veuillez patienter, la traduction est prise en charge..."
+msgstr "Veuillez patienter, application de la traduction..."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Une erreur est survenue lors de la prise en charge de la traduction."
+msgstr "Une erreur est survenue lors de l'application de la traduction."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
-msgstr "Quelqu'un est déjà en train de réviser cette traduction. veuillez réessayer plus tard."
+msgstr "Quelqu'un est déjà en train de réviser cette traduction. Veuillez réessayer plus tard."

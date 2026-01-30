@@ -112,19 +112,7 @@ class WCML_Bookings implements \IWPML_Action {
 
 		add_action( 'woocommerce_new_booking', [ $this, 'duplicate_booking_for_translations' ] );
 
-		$bookings_statuses = [
-			'unpaid',
-			'pending-confirmation',
-			'confirmed',
-			'paid',
-			'cancelled',
-			'complete',
-			'in-cart',
-			'was-in-cart',
-		];
-		foreach ( $bookings_statuses as $status ) {
-			add_action( 'woocommerce_booking_' . $status, [ $this, 'update_status_for_translations' ] );
-		}
+		add_action( 'woocommerce_booking_status_changed', [ $this, 'woocommerce_booking_status_changed_update_translations' ], 10, 4 );
 
 		add_filter( 'woocommerce_bookings_in_date_range_query', [ $this, 'bookings_in_date_range_query' ] );
 
@@ -245,6 +233,8 @@ class WCML_Bookings implements \IWPML_Action {
 
 				// sync_persons.
 				$this->sync_persons( $original_product_id, $translation, $language );
+
+				$this->clear_bookable_product_cache( $translation );
 			}
 		}
 	}
@@ -856,6 +846,8 @@ class WCML_Bookings implements \IWPML_Action {
 
 		add_action( 'save_post', [ $this->wpml_post_translations, 'save_post_actions' ], 100, 2 );
 
+		$this->clear_bookable_product_cache( $tr_product_id );
+
 	}
 
 	public function duplicate_booking_for_translations( $booking_id, $lang = false ) {
@@ -982,6 +974,22 @@ class WCML_Bookings implements \IWPML_Action {
 
 	}
 
+	/**
+	 * @param string     $from       Previous status.
+	 * @param string     $to         New (current) status.
+	 * @param int        $booking_id Booking id.
+	 * @param WC_Booking $wc_booking Booking object.
+	 */
+	public function woocommerce_booking_status_changed_update_translations( $from, $to, $booking_id, $wc_booking ) {
+		if ( 'in-cart' === $from && 'unpaid' === $to ) {
+			return;
+		}
+		$this->update_status_for_translations( $booking_id );
+	}
+
+	/**
+	 * @param int $booking_id
+	 */
 	public function update_status_for_translations( $booking_id ) {
 
 		foreach ( $this->get_translated_bookings( $booking_id, false ) as $translated_booking_id ) {
@@ -1001,9 +1009,10 @@ class WCML_Bookings implements \IWPML_Action {
 				);
 
 				$this->update_translated_booking_meta( $translated_booking_id, $booking_id, $language );
+
+				wp_cache_delete( $translated_booking_id, 'posts' );
 			}
 		}
-
 	}
 
 	public function get_translated_bookings( $booking_id, $actual_translations_only = true ) {
@@ -1539,7 +1548,7 @@ class WCML_Bookings implements \IWPML_Action {
 	 *
 	 * @todo Review whether this is needed.
 	 * We already have a callback on wpml_pro_translation_completed syncing data to the created/edited translation.
-	 * This callback here takes the translation, hets the original product, and syncs it into all translations.
+	 * This callback here takes the translation, sets the original product, and syncs it into all translations.
 	 * Note that we have some callbacks on wcml_before_sync_product and vcml_before_sync_product_data, it might be relevant.
 	 */
 	public function synchronize_bookings_on_translation_completed( $new_post_id, $fields, $job ) {
@@ -1548,6 +1557,8 @@ class WCML_Bookings implements \IWPML_Action {
 			&& $this->is_booking( $job->original_doc_id )
 		) {
 			do_action( \WCML\Synchronization\Hooks::HOOK_SYNCHRONIZE_PRODUCT_TRANSLATIONS, get_post( $job->original_doc_id ), [], [] );
+
+			$this->clear_bookable_product_cache( $new_post_id );
 		}
 	}
 
@@ -1640,6 +1651,16 @@ class WCML_Bookings implements \IWPML_Action {
 				'post_parent' => $order_id,
 			] );
 		}
+	}
+
+	/**
+	 * Clear product cache for bookable products.
+	 *
+	 * @param int $product_id
+	 */
+	private function clear_bookable_product_cache( $product_id ) {
+		wp_cache_delete( 'wc_product_' . $product_id . '_cache_prefix', 'product_' . $product_id );
+		wp_cache_delete( 'wc_object_' . $product_id . '_cache_prefix', 'object_' . $product_id );
 	}
 
 	/**

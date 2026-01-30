@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/admin-strings/texts.js:10
@@ -35,7 +35,7 @@ msgstr "Kommunikationsfehler"
 
 #: src/js/admin-strings/texts.js:20
 msgid "The action failed."
-msgstr "Die Klage ist gescheitert."
+msgstr "Die Aktion ist fehlgeschlagen."
 
 #: src/js/admin-strings/texts.js:22
 msgid "All (%d)"
@@ -67,11 +67,11 @@ msgstr "Typ"
 
 #: src/js/admin-strings/texts.js:31
 msgid "State"
-msgstr "Staat"
+msgstr "Status"
 
 #: src/js/admin-strings/texts.js:34
 msgid "Export as a WPML configuration file"
-msgstr "Export als WPML-Konfigurationsdatei"
+msgstr "Als WPML-Konfigurationsdatei exportieren"
 
 #: src/js/admin-strings/texts.js:35
 msgid "Cancel"
@@ -79,7 +79,7 @@ msgstr "Abbrechen"
 
 #: src/js/admin-strings/texts.js:36
 msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr "Speichern Sie das Folgende in einer wpml-config.xml im Stammverzeichnis Ihres Themes oder Plugins."
+msgstr "Speichern Sie Folgendes in einer wpml-config.xml im Stammverzeichnis Ihres Themes oder Plugins."
 
 #: src/js/admin-strings/texts.js:38
 msgid "No options found."
@@ -90,7 +90,7 @@ msgid ""
 "Make sure you saved your theme options at least once. Some themes only add "
 "these to the wp_options table after the user explicitly saves changes to "
 "the theme defaults."
-msgstr "Stellen Sie sicher, dass Sie Ihre Themenoptionen mindestens einmal gespeichert haben. Einige Themes fügen diese erst dann der Tabelle wp_options hinzu, wenn der Benutzer die Änderungen an den Theme-Standardeinstellungen explizit gespeichert hat."
+msgstr "Stellen Sie sicher, dass Sie Ihre Theme-Optionen mindestens einmal gespeichert haben. Einige Themes fügen diese erst zur Tabelle wp_options hinzu, nachdem der Benutzer Änderungen an den Theme-Standardeinstellungen explizit gespeichert hat."
 
 #: src/js/admin-strings/texts.js:6
 msgid "Add to String Translation"
@@ -98,7 +98,7 @@ msgstr "Zur String-Übersetzung hinzufügen"
 
 #: src/js/admin-strings/texts.js:7
 msgid "Remove from String Translation"
-msgstr "Aus String-Übersetzung entfernen"
+msgstr "Aus der String-Übersetzung entfernen"
 
 #: src/js/admin-strings/texts.js:9
 msgid "Included in String Translation"

@@ -53,8 +53,17 @@ class WPML_TM_Translation_Roles_Section implements IWPML_TM_Admin_Section {
 	 * @return string
 	 */
 	public function get_caption() {
-		return __( 'Translators', 'wpml-translation-management' );
+		return __( 'Manage Translators & Services', 'sitepress' );
 
+	}
+
+	/**
+	 * Returns the description to display below the tab.
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return '<p class="wpml-tab-description">' . __( 'Choose who translates your site', 'sitepress' ) . '</p>';
 	}
 
 	/**

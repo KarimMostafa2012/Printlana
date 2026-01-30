@@ -3,6 +3,15 @@
 class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 
 	const CACHE_GROUP = 'wpml_pre_option_page';
+	private static $hooks_added = false;
+
+	private static function add_cache_clearing_hooks() {
+		if ( self::$hooks_added ) {
+			return;
+		}
+		self::$hooks_added = true;
+		add_action( 'update_option_page_on_front', [ self::class, 'clear_page_on_front_cache' ], 10, 0 );
+	}
 
 	private $switched;
 	private $lang;
@@ -12,6 +21,9 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 
 		$this->switched = $switched;
 		$this->lang     = $lang;
+
+		// Register hooks once
+		self::add_cache_clearing_hooks();
 	}
 
 	public function get( $type, $from_language = null ) {
@@ -47,7 +59,7 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 
 			if ( is_array( $values ) && count( $values ) ) {
 				foreach ( $values as $lang_result ) {
-					$results [ $type ] [ $lang_result->language_code ] = $lang_result->element_id;
+					$results[ $type ] [ $lang_result->language_code ] = $lang_result->element_id;
 				}
 			}
 
@@ -59,9 +71,17 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 		return isset( $results[ $type ][ $target_language ] ) ? $results[ $type ][ $target_language ] : false;
 	}
 
+
 	public static function clear_cache() {
 		$cache = new WPML_WP_Cache( self::CACHE_GROUP );
 		$cache->flush_group_cache();
+	}
+	public static function clear_page_on_front_cache() {
+		self::clear_cache_key( 'page_on_front' );
+	}
+
+	public static function clear_cache_key( $cache_key ) {
+		wp_cache_delete( $cache_key, self::CACHE_GROUP );
 	}
 
 	function fix_trashed_front_or_posts_page_settings( $post_id ) {

@@ -1,221 +1,216 @@
-# Copyright (C) 2025 OnTheGoSystems
+# Copyright (C) 2026 OnTheGoSystems
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
+"Project-Id-Version: WPML Multilingual CMS 4.9.0-beta-1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
+"POT-Creation-Date: 2026-01-06T08:55:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: sitepress\n"
 
 #. Plugin Name of the plugin
-#: sitepress.php
 msgid "WPML Multilingual CMS"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: sitepress.php
 msgid "https://wpml.org/"
 msgstr ""
 
 #. Description of the plugin
-#: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-9.0-beta-1/\">WPML 4.9.0-beta-1 release notes</a>"
 msgstr ""
 
 #. Author of the plugin
-#: sitepress.php
 msgid "OnTheGoSystems"
 msgstr ""
 
 #. Author URI of the plugin
-#: sitepress.php
 msgid "http://www.onthegosystems.com/"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:188
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:187
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:193
 msgid "Button: Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:203
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:202
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:208
 msgid "Heading: Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:218
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:222
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:228
 msgid "Photo: Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:238
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:257
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:263
 msgid "Callout: Heading"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:262
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:268
 msgid "Callout: Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:267
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:273
 msgid "Callout: Call to action text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:272
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:278
 msgid "Callout: Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:282
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:288
 msgid "Contact Form: Name Field Placeholder"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:287
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:293
 msgid "Contact Form: Subject Field Placeholder"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:292
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:298
 msgid "Contact Form: Email Field Placeholder"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:297
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:303
 msgid "Contact Form: Phone Field Placeholder"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:302
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:308
 msgid "Contact Form: Your Message Placeholder"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:307
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:313
 msgid "Contact Form: Checkbox Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:312
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:318
 msgid "Contact Form: Terms and Conditions"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:317
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:323
 msgid "Contact Form: Success Message"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:322
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:328
 msgid "Contact Form: Button Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:327
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:333
 msgid "Contact Form: Redirect Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:337
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:343
 msgid "Call to Action: Heading"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:342
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:348
 msgid "Call to Action: Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:347
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:353
 msgid "Call to Action: Button text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:352
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:358
 msgid "Call to Action: Button link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:363
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:369
 msgid "Subscribe form: Checkbox Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:368
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:374
 msgid "Subscribe form: Terms and Conditions"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:373
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:379
 msgid "Subscribe form: Notification Subject"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:378
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:384
 msgid "Subscribe form: Success Message"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:383
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:389
 msgid "Subscribe form: Button Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:388
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:394
 msgid "Subscribe form: Redirect Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:403
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:409
 msgid "Icon: Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:408
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:414
 msgid "Icon: Link"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:423
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:429
 msgid "Map: Address"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:433
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:439
 msgid "Testimonial: Heading"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:445
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:451
 msgid "Number Counter: Text before number"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:450
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:456
 msgid "Number Counter: Text after number"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:455
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:461
 msgid "Number Counter: Number Prefix"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:460
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:466
 msgid "Number Counter: Number Suffix"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:470
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:476
 msgid "Posts: No Results Message"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:475
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:481
 msgid "Posts: Button Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:480
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:486
 msgid "Posts: Terms Label"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:485
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:491
 msgid "Posts: More Link Text"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:495
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:501
 msgid "Posts Slider: More Link Text"
 msgstr ""
 
@@ -753,11 +748,11 @@ msgid "Author: Archive URL"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:802
-msgid "Galleries: All Label"
+msgid "Gallery: All Label"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:807
-msgid "Galleries: Gallery custom link"
+msgid "Gallery: Gallery custom link"
 msgstr ""
 
 #. Translators: %s: Post type label. For example, Elementor Landing Pages.
@@ -778,7 +773,7 @@ msgid "Language switcher type"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:67
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:373
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:411
 msgid "Custom"
 msgstr ""
 
@@ -799,12 +794,12 @@ msgid "Show Active Language - has to be ON with Dropdown"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:97
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:362
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:400
 msgid "Native language name"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:107
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:363
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:401
 msgid "Language name in current language"
 msgstr ""
 
@@ -813,7 +808,7 @@ msgid "Style"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:128
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:611
 msgid "Normal"
 msgstr ""
 
@@ -829,7 +824,7 @@ msgid "Background Color"
 msgstr ""
 
 #: addons/wpml-page-builders/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php:174
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:612
 msgid "Hover"
 msgstr ""
 
@@ -939,14 +934,40 @@ msgstr ""
 msgid "Enfold %s"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:27
-#: classes/options/class-wpml-multilingual-options.php:90
-msgid "You can set different options for each language"
+#. Translators: %s is the display name of a language.
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:71
+msgid "You're editing theme options for %s"
 msgstr ""
 
-#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:28
-#: classes/options/class-wpml-multilingual-options.php:91
-msgid "Use the language switcher in the top admin bar to switch languages, then set and save options for each language individually."
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:75
+msgid "Avada stores a separate set of options for each language."
+msgstr ""
+
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:76
+msgid "To edit other languages, use the switcher in the top admin bar."
+msgstr ""
+
+#. Translators: %1$s and %2$s are bold HTML tags, and %3$s and %4$s are HTML anchor tags.
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:80
+msgid "To translate text-based options, use %1$sOther texts (Strings)%2$s in the %3$sTranslation Dashboard%4$s."
+msgstr ""
+
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:93
+msgid "You're editing theme options for all languages"
+msgstr ""
+
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:94
+msgid "Your edits will be synchronized to all languages on your site."
+msgstr ""
+
+#. Translators: %1$s and %2$s are bold HTML tags.
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:99
+msgid "This will %1$soverwrite any existing language-specific settings%2$s, including translated texts created with WPML."
+msgstr ""
+
+#. Translators: %1$s and %2$s are bold HTML tags.
+#: addons/wpml-page-builders/classes/Integrations/FusionBuilder/Hooks/MultilingualOptions.php:106
+msgid "This will %1$soverwrite any existing language-specific settings%2$s."
 msgstr ""
 
 #. Translators: %s: Post type label. For example, Avada Templates.
@@ -980,6 +1001,18 @@ msgstr ""
 msgid "Deactivate WPML Page Builders"
 msgstr ""
 
+#: addons/wpml-page-builders/tests/phpunit/tests/Integrations/Cornerstone/test-wpml-cornerstone-update-translation.php:28
+msgid "Custom node text"
+msgstr ""
+
+#: addons/wpml-page-builders/tests/phpunit/tests/Integrations/Cornerstone/test-wpml-cornerstone-update-translation.php:38
+msgid "Tab Label"
+msgstr ""
+
+#: addons/wpml-page-builders/tests/phpunit/tests/Integrations/Cornerstone/test-wpml-cornerstone-update-translation.php:48
+msgid "Text Content"
+msgstr ""
+
 #: ajax.php:184
 #: classes/menu-elements/class-wpml-user-options-menu.php:159
 #: menu/languages.php:686
@@ -1002,57 +1035,59 @@ msgstr ""
 msgid "All languages are currently displayed."
 msgstr ""
 
-#: ajax.php:312
+#: ajax.php:372
 msgid "Error: No custom field"
 msgstr ""
 
-#: ajax.php:318
+#: ajax.php:378
 msgid "Error: Please provide translation action"
 msgstr ""
 
-#: ajax.php:327
+#: ajax.php:387
 msgid "Settings updated"
 msgstr ""
 
-#: ajax.php:330
+#: ajax.php:390
 msgid "Error: WPML Translation Management plugin not initiated"
 msgstr ""
 
-#: ajax.php:335
+#: ajax.php:395
 msgid "Error: Please activate WPML Translation Management plugin"
 msgstr ""
 
 #: classes/action-filter-loader/class-wpml-ajax-action-validation.php:23
 #: classes/class-wpml-config-update-integrator.php:79
-#: classes/class-wpml-translation-management.php:414
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1371
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1428
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1498
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1578
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1631
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1652
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1673
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1913
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1926
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2056
+#: classes/class-wpml-translation-management.php:407
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1400
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1457
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1527
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1607
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1660
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1681
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1702
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1942
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1955
 #: classes/media/duplication/class-wpml-media-attachments-duplication.php:2085
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2108
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2114
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2137
 #: classes/translation-feedback/hooks/wpml-tf-frontend-ajax-hooks.php:75
 #: classes/troubleshooting/SynchronizeSourceIdOfATEJobs/TriggerSynchronization.php:79
 #: classes/url-handling/class-wpml-xdomain-data-parser.php:84
 #: classes/widgets/class-wpml-widgets-support-backend.php:153
-#: inc/functions-troubleshooting.php:211
+#: inc/functions-troubleshooting.php:212
 #: inc/icl-admin-notifier.php:791
 #: inc/wp-nav-menus/class-wpml-nav-menu.php:169
-#: inc/wpml-post-edit-ajax.class.php:277
+#: inc/wpml-post-edit-ajax.class.php:286
 msgid "Invalid request!"
 msgstr ""
 
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:43
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:44
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:372
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:410
 #: inc/functions-network.php:36
 #: inc/functions-network.php:37
+#: tests/phpunit/tests/classes/admin-menu/test-wpml-menu-main.php:74
+#: tests/phpunit/tests/classes/admin-menu/test-wpml-menu-main.php:75
 msgid "WPML"
 msgstr ""
 
@@ -1098,8 +1133,8 @@ msgstr ""
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:182
 #: classes/admin-menu/configurations/class-wpml-main-admin-menu.php:183
 #: menu/troubleshooting.php:340
-#: sitepress.class.php:811
-#: sitepress.class.php:817
+#: sitepress.class.php:827
+#: sitepress.class.php:833
 msgid "Troubleshooting"
 msgstr ""
 
@@ -1110,46 +1145,46 @@ msgid "Debug information"
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:50
-#: menu/edit-languages.php:1266
+#: menu/edit-languages.php:1324
 msgid "There was an error uploading the file, please try again!"
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:53
-#: menu/edit-languages.php:1270
+#: menu/edit-languages.php:1328
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:56
-#: menu/edit-languages.php:1273
+#: menu/edit-languages.php:1331
 msgid "The uploaded file exceeds %s bytes."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:59
-#: menu/edit-languages.php:1276
+#: menu/edit-languages.php:1334
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:62
-#: menu/edit-languages.php:1279
+#: menu/edit-languages.php:1337
 msgid "No file was uploaded."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:65
-#: menu/edit-languages.php:1282
+#: menu/edit-languages.php:1340
 msgid "Missing a temporary folder."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:68
-#: menu/edit-languages.php:1285
+#: menu/edit-languages.php:1343
 msgid "Failed to write file to disk."
 msgstr ""
 
 #: classes/ajax/endpoints/Upload.php:71
-#: menu/edit-languages.php:1288
+#: menu/edit-languages.php:1346
 msgid "A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help."
 msgstr ""
 
-#: classes/ATE/API/class-wpml-tm-ate-api.php:380
+#: classes/ATE/API/class-wpml-tm-ate-api.php:378
 msgid "WPML Failed to check language pairs"
 msgstr ""
 
@@ -1158,15 +1193,15 @@ msgstr ""
 msgid "Communication error"
 msgstr ""
 
-#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:199
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:200
 msgid "%1$s jobs added to the Advanced Translation Editor."
 msgstr ""
 
-#: classes/ATE/Hooks/class-wpml-tm-old-editor.php:35
+#: classes/ATE/Hooks/class-wpml-tm-old-editor.php:43
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr ""
 
-#: classes/ATE/sitekey/Endpoint.php:49
+#: classes/ATE/sitekey/Endpoint.php:47
 msgid "Initializing AMS credentials."
 msgstr ""
 
@@ -1175,15 +1210,15 @@ msgstr ""
 msgid "Server error. Please refresh and try again."
 msgstr ""
 
-#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:144
+#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:148
 msgid "WPML experienced an issue while trying to automatically translating some of your content:"
 msgstr ""
 
-#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:151
+#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:155
 msgid "To translate these items, please go to <a rel=\"noreferrer\" href=\"%s\">Translation Management</a> and send them for translation."
 msgstr ""
 
-#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:152
+#: classes/automatic-translation/AutomaticTranslationJobCreationFailureNotice.php:156
 msgid "If the problem continues, contact <a target=\"_blank\" rel=\"noreferrer\" href=\"%s\">WPML support</a> for assistance."
 msgstr ""
 
@@ -1225,11 +1260,11 @@ msgid "Select this option if your theme or plugins use AJAX operations on the fr
 msgstr ""
 
 #: classes/cookie/class-wpml-cookie-admin-ui.php:50
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:358
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:396
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:208
 #: classes/seo/class-wpml-seo-headlangs.php:134
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:34
-#: menu/edit-languages.php:308
+#: menu/edit-languages.php:315
 #: menu/languages.php:202
 #: menu/languages.php:248
 #: menu/languages.php:570
@@ -1248,25 +1283,30 @@ msgid "Save"
 msgstr ""
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:34
+#: tests/phpunit/tests/classes/display-as-translated/test-wpml-display-as-translated-default-lang-messages-view.php:30
 msgid "You have post types set to fallback to the default language. Changing the default language may impact how archive listings display untranslated posts."
 msgstr ""
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:35
+#: tests/phpunit/tests/classes/display-as-translated/test-wpml-display-as-translated-default-lang-messages-view.php:31
 msgid "Some content may appear gone due to the default language change. See "
 msgstr ""
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:36
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2070
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2099
 #: classes/media/settings/class-wpml-media-settings.php:107
 #: menu/upgrade_notice.php:24
+#: tests/phpunit/tests/classes/display-as-translated/test-wpml-display-as-translated-default-lang-messages-view.php:32
 msgid "Learn more"
 msgstr ""
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:38
+#: tests/phpunit/tests/classes/display-as-translated/test-wpml-display-as-translated-default-lang-messages-view.php:34
 msgid "how to ensure your archive listing continues to display all posts"
 msgstr ""
 
 #: classes/display-as-translated/class-wpml-display-as-translated-default-lang-messages-view.php:40
+#: tests/phpunit/tests/classes/display-as-translated/test-wpml-display-as-translated-default-lang-messages-view.php:36
 msgid "Got it"
 msgstr ""
 
@@ -1278,105 +1318,187 @@ msgstr ""
 msgid "Read how this works"
 msgstr ""
 
-#: classes/filters/class-wpml-tm-translation-status-display.php:202
-msgid "Waiting for translation from %s"
-msgstr ""
-
-#: classes/filters/class-wpml-tm-translation-status-display.php:205
-msgid "Cannot edit this item, because it is currently in the translation basket."
-msgstr ""
-
-#: classes/filters/class-wpml-tm-translation-status-display.php:213
-msgid "%s: Waiting for automatic translation"
+#: classes/filters/class-wpml-tm-translation-status-display.php:216
+msgid "Translation job encountered an error and needs to be resent"
 msgstr ""
 
 #: classes/filters/class-wpml-tm-translation-status-display.php:221
+msgid "Waiting for translation from %s"
+msgstr ""
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:224
+msgid "Cannot edit this item, because it is currently in the translation basket."
+msgstr ""
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:232
+msgid "%s: Waiting for automatic translation"
+msgstr ""
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:240
 msgid "You don't have the rights to translate from %1$s to %2$s"
 msgstr ""
 
-#: classes/filters/class-wpml-tm-translation-status-display.php:226
+#: classes/filters/class-wpml-tm-translation-status-display.php:245
 msgid "You can only edit translations assigned to you."
 msgstr ""
 
-#: classes/filters/class-wpml-tm-translation-status-display.php:230
+#: classes/filters/class-wpml-tm-translation-status-display.php:249
 msgid "WPML is translating your content automatically. You can monitor the progress in the admin bar."
 msgstr ""
 
-#. Translators: %s: Language display name.
-#: classes/filters/class-wpml-tm-translation-status-display.php:661
+#: classes/filters/class-wpml-tm-translation-status-display.php:699
 msgid "Complete the %s translation"
 msgstr ""
 
 #. Translators: %s: Language display name.
-#: classes/filters/class-wpml-tm-translation-status-display.php:670
+#: classes/filters/class-wpml-tm-translation-status-display.php:708
 msgid "%s translation assigned to local translator"
 msgstr ""
 
 #. Translators: %s: Language display name.
-#: classes/filters/class-wpml-tm-translation-status-display.php:672
+#: classes/filters/class-wpml-tm-translation-status-display.php:710
 msgid "%s translation awaiting first available translator"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:117
+#: classes/jobs/Log/Hooks.php:97
+msgid "Logs cleared successfully"
+msgstr ""
+
+#: classes/jobs/Log/Hooks.php:100
+msgid "Failed to clear logs"
+msgstr ""
+
+#: classes/jobs/Log/View.php:23
+#: classes/jobs/Log/View.php:25
+msgid "Job logs are enabled"
+msgstr ""
+
+#: classes/jobs/Log/View.php:23
+#: classes/jobs/Log/View.php:26
+msgid "Job logs are disabled"
+msgstr ""
+
+#: classes/jobs/Log/View.php:29
+msgid "Translation Management Job Logs"
+msgstr ""
+
+#: classes/jobs/Log/View.php:41
+msgid "Clear logs"
+msgstr ""
+
+#: classes/jobs/Log/View.php:68
+msgid "Logs"
+msgstr ""
+
+#: classes/jobs/Log/View.php:84
+msgid "Send to translation"
+msgstr ""
+
+#: classes/jobs/Log/View.php:86
+#: menu/menu-sync/menus-sync.php:223
+msgid "Sync"
+msgstr ""
+
+#: classes/jobs/Log/View.php:88
+#: classes/jobs/Log/View.php:313
+#: classes/requirements/class-wpml-requirements-notifications.php:118
+msgid "Download"
+msgstr ""
+
+#: classes/jobs/Log/View.php:136
+msgid "No logs available"
+msgstr ""
+
+#: classes/jobs/Log/View.php:163
+msgid "Processing element with id"
+msgstr ""
+
+#: classes/jobs/Log/View.php:189
+msgid "Processing target language"
+msgstr ""
+
+#: classes/jobs/Log/View.php:211
+msgid "No entries"
+msgstr ""
+
+#: classes/jobs/Log/View.php:235
+#: classes/jobs/Log/View.php:244
+msgid "Open"
+msgstr ""
+
+#: classes/jobs/Log/View.php:236
+#: sitepress.class.php:1323
+msgid "Close"
+msgstr ""
+
+#: classes/jobs/Log/View.php:260
+msgid "Api call to url"
+msgstr ""
+
+#: classes/jobs/Log/View.php:307
+msgid "Step"
+msgstr ""
+
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:125
 #: classes/translation-feedback/hooks/wpml-tf-backend-options-ajax-hooks.php:92
-#: sitepress.class.php:2098
+#: sitepress.class.php:2138
 msgid "Settings saved"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:119
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:127
 msgid "You can't do that!"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:161
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:199
 msgid "Preview update failed"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:199
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:468
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:237
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:506
 msgid "Language switcher options"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:204
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:605
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:242
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:643
 msgid "Reset settings"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:252
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:290
 msgid "Customize the language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:258
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:296
 msgid "Add a language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:353
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:391
 msgid "There are no templates available."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:354
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:392
 msgctxt "Language switcher preview"
 msgid "Preview"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:355
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:393
 msgctxt "Language switcher preview"
 msgid "Position"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:356
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:394
 msgctxt "Language switcher preview"
 msgid "Actions"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:357
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:395
 msgctxt "Language switcher preview"
 msgid "Action"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:359
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:397
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:204
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-row-view.php:92
-#: menu/edit-languages.php:301
+#: menu/edit-languages.php:308
 #: menu/languages.php:201
 #: menu/languages.php:246
 #: menu/menu-sync/menus-sync.php:134
@@ -1384,419 +1506,419 @@ msgstr ""
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:227
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:49
 #: menu/wpml-tm-menus-settings.php:339
-#: sitepress.class.php:1267
+#: sitepress.class.php:1308
 msgid "Cancel"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:360
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:398
 msgid "What to include in the language switcher:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:361
-#: menu/edit-languages.php:234
-#: menu/edit-languages.php:260
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:399
+#: menu/edit-languages.php:241
+#: menu/edit-languages.php:267
 msgid "Flag"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:364
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:402
 msgid "Current language"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:365
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:403
 msgid "Width"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:366
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:404
 msgid "Height"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:367
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:368
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:405
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:406
 msgid "auto"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:369
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:370
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:407
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:408
 msgid "px"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:371
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:409
 msgid "Language switcher style:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:374
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:412
 msgid "Edit language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:375
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:413
 msgid "Delete language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:376
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:414
 msgid "Back"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:377
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:415
 msgid "Next"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:387
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:425
 msgid "This is the order in which the languages will be displayed in the language switcher."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:390
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:428
 msgid "Some content may not be translated to all languages. Choose what should appear in the language switcher when translation is missing."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:393
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:431
 msgid "Add a comma-separated list of URL arguments that you want WPML to pass when switching languages."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:395
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:433
 msgid "Preserving URL arguments"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:402
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:440
 msgid "Enter CSS to add to the page. This is useful when you want to add styling to the language switcher, without having to edit the CSS file on the server."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:404
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:442
 msgid "Styling the language switcher with additional CSS"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:411
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:449
 msgid "You can display links to translation of posts before the post and after it. These links look like \"This post is also available in...\""
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:414
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:452
 msgid "The button is disabled because all existing menus have language switchers. You can edit the settings of the existing language switchers."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:417
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:455
 msgid "The button is disabled because there are no menus in the site. Add a menu and you can later enable a language switcher in it."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:420
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:458
 msgid "The button is disabled because all existing widget areas have language switchers. You can edit the settings of the existing language switchers."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:423
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:461
 msgid "The button is disabled because there are no registered widget areas in the site."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:426
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:464
 msgid "Elements to include in the language switcher."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:429
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:467
 msgid "Select the menus, in which to display the language switcher."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:433
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
 msgid "Select the widget area where to include the language switcher."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:436
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
 msgid "Select the style of the language switcher."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:439
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
 msgid "Select how to display the language switcher in the menu. Choose \"List of languages\" to display all the items at the same level or \"Dropdown\" to display the current language as parent and other languages as children."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:442
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:480
 msgid "Select the position to display the language switcher in the menu."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:445
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:483
 msgid "Enter the title of the widget or leave empty for no title."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:448
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:486
 msgid "Select the position to display the post translations links."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:451
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
 msgid "This text appears before the list of languages. Your text needs to include the string %s which is a placeholder for the actual links."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:454
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
 msgid "Since WPML 3.6.0, the language switchers are not using CSS IDs and the CSS classes have changed. This was required to fix some bugs and match the latest standards. If your theme or your custom CSS is not relying on these old selectors, it's recommended to skip the backwards compatibility. However, it's still possible to re-activate this option later."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:458
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
 msgid "You can display a language switcher in the site's footer. You can customize and style it here."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:469
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:507
 msgid "All language switchers in your site are affected by the settings in this section."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:470
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:508
 msgid "Order of languages"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:471
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
 msgid "Drag and drop the languages to change their order"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:472
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
 msgid "How to handle languages without translation"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:473
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
 msgid "Skip language"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:474
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
 msgid "Link to home of language for missing translations"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:475
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
 msgid "Preserve URL arguments"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:476
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
 msgid "Additional CSS"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:477
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:515
 msgid "Backwards compatibility"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:478
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:516
 msgid "Skip backwards compatibility"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:487
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
 msgid "Menu language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:488
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:526
 msgid "Add a new language switcher to a menu"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:489
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:527
 msgid "Menu"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:490
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:528
 msgid "Choose a menu"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:491
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:529
 msgid "Position:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:492
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:530
 msgid "First menu item"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:493
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:531
 msgid "Last menu item"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:494
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:532
 msgid "Language menu items style:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:495
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:533
 msgid "List of languages"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:496
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:534
 msgid "good for menus that display items as a list"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:497
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
 msgid "Dropdown"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:498
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
 msgid "good for menus that support drop-downs"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:499
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
 msgid "Edit Menu Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:500
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
 msgid "New Menu Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:509
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:547
 msgid "Widget language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:510
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:548
 msgid "Add a new language switcher to a widget area"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:511
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:549
 msgid "Widget area"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:512
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:550
 msgid "Choose a widget area"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:513
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:551
 msgid "Widget title:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:514
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:552
 msgid "Edit Widget Area Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:515
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:553
 msgid "New Widget Area language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:524
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:562
 msgid "Footer language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:525
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:563
 msgid "Show language switcher in footer"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:526
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:564
 msgid "Edit Footer Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:535
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:573
 msgid "Links to translation of posts"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:536
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:574
 msgid "Show links above or below posts, offering them in other languages"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:537
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
 msgid "Position of link(s):"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:538
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
 msgid "Above post"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:539
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
 msgid "Below post"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:540
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
 msgid "Text for alternative languages for posts:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:541
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
 #: classes/language-switcher/class-wpml-ls-settings.php:187
 msgid "This post is also available in: %s"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:542
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:580
 msgid "Edit Post Translations Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:551
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
 msgctxt "Custom languuage switcher description: external link text"
 msgid "insert WPML's switchers in custom locations"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:554
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:592
 msgctxt "Custom languuage switcher description: text"
 msgid "Need more options? See how you can %s."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:557
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:595
 msgid "Custom language switchers"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:559
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:597
 #: menu/languages.php:233
 msgid "Enable"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:560
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:598
 msgid "Customize"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:561
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:599
 msgid "Edit Shortcode Actions Language Switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:570
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
 msgid "Language switcher colors"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:571
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:609
 msgid "Color themes:"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:572
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:610
 msgid "Select a preset"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:575
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:613
 msgid "Background"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:576
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:614
 msgid "Border"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:577
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:615
 msgid "Current language font color"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:578
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:616
 msgid "Current language background color"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:579
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:617
 msgid "Other language font color"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:580
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:618
 msgid "Other language background color"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:589
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:627
 msgid "Do you really want to remove this item?"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:590
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:628
 msgid "Leave the text box to auto-save"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:591
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:629
 msgid "Choose which menu to display your language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:592
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:630
 msgid "Choose which widget to display your language switcher"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:602
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:640
 msgid "in options, menus, widgets, footer and shortcode"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:606
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:644
 msgid "This will change the settings of your language switchers %s to their defaults as set by the theme. Please note that some switchers may be removed and others may be added."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:608
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:646
 msgid "* Your theme has a %s file, which sets the default values for WPML."
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:609
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:647
 msgid "Are you sure you want to reset to the default settings?"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:611
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:649
 msgid "Restore default"
 msgstr ""
 
-#: classes/language-switcher/class-wpml-ls-admin-ui.php:625
+#: classes/language-switcher/class-wpml-ls-admin-ui.php:663
 msgid "%s is defined in your theme. The language switcher can only be customized using the theme's CSS."
 msgstr ""
 
@@ -1852,46 +1974,45 @@ msgstr ""
 msgid "WordPress language file (.mo) is missing. Keeping existing display language."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1398
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1427
 msgid "Duplicating featured content: %d left. Stay here until complete. May take a few minutes."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1400
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1429
 msgid "Duplicating featured content: 0 left. Stay here until complete. May take a few minutes."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1473
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1561
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1502
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1590
 msgid "Duplicating content: %d left. Stay here until complete. May take a few minutes."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1475
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1563
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1504
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1592
 msgid "Duplicating content: 0 left. Stay here until complete. May take a few minutes."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1618
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1647
 msgid "Setting language to media. %d left"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1620
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1649
 msgid "Setting language to media: done!"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1824
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1853
 msgid "Done!"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1916
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1945
 msgid "Saving settings..."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1956
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:1985
 #: inc/icl-admin-notifier.php:232
 #: inc/icl-admin-notifier.php:284
 #: inc/icl-admin-notifier.php:714
 #: inc/icl-admin-notifier.php:774
-#: inc/upgrade-functions/upgrade-2.0.0.php:236
 #: menu/troubleshooting.php:378
 #: menu/troubleshooting.php:389
 #: menu/troubleshooting.php:416
@@ -1904,38 +2025,38 @@ msgstr ""
 #: menu/troubleshooting.php:580
 #: menu/troubleshooting.php:592
 #: menu/troubleshooting.php:615
-#: sitepress.class.php:1306
+#: sitepress.class.php:1347
 msgid "Done"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2023
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2052
 msgid "New in WPML 4.8 - Automatic image and media detection"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2024
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2068
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2053
 #: classes/media/duplication/class-wpml-media-attachments-duplication.php:2097
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2126
 msgid "Close banner"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2026
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2055
 msgid "WPML can now automatically detect what types of texts (alt, caption, title) your images use. Enable this option to avoid duplicate fields in the translation editor and missing translations for your images."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2034
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2073
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2063
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2102
 msgid "Enable it now"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2044
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2073
 msgid "Learn more about media translation"
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2069
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2098
 msgid "We strongly recommend enabling WPML's automatic detection for image texts to avoid duplicated media fields and missing translations."
 msgstr ""
 
-#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2098
+#: classes/media/duplication/class-wpml-media-attachments-duplication.php:2127
 msgid "As this site uses Elementor, changes you make here might not be visible on the front-end. In this case, go to Elementor settings and clear its cache."
 msgstr ""
 
@@ -1993,7 +2114,7 @@ msgstr ""
 
 #: classes/media/settings/class-wpml-media-settings.php:125
 #: classes/requirements/class-wpml-requirements-notifications.php:120
-#: classes/user-language/class-wpml-user-language.php:335
+#: classes/user-language/class-wpml-user-language.php:356
 #: menu/network.php:167
 msgid "Activate"
 msgstr ""
@@ -2087,7 +2208,7 @@ msgstr ""
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:103
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:109
 #: menu/network.php:154
-#: sitepress.class.php:2461
+#: sitepress.class.php:2501
 msgid "Edit"
 msgstr ""
 
@@ -2120,7 +2241,7 @@ msgstr ""
 #: inc/wp-nav-menus/class-wpml-nav-menu.php:381
 #: menu/menu-sync/menus-sync.php:56
 #: menu/term-taxonomy-menus/wpml-taxonomy-element-language-dropdown.class.php:14
-#: sitepress.class.php:1474
+#: sitepress.class.php:1515
 msgid "Language"
 msgstr ""
 
@@ -2216,8 +2337,8 @@ msgstr ""
 #: classes/menu-elements/class-wpml-tm-post-edit-custom-field-settings-menu.php:56
 #: inc/template-functions.php:689
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:380
-#: sitepress.class.php:2173
-#: sitepress.class.php:2400
+#: sitepress.class.php:2213
+#: sitepress.class.php:2440
 msgid "Translate"
 msgstr ""
 
@@ -2263,11 +2384,11 @@ msgid "Display hidden languages"
 msgstr ""
 
 #: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:31
-msgid "Translation Tools"
+msgid "Payments & Maintenance"
 msgstr ""
 
-#: classes/menu/ams-ate-console/TranslationQualityConsoleSection.php:39
-msgid "Translation Quality"
+#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:40
+msgid "Balance, invoices and tools"
 msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:58
@@ -2301,7 +2422,7 @@ msgid "Needs review"
 msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:261
-#: inc/translation-management/translation-management.class.php:1048
+#: inc/translation-management/translation-management.class.php:1062
 #: inc/wp-nav-menus/menus-sync.php:428
 msgid "Not translated"
 msgstr ""
@@ -2313,7 +2434,7 @@ msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:266
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:275
-#: inc/translation-management/translation-management.class.php:1051
+#: inc/translation-management/translation-management.class.php:1065
 msgid "Waiting for translator"
 msgstr ""
 
@@ -2326,7 +2447,7 @@ msgid "Waiting for translation service"
 msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:284
-#: inc/translation-management/translation-management.class.php:1066
+#: inc/translation-management/translation-management.class.php:1080
 msgid "Translation ready to download"
 msgstr ""
 
@@ -2339,12 +2460,12 @@ msgid "Translation completed"
 msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:298
-#: inc/translation-management/translation-management.class.php:1057
+#: inc/translation-management/translation-management.class.php:1071
 msgid "Needs update"
 msgstr ""
 
 #: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:301
-#: inc/translation-management/translation-management.class.php:1054
+#: inc/translation-management/translation-management.class.php:1068
 msgid "In progress"
 msgstr ""
 
@@ -2360,12 +2481,33 @@ msgstr ""
 msgid "Show \"Multilingual Content Setup\" meta box on post edit screen."
 msgstr ""
 
-#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:30
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:42
 msgid "Scanning now, please wait..."
 msgstr ""
 
-#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:31
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:43
 msgid "Error! Reload the page and try again."
+msgstr ""
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:104
+msgid "Translations queue"
+msgstr ""
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:109
+msgid "Need the full list for monitoring or troubleshooting? Go to %s."
+msgstr ""
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:110
+#: menu/wpml-tm-menus-management.php:472
+msgid "Translation Jobs"
+msgstr ""
+
+#: classes/menu/translation-roles/class-wpml-tm-translation-roles-section.php:56
+msgid "Manage Translators & Services"
+msgstr ""
+
+#: classes/menu/translation-roles/class-wpml-tm-translation-roles-section.php:66
+msgid "Choose who translates your site"
 msgstr ""
 
 #: classes/menu/translation-services/ActiveServiceTemplate.php:29
@@ -2449,7 +2591,7 @@ msgstr ""
 msgid "Fix now"
 msgstr ""
 
-#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:162
+#: classes/minimum-requirements/Display_Notice_Minimum_Requirements_If_Needed.php:160
 msgid "Great! All WPML requirements are now met. Your site is ready to use WPML."
 msgstr ""
 
@@ -2473,15 +2615,15 @@ msgstr ""
 msgid "Show this notice."
 msgstr ""
 
-#: classes/notices/class-wpml-notices.php:309
+#: classes/notices/class-wpml-notices.php:391
 msgid "Notice does not exists."
 msgstr ""
 
-#: classes/notices/class-wpml-notices.php:321
+#: classes/notices/class-wpml-notices.php:403
 msgid "Notice does not exist."
 msgstr ""
 
-#: classes/notices/class-wpml-notices.php:357
+#: classes/notices/class-wpml-notices.php:439
 msgid "Group does not exist."
 msgstr ""
 
@@ -2543,7 +2685,6 @@ msgid "Get a key for this site"
 msgstr ""
 
 #: classes/notices/translation-jobs-migration/class-wpml-tm-translation-jobs-fix-summary-notice.php:6
-#: menu/wpml-tm-menus-management.php:103
 msgid "Translation Dashboard"
 msgstr ""
 
@@ -2632,6 +2773,14 @@ msgid_plural "Something went wrong with automatic translation. Please contact %1
 msgstr[0] ""
 msgstr[1] ""
 
+#: classes/options/class-wpml-multilingual-options.php:90
+msgid "You can set different options for each language"
+msgstr ""
+
+#: classes/options/class-wpml-multilingual-options.php:91
+msgid "Use the language switcher in the top admin bar to switch languages, then set and save options for each language individually."
+msgstr ""
+
 #: classes/plugins/Plugins.php:131
 msgid "WPML Translation Management is now included in WPML Multilingual CMS."
 msgstr ""
@@ -2644,12 +2793,12 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
-#: classes/post-edit-screen/TranslationEditorPostSettings.php:73
+#: classes/post-edit-screen/TranslationEditorPostSettings.php:80
 #: menu/wpml-tm-menus-settings.php:206
 msgid "Advanced Translation Editor"
 msgstr ""
 
-#: classes/post-edit-screen/TranslationEditorPostSettings.php:74
+#: classes/post-edit-screen/TranslationEditorPostSettings.php:81
 #: menu/wpml-tm-menus-settings.php:210
 msgid "Classic Translation Editor"
 msgstr ""
@@ -2697,9 +2846,9 @@ msgstr ""
 
 #: classes/requirements/class-wpml-integrations-requirements.php:212
 #: classes/requirements/class-wpml-integrations-requirements.php:222
-#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:107
+#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:89
 #: menu/upgrade_notice.php:30
-#: sitepress.class.php:3614
+#: sitepress.class.php:3654
 msgid "Dismiss"
 msgstr ""
 
@@ -2748,10 +2897,6 @@ msgstr ""
 msgid "%1$sLearn how to translate %2$s content%3$s"
 msgstr ""
 
-#: classes/requirements/class-wpml-requirements-notifications.php:118
-msgid "Download"
-msgstr ""
-
 #: classes/requirements/class-wpml-requirements-notifications.php:119
 msgid "Install"
 msgstr ""
@@ -2765,7 +2910,7 @@ msgid "Activated"
 msgstr ""
 
 #: classes/requirements/class-wpml-requirements-notifications.php:123
-#: classes/utilities/class-wpml-global-ajax.php:69
+#: classes/utilities/class-wpml-global-ajax.php:120
 msgid "Error"
 msgstr ""
 
@@ -2977,11 +3122,11 @@ msgstr ""
 msgid "Automatic"
 msgstr ""
 
-#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:96
+#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:65
 msgid "Translating %1$s? Use the %2$s table for easier translation."
 msgstr ""
 
-#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:131
+#: classes/taxonomy-term-translation/class-wpml-taxonomy-translation-help-notice.php:197
 msgid " %s translation"
 msgstr ""
 
@@ -3000,18 +3145,22 @@ msgid "Localization options"
 msgstr ""
 
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:24
+#: tests/phpunit/tests/classes/theme-plugin-localization/strategy/test-wpml-theme-plugin-localization-options-ui.php:63
 msgid "Automatically load the theme's .mo file using 'load_textdomain'"
 msgstr ""
 
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:29
+#: tests/phpunit/tests/classes/theme-plugin-localization/strategy/test-wpml-theme-plugin-localization-options-ui.php:68
 msgid "Enter textdomain:"
 msgstr ""
 
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:35
+#: tests/phpunit/tests/classes/theme-plugin-localization/strategy/test-wpml-theme-plugin-localization-options-ui.php:74
 msgid "Scanning now, please don't close this page."
 msgstr ""
 
 #: classes/theme-plugin-localization/strategy/class-wpml-theme-plugin-localization-options-ui.php:36
+#: tests/phpunit/tests/classes/theme-plugin-localization/strategy/test-wpml-theme-plugin-localization-options-ui.php:75
 msgid "Scanning Results"
 msgstr ""
 
@@ -3229,33 +3378,39 @@ msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:117
 #: classes/utilities/admin/wpml-admin-pagination-render.php:33
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:71
 msgid "First page"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:118
 #: classes/utilities/admin/wpml-admin-pagination-render.php:34
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:72
 msgid "Previous page"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:119
 #: classes/utilities/admin/wpml-admin-pagination-render.php:35
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:73
 msgid "Next page"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:120
 #: classes/utilities/admin/wpml-admin-pagination-render.php:36
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:74
 msgid "Last page"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:121
 #: classes/utilities/admin/wpml-admin-pagination-render.php:37
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:52
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:75
 msgid "Current page"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:122
 #: classes/utilities/admin/wpml-admin-pagination-render.php:38
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:16
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:76
 msgid "of"
 msgstr ""
 
@@ -3264,7 +3419,7 @@ msgid "Select bulk action"
 msgstr ""
 
 #: classes/translation-feedback/views/wpml-tf-backend-feedback-list-view.php:126
-#: sitepress.class.php:2212
+#: sitepress.class.php:2252
 msgid "Apply"
 msgstr ""
 
@@ -3679,27 +3834,27 @@ msgstr ""
 msgid "Thank you for choosing. You can always change your selection in %sPost Types Translation setup%s."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:84
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:85
 msgid "The upgrade is complete."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:89
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:90
 msgid "%d items remaining..."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:158
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:159
 msgid "WPML needs to upgrade the post's media information."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:160
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:161
 msgid "We couldn't complete the whole process in one request. Please click on the \"Upgrade\" button to continue."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:163
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:164
 msgid "Starting..."
 msgstr ""
 
-#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:190
+#: classes/upgrade/commands/class-wpml-upgrade-media-duplication-in-core.php:191
 msgid "The following exception has occurred while running the migration, please try again later or contact support if the problem persists."
 msgstr ""
 
@@ -3707,40 +3862,41 @@ msgstr ""
 msgid "Choose language:"
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:296
+#: classes/user-language/class-wpml-user-language.php:317
 msgid "Do you want the WordPress admin to be in a different language?"
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:298
+#: classes/user-language/class-wpml-user-language.php:319
 msgid "WPML lets each user choose the admin language, unrelated of the language in which visitors will see the front-end of the site."
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:304
+#: classes/user-language/class-wpml-user-language.php:325
 msgid "Go to your %s to choose your admin language."
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:305
+#: classes/user-language/class-wpml-user-language.php:326
 msgid "profile"
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:323
+#: classes/user-language/class-wpml-user-language.php:344
 msgid "WPML->Settings"
 msgstr ""
 
 #. translators: %s link to WPML Settings page
-#: classes/user-language/class-wpml-user-language.php:325
+#: classes/user-language/class-wpml-user-language.php:346
 msgid "WPML will include a language switcher on the WordPress login page. To change this, go to %s."
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:328
+#: classes/user-language/class-wpml-user-language.php:349
 msgid "Login Page:"
 msgstr ""
 
-#: classes/user-language/class-wpml-user-language.php:333
+#: classes/user-language/class-wpml-user-language.php:354
 msgid "Your site currently has language switching for the login page disabled."
 msgstr ""
 
 #: classes/utilities/admin/wpml-admin-pagination-render.php:32
+#: tests/phpunit/tests/classes/utilities/admin/test-wpml-admin-pagination-render.php:70
 msgid "Navigation"
 msgstr ""
 
@@ -3751,28 +3907,29 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: classes/utilities/class-wpml-flags.php:108
+#: tests/phpunit/tests/classes/utilities/test-wpml-flags.php:292
 msgid "Flag for %s"
 msgstr ""
 
-#: classes/utilities/class-wpml-global-ajax.php:64
+#: classes/utilities/class-wpml-global-ajax.php:111
 msgctxt "You may need to {re-save the site permalinks} - 2/2"
 msgid "re-save the site permalinks"
 msgstr ""
 
-#: classes/utilities/class-wpml-global-ajax.php:65
+#: classes/utilities/class-wpml-global-ajax.php:112
 msgctxt "You may need to {re-save the site permalinks} - 1/2"
 msgid "You may need to %s."
 msgstr ""
 
-#: classes/utilities/class-wpml-global-ajax.php:85
+#: classes/utilities/class-wpml-global-ajax.php:159
 msgid "The URL of the HTML file is required"
 msgstr ""
 
-#: classes/utilities/class-wpml-global-ajax.php:94
+#: classes/utilities/class-wpml-global-ajax.php:168
 msgid "You are trying to use an external URL: this is not allowed."
 msgstr ""
 
-#: classes/utilities/class-wpml-global-ajax.php:107
+#: classes/utilities/class-wpml-global-ajax.php:181
 msgid "An attempt to open the URL specified as a root page failed with the following error:"
 msgstr ""
 
@@ -4009,8 +4166,8 @@ msgid "No such post for ID = %d"
 msgstr ""
 
 #: inc/template-functions.php:844
-#: menu/edit-languages.php:232
-#: menu/edit-languages.php:258
+#: menu/edit-languages.php:239
+#: menu/edit-languages.php:265
 msgid "Translation"
 msgstr ""
 
@@ -4035,62 +4192,66 @@ msgid "%1$s is not translated. %2$sClick here to make this post type translatabl
 msgstr ""
 
 #: inc/translation-jobs/jobs/wpml-element-translation-job.class.php:34
+#: tests/tests/inc/translation-jobs/test-translation-job-external.php:54
 msgid "The original has been deleted!"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:335
+#: inc/translation-management/translation-management.class.php:336
 msgid "No Batch"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1060
+#: inc/translation-management/translation-management.class.php:1074
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:381
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:396
 msgid "Duplicate"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1063
+#: inc/translation-management/translation-management.class.php:1077
 msgid "Complete"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1069
+#: inc/translation-management/translation-management.class.php:1083
 msgid "In progress - needs retry"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1769
+#: inc/translation-management/translation-management.class.php:1899
 msgid "Translation entry not found for: %d"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1915
-#: inc/translation-management/translation-management.class.php:1934
+#: inc/translation-management/translation-management.class.php:2045
+#: inc/translation-management/translation-management.class.php:2064
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:26
 msgid "translate"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1917
+#: inc/translation-management/translation-management.class.php:2047
 msgid "string not registered"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1925
+#: inc/translation-management/translation-management.class.php:2055
 msgid "Multiple options"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:1937
+#: inc/translation-management/translation-management.class.php:2067
 msgid "some strings might be not registered"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:2162
+#: inc/translation-management/translation-management.class.php:2308
 msgid " - (needs update)"
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:2338
+#: inc/translation-management/translation-management.class.php:2484
+#: tests/tests/inc/translation-management/test-wpml-translation-management.php:94
 msgid "Preferences saved."
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:2357
+#: inc/translation-management/translation-management.class.php:2503
+#: tests/tests/inc/translation-management/test-wpml-translation-management.php:57
 msgid "Translation requests cancelled."
 msgstr ""
 
-#: inc/translation-management/translation-management.class.php:2359
+#: inc/translation-management/translation-management.class.php:2505
+#: tests/tests/inc/translation-management/test-wpml-translation-management.php:54
 msgid "No Translation requests selected."
 msgstr ""
 
@@ -4106,44 +4267,7 @@ msgstr ""
 msgid "Failed to select translation service ( serviceId: %d )"
 msgstr ""
 
-#: inc/upgrade-functions/upgrade-2.0.0.php:71
-#: inc/upgrade-functions/upgrade-2.0.0.php:204
-msgid "Processing translations..."
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:204
-msgid "Finalizing upgrade..."
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:243
-msgid "Missing step"
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:261
-msgid "Resume Upgrade Process"
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:261
-msgid "Run Upgrade Process"
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:262
-msgid "WPML requires database upgrade"
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:263
-msgid "This normally takes a few seconds, but may last up to several minutes of very large databases."
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:274
-msgid "Starting the upgrade process..."
-msgstr ""
-
-#: inc/upgrade-functions/upgrade-2.0.0.php:297
-msgid "Creating new tables..."
-msgstr ""
-
-#: inc/upgrade.php:192
+#: inc/upgrade.php:183
 msgid "<strong>WPML notice:</strong> Upgrades to this version are only supported from versions %1$s and above. To upgrade from version %2$s, first, download <a%3$s>2.0.4</a>, do the DB upgrade and then go to this version."
 msgstr ""
 
@@ -4190,17 +4314,17 @@ msgid "Menu(s) syncing complete."
 msgstr ""
 
 #: inc/wp-nav-menus/menus-sync.php:578
-#: sitepress.class.php:1321
+#: sitepress.class.php:1362
 msgid "Your menu includes custom items, which you need to translate using WPML's String Translation."
 msgstr ""
 
 #: inc/wp-nav-menus/menus-sync.php:580
-#: sitepress.class.php:1322
+#: sitepress.class.php:1363
 msgid "1. Translate these strings: "
 msgstr ""
 
 #: inc/wp-nav-menus/menus-sync.php:590
-#: sitepress.class.php:1323
+#: sitepress.class.php:1364
 msgid "2. When you're done translating, return here and run the menu synchronization again. This will use the strings that you translated to update the menus."
 msgstr ""
 
@@ -4244,7 +4368,7 @@ msgstr ""
 msgid "Deleted comments:"
 msgstr ""
 
-#: inc/wpml-post-edit-ajax.class.php:162
+#: inc/wpml-post-edit-ajax.class.php:171
 msgid "Post not found"
 msgstr ""
 
@@ -4254,11 +4378,11 @@ msgid ""
 "\t\t\t <p>In order to synchronize the taxonomies, you need to go over each of them from the following list and click the \"Update taxonomy hierarchy\" button.</p>"
 msgstr ""
 
-#: inc/wpml-private-actions.php:85
+#: inc/wpml-private-actions.php:106
 msgid "Valid"
 msgstr ""
 
-#: inc/wpml-private-actions.php:87
+#: inc/wpml-private-actions.php:108
 msgid "Not valid"
 msgstr ""
 
@@ -4266,247 +4390,247 @@ msgstr ""
 msgid "This information allows our support team to see the versions of WordPress, plugins and theme on your site. Provide this information if requested in our support forum. No passwords or other confidential information is included."
 msgstr ""
 
-#: menu/edit-languages.php:105
+#: menu/edit-languages.php:112
 msgid "Upload directory cannot be created. Check your permissions."
 msgstr ""
 
-#: menu/edit-languages.php:108
+#: menu/edit-languages.php:115
 msgid "Upload dir is not writable"
 msgstr ""
 
-#: menu/edit-languages.php:142
+#: menu/edit-languages.php:149
 msgctxt "Edit languages page: page title"
 msgid "Edit Languages"
 msgstr ""
 
-#: menu/edit-languages.php:144
+#: menu/edit-languages.php:151
 msgctxt "Edit languages page: sentence #1"
 msgid "This table allows you to edit languages for your site. Each row represents a language."
 msgstr ""
 
-#: menu/edit-languages.php:146
+#: menu/edit-languages.php:153
 msgctxt "Edit languages page: sentence #2"
 msgid "For each language, you need to enter the following information:"
 msgstr ""
 
-#: menu/edit-languages.php:149
+#: menu/edit-languages.php:156
 msgctxt "Edit languages page: subtitle #1"
 msgid "Code:"
 msgstr ""
 
-#: menu/edit-languages.php:149
+#: menu/edit-languages.php:156
 msgctxt "Edit languages page: subtitle #1, description"
 msgid "a unique value that identifies the language. Once entered, the language code cannot be changed."
 msgstr ""
 
-#: menu/edit-languages.php:152
+#: menu/edit-languages.php:159
 msgctxt "Edit languages page: subtitle #2"
 msgid "Translations:"
 msgstr ""
 
-#: menu/edit-languages.php:152
+#: menu/edit-languages.php:159
 msgctxt "Edit languages page: subtitle #2, description"
 msgid "the way the language name will be displayed in different languages."
 msgstr ""
 
-#: menu/edit-languages.php:155
+#: menu/edit-languages.php:162
 msgctxt "Edit languages page: subtitle #3"
 msgid "Flag:"
 msgstr ""
 
 #. translators: %s: link to flag documentation
-#: menu/edit-languages.php:162
+#: menu/edit-languages.php:169
 msgctxt "Edit languages page: subtitle #3, description"
 msgid "the flag to display next to the language (optional). You can either upload your own flag or use one of WPML's built in flag images. Read more about <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">using flags</a>."
 msgstr ""
 
-#: menu/edit-languages.php:174
+#: menu/edit-languages.php:181
 msgctxt "Edit languages page: subtitle #4"
 msgid "Default locale:"
 msgstr ""
 
-#: menu/edit-languages.php:174
+#: menu/edit-languages.php:181
 msgctxt "Edit languages page: subtitle #4, description"
-msgid "This determines the locale value for this language. You should check the name of WordPress localization file to set this correctly."
+msgid "this determines the locale value for this language. You should check the name of WordPress localization file to set this correctly."
 msgstr ""
 
-#: menu/edit-languages.php:177
+#: menu/edit-languages.php:184
 msgctxt "Edit languages page: subtitle #5"
 msgid "Encode URLs:"
 msgstr ""
 
-#: menu/edit-languages.php:177
+#: menu/edit-languages.php:184
 msgctxt "Edit languages page: subtitle #5, description"
 msgid "yes/no, determines if URLs in this language are encoded or use ASCII characters (leave ‘no’ if you are not sure)."
 msgstr ""
 
-#: menu/edit-languages.php:180
+#: menu/edit-languages.php:187
 msgctxt "Edit languages page: subtitle #6"
 msgid "hreflang:"
 msgstr ""
 
-#: menu/edit-languages.php:180
+#: menu/edit-languages.php:187
 msgctxt "Edit languages page: subtitle #6, description"
 msgid "the code Google expects for this language. The hreflang should contain at least the language code (usually, made of two letters), or, if you want to specify the country/region, it sould be the same information as the locale name, but in a slightly different format. If the locale for Canadian French is fr_CA, the corresponding hreflang would be fr-ca. Instead of an underscore, use a dash (-) and all letters should be lowercase."
 msgstr ""
 
-#: menu/edit-languages.php:183
+#: menu/edit-languages.php:190
 msgctxt "Edit languages page: subtitle #7"
 msgid "Language mapping:"
 msgstr ""
 
-#: menu/edit-languages.php:187
+#: menu/edit-languages.php:194
 msgctxt "Edit languages page: subtitle #7, description"
-msgid "To use automatic translation with a custom or country-specific language, you must map it to a supported language. Read more about <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">using automatic translation with custom languages</a>."
+msgid "to use automatic translation with a custom or country-specific language, you must map it to a supported language. Read more about <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">using automatic translation with custom languages</a>."
 msgstr ""
 
-#: menu/edit-languages.php:222
-#: menu/edit-languages.php:248
+#: menu/edit-languages.php:229
+#: menu/edit-languages.php:255
 msgid "Language name"
-msgstr ""
-
-#: menu/edit-languages.php:223
-#: menu/edit-languages.php:249
-msgid "Code"
 msgstr ""
 
 #: menu/edit-languages.php:230
 #: menu/edit-languages.php:256
-msgid "Translation (new)"
-msgstr ""
-
-#: menu/edit-languages.php:235
-#: menu/edit-languages.php:261
-msgid "Default locale"
-msgstr ""
-
-#: menu/edit-languages.php:236
-#: menu/edit-languages.php:262
-msgid "Encode URLs"
+msgid "Code"
 msgstr ""
 
 #: menu/edit-languages.php:237
 #: menu/edit-languages.php:263
+msgid "Translation (new)"
+msgstr ""
+
+#: menu/edit-languages.php:242
+#: menu/edit-languages.php:268
+msgid "Default locale"
+msgstr ""
+
+#: menu/edit-languages.php:243
+#: menu/edit-languages.php:269
+msgid "Encode URLs"
+msgstr ""
+
+#: menu/edit-languages.php:244
+#: menu/edit-languages.php:270
 msgid "hreflang"
 msgstr ""
 
-#: menu/edit-languages.php:240
-#: menu/edit-languages.php:266
+#: menu/edit-languages.php:247
+#: menu/edit-languages.php:273
 msgid "Language mapping"
 msgstr ""
 
-#: menu/edit-languages.php:289
+#: menu/edit-languages.php:296
 msgid "Please note: language codes cannot be changed after adding languages. Make sure you enter the correct code."
 msgstr ""
 
-#: menu/edit-languages.php:290
+#: menu/edit-languages.php:297
 msgid "Back to languages"
 msgstr ""
 
-#: menu/edit-languages.php:294
+#: menu/edit-languages.php:301
 msgid "Add Language"
 msgstr ""
 
-#: menu/edit-languages.php:440
+#: menu/edit-languages.php:467
 msgid "Custom flag"
 msgstr ""
 
-#: menu/edit-languages.php:458
+#: menu/edit-languages.php:485
 msgid "Upload custom flag"
 msgstr ""
 
-#: menu/edit-languages.php:461
+#: menu/edit-languages.php:488
 msgid "(allowed: %s)"
 msgstr ""
 
-#: menu/edit-languages.php:480
-#: menu/edit-languages.php:499
+#: menu/edit-languages.php:507
+#: menu/edit-languages.php:526
 msgid "WPML flag"
 msgstr ""
 
-#: menu/edit-languages.php:528
+#: menu/edit-languages.php:562
 #: menu/support.php:57
 msgid "No"
 msgstr ""
 
-#: menu/edit-languages.php:537
+#: menu/edit-languages.php:571
 #: menu/support.php:57
 msgid "Yes"
 msgstr ""
 
-#: menu/edit-languages.php:569
-#: menu/edit-languages.php:577
+#: menu/edit-languages.php:619
+#: menu/edit-languages.php:627
 msgid "Delete"
 msgstr ""
 
-#: menu/edit-languages.php:573
+#: menu/edit-languages.php:623
 msgid "Are you sure you want to delete this language?%sALL the data associated with this language will be ERASED!"
 msgstr ""
 
-#: menu/edit-languages.php:709
-#: menu/edit-languages.php:1031
+#: menu/edit-languages.php:759
+#: menu/edit-languages.php:1089
 msgid "Please, enter valid data."
 msgstr ""
 
-#: menu/edit-languages.php:783
-#: menu/edit-languages.php:916
-#: menu/edit-languages.php:926
+#: menu/edit-languages.php:833
+#: menu/edit-languages.php:974
+#: menu/edit-languages.php:984
 msgid "Error adding translation %1$s for %2$s."
 msgstr ""
 
-#: menu/edit-languages.php:830
+#: menu/edit-languages.php:883
 msgid "Error uploading flag file."
 msgstr ""
 
-#: menu/edit-languages.php:873
+#: menu/edit-languages.php:928
 msgid "Adding language failed."
 msgstr ""
 
-#: menu/edit-languages.php:940
+#: menu/edit-languages.php:998
 msgid "Error adding native name."
 msgstr ""
 
-#: menu/edit-languages.php:948
+#: menu/edit-languages.php:1006
 msgid "Error adding flag."
 msgstr ""
 
-#: menu/edit-languages.php:960
+#: menu/edit-languages.php:1018
 msgid "The Language code already exists."
 msgstr ""
 
-#: menu/edit-languages.php:961
+#: menu/edit-languages.php:1019
 msgid "The Language name already exists."
 msgstr ""
 
-#: menu/edit-languages.php:962
+#: menu/edit-languages.php:1020
 msgid "The default locale already exists."
 msgstr ""
 
-#: menu/edit-languages.php:963
+#: menu/edit-languages.php:1021
 msgid "The hreflang already exists."
 msgstr ""
 
-#: menu/edit-languages.php:1007
+#: menu/edit-languages.php:1065
 msgid "Invalid character in language code."
 msgstr ""
 
-#: menu/edit-languages.php:1020
+#: menu/edit-languages.php:1078
 msgid "Please, enter required data."
 msgstr ""
 
-#: menu/edit-languages.php:1098
+#: menu/edit-languages.php:1156
 msgid "Error: This is a built in language. You can't delete it."
 msgstr ""
 
-#: menu/edit-languages.php:1173
+#: menu/edit-languages.php:1231
 msgid "The language %s was deleted."
 msgstr ""
 
-#: menu/edit-languages.php:1178
+#: menu/edit-languages.php:1236
 msgid "Error: Language not found."
 msgstr ""
 
-#: menu/edit-languages.php:1202
+#: menu/edit-languages.php:1260
 msgid "File extension not allowed."
 msgstr ""
 
@@ -4559,7 +4683,7 @@ msgstr ""
 
 #: menu/languages.php:134
 #: menu/languages.php:817
-msgid "WPML love"
+msgid "Show your love for WPML"
 msgstr ""
 
 #: menu/languages.php:161
@@ -4819,10 +4943,6 @@ msgstr ""
 msgid "Auto-generated title. Click to edit."
 msgstr ""
 
-#: menu/menu-sync/menus-sync.php:223
-msgid "Sync"
-msgstr ""
-
 #: menu/menu-sync/menus-sync.php:241
 msgid "The menus on this page may not sync because it requires more input variables. Please modify the %1$s setting in your php.ini or .htaccess files to %2$s or more."
 msgstr ""
@@ -5038,17 +5158,17 @@ msgid "%sEnable automatic translation for drafts%s"
 msgstr ""
 
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:431
-#: sitepress.class.php:2428
+#: sitepress.class.php:2468
 msgid "Translations"
 msgstr ""
 
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:432
-#: sitepress.class.php:2433
+#: sitepress.class.php:2473
 msgid "hide"
 msgstr ""
 
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:432
-#: sitepress.class.php:2438
+#: sitepress.class.php:2478
 msgid "show"
 msgstr ""
 
@@ -5079,47 +5199,47 @@ msgid " for "
 msgstr ""
 
 #: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:573
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:774
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:779
 msgid "Post without a title"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:642
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:647
 msgid "Media attachments"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:655
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:660
 msgid "Duplicate uploaded media to translations"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:656
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:661
 msgid "Duplicate featured image to translations"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:658
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:663
 msgid "Duplicate uploaded media from original"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:659
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:664
 msgid "Duplicate featured image from original"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:682
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:687
 msgid "Copy content from %s"
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:689
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:694
 msgid "This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor."
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:704
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:709
 msgid "Overwrite with %s content."
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:709
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:714
 msgid "The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content."
 msgstr ""
 
-#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:719
+#: menu/post-menus/post-edit-screen/wpml-meta-boxes-post-edit-html.class.php:724
 msgid "This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language."
 msgstr ""
 
@@ -5148,7 +5268,7 @@ msgid "Installed"
 msgstr ""
 
 #: menu/support.php:60
-#: sitepress.class.php:2461
+#: sitepress.class.php:2501
 msgid "n/a"
 msgstr ""
 
@@ -5278,7 +5398,7 @@ msgid "Description"
 msgstr ""
 
 #: menu/term-taxonomy-menus/taxonomy-translation-display.class.php:44
-#: sitepress.class.php:1266
+#: sitepress.class.php:1307
 msgid "OK"
 msgstr ""
 
@@ -5370,7 +5490,6 @@ msgstr ""
 msgid "Wrong nonce"
 msgstr ""
 
-#. translators: %s is replaced by the name of the taxonomy.
 #: menu/term-taxonomy-menus/wpml-tax-menu-loader.class.php:133
 msgid "Adding translation for: %s."
 msgstr ""
@@ -5448,7 +5567,7 @@ msgid "This operation will reset WPML's language tables and reinstall it. Any cu
 msgstr ""
 
 #: menu/troubleshooting.php:666
-#: sitepress.class.php:831
+#: sitepress.class.php:847
 msgid "Clear language information and repopulate languages"
 msgstr ""
 
@@ -5623,7 +5742,7 @@ msgid "WPML 3.2 release notes"
 msgstr ""
 
 #: menu/upgrade_notice.php:30
-#: sitepress.class.php:3614
+#: sitepress.class.php:3654
 msgid "Stop showing this message"
 msgstr ""
 
@@ -5656,8 +5775,28 @@ msgstr ""
 msgid "Add translation to %s"
 msgstr ""
 
+#: menu/wpml-tm-menus-management.php:103
+msgid "Translate Content"
+msgstr ""
+
+#: menu/wpml-tm-menus-management.php:104
+msgid "Select content and send to translation"
+msgstr ""
+
 #: menu/wpml-tm-menus-management.php:469
-msgid "Translation Jobs"
+msgid "Track and manage jobs"
+msgstr ""
+
+#: menu/wpml-tm-menus-management.php:485
+msgid "Track all translation jobs on your site, along with status, translation method, and history. Use this page to monitor progress or cancel jobs."
+msgstr ""
+
+#: menu/wpml-tm-menus-management.php:489
+msgid "Looking for items assigned to you for translation or review? Go to the %s."
+msgstr ""
+
+#: menu/wpml-tm-menus-management.php:490
+msgid "Translation Queue"
 msgstr ""
 
 #: menu/wpml-tm-menus-settings.php:148
@@ -5944,128 +6083,124 @@ msgstr ""
 msgid "Clear cache now"
 msgstr ""
 
-#: sitepress.class.php:820
+#: sitepress.class.php:836
 msgid "WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed."
 msgstr ""
 
-#: sitepress.class.php:826
+#: sitepress.class.php:842
 msgid "Please go to the %1$s page and click on \"%2$s\" to fix this problem."
 msgstr ""
 
-#: sitepress.class.php:838
+#: sitepress.class.php:854
 msgid "This warning will disappear once this issue is fixed."
 msgstr ""
 
-#: sitepress.class.php:1258
+#: sitepress.class.php:1299
 msgid "You are about to change the language of {post_name}."
 msgstr ""
 
-#: sitepress.class.php:1259
+#: sitepress.class.php:1300
 msgid "All categories and tags will be translated if possible."
 msgstr ""
 
-#: sitepress.class.php:1260
+#: sitepress.class.php:1301
 msgid "The following terms do not have a translation in the chosen language and will be disconnected from this post:"
 msgstr ""
 
-#: sitepress.class.php:1261
+#: sitepress.class.php:1302
 msgid "Loading Language Data for {post_name}"
 msgstr ""
 
-#: sitepress.class.php:1262
+#: sitepress.class.php:1303
 msgid "Please make sure that you've saved all the changes. We will have to reload the page."
 msgstr ""
 
-#: sitepress.class.php:1263
+#: sitepress.class.php:1304
 msgid "Do you want to continue?"
 msgstr ""
 
-#: sitepress.class.php:1265
+#: sitepress.class.php:1306
 msgid "(No title for this post yet)"
 msgstr ""
 
-#: sitepress.class.php:1282
-msgid "Close"
-msgstr ""
-
-#: sitepress.class.php:1302
+#: sitepress.class.php:1343
 msgid "Post type and source language assignment have been fixed for "
 msgstr ""
 
-#: sitepress.class.php:1303
+#: sitepress.class.php:1344
 msgid " elements"
 msgstr ""
 
-#: sitepress.class.php:1304
+#: sitepress.class.php:1345
 msgid "No errors were found in the assignment of post types."
 msgstr ""
 
-#: sitepress.class.php:1305
+#: sitepress.class.php:1346
 msgid "Language suffixes were removed from the selected terms."
 msgstr ""
 
-#: sitepress.class.php:1413
+#: sitepress.class.php:1454
 msgid "Multilingual Content Setup"
 msgstr ""
 
-#: sitepress.class.php:2159
+#: sitepress.class.php:2199
 msgid "Custom taxonomies"
 msgstr ""
 
-#: sitepress.class.php:2174
+#: sitepress.class.php:2214
 msgid "Do nothing"
 msgstr ""
 
-#: sitepress.class.php:2194
+#: sitepress.class.php:2234
 msgid "Hide system fields"
 msgstr ""
 
-#: sitepress.class.php:2194
+#: sitepress.class.php:2234
 msgid "Show system fields"
 msgstr ""
 
-#: sitepress.class.php:2207
+#: sitepress.class.php:2247
 msgid "Note: Custom taxonomies and custom fields are shared across different post types."
 msgstr ""
 
-#: sitepress.class.php:2215
+#: sitepress.class.php:2255
 msgid "Nothing to configure."
 msgstr ""
 
-#: sitepress.class.php:2357
+#: sitepress.class.php:2397
 msgid "Main Page (no parent)"
 msgstr ""
 
-#: sitepress.class.php:2418
+#: sitepress.class.php:2458
 msgid "add"
 msgstr ""
 
-#: sitepress.class.php:3570
+#: sitepress.class.php:3610
 msgid "WPML admin screens require JavaScript in order to display. JavaScript is currently off in your browser."
 msgstr ""
 
-#: sitepress.class.php:3605
+#: sitepress.class.php:3645
 msgid "You need to configure WPML before you can start translating."
 msgstr ""
 
-#: sitepress.class.php:3609
+#: sitepress.class.php:3649
 msgid "Configure WPML"
 msgstr ""
 
-#: sitepress.class.php:3611
+#: sitepress.class.php:3651
 msgid "Getting started guide"
 msgstr ""
 
-#: sitepress.class.php:3628
+#: sitepress.class.php:3668
 msgctxt "Multilingual WordPress with WPML: first part"
 msgid "Multilingual WordPress"
 msgstr ""
 
-#: sitepress.class.php:3629
+#: sitepress.class.php:3669
 msgctxt "Multilingual WordPress with WPML: second part"
 msgid "with WPML"
 msgstr ""
 
-#: sitepress.class.php:3723
+#: sitepress.class.php:3763
 msgid "Invalid language code"
 msgstr ""

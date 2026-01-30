@@ -1,6 +1,6 @@
 <?php
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
-/** @var ?\Gzp\WbsNg\Model\Calc\Solution $solution */
+/** @var ?\Aikinomi\Wbsng\Model\Calc\Solution $solution */
 /** @var ?string $error */
 // @formatter:off
 ?>
@@ -24,7 +24,7 @@
                         <div class="wbsng-shipment-detail">
                             <ul class="wbsng-shipment-products">
     <?php
-    /** @var \Gzp\WbsNg\Model\Order\Item $item */
+    /** @var \Aikinomi\Wbsng\Model\Order\Item $item */
     foreach ($shipment->bundle as $i => $item):
         $last = $i === $shipment->bundle->count() - 1;
     ?>

@@ -47,7 +47,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	protected function render_main( $embeddedRenderCallback = null ) {
 		if ( ! AteApiLock::isLocked() ) {
 			?>
-		<div class="wrap">
+		<div class="wrap wpml-tm-dashboard-page">
 			<?php if ( $embeddedRenderCallback === null ): ?>
 				<h1><?php echo esc_html__( 'Translation Dashboard', 'wpml-translation-management' ); ?></h1>
 			<?php endif; ?>
@@ -100,7 +100,8 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 	private function build_dashboard_item( $embeddedRenderCallback = null ) {
 		$this->tab_items['dashboard'] = [
-			'caption'          => __( 'Translation Dashboard', 'sitepress' ),
+			'caption'          => __( 'Translate Content', 'sitepress' ),
+			'description'      => '<p class="wpml-tab-description">' . __( 'Select content and send to translation', 'sitepress' ) . '</p>',
 			'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
 			'callback'         => $embeddedRenderCallback ?: [ $this, 'build_content_dashboard' ],
 			'order'            => 100,
@@ -465,18 +466,32 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		$jobs_count      = $jobs_repository->get_count( new WPML_TM_Jobs_Search_Params() );
 
 		if ( $jobs_count ) {
+			$description = '<p class="wpml-tab-description">' . __( 'Track and manage jobs', 'sitepress' ) . '</p>';
+
 			$this->tab_items['jobs'] = [
 				'caption'          => __( 'Translation Jobs', 'sitepress' ),
+				'description'      => $description,
 				'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
 				'callback'         => [ $this, 'build_content_translation_jobs' ],
 				'order'            => 100000,
-				'visible'          => ! Option::shouldTranslateEverything(),
 			];
 		}
 	}
 
 	public function build_content_translation_jobs() {
-		echo "<div id='wpml-remote-jobs-container'></div>";
+		$queue_url = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php' );
+		?>
+		<p class="wpml-jobs-page-description"><?php echo esc_html__( 'Track all translation jobs on your site, along with status, translation method, and history. Use this page to monitor progress or cancel jobs.', 'sitepress' ); ?></p>
+		<p class="wpml-jobs-page-description">
+			<?php
+			printf(
+				esc_html__( 'Looking for items assigned to you for translation or review? Go to the %s.', 'sitepress' ),
+				'<a href="' . esc_url( $queue_url ) . '">' . esc_html__( 'Translation Queue', 'sitepress' ) . '</a>'
+			);
+			?>
+		</p>
+		<div id='wpml-remote-jobs-container'></div>
+		<?php
 	}
 
 

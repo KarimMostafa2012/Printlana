@@ -187,7 +187,7 @@ class WPML_TM_Troubleshooting_Reset_Pro_Trans_Config extends WPML_TM_AJAX_Factor
 
 		$this->sitepress->save_settings();
 
-		$this->wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}icl_core_status" );
+		$this->wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}icl_core_status" );
 		$this->wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}icl_content_status" );
 		$this->wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}icl_string_status" );
 		$this->wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}icl_node" );

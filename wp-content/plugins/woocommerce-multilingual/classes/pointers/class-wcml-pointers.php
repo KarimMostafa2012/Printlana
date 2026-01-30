@@ -46,6 +46,10 @@ class WCML_Pointers{
 	}
 
 	public function add_shipping_classes_translation_link() {
+		if ( ! WCML_Terms::wpml_is_product_shipping_class_set_as_translated() ) {
+			return;
+		}
+
 		$link   = \WCML\Utilities\AdminUrl::getWPMLTaxonomyTranslation( 'product_shipping_class' );
 		$name   = __( 'Translate shipping classes', 'woocommerce-multilingual' );
 		$anchor = '<a class="button button-small button-wpml wcml-pointer-shipping_classes_translation" href="{{ url }}">{{ text }}</a>';

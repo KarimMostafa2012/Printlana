@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the WPML String Translation plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML String Translation 3.4.1\n"
+"Project-Id-Version: WPML String Translation 3.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpml-string-translation\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-24T13:13:29+00:00\n"
+"POT-Creation-Date: 2025-12-05T14:38:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wpml-string-translation\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: plugin.php
 msgid "WPML String Translation"
-msgstr "Μετάφραση Συμβολοσειρών WPML"
+msgstr "WPML String Translation"
 
 #. Plugin URI of the plugin
 #: plugin.php
@@ -28,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: plugin.php
-msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">WPML String Translation 3.4.1 release notes</a>"
-msgstr "Προσθέτει δυνατότητες μετάφρασης θέματος και πρόσθετων στο WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Τεκμηρίωση</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">Σημειώσεις έκδοσης WPML String Translation 3.4.1</a>"
+msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">WPML String Translation 3.3.0-dev release notes</a>"
+msgstr "Προσθέτει δυνατότητες μετάφρασης θέματος και προσθηκών στο WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Τεκμηρίωση</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">Σημειώσεις έκδοσης WPML String Translation 3.3.0-dev</a>"
 
 #. Author of the plugin
 #: plugin.php
@@ -51,7 +51,7 @@ msgstr "Κάντε κλικ εδώ για να το ενεργοποιήσετε
 
 #: classes/AutoRegisterStringsNotice.php:27
 msgid "String auto registration is disabled. "
-msgstr "Η αυτόματη εγγραφή συμβολοσειρών είναι απενεργοποιημένη. "
+msgstr "Η αυτόματη καταχώριση συμβολοσειρών είναι απενεργοποιημένη. "
 
 #: classes/batch-action/ChangeLanguageOfStringsInDomain.php:43
 #: classes/batch-action/ChangeTranslationPriorityOfStringsInDomain.php:43
@@ -62,11 +62,11 @@ msgstr "Η αυτόματη εγγραφή συμβολοσειρών είναι
 #: classes/strings-cleanup/ajax/InitStringsRemoving.php:33
 #: classes/strings-cleanup/ajax/RemoveStringsFromDomains.php:34
 msgid "Error: please try again"
-msgstr "Σφάλμα: παρακαλώ προσπαθήστε ξανά"
+msgstr "Σφάλμα: παρακαλώ δοκιμάστε ξανά"
 
 #: classes/class-wpml-st-string-statuses.php:14
 msgid "Translation complete"
-msgstr "Ολοκληρωμένη μετάφραση"
+msgstr "Η μετάφραση ολοκληρώθηκε"
 
 #: classes/class-wpml-st-string-statuses.php:17
 msgid "Partial translation"
@@ -80,7 +80,7 @@ msgstr "Η μετάφραση χρειάζεται ενημέρωση"
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:403
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:443
 msgid "Not translated"
-msgstr "Δεν έχει μεταφραστεί"
+msgstr "Δεν μεταφράστηκε"
 
 #: classes/class-wpml-st-string-statuses.php:26
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:391
@@ -90,11 +90,11 @@ msgstr "Αναμονή για μεταφραστή"
 
 #: classes/class-wpml-st-verify-dependencies.php:36
 msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
-msgstr "Παρακαλούμε ενεργοποιήστε το WPML Multilingual CMS για να λειτουργήσει το WPML String Translation."
+msgstr "Παρακαλώ ενεργοποιήστε το WPML Multilingual CMS για να λειτουργήσει το WPML String Translation."
 
 #: classes/class-wpml-st-verify-dependencies.php:45
 msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
-msgstr "Το WPML String Translation είναι ενεργοποιημένο αλλά δεν είναι αποτελεσματικό, επειδή το WPML είναι παρωχημένο. Παρακαλούμε ενημερώστε πρώτα το WPML."
+msgstr "Το WPML String Translation είναι ενεργοποιημένο αλλά δεν είναι αποτελεσματικό, επειδή το WPML είναι παλιό. Παρακαλώ ενημερώστε πρώτα το WPML."
 
 #: classes/filters/class-wpml-st-taxonomy-labels-translation.php:205
 msgid "Missing parameters"
@@ -106,11 +106,11 @@ msgstr "Μη έγκυρο nonce"
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:230
 msgid "Nonce value is invalid"
-msgstr "Η τιμή nonce δεν είναι έγκυρη"
+msgstr "Η τιμή nonce είναι μη έγκυρη"
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:237
 msgid "Automatic string registration will remain active for <span class='counter-msg'>%s</span>. Please visit the site's front-end to allow WPML to find strings for translation."
-msgstr "Η αυτόματη εγγραφή συμβολοσειρών θα παραμείνει ενεργή για <span class=“counter-msg”>%s</span>. Παρακαλούμε επισκεφθείτε το front-end του ιστότοπου για να επιτρέψετε στο WPML να βρει συμβολοσειρές για μετάφραση."
+msgstr "Η αυτόματη καταχώριση συμβολοσειρών θα παραμείνει ενεργή για <span class='counter-msg'>%s</span>. Παρακαλώ επισκεφθείτε το frontend του ιστότοπου για να επιτρέψετε στο WPML να βρει συμβολοσειρές για μετάφραση."
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:242
 msgid "* This feature is only intended for sites that are in development. It will significantly slow down the site, but help you find strings that WPML cannot detect in the PHP code."
@@ -118,21 +118,21 @@ msgstr "* Αυτή η λειτουργία προορίζεται μόνο γι�
 
 #: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:30
 msgid "Use theme or plugin text domains when gettext calls do not use a string literal"
-msgstr "Χρησιμοποιήστε τομείς κειμένου θέματος ή πρόσθετου όταν οι κλήσεις gettext δεν χρησιμοποιούν κυριολεκτική συμβολοσειρά"
+msgstr "Χρησιμοποιήστε πεδία κειμένου θέματος ή προσθήκης όταν οι κλήσεις gettext δεν χρησιμοποιούν μια κυριολεκτική συμβολοσειρά"
 
 #: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:31
 msgid "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name."
-msgstr "Μερικά θέματα και πρόσθετα δεν ορίζουν σωστά τον τομέα κειμένου (δεύτερο όρισμα) στις κλήσεις GetText. Όταν επιλέγετε αυτήν την επιλογή, το WPML θα υποθέσει ότι οι συμβολοσειρές που βρίσκονται στις κλήσεις GetText στα αρχεία PHP του θέματος και του πρόσθετου θα πρέπει να έχουν τον τομέα κειμένου με το όνομα του θέματος/πρόσθετου."
+msgstr "Ορισμένα θέματα και προσθήκες δεν ορίζουν σωστά το πεδίο κειμένου (δεύτερο όρισμα) στις κλήσεις GetText. Όταν επιλέξετε αυτήν την επιλογή, το WPML θα υποθέσει ότι οι συμβολοσειρές που βρέθηκαν στις κλήσεις GetText στα αρχεία PHP του θέματος και της προσθήκης θα πρέπει να έχουν το πεδίο κειμένου με το όνομα του θέματος/προσθήκης."
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:40
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:40
 msgid "Scan selected plugins for strings"
-msgstr "Σάρωση επιλεγμένων πρόσθετων για συμβολοσειρές"
+msgstr "Σάρωση επιλεγμένων προσθηκών για συμβολοσειρές"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:41
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:38
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:41
-#: inc/wpml-string-translation.class.php:548
+#: inc/wpml-string-translation.class.php:551
 msgid "Completely translated strings"
 msgstr "Πλήρως μεταφρασμένες συμβολοσειρές"
 
@@ -144,14 +144,14 @@ msgstr "Συμβολοσειρές που χρειάζονται μετάφρα�
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:43
 msgid "Plugins"
-msgstr "Πρόσθετα"
+msgstr "Προσθήκες"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:44
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:41
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:44
-#: inc/wpml-string-translation.class.php:546
+#: inc/wpml-string-translation.class.php:549
 msgid "Textdomain"
-msgstr "Τομέας κειμένου"
+msgstr "Πεδίο κειμένου"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:45
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:42
@@ -162,24 +162,24 @@ msgstr "Όλα"
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:43
 #: inc/package-translation/inc/wpml-package-translation.class.php:344
 msgid "Active"
-msgstr "Ενεργά"
+msgstr "Ενεργό"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:47
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:44
 msgid "Inactive"
-msgstr "Ανενεργά"
+msgstr "Ανενεργό"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:48
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:45
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:45
 msgid "show textdomains"
-msgstr "εμφάνιση textdomains"
+msgstr "εμφάνιση πεδίων κειμένου"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:49
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:46
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:46
 msgid "hide textdomains"
-msgstr "απόκρυψη textdomains"
+msgstr "απόκρυψη πεδίων κειμένου"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:92
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:79
@@ -195,7 +195,7 @@ msgstr "Σαρώθηκε"
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:91
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:78
 msgid "Needs re-scanning"
-msgstr "Χρειάζεται επανασάρωση"
+msgstr "Χρειάζεται επανεκσάρωση"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:37
 msgid "Scan selected themes for strings"
@@ -215,15 +215,15 @@ msgstr "Το WPML String Translation προσπαθεί να γράψει αρχ
 
 #: classes/MO/File/FailureHooks.php:92
 msgid "This folder appears to be not writable. This is blocking translation for strings from appearing on the site."
-msgstr "Αυτός ο φάκελος φαίνεται να μην είναι εγγράψιμος. Αυτό εμποδίζει την εμφάνιση των μεταφράσεων για συμβολοσειρές στον ιστότοπο."
+msgstr "Αυτός ο φάκελος φαίνεται να μην είναι εγγράψιμος. Αυτό εμποδίζει την εμφάνιση μεταφράσεων για συμβολοσειρές στον ιστότοπο."
 
 #: classes/MO/File/FailureHooks.php:97
 msgid "If this is a %1$slocal development site%2$s, make sure that your local server can write to this folder."
-msgstr "Εάν αυτός είναι ένας %1$sτοπικός ιστότοπος ανάπτυξης%2$s, βεβαιωθείτε ότι ο τοπικός σας διακομιστής μπορεί να γράψει σε αυτόν τον φάκελο."
+msgstr "Εάν πρόκειται για %1$sτοπικό ιστότοπο ανάπτυξης%2$s, βεβαιωθείτε ότι ο τοπικός σας διακομιστής μπορεί να γράψει σε αυτόν τον φάκελο."
 
 #: classes/MO/File/FailureHooks.php:102
 msgid "If it's an %1$sonline site%2$s, contact your hosting company and request that they make that folder writable."
-msgstr "Εάν είναι ένας %1$sδιαδικτυακός ιστότοπος%2$s, επικοινωνήστε με την εταιρεία φιλοξενίας σας και ζητήστε να κάνουν αυτόν τον φάκελο εγγράψιμο."
+msgstr "Εάν πρόκειται για %1$sδιαδικτυακό ιστότοπο%2$s, επικοινωνήστε με την εταιρεία φιλοξενίας σας και ζητήστε να κάνουν αυτόν τον φάκελο εγγράψιμο."
 
 #: classes/MO/File/FailureHooks.php:110
 msgid "WPML's documentation on troubleshooting .mo files generation."
@@ -240,11 +240,11 @@ msgstr "Σφάλμα μεταφόρτωσης αρχείου"
 #. translators: 1: Language name, 2: Language name, 3: Opening anchor tag, 4: Closing anchor tag.
 #: classes/po-import/class-wpml-po-import-strings.php:83
 msgid "You're trying to import strings that are already registered in %1$s. To import them as %2$s, first %3$schange the source language of existing strings%4$s using String Translation. Then, try importing them again."
-msgstr "Επιχειρείτε να εισαγάγετε συμβολοσειρές που είναι ήδη καταχωρημένες στο %1$s. Για να τις εισαγάγετε ως %2$s, πρώτα %3$sαλλάξτε τη γλώσσα προέλευσης των υπαρχουσών συμβολοσειρών%4$s χρησιμοποιώντας τη Μετάφραση Συμβολοσειρών. Στη συνέχεια, προσπαθήστε να τις εισαγάγετε ξανά."
+msgstr "Προσπαθείτε να εισαγάγετε συμβολοσειρές που είναι ήδη καταχωρημένες στο %1$s. Για να τις εισαγάγετε ως %2$s, πρώτα %3$sαλλάξτε τη γλώσσα προέλευσης των υπαρχουσών συμβολοσειρών%4$s χρησιμοποιώντας το String Translation. Στη συνέχεια, δοκιμάστε να τις εισαγάγετε ξανά."
 
 #: classes/privacy/class-wpml-st-privacy-content.php:19
 msgid "WPML String Translation will send all strings to WPML’s Advanced Translation Editor and to the translation services which are used."
-msgstr "Το WPML String Translation θα στείλει όλες τις συμβολοσειρές στον Προηγμένο Επεξεργαστή Μετάφρασης του WPML και στις υπηρεσίες μετάφρασης που χρησιμοποιούνται."
+msgstr "Το WPML String Translation θα στείλει όλες τις συμβολοσειρές στο Advanced Translation Editor του WPML και στις υπηρεσίες μετάφρασης που χρησιμοποιούνται."
 
 #. translators: %s: translation dashboard link
 #: classes/SendStringsForTranslationNotice.php:21
@@ -253,7 +253,7 @@ msgstr "Για να μεταφράσετε συμβολοσειρές αυτόμ
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:54
 msgid "Set different slugs in different languages for %s."
-msgstr "Ορίστε διαφορετικά slugs σε διαφορετικές γλώσσες για %s."
+msgstr "Ορίστε διαφορετικά slugs σε διαφορετικές γλώσσες για το %s."
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:55
 msgid "Not marked as 'complete'. Press 'Save' to enable."
@@ -265,7 +265,7 @@ msgstr "(πρωτότυπο)"
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:66
 msgid "%s slugs are set to be translated, but they are missing their translation"
-msgstr "Τα slugs %s έχουν οριστεί να μεταφραστούν, αλλά λείπει η μετάφρασή τους"
+msgstr "Τα slugs %s έχουν οριστεί για μετάφραση, αλλά λείπει η μετάφρασή τους"
 
 #: classes/string-tracking/class-wpml-st-string-positions-in-source.php:52
 msgid "No records found"
@@ -292,7 +292,7 @@ msgstr "Ακύρωση"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:36
 msgid "Select for which domain to set the language: "
-msgstr "Επιλέξτε για ποιον τομέα θα οριστεί η γλώσσα: "
+msgstr "Επιλέξτε για ποιον τομέα θα ορίσετε τη γλώσσα: "
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:41
 msgid "-- Please select --"
@@ -300,7 +300,7 @@ msgstr "-- Παρακαλώ επιλέξτε --"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:78
 msgid "This domain currently has the following strings:"
-msgstr "Αυτός ο τομέας έχει επί του παρόντος τις ακόλουθες συμβολοσειρές:"
+msgstr "Αυτός ο τομέας έχει αυτήν τη στιγμή τις ακόλουθες συμβολοσειρές:"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:85
 msgid "Current source language"
@@ -316,11 +316,11 @@ msgstr "Ορίστε τη γλώσσα προέλευσης αυτών των σ
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:108
 msgid "Use this language as the default language for new strings in this domain"
-msgstr "Χρησιμοποιήστε αυτή τη γλώσσα ως προεπιλεγμένη γλώσσα για νέες συμβολοσειρές σε αυτόν τον τομέα"
+msgstr "Χρησιμοποιήστε αυτήν τη γλώσσα ως προεπιλεγμένη γλώσσα για νέες συμβολοσειρές σε αυτόν τον τομέα"
 
 #: classes/string-translation-ui/class-wpml-change-string-language-select.php:31
 msgid "Change the language of selected strings"
-msgstr "Αλλαγή της γλώσσας των επιλεγμένων συμβολοσειρών"
+msgstr "Αλλαγή γλώσσας επιλεγμένων συμβολοσειρών"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:63
 msgid "No strings found"
@@ -341,7 +341,7 @@ msgstr "Πλαίσιο"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:163
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:103
-#: inc/wpml-string-translation.class.php:544
+#: inc/wpml-string-translation.class.php:547
 msgid "Name"
 msgstr "Όνομα"
 
@@ -362,11 +362,11 @@ msgstr "Συμβολοσειρά"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:182
 msgid "All %d strings on this page are selected."
-msgstr "Όλες οι %d συμβολοσειρές σε αυτή τη σελίδα είναι επιλεγμένες."
+msgstr "Όλες οι %d συμβολοσειρές σε αυτήν τη σελίδα είναι επιλεγμένες."
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:183
 msgid "Select all strings that match this search"
-msgstr "Επιλέξτε όλες τις συμβολοσειρές που ταιριάζουν με αυτή την αναζήτηση"
+msgstr "Επιλέξτε όλες τις συμβολοσειρές που ταιριάζουν με αυτήν την αναζήτηση"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:184
 msgid "All %d strings from all pages are selected."
@@ -374,7 +374,7 @@ msgstr "Όλες οι %d συμβολοσειρές από όλες τις σε�
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:185
 msgid "Unselect all strings that match this search"
-msgstr "Αποεπιλέξτε όλες τις συμβολοσειρές που ταιριάζουν με αυτή την αναζήτηση"
+msgstr "Καταργήστε την επιλογή όλων των συμβολοσειρών που ταιριάζουν με αυτήν την αναζήτηση"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:290
 msgid "Preview string on site"
@@ -382,7 +382,7 @@ msgstr "Προεπισκόπηση συμβολοσειράς στον ιστό�
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:291
 msgid "This preview shows where the selected string appears on your site’s front-end."
-msgstr "Αυτή η προεπισκόπηση δείχνει πού εμφανίζεται η επιλεγμένη συμβολοσειρά στο front-end του ιστότοπού σας."
+msgstr "Αυτή η προεπισκόπηση δείχνει πού εμφανίζεται η επιλεγμένη συμβολοσειρά στο frontend του ιστότοπού σας."
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:292
 msgid "Frontend preview"
@@ -390,11 +390,11 @@ msgstr "Προεπισκόπηση frontend"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:295
 msgid "Preview where this string appears on your site"
-msgstr "Προεπισκόπηση του σημείου όπου εμφανίζεται αυτή η συμβολοσειρά στον ιστότοπό σας"
+msgstr "Προεπισκόπηση όπου εμφανίζεται αυτή η συμβολοσειρά στον ιστότοπό σας"
 
 #: classes/string-translation-ui/class-wpml-translation-priority-select.php:20
 msgid "Change translation priority of selected strings"
-msgstr "Αλλαγή προτεραιότητας μετάφρασης των επιλεγμένων συμβολοσειρών"
+msgstr "Αλλαγή προτεραιότητας μετάφρασης επιλεγμένων συμβολοσειρών"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:40
 msgid "Dismiss all notices"
@@ -402,27 +402,57 @@ msgstr "Απόρριψη όλων των ειδοποιήσεων"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:41
 msgid "Also prevent similar messages in the future?"
-msgstr "Να αποτραπούν επίσης παρόμοια μηνύματα στο μέλλον;?"
+msgstr "Να αποτρέπονται και παρόμοια μηνύματα στο μέλλον;"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:42
 msgid "No - keep showing these message"
-msgstr "Όχι - συνέχιση εμφάνισης αυτών των μηνυμάτων"
+msgstr "Όχι - να εμφανίζονται αυτά τα μηνύματα"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:43
 msgid "Yes - disable these notifications completely"
 msgstr "Ναι - απενεργοποίηση αυτών των ειδοποιήσεων εντελώς"
 
-#: classes/strings-scanning/wpml-st-theme-plugin-scan-dir-ajax.php:52
+#: classes/strings-scanning/JS/SettingsHooks.php:67
+msgid "Detect strings in JavaScript files"
+msgstr "Εντοπισμός συμβολοσειρών σε αρχεία JavaScript"
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:73
+msgid "When enabled, WPML tracks JavaScript files loaded on your site's pages. Texts (strings) from these files will be included when you scan a theme or plugin in %1$sWPML > Theme and plugins localization%2$s."
+msgstr "Όταν είναι ενεργοποιημένο, το WPML παρακολουθεί τα αρχεία JavaScript που φορτώνονται στις σελίδες του ιστοτόπου σας. Κείμενα (συμβολοσειρές) από αυτά τα αρχεία θα συμπεριληφθούν όταν σαρώσετε ένα θέμα ή ένα πρόσθετο στο %1$sWPML > Μετάφραση θέματος και προσθέτων%2$s."
+
+#. translators: Placeholders are for open and close bold tag
+#: classes/strings-scanning/JS/SettingsHooks.php:93
+msgid "%1$sNote:%2$s This feature may affect site performance. We recommend disabling it after scanning is complete."
+msgstr "%1$sΣημείωση:%2$s Αυτή η λειτουργία ενδέχεται να επηρεάσει την απόδοση του ιστοτόπου. Συνιστούμε να την απενεργοποιήσετε μετά την ολοκλήρωση της σάρωσης."
+
+#: classes/strings-scanning/JS/SettingsHooks.php:122
+#: inc/wpml-string-translation.class.php:443
+#: inc/wpml-string-translation.class.php:444
+msgid "String Translation"
+msgstr "Μετάφραση συμβολοσειρών"
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:131
+msgid "JavaScript file scanning is active and may affect performance. %1$sDisable this feature%2$s in WPML Settings once your texts (strings) are registered."
+msgstr "Η σάρωση αρχείων JavaScript είναι ενεργή και ενδέχεται να επηρεάσει την απόδοση. %1$sΑπενεργοποιήστε αυτή τη λειτουργία%2$s στις Ρυθμίσεις WPML μόλις καταχωρηθούν τα κείμενά σας (συμβολοσειρές)."
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:138
+msgid "Missing texts (strings) after scanning? %1$sEnable Scan strings in JavaScript files%2$s in WPML Settings, visit the page containing the string, then scan again."
+msgstr "Λείπουν κείμενα (συμβολοσειρές) μετά τη σάρωση; %1$sΕνεργοποιήστε τη σάρωση συμβολοσειρών σε αρχεία JavaScript%2$s στις Ρυθμίσεις WPML, επισκεφθείτε τη σελίδα που περιέχει τη συμβολοσειρά και, στη συνέχεια, σαρώστε ξανά."
+
+#: classes/strings-scanning/wpml-st-theme-plugin-scan-dir-ajax.php:54
 msgid "Files already scanned."
 msgstr "Τα αρχεία έχουν ήδη σαρωθεί."
 
 #: classes/support/class-wpml-st-support-info-filter.php:27
 msgid "Multibyte String extension"
-msgstr "Επέκταση Multibyte String"
+msgstr "Επέκταση συμβολοσειράς πολλαπλών byte"
 
 #: classes/support/class-wpml-st-support-info-filter.php:28
 msgid "Loaded"
-msgstr "Φορτώθηκε"
+msgstr "Φορτωμένο"
 
 #: classes/support/class-wpml-st-support-info-filter.php:28
 msgid "Not loaded"
@@ -430,42 +460,42 @@ msgstr "Δεν φορτώθηκε"
 
 #: classes/support/class-wpml-st-support-info-filter.php:31
 msgid "Multibyte String extension is required for WPML String Translation."
-msgstr "Η επέκταση Multibyte String απαιτείται για το WPML String Translation."
-
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:48
-msgctxt "MO Import blocked short 1/3"
-msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
-msgstr "Το WPML δεν μπορεί να αντικαταστήσει τα αρχεία.mo λόγω τεχνικών προβλημάτων στον πίνακα String Translation."
+msgstr "Η επέκταση συμβολοσειράς πολλαπλών byte απαιτείται για το WPML String Translation."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:54
+msgctxt "MO Import blocked short 1/3"
+msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
+msgstr "Το WPML δεν μπορεί να αντικαταστήσει αρχεία.mo λόγω τεχνικών προβλημάτων στον πίνακα String Translation."
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:60
 msgctxt "MO Import blocked short 2/3"
 msgid "WPML support team knows how to fix it."
-msgstr "Η ομάδα υποστήριξης του WPML γνωρίζει πώς να το διορθώσει."
+msgstr "Η ομάδα υποστήριξης του WPML ξέρει πώς να το διορθώσει."
 
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:61
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:67
 msgctxt "MO Import blocked short 3/3"
 msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\" >support thread</a> and we'll fix it for you."
-msgstr "Παρακαλούμε προσθέστε ένα μήνυμα στο σχετικό <a href=\"%s\" target=\"_blank\" >νήμα υποστήριξης</a> και θα το διορθώσουμε για εσάς."
-
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:73
-msgctxt "MO Import blocked 1/4"
-msgid "There is a problem with the String Translation table in your site."
-msgstr "Υπάρχει ένα πρόβλημα με τον πίνακα String Translation στον ιστότοπό σας."
+msgstr "Παρακαλώ προσθέστε ένα μήνυμα στο σχετικό <a href=\"%s\" target=\"_blank\" >νήμα υποστήριξης</a> και θα το διορθώσουμε για εσάς."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:79
-msgctxt "MO Import blocked 2/4"
-msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
-msgstr "Αυτό το πρόβλημα δεν προκαλεί πρόβλημα στη λειτουργία του ιστότοπου αυτή τη στιγμή, αλλά μπορεί να γίνει κρίσιμο ζήτημα στο μέλλον."
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "Υπάρχει πρόβλημα με τον πίνακα String Translation στον ιστότοπό σας."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:85
+msgctxt "MO Import blocked 2/4"
+msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
+msgstr "Αυτό το πρόβλημα δεν προκαλεί πρόβλημα στην εκτέλεση του ιστότοπου αυτήν τη στιγμή, αλλά μπορεί να γίνει κρίσιμο ζήτημα στο μέλλον."
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:91
 msgctxt "MO Import blocked 3/4"
 msgid "WPML support team knows how to fix it."
-msgstr "Η ομάδα υποστήριξης του WPML γνωρίζει πώς να το διορθώσει."
+msgstr "Η ομάδα υποστήριξης του WPML ξέρει πώς να το διορθώσει."
 
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:92
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:98
 msgctxt "MO Import blocked 4/4"
 msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\">support thread</a> and we'll fix it for you."
-msgstr "Παρακαλούμε προσθέστε ένα μήνυμα στο σχετικό <a href=\"%s\" target=\"_blank\">νήμα υποστήριξης</a> και θα το διορθώσουμε για εσάς."
+msgstr "Παρακαλώ προσθέστε ένα μήνυμα στο σχετικό <a href=\"%s\" target=\"_blank\">νήμα υποστήριξης</a> και θα το διορθώσουμε για εσάς."
 
 #: classes/Troubleshooting/BackendHooks.php:33
 msgid "Show custom MO Files Pre-generation dialog box"
@@ -477,19 +507,19 @@ msgstr "Εκκαθάριση και βελτιστοποίηση πινάκων 
 
 #: classes/Troubleshooting/BackendHooks.php:41
 msgid "Cleanup and optimization completed!"
-msgstr "Η εκκαθάριση και βελτιστοποίηση ολοκληρώθηκε!"
+msgstr "Η εκκαθάριση και η βελτιστοποίηση ολοκληρώθηκαν!"
 
 #: classes/Troubleshooting/BackendHooks.php:46
 msgid "Check for string issues"
-msgstr "Έλεγχος για ζητήματα συμβολοσειρών"
+msgstr "Έλεγχος για προβλήματα συμβολοσειρών"
 
 #: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:43
 msgid "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings."
-msgstr "Το WPML χρειάζεται να ενημερώσει τη βάση δεδομένων. Αυτή η ενημέρωση θα βοηθήσει στη βελτίωση της απόδοσης του WPML κατά την ανάκτηση μεταφρασμένων συμβολοσειρών."
+msgstr "Το WPML πρέπει να ενημερώσει τη βάση δεδομένων. Αυτή η ενημέρωση θα βοηθήσει στη βελτίωση της απόδοσης του WPML κατά την ανάκτηση μεταφρασμένων συμβολοσειρών."
 
 #: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:45
 msgid "Update Now"
-msgstr "Ενημέρωση Τώρα"
+msgstr "Ενημέρωση τώρα"
 
 #: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:51
 msgid "The database has been updated."
@@ -502,15 +532,15 @@ msgstr "Κλείσιμο"
 
 #: classes/upgrade/repair-schema/wpml-st-repair-strings-schema.php:84
 msgid "We have detected a problem with some tables in the database. Please contact %1$sWPML support%2$s to get this fixed."
-msgstr "Εντοπίσαμε ένα πρόβλημα με ορισμένους πίνακες στη βάση δεδομένων. Παρακαλούμε επικοινωνήστε με την %1$sυποστήριξη του WPML%2$s για να το διορθώσετε."
+msgstr "Έχουμε εντοπίσει ένα πρόβλημα με ορισμένους πίνακες στη βάση δεδομένων. Παρακαλώ επικοινωνήστε με την %1$sυποστήριξη του WPML%2$s για να το διορθώσετε."
 
 #: inc/auto-download-locales.php:140
 msgid "Updated %s translation is available"
-msgstr "Διατίθεται ενημερωμένη μετάφραση %s"
+msgstr "Διαθέσιμη ενημερωμένη μετάφραση %s"
 
 #: inc/auto-download-locales.php:144
 msgid "Review changes and update"
-msgstr "Επανεξέταση αλλαγών και ενημέρωση"
+msgstr "Ελέγξτε τις αλλαγές και ενημερώστε"
 
 #: inc/auto-download-locales.php:153
 msgid "No updates found."
@@ -526,33 +556,33 @@ msgstr "Σφάλματα: %s"
 
 #: inc/auto-download-locales.php:212
 msgid "Failed downloading the language information file. Please go back and try a little later."
-msgstr "Αποτυχία λήψης του αρχείου πληροφοριών γλώσσας. Παρακαλούμε επιστρέψτε και δοκιμάστε ξανά αργότερα."
+msgstr "Αποτυχία λήψης του αρχείου πληροφοριών γλώσσας. Παρακαλώ επιστρέψτε και δοκιμάστε λίγο αργότερα."
 
-#: inc/functions.php:1117
+#: inc/functions.php:1150
 msgid "Translations for strings updated"
-msgstr "Οι μεταφράσεις για τις συμβολοσειρές ενημερώθηκαν"
+msgstr "Οι μεταφράσεις για συμβολοσειρές ενημερώθηκαν"
 
 #: inc/gettext/wpml-po-import.class.php:99
 msgid "No string found"
 msgstr "Δεν βρέθηκε συμβολοσειρά"
 
-#: inc/gettext/wpml-string-scanner.class.php:82
+#: inc/gettext/wpml-string-scanner.class.php:84
 msgid "Scan successful: WPML found %s strings."
-msgstr "Επιτυχής σάρωση: Το WPML βρήκε %s συμβολοσειρές."
+msgstr "Η σάρωση ολοκληρώθηκε με επιτυχία: Το WPML βρήκε %s συμβολοσειρές."
 
-#: inc/gettext/wpml-string-scanner.class.php:83
+#: inc/gettext/wpml-string-scanner.class.php:85
 msgid "The following files were processed:"
 msgstr "Τα ακόλουθα αρχεία επεξεργάστηκαν:"
 
-#: inc/gettext/wpml-string-scanner.class.php:90
+#: inc/gettext/wpml-string-scanner.class.php:92
 msgid " They were added to the translations table."
-msgstr "Προστέθηκαν στον πίνακα μεταφράσεων."
+msgstr " Προστέθηκαν στον πίνακα μεταφράσεων."
 
-#: inc/gettext/wpml-theme-string-scanner.class.php:36
+#: inc/gettext/wpml-theme-string-scanner.class.php:40
 msgid "Scanning file: %s"
 msgstr "Σάρωση αρχείου: %s"
 
-#: inc/gettext/wpml-theme-string-scanner.class.php:41
+#: inc/gettext/wpml-theme-string-scanner.class.php:44
 msgid "Skipping file: %s"
 msgstr "Παράλειψη αρχείου: %s"
 
@@ -562,27 +592,26 @@ msgstr "Ορισμένες από τις επιλεγμένες συμβολοσ
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:35
 msgid "Package Management"
-msgstr "Διαχείριση Πακέτων"
+msgstr "Διαχείριση πακέτων"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:36
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:37
 msgid "Display packages for this kind:"
-msgstr "Εμφάνιση πακέτων αυτού του είδους:"
+msgstr "Εμφάνιση πακέτων για αυτόν τον τύπο:"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:65
 msgid "Delete Selected Packages"
-msgstr "Διαγραφή Επιλεγμένων Πακέτων"
+msgstr "Διαγραφή επιλεγμένων πακέτων"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:68
 msgid ""
 "Are you sure you want to delete these packages?\n"
 "Their strings and translations will be deleted too."
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα πακέτα;
-Οι συμβολοσειρές και οι μεταφράσεις τους θα διαγραφούν επίσης."
+msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτά τα πακέτα;\nΟι συμβολοσειρές και οι μεταφράσεις τους θα διαγραφούν επίσης."
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:98
 msgid "Select All"
-msgstr "Επιλογή Όλων"
+msgstr "Επιλογή όλων"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:102
 msgid "Kind"
@@ -652,23 +681,23 @@ msgstr "Στο καλάθι μετάφρασης"
 msgid ""
 "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n"
 "\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
-msgstr "Δεν μπορείτε να προσθέσετε πακέτα σε αυτή τη γλώσσα στο καλάθι, καθώς περιέχει ήδη αναρτήσεις, πακέτα ή συμβολοσειρές άλλης γλώσσας προέλευσης!\n\t\t\t\t	Είτε υποβάλετε το τρέχον καλάθι και στη συνέχεια προσθέστε την ανάρτηση, είτε διαγράψτε τις αναρτήσεις διαφορετικής γλώσσας στο τρέχον καλάθι"
+msgstr "Δεν μπορείτε να προσθέσετε πακέτα σε αυτήν τη γλώσσα στο καλάθι, καθώς περιέχει ήδη αναρτήσεις, πακέτα ή συμβολοσειρές άλλης γλώσσας προέλευσης!\n\t\t\t\t\tΕίτε υποβάλετε το τρέχον καλάθι και μετά προσθέστε την ανάρτηση είτε διαγράψτε τις αναρτήσεις διαφορετικής γλώσσας στο τρέχον καλάθι"
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:144
 msgid "Please select at least one language to translate into."
-msgstr "Παρακαλούμε επιλέξτε τουλάχιστον μία γλώσσα για μετάφραση."
+msgstr "Παρακαλώ επιλέξτε τουλάχιστον μία γλώσσα για μετάφραση."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:163
 msgid "Please select at least one document to translate."
-msgstr "Παρακαλούμε επιλέξτε τουλάχιστον ένα έγγραφο για μετάφραση."
+msgstr "Παρακαλώ επιλέξτε τουλάχιστον ένα έγγραφο για μετάφραση."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:255
 msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already in progress."
-msgstr "Η ανάρτηση “%1$s” θα αγνοηθεί για %2$s, επειδή η μετάφραση βρίσκεται ήδη σε εξέλιξη."
+msgstr "Η ανάρτηση “%1$s” θα αγνοηθεί για το %2$s, επειδή η μετάφραση βρίσκεται ήδη σε εξέλιξη."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:268
 msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already waiting for translator."
-msgstr "Η ανάρτηση “%1$s” θα αγνοηθεί για %2$s, επειδή η μετάφραση περιμένει ήδη μεταφραστή."
+msgstr "Η ανάρτηση “%1$s” θα αγνοηθεί για το %2$s, επειδή η μετάφραση αναμένει ήδη μεταφραστή."
 
 #: inc/package-translation/inc/wpml-package-translation-ui.class.php:65
 #: inc/package-translation/inc/wpml-package-translation-ui.class.php:66
@@ -677,24 +706,19 @@ msgstr "Πακέτα"
 
 #: inc/package-translation/inc/wpml-package-translation.class.php:523
 msgid "WPML Package Translation is active but requires both the <a href=\"%s\">WPML core</a> and WPML String Translation plugins to function properly."
-msgstr "Το WPML Package Translation είναι ενεργό αλλά απαιτεί τόσο το <a href=\"%s\">βασικό WPML</a> όσο και τα πρόσθετα WPML String Translation για να λειτουργήσει σωστά."
+msgstr "Το WPML Package Translation είναι ενεργό αλλά απαιτεί τόσο τον <a href=\"%s\">πυρήνα του WPML</a> όσο και τις προσθήκες WPML String Translation για να λειτουργήσει σωστά."
 
 #: inc/wpml-localization.class.php:205
 msgid "No TextDomain"
-msgstr "Χωρίς Τομέα Κειμένου"
+msgstr "Χωρίς TextDomain"
 
 #: inc/wpml-localization.class.php:235
 msgid "Translate strings in %s"
-msgstr "Μετάφραση συμβολοσειρών σε %s"
+msgstr "Μετάφραση συμβολοσειρών στο %s"
 
 #: inc/wpml-localization.class.php:236
 msgid "All strings in %s"
-msgstr "Όλες οι συμβολοσειρές σε %s"
-
-#: inc/wpml-string-translation.class.php:443
-#: inc/wpml-string-translation.class.php:444
-msgid "String Translation"
-msgstr "Μετάφραση Συμβολοσειρών"
+msgstr "Όλες οι συμβολοσειρές στο %s"
 
 #: inc/wpml-string-translation.class.php:486
 msgid "Show page builder packages"
@@ -706,47 +730,47 @@ msgstr "Διαμόρφωση"
 
 #: inc/wpml-string-translation.class.php:537
 msgid "Scan strings in themes, plugins and WordPress"
-msgstr "Σάρωση συμβολοσειρών σε θέματα, πρόσθετα και WordPress"
+msgstr "Σάρωση συμβολοσειρών σε θέματα, προσθήκες και WordPress"
 
-#: inc/wpml-string-translation.class.php:545
+#: inc/wpml-string-translation.class.php:548
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: inc/wpml-string-translation.class.php:547
+#: inc/wpml-string-translation.class.php:550
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: inc/wpml-string-translation.class.php:549
+#: inc/wpml-string-translation.class.php:552
 msgid "Strings that need translation"
 msgstr "Συμβολοσειρές που χρειάζονται μετάφραση"
 
-#: inc/wpml-string-translation.class.php:575
+#: inc/wpml-string-translation.class.php:578
 msgid "Scan selected components for strings"
 msgstr "Σάρωση επιλεγμένων στοιχείων για συμβολοσειρές"
 
-#: inc/wpml-string-translation.class.php:612
+#: inc/wpml-string-translation.class.php:615
 msgid "WPML could not detect the translation files (.mo) for %s. To fix this, visit your site's frontend in a secondary language."
 msgid_plural "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
-msgstr[0] "Το WPML δεν μπόρεσε να εντοπίσει τα αρχεία μετάφρασης (.mo) για %s. Για να το διορθώσετε, επισκεφθείτε το frontend του ιστότοπού σας σε δευτερεύουσα γλώσσα."
-msgstr[1] "Το WPML δεν μπόρεσε να εντοπίσει τα αρχεία μετάφρασης (.mo) για %s και %s. Για να το διορθώσετε, επισκεφθείτε το frontend του ιστότοπού σας σε δευτερεύουσα γλώσσα."
+msgstr[0] "Το WPML δεν μπόρεσε να εντοπίσει τα αρχεία μετάφρασης (.mo) για το %s. Για να το διορθώσετε, επισκεφθείτε το προσκήνιο του ιστότοπού σας σε μια δευτερεύουσα γλώσσα."
+msgstr[1] "Το WPML δεν μπόρεσε να εντοπίσει τα αρχεία μετάφρασης (.mo) για το %s και το %s. Για να το διορθώσετε, επισκεφθείτε το προσκήνιο του ιστότοπού σας σε μια δευτερεύουσα γλώσσα."
 
-#: inc/wpml-string-translation.class.php:646
+#: inc/wpml-string-translation.class.php:649
 msgid "This will load the translation files and WPML will be able to scan them."
-msgstr "Αυτό θα φορτώσει τα αρχεία μετάφρασης και το WPML θα μπορέσει να τα σαρώσει."
+msgstr "Αυτό θα φορτώσει τα αρχεία μετάφρασης και το WPML θα μπορεί να τα σαρώσει."
 
-#: inc/wpml-string-translation.class.php:667
+#: inc/wpml-string-translation.class.php:670
 msgid "Scan the selected components to make new texts available for translation."
-msgstr "Σαρώστε τα επιλεγμένα στοιχεία για να κάνετε διαθέσιμα νέα κείμενα για μετάφραση."
+msgstr "Σαρώστε τα επιλεγμένα στοιχεία για να κάνετε νέα κείμενα διαθέσιμα για μετάφραση."
 
-#: inc/wpml-string-translation.class.php:671
+#: inc/wpml-string-translation.class.php:674
 msgid "Updated or new translation files detected"
 msgstr "Εντοπίστηκαν ενημερωμένα ή νέα αρχεία μετάφρασης"
 
-#: inc/wpml-string-translation.class.php:672
+#: inc/wpml-string-translation.class.php:675
 msgid "WPML has found new or updated translation (.mo) files and needs to scan them to find translatable strings."
-msgstr "Το WPML έχει βρει νέα ή ενημερωμένα αρχεία μετάφρασης (.mo) και πρέπει να τα σαρώσει για να βρει μεταφράσιμες συμβολοσειρές."
+msgstr "Το WPML βρήκε νέα ή ενημερωμένα αρχεία μετάφρασης (.mo) και πρέπει να τα σαρώσει για να βρει μεταφράσιμες συμβολοσειρές."
 
-#: inc/wpml-string-translation.class.php:673
+#: inc/wpml-string-translation.class.php:676
 msgid "Select affected components"
 msgstr "Επιλέξτε τα επηρεαζόμενα στοιχεία"
 
@@ -764,7 +788,7 @@ msgstr[1] "Ενημερώθηκαν %d μεταφράσεις."
 
 #: menu/auto-download-mo.php:65
 msgid "No action performed. Please select the strings that you need to update or add."
-msgstr "Δεν εκτελέστηκε καμία ενέργεια. Παρακαλούμε επιλέξτε τις συμβολοσειρές που πρέπει να ενημερώσετε ή να προσθέσετε."
+msgstr "Δεν πραγματοποιήθηκε καμία ενέργεια. Παρακαλώ επιλέξτε τις συμβολοσειρές που πρέπει να ενημερώσετε ή να προσθέσετε."
 
 #: menu/auto-download-mo.php:75
 msgid "Auto-download WordPress translations"
@@ -789,7 +813,7 @@ msgstr "Μη έγκυρη γλώσσα: %s"
 
 #: menu/auto-download-mo.php:108
 msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
-msgstr "Αυτή η ενημέρωση περιλαμβάνει %d νέες συμβολοσειρές και %d ενημερωμένες συμβολοσειρές. Μπορείτε να επανεξετάσετε τις συμβολοσειρές παρακάτω. Στη συνέχεια, πηγαίνετε στο <a%s>κάτω μέρος αυτής της σελίδας</a> και κάντε κλικ στο κουμπί Συνέχεια."
+msgstr "Αυτή η ενημέρωση περιλαμβάνει %d νέες συμβολοσειρές και %d ενημερωμένες συμβολοσειρές. Μπορείτε να ελέγξετε τις συμβολοσειρές παρακάτω. Στη συνέχεια, μεταβείτε στο <a%s>κάτω μέρος αυτής της σελίδας</a> και κάντε κλικ στο κουμπί Συνέχεια."
 
 #: menu/auto-download-mo.php:122
 msgid "Updated translations (%d)"
@@ -816,7 +840,7 @@ msgstr "Μετάφραση"
 
 #: menu/auto-download-mo.php:200
 msgid "Add the new translations."
-msgstr "Προσθήκη των νέων μεταφράσεων."
+msgstr "Προσθέστε τις νέες μεταφράσεις."
 
 #: menu/auto-download-mo.php:206
 msgid "Proceed"
@@ -828,31 +852,31 @@ msgstr "Δεν υπάρχει τίποτα για ενημέρωση ή προσ
 
 #: menu/string-translation-translate-options.php:2
 msgid "Admin Texts Translation"
-msgstr "Μετάφραση Κειμένων Διαχείρισης"
+msgstr "Μετάφραση κειμένων διαχειριστή"
 
 #: menu/string-translation-translate-options.php:13
 msgid "Translate texts you can customize from the WordPress admin but which appear on the front-end."
-msgstr "Μεταφράστε κείμενα που μπορείτε να προσαρμόσετε από το διαχειριστικό περιβάλλον του WordPress αλλά εμφανίζονται στο front-end."
+msgstr "Μεταφράστε κείμενα που μπορείτε να προσαρμόσετε από το διαχειριστικό του WordPress αλλά εμφανίζονται στο frontend."
 
 #: menu/string-translation-translate-options.php:16
 msgid "This includes strings like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
-msgstr "Αυτό περιλαμβάνει συμβολοσειρές όπως κείμενο υποσέλιδου, ειδοποιήσεις πνευματικών δικαιωμάτων, επιλογές και ρυθμίσεις πρόσθετων, μορφή ώρας, κείμενα widget και άλλα."
+msgstr "Αυτό περιλαμβάνει συμβολοσειρές όπως κείμενο υποσέλιδου, ειδοποιήσεις πνευματικών δικαιωμάτων, επιλογές και ρυθμίσεις προσθηκών, μορφή ώρας, κείμενα widget και άλλα."
 
 #: menu/string-translation-translate-options.php:19
 msgid "Learn more about %1$stranslating admin and settings strings.%2$s"
-msgstr "Μάθετε περισσότερα για τη %1$sμετάφραση συμβολοσειρών διαχείρισης και ρυθμίσεων.%2$s"
+msgstr "Μάθετε περισσότερα σχετικά με τη %1$sμετάφραση συμβολοσειρών διαχειριστή και ρυθμίσεων.%2$s"
 
 #: menu/string-translation-translate-options.php:29
 msgid "Return to String Translation"
-msgstr "Επιστροφή στη Μετάφραση Συμβολοσειρών"
+msgstr "Επιστροφή στο String Translation"
 
 #: menu/string-translation.php:104
 msgid "This is the list of strings that are not used or they are linked to wrong translation data."
-msgstr "Αυτή είναι η λίστα των συμβολοσειρών που δεν χρησιμοποιούνται ή είναι συνδεδεμένες με λανθασμένα δεδομένα μετάφρασης."
+msgstr "Αυτή είναι η λίστα των συμβολοσειρών που δεν χρησιμοποιούνται ή συνδέονται με λανθασμένα δεδομένα μετάφρασης."
 
 #: menu/string-translation.php:116
 msgid "These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom of this screen%2$s. You can exclude individual strings by clearing the check boxes next to them."
-msgstr "Αυτές είναι οι συμβολοσειρές που βρήκαμε στο αρχείο.po σας. Παρακαλούμε επανεξετάστε τις προσεκτικά. Στη συνέχεια, κάντε κλικ στα κουμπιά “προσθήκη” ή “ακύρωση” στο %1$sκάτω μέρος αυτής της οθόνης%2$s. Μπορείτε να εξαιρέσετε μεμονωμένες συμβολοσειρές καθαρίζοντας τα πλαίσια ελέγχου δίπλα τους."
+msgstr "Αυτές είναι οι συμβολοσειρές που βρήκαμε στο αρχείο.po σας. Παρακαλώ ελέγξτε τις προσεκτικά. Στη συνέχεια, κάντε κλικ στα κουμπιά “προσθήκη” ή “ακύρωση” στο %1$sκάτω μέρος αυτής της οθόνης%2$s. Μπορείτε να εξαιρέσετε μεμονωμένες συμβολοσειρές καθαρίζοντας τα πλαίσια ελέγχου δίπλα τους."
 
 #: menu/string-translation.php:182
 msgid "Name: %s"
@@ -876,11 +900,11 @@ msgstr "Απαιτείται μετάφραση"
 
 #: menu/string-translation.php:215
 msgid "Partial Translation"
-msgstr "Μερική Μετάφραση"
+msgstr "Μερική μετάφραση"
 
 #: menu/string-translation.php:216
 msgid "Auto-registered, translation needed"
-msgstr "Αυτόματα καταχωρημένες, απαιτείται μετάφραση"
+msgstr "Αυτόματη καταχώριση, απαιτείται μετάφραση"
 
 #: menu/string-translation.php:222
 msgid "Search for:"
@@ -912,11 +936,11 @@ msgstr "Όλοι οι τομείς"
 
 #: menu/string-translation.php:287
 msgid "With Priority:"
-msgstr "Με Προτεραιότητα:"
+msgstr "Με προτεραιότητα:"
 
 #: menu/string-translation.php:288
 msgid "All Translation Priorities"
-msgstr "Όλες οι Προτεραιότητες Μετάφρασης"
+msgstr "Όλες οι προτεραιότητες μετάφρασης"
 
 #: menu/string-translation.php:301
 msgid "Filter"
@@ -928,7 +952,7 @@ msgstr "Εμφάνιση μόνο συμβολοσειρών που περιέχ
 
 #: menu/string-translation.php:306
 msgid "x &nbsp;Clear filters"
-msgstr "x &nbsp;Καθαρισμός φίλτρων"
+msgstr "x &nbsp;Εκκαθάριση φίλτρων"
 
 #: menu/string-translation.php:317
 msgid "Can't find the strings you're looking to translate? Add more strings for translation."
@@ -948,29 +972,29 @@ msgstr "Κάντε κλικ για εναλλαγή"
 
 #: menu/string-translation.php:332
 msgid "Strings in the theme and plugins"
-msgstr "Συμβολοσειρές στο θέμα και τα πρόσθετα"
+msgstr "Συμβολοσειρές στο θέμα και στα πρόσθετα"
 
 #: menu/string-translation.php:338
 msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
-msgstr "Μεταφράστε κείμενα του front-end που μπορείτε να προσαρμόσετε από το διαχειριστικό περιβάλλον του WordPress όπως κείμενο υποσέλιδου, ειδοποιήσεις πνευματικών δικαιωμάτων, επιλογές και ρυθμίσεις πρόσθετων, μορφή ώρας, κείμενα widget και άλλα."
+msgstr "Μεταφράστε κείμενα προσκηνίου που μπορείτε να προσαρμόσετε από τον διαχειριστή του WordPress, όπως κείμενο υποσέλιδου, ειδοποιήσεις πνευματικών δικαιωμάτων, επιλογές και ρυθμίσεις προσθέτων, μορφή ώρας, κείμενα widget και άλλα."
 
 #: menu/string-translation.php:339
 msgid "Translating Strings From Admin and Settings"
-msgstr "Μετάφραση Συμβολοσειρών από τη Διαχείριση και τις Ρυθμίσεις"
+msgstr "Μετάφραση συμβολοσειρών από τον διαχειριστή και τις ρυθμίσεις"
 
 #: menu/string-translation.php:343
 msgid "Translate texts in admin screens"
-msgstr "Μετάφραση κειμένων σε οθόνες διαχείρισης"
+msgstr "Μετάφραση κειμένων σε οθόνες διαχειριστή"
 
 #: menu/string-translation.php:350
 #: menu/string-translation.php:355
 #: menu/string-translation.php:361
 msgid "Translate User Meta Information"
-msgstr "Μετάφραση Πληροφοριών Meta Χρήστη"
+msgstr "Μετάφραση μετα-πληροφοριών χρήστη"
 
 #: menu/string-translation.php:351
 msgid "Making User Meta Information Translatable"
-msgstr "Κάνοντας τις Πληροφορίες Meta Χρήστη Μεταφράσιμες"
+msgstr "Καθιστώντας τις μετα-πληροφορίες χρήστη μεταφράσιμες"
 
 #: menu/string-translation.php:364
 msgid "Data saved"
@@ -978,15 +1002,15 @@ msgstr "Τα δεδομένα αποθηκεύτηκαν"
 
 #: menu/string-translation.php:368
 msgid "WPML allows you to translate user information like the name, nickname, biography, and more."
-msgstr "Το WPML σας επιτρέπει να μεταφράσετε πληροφορίες χρήστη όπως το όνομα, το ψευδώνυμο, τη βιογραφία και άλλα."
+msgstr "Το WPML σάς επιτρέπει να μεταφράζετε πληροφορίες χρήστη, όπως το όνομα, το ψευδώνυμο, τη βιογραφία και άλλα."
 
 #: menu/string-translation.php:371
 msgid "Select the user roles whose information you want to make translatable and then use the String Translation page to translate it."
-msgstr "Επιλέξτε τους ρόλους χρηστών των οποίων τις πληροφορίες θέλετε να κάνετε μεταφράσιμες και στη συνέχεια χρησιμοποιήστε τη σελίδα Μετάφρασης Συμβολοσειρών για να τις μεταφράσετε."
+msgstr "Επιλέξτε τους ρόλους χρήστη των οποίων τις πληροφορίες θέλετε να κάνετε μεταφράσιμες και, στη συνέχεια, χρησιμοποιήστε τη σελίδα Μετάφραση συμβολοσειρών για να τις μεταφράσετε."
 
 #: menu/string-translation.php:375
 msgid "Learn more about %1$stranslating user meta information.%2$s"
-msgstr "Μάθετε περισσότερα για τη %1$sμετάφραση πληροφοριών meta χρήστη.%2$s"
+msgstr "Μάθετε περισσότερα σχετικά με τη %1$sμετάφραση μετα-πληροφοριών χρήστη.%2$s"
 
 #: menu/string-translation.php:402
 msgid "Select all"
@@ -1014,14 +1038,13 @@ msgstr "Εμφάνιση όλων των αποτελεσμάτων"
 
 #: menu/string-translation.php:581
 msgid "You have selected strings belonging to a package. Please select all strings from the affected package or unselect these strings."
-msgstr "Έχετε επιλέξει συμβολοσειρές που ανήκουν σε ένα πακέτο. Παρακαλώ επιλέξτε όλες τις συμβολοσειρές από το επηρεαζόμενο πακέτο ή αποεπιλέξτε αυτές τις συμβολοσειρές."
+msgstr "Έχετε επιλέξει συμβολοσειρές που ανήκουν σε ένα πακέτο. Επιλέξτε όλες τις συμβολοσειρές από το επηρεαζόμενο πακέτο ή αποεπιλέξτε αυτές τις συμβολοσειρές."
 
 #: menu/string-translation.php:583
 msgid ""
 "Are you sure you want to delete these strings?\n"
 "Their translations will be deleted too."
-msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτές τις συμβολοσειρές;
-Οι μεταφράσεις τους θα διαγραφούν επίσης."
+msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτές τις συμβολοσειρές;\nΟι μεταφράσεις τους θα διαγραφούν επίσης."
 
 #: menu/string-translation.php:584
 msgid "WPML could not delete the strings"
@@ -1033,11 +1056,11 @@ msgstr "Διαγραφή επιλεγμένων συμβολοσειρών"
 
 #: menu/string-translation.php:616
 msgid "Utilities"
-msgstr "Παροχές"
+msgstr "Βοηθητικά προγράμματα"
 
 #: menu/string-translation.php:629
 msgid "Auto register untranslated strings"
-msgstr "Αυτόματη εγγραφή αμετάφραστων συμβολοσειρών"
+msgstr "Αυτόματη καταχώριση αμετάφραστων συμβολοσειρών"
 
 #: menu/string-translation.php:634
 msgid "This feature is disabled. %1$sClick here to enable it.%2$s"
@@ -1045,15 +1068,15 @@ msgstr "Αυτή η λειτουργία είναι απενεργοποιημέ
 
 #: menu/string-translation.php:647
 msgid "WPML can detect untranslated strings and automatically register them for translation. WPML will register any untranslated strings encountered while browsing the site."
-msgstr "Το WPML εντοπίζει αμετάφραστα κείμενα και τα καταχωρεί αυτόματα."
+msgstr "Το WPML μπορεί να εντοπίσει αμετάφραστες συμβολοσειρές και να τις καταχωρίσει αυτόματα για μετάφραση. Το WPML θα καταχωρίσει τυχόν αμετάφραστες συμβολοσειρές που θα συναντήσει κατά την περιήγηση στον ιστότοπο."
 
 #: menu/string-translation.php:656
 msgid "Untranslated strings that I encounter while logged in"
-msgstr "Αμετάφραστες συμβολοσειρές που συναντώ ενώ είμαι συνδεδεμένος"
+msgstr "Αμετάφραστες συμβολοσειρές που συναντώ όταν είμαι συνδεδεμένος"
 
 #: menu/string-translation.php:657
 msgid "recommended"
-msgstr "προτεινόμενο"
+msgstr "συνιστάται"
 
 #: menu/string-translation.php:667
 msgid "Untranslated strings that all logged in, logged out users, and site visitors encounter"
@@ -1061,7 +1084,7 @@ msgstr "Αμετάφραστες συμβολοσειρές που συναντ�
 
 #: menu/string-translation.php:677
 msgid "Disable auto register of untranslated strings"
-msgstr "Απενεργοποίηση αυτόματης εγγραφής αμετάφραστων συμβολοσειρών"
+msgstr "Απενεργοποίηση αυτόματης καταχώρισης αμετάφραστων συμβολοσειρών"
 
 #: menu/string-translation.php:685
 msgid "Save settings"
@@ -1069,11 +1092,11 @@ msgstr "Αποθήκευση ρυθμίσεων"
 
 #: menu/string-translation.php:714
 msgid "Translate strings automatically, with your translators or a translation service"
-msgstr "Μετάφραση συμβολοσειρών αυτόματα, με τους μεταφραστές σας ή μια υπηρεσία μετάφρασης"
+msgstr "Μεταφράστε συμβολοσειρές αυτόματα, με τους μεταφραστές σας ή μια υπηρεσία μετάφρασης"
 
 #: menu/string-translation.php:723
 msgid "Use WPML's %1$sTranslation Dashboard%2$s to send strings to translation."
-msgstr "Χρησιμοποιήστε τον %1$sΠίνακα Ελέγχου Μετάφρασης%2$s του WPML για να στείλετε συμβολοσειρές για μετάφραση."
+msgstr "Χρησιμοποιήστε τον %1$sΠίνακα ελέγχου μετάφρασης%2$s του WPML για να στείλετε συμβολοσειρές για μετάφραση."
 
 #: menu/string-translation.php:734
 msgid "Import / export .po"
@@ -1089,7 +1112,7 @@ msgstr "Αρχείο.po :"
 
 #: menu/string-translation.php:764
 msgid "Select the original language of strings to import"
-msgstr "Επιλέξτε την αρχική γλώσσα των συμβολοσειρών προς εισαγωγή"
+msgstr "Επιλέξτε την αρχική γλώσσα των συμβολοσειρών για εισαγωγή"
 
 #: menu/string-translation.php:766
 msgid "English"
@@ -1101,7 +1124,7 @@ msgstr "Δημιουργία μεταφράσεων σύμφωνα με το α�
 
 #: menu/string-translation.php:798
 msgid "Select what the strings are for:"
-msgstr "Επιλέξτε για τι προορίζονται οι συμβολοσειρές:"
+msgstr "Επιλέξτε για τι είναι οι συμβολοσειρές:"
 
 #: menu/string-translation.php:816
 msgid "New"
@@ -1109,7 +1132,7 @@ msgstr "Νέο"
 
 #: menu/string-translation.php:817
 msgid "Select from existing"
-msgstr "Επιλέξτε από τις υπάρχουσες"
+msgstr "Επιλογή από υπάρχοντα"
 
 #: menu/string-translation.php:824
 #: menu/string-translation.php:883
@@ -1130,15 +1153,15 @@ msgstr "Εξαγωγή συμβολοσειρών σε αρχείο.po/.pot"
 
 #: menu/string-translation.php:839
 msgid "PO export may be glitchy. We are working to fix it."
-msgstr "Η εξαγωγή PO μπορεί να έχει προβλήματα. Εργαζόμαστε για να το διορθώσουμε."
+msgstr "Η εξαγωγή PO ενδέχεται να έχει δυσλειτουργίες. Εργαζόμαστε για να το διορθώσουμε."
 
 #: menu/string-translation.php:847
 msgid "Select domain:"
-msgstr "Επιλογή τομέα:"
+msgstr "Επιλέξτε τομέα:"
 
 #: menu/string-translation.php:862
 msgid "Also include translations"
-msgstr "Συμπερίληψη και μεταφράσεων"
+msgstr "Συμπεριλάβετε επίσης μεταφράσεις"
 
 #: menu/string-translation.php:897
 msgid "Remove strings by domain"
@@ -1146,19 +1169,19 @@ msgstr "Αφαίρεση συμβολοσειρών ανά τομέα"
 
 #: menu/string-translation.php:915
 msgid "Set the original language of themes and plugins"
-msgstr "Ορισμός της αρχικής γλώσσας των θεμάτων και πρόσθετων"
+msgstr "Ορισμός της αρχικής γλώσσας των θεμάτων και των προσθέτων"
 
 #: menu/string-translation.php:924
 msgid "By default WPML assumes that strings in themes and plugins are in English. If you're using a theme or plugin that has strings in other languages you can set the language of text-domains."
-msgstr "Από προεπιλογή, το WPML υποθέτει ότι οι συμβολοσειρές στα θέματα και τα πρόσθετα είναι στα Αγγλικά. Εάν χρησιμοποιείτε ένα θέμα ή πρόσθετο που έχει συμβολοσειρές σε άλλες γλώσσες, μπορείτε να ορίσετε τη γλώσσα των text-domains."
+msgstr "Από προεπιλογή, το WPML υποθέτει ότι οι συμβολοσειρές σε θέματα και πρόσθετα είναι στα Αγγλικά. Εάν χρησιμοποιείτε ένα θέμα ή πρόσθετο που έχει συμβολοσειρές σε άλλες γλώσσες, μπορείτε να ορίσετε τη γλώσσα των τομέων κειμένου."
 
 #: menu/string-translation.php:944
 msgid "Not seeing strings that you are looking for?"
-msgstr "Δεν βλέπετε τις συμβολοσειρές που αναζητάτε;?"
+msgstr "Δεν βλέπετε τις συμβολοσειρές που ψάχνετε;"
 
 #: menu/string-translation.php:953
 msgid "You can add to the String Translations table texts that appear in the admin screens of the theme and plugins. To do this, go to %1$sAdmin Texts Translation%2$s"
-msgstr "Μπορείτε να προσθέσετε στον πίνακα Μεταφράσεις Συμβολοσειρών κείμενα που εμφανίζονται στις οθόνες διαχείρισης του θέματος και των πρόσθετων. Για να το κάνετε αυτό, μεταβείτε στο %1$sΜετάφραση Κειμένων Διαχείρισης%2$s"
+msgstr "Μπορείτε να προσθέσετε στον πίνακα Μεταφράσεις συμβολοσειρών κείμενα που εμφανίζονται στις οθόνες διαχείρισης του θέματος και των προσθέτων. Για να το κάνετε αυτό, μεταβείτε στο %1$sΜετάφραση κειμένων διαχειριστή%2$s"
 
 #: menu/string-translation.php:963
 msgid "Translate User properties"
@@ -1170,32 +1193,32 @@ msgstr "κανένα"
 
 #: menu/string-translation.php:996
 msgid "Choose the user roles you would like to make translatable: %s"
-msgstr "Επιλέξτε τους ρόλους χρηστών που θέλετε να καταστήσετε μεταφράσιμους: %s"
+msgstr "Επιλέξτε τους ρόλους χρήστη που θέλετε να κάνετε μεταφράσιμους: %s"
 
 #: menu/string-translation.php:1023
 #: menu/string-translation.php:1025
 msgid "Edit user roles"
-msgstr "Επεξεργασία ρόλων χρηστών"
+msgstr "Επεξεργασία ρόλων χρήστη"
 
 #: menu/string-translation.php:1029
 msgid "Translating User Meta Information With WPML"
-msgstr "Μετάφραση Πληροφοριών Meta Χρήστη Με το WPML"
+msgstr "Μετάφραση μετα-πληροφοριών χρήστη με το WPML"
 
 #: menu/string-translation.php:1042
 #: menu/string-translation.php:1075
 msgid "Track where strings appear on the site"
-msgstr "Παρακολούθηση όπου εμφανίζονται οι συμβολοσειρές στον ιστότοπο"
+msgstr "Παρακολούθηση του πού εμφανίζονται οι συμβολοσειρές στον ιστότοπο"
 
 #: menu/string-translation.php:1053
 msgid ""
 "This feature helps you find where the text (strings) appears on your site, so you can translate it more easily. \n"
 "\t\t\t\t\t\t\t\t\t\t\tIt may slow down your site while it's running, so it's best to use it only during development. \n"
 "\t\t\t\t\t\t\t\t\t\t\tRemember to turn it off when your site goes live to keep things running smoothly."
-msgstr "Αυτή η λειτουργία σας βοηθά να βρείτε πού εμφανίζεται το κείμενο (συμβολοσειρές) στον ιστότοπό σας, ώστε να μπορείτε να το μεταφράσετε πιο εύκολα. \n\t\t\t\t\t\t\t\t\t\t	Μπορεί να επιβραδύνει τον ιστότοπό σας ενώ εκτελείται, οπότε είναι καλύτερα να το χρησιμοποιείτε μόνο κατά τη διάρκεια της ανάπτυξης. \n\t\t\t\t\t\t\t\t\t\t	Θυμηθείτε να το απενεργοποιήσετε όταν ο ιστότοπός σας είναι σε λειτουργία για να διατηρήσετε την ομαλή λειτουργία."
+msgstr "Αυτή η λειτουργία σάς βοηθά να βρείτε πού εμφανίζεται το κείμενο (συμβολοσειρές) στον ιστότοπό σας, ώστε να μπορείτε να το μεταφράσετε πιο εύκολα. \n\t\t\t\t\t\t\t\t\t\t\tΕνδέχεται να επιβραδύνει τον ιστότοπό σας όσο εκτελείται, οπότε είναι καλύτερο να το χρησιμοποιείτε μόνο κατά την ανάπτυξη. \n\t\t\t\t\t\t\t\t\t\t\tΘυμηθείτε να το απενεργοποιήσετε όταν ο ιστότοπός σας τεθεί σε λειτουργία για να διατηρήσετε την ομαλή λειτουργία."
 
 #: menu/string-translation.php:1062
 msgid "Learn more about finding strings"
-msgstr "Μάθετε περισσότερα για την εύρεση συμβολοσειρών"
+msgstr "Μάθετε περισσότερα σχετικά με την εύρεση συμβολοσειρών"
 
 #: menu/string-translation.php:1082
 msgid "Highlight color for strings"
@@ -1203,7 +1226,7 @@ msgstr "Χρώμα επισήμανσης για συμβολοσειρές"
 
 #: menu/string-translation.php:1116
 msgid "String Tracking Enabled"
-msgstr "Η Παρακολούθηση Συμβολοσειρών Ενεργοποιήθηκε"
+msgstr "Η παρακολούθηση συμβολοσειρών είναι ενεργοποιημένη"
 
 #: menu/string-translation.php:1117
 msgid "OK"
@@ -1211,19 +1234,19 @@ msgstr "Εντάξει"
 
 #: menu/string-translation.php:1121
 msgid "WPML will now track where your site's text (strings) appears as you browse both the admin and front-end."
-msgstr "Το WPML θα παρακολουθεί τώρα πού εμφανίζεται το κείμενο (συμβολοσειρές) του ιστοτόπου σας καθώς περιηγείστε τόσο στη διαχείριση όσο και στο front-end."
+msgstr "Το WPML θα παρακολουθεί τώρα πού εμφανίζεται το κείμενο (συμβολοσειρές) του ιστότοπού σας καθώς περιηγείστε τόσο στον διαχειριστή όσο και στο προσκήνιο."
 
 #: menu/string-translation.php:1128
 msgid "Be sure to turn off this feature before your site goes live to avoid performance issues."
-msgstr "Βεβαιωθείτε ότι θα απενεργοποιήσετε αυτή τη λειτουργία πριν ο ιστότοπός σας τεθεί σε λειτουργία για να αποφύγετε προβλήματα απόδοσης."
+msgstr "Βεβαιωθείτε ότι έχετε απενεργοποιήσει αυτήν τη λειτουργία πριν ο ιστότοπός σας τεθεί σε λειτουργία για να αποφύγετε προβλήματα απόδοσης."
 
 #: menu/_slug-translation-options.php:7
 msgid "Slug translations"
-msgstr "Μεταφράσεις συνδέσμων"
+msgstr "Μεταφράσεις slug"
 
 #: menu/_slug-translation-options.php:17
 msgid "Translate base slugs of custom post types and taxonomies (via WPML -> Taxonomy translation)."
-msgstr "Μεταφράστε τα βασικά slugs των προσαρμοσμένων τύπων δημοσιεύσεων και ταξινομιών (μέσω WPML -> Μετάφραση ταξινομίας)."
+msgstr "Μεταφράστε βασικά slugs προσαρμοσμένων τύπων δημοσιεύσεων και ταξινομιών (μέσω WPML -> Μετάφραση ταξινομίας)."
 
 #: menu/_slug-translation-options.php:23
 msgid "Save"
@@ -1231,8 +1254,8 @@ msgstr "Αποθήκευση"
 
 #: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:49
 msgid "Inactive Widgets"
-msgstr "Ανενεργά Widgets"
+msgstr "Ανενεργά widget"
 
 #: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:57
 msgid "Widgets"
-msgstr "Widgets"
+msgstr "Widget"

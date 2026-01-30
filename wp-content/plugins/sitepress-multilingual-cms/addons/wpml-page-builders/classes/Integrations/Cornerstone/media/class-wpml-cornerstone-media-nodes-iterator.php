@@ -31,11 +31,11 @@ class WPML_Cornerstone_Media_Nodes_Iterator implements IWPML_PB_Media_Nodes_Iter
 	}
 
 	/**
-	 * @param stdClass $settings
-	 * @param string   $lang
-	 * @param string   $source_lang
+	 * @param array  $settings
+	 * @param string $lang
+	 * @param string $source_lang
 	 *
-	 * @return stdClass
+	 * @return array
 	 */
 	private function translate_node( $settings, $lang, $source_lang ) {
 		$node = $this->node_provider->get( $settings['_type'] );

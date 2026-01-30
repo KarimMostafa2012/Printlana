@@ -618,9 +618,7 @@ jQuery(function($) {
 			ajaxFilesChunk.nonce = this.scanningSection.getNonces()['filesNonce'];
 			ajaxFilesChunk[sectionType] = elementValue;
 
-			while ( 0 < dirFiles.length ) {
-				filesChunks.push( dirFiles.splice(0, this.numberOfFilesPerChunk) );
-			}
+			filesChunks = this.buildFilesChunks(dirFiles);
 
 			this.counter.filesChunkToScanCount = this.counter.filesChunkToScanCount + filesChunks.length;
 			this.counter.scannedDirsCount++;
@@ -651,6 +649,39 @@ jQuery(function($) {
 			}, this);
 		},
 
+		buildFilesChunks: function(files) {
+			var filesChunks = [];
+			var chunk = [];
+			var jsFiles = [];
+			var nonJsFiles = [];
+
+			(files || []).forEach(function(file) {
+				if(/\.js$/i.test(file)) {
+					jsFiles.push(file);
+				} else {
+					nonJsFiles.push(file);
+				}
+			});
+
+			nonJsFiles.forEach(function(file) {
+				chunk.push(file);
+				if(chunk.length === this.numberOfFilesPerChunk) {
+					filesChunks.push(chunk);
+					chunk = [];
+				}
+			}, this);
+
+			if(chunk.length) {
+				filesChunks.push(chunk);
+			}
+
+			jsFiles.forEach(function(file) {
+				filesChunks.push([file]);
+			});
+
+			return filesChunks;
+		},
+
 		scanFilesAjax: function(ajax_files_chunk, files_chunks, index) {
 			var self = this;
 
@@ -667,6 +698,13 @@ jQuery(function($) {
 				context: this,
 				success: $.proxy(this.scanFilesSuccess, this),
 				error: function() {
+					var is_single_file_scan = 1 === files_chunks[index].length;
+
+					if(is_single_file_scan) {
+						self.skipErrorOnSingleFileScan(files_chunks, ajax_files_chunk, index);
+						return;
+					}
+
 					var origChunkFiles = files_chunks[index].slice();
 					var smallerFilesChunks = [];
 
@@ -679,6 +717,18 @@ jQuery(function($) {
 			}).done(function() {
 				this.scanFilesAjaxDone(files_chunks, ajax_files_chunk, index);
 			});
+		},
+
+		skipErrorOnSingleFileScan: function(files_chunks, ajax_files_chunk, index) {
+			this.counter.scannedFilesChunkCount++;
+
+			if(this.counter.scannedFilesChunkCount === this.counter.filesChunkToScanCount) {
+				this.scheduledFileChunks = [];
+				this.updateStatsAjax();
+				return;
+			}
+
+			this.scanFilesAjaxDone(files_chunks, ajax_files_chunk, index);
 		},
 
 		rescanFilesAjax: function(ajax_files_chunk, files_chunks, index, orig_files_chunks, orig_index) {

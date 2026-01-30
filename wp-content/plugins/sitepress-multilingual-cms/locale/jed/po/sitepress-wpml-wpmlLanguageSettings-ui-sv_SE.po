@@ -13,7 +13,7 @@ msgstr "Välj bildfilstyp för flaggor"
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "Detta påverkar endast inbyggda WPML-flaggor."
+msgstr "Detta alternativ påverkar endast de inbyggda WPML-flaggorna, inte de anpassade uppladdade."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
@@ -29,4 +29,4 @@ msgstr "Det nya formatet har sparats."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:25
 msgid "Failed to save the new format"
-msgstr "Misslyckades spara nya formatet"
+msgstr "Det gick inte att spara det nya formatet"

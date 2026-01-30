@@ -11,11 +11,11 @@ msgstr "ขั้นสูง"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "HTML anchor"
+msgstr "จุดยึด HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "เพิ่มทางลัดไปยังบล็อกนี้เมื่อโหลดหน้าโดยใช้ URL “#anchor”."
+msgstr "เพิ่มทางลัดไปยังบล็อกนี้เมื่อโหลดหน้าโดยใช้ URL “#anchor”"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -23,7 +23,7 @@ msgstr "คลาส CSS เพิ่มเติม"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "แยกหลายคลาสด้วยช่องว่าง."
+msgstr "แยกหลายคลาสด้วยช่องว่าง"
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -53,7 +53,7 @@ msgstr "ระยะขอบบล็อก"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "ระยะขอบในบล็อก"
+msgstr "ระยะห่างภายในบล็อก"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -61,11 +61,11 @@ msgstr "ภาษา"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "ระยะห่างของภาษา"
+msgstr "ระยะห่างภาษา"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "ระยะขอบในของภาษา"
+msgstr "ระยะห่างภายในภาษา"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -105,7 +105,7 @@ msgstr "ระยะห่าง"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "อนุญาตให้ขึ้นบรรทัดใหม่"
+msgstr "อนุญาตให้ขึ้นบรรทัดใหม่ได้หลายบรรทัด"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -121,15 +121,15 @@ msgstr "เค้าโครง"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "การจัดวาง"
+msgstr "การจัดแนว"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
-msgstr "ทิศทาง"
+msgstr "การวางแนว"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
-msgstr "การจัดรูปแบบตัวอักษร"
+msgstr "การพิมพ์"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:116
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
@@ -163,19 +163,19 @@ msgstr "รหัส"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "จัดวางรายการชิดซ้าย"
+msgstr "จัดรายการชิดซ้าย"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "จัดวางรายการตรงกลาง"
+msgstr "จัดรายการกึ่งกลาง"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "จัดวางรายการชิดขวา"
+msgstr "จัดรายการชิดขวา"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "จัดวางรายการกระจายเต็มพื้นที่"
+msgstr "จัดรายการเว้นระยะห่างเท่ากัน"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -219,7 +219,7 @@ msgstr "เล็ก"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "แสดงตัวสลับภาษา WPML."
+msgstr "แสดงตัวสลับภาษา WPML"
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
@@ -235,11 +235,11 @@ msgstr "แสดงตัวสลับภาษา WPML"
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "แสดงตัวสลับภาษา WPML <br/> เรียนรู้ <a>วิธีแปลบล็อกนี้</a>."
+msgstr "แสดงตัวสลับภาษา WPML <br/> เรียนรู้ <a>วิธีแปลบล็อกนี้</a>"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "ตัวสลับภาษาในการนำทาง"
+msgstr "ตัวสลับภาษาการนำทาง"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

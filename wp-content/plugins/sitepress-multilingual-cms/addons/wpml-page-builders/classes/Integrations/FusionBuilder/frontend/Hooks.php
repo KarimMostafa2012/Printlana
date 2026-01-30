@@ -57,7 +57,7 @@ class Hooks extends BaseHooks implements \IWPML_Frontend_Action, \IWPML_DIC_Acti
 				if ( 'specific_' === substr( $key, 0, 9 ) ) {
 					list( $pattern, $id ) = explode( '|', $key, 2 );
 					$post_type            = substr( $pattern, 9 );
-					$id                   = $this->sitepress->get_object_id( $id, $post_type, true );
+					$id                   = $this->sitepress->get_object_id( (int) $id, $post_type, true );
 					$key                  = $pattern . '|' . $id;
 				}
 				$result[ $key ] = $condition;
@@ -67,5 +67,4 @@ class Hooks extends BaseHooks implements \IWPML_Frontend_Action, \IWPML_DIC_Acti
 
 		return $data;
 	}
-
 }

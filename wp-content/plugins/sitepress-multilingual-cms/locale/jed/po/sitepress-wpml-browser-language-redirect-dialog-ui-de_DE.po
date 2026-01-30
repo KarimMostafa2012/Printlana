@@ -7,15 +7,15 @@ msgstr ""
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "Wie die Umleitung nach Browser-Sprache die Google-Indizierung beeinflusst"
+msgstr "Wie die Browser-Sprachumleitung die Google-Indexierung beeinflusst"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
-msgstr "Produktdokumentation"
+msgstr "Dokumentation"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "Die Browser-Umleitung beeinflusst die Google-Indizierung und die Suchergebnisse"
+msgstr "Browser-Umleitung beeinflusst Google-Indexierung und Suchergebnisse"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
@@ -30,13 +30,13 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "Wenn Sie Besucher auf Basis ihrer Sprache umleiten, leiten Sie auch Google um. Google möchte Ihre Website exakt so sehen, wie Besucher sie sehen, einschließlich aller Umleitungen, die Sie anwenden."
+msgstr "Wenn Sie Besucher basierend auf ihrer Sprache umleiten, leiten Sie auch Google um. Google möchte Ihre Website genau so sehen, wie Besucher sie sehen, einschließlich aller Umleitungen, die Sie anwenden."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "Es ist OK, Besucher auf Basis ihrer Sprache umzuleiten, doch Ihnen muss bewusst sein, dass diese Funktion sich auf die SEO auswirkt."
+msgstr "Es ist in Ordnung, Besucher basierend auf ihrer Sprache umzuleiten, aber Sie müssen sich bewusst sein, dass diese Funktion SEO beeinflusst."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"

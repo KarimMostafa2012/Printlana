@@ -173,6 +173,10 @@ final class WPML_Proxy {
 			remove_all_actions( 'shutdown' );
 		}
 
+		// [Goal] Provide a strict, predictable response size.
+		// Add Content-Length so clients can trust the payload size.
+		$respHeaders['Content-Length'] = (string) strlen( (string) $body );
+
 		// Emit headers
 		foreach ( $respHeaders as $name => $value ) {
 			if ( $name === '' ) {

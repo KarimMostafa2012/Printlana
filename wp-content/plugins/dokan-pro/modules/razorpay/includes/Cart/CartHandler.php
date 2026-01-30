@@ -235,7 +235,9 @@ class CartHandler {
         $available_vendors = [];
         foreach ( WC()->cart->get_cart() as $item ) {
             $product_id = $item['data']->get_id();
-
+            if ( Helper::should_skip_product( $product_id ) ) {
+                continue;
+            }
             $available_vendors[ get_post_field( 'post_author', $product_id ) ][] = $item['data'];
         }
 
@@ -293,7 +295,7 @@ class CartHandler {
 
         // If product is subscription product, we're not adding this product to cart
         // It's a temporary check. After adding subscription feature, we'll remove this.
-        if ( Helper::is_vendor_subscription_product( $product_id ) ) {
+        if ( Helper::is_vendor_recurring_subscription_product( $product_id ) ) {
             $message = wp_kses(
                 sprintf(
                     /* translators: 1: Product title, 2: Gateway title */
@@ -359,7 +361,7 @@ class CartHandler {
 
         // If we find any subscription product in cart, we're not showing razorpay gateway
         foreach ( WC()->cart->cart_contents as $values ) {
-            if ( Helper::is_vendor_subscription_product( $values['data']->get_id() ) ) {
+            if ( Helper::is_vendor_recurring_subscription_product( $values['data']->get_id() ) ) {
                 unset( $gateways[ Helper::get_gateway_id() ] );
                 break;
             }

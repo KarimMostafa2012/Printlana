@@ -107,7 +107,7 @@ export default function ReplyItem( { reply }: ReplyItemProps ) {
                             <div
                                 className={ `p-3 rounded-lg ${ messageBoxClass }` }
                             >
-                                <RawHTML className="prose max-w-none text-sm text-gray-800">
+                                <RawHTML className="prose max-w-none text-sm text-gray-800 whitespace-pre-line">
                                     { reply.content }
                                 </RawHTML>
                             </div>

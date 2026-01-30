@@ -13,7 +13,7 @@ msgstr "このカスタムHTMLブロックを特定の言語で表示するに�
 
 #: src/js/widgets-language-switcher/LanguageSwitcher.js:126
 msgid "Place inside Group block"
-msgstr "グループブロック内に配置する"
+msgstr "グループブロック内に配置"
 
 #: src/js/widgets-language-switcher/LanguageSwitcher.js:13
 msgid "All"
@@ -21,4 +21,4 @@ msgstr "すべて"
 
 #: src/js/widgets-language-switcher/LanguageSwitcher.js:56
 msgid "Display on language"
-msgstr "言語上に表示"
+msgstr "言語で表示"

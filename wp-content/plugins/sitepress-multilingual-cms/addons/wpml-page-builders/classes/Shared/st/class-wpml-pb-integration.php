@@ -86,8 +86,8 @@ class WPML_PB_Integration {
 
 	public function resave_post_translation_in_shutdown( WPML_Post_Element $post_element, $disallowed_in_shutdown = true ) {
 		if ( ! $post_element->get_source_element()
-			 || ( did_action( 'shutdown' ) && $disallowed_in_shutdown )
-			 || array_key_exists( $post_element->get_id(), $this->save_post_queue )
+			|| ( did_action( 'shutdown' ) && $disallowed_in_shutdown )
+			|| array_key_exists( $post_element->get_id(), $this->save_post_queue )
 		) {
 			return;
 		}
@@ -106,12 +106,14 @@ class WPML_PB_Integration {
 			);
 		}
 
-		$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $updated_packages, $post_element ) {
-			foreach ( $updated_packages as $package ) {
-				$this->factory->get_string_translations( $strategy )
-					->add_package_to_update_list( $package, $post_element->get_language_code() );
+		$this->with_strategies(
+			function ( IWPML_PB_Strategy $strategy ) use ( $updated_packages, $post_element ) {
+				foreach ( $updated_packages as $package ) {
+					$this->factory->get_string_translations( $strategy )
+						->add_package_to_update_list( $package, $post_element->get_language_code() );
+				}
 			}
-		} );
+		);
 
 		$this->new_translations_recieved = true;
 		$this->queue_save_post_actions( $post_element->get_id(), $post_element->get_wp_object() );
@@ -163,18 +165,18 @@ class WPML_PB_Integration {
 	 */
 	private function is_editing_translation_with_native_editor( $translatedPostId ) {
 		// $getPOST :: string -> mixed
-		$getPOST = Obj::prop( Fns::__, $_POST ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+		$getPOST = Obj::prop( Fns::__, $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		// $isQuickEditAction :: int -> bool
-		$isQuickEditAction = function( $id ) use ( $getPOST ) {
+		$isQuickEditAction = function ( $id ) use ( $getPOST ) {
 			return wp_doing_ajax()
-				   && 'inline-save' === $getPOST( 'action' )
-				   && $id === (int) $getPOST( 'post_ID' );
+				&& 'inline-save' === $getPOST( 'action' )
+				&& $id === (int) $getPOST( 'post_ID' );
 		};
 
 		// $isSavingPostWithREST :: int -> bool
-		$isSavingPostWithREST = function( $translatedPostId ) {
-			if ( ! in_array( $_SERVER['REQUEST_METHOD'], [ 'POST', 'PUT', 'PATCH' ], true ) ) {
+		$isSavingPostWithREST = function ( $translatedPostId ) {
+			if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || ! in_array( $_SERVER['REQUEST_METHOD'], [ 'POST', 'PUT', 'PATCH' ], true ) ) {
 				return false;
 			}
 
@@ -191,14 +193,16 @@ class WPML_PB_Integration {
 
 			$quoteComposedBase = Fns::unary( partialRight( 'preg_quote', '/' ) );
 
-			$postTypeSlugs = wpml_collect( get_post_types( [
-				'show_in_rest' => true,
-			], 'objects' ) )
-				->map( function( $postType ) {
+			$postTypeSlugs = wpml_collect(
+				get_post_types(
+					[ 'show_in_rest' => true ],
+					'objects'
+				)
+			)->map(
+				function ( $postType ) {
 					return Obj::prop( 'rest_base', $postType ) ?: Obj::prop( 'name', $postType );
-				} )
-				// Filter out variable bases, see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlpb-450.
-				->filter( $hasValidBase )
+				}
+			)->filter( $hasValidBase ) // Filter out variable bases, see wpmlpb-450.
 				->map( $quoteComposedBase )
 				->implode( '|' );
 
@@ -209,10 +213,10 @@ class WPML_PB_Integration {
 		};
 
 		// $getGET :: string -> mixed
-		$getGET = Obj::prop( Fns::__, $_GET ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+		$getGET = Obj::prop( Fns::__, $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		// $isBulkEditAction :: int -> bool
-		$isBulkEditAction = function( $id ) use ( $getGET ) {
+		$isBulkEditAction = function ( $id ) use ( $getGET ) {
 			$screenAction = 'edit-' . get_post_type( $id );
 			return $screenAction === $getGET( 'screen' )
 				&& 'edit' === $getGET( 'action' )
@@ -282,7 +286,7 @@ class WPML_PB_Integration {
 	public function add_hooks() {
 		add_action( 'pre_post_update', array( $this, 'migrate_location' ) );
 		add_action( 'save_post', array( $this, 'queue_save_post_actions' ), PHP_INT_MAX, 2 );
-		add_action( 'wpml_pro_translation_completed', [ $this, 'set_last_editor_mode_to_translation_editor' ], 10, 1 );
+		add_action( 'wpml_pro_translation_after_post_save', array( $this, 'set_last_editor_mode_to_translation_editor' ) );
 		add_action( 'wpml_pb_resave_post_translation', array( $this, 'resave_post_translation_in_shutdown' ), 10, 2 );
 		add_action( 'icl_st_add_string_translation', array( $this, 'new_translation' ), 10, 1 );
 		add_action( 'wpml_pb_finished_adding_string_translations', array( $this, 'process_pb_content_with_hidden_strings_only' ), 9, 2 );
@@ -349,18 +353,20 @@ class WPML_PB_Integration {
 
 	public function new_translation( $translated_string_id ) {
 		if ( ! $this->is_registering_string ) {
-			$this->with_strategies( function( $strategy ) use ( $translated_string_id ) {
-				$this->factory->get_string_translations( $strategy )->new_translation( $translated_string_id );
-			} );
+			$this->with_strategies(
+				function ( $strategy ) use ( $translated_string_id ) {
+					$this->factory->get_string_translations( $strategy )->new_translation( $translated_string_id );
+				}
+			);
 			$this->new_translations_recieved = true;
 		}
 	}
 
 	/**
-	 * @param callable $callable
+	 * @param callable $callback
 	 */
-	private function with_strategies( callable $callable ) {
-		Fns::each( $callable, $this->strategies );
+	private function with_strategies( callable $callback ) {
+		Fns::each( $callback, $this->strategies );
 	}
 
 	/**
@@ -378,12 +384,13 @@ class WPML_PB_Integration {
 		) {
 			$targetLang = $this->sitepress->get_language_for_element( $new_post_id, 'post_' . get_post_type( $new_post_id ) );
 
-			$addPackageToUpdateList = function( WPML_Package $package ) use ( $targetLang ) {
-				$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $package, $targetLang ) {
-					$this->factory
-						->get_string_translations( $strategy )
-						->add_package_to_update_list( $package, $targetLang );
-				} );
+			$addPackageToUpdateList = function ( WPML_Package $package ) use ( $targetLang ) {
+				$this->with_strategies(
+					function ( IWPML_PB_Strategy $strategy ) use ( $package, $targetLang ) {
+						$this->factory->get_string_translations( $strategy )
+							->add_package_to_update_list( $package, $targetLang );
+					}
+				);
 			};
 
 			$this->new_translations_recieved = wpml_collect( apply_filters( 'wpml_st_get_post_string_packages', [], $original_doc_id ) )
@@ -394,9 +401,11 @@ class WPML_PB_Integration {
 
 	public function save_translations_to_post() {
 		if ( $this->new_translations_recieved ) {
-			$this->with_strategies( function( IWPML_PB_Strategy $strategy ) {
-				$this->factory->get_string_translations( $strategy )->save_translations_to_post();
-			} );
+			$this->with_strategies(
+				function ( IWPML_PB_Strategy $strategy ) {
+					$this->factory->get_string_translations( $strategy )->save_translations_to_post();
+				}
+			);
 			$this->new_translations_recieved = false;
 		}
 	}
@@ -408,9 +417,11 @@ class WPML_PB_Integration {
 	 * @return string
 	 */
 	public function update_translations_in_content( $content, $lang ) {
-		$this->with_strategies( function ( IWPML_PB_Strategy $strategy ) use ( &$content, $lang ) {
-			$content = $this->factory->get_string_translations( $strategy )->update_translations_in_content( $content, $lang );
-		} );
+		$this->with_strategies(
+			function ( IWPML_PB_Strategy $strategy ) use ( &$content, $lang ) {
+				$content = $this->factory->get_string_translations( $strategy )->update_translations_in_content( $content, $lang );
+			}
+		);
 
 		return $content;
 	}
@@ -488,9 +499,9 @@ class WPML_PB_Integration {
 			return false;
 		}
 
-		// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$string_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$string_packages_table} WHERE post_id = %d", $post_id ) );
-		// phpcs:enable WordPress.WP.PreparedSQL.NotPrepared
+
 		return $string_count > 0;
 	}
 

@@ -3,9 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "domain": "messages"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
             "按域删除未翻译的字符串，清理字符串翻译表。"

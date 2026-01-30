@@ -3,12 +3,16 @@ __( 'Default', 'elementor-pro' );
 __( 'Margin', 'elementor-pro' );
 __( 'Margin (all)', 'elementor-pro' );
 __( 'Margin bottom', 'elementor-pro' );
+__( 'Margin right', 'elementor-pro' );
+__( 'Margin left', 'elementor-pro' );
 __( 'Margin left', 'elementor-pro' );
 __( 'Margin right', 'elementor-pro' );
 __( 'Margin top', 'elementor-pro' );
 __( 'Padding', 'elementor-pro' );
 __( 'Padding (all)', 'elementor-pro' );
 __( 'Padding bottom', 'elementor-pro' );
+__( 'Padding right', 'elementor-pro' );
+__( 'Padding left', 'elementor-pro' );
 __( 'Padding left', 'elementor-pro' );
 __( 'Padding right', 'elementor-pro' );
 __( 'Padding top', 'elementor-pro' );
@@ -26,8 +30,10 @@ __( 'Min height', 'elementor-pro' );
 __( 'Min width', 'elementor-pro' );
 __( 'Position', 'elementor-pro' );
 __( 'Top', 'elementor-pro' );
+__( 'Right', 'elementor-pro' );
 __( 'Left', 'elementor-pro' );
 __( 'Bottom', 'elementor-pro' );
+__( 'Left', 'elementor-pro' );
 __( 'Right', 'elementor-pro' );
 __( 'Z-Index', 'elementor-pro' );
 __( 'Typography', 'elementor-pro' );
@@ -55,6 +61,7 @@ __( 'Effects', 'elementor-pro' );
 __( 'Opacity', 'elementor-pro' );
 __( 'Transform (all)', 'elementor-pro' );
 __( 'Filter (all)', 'elementor-pro' );
+__( 'Display Conditions', 'elementor-pro' );
 __( "Empty attribute names aren't valid and won't render on the page.", 'elementor-pro' );
 __( 'Name', 'elementor-pro' );
 __( 'Value', 'elementor-pro' );
@@ -62,3 +69,12 @@ __(
 				'Names can only use letters, numbers, dashes (-) and underscores (_).',
 				'elementor-pro'
 			);
+__(
+			'The use of pseudo-states is not permitted. Instead, switch to the desired pseudo state and add your custom code there.',
+			'elementor-pro'
+		);
+__(
+			'The use of @media width queries is not permitted. Instead, switch to the desired breakpoint and add your custom code there.',
+			'elementor-pro'
+		);
+__( 'Clear', 'elementor-pro' );

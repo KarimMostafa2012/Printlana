@@ -7,23 +7,23 @@ msgstr ""
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
-msgstr "詳細"
+msgstr "詳細設定"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "HTML アンカー"
+msgstr "HTMLアンカー"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "「#anchor」URL を使用してページを読み込む際に、このブロックへのショートカットを追加します。"
+msgstr "「#anchor」URLを使用してページを読み込む際に、このブロックへのショートカットを追加します。"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "追加 CSS クラス (複数可)"
+msgstr "追加CSSクラス"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "複数クラスの場合は、スペースで区切ります。"
+msgstr "複数のクラスはスペースで区切ります。"
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -41,19 +41,19 @@ msgstr "%"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
 msgid "Dimensions"
-msgstr "ディメンション"
+msgstr "寸法"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
-msgstr "Block"
+msgstr "ブロック"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "ブロック マージン"
+msgstr "ブロックの余白"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "ブロック パディング"
+msgstr "ブロックのパディング"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -61,11 +61,11 @@ msgstr "言語"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "言語スペーシング"
+msgstr "言語の間隔"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "言語パディング"
+msgstr "言語のパディング"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -73,15 +73,15 @@ msgstr "表示"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
-msgstr "フラグを表示する"
+msgstr "フラグを表示"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
-msgstr "言語名を表示する"
+msgstr "言語名を表示"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "言語名を表示:"
+msgstr "言語名を表示する場所"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -101,11 +101,11 @@ msgstr "高さ"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "スペーシング"
+msgstr "間隔"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "複数行への折り返しを許可する"
+msgstr "複数行への折り返しを許可"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -113,7 +113,7 @@ msgstr "クリックで開く"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
-msgstr "矢印を表示する"
+msgstr "矢印を表示"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
 msgid "Layout"
@@ -121,15 +121,15 @@ msgstr "レイアウト"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "ジャスティフィケーション"
+msgstr "配置"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
-msgstr "オリエンテーション"
+msgstr "向き"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
-msgstr "タイポグラフィー"
+msgstr "タイポグラフィ"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:116
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
@@ -142,7 +142,7 @@ msgstr "言語テキスト"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:126
 msgid "Language Background"
-msgstr "言語バックグラウンド"
+msgstr "言語の背景"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:131
 msgid "Current language text"
@@ -151,7 +151,7 @@ msgstr "現在の言語テキスト"
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:136
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
 msgid "Current language background"
-msgstr "現在の言語バックグラウンド"
+msgstr "現在の言語の背景"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
@@ -163,19 +163,19 @@ msgstr "コード"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "アイテムを左寄せにする"
+msgstr "項目を左揃え"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "アイテムを中央寄せする"
+msgstr "項目を中央揃え"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "アイテムを右寄せにする"
+msgstr "項目を右揃え"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "アイテムを両端揃えにする"
+msgstr "項目を均等に配置"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -187,7 +187,7 @@ msgstr "垂直"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
 msgid "Normal"
-msgstr "通常"
+msgstr "標準"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
 msgid "Medium"
@@ -229,13 +229,13 @@ msgstr "言語スイッチャー"
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "wPML言語スイッチャーを表示します"
+msgstr "WPML言語スイッチャーを表示します"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "WPML言語スイッチャーを表示します。<br/>このブロックの<a>翻訳方法を学ぶ</a>。"
+msgstr "WPML言語スイッチャーを表示します。<br/><a>このブロックを翻訳する方法</a>を学ぶ。"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"

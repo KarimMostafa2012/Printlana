@@ -140,7 +140,8 @@ class PostWithMediaFiles {
 				continue;
 			}
 
-			$texts = $this->get_image_texts( $copied_media_id );
+			$copied_media_filepath = get_post_meta( $copied_media_id, '_wp_attached_file', true );
+			$texts                 = $this->get_image_texts( $copied_media_id );
 
 			$translations = $this->sitepress->get_element_translations( $trid, 'post_attachment', true, true );
 			foreach ( $translations as $translation ) {
@@ -153,6 +154,15 @@ class PostWithMediaFiles {
 					$texts['caption'] !== $translation_texts['caption'] ||
 					$texts['description'] !== $translation_texts['description'] ||
 					$texts['alt'] !== $translation_texts['alt']
+				) {
+					continue;
+				}
+
+				$translation_media_filepath = get_post_meta( $translation->element_id, '_wp_attached_file', true );
+				if (
+					! is_string( $copied_media_filepath ) ||
+					! is_string( $translation_media_filepath ) ||
+					$copied_media_filepath !== $translation_media_filepath
 				) {
 					continue;
 				}

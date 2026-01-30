@@ -11,12 +11,12 @@ msgstr "Zaakceptowano"
 
 #: src/js/translationReview/components/AcceptedText.js:8
 msgid "Approved!"
-msgstr "Zatwierdzone!"
+msgstr "Zatwierdzono!"
 
 #: src/js/translationReview/components/AcceptedText.js:9
 #: src/js/translationReview/components/PublishedText.js:9
 msgid "Loading the next translation for review..."
-msgstr "Trwa ładowanie kolejnego tłumaczenie do sprawdzenia."
+msgstr "Ładowanie następnego tłumaczenia do recenzji..."
 
 #: src/js/translationReview/components/BackButton.js:7
 msgid "Back"
@@ -26,15 +26,15 @@ msgstr "Wstecz"
 msgid ""
 "Turn off to not automatically load the next translation after finishing "
 "this review."
-msgstr "Wyłącz, aby kolejne tłumaczenie nie ładowało się automatycznie po ukończeniu tego sprawdzania."
+msgstr "Wyłącz, aby nie ładować automatycznie następnego tłumaczenia po zakończeniu tej recenzji."
 
 #: src/js/translationReview/components/ContinueReviewToggle.js:18
 msgid "Turn on to automatically load the next translation after finishing this  ."
-msgstr "Włącz, aby automatycznie wczytać kolejne tłumaczenie po skończeniu tego."
+msgstr "Włącz, aby automatycznie ładować następne tłumaczenie po zakończeniu tej recenzji."
 
 #: src/js/translationReview/components/EditButton.js:10
 msgid "Edit"
-msgstr "Edycja"
+msgstr "Edytuj"
 
 #: src/js/translationReview/components/EditButton.js:9
 msgid "Edit translation"
@@ -42,7 +42,7 @@ msgstr "Edytuj tłumaczenie"
 
 #: src/js/translationReview/components/NextTranslationReview.js:22
 msgid "Next review"
-msgstr "Kolejne sprawdzanie"
+msgstr "Następna recenzja"
 
 #: src/js/translationReview/components/PublishButton.js:10
 msgid "Publish this translation"
@@ -54,15 +54,15 @@ msgstr "Zaakceptuj to tłumaczenie"
 
 #: src/js/translationReview/components/PublishedText.js:8
 msgid "Published!"
-msgstr "Opublikowane!"
+msgstr "Opublikowano!"
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Poczekaj, trwa wdrażanie tłumaczenia."
+msgstr "Proszę czekać, trwa stosowanie tłumaczenia..."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Wystąpił błąd w trakcie wdrażania tego tłumaczenia."
+msgstr "Wystąpił błąd podczas stosowania tłumaczenia."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."

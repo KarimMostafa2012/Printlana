@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
     /**
-     * @since 2.0 Function show modal pricing info
+     * @since 2.4 Function show modal pricing info
      */
     const selectorTrigger = [
         '.open-vwg-modal-pro-info',                               // URL info PRO feature
@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
                                 <h2>Single Site</h2>
                                 <div class="price">
                                     <span class="currency">$</span>
-                                    <span class="value">49</span>
+                                    <span class="value">69</span>
                                     <span class="duration">one-time</span>
                                 </div>
                                 <ul class="pricing-features">
@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
                                     <li><i class="fas fa-check"></i>Premium Support</li>
                                 </ul>
                                 <div class="pricing-footer">
-                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce#pricing" target="_blank">Buy Now</a>
+                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce?utm_source=video-wc-gallery&utm_medium=plugin&utm_campaign=single_site#pricing" target="_blank">Buy Now</a>
                                 </div>
                             </div>
                        </li>
@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
                                 <h2>Multiple Sites</h2>
                                 <div class="price">
                                     <span class="currency">$</span>
-                                    <span class="value">89</span>
+                                    <span class="value">99</span>
                                     <span class="duration">one-time</span>
                                 </div>
                                 <ul class="pricing-features">
@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
                                     <li><i class="fas fa-check"></i>Premium Support</li>
                                 </ul>
                                 <div class="pricing-footer">
-                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce#pricing" target="_blank">Buy Now</a>
+                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce?utm_source=video-wc-gallery&utm_medium=plugin&utm_campaign=multiple_sites#pricing" target="_blank">Buy Now</a>
                                 </div>
                             </div>
                        </li>
@@ -102,7 +102,7 @@ jQuery(document).ready(function($) {
                                 <h2>Unlimited Sites</h2>
                                 <div class="price">
                                     <span class="currency">$</span>
-                                    <span class="value">189</span>
+                                    <span class="value">219</span>
                                     <span class="duration">one-time</span>
                                 </div>
                                 <ul class="pricing-features">
@@ -112,7 +112,7 @@ jQuery(document).ready(function($) {
                                     <li><i class="fas fa-check"></i>Premium Support</li>
                                 </ul>
                                 <div class="pricing-footer">
-                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce#pricing" target="_blank">Buy Now</a>
+                                    <a class="buy-now-btn" href="https://nitramix.com/projects/video-gallery-for-woocommerce?utm_source=video-wc-gallery&utm_medium=plugin&utm_campaign=unlimited_sites#pricing" target="_blank">Buy Now</a>
                                 </div>
                             </div>
                        </li>
@@ -121,8 +121,8 @@ jQuery(document).ready(function($) {
                        <div class="guarantee-icon">
                            <i class="fas fa-undo-alt"></i>
                        </div>
-                       <h3>14-Day Money Back Guarantee</h3>
-                       <p>If you're not satisfied, we offer a full refund within 14 days. No questions asked.</p>
+                       <h3>7-Days Money Back Guarantee</h3>
+                       <p>If you're not satisfied, we offer a full refund within 7 days. No questions asked.</p>
                    </div>
                </div>
                 `, // END HTML Pricing table

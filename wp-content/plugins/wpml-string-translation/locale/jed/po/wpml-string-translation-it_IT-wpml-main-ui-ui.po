@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: it\n"
+"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/main-ui/components/Actions.js:46
@@ -11,15 +11,15 @@ msgstr "Modifica"
 
 #: src/js/main-ui/components/Actions.js:57
 msgid "Shift+Tab"
-msgstr "Shift+tab"
+msgstr "Maiusc+Tab"
 
 #: src/js/main-ui/components/Actions.js:62
 msgid "Tab"
-msgstr "Scheda"
+msgstr "Tab"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
-msgstr "Traduzione a:"
+msgstr "Traduzione in:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
@@ -27,7 +27,7 @@ msgstr "Copia dall'originale"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
-msgstr "Usa Shift+Invio per aggiungere una nuova riga."
+msgstr "Usa Maiusc+Invio per aggiungere una nuova riga."
 
 #: src/js/main-ui/components/EditTranslationPopup.js:97
 msgid "Original:"
@@ -35,15 +35,15 @@ msgstr "Originale:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "Aggiungi la traduzione di %s "
+msgstr "Aggiungi traduzione %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
-msgstr "Modifica la traduzione di %s "
+msgstr "Modifica traduzione %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "Aggiungi la traduzione di %s (la stringa appare sul sito e non viene tradotta)"
+msgstr "Aggiungi traduzione %s (la stringa appare sul sito e non è tradotta)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
@@ -51,7 +51,7 @@ msgstr "Lingua originale %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "In attesa del traduttore %s"
+msgstr "In attesa del traduttore per %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
@@ -59,7 +59,7 @@ msgstr "Traduzione in corso in %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
-msgstr "Nel cestino per la traduzione in %s"
+msgstr "Nel carrello per la traduzione in %s"
 
 #: src/js/main-ui/components/notification.js:13
 msgid "Translation saved."
@@ -67,4 +67,4 @@ msgstr "Traduzione salvata."
 
 #: src/js/main-ui/components/notification.js:17
 msgid "Translation update failed."
-msgstr "Aggiornamento della traduzione non riuscito."
+msgstr "Aggiornamento traduzione non riuscito."

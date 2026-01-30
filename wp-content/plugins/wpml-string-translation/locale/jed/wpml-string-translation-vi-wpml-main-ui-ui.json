@@ -8,16 +8,16 @@
             "lang": "vi"
          },
          "Edit": [
-            "Biên tập"
+            "Chỉnh sửa"
          ],
          "Shift+Tab": [
-            "Tab Shift+"
+            "Shift+tab"
          ],
          "Tab": [
-            "Chuyển hướng"
+            "Tab"
          ],
          "Translation to:": [
-            "Bản dịch sang:"
+            "Dịch sang:"
          ],
          "Copy from original": [
             "Sao chép từ bản gốc"
@@ -26,22 +26,22 @@
             "Sử dụng Shift+Enter để thêm dòng mới."
          ],
          "Original:": [
-            "Nguyên bản:"
+            "Bản gốc:"
          ],
          "Add %s translation": [
-            "Thêm vào %s dịch"
+            "Thêm bản dịch %s"
          ],
          "Edit %s translation": [
-            "Biên tập %s dịch"
+            "Chỉnh sửa bản dịch %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Thêm vào%s bản dịch (chuỗi xuất hiện trên trang web và không được dịch)"
+            "Thêm bản dịch %s (chuỗi xuất hiện trên trang web và chưa được dịch)"
          ],
          "Original language %s": [
             "Ngôn ngữ gốc %s"
          ],
          "Waiting for translator to %s": [
-            "Đang chờ người dịch %s"
+            "Đang chờ người dịch đến %s"
          ],
          "Translation in progress to %s": [
             "Đang dịch sang %s"

@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "Wpływ przekierowania na podstawie języka w przeglądarce na indeksowanie w Google"
+msgstr "Jak przekierowanie językowe przeglądarki wpływa na indeksowanie przez Google"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
@@ -15,11 +15,11 @@ msgstr "Dokumentacja"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "Przekierowanie przeglądarki wpływa na indeksowanie i wyniki wyszukiwania w Google."
+msgstr "Przekierowanie przeglądarki wpływa na indeksowanie przez Google i wyniki wyszukiwania"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
-msgstr "Rozumiem, i tak aktywuj"
+msgstr "Rozumiem, aktywuj mimo to"
 
 #: src/js/browser-language-redirect-dialog/texts.js:5
 msgid "Cancel"
@@ -30,14 +30,14 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "Przekierowując gości na podstawie ich języka, przekierowujesz też Google. Google chce widzieć Twoją stronę taką, jaką widzą ją odwiedzający. Dotyczy to również przekierowań, które na niej umieścisz."
+msgstr "Kiedy przekierowujesz odwiedzających na podstawie ich języka, przekierowujesz również Google. Google chce widzieć Twoją witrynę dokładnie tak, jak widzą ją odwiedzający, włączając w to wszelkie zastosowane przekierowania."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "Przekierowywanie odwiedzających w oparciu język, którym się posługują to dobra rzecz, ale należy zdawać sobie sprawę, że taka funkcjonalność wpływa na SEO."
+msgstr "Przekierowywanie odwiedzających na podstawie ich języka jest w porządku, ale musisz zdawać sobie sprawę, że ta funkcja wpływa na SEO."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"
-msgstr "Zanim przejdziesz dalej, zalecamy przeczytanie tych dwóch stron:"
+msgstr "Przed kontynuowaniem zalecamy przeczytanie tych dwóch stron:"

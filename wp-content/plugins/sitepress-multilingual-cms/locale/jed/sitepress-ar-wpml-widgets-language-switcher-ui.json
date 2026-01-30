@@ -8,7 +8,7 @@
             "lang": "ar"
          },
          "To display this Custom HTML block in a specific language, first place it inside a Group block.": [
-            "لعرض كتلة HTML المخصصة هذه بلغة معينة، قم أولاً بوضعها داخل كتلة مجموعة."
+            "لعرض كتلة HTML المخصصة هذه بلغة معينة، ضعها أولاً داخل كتلة مجموعة."
          ],
          "Place inside Group block": [
             "ضع داخل كتلة المجموعة"
@@ -17,7 +17,7 @@
             "الكل"
          ],
          "Display on language": [
-            "لغة العرض"
+            "العرض باللغة"
          ]
       }
    }

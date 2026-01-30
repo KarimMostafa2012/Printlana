@@ -222,7 +222,7 @@ class WPML_Media_Attachment_By_URL_Query {
 	 * @return array
 	 */
 	private function getAllowedExtensionsForFilename() {
-		return [
+		$extensions = [
 			'jpg', 'jpeg', 'jpe', 'gif', 'png', 'bmp', 'tiff', 'tif', 'webp', 'ico', 'heic',
 			'asf', 'asx', 'wmv', 'wmx', 'wm', 'avi', 'divx', 'flv', 'mov', 'qt', 'mpeg', 'mpg',
 			'mpe', 'mp4', 'm4v', 'ogv', 'webm', 'mkv', '3gp', '3gpp', '3g2', '3gp2', 'txt', 'asc',
@@ -233,8 +233,10 @@ class WPML_Media_Attachment_By_URL_Query {
 			'docx', 'docm', 'dotx', 'dotm', 'xlsx', 'xlsm', 'xlsb', 'xltx', 'xltm', 'xlam',
 			'pptx', 'pptm', 'ppsx', 'ppsm', 'potx', 'potm', 'ppam', 'sldx', 'sldm',
 			'onetoc', 'onetoc2', 'onetmp', 'onepkg', 'oxps', 'xps', 'odt', 'odp', 'ods', 'odg', 'odc', 'odb', 'odf',
-			'wp', 'wpd', 'key', 'numbers', 'pages',
+			'wp', 'wpd', 'key', 'numbers', 'pages', 'svg', 'avif', 'apng',
 		];
+
+		return apply_filters( 'wpml_media_allowed_filename_extensions', $extensions );
 	}
 
 	/**

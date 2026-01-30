@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
-msgstr "Avanzato"
+msgstr "Avanzate"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
@@ -15,11 +15,11 @@ msgstr "Ancora HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Aggiungi un collegamento rapido a questo blocco durante il caricamento della pagina utilizzando l'URL “#anchor”."
+msgstr "Aggiungi un collegamento rapido a questo blocco durante il caricamento della pagina usando l'URL “#anchor”."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "Classe(i) CSS aggiuntiva(e)"
+msgstr "Classi CSS aggiuntive"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
@@ -61,11 +61,11 @@ msgstr "LINGUA"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Spaziatura della lingua"
+msgstr "Spaziatura lingua"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Spaziatura interna della lingua"
+msgstr "Spaziatura interna lingua"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -89,7 +89,7 @@ msgstr "Stile"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
-msgstr "Impostazioni della bandiera"
+msgstr "Impostazioni bandiera"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
 msgid "Width"
@@ -121,7 +121,7 @@ msgstr "Layout"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "Allineamento"
+msgstr "Giustificazione"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
@@ -138,20 +138,20 @@ msgstr "Sfondo"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:121
 msgid "Language Text"
-msgstr "Testo della lingua"
+msgstr "Testo lingua"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:126
 msgid "Language Background"
-msgstr "Sfondo della lingua"
+msgstr "Sfondo lingua"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:131
 msgid "Current language text"
-msgstr "Testo della lingua corrente"
+msgstr "Testo lingua corrente"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:136
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
 msgid "Current language background"
-msgstr "Sfondo della lingua corrente"
+msgstr "Sfondo lingua corrente"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
@@ -163,19 +163,19 @@ msgstr "Codice"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "Allinea elementi a sinistra"
+msgstr "Giustifica elementi a sinistra"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "Allinea elementi al centro"
+msgstr "Giustifica elementi al centro"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "Allinea elementi a destra"
+msgstr "Giustifica elementi a destra"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Allinea elementi con spazio tra"
+msgstr "Giustifica elementi con spazio tra"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -199,7 +199,7 @@ msgstr "Grande"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Extra grande"
+msgstr "Molto grande"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -219,27 +219,27 @@ msgstr "Piccolo"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Visualizza il selettore di lingua WPML."
+msgstr "Visualizza lo switcher della lingua di WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "Selettore di lingua"
+msgstr "Switcher della lingua"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "visualizza il selettore di lingua WPML"
+msgstr "visualizza lo switcher della lingua di WPML"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Visualizza il selettore di lingua WPML. <br/> Scopri <a>come tradurre questo blocco</a>."
+msgstr "Visualizza lo switcher della lingua di WPML. <br/> Scopri <a>come tradurre questo blocco</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Selettore di lingua per la navigazione"
+msgstr "Switcher della lingua di navigazione"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

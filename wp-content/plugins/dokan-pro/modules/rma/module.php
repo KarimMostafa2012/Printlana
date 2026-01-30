@@ -10,7 +10,7 @@ use WeDevs\DokanPro\Modules\RMA\Api\WarrantyConversationController;
 use WeDevs\DokanPro\Modules\RMA\Emails\ConversationNotification;
 use WeDevs\DokanPro\Modules\RMA\Emails\SendCouponEmail;
 use WeDevs\DokanPro\Modules\RMA\Emails\SendWarrantyRequest;
-
+use WeDevs\DokanPro\Modules\RMA\Emails\WarrantyRequestStatusChanged;
 class Module {
 
     /**
@@ -247,7 +247,7 @@ class Module {
         $wc_emails['Dokan_Send_Coupon_Email']             = new SendCouponEmail();
         $wc_emails['Dokan_Rma_Send_Warranty_Request']     = new SendWarrantyRequest();
         $wc_emails['Dokan_RMA_Conversation_Notification'] = new ConversationNotification();
-
+        $wc_emails['Dokan_Rma_Status_Changed']           = new WarrantyRequestStatusChanged();
         return $wc_emails;
     }
 

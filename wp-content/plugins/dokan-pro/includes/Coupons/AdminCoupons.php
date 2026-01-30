@@ -716,9 +716,15 @@ class AdminCoupons {
             $coupons_list_link = sprintf( '<a href="%s">%s</a>', esc_url( $coupons_list_link ), __( 'Check the coupons list', 'dokan' ) );
 
             if ( 'no' === $enabled_for_vendor ) {
+                // Selected vendors only mode - get vendors from form submission
                 $vendors_ids = array_filter( array_map( 'intval', (array) ( $_POST['vendors_ids'] ?? [] ) ) );
-            } elseif ( 'yes' === $enabled_for_vendor && ! empty( $exclude_vendors_ids ) ) {
-                $exclude_sellers = array_filter( array_map( 'intval', (array) $_POST['exclude_vendors_ids'] ) );
+            } elseif ( 'yes' === $enabled_for_vendor ) {
+                // All vendors mode - $vendors_ids empty for 'all_seller' mode
+                $vendors_ids = array();
+                //set exclude_sellers if excluded vendors are present in the form submission
+                if ( ! empty( $exclude_vendors_ids ) ) {
+                    $exclude_sellers = array_filter( array_map( 'intval', explode( ',', $exclude_vendors_ids ) ) );
+                }
             }
 
             if ( 'percentage' === $shared_coupon_type ) {
@@ -751,9 +757,9 @@ class AdminCoupons {
             $args = [
                 'title'               => __( 'Admin Created a Coupon for Your Store.', 'dokan' ),
                 'content'             => $content,
-                'sender_type'         => 'yes' === $enabled_for_vendor ? 'all_seller' : 'selected_seller',
+                'announcement_type'   => ( 'yes' === $enabled_for_vendor && empty( $vendors_ids ) ) ? 'all_seller' : 'selected_seller',
                 'sender_ids'          => $vendors_ids,
-                'exclude_sellers_ids' => $exclude_sellers,
+                'exclude_seller_ids'  => $exclude_sellers,
                 'status'              => 'publish',
             ];
 

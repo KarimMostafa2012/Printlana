@@ -105,15 +105,6 @@ function icl_plugin_upgrade() {
 		}
 	}
 
-	if ( get_option( 'icl_sitepress_version' ) && version_compare( get_option( 'icl_sitepress_version' ), '2.0.0', '<' ) ) {
-		include_once WPML_PLUGIN_PATH . '/inc/upgrade-functions/upgrade-2.0.0.php';
-
-		if ( empty( $iclsettings['migrated_2_0_0'] ) ) {
-			define( 'ICL_MULTI_STEP_UPGRADE', true );
-			return; // GET OUT AND DO NOT SET THE NEW VERSION
-		}
-	}
-
 	if ( get_option( 'icl_sitepress_version' ) && version_compare( get_option( 'icl_sitepress_version' ), '2.0.4', '<' ) ) {
 		$sql = "ALTER TABLE {$wpdb->prefix}icl_translation_status ADD COLUMN `_prevstate` longtext";
 		$wpdb->query( $sql );

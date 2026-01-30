@@ -111,7 +111,19 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 		}
 		do_action( 'icl_set_element_language', $translation_id, $el_id, $language_code, $trid );
 
+		wp_cache_delete( ...self::get_cache_ref( $el_id, $el_type ) );
+
 		return $translation_id;
+	}
+
+	/**
+	 * @param string|int $el_id
+	 * @param string     $el_type
+	 *
+	 * @return array<string, string>
+	 */
+	public static function get_cache_ref( $el_id, $el_type ) {
+		return [ $el_id . ':' . $el_type, 'element_language_details' ];
 	}
 
 	/**

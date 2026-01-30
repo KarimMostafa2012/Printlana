@@ -40,6 +40,10 @@ class Attributes extends Base {
 				continue;
 			}
 
+			if ( $this->shouldSkipMediaType( $config_keys, $matching_key ) ) {
+				continue;
+			}
+
 			if ( $this->hasJsonEncoding( $attr_key, $config_keys ) ) {
 				$attr_value = json_decode( urldecode( $attr_value ), true );
 			}
@@ -149,7 +153,7 @@ class Attributes extends Base {
 	 */
 	private function isRegex( array $key_attrs ) {
 		return isset( $key_attrs['search-method'] )
-			   && \WPML_Gutenberg_Config_Option::SEARCH_METHOD_REGEX === $key_attrs['search-method'];
+			&& \WPML_Gutenberg_Config_Option::SEARCH_METHOD_REGEX === $key_attrs['search-method'];
 	}
 
 	/**
@@ -214,10 +218,10 @@ class Attributes extends Base {
 	}
 
 	/**
-	 * @param array $attr_key
-	 * @param array $config_keys
+	 * @param string $attr_key
+	 * @param array  $config_keys
 	 *
-	 * @retrun bool
+	 * @return bool
 	 */
 	private function hasJsonEncoding( $attr_key, $config_keys ) {
 		return 'json' === Obj::path( [ $attr_key, 'encoding' ], $config_keys );
@@ -252,5 +256,24 @@ class Attributes extends Base {
 				'search-method' => \WPML_Gutenberg_Config_Option::SEARCH_METHOD_WILDCARD,
 			],
 		];
+	}
+
+	/**
+	 * @param array  $configKeys
+	 * @param string $matchingKey
+	 *
+	 * @return bool
+	 */
+	private function shouldSkipMediaType( array $configKeys, $matchingKey ) {
+		$configType = $configKeys[ $matchingKey ]['type'] ?? null;
+
+		return in_array(
+			$configType,
+			[
+				\WPML_Page_Builders_Media_Gutenberg::TYPE_URL,
+				\WPML_Page_Builders_Media_Gutenberg::TYPE_IDS,
+			],
+			true
+		);
 	}
 }

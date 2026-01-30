@@ -15,7 +15,7 @@ msgstr "Avbryt jobb"
 
 #: src/js/jobs/components/Actions/ContinieReview.js:44
 msgid "Continue reviewing"
-msgstr "Fortsätt granskning"
+msgstr "Fortsätt granska"
 
 #: src/js/jobs/components/Actions/DownloadXLIFF.js:33
 msgid "Start downloading XLIFF file"
@@ -31,7 +31,7 @@ msgstr "Hämta översättning"
 
 #: src/js/jobs/components/Actions/Resign.js:35
 msgid "Resign"
-msgstr "Avsäg"
+msgstr "Avgå"
 
 #: src/js/jobs/components/Actions/Review.js:46
 #: src/js/jobs/components/Actions/ReviewInATE.js:35
@@ -52,7 +52,7 @@ msgstr "Visa"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:48
 msgid "Delete Translations"
-msgstr "Radera översättningar"
+msgstr "Ta bort översättningar"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:56
 msgid "Keep Translations as Draft"
@@ -60,7 +60,7 @@ msgstr "Behåll översättningar som utkast"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
 msgid "Never mind. I want to review these translations."
-msgstr "Glöm det. Jag vill granska dessa översättningar."
+msgstr "Strunt samma. Jag vill granska dessa översättningar."
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
 #: src/js/jobs/components/Filters/ActionFilters.js:60
@@ -84,19 +84,19 @@ msgstr "Massåtgärder"
 #: src/js/jobs/components/BulkActions/BulkActions.js:81
 #: src/js/jobs/components/Filters/ActionFilters.js:61
 msgid "Apply"
-msgstr "Tillämpa"
+msgstr "Verkställ"
 
 #: src/js/jobs/components/BulkActions/Info.js:10
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "Åtgärder som tillämpas på flera översättningsjobb kan ta några sekunder. Vänligen lämna inte sidan."
+msgstr "Åtgärder som tillämpas på flera översättningsjobb kan ta några sekunder. Lämna inte sidan."
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "Åtgärder som tillämpas på flera översättningsjobb kan ta några minuter. Vänligen lämna inte sidan."
+msgstr "Åtgärder som tillämpas på flera översättningsjobb kan ta några minuter. Lämna inte sidan."
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
@@ -113,7 +113,7 @@ msgstr "Avbruten"
 #: src/js/jobs/components/Cells/StatusCell.js:12
 #: src/js/jobs/model/store/columnsManagement.js:50
 msgid "Needs translation"
-msgstr "Behöver översättning"
+msgstr "Behöver översättas"
 
 #: src/js/jobs/components/Cells/StatusCell.js:13
 #: src/js/jobs/model/store/columnsManagement.js:46
@@ -123,7 +123,7 @@ msgstr "Pågående"
 #: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
-msgstr "Översättning klar att ladda ner"
+msgstr "Översättning redo att laddas ner"
 
 #: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
@@ -137,11 +137,11 @@ msgstr "%s publiceras omedelbart eftersom de inte stöder utkastläge."
 
 #: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
-msgstr "Publicerad — Väntar på granskning"
+msgstr "Publicerad – Väntar på granskning"
 
 #: src/js/jobs/components/Cells/StatusCell.js:38
 msgid "Draft — Pending review"
-msgstr "Utkast — Väntar på granskning"
+msgstr "Utkast – Väntar på granskning"
 
 #: src/js/jobs/components/Cells/StatusCell.js:43
 msgid "Review in progress"
@@ -149,11 +149,11 @@ msgstr "Granskning pågår"
 
 #: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
-msgstr "Publicerad — Granskning pågår"
+msgstr "Publicerad – Granskning pågår"
 
 #: src/js/jobs/components/Cells/StatusCell.js:47
 msgid "Draft — Review in progress"
-msgstr "Utkast — Granskning pågår"
+msgstr "Utkast – Granskning pågår"
 
 #: src/js/jobs/components/Cells/StatusCell.js:51
 msgid "Insufficient funds"
@@ -162,7 +162,7 @@ msgstr "Otillräckliga medel"
 #: src/js/jobs/components/Cells/StatusCell.js:57
 #: src/js/jobs/model/store/columnsManagement.js:42
 msgid "Needs update"
-msgstr "Behöver uppdatering"
+msgstr "Behöver uppdateras"
 
 #: src/js/jobs/components/Cells/TitleCell.js:14
 msgid "View original"
@@ -326,7 +326,7 @@ msgstr "Importera"
 
 #: src/js/jobs/components/XliffBox/XliffBox.js:19
 msgid "Import / Export XLIFF"
-msgstr "Importera / Exportera XLIFF"
+msgstr "Importera/exportera XLIFF"
 
 #: src/js/jobs/components/actionColumn.js:13
 msgid "Actions"
@@ -368,11 +368,11 @@ msgstr "Hämta översättningar"
 
 #: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
 msgid "This action does not apply to any of the selected translation jobs"
-msgstr "Denna åtgärd gäller inte för några av de valda översättningsjobben"
+msgstr "Denna åtgärd gäller inte för något av de valda översättningsjobben"
 
 #: src/js/jobs/model/store/applyTranslations.js:30
 msgid "Translations have been downloaded"
-msgstr "Översättningarna har laddats ner"
+msgstr "Översättningar har laddats ner"
 
 #: src/js/jobs/model/store/applyTranslations.js:31
 msgid "Translation has been downloaded"
@@ -380,7 +380,7 @@ msgstr "Översättningen har laddats ner"
 
 #: src/js/jobs/model/store/applyTranslations.js:36
 msgid "Translations could not be downloaded"
-msgstr "Översättningarna kunde inte laddas ner"
+msgstr "Översättningar kunde inte laddas ner"
 
 #: src/js/jobs/model/store/applyTranslations.js:37
 msgid "Translation could not be downloaded"
@@ -396,7 +396,7 @@ msgstr "Misslyckades med att godkänna översättningar för följande inlägg: 
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
-msgstr "Översättningsgranskningar godkända framgångsrikt!"
+msgstr "Översättningsgranskningar godkändes framgångsrikt!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:57
 msgid "No valid jobs selected to approve translations reviews!"
@@ -433,7 +433,7 @@ msgstr "Översättningsgranskningar har avbrutits"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:27
 msgid "Translation review has been canceled"
-msgstr "Översättningsgranskning har avbrutits"
+msgstr "Översättningsgranskningen har avbrutits"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:33
 msgid "Translation reviews could not be canceled"
@@ -441,11 +441,11 @@ msgstr "Översättningsgranskningar kunde inte avbrytas"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:34
 msgid "Translation review could not be canceled"
-msgstr "Översättningsgranskning kunde inte avbrytas"
+msgstr "Översättningsgranskningen kunde inte avbrytas"
 
 #: src/js/jobs/model/store/columnsManagement.js:106
 msgid "Sent on"
-msgstr "Skickat den"
+msgstr "Skickades den"
 
 #: src/js/jobs/model/store/columnsManagement.js:114
 msgid "Deadline"
@@ -501,7 +501,7 @@ msgstr "Kunde inte importera något jobb"
 
 #: src/js/jobs/model/store/importXLIFF.js:45
 msgid "Import failed!"
-msgstr "Importen misslyckades!"
+msgstr "Import misslyckades!"
 
 #: src/js/jobs/model/store/jobs.js:18
 msgid "Loading translations queue"
@@ -517,31 +517,31 @@ msgstr "Jobb kunde inte laddas"
 
 #: src/js/jobs/model/store/resign.js:12
 msgid "Specify some jobs to resign"
-msgstr "Ange några jobb att avsäga sig"
+msgstr "Ange några jobb att avgå från"
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
-msgstr "Vi kunde inte avsäga oss jobb: %s"
+msgstr "Vi kunde inte avgå från jobb: %s"
 
 #: src/js/jobs/model/store/resign.js:34
 msgid "Resigned from jobs"
-msgstr "Avsagt sig jobb"
+msgstr "Avgick från jobb"
 
 #: src/js/jobs/model/store/resign.js:35
 msgid "Resigned from job"
-msgstr "Avsagt sig jobbet"
+msgstr "Avgick från jobb"
 
 #: src/js/jobs/model/store/resign.js:39
 msgid "Failed to resign from jobs"
-msgstr "Misslyckades att avsäga sig jobb"
+msgstr "Misslyckades med att avgå från jobb"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
-msgstr "Synkroniseringen av jobb i Avancerad redigerare har misslyckats"
+msgstr "Synkroniseringen av Advanced Editor-jobb misslyckades"
 
 #: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
 msgid "Synchronization with the Professional Translation service has failed"
-msgstr "Synkronisering med den professionella översättningstjänsten har misslyckats"
+msgstr "Synkronisering med den professionella översättningstjänsten misslyckades"
 
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"

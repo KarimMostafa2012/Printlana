@@ -408,31 +408,30 @@ class CompressX_Image_Optimization_Display
             <div class="compressx-v2-grid compressx-v2-grid-cols-1 md:compressx-v2-grid-cols-3 compressx-v2-mb-4 compressx-v2-gap-6">
 
                 <div class="compressx-v2-flex compressx-v2-flex-wrap compressx-v2-gap-4 compressx-v2-items-center compressx-v2-mb-3">
-
-                    <label class="compressx-v2-inline-flex compressx-v2-items-center compressx-v2-gap-2 cursor-pointer">
-                        <button type="button"
-                                class="compressx-v2-relative compressx-v2-flex compressx-v2-items-center compressx-v2-justify-start
+                    <h3 class="compressx-v2-text-sm">
+                        <label class="compressx-v2-inline-flex compressx-v2-items-center compressx-v2-gap-2 cursor-pointer">
+                            <button type="button"
+                                    class="compressx-v2-relative compressx-v2-flex compressx-v2-items-center compressx-v2-justify-start
                                 compressx-v2-w-11 compressx-v2-h-6
                                 compressx-v2-bg-gray-300 compressx-v2-rounded compressx-v2-transition-colors
                                 compressx-v2-border compressx-v2-border-gray-300"
-                                role="switch" aria-checked="<?php echo $is_auto_checked ?>" id="cx_enable_auto_optimize" data-checked="<?php echo $data_is_auto?>">
+                                    role="switch" aria-checked="<?php echo $is_auto_checked ?>" id="cx_enable_auto_optimize" data-checked="<?php echo $data_is_auto?>">
                             <span class="compressx-v2-w-4 compressx-v2-h-4 compressx-v2-bg-white
                                         compressx-v2-rounded compressx-v2-transition-all
                                         compressx-v2-mx-0.5"></span>
-                        </button>
+                            </button>
 
-                        <span class="compressx-v2-text-sm"><?php esc_html_e('Auto-optimize new uploads', 'compressx') ?></span>
-                    </label>
+                            <span class="compressx-v2-text-sm"><?php esc_html_e('Auto-optimize new uploads', 'compressx') ?></span>
+                        </label>
 
-                    <?php
-                    $this->output_tooltip(
-                        'cx-v2-tip-auto-optimize',
-                        esc_html__('Enable it to convert the new uploaded images.', 'compressx'),
-                        'large'
-                    );
-                    ?>
-
-
+                        <?php
+                        $this->output_tooltip(
+                            'cx-v2-tip-auto-optimize',
+                            esc_html__('Enable it to convert the new uploaded images.', 'compressx'),
+                            'large'
+                        );
+                        ?>
+                    </h3>
                 </div>
 
                 <div>
@@ -443,9 +442,7 @@ class CompressX_Image_Optimization_Display
                             <?php
                             $this->output_tooltip(
                                 'cx-v2-tip-library',
-                                esc_html__('Choose the PHP extension to process images.
- GD is a PHP extension for handling image optimization.It may be slightly faster at processing large images but supports fewer image formats
- Imagick is another image optimization library that supports more image formats and produces higher quality images.', 'compressx')
+                                esc_html__('Choose the PHP extension for image processing. GD is faster for large images but supports fewer formats. Imagick supports more formats and produces higher quality results.', 'compressx')
                             );
                             ?>
                         </h3>
@@ -552,9 +549,12 @@ class CompressX_Image_Optimization_Display
 
     private function output_free_quality_section()
     {
-        $quality_options = CompressX_Options::get_option('compressx_quality', array());
-        $webp_quality = CompressX_Options::get_webp_quality($quality_options);
-        $avif_quality = CompressX_Options::get_avif_quality($quality_options);
+        $enable_smart_mode=false;
+        $class_general="";
+        $general_selected="compressx-v2-bg-white";
+
+        $class_smart="compressx-v2-hidden";
+        $smart_selected="";
 
         ?>
         <div id="cx-v2-tab-buttons" class="compressx-v2-flex compressx-v2-gap-1 compressx-v2-border-b compressx-v2-border-gray-200 compressx-v2-mb-2">
@@ -567,100 +567,104 @@ class CompressX_Image_Optimization_Display
 
         <div id="cx-v2-tab-content" class="compressx-v2-bg-[#F2FBFA] compressx-v2-rounded compressx-v2-p-4">
             <div data-tab-panel="global">
-                <div class="compressx-v2-mb-4">
+                <div>
                     <div class="compressx-v2-flex compressx-v2-justify-between compressx-v2-items-center compressx-v2-flex-wrap compressx-v2-gap-2 compressx-v2-mb-4">
+                        <!-- Left Column -->
                         <div>
                             <h3 class="compressx-v2-text-sm compressx-v2-font-medium compressx-v2-flex compressx-v2-items-center compressx-v2-gap-1">
                                 <span class="dashicons dashicons-admin-site-alt3 compressx-v2-text-blue-600"></span>
-                                <?php esc_html_e('Global Compression Level', 'compressx') ?>
-                                <span class="compressx-v2-text-blue-600">
-                                    <a href="#" id="cx-v2-free-toggle-advanced">-<?php esc_html_e('Advanced', 'compressx') ?></a>
-                                    <span class="dashicons dashicons-arrow-right" id="cx-v2-free-advanced-arrow"></span>
-                                </span>
+                                Global Compression Mode <span class="compressx-v2-text-blue-600">
                             </h3>
                             <p class="compressx-v2-text-sm compressx-v2-text-gray-500">
-                                <?php esc_html_e('Define the global compression quality for all images.', 'compressx') ?>
+                                Choose how compression quality is applied across your images.
                             </p>
                         </div>
+                        <!-- Right Column (beautified text) -->
                         <div class="compressx-v2-space-x-2">
                             <span class="compressx-v2-bg-slate-50 compressx-v2-border compressx-v2-border-slate-200 compressx-v2-rounded compressx-v2-px-3 compressx-v2-py-1 compressx-v2-text-xs compressx-v2-text-slate-600 compressx-v2-font-medium compressx-v2-whitespace-nowrap">
-                                <span class="compressx-v2-text-gray-500"><?php esc_html_e('Lossless:', 'compressx') ?></span> WebP <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">99</span>, AVIF <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">80</span>. <span class="compressx-v2-text-gray-500"><?php esc_html_e('Default:', 'compressx') ?></span> WebP <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">80</span>, AVIF <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">60</span>.
+                                <span class="compressx-v2-text-gray-500">Lossless:</span> WebP <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">99</span>,AVIF <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">99</span>.
+                                <span class="compressx-v2-text-gray-500">Default:</span> WebP <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">80</span>,
+                                AVIF <span class="compressx-v2-font-semibold compressx-v2-text-gray-700">60</span>.
+                            </span>
+                            <span class="compressx-v2-relative compressx-v2-inline-flex compressx-v2-items-center compressx-v2-group">
+                                    <!-- Trigger Button -->
+                                    <button type="button" class="compressx-v2-inline-flex compressx-v2-items-center compressx-v2-justify-center compressx-v2-h-6 compressx-v2-w-6 compressx-v2-rounded compressx-v2-border compressx-v2-border-slate-300 compressx-v2-bg-white hover:compressx-v2-bg-slate-50 compressx-v2-text-slate-600 hover:compressx-v2-text-slate-800 compressx-v2-shadow-sm focus:compressx-v2-outline-none focus:compressx-v2-ring-2 focus:compressx-v2-ring-sky-400" aria-describedby="cxp-tip-1">
+                                        <span class="compressx-v2-font-semibold compressx-v2-text-xs">i</span>
+                                    </button>
+                                <!-- Tooltip -->
+                                    <div id="cxp-tip-1" role="tooltip" class="compressx-v2-absolute compressx-v2-z-50 compressx-v2-bottom-full compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-mb-2
+                                        compressx-v2-hidden group-hover:compressx-v2-block group-focus-within:compressx-v2-block
+                                        compressx-v2-min-w-64 compressx-v2-max-w-96 compressx-v2-rounded compressx-v2-bg-slate-900/95 compressx-v2-text-white compressx-v2-text-xs compressx-v2-leading-5 compressx-v2-px-3 compressx-v2-py-3
+                                        compressx-v2-shadow-xl compressx-v2-ring-1 compressx-v2-ring-black/10">
+                                        <div class="compressx-v2-flex compressx-v2-gap-2 compressx-v2-items-start">
+                                        <span class="compressx-v2-mt-0.5 compressx-v2-inline-block compressx-v2-h-1.5 compressx-v2-w-1.5 compressx-v2-rounded compressx-v2-bg-emerald-400"></span>
+                                        <div>
+                                            <div class="compressx-v2-font-medium compressx-v2-text-[11px] compressx-v2-tracking-wide compressx-v2-text-emerald-300 compressx-v2-mb-0.5">
+                                            Tip
+                                            </div>
+                                            <div>
+                                            Re-generate modern formats (WebP/AVIF) anytime. This won’t touch your original image.
+                                            <a href="#" class="compressx-v2-text-sky-300 hover:compressx-v2-underline">Learn more...</a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="compressx-v2-absolute compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-top-full compressx-v2-h-2 compressx-v2-w-2 compressx-v2-rotate-45 compressx-v2-bg-slate-900/95"></div>
+                                    </div>
                             </span>
                         </div>
                     </div>
-
-                    <div class="compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-6">
-                        <div>
-                            <label class="compressx-v2-text-sm compressx-v2-block compressx-v2-mb-1"><?php esc_html_e('WebP Quality (1 to 99)', 'compressx') ?></label>
-                            <input id="cx-v2-webp-quality-input" type="number" value="<?php echo esc_attr($webp_quality) ?>" min="1" max="99" class="compressx-v2-w-full compressx-v2-border compressx-v2-rounded compressx-v2-px-3 compressx-v2-py-2" />
-                        </div>
-                        <div>
-                            <label class="compressx-v2-text-sm compressx-v2-block compressx-v2-mb-1"><?php esc_html_e('AVIF Quality (1 to 99)', 'compressx') ?></label>
-                            <input id="cx-v2-avif-quality-input" type="number" value="<?php echo esc_attr($avif_quality) ?>" min="1" max="99" class="compressx-v2-w-full compressx-v2-border compressx-v2-rounded compressx-v2-px-3 compressx-v2-py-2" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="compressx-v2-bg-white compressx-v2-p-4 compressx-v2-rounded" id="cx-v2-free-advanced-section" style="display: none;">
-                    <div class="compressx-v2-mb-4 compressx-v2-flex compressx-v2-items-center compressx-v2-justify-between compressx-v2-flex-wrap compressx-v2-gap-2">
-                        <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-2">
-                            <div>
-                                <button type="button" class="compressx-v2-relative compressx-v2-flex compressx-v2-items-center compressx-v2-justify-start compressx-v2-w-11 compressx-v2-h-6 compressx-v2-bg-gray-300 compressx-v2-rounded compressx-v2-transition-colors compressx-v2-border compressx-v2-border-gray-300" role="switch" aria-checked="false" disabled>
-                                    <span class="compressx-v2-w-4 compressx-v2-h-4 compressx-v2-bg-white compressx-v2-rounded compressx-v2-transition-all compressx-v2-mx-0.5"></span>
-                                </button>
-                            </div>
-                            <div class="compressx-v2-flex compressx-v2-flex-col">
-                                <span class="compressx-v2-text-sm compressx-v2-text-slate-500">
-                                    <?php esc_html_e('Adjust compression level based on image size (recommended).', 'compressx') ?>
-                                    <span class="compressx-v2-text-blue-600"><a href="https://compressx.io/pricing" target="_blank"><?php esc_html_e('Pro only', 'compressx') ?></a></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="compressx-v2-opacity-50 compressx-v2-pointer-events-none">
-                        <div class="compressx-v2-grid sm:compressx-v2-grid-cols-2 lg:compressx-v2-grid-cols-4 xl:compressx-v2-grid-cols-6 compressx-v2-gap-4">
-                            <?php
-                            $offset_ranges = array(
-                                array('label' => '4MB+', 'webp' => -25, 'avif' => -35),
-                                array('label' => '(2 - 4) MB', 'webp' => -22, 'avif' => -30),
-                                array('label' => '(1 - 2) MB', 'webp' => -20, 'avif' => -28),
-                                array('label' => '(701 - 1000) KB', 'webp' => -18, 'avif' => -25),
-                                array('label' => '(601 - 700) KB', 'webp' => -15, 'avif' => -20),
-                                array('label' => '(501 - 600) KB', 'webp' => -12, 'avif' => -18),
-                                array('label' => '(401 - 500) KB', 'webp' => -10, 'avif' => -15),
-                                array('label' => '(301 - 400) KB', 'webp' => -5, 'avif' => -10),
-                                array('label' => '(201 - 300) KB', 'webp' => -3, 'avif' => -5),
-                                array('label' => '(151 - 200) KB', 'webp' => 0, 'avif' => 0),
-                                array('label' => '(101 - 150) KB', 'webp' => 3, 'avif' => 3),
-                                array('label' => '(61 - 100) KB', 'webp' => 5, 'avif' => 5),
-                                array('label' => '(31 - 60) KB', 'webp' => 10, 'avif' => 10),
-                                array('label' => '(0 - 30) KB', 'webp' => 15, 'avif' => 15),
-                            );
-
-                            foreach ($offset_ranges as $range) {
-                                ?>
-                                <div class="compressx-v2-relative compressx-v2-border compressx-v2-rounded compressx-v2-p-4 compressx-v2-bg-gray-50">
-                                    <input type="checkbox" class="compressx-v2-absolute compressx-v2-right-2" disabled>
-                                    <p class="compressx-v2-text-sm compressx-v2-font-medium"><?php echo esc_html($range['label']) ?></p>
-                                    <div class="compressx-v2-flex compressx-v2-gap-4 compressx-v2-mt-3">
-                                        <div class="compressx-v2-flex compressx-v2-flex-col compressx-v2-items-center">
-                                            <label class="compressx-v2-text-[10px] compressx-v2-text-gray-500">WebP</label>
-                                            <input type="number" value="<?php echo esc_attr($range['webp']) ?>" class="compressx-v2-w-16 compressx-v2-border compressx-v2-rounded compressx-v2-text-center compressx-v2-p-1" disabled>
+                    <div class="compressx-v2-rounded compressx-v2-mb-2">
+                        <!-- Radio Group -->
+                        <div class="compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-4">
+                            <!-- General Mode -->
+                            <label class="compressx-v2-border compressx-v2-rounded compressx-v2-p-4 compressx-v2-cursor-pointer <?php echo esc_attr($general_selected) ;?>">
+                                <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 ">
+                                    <input id="cx_compression_mode_general" type="radio" name="compression_mode" value="general" class="compressx-v2-mt-1" <?php echo checked(!$enable_smart_mode)?>/>
+                                    <div>
+                                        <div class="compressx-v2-text-sm compressx-v2-font-medium">
+                                            General
                                         </div>
-                                        <div class="compressx-v2-flex compressx-v2-flex-col compressx-v2-items-center">
-                                            <label class="compressx-v2-text-[10px] compressx-v2-text-gray-500">AVIF</label>
-                                            <input type="number" value="<?php echo esc_attr($range['avif']) ?>" class="compressx-v2-w-16 compressx-v2-border compressx-v2-rounded compressx-v2-text-center compressx-v2-p-1" disabled>
+                                        <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                                            Use a single fixed compression quality for all images.
+                                        </div>
+                                        <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                            The simplest settings for common websites.
                                         </div>
                                     </div>
-                                    <p class="compressx-v2-text-xs compressx-v2-text-gray-400 compressx-v2-mt-2">
-                                        <?php
-                                        /* translators: 1: WebP quality value, 2: AVIF quality value */
-                                        echo sprintf(esc_html__('Recommended: %1$d / %2$d', 'compressx'), esc_html($range['webp']), esc_html($range['avif'])) ?>
-                                    </p>
                                 </div>
-                            <?php } ?>
+                            </label>
+
+                            <!-- Smart Mode -->
+                            <label class="compressx-v2-border compressx-v2-rounded compressx-v2-p-4 compressx-v2-cursor-pointer <?php echo esc_attr($smart_selected) ;?>">
+                                <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3">
+                                    <input id="cx_compression_mode_smart" type="radio" name="compression_mode" value="smart" class="compressx-v2-mt-1" <?php echo checked($enable_smart_mode)?> />
+                                    <div>
+                                        <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-2">
+                                            <span class="compressx-v2-text-sm compressx-v2-font-medium">Smart</span>
+                                            <span class="compressx-v2-text-xs compressx-v2-text-green-600">Pro</span>
+                                            <span class="compressx-v2-text-xs compressx-v2-text-green-600">
+                                                <a href="https://compressx.io/docs/smart-image-optimization/">Learn more</a>
+                                            </span>
+                                        </div>
+                                        <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                                            Automatically adjust quality based on image size.
+                                        </div>
+                                        <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                            Higher quality for small images, stronger compression for large images.
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
+                    </div>
+                    <!-- General radio content -->
+                    <div id="compressx_general_quality_setting" class="compressx-v2-bg-white compressx-v2-border compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-6 compressx-v2-p-2 <?php echo esc_attr($class_general)?>">
+                        <?php $this->output_general();?>
+                    </div>
+
+                    <!-- Smart radio content -->
+                    <div id="compressx_smart_quality_setting" class="compressx-v2-bg-white compressx-v2-border compressx-v2-rounded compressx-v2-p-4 <?php echo esc_attr($class_smart)?>">
+                        <?php $this->output_smart();?>
                     </div>
                 </div>
             </div>
@@ -948,6 +952,619 @@ class CompressX_Image_Optimization_Display
         <?php
     }
 
+    public function output_general()
+    {
+        $quality_options = CompressX_Options::get_option('compressx_quality', array());
+        $webp_quality = CompressX_Options::get_webp_quality($quality_options);
+        $avif_quality = CompressX_Options::get_avif_quality($quality_options);
+
+        ?>
+        <!-- WebP Settings -->
+        <div class="compressx-v2-border compressx-v2-border-blue-100 compressx-v2-rounded compressx-v2-p-4 compressx-v2-bg-white">
+            <h4 class="compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-blue-700 compressx-v2-mb-3">
+                WebP
+            </h4>
+            <div>
+                <label class="compressx-v2-text-sm compressx-v2-font-medium">
+                    Compression Quality (1–99)
+                    <span class="compressx-v2-relative compressx-v2-inline-flex compressx-v2-items-center compressx-v2-group">
+                        <button type="button"
+                                class="compressx-v2-inline-flex compressx-v2-items-center compressx-v2-justify-center compressx-v2-h-6 compressx-v2-w-6 compressx-v2-rounded compressx-v2-border compressx-v2-border-slate-300 compressx-v2-bg-white hover:compressx-v2-bg-slate-50 compressx-v2-text-slate-600 hover:compressx-v2-text-slate-800 compressx-v2-shadow-sm focus:compressx-v2-outline-none focus:compressx-v2-ring-2 focus:compressx-v2-ring-sky-400"
+                                aria-describedby="cxp-tip-1">
+                            <span class="compressx-v2-font-semibold compressx-v2-text-xs">i</span>
+                        </button>
+
+                        <!-- Tooltip -->
+                        <div id="cxp-tip-1" role="tooltip"
+                             class="compressx-v2-absolute compressx-v2-z-50 compressx-v2-bottom-full compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-mb-2
+                                    compressx-v2-hidden group-hover:compressx-v2-block group-focus-within:compressx-v2-block
+                                    compressx-v2-min-w-64 compressx-v2-max-w-96 compressx-v2-rounded compressx-v2-bg-slate-900/95 compressx-v2-text-white compressx-v2-text-xs compressx-v2-leading-5 compressx-v2-px-3 compressx-v2-py-3
+                                    compressx-v2-shadow-xl compressx-v2-ring-1 compressx-v2-ring-black/10">
+                            <div class="compressx-v2-flex compressx-v2-gap-2 compressx-v2-items-start">
+                                <span class="compressx-v2-mt-0.5 compressx-v2-inline-block compressx-v2-h-1.5 compressx-v2-w-1.5 compressx-v2-rounded compressx-v2-bg-emerald-400"></span>
+                                <div>
+                                    <div class="compressx-v2-font-medium compressx-v2-text-[11px] compressx-v2-tracking-wide compressx-v2-text-emerald-300 compressx-v2-mb-0.5">
+                                        Tip
+                                    </div>
+                                    <div>
+                                        Higher values apply stronger compression across all image sizes and reduce quality more noticeably.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compressx-v2-absolute compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-top-full compressx-v2-h-2 compressx-v2-w-2 compressx-v2-rotate-45 compressx-v2-bg-slate-900/95"></div>
+                        </div>
+                    </span>
+                </label>
+
+                <!-- Slider with value on the right -->
+                <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                    <input id="cx-v2-webp-quality-input" type="range" min="1" max="99" value="<?php echo esc_attr($webp_quality); ?>"
+                           class="compressx-v2-flex-1 compressx-v2-w-full">
+                    <!-- 👇 value display -->
+                    <span id="webpStrengthValue" class="compressx-v2-w-8 compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-slate-600 compressx-v2-text-right">
+                       <?php echo esc_html($webp_quality);?>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Script -->
+            <script>
+                const range = document.getElementById("cx-v2-webp-quality-input");
+                const valueDisplay = document.getElementById("webpStrengthValue");
+                range.addEventListener("input", () => {
+                    valueDisplay.textContent = range.value;
+                });
+            </script>
+        </div>
+
+        <!-- AVIF Settings -->
+        <div class="compressx-v2-border compressx-v2-border-green-100 compressx-v2-rounded compressx-v2-p-4 compressx-v2-bg-white">
+            <h4 class="compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-green-700 compressx-v2-mb-3">
+                AVIF
+            </h4>
+            <div>
+                <label class="compressx-v2-text-sm compressx-v2-font-medium">
+                    Compression Quality (1–99)
+                    <span class="compressx-v2-relative compressx-v2-inline-flex compressx-v2-items-center compressx-v2-group">
+                        <button type="button"
+                                class="compressx-v2-inline-flex compressx-v2-items-center compressx-v2-justify-center compressx-v2-h-6 compressx-v2-w-6 compressx-v2-rounded compressx-v2-border compressx-v2-border-slate-300 compressx-v2-bg-white hover:compressx-v2-bg-slate-50 compressx-v2-text-slate-600 hover:compressx-v2-text-slate-800 compressx-v2-shadow-sm focus:compressx-v2-outline-none focus:compressx-v2-ring-2 focus:compressx-v2-ring-sky-400"
+                                aria-describedby="cxp-tip-1">
+                            <span class="compressx-v2-font-semibold compressx-v2-text-xs">i</span>
+                        </button>
+
+                        <!-- Tooltip -->
+                        <div id="cxp-tip-1" role="tooltip"
+                             class="compressx-v2-absolute compressx-v2-z-50 compressx-v2-bottom-full compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-mb-2
+                             compressx-v2-hidden group-hover:compressx-v2-block group-focus-within:compressx-v2-block
+                             compressx-v2-min-w-64 compressx-v2-max-w-96 compressx-v2-rounded compressx-v2-bg-slate-900/95 compressx-v2-text-white compressx-v2-text-xs compressx-v2-leading-5 compressx-v2-px-3 compressx-v2-py-3
+                             compressx-v2-shadow-xl compressx-v2-ring-1 compressx-v2-ring-black/10">
+                            <div class="compressx-v2-flex compressx-v2-gap-2 compressx-v2-items-start">
+                                <span class="compressx-v2-mt-0.5 compressx-v2-inline-block compressx-v2-h-1.5 compressx-v2-w-1.5 compressx-v2-rounded compressx-v2-bg-emerald-400"></span>
+                                <div>
+                                    <div class="compressx-v2-font-medium compressx-v2-text-[11px] compressx-v2-tracking-wide compressx-v2-text-emerald-300 compressx-v2-mb-0.5">
+                                        Tip
+                                    </div>
+                                    <div>
+                                        Higher values apply stronger compression across all image sizes and reduce quality more noticeably.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compressx-v2-absolute compressx-v2-left-1/2 -compressx-v2-translate-x-1/2 compressx-v2-top-full compressx-v2-h-2 compressx-v2-w-2 compressx-v2-rotate-45 compressx-v2-bg-slate-900/95"></div>
+                        </div>
+                    </span>
+                </label>
+
+                <!-- Slider + Value display -->
+                <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                    <input id="cx-v2-avif-quality-input" type="range" min="1" max="100" value="<?php echo esc_attr($avif_quality); ?>" class="compressx-v2-flex-1 compressx-v2-w-full">
+                    <span id="avifStrengthValue" class="compressx-v2-w-8 compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-slate-600 compressx-v2-text-right">
+                        <?php echo esc_html($avif_quality); ?>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Script -->
+            <script>
+                const avifRange = document.getElementById("cx-v2-avif-quality-input");
+                const avifDisplay = document.getElementById("avifStrengthValue");
+                avifRange.addEventListener("input", () => {
+                    avifDisplay.textContent = avifRange.value;
+                });
+            </script>
+        </div>
+
+        <?php
+    }
+
+    public function output_smart()
+    {
+        $size_threshold=80;
+
+        $quality_options = CompressX_Options::get_option('compressx_quality', array());
+        $webp_quality = CompressX_Options::get_webp_quality($quality_options);
+        $avif_quality = CompressX_Options::get_avif_quality($quality_options);
+
+        $fixed_webp=80;
+        $fixed_avif=60;
+
+        $webp_max=80;
+        $webp_min=35;
+
+        $avif_max=60;
+        $avif_min=30;
+
+        ?>
+        <div class="compressx-v2-bg-white compressx-v2-rounded">
+
+            <!-- Global Rule Explanation -->
+            <!-- Global Rule Explanation (2 Columns) -->
+            <div class="compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-6 compressx-v2-mb-4">
+                <!-- Left: Title & Description -->
+                <div>
+                    <h4 class="compressx-v2-text-sm compressx-v2-font-medium">
+                        Smart Quality Rules
+                    </h4>
+                    <p class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                        Define how compression quality changes based on image size.
+                    </p>
+                </div>
+                <!-- Right: Tip -->
+                <div class="compressx-v2-bg-gray-50 compressx-v2-rounded compressx-v2-p-3">
+                    <p class="compressx-v2-text-xs compressx-v2-text-gray-600">
+                        <span class="compressx-v2-font-medium">Tip:</span>
+                        In most cases, you do not need to change any settings below.
+                        Smart mode works well with the default values for most sites.
+                    </p>
+                </div>
+            </div>
+            <!-- Size Threshold -->
+            <div class="compressx-v2-border compressx-v2-rounded compressx-v2-p-4 compressx-v2-mb-4">
+                <div class="compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-6">
+                    <!-- Left: Size Threshold Rule -->
+                    <div>
+                        <h5 class="compressx-v2-text-sm compressx-v2-font-medium">
+                            Size Threshold
+                        </h5>
+                        <div class="compressx-v2-text-xs compressx-v2-text-gray-500 compressx-v2-mb-3">
+                            Define the split point between fixed and adaptive compression.
+                            <a id="cx_show_size_threshold_tip" style="cursor: pointer" class="compressx-v2-text-xs compressx-v2-text-blue-600 hover:compressx-v2-text-blue-700">Why?</a>
+                        </div>
+                        <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-2">
+                            <span class="compressx-v2-text-sm">
+                                Images ≤
+                            </span>
+                            <input id="compressx_size_threshold" type="number" value="<?php echo esc_attr($size_threshold)?>" min="10" max="500" class="compressx-v2-w-20 compressx-v2-border compressx-v2-rounded compressx-v2-text-center" readonly/>
+                            <span class="compressx-v2-text-sm">
+                                KB use fixed quality
+                            </span>
+                        </div>
+                        <div class="compressx-v2-text-xs compressx-v2-text-gray-400 compressx-v2-mt-2">
+                            Recommended value: 30KB – 100KB.
+                        </div>
+                    </div>
+                    <!-- Right: Design Rationale Tip -->
+                    <div id="cx_size_threshold_tip" style="display: none"  class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                        <div class="compressx-v2-font-medium compressx-v2-text-gray-600 compressx-v2-mb-1">
+                            Why a size threshold?
+                        </div>
+                        <div>
+                            Very small images are more sensitive to quality changes.
+                            Using a fixed quality helps preserve visual clarity.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Rule Layout -->
+            <div class="compressx-v2-grid compressx-v2-grid-cols-3 compressx-v2-gap-4 compressx-v2-mb-4">
+                <!-- Small Images -->
+                <div class="compressx-v2-col-span-1 compressx-v2-border compressx-v2-rounded compressx-v2-p-4">
+                    <h5 class="compressx-v2-text-sm compressx-v2-font-medium">
+                        Small Images (≤ Threshold)
+                    </h5>
+                    <p class="compressx-v2-text-xs compressx-v2-text-gray-500 compressx-v2-mb-4">
+                        Fixed compression quality is applied.
+                    </p>
+                    <div class="compressx-v2-mb-4">
+                        <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                            WebP Fixed Quality
+                        </div>
+                        <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                            <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                                <input disabled id="compressx_fixed_webp" type="range" min="1" max="99" value="<?php echo esc_attr($fixed_webp) ?>" class="compressx-v2-flex-1 compressx-v2-w-full cx-quality-range">
+                                <!-- 👇 value display -->
+                                <span class="compressx-v2-w-8 compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-slate-600 compressx-v2-text-right">
+                                   <?php echo esc_html($fixed_webp) ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                            AVIF Fixed Quality
+                        </div>
+                        <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                            <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                                <input disabled id="compressx_fixed_avif" type="range" min="1" max="99" value="<?php echo esc_attr($fixed_avif) ?>" class="cx-quality-range compressx-v2-flex-1 compressx-v2-w-full">
+                                <!-- 👇 value display -->
+                                <span class="compressx-v2-w-8 compressx-v2-text-sm compressx-v2-font-semibold compressx-v2-text-slate-600 compressx-v2-text-right">
+                                    <?php echo esc_html($fixed_avif) ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Large Images -->
+                <div class="compressx-v2-col-span-2 compressx-v2-border compressx-v2-rounded compressx-v2-p-4">
+                    <h5 class="compressx-v2-text-sm compressx-v2-font-medium">
+                        Large Images (> Threshold)
+                    </h5>
+                    <p class="compressx-v2-text-xs compressx-v2-text-gray-500 compressx-v2-mb-4">
+                        Compression quality decreases automatically as image size increases.
+                    </p>
+                    <div class="compressx-v2-grid compressx-v2-grid-cols-2 compressx-v2-gap-4">
+                        <!-- WebP -->
+                        <div class="compressx-v2-border compressx-v2-rounded compressx-v2-p-3">
+                            <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                                WebP Quality Range
+                            </div>
+                            <div class="compressx-v2-mt-2">
+                                <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                    Quality at Threshold
+                                </div>
+                                <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                    <span id="cx_webp_max"><?php echo esc_html($webp_max)?></span> <span class="compressx-v2-text-xs compressx-v2-text-gray-400">(Inherited)</span>
+                                </div>
+                                <div class="compressx-v2-mt-2">
+                                    <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                        Threshold → 4MB
+                                    </div>
+                                    <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                        <span><span id="cx_webp_max_2"><?php echo esc_html($webp_max)?></span><span> to </span><span id="cx_webp_min_2"><?php echo esc_html($webp_min)?></span></span><span class="compressx-v2-text-xs compressx-v2-text-gray-400"> Lower quality, smaller file size. <a href="https://compressx.io/docs/smart-image-optimization/#compressx-size-threshold" >Why?</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compressx-v2-mt-2">
+                                <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                    Quality ≥ 4MB
+                                </div>
+                                <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                    <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                                        <span class="compressx-v2-w-8 compressx-v2-text-lg compressx-v2-font-semibold compressx-v2-text-slate-600 ">
+                                            <?php echo esc_html($webp_min)?>
+                                        </span>
+                                        <input disabled id="compressx_webp_min" type="range" min="1" max="99" value="<?php echo esc_attr($webp_min)?>" class="cx-quality-range compressx-v2-flex-1 compressx-v2-w-full">
+                                        <!-- 👇 value display -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- AVIF -->
+                        <div class="compressx-v2-border compressx-v2-rounded compressx-v2-p-3">
+                            <div class="compressx-v2-text-xs compressx-v2-text-gray-500">
+                                AVIF Quality Range
+                            </div>
+                            <div class="compressx-v2-mt-2">
+                                <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                    Quality at Threshold
+                                </div>
+                                <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                    <span id="cx_avif_max"><?php echo esc_html($avif_max)?> </span> <span class="compressx-v2-text-xs compressx-v2-text-gray-400">(Inherited)</span>
+                                </div>
+                                <div class="compressx-v2-mt-2">
+                                    <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                        Threshold → 4MB
+                                    </div>
+                                    <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                        <span><span id="cx_avif_max_2"><?php echo esc_html($avif_max)?></span><span> to </span><span id="cx_avif_min_2"><?php echo esc_html($avif_min)?></span></span><span class="compressx-v2-text-xs compressx-v2-text-gray-400"> Lower quality, smaller file size. <a href="https://compressx.io/docs/smart-image-optimization/#compressx-size-threshold">Why?</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compressx-v2-mt-2">
+                                <div class="compressx-v2-text-xs compressx-v2-text-gray-400">
+                                    Quality ≥ 4MB
+                                </div>
+                                <div class="compressx-v2-text-lg compressx-v2-font-semibold">
+                                    <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3 compressx-v2-mt-1">
+                                        <span class="compressx-v2-w-8 compressx-v2-text-lg compressx-v2-font-semibold compressx-v2-text-slate-600">
+                                            <?php echo esc_html($avif_min)?>
+                                        </span>
+                                        <input disabled id="compressx_avif_min" type="range" min="1" max="99" value="<?php echo esc_attr($avif_min)?>" class="cx-quality-range compressx-v2-flex-1 compressx-v2-w-full">
+                                        <!-- 👇 value display -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Chart -->
+            <div>
+                <!-- Full Width Chart -->
+                <div class="compressx-v2-w-full compressx-v2-border compressx-v2-h-96 compressx-v2-bg-gray-50 compressx-v2-rounded">
+                    <canvas id="compressxCurveDual"></canvas>
+                </div>
+            </div>
+        </div>
+        <script>
+            jQuery('.cx-quality-range').change(function(e)
+            {
+                jQuery(this).prev('span').text(jQuery(this).val());
+                jQuery(this).next('span').text(jQuery(this).val());
+            });
+
+            jQuery('#compressx_fixed_webp').change(function(e)
+            {
+                let webp_max=jQuery(this).val();
+                jQuery("#cx_webp_max").html(webp_max);
+            });
+
+            jQuery('#compressx_fixed_avif').change(function(e)
+            {
+                let avif_max=jQuery(this).val();
+                jQuery("#cx_avif_max").html(avif_max);
+            });
+        </script>
+        <script>
+            const ctx = document.getElementById('compressxCurveDual');
+            let chart;
+
+            function clamp(v, min, max) {
+                return Math.max(min, Math.min(max, v));
+            }
+
+            /**
+             * JS port of calculate_quality_v2:
+             * 1) size <= threshold => fixedQ
+             * 2) threshold < size <= 4MB => log curve maxQ -> minQ
+             * 3) size > 4MB => minQ
+             */
+            function calculateQualityV2(sizeKB, thresholdKB, fixedQ, minQ, maxQ, K = 1.6) {
+                const Smax = 4000.0; // 4MB
+
+                sizeKB = Math.max(1.0, Number(sizeKB));
+                thresholdKB = Math.max(1.0, Number(thresholdKB));
+
+                fixedQ = parseInt(fixedQ, 10);
+                minQ = parseInt(minQ, 10);
+                maxQ = parseInt(maxQ, 10);
+
+                if (maxQ < minQ) [maxQ, minQ] = [minQ, maxQ];
+
+                fixedQ = clamp(fixedQ, 0, 100);
+                minQ = clamp(minQ, 0, 100);
+                maxQ = clamp(maxQ, 0, 100);
+
+                // Rule 1: small images fixed
+                if (sizeKB <= thresholdKB) return fixedQ;
+
+                // Rule 3: > 4MB uses minQ
+                if (sizeKB > Smax) return minQ;
+
+                // Rule 2: in-between curve
+                if (thresholdKB >= Smax) return minQ; // degenerate config safeguard
+
+                let ratio = (Math.log(sizeKB) - Math.log(thresholdKB)) / (Math.log(Smax) - Math.log(thresholdKB));
+                ratio = clamp(ratio, 0.0, 1.0);
+
+                const rK = Math.pow(ratio, K);
+
+                const Q = maxQ - (maxQ - minQ) * rK;
+                return clamp(Q, 0, 100);
+            }
+
+            function buildKeySizes(thresholdKB, opts = {})
+            {
+                const {
+                    includeZero = true,
+                    sMax = 4000,               // 4MB
+                    tail = [6144, 8192, 10240],// 6/8/10MB
+                    keys = [100, 200, 300, 400, 500,600,700,800,900, 1024, 2048, 3072, 4000], //
+                    maxMidPoints = 13           //
+                } = opts;
+
+                thresholdKB = Math.max(1, parseInt(thresholdKB || 200, 10));
+
+                const sizes = [];
+
+                // A) 0 and threshold
+                if (includeZero) sizes.push(0);
+                sizes.push(thresholdKB);
+
+                // B) threshold..4MB key points
+                let midCandidates = keys
+                    .filter(k => k > thresholdKB && k < sMax);
+
+                if (midCandidates.length > maxMidPoints) {
+                    const step = (midCandidates.length - 1) / (maxMidPoints - 1);
+                    const picked = [];
+                    for (let i = 0; i < maxMidPoints; i++) {
+                        picked.push(midCandidates[Math.round(i * step)]);
+                    }
+                    midCandidates = Array.from(new Set(picked));
+                }
+
+                sizes.push(...midCandidates);
+
+                if (!sizes.includes(sMax)) sizes.push(sMax);
+
+                tail.forEach(t => sizes.push(t));
+
+                return Array.from(new Set(sizes)).sort((a, b) => a - b);
+            }
+
+            function generateCurve(format = 'webp') {
+                const thresholdKB = parseInt(document.getElementById("compressx_size_threshold")?.value || 200, 10);
+
+                let fixedQ, minQ;
+                if (format === 'avif') {
+                    fixedQ = parseInt(document.getElementById("compressx_fixed_avif")?.value || 90, 10);
+                    minQ = parseInt(document.getElementById("compressx_avif_min")?.value || 60, 10);
+                } else {
+                    fixedQ = parseInt(document.getElementById("compressx_fixed_webp")?.value || 90, 10);
+                    minQ = parseInt(document.getElementById("compressx_webp_min")?.value || 60, 10);
+                }
+
+                const maxQ = fixedQ;
+                const K = 1.6;
+
+                const sizes = buildKeySizes(thresholdKB, {
+                    includeZero: true,
+                    maxMidPoints: 10,
+                    keys: [100, 200, 300, 400, 500,600,700,800,900, 1024, 2048, 3072, 4000]
+                });
+
+                const data = sizes.map(sizeKB => {
+                    const safeSize = Math.max(1, sizeKB);
+                    return calculateQualityV2(safeSize, thresholdKB, fixedQ, minQ, maxQ, K);
+                });
+
+                return { sizes, data };
+            }
+
+            function formatSize(kb) {
+                kb = Number(kb) || 0;
+
+                if (kb === 4000) return "4MB";
+
+                if (kb === 6144) return "6MB";
+                if (kb === 8192) return "8MB";
+                if (kb === 10240) return "10MB";
+
+                if (kb < 1024) return `${Math.round(kb)}KB`;
+
+                const mb = kb / 1024;
+                return `${mb.toFixed(mb >= 10 ? 0 : 1)}MB`;
+            }
+
+
+            function drawCurves() {
+                const webp = generateCurve('webp');
+                const avif = generateCurve('avif');
+
+                const labels = webp.sizes.map(formatSize);
+
+                const thresholdKB = parseInt(document.getElementById("compressx_size_threshold")?.value || 200, 10);
+                const thresholdLabel = formatSize(thresholdKB);
+                const thresholdMaxLabel = formatSize(4000);
+
+                const thresholdLine = {
+                    label: 'Threshold',
+                    type: 'line',
+                    data: [
+                        { x: thresholdLabel, y: 0 },
+                        { x: thresholdLabel, y: 100 }
+                    ],
+                    borderColor: '#f59e0b',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                };
+
+                const thresholdLineMax = {
+                    label: '4MB',
+                    type: 'line',
+                    data: [
+                        { x: thresholdMaxLabel, y: 0 },
+                        { x: thresholdMaxLabel, y: 100 }
+                    ],
+                    borderColor: '#cbd5e1',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                };
+
+                if (chart) chart.destroy();
+
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: 'WebP', data: webp.data, borderColor: '#3b82f6', tension: 0.4, fill: false },
+                            { label: 'AVIF', data: avif.data, borderColor: '#10b981', tension: 0.4, fill: false },
+                            thresholdLine,
+                            thresholdLineMax
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'File Size' }
+                            },
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Quality %' }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: function(items) {
+                                        return `Size: ${items[0].label}`;
+                                    },
+                                    label: function(item) {
+                                        if (item.dataset.label === 'Threshold') return null;
+                                        return `${item.dataset.label}: ${Math.round(item.raw)}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+
+
+            jQuery(function ($) {
+
+                const watchIds = [
+                    '#compressx_size_threshold',
+                    '#compressx_fixed_webp',
+                    '#compressx_fixed_avif',
+                    '#compressx_webp_min',
+                    '#compressx_avif_min'
+                ];
+
+                function updateRangeDisplay($el) {
+                    const $span = $el.closest('.compressx-v2-flex').find('span').last();
+                    if ($span.length) $span.text($el.val());
+                }
+
+                function onAnyControlChange(e) {
+                    const $el = $(e.target);
+
+                    if ($el.attr('type') === 'range') {
+                        updateRangeDisplay($el);
+                    }
+
+                    drawCurves();
+                }
+
+                watchIds.forEach(id => {
+                    const $el = $(id);
+                    if ($el.length && $el.attr('type') === 'range') {
+                        updateRangeDisplay($el);
+                    }
+                });
+
+                $(watchIds.join(',')).on('input change', onAnyControlChange);
+
+                drawCurves();
+            });
+
+        </script>
+        <?php
+    }
+
     public function output_settings()
     {
         $options = CompressX_Options::get_option('compressx_general_settings', array());
@@ -998,9 +1615,7 @@ class CompressX_Image_Optimization_Display
                 <!-- Browser compatibility -->
                 <div class="compressx-v2-flex compressx-v2-items-start compressx-v2-gap-3">
                     <label class="compressx-v2-w-56 compressx-v2-text-sm compressx-v2-font-medium"><?php esc_html_e('Browser compatibility', 'compressx') ?>
-                        <?php $this->output_tooltip('', esc_html__('Rewrite rule:Load WebP and AVIF images by adding rewrite rules to the .htaccess file. So if the browser supports AVIF, AVIF images will be loaded. If AVIF is not supported, WebP images will be loaded. If both formats are not supported, the original .jpg and .png images will be loaded if any.The \'.htaccess\' refers to \'/wp-content/.htaccess\'.
-Compatible Rewrite Rule (Beta): An alternative set of rewrite rules for broader server compatibility. Try it when the standard "Rewrite Rule" fails.
-Picture tag: Load WebP and AVIF images by replacing <img> tags with <picture> tags. You can use it when .htaccess can not take effect on your server. For example, if you are not able to restart an OpenLiteSpeed server which is required for .htaccess to take effect. This method works for most browsers but does not support images in CSS.', 'compressx')); ?>
+                        <?php $this->output_tooltip('', esc_html__("Choose how to deliver WebP/AVIF images: via .htaccess rewrite rules (standard or compatible for broader support) or picture tags (when .htaccess doesn't work, but excludes CSS images).", 'compressx')); ?>
                     </label>
 
                     <div class="compressx-v2-space-y-2 compressx-v2-text-sm">
@@ -1104,7 +1719,7 @@ Picture tag: Load WebP and AVIF images by replacing <img> tags with <picture> ta
                 <!-- Queue throughput -->
                 <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-3">
                     <label class="compressx-v2-w-56 compressx-v2-text-sm compressx-v2-font-medium"><?php esc_html_e('Queue throughput', 'compressx') ?>
-                        <?php $this->output_tooltip('', esc_html__('This value indicates how many WordPress image attachments (including original images and thumbnails) can be processed in one AJAX cycle. For example, if the value is set to 1, the plugin will process 1 attachment, which may include 1 original image and 20 thumbnails. Typically, web hosting services allow an AJAX execution time of 120 seconds, during which 3 image attachments can be processed, equating to 3 original images and 60 thumbnails. The default value is set to 5.', 'compressx')); ?>
+                        <?php $this->output_tooltip('', esc_html__('Number of WordPress image attachments (including original and thumbnails) processed per AJAX cycle. Default is 5.', 'compressx')); ?>
                     </label>
                     <div class="compressx-v2-flex compressx-v2-items-center compressx-v2-gap-2">
                         <select id="cx-v2-throughput" class="compressx-v2-border compressx-v2-border-gray-300 compressx-v2-rounded compressx-v2-px-2 compressx-v2-py-1">
@@ -1139,12 +1754,7 @@ Picture tag: Load WebP and AVIF images by replacing <img> tags with <picture> ta
         <div class="compressx-v2-flex compressx-v2-items-start compressx-v2-gap-3 compressx-v2-opacity-50">
             <label class="compressx-v2-w-56 compressx-v2-text-sm compressx-v2-font-medium">
                 <?php esc_html_e('New Upload (Cron)', 'compressx') ?>
-                <?php $this->output_tooltip('', esc_html__('Process images immediately upon upload
-Process images immediately after upload. You may experience a short delay on image available due to real-time conversion.
-(Recommended) Process images after x minutes of uploading
-Delay image processing by a specified time. This option can help prevent interruptions to your workflow caused by image conversions and compression.
-Process new uploads within a scheduled time window:
-Schedule bulk processing of newly uploaded images for a time window with low traffic (e.g., overnight). This helps minimize the impact on server performance during peak hours.', 'compressx')); ?>
+                <?php $this->output_tooltip('', esc_html__('Choose when to process new uploads: immediately (real-time but may delay availability), after a delay (recommended to avoid workflow interruption), or during scheduled low-traffic windows (minimizes server impact).', 'compressx')); ?>
                 <a href="https://compressx.io/pricing" target="_blank" class="compressx-v2-text-blue-600"><?php esc_html_e('Pro only', 'compressx') ?></a>
             </label>
 
@@ -1224,7 +1834,7 @@ Schedule bulk processing of newly uploaded images for a time window with low tra
 
     public function get_bulk_progress()
     {
-        $stats = CompressX_Image_Meta::get_global_stats_ex();
+        $stats = CompressX_Image_Meta_V2::get_global_stats_ex();
         if(isset($stats['converted_percent']))
             return $stats['converted_percent'];
         else

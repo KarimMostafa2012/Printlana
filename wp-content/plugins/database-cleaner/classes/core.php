@@ -605,6 +605,7 @@ class Meow_DBCLNR_Core
 			'metadata_usedby' => [],
 			'deep_deletions' => false,
 			'mode' => 'easy',
+			'enable_protected_deletion' => false,
 			'hide_message' => false,
 			'migrated_option_names' => true, // Flag whether it has migrated option's name or not
 			'delay' => 100,

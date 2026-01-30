@@ -373,13 +373,6 @@ class WPML_Translation_Management {
 		return ! isset( $_SERVER['HTTP_ACCEPT'] ) || false !== strpos( $_SERVER['HTTP_ACCEPT'], 'text/html' );
 	}
 
-	function dismiss_icl_side_by_site() {
-		global $iclTranslationManagement;
-		$iclTranslationManagement->settings['doc_translation_method'] = ICL_TM_TMETHOD_MANUAL;
-		$iclTranslationManagement->save_settings();
-		exit;
-	}
-
 	function plugin_action_links( $links, $file ) {
 		$this_plugin = basename( WPML_TM_PATH ) . '/plugin.php';
 		if ( $file == $this_plugin ) {
@@ -610,7 +603,6 @@ class WPML_Translation_Management {
 		// Add a nice warning message if the user tries to edit a post manually and it's actually in the process of being translated
 		$this->add_translation_in_progress_warning( $pagenow );
 
-		add_action( 'wp_ajax_dismiss_icl_side_by_site', array( $this, 'dismiss_icl_side_by_site' ) );
 		add_action( 'wp_ajax_icl_tm_toggle_promo', array( $this, '_icl_tm_toggle_promo' ) );
 		add_action( 'wpml_support_page_after', array( $this, 'add_com_log_link' ) );
 

@@ -11,19 +11,19 @@ msgstr "متقدم"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "عنصر ارتساء HTML"
+msgstr "مرساة HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "أضف اختصارًا إلى هذه الكتلة عند تحميل الصفحة باستخدام مسار الإنترنت الخاص بـ\"#anchor\"."
+msgstr "أضف اختصارًا إلى هذه الكتلة عند تحميل الصفحة باستخدام عنوان URL ”#anchor“."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "فئة (فئات) CSS الإضافية"
+msgstr "فئات CSS إضافية"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "فصل الفئات المتعددة بفاصلة."
+msgstr "افصل الفئات المتعددة بمسافات."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -45,15 +45,15 @@ msgstr "الأبعاد"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
-msgstr "الكتل"
+msgstr "الكتلة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "هامش كتلة البيانات"
+msgstr "هامش الكتلة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "نطاق كتلة البيانات"
+msgstr "حشوة الكتلة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -61,23 +61,23 @@ msgstr "اللغة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "تباعد المسافات في اللغة"
+msgstr "تباعد اللغة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "نطاق اللغة"
+msgstr "حشوة اللغة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "عرض"
+msgstr "العرض"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
-msgstr "عرض العلم"
+msgstr "إظهار العلم"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
-msgstr "عرض اسم اللغة"
+msgstr "إظهار اسم اللغة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
@@ -101,23 +101,23 @@ msgstr "الارتفاع"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "تباعد المسافات"
+msgstr "التباعد"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "السماح بالتضمين في عدة أسطر"
+msgstr "السماح بالالتفاف إلى أسطر متعددة"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "الفتح عند النقر"
+msgstr "فتح عند النقر"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
-msgstr "عرض السهم"
+msgstr "إظهار السهم"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
 msgid "Layout"
-msgstr "التنسيق"
+msgstr "التخطيط"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
@@ -129,12 +129,12 @@ msgstr "الاتجاه"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
-msgstr "نمط الطباعة"
+msgstr "الطباعة"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:116
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
 msgid "Background"
-msgstr "خلفية"
+msgstr "الخلفية"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:121
 msgid "Language Text"
@@ -155,27 +155,27 @@ msgstr "خلفية اللغة الحالية"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
-msgstr "الاسم بالكامل"
+msgstr "الاسم الكامل"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:9
 msgid "Code"
-msgstr "الكود"
+msgstr "الرمز"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "ضبط العناصر إلى اليسار"
+msgstr "محاذاة العناصر إلى اليسار"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "ضبط العناصر إلى المنتصف"
+msgstr "محاذاة العناصر إلى المنتصف"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "ضبط العناصر إلى اليمين"
+msgstr "محاذاة العناصر إلى اليمين"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "ضبط المسافة البينية للعناصر"
+msgstr "محاذاة العناصر مع تباعد بينها"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -183,7 +183,7 @@ msgstr "أفقي"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
 msgid "Vertical"
-msgstr "رأسي"
+msgstr "عمودي"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
 msgid "Normal"
@@ -199,7 +199,7 @@ msgstr "كبير"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "كبير للغاية"
+msgstr "كبير جدًا"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -207,7 +207,7 @@ msgstr "أب"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
 msgid "AB"
-msgstr "أب"
+msgstr "أ ب"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
 msgid "ab"
@@ -219,27 +219,27 @@ msgstr "صغير"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "يعرض محوّل اللغة الخاص بـWPML."
+msgstr "يعرض مبدل لغة WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "محوّل اللغة"
+msgstr "مبدل اللغة"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "يعرض محوّل اللغة الخاص بـWPML"
+msgstr "يعرض مبدل لغة WPML"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "يعرض محوّل اللغة WPML Language Switcher. <br/> تعرف على <a>كيفية ترجمة كتلة البيانات هذه</a>."
+msgstr "يعرض مبدل لغة WPML. <br/> تعرّف على <a>كيفية ترجمة هذه الكتلة</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "محوّل لغة التنقل"
+msgstr "مبدل لغة التنقل"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

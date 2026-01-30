@@ -7,10 +7,10 @@ msgstr ""
 
 #: src/js/media-setup/components/MediaSetupStatus.js:15
 msgid "But..."
-msgstr "但是"
+msgstr "但是…"
 
 #: src/js/media-setup/components/MediaSetupStatus.js:16
 msgid ""
 "Wait to translate any content that contains media until we're finished "
 "configuring it. It will be just a moment."
-msgstr "在我们完成配置之前，请不要翻译任何包含媒体的内容。只需稍等片刻。"
+msgstr "请等待翻译任何包含媒体的内容，直到我们完成配置。这只需要片刻时间。"

@@ -31,6 +31,8 @@ class AllNodes extends \WPML_Elementor_Media_Node {
 						'background_image',
 						'background_overlay_image',
 						'background_hover_image',
+						'background_image_mobile',
+						'background_image_tablet',
 					],
 					'repeater_fields' => [
 						'background_slideshow_gallery',

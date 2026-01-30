@@ -15,6 +15,7 @@ use WPML\Settings\PostType\Automatic;
 use WPML\TM\API\ATE\LanguageMappings;
 use WPML\TM\API\Job\Map;
 use WPML\TM\Records\UpdateTranslationReviewStatus;
+use WPML\Translation\TranslateJobErrorServiceFactory;
 use function WPML\Container\make;
 use function WPML\FP\curryN;
 use function WPML\FP\pipe;
@@ -122,6 +123,9 @@ class Jobs {
 				[ 'job_id' => $jobId ],
 				[ 'job_id' => '%d' ]
 			);
+
+			$service = TranslateJobErrorServiceFactory::create();
+			$service->deleteError( $jobId );
 		} ) );
 
 		self::macro( 'isEligibleForAutomaticTranslations', curryN( 1, Fns::memorize( function ( $wpmlJobId ) {
@@ -382,7 +386,9 @@ class Jobs {
 		}
 
 		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
-		$wpdb->query( $query );
+		if ( $wpdb->query( $query ) > 0 ) {
+			do_action( 'wpml_tm_ate_jobs_updated', [ $jobId ] );
+		}
 
 		return $jobId;
 	}

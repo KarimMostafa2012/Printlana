@@ -152,7 +152,7 @@ html,
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   /* 3 */
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
@@ -197,7 +197,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 /*
@@ -618,6 +618,10 @@ video {
   right: 0.75rem;
 }
 
+.compressx-v2-top-0 {
+  top: 0px;
+}
+
 .compressx-v2-top-0\.5 {
   top: 0.125rem;
 }
@@ -815,10 +819,6 @@ video {
   height: 0.5rem;
 }
 
-.compressx-v2-h-20 {
-  height: 5rem;
-}
-
 .compressx-v2-h-3 {
   height: 0.75rem;
 }
@@ -835,6 +835,10 @@ video {
   height: 1.25rem;
 }
 
+.compressx-v2-h-52 {
+  height: 13rem;
+}
+
 .compressx-v2-h-56 {
   height: 14rem;
 }
@@ -845,6 +849,10 @@ video {
 
 .compressx-v2-h-64 {
   height: 16rem;
+}
+
+.compressx-v2-h-96 {
+  height: 24rem;
 }
 
 .compressx-v2-h-\[135px\] {
@@ -863,8 +871,8 @@ video {
   height: 160px;
 }
 
-.compressx-v2-h-\[30rem\] {
-  height: 30rem;
+.compressx-v2-h-\[35rem\] {
+  height: 35rem;
 }
 
 .compressx-v2-h-\[400px\] {
@@ -890,6 +898,10 @@ video {
 
 .compressx-v2-h-px {
   height: 1px;
+}
+
+.compressx-v2-h-36 {
+  height: 9rem;
 }
 
 .compressx-v2-max-h-\[600px\] {
@@ -932,6 +944,14 @@ video {
   width: 6rem;
 }
 
+.compressx-v2-w-32 {
+  width: 8rem;
+}
+
+.compressx-v2-w-36 {
+  width: 9rem;
+}
+
 .compressx-v2-w-4 {
   width: 1rem;
 }
@@ -954,6 +974,10 @@ video {
 
 .compressx-v2-w-64 {
   width: 16rem;
+}
+
+.compressx-v2-w-8 {
+  width: 2rem;
 }
 
 .compressx-v2-w-\[135px\] {
@@ -992,6 +1016,14 @@ video {
   width: 100%;
 }
 
+.compressx-v2-min-w-20 {
+  min-width: 5rem;
+}
+
+.compressx-v2-min-w-56 {
+  min-width: 14rem;
+}
+
 .compressx-v2-min-w-64 {
   min-width: 16rem;
 }
@@ -1002,10 +1034,6 @@ video {
 
 .compressx-v2-min-w-full {
   min-width: 100%;
-}
-
-.compressx-v2-min-w-20 {
-  min-width: 5rem;
 }
 
 .compressx-v2-max-w-7xl {
@@ -1037,8 +1065,23 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.compressx-v2--translate-y-1\/2 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.compressx-v2-translate-x-1\/2 {
+  --tw-translate-x: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .compressx-v2-translate-x-5 {
   --tw-translate-x: 1.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.compressx-v2-translate-y-1\/2 {
+  --tw-translate-y: 50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1150,12 +1193,12 @@ video {
 
 .compressx-v2-gap-x-1 {
   -moz-column-gap: 0.25rem;
-       column-gap: 0.25rem;
+  column-gap: 0.25rem;
 }
 
 .compressx-v2-gap-x-6 {
   -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
+  column-gap: 1.5rem;
 }
 
 .compressx-v2-gap-y-1 {
@@ -1182,12 +1225,6 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.compressx-v2-space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .compressx-v2-space-x-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1433,6 +1470,11 @@ video {
 
 .compressx-v2-border-transparent {
   border-color: transparent;
+}
+
+.compressx-v2-border-yellow-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(253 224 71 / var(--tw-border-opacity, 1));
 }
 
 .compressx-v2-border-yellow-400 {
@@ -1758,7 +1800,7 @@ video {
 
 .compressx-v2-object-contain {
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .compressx-v2-p-1 {
@@ -1819,6 +1861,11 @@ video {
   padding-right: 1.5rem;
 }
 
+.compressx-v2-px-\[6px\] {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .compressx-v2-py-0\.5 {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -1859,6 +1906,11 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.compressx-v2-py-\[1px\] {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .compressx-v2-pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -1867,8 +1919,24 @@ video {
   padding-bottom: 1rem;
 }
 
+.compressx-v2-pl-2 {
+  padding-left: 0.5rem;
+}
+
+.compressx-v2-pl-3 {
+  padding-left: 0.75rem;
+}
+
+.compressx-v2-pl-5 {
+  padding-left: 1.25rem;
+}
+
 .compressx-v2-pl-6 {
   padding-left: 1.5rem;
+}
+
+.compressx-v2-pr-3 {
+  padding-right: 0.75rem;
 }
 
 .compressx-v2-pr-4 {
@@ -1978,6 +2046,10 @@ video {
 
 .compressx-v2-leading-normal {
   line-height: 1.5;
+}
+
+.compressx-v2-leading-relaxed {
+  line-height: 1.625;
 }
 
 .compressx-v2-leading-snug {
@@ -2186,6 +2258,11 @@ video {
   color: rgb(133 77 14 / var(--tw-text-opacity, 1));
 }
 
+.compressx-v2-text-yellow-900 {
+  --tw-text-opacity: 1;
+  color: rgb(113 63 18 / var(--tw-text-opacity, 1));
+}
+
 .compressx-v2-underline {
   text-decoration-line: underline;
 }
@@ -2308,6 +2385,11 @@ video {
 .hover\:compressx-v2-bg-gray-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:compressx-v2-bg-gray-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:compressx-v2-bg-gray-50:hover {
@@ -2476,6 +2558,11 @@ video {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:compressx-v2-ring-gray-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity, 1));
 }
 
 .focus\:compressx-v2-ring-gray-400:focus {

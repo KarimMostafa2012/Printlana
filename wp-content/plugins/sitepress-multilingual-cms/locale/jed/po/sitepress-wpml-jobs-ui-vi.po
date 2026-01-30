@@ -2,12 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: vi_VN\n"
+"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
-msgstr "Bắt đầu đồng bộ hóa hàng loạt"
+msgstr "Bắt đầu đồng bộ hàng loạt"
 
 #: src/js/jobs/components/Actions/Cancel.js:35
 msgid "Cancel job"
@@ -23,7 +23,7 @@ msgstr "Bắt đầu tải xuống tệp XLIFF"
 
 #: src/js/jobs/components/Actions/Edit.js:38
 msgid "Edit"
-msgstr "Sửa"
+msgstr "Chỉnh sửa"
 
 #: src/js/jobs/components/Actions/GetTranslation.js:31
 msgid "Get translation"
@@ -31,12 +31,12 @@ msgstr "Nhận bản dịch"
 
 #: src/js/jobs/components/Actions/Resign.js:35
 msgid "Resign"
-msgstr "Từ bỏ"
+msgstr "Từ chối"
 
 #: src/js/jobs/components/Actions/Review.js:46
 #: src/js/jobs/components/Actions/ReviewInATE.js:35
 msgid "Review"
-msgstr "Đánh giá"
+msgstr "Xem xét"
 
 #: src/js/jobs/components/Actions/TakeAndTranslate.js:33
 msgid "Translate"
@@ -44,7 +44,7 @@ msgstr "Dịch"
 
 #: src/js/jobs/components/Actions/TakeAndTranslate.js:33
 msgid "Take and Translate"
-msgstr "Lấy và Dịch"
+msgstr "Nhận và dịch"
 
 #: src/js/jobs/components/Actions/View.js:22
 msgid "View"
@@ -52,15 +52,15 @@ msgstr "Xem"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:48
 msgid "Delete Translations"
-msgstr "Xóa các bản dịch"
+msgstr "Xóa bản dịch"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:56
 msgid "Keep Translations as Draft"
-msgstr "Giữ các bản dịch dưới dạng Bản nháp"
+msgstr "Giữ bản dịch dưới dạng bản nháp"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
 msgid "Never mind. I want to review these translations."
-msgstr "Không sao. Tôi muốn rà soát các bản dịch này."
+msgstr "Không sao. Tôi muốn xem xét các bản dịch này."
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
 #: src/js/jobs/components/Filters/ActionFilters.js:60
@@ -71,15 +71,15 @@ msgstr "Hủy"
 msgid ""
 "This will remove the selected jobs from the Translations Queue without "
 "publishing them. What would you like to do with the translations?"
-msgstr "Việc này sẽ xóa các công việc đã chọn khỏi Hàng chờ Bản dịch mà không đăng tải chúng. Bạn muốn làm gì với các bản dịch?"
+msgstr "Thao tác này sẽ xóa các công việc đã chọn khỏi Hàng đợi bản dịch mà không xuất bản chúng. Bạn muốn làm gì với các bản dịch?"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
 msgid "Cancel Translation Review"
-msgstr "Hủy việc rà soát bản dịch"
+msgstr "Hủy xem xét bản dịch"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:39
 msgid "Bulk actions"
-msgstr "Hành động hàng loạt"
+msgstr "Thao tác hàng loạt"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:81
 #: src/js/jobs/components/Filters/ActionFilters.js:61
@@ -90,13 +90,13 @@ msgstr "Áp dụng"
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "Các hành động áp dụng cho nhiều công việc dịch thuật có thể mất vài giây. Vui lòng không rời khỏi trang."
+msgstr "Các thao tác áp dụng cho nhiều công việc dịch có thể mất vài giây. Vui lòng không rời khỏi trang."
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "Các hành động áp dụng cho nhiều công việc dịch thuật có thể mất vài phút. Vui lòng không rời khỏi trang."
+msgstr "Các thao tác áp dụng cho nhiều công việc dịch có thể mất vài phút. Vui lòng không rời khỏi trang."
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
@@ -104,7 +104,7 @@ msgstr "Chọn người dịch"
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:41
 msgid "Assign"
-msgstr "Phân công"
+msgstr "Chỉ định"
 
 #: src/js/jobs/components/Cells/StatusCell.js:11
 msgid "Cancelled"
@@ -137,15 +137,15 @@ msgstr "%s được xuất bản ngay lập tức vì chúng không hỗ trợ c
 
 #: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
-msgstr "Đã xuất bản — Chờ xem xét"
+msgstr "Đã xuất bản — Đang chờ xem xét"
 
 #: src/js/jobs/components/Cells/StatusCell.js:38
 msgid "Draft — Pending review"
-msgstr "Bản nháp - Đang chờ rà soát"
+msgstr "Bản nháp — Đang chờ xem xét"
 
 #: src/js/jobs/components/Cells/StatusCell.js:43
 msgid "Review in progress"
-msgstr "Đang trong quá trình xem xét"
+msgstr "Đang xem xét"
 
 #: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
@@ -180,7 +180,7 @@ msgstr "Dịch tự động"
 
 #: src/js/jobs/components/Cells/TranslatorCell.js:42
 msgid "TP ID: %d"
-msgstr "TP ID: %d"
+msgstr "ID TP: %d"
 
 #: src/js/jobs/components/Filters/Buttons.js:8
 msgid "Reset"
@@ -233,12 +233,12 @@ msgstr "Xóa tất cả bộ lọc"
 #: src/js/jobs/components/Filters/FiltersList.js:55
 #: src/js/jobs/components/Filters/TranslatedBy.js:37
 msgid "Any Translation Service"
-msgstr "Bất kỳ Dịch vụ Dịch thuật nào"
+msgstr "Bất kỳ dịch vụ dịch thuật nào"
 
 #: src/js/jobs/components/Filters/FiltersList.js:59
 #: src/js/jobs/components/Filters/TranslatedBy.js:42
 msgid "Any WordPress Translator"
-msgstr "Bất kỳ Người dịch WordPress nào"
+msgstr "Bất kỳ người dịch WordPress nào"
 
 #: src/js/jobs/components/Filters/Languages.js:72
 msgid "From"
@@ -254,7 +254,7 @@ msgstr "Bất kỳ ai"
 
 #: src/js/jobs/components/Filters/TranslationServiceJobsSwitcher.js:7
 msgid "Include jobs from translation services"
-msgstr "Bao gồm công việc từ dịch vụ dịch thuật"
+msgstr "Bao gồm các công việc từ dịch vụ dịch thuật"
 
 #: src/js/jobs/components/Filters/TypeFilter.js:33
 msgid "All types"
@@ -262,7 +262,7 @@ msgstr "Tất cả các loại"
 
 #: src/js/jobs/components/Filters/VisibleColumns.js:16
 msgid "Select visible columns"
-msgstr "Chọn cột hiển thị"
+msgstr "Chọn các cột hiển thị"
 
 #: src/js/jobs/components/Table.js:128
 msgid "Sort descending"
@@ -278,7 +278,7 @@ msgstr "Hủy sắp xếp"
 
 #: src/js/jobs/components/Table.js:97
 msgid "The bulk action is running..."
-msgstr "Đang thực hiện hành động hàng loạt..."
+msgstr "Thao tác hàng loạt đang chạy..."
 
 #: src/js/jobs/components/XliffBox/Export.js:54
 msgid "Export all jobs to XLIFF 1.0"
@@ -310,7 +310,7 @@ msgstr "Xuất"
 
 #: src/js/jobs/components/XliffBox/Import.js:38
 msgid "Select File"
-msgstr "Chọn Tệp"
+msgstr "Chọn tệp"
 
 #: src/js/jobs/components/XliffBox/Import.js:39
 msgid ".xliff .zip"
@@ -326,7 +326,7 @@ msgstr "Nhập"
 
 #: src/js/jobs/components/XliffBox/XliffBox.js:19
 msgid "Import / Export XLIFF"
-msgstr "Nhập / Xuất XLIFF"
+msgstr "Nhập/xuất XLIFF"
 
 #: src/js/jobs/components/actionColumn.js:13
 msgid "Actions"
@@ -348,7 +348,7 @@ msgstr "Tiêu đề"
 
 #: src/js/jobs/hooks/BulkActions/useCreateApproveTranslationReviewsAction.js:13
 msgid "Approve translation reviews"
-msgstr "Phê duyệt xem xét bản dịch"
+msgstr "Phê duyệt đánh giá bản dịch"
 
 #: src/js/jobs/hooks/BulkActions/useCreateCancelAction.js:20
 msgid "Cancel jobs"
@@ -356,7 +356,7 @@ msgstr "Hủy công việc"
 
 #: src/js/jobs/hooks/BulkActions/useCreateCancelTranslationReviewsAction.js:16
 msgid "Cancel translation reviews"
-msgstr "Hủy xem xét bản dịch"
+msgstr "Hủy đánh giá bản dịch"
 
 #: src/js/jobs/hooks/BulkActions/useCreateExportXLIFFAction.js:12
 msgid "Export to XLIFF %s"
@@ -368,7 +368,7 @@ msgstr "Nhận bản dịch"
 
 #: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
 msgid "This action does not apply to any of the selected translation jobs"
-msgstr "Hành động này không áp dụng cho bất kỳ công việc dịch thuật nào đã chọn"
+msgstr "Hành động này không áp dụng cho bất kỳ công việc dịch nào đã chọn"
 
 #: src/js/jobs/model/store/applyTranslations.js:30
 msgid "Translations have been downloaded"
@@ -388,28 +388,28 @@ msgstr "Không thể tải xuống bản dịch"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:10
 msgid "Approving translations reviews failed!"
-msgstr "Phê duyệt xem xét bản dịch thất bại!"
+msgstr "Phê duyệt đánh giá bản dịch không thành công!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:38
 msgid "Failed approving translations for the following posts: "
-msgstr "Không thể phê duyệt bản dịch cho các bài viết sau: "
+msgstr "Không thể phê duyệt bản dịch cho các bài đăng sau: "
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
-msgstr "Xem xét bản dịch đã được phê duyệt thành công!"
+msgstr "Đánh giá bản dịch đã được phê duyệt thành công!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:57
 msgid "No valid jobs selected to approve translations reviews!"
-msgstr "Không có công việc hợp lệ nào được chọn để phê duyệt xem xét bản dịch!"
+msgstr "Không có công việc hợp lệ nào được chọn để phê duyệt đánh giá bản dịch!"
 
 #: src/js/jobs/model/store/assignTranslator.js:17
 msgid "The translator has been assigned to the job"
-msgstr "Người dịch đã được phân công cho công việc"
+msgstr "Người dịch đã được chỉ định cho công việc"
 
 #: src/js/jobs/model/store/assignTranslator.js:22
 #: src/js/jobs/model/store/openEditor.js:37
 msgid "The translator could not be assigned to the job"
-msgstr "Không thể phân công người dịch cho công việc"
+msgstr "Không thể chỉ định người dịch cho công việc"
 
 #: src/js/jobs/model/store/cancelJobs.js:22
 msgid "The jobs have been cancelled"
@@ -429,23 +429,23 @@ msgstr "Không thể hủy công việc"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:26
 msgid "Translation reviews have been canceled"
-msgstr "Xem xét bản dịch đã bị hủy"
+msgstr "Đánh giá bản dịch đã bị hủy"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:27
 msgid "Translation review has been canceled"
-msgstr "Xem xét bản dịch đã bị hủy"
+msgstr "Đánh giá bản dịch đã bị hủy"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:33
 msgid "Translation reviews could not be canceled"
-msgstr "Không thể hủy xem xét bản dịch"
+msgstr "Không thể hủy đánh giá bản dịch"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:34
 msgid "Translation review could not be canceled"
-msgstr "Không thể hủy bỏ việc xem xét bản dịch"
+msgstr "Không thể hủy đánh giá bản dịch"
 
 #: src/js/jobs/model/store/columnsManagement.js:106
 msgid "Sent on"
-msgstr "Gửi lúc"
+msgstr "Đã gửi vào"
 
 #: src/js/jobs/model/store/columnsManagement.js:114
 msgid "Deadline"
@@ -457,7 +457,7 @@ msgstr "Trạng thái"
 
 #: src/js/jobs/model/store/columnsManagement.js:54
 msgid "Pending review"
-msgstr "Đang chờ đánh giá"
+msgstr "Đang chờ xem xét"
 
 #: src/js/jobs/model/store/columnsManagement.js:65
 msgid "ID"
@@ -477,15 +477,15 @@ msgstr "Được dịch bởi"
 
 #: src/js/jobs/model/store/downloadXliff.js:11
 msgid "Download XLIFF file couldn't be finished"
-msgstr "Không thể hoàn tất việc tải xuống tệp XLIFF"
+msgstr "Không thể hoàn tất tải xuống tệp XLIFF"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:20
 msgid "Could not load jobs for export"
-msgstr "Không thể tải các công việc để xuất"
+msgstr "Không thể tải công việc để xuất"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:44
 msgid "The export to XLIFF failed"
-msgstr "Việc xuất sang XLIFF thất bại"
+msgstr "Xuất sang XLIFF không thành công"
 
 #: src/js/jobs/model/store/importXLIFF.js:26
 msgid "Imported %d jobs"
@@ -501,7 +501,7 @@ msgstr "Không thể nhập bất kỳ công việc nào"
 
 #: src/js/jobs/model/store/importXLIFF.js:45
 msgid "Import failed!"
-msgstr "Nhập thất bại!"
+msgstr "Nhập không thành công!"
 
 #: src/js/jobs/model/store/jobs.js:18
 msgid "Loading translations queue"
@@ -509,11 +509,11 @@ msgstr "Đang tải hàng đợi bản dịch"
 
 #: src/js/jobs/model/store/jobs.js:19
 msgid "Loading translation jobs"
-msgstr "Đang tải các công việc dịch thuật"
+msgstr "Đang tải công việc dịch"
 
 #: src/js/jobs/model/store/jobs.js:82
 msgid "Jobs could not be loaded"
-msgstr "Không thể tải các công việc"
+msgstr "Không thể tải công việc"
 
 #: src/js/jobs/model/store/resign.js:12
 msgid "Specify some jobs to resign"
@@ -521,11 +521,11 @@ msgstr "Chỉ định một số công việc để từ chối"
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
-msgstr "Chúng tôi không thể từ chối các công việc: %s"
+msgstr "Chúng tôi không thể từ chối công việc: %s"
 
 #: src/js/jobs/model/store/resign.js:34
 msgid "Resigned from jobs"
-msgstr "Đã từ chối các công việc"
+msgstr "Đã từ chối công việc"
 
 #: src/js/jobs/model/store/resign.js:35
 msgid "Resigned from job"
@@ -533,15 +533,15 @@ msgstr "Đã từ chối công việc"
 
 #: src/js/jobs/model/store/resign.js:39
 msgid "Failed to resign from jobs"
-msgstr "Không thể từ chối các công việc"
+msgstr "Không thể từ chối công việc"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
-msgstr "Đồng bộ hóa công việc của Trình biên tập Nâng cao đã thất bại"
+msgstr "Đồng bộ hóa công việc Trình chỉnh sửa nâng cao không thành công"
 
 #: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
 msgid "Synchronization with the Professional Translation service has failed"
-msgstr "Đồng bộ hóa với dịch vụ Dịch thuật Chuyên nghiệp đã thất bại"
+msgstr "Đồng bộ hóa với dịch vụ Dịch thuật chuyên nghiệp không thành công"
 
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
@@ -550,7 +550,7 @@ msgstr[0] "%d bản dịch đã được tải xuống"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"
-msgstr "Đồng bộ hóa hàng loạt hoàn tất thành công!"
+msgstr "Đồng bộ hóa hàng loạt đã hoàn tất thành công!"
 
 #: src/js/jobs/model/store/translationBatchSync.js:88
 msgid "Batch sync couldn't be finished"

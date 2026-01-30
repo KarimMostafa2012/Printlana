@@ -84,4 +84,5 @@ interface SettingsRepositoryInterface {
 	public function isStringTrackingEnabled(): bool;
 	public function enableStringTracking();
 	public function disableStringTracking();
+	public function setDetectStringsInJS( int $detectStringsInJS );
 }

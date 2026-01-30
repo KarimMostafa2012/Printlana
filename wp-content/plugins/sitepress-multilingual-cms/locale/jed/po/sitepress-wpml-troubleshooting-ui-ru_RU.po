@@ -23,23 +23,23 @@ msgstr "Отмена заданий не удалась"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
 msgid "Cancel in-progress automatic jobs"
-msgstr "Отменить выполняемые автоматические задания"
+msgstr "Отменить выполняющиеся автоматические задания"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
 msgid "Domain name has been updated"
-msgstr "Доменное имя изменилось"
+msgstr "Доменное имя обновлено"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
 msgid "Domain name update has been failed"
-msgstr "Изменение доменного имени не выполнено"
+msgstr "Обновление доменного имени не удалось"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
 msgid "Update domain name in language switcher settings"
-msgstr "Измените доменное имя в настройках переключателя языков"
+msgstr "Обновите доменное имя в настройках переключателя языков"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:7
 msgid "Disclaimer: MySQL Disk Space"
-msgstr "Отказ от ответственности: Дисковое пространство MySQL"
+msgstr "Отказ от ответственности: дисковое пространство MySQL"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:8
 msgid ""
@@ -47,7 +47,7 @@ msgid ""
 "tables reduces its data size, but does not automatically free up disk space "
 "in MySQL. To reclaim disk space, a table rebuild is required—a risky "
 "operation not performed automatically by this tool."
-msgstr "Очистка и сжатие таблиц wp_icl_translate и wp_icl_translation_status уменьшает размер их данных, но не освобождает автоматически дисковое пространство в MySQL. Для восстановления дискового пространства требуется перестройка таблицы — рискованная операция, которая не выполняется автоматически этим инструментом."
+msgstr "Очистка и сжатие таблиц wp_icl_translate и wp_icl_translation_status уменьшает их размер данных, но не освобождает автоматически дисковое пространство в MySQL. Для восстановления дискового пространства требуется перестроение таблицы — рискованная операция, которая не выполняется автоматически этим инструментом."
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:38
 msgid "Optimize translation tables"
@@ -86,7 +86,7 @@ msgid ""
 "This process is resource-intensive and may take a significant amount of "
 "time. It is recommended to run this optimization during periods of low "
 "traffic."
-msgstr "Этот процесс требует значительных ресурсов и может занять много времени. Рекомендуется выполнять эту оптимизацию в периоды низкой нагрузки."
+msgstr "Этот процесс требует больших ресурсов и может занять значительное количество времени. Рекомендуется выполнять эту оптимизацию в периоды низкой нагрузки."
 
 #: src/js/troubleshooting/optimizeDbTables/index.js:16
 msgid "Database Tables Optimization"
@@ -112,32 +112,32 @@ msgstr "Повторить застрявшие автоматические п�
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
-msgstr "Повторно отправляет задания на перевод, которые не удалось обработать из-за временной проблемы, когда был активен режим автоматического перевода всего."
+msgstr "Повторно отправляет задания перевода, которые не могли быть обработаны из-за временной проблемы, пока был активен автоматический перевод всего."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:10
 msgid "Checking for stuck translation jobs..."
-msgstr "Проверка застрявших заданий на перевод..."
+msgstr "Проверка на наличие застрявших заданий перевода..."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:13
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
-msgstr[0] "Обработка... Найден %s застрявший перевод"
-msgstr[1] "Processing... %s stuck translations found so far"
-msgstr[2] "Processing... %s stuck translations found so far"
+msgstr[0] "Обработка... Найдено %s застрявший перевод"
+msgstr[1] "Обработка... Найдено %s застрявших переводов"
+msgstr[2] "Обработка... Найдено %s застрявших переводов"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
 "Something went wrong while checking for stuck translation jobs. Please "
 "<a>contact WPML support</a>."
-msgstr "Что-то пошло не так при проверке застрявших заданий на перевод. Пожалуйста, <a>свяжитесь со службой поддержки WPML</a>."
+msgstr "Что-то пошло не так при проверке застрявших заданий перевода. Пожалуйста, <a>свяжитесь со службой поддержки WPML</a>."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:37
 msgid "No stuck translation jobs found."
-msgstr "Застрявших заданий на перевод не найдено."
+msgstr "Застрявших заданий перевода не найдено."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "Найдено %s застрявшее задание на перевод. WPML переведет его автоматически в фоновом режиме.\nВы можете отслеживать прогресс в панели переводов."
-msgstr[1] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[2] "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
+msgstr[0] "Найдено %s застрявшее задание перевода. WPML переведет его автоматически в фоновом режиме.\nВы можете проверить прогресс на панели управления переводами."
+msgstr[1] "Найдено %s застрявших заданий перевода. WPML переведет их автоматически в фоновом режиме.\nВы можете проверить их прогресс на панели управления переводами."
+msgstr[2] "Найдено %s застрявших заданий перевода. WPML переведет их автоматически в фоновом режиме.\nВы можете проверить их прогресс на панели управления переводами."

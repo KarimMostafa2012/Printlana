@@ -6,6 +6,7 @@ use OTGS_Installer_Subscription;
 use OTGS_Installer_WP_Share_Local_Components_Setting;
 use WPML\Ajax\Endpoint\Upload;
 use WPML\Core\Component\MinimumRequirements\Application\Service\RequirementsService;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
 use WPML\Core\LanguageNegotiation;
 use WPML\Core\WP\App\Resources;
 use WPML\Element\API\Languages;
@@ -16,6 +17,8 @@ use WPML\FP\Obj;
 use WPML\Infrastructure\Dic;
 use WPML\LIB\WP\Option as WPOption;
 use WPML\LIB\WP\User;
+use WPML\PostHog\Event\CaptureWizardStartedEvent;
+use WPML\PostHog\State\PostHogState;
 use WPML\Setup\Endpoint\CheckTMAllowed;
 use WPML\Setup\Endpoint\CurrentStep;
 use WPML\Setup\Endpoint\ShouldShowWCMLMessages;
@@ -38,7 +41,8 @@ class Initializer {
 	public static function loadJS() {
 		// Enqueue the setup app with the ATE dashboard script as a dependency
 		$setupApp = Resources::enqueueApp( 'setup' );
-		$setupApp( self::getData(), [ self::registerAteDashboardScript() ] );
+		$handleATEDashboardScript = self::registerAteDashboardScript() ;
+		$setupApp( self::getData(), [ $handleATEDashboardScript ] );
 	}
 
 	public static function getData() {
@@ -70,6 +74,8 @@ class Initializer {
 		if ( defined( 'OTGS_INSTALLER_SITE_KEY_WPML' ) ) {
 			self::savePredefinedSiteKey( OTGS_INSTALLER_SITE_KEY_WPML );
 		}
+
+		self::maybeCaptureWizardStartedEvent( $currentStep );
 
 		return [
 			'name' => 'wpml_wizard',
@@ -120,6 +126,7 @@ class Initializer {
 				'isAteEnabled'             => WPML_TM_ATE_Status::is_enabled_and_activated(),
 				'isWCMLWizardWaiting'      => ShouldShowWCMLMessages::getOption(),
 				'ateBaseUrl'               => self::getATEBaseUrl(),
+				'ateDashboardScript'       => make( ATEDashboardLoader::class )->getRegisteredScriptUrl(),
 				'whenFinishedUrlLanguages' => admin_url( UIPage::getLanguages() ),
 				'whenFinishedUrlTM'        => admin_url( UIPage::getTM() ),
 				'ateSignUpUrl'             => admin_url( UIPage::getTMATE() ),
@@ -157,6 +164,20 @@ class Initializer {
 				],
 			],
 		];
+	}
+
+
+	private static function maybeCaptureWizardStartedEvent( $currentStep ) {
+		if ( ! PostHogState::isEnabled() ) {
+			return;
+		}
+
+		$wizardUUID = get_option( 'wpml_ph_wizard_uuid', false );
+
+		if ( $currentStep === 'languages' && ! $wizardUUID ) {
+			$event = ( new EventInstanceService() )->getWizardStartedEvent( [] );
+			CaptureWizardStartedEvent::capture( $event );
+		}
 	}
 
 

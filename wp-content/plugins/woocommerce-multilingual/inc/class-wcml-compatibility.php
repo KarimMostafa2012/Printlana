@@ -74,6 +74,7 @@ class WCML_Compatibility {
 			\WCML\Compatibility\WcProductTypeColumn\Factory::class    => class_exists( 'WC_Product_Type_Column' ),
 			\WCML\Compatibility\YikesCustomProductTabs\Factory::class => class_exists( 'YIKES_Custom_Product_Tabs' ),
 			\WCML\Compatibility\WcOrderStatusManager\Factory::class   => class_exists( 'WC_Order_Status_Manager' ),
+			\WCML\Compatibility\FacebookForWc\Factory::class          => class_exists( WC_Facebookcommerce::class ),
 		] )->filter( Logic::isTruthy() )
 			->keys()
 			->toArray();

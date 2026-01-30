@@ -7,19 +7,19 @@ msgstr ""
 
 #: src/js/main-ui/components/Actions.js:46
 msgid "Edit"
-msgstr "Biên tập"
+msgstr "Chỉnh sửa"
 
 #: src/js/main-ui/components/Actions.js:57
 msgid "Shift+Tab"
-msgstr "Tab Shift+"
+msgstr "Shift+tab"
 
 #: src/js/main-ui/components/Actions.js:62
 msgid "Tab"
-msgstr "Chuyển hướng"
+msgstr "Tab"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
-msgstr "Bản dịch sang:"
+msgstr "Dịch sang:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
@@ -31,19 +31,19 @@ msgstr "Sử dụng Shift+Enter để thêm dòng mới."
 
 #: src/js/main-ui/components/EditTranslationPopup.js:97
 msgid "Original:"
-msgstr "Nguyên bản:"
+msgstr "Bản gốc:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "Thêm vào %s dịch"
+msgstr "Thêm bản dịch %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
-msgstr "Biên tập %s dịch"
+msgstr "Chỉnh sửa bản dịch %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "Thêm vào%s bản dịch (chuỗi xuất hiện trên trang web và không được dịch)"
+msgstr "Thêm bản dịch %s (chuỗi xuất hiện trên trang web và chưa được dịch)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
@@ -51,7 +51,7 @@ msgstr "Ngôn ngữ gốc %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "Đang chờ người dịch %s"
+msgstr "Đang chờ người dịch đến %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"

@@ -4,29 +4,6 @@ namespace WPML\Translation\TranslationElements;
 
 class FieldCompression {
 
-	/** @var callable|null */
-	private static $functionExistsCallback;
-
-	/**
-	 * @param callable|null $functionExistsCallback
-	 */
-	public static function setFunctionExistsCallback( $functionExistsCallback = null ) {
-		self::$functionExistsCallback = $functionExistsCallback;
-	}
-
-	/**
-	 * @param string $functionName
-	 *
-	 * @return bool
-	 */
-	private static function functionExists( string $functionName ): bool {
-		if ( self::$functionExistsCallback ) {
-			return ( self::$functionExistsCallback )( $functionName );
-		}
-
-		return function_exists( $functionName );
-	}
-
 	/**
 	 * Checks if the provided data is already compressed with gzcompress and base64 encoded.
 	 *
@@ -35,7 +12,7 @@ class FieldCompression {
 	 * @return bool True if the data is already compressed, false otherwise.
 	 */
 	public static function isCompressed( $data ) {
-		if ( $data === null || $data === '' || ! self::functionExists( 'gzuncompress' ) ) {
+		if ( $data === null || $data === '' || ! ZlibAvailabilityChecker::isGzuncompressAvailable() ) {
 			return false;
 		}
 
@@ -63,7 +40,7 @@ class FieldCompression {
 	 * } The fixed data and whether it was double-compressed.
 	 */
 	public static function fixDoubleCompression( $data ) {
-		if ( $data === null || $data === '' || ! self::functionExists( 'gzuncompress' ) ) {
+		if ( $data === null || $data === '' || ! ZlibAvailabilityChecker::isGzuncompressAvailable() ) {
 			return [
 				'data'                  => $data,
 				'was_double_compressed' => false
@@ -110,7 +87,7 @@ class FieldCompression {
 			return $data;
 		}
 
-		if ( ! self::functionExists( 'gzcompress' ) || $data === '' ) {
+		if ( ! ZlibAvailabilityChecker::isGzcompressAvailable() || $data === '' ) {
 			return $isAlreadyBase64Compressed ? $data : base64_encode( $data );
 		}
 
@@ -128,6 +105,36 @@ class FieldCompression {
 	}
 
 	/**
+	 * Compress data and track the job_id if compression succeeds.
+	 *
+	 * @param string|null $data The data to compress.
+	 * @param bool $isAlreadyBase64Compressed Whether the data is already base64 encoded.
+	 * @param int|null $job_id Job ID to track if compression succeeds.
+	 *
+	 * @return string|null The compressed data.
+	 */
+	public static function compressAndTrack( $data, bool $isAlreadyBase64Compressed = true, $job_id = null ) {
+		$compressed = self::compress( $data, $isAlreadyBase64Compressed );
+
+		// Only track if:
+		// 1. We have a job_id
+		// 2. Compression actually happened (data changed)
+		// 3. gzcompress is available
+		// 4. Data is not null or empty
+		if (
+			$job_id !== null
+			&& ZlibAvailabilityChecker::isGzcompressAvailable()
+			&& $compressed !== $data
+			&& $data !== null
+			&& $data !== ''
+		) {
+			CompressionTracker::recordCompression( $job_id );
+		}
+
+		return $compressed;
+	}
+
+	/**
 	 * @param string|null $data
 	 * @param bool $preserveBase64Encoding
 	 *
@@ -138,7 +145,7 @@ class FieldCompression {
 			return null;
 		}
 
-		if ( ! self::functionExists( 'gzuncompress' ) || $data === '' ) {
+		if ( ! ZlibAvailabilityChecker::isGzuncompressAvailable() || $data === '' ) {
 			return $preserveBase64Encoding ? $data : base64_decode( $data );
 		}
 

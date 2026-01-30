@@ -182,4 +182,30 @@ class WPML_TM_Translation_Batch {
 	public function setHowToHandleExisting( $howToHandleExisting ) {
 		$this->howToHandleExisting = $howToHandleExisting;
 	}
+
+	/**
+	 * @return array
+	 */
+	public function toArray() {
+		$elements = [];
+		foreach ( $this->elements as $element ) {
+			$elements[] = [
+				'element_id'            => $element->get_element_id(),
+				'element_type'          => $element->get_element_type(),
+				'source_lang'           => $element->get_source_lang(),
+				'target_langs'          => $element->get_target_langs(),
+				'media_to_translations' => $element->get_media_to_translations(),
+			];
+		}
+
+		return array(
+			'elements'               => $elements,
+			'basket_name'            => $this->basket_name,
+			'translators'            => $this->translators,
+			'deadline'               => $this->deadline ? $this->deadline->format( 'Y-m-d H:i:s' ) : null,
+			'translation_mode'       => $this->translationMode,
+			'tp_batch_info'          => $this->tpBatchInfo,
+			'how_to_handle_existing' => $this->howToHandleExisting,
+		);
+	}
 }

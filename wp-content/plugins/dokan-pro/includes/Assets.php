@@ -269,6 +269,7 @@ class Assets {
 
         $react_assets = include DOKAN_PRO_DIR . '/assets/js/admin-react.asset.php';
         $react_deps = $react_assets['dependencies'] ?? [];
+        $jquery_blockui = \WeDevs\Dokan\Assets::get_wc_handler( 'jquery-blockui' );
 
         // Analytics report scripts.
         $react_vendor_analytics_assets = include DOKAN_PRO_DIR . '/assets/js/vendor-dashboard/reports/index.asset.php';
@@ -306,7 +307,7 @@ class Assets {
             ],
             'dokan-pro-vue-frontend-shipping' => [
                 'src'       => DOKAN_PRO_PLUGIN_ASSEST . '/js/vue-pro-frontend-shipping' . $this->suffix . '.js',
-                'deps'      => [ 'jquery', 'wp-i18n', 'dokan-vue-vendor', 'dokan-vue-bootstrap', 'underscore', 'jquery-blockui' ],
+                'deps'      => [ 'jquery', 'wp-i18n', 'dokan-vue-vendor', 'dokan-vue-bootstrap', 'underscore', $jquery_blockui ],
                 'version'   => $this->script_version,
                 'in_footer' => true,
             ],
@@ -394,16 +395,16 @@ class Assets {
         }
 
         $admin_dashboard_asset = DOKAN_PRO_DIR . '/assets/js/dokan-pro-admin-dashboard.asset.php';
-	      if ( file_exists( $admin_dashboard_asset ) ) {
-		        $dashboard_asset = include $admin_dashboard_asset;
-		        $scripts['dokan-pro-admin-dashboard'] = [
-                'src'       => DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin-dashboard.js',
-			          'deps'      => array_merge( $dashboard_asset['dependencies'], [ 'dokan-admin-dashboard' ] ),
-			          'version'   => $dashboard_asset['version'],
-			          'in_footer' => true,
-		        ];
-	      }
-  
+		if ( file_exists( $admin_dashboard_asset ) ) {
+			$dashboard_asset = include $admin_dashboard_asset;
+			$scripts['dokan-pro-admin-dashboard'] = [
+				'src'       => DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin-dashboard.js',
+				'deps'      => array_merge( $dashboard_asset['dependencies'], [ 'dokan-admin-dashboard' ] ),
+				'version'   => $dashboard_asset['version'],
+				'in_footer' => true,
+			];
+		}
+
         $reviews_script_file = DOKAN_PRO_DIR . '/assets/js/dashboard-reviews.asset.php';
         if ( file_exists( $reviews_script_file ) ) {
             $dashboard_product_reviews = require $reviews_script_file;

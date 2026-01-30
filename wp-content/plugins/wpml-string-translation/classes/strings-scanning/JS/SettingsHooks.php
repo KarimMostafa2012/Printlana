@@ -123,7 +123,7 @@ class SettingsHooks implements \IWPML_Action {
 	}
 
 	public function showLocalizationUINotice() {
-		$urlToSettings = UIPage::getSettings() . '#' . self::SECTION_ID;
+		$urlToSettings = self::getSettingsURL();
 
 		if ( $this->isDetectionEnabled ) {
 			$text = sprintf(
@@ -148,5 +148,9 @@ class SettingsHooks implements \IWPML_Action {
 			</div>
 		</div>
 		<?php
+	}
+
+	public static function getSettingsURL(): string {
+		return UIPage::getSettings() . '#' . self::SECTION_ID;
 	}
 }

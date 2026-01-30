@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.32.0 - 16-09-2025 */
+/*! elementor-pro - v3.34.0 - 29-01-2026 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -25,6 +25,7 @@ class Module extends elementorModules.Module {
   }];
   onInit() {
     this.assignMenuItemActions();
+    this.assignProLicenseActivateEvent();
   }
   assignMenuItemActions() {
     window.addEventListener('DOMContentLoaded', () => {
@@ -38,6 +39,28 @@ class Module extends elementorModules.Module {
           window.open(item.external_url, '_blank');
         });
       });
+    });
+  }
+  assignProLicenseActivateEvent() {
+    window.addEventListener('DOMContentLoaded', () => {
+      const activateButton = document.querySelector('.button-primary[href*="elementor-connect"]');
+      if (activateButton) {
+        activateButton.addEventListener('click', () => {
+          if (!window.elementorCommon?.config?.experimentalFeatures?.editor_events) {
+            return;
+          }
+          const eventsManager = window.elementorCommon?.eventsManager || {};
+          const dispatchEvent = eventsManager.dispatchEvent?.bind(eventsManager);
+          const eventName = 'pro_license_activate';
+          const eventData = {
+            app_type: 'editor',
+            location: 'Elementor WP-admin pages',
+            secondaryLocation: 'license page',
+            trigger: 'click'
+          };
+          dispatchEvent?.(eventName, eventData);
+        });
+      }
     });
   }
 }
@@ -83,9 +106,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 class CustomAssetsBase extends elementorModules.ViewModule {
-  showAlertDialog(id, message) {
-    let onConfirm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    let onHide = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  showAlertDialog(id, message, onConfirm = false, onHide = false) {
     const alertData = {
       id,
       message
@@ -334,7 +355,6 @@ class CustomIcons extends _customAssetsBase.default {
     $publishButton.trigger('click');
   }
   onInit() {
-    var _this = this;
     const {
         $body
       } = elementorCommon.elements,
@@ -356,9 +376,7 @@ class CustomIcons extends _customAssetsBase.default {
       } = this.elements;
     if ('' === config) {
       $dropzone.show('fast');
-      dropzoneField.setSettings('onSuccess', function () {
-        return _this.onSuccess(...arguments);
-      });
+      dropzoneField.setSettings('onSuccess', (...args) => this.onSuccess(...args));
     } else {
       this.renderIcons(config);
     }
@@ -528,12 +546,12 @@ class CustomFontsManager extends _customAssetsBase.default {
   titleRequired() {
     this.elements.$title.prop('required', true);
   }
-  onInit() {
+  onInit(...args) {
     const settings = this.getSettings();
     if (!jQuery('body').hasClass(settings.selectors.editPageClass)) {
       return;
     }
-    super.onInit(...arguments);
+    super.onInit(...args);
     this.removeCloseHandle();
     this.titleRequired();
     settings.fields.upload.init();
@@ -1235,10 +1253,12 @@ module.exports = function () {
   this.mailChimp = new ApiValidations('mailchimp_api_key');
   this.mailerLite = new ApiValidations('mailerlite_api_key');
   this.activeCcampaign = new ApiValidations('activecampaign_api_key', 'activecampaign_api_url');
-  jQuery('.e-notice--cta.e-notice--dismissible[data-notice_id="site_mailer_forms_submissions_notice"] a.e-button--cta').on('click', function () {
+  document.querySelector('.e-notice--cta.e-notice--dismissible[data-notice_id="site_mailer_forms_submissions_notice"] a.e-button--cta')?.addEventListener('click', function () {
+    const $notice = $(this).closest('.e-notice');
+    const source = $notice.data('source') || 'sm-submission-install';
     elementorCommon.ajax.addRequest('elementor_site_mailer_campaign', {
       data: {
-        source: 'sm-submission-install'
+        source
       }
     });
   });
@@ -1339,7 +1359,9 @@ module.exports = function (key, fieldID) {
 
 module.exports = function () {
   var EditButton = __webpack_require__(/*! ./admin/edit-button */ "../modules/library/assets/js/admin/edit-button.js");
+  var ShortcodeTextarea = __webpack_require__(/*! ./admin/shortcode-textarea */ "../modules/library/assets/js/admin/shortcode-textarea.js");
   this.editButton = new EditButton();
+  this.shortcodeTextarea = new ShortcodeTextarea();
 };
 
 /***/ }),
@@ -1371,6 +1393,39 @@ module.exports = function () {
     });
   };
   self.init();
+};
+
+/***/ }),
+
+/***/ "../modules/library/assets/js/admin/shortcode-textarea.js":
+/*!****************************************************************!*\
+  !*** ../modules/library/assets/js/admin/shortcode-textarea.js ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function () {
+  const resizeAllTextareas = () => {
+    const textareas = document.querySelectorAll('.elementor-shortcode-textarea');
+    textareas.forEach(textarea => {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 5 + 'px';
+    });
+  };
+  const init = () => {
+    resizeAllTextareas();
+    window.addEventListener('resize', () => {
+      resizeAllTextareas();
+    });
+    document.addEventListener('click', event => {
+      if (event.target.matches('button.toggle-row')) {
+        resizeAllTextareas();
+      }
+    });
+  };
+  init();
 };
 
 /***/ }),

@@ -1316,9 +1316,7 @@ class Module {
                                 <span class="chat-user"><?php the_author(); ?></span>
                             </div>
                         </div>
-                        <div class="dokan-chat-text dokan-customer-chat-text">
-                            <?php the_content(); ?>
-                        </div>
+                        <div class="dokan-chat-text dokan-customer-chat-text"><?php the_content(); ?></div>
                         <div class="dokan-chat-time-box">
                             <span class="dokan-chat-time">
                             <?php echo esc_html( dokan_format_datetime( dokan_get_timestamp( $post->post_date_gmt, true ) ) ); ?>

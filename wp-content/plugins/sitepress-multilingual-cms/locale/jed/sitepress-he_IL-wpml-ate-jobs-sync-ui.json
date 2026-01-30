@@ -8,19 +8,19 @@
             "lang": "he_IL"
          },
          "Sending for translation": [
-            "שליחה לתרגום"
+            "שולח לתרגום"
          ],
          "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
-            "תוכן זה מתורגם באופן אוטומטי. אם ברצונך לעשות משהו אחר עם זה, בטל תחילה את משימות התרגום."
+            "תוכן זה מתורגם אוטומטית. אם ברצונכם לעשות איתו משהו אחר, בטלו תחילה את משימות התרגום."
          ],
          "Connecting to WPML’s Advanced Translation Editor": [
             "מתחבר לעורך התרגום המתקדם של WPML"
          ],
          "Try again": [
-            "נסה שוב"
+            "נסו שוב"
          ],
          "You don't have the rights to review this language": [
-            "אין לך זכויות לבדיקת שפה זו"
+            "אין לכם הרשאות לסקור שפה זו"
          ],
          "translations": [
             "תרגומים"
@@ -29,7 +29,7 @@
             "נותרו בתור"
          ],
          "Translation on hold": [
-            "התרגום בהשהייה"
+            "תרגום בהמתנה"
          ],
          "No translations in the queue": [
             "אין תרגומים בתור"
@@ -38,133 +38,145 @@
             "%d תרגומים נותרו"
          ],
          "%d min remaining": [
-            "%d דק' נותרו"
+            "%d דקות נותרו"
          ],
          "less than 1 min remaining": [
-            "נותרה פחות מדקה אחת"
-         ],
-         "Automatic translation status": [
-            "סטטוס תרגום אוטומטי"
-         ],
-         "Translate Everything Automatically": [
-            "תרגם הכל באופן אוטומטי"
-         ],
-         "Translate Everything Automatically is active": [
-            "'תרגם הכל באופן אוטמטי' פעיל"
-         ],
-         "Translate Everything Automatically is paused": [
-            "'תרגם הכל באופן אוטומטי' מושהה"
-         ],
-         "Translate Everything Automatically is stopped": [
-            "תרגום אוטומטי של הכל הופסק"
-         ],
-         "Out of Credits for Automatic Translation": [
-            "אין יתרת קרדיטים לתרגום אוטומטי"
-         ],
-         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
-            "יש לך <b>1</b> קרדיט תרגום משולם מראש בחשבון wpml.org שלך. הקצה קרדיטים אלה לאתר שלך כדי להתחיל להשתמש בתרגום אוטומטי",
-            "יש לך <b>%s</b> קרדיטי תרגום משולמים מראש בחשבון wpml.org שלך. הקצה קרדיטים אלה לאתר שלך כדי להתחיל להשתמש בתרגום אוטומטי"
-         ],
-         "Preparing content for translation": [
-            "מכין תוכן לתרגום"
-         ],
-         "Preparing more content for translation": [
-            "מכין עוד תוכן לתרגום"
-         ],
-         "An error occured, fix it to continue.": [
-            "אירה שגיאה. תקן אותה כדי להמשיך."
-         ],
-         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
-            "יש בעיה בתרגום האוטומטי שזקוקה לתשומת הלב שלך. תקן אותה כדי להמשיך."
-         ],
-         "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "על שפת ברירת המחדל שלך, %s, להיות ממופית לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
-         ],
-         "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "השפה שלך, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי.",
-            "השפות הבאות באתר שלך חייבות להיות ממופות לשפה נתמכת כדי להשתמש בתרגום אוטומטי: %s"
-         ],
-         "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
-            "תוכן בשפות אלו: %s, לא מתאימים לתרגום אוטומטי אלא אם תמפה אותם לשפה השונה מברירת המחדל."
+            "פחות מדקה נותרה"
          ],
          "%d translation waiting for review": [
             "%d תרגום ממתין לבדיקה",
             "%d תרגומים ממתינים לבדיקה"
          ],
+         "Automatic translation status": [
+            "סטטוס תרגום אוטומטי"
+         ],
+         "Translate Everything Automatically": [
+            "תרגם הכל אוטומטית"
+         ],
+         "Translate Everything Automatically is active": [
+            "תרגם הכל אוטומטית פעיל"
+         ],
+         "Translate Everything Automatically is paused — payment required": [
+            "תרגם הכל אוטומטית מושהה — נדרש תשלום"
+         ],
+         "Automatic translation is paused — payment required": [
+            "תרגום אוטומטי מושהה — נדרש תשלום"
+         ],
+         "We couldn’t process your payment. Click “Pay now” to complete the transaction and resume automatic translation.": [
+            "לא הצלחנו לעבד את התשלום שלכם. לחצו על \"שלמו עכשיו\" כדי להשלים את העסקה ולחדש את התרגום האוטומטי."
+         ],
+         "Translate Everything automatically is paused - not enough credits": [
+            "תרגם הכל אוטומטית מושהה - אין מספיק קרדיטים"
+         ],
+         "Automatic translation is paused — not enough credits": [
+            "תרגום אוטומטי מושהה — אין מספיק קרדיטים"
+         ],
+         "Translation will resume automatically once you assign more credits.": [
+            "התרגום יתחדש אוטומטית ברגע שתקצו קרדיטים נוספים."
+         ],
+         "You have %s prepaid translation credit in your WPML account. Assign these credits to this site to resume automatic translation": [
+            "יש לכם %s קרדיט לתרגום ששולם מראש בחשבון ה-WPML שלכם. הקצו קרדיטים אלה לאתר זה כדי לחדש את התרגום האוטומטי",
+            "יש לכם %s קרדיטים לתרגום ששולמו מראש בחשבון ה-WPML שלכם. הקצו קרדיטים אלה לאתר זה כדי לחדש את התרגום האוטומטי"
+         ],
+         "Preparing content for translation": [
+            "מכין תוכן לתרגום"
+         ],
+         "Preparing more content for translation": [
+            "מכין תוכן נוסף לתרגום"
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "שפת ברירת המחדל שלכם, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי."
+         ],
+         "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "השפה שלכם, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי.",
+            "השפות הבאות באתר שלכם חייבות להיות ממופות לשפה נתמכת כדי להשתמש בתרגום אוטומטי: %s"
+         ],
+         "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
+            "תוכן בשפות אלו: %s, לא ניתן לתרגום אוטומטי אלא אם תמפו אותן לשפה שונה משפת ברירת המחדל."
+         ],
          "Account credits used": [
-            "נקודות זכות של החשבון שנעשה בהן שימוש"
+            "קרדיטים בחשבון שנוצלו"
          ],
          "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
-            "לאחר שתשתמש בכל נקודות הזכות ששולמו מראש, אנו נחייב אותך עבור כל נקות זכות נוספת שבה תשתמש אחרי סוף החודש."
+            "לאחר שתשתמשו בכל הקרדיטים ששולמו מראש, נחייב אתכם עבור כל קרדיט נוסף שתשתמשו בו לאחר סוף החודש"
          ],
          "Payment limit:": [
             "מגבלת תשלום:"
          ],
          "%s credits": [
-            "%s נקודות זכות"
+            "%s קרדיטים"
          ],
          "Credits used:": [
-            "נקודות זכות שנעשה בהן שימוש:"
+            "קרדיטים שנוצלו:"
          ],
          "Credits left:": [
-            "נקודות זכות שנותרו:"
+            "קרדיטים שנותרו:"
          ],
          "The number of credit you will receive an invoice for at the end of the month. View your pay-as-you-go details in your site’s automatic translation settings.": [
-            "מספר נקודות הזכות שתקבל עבורן חשבונית בסוף כל חודש. הצג את פרטי התשלום בהתאם להתקדמות בהגדרות התרגום האוטומטי של האתר שלך."
+            "מספר הקרדיטים שעבורם תקבלו חשבונית בסוף החודש. צפו בפרטי התשלום לפי שימוש שלכם בהגדרות התרגום האוטומטי של האתר שלכם."
          ],
          "Calculating": [
             "מחשב"
          ],
          "Remaining prepaid credits that are assigned to this site on WPML.org.": [
-            "יתרות נקודות זכות ששולמו מראש שמוקצות לאתר זה ב-WPML.org."
+            "קרדיטים ששולמו מראש שנותרו ושהוקצו לאתר זה ב-WPML.org."
          ],
          "Prepaid credits left": [
-            "נקודות זכות ששולמו מראש שנותרו"
+            "קרדיטים ששולמו מראש שנותרו"
          ],
          "Pay-as-you-go credits used": [
-            "נקודות זיכוי של תרגום בהתאם להתקדמות שנעשה בהן שימוש"
+            "קרדיטים שנוצלו בתשלום לפי שימוש"
          ],
          "Your site doesn't meet WPML's minimum requirements": [
-            "האתר שלך אינו עומד בדרישות המינימום של WPML"
+            "האתר שלכם אינו עומד בדרישות המינימום של WPML"
          ],
          "Fix it": [
-            "תקן זאת"
+            "תקן את זה"
          ],
          "Stop": [
             "עצור"
          ],
-         "Assign credits now": [
-            "הקצה קרדיטים כעת"
+         "Pay now": [
+            "שלמו עכשיו"
+         ],
+         "Get more credits": [
+            "קבלו עוד קרדיטים"
+         ],
+         "Assign credits": [
+            "הקצו קרדיטים"
          ],
          "Resume": [
             "המשך"
          ],
+         "This translation couldn't be completed due to an unexpected error. Please try resending it.": [
+            "התרגום לא הושלם עקב שגיאה בלתי צפויה. אנא נסה לשלוח אותו שוב."
+         ],
          "Refreshing translation status": [
-            "מרענן את סטטוס התרגום"
+            "מרענן סטטוס תרגום"
          ],
          "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
-            "ניתן למצוא מידע נוסף אודות תרגום התוכן שלך ב<a>מדריך לתחילת העבודה</a>"
+            "קראו עוד על איך לתרגם את התוכן שלכם ב<a>מדריך תחילת העבודה</a>"
          ],
          "Let's Start Translating!": [
-            "הבה נתחיל לתרגם!"
+            "בואו נתחיל לתרגם!"
          ],
          "Choose your content from the Translation Dashboard below and create your first translation job!": [
-            "בחר את התוכן שלך מ'לוח הבקרה של התרגום' להלן וצור את משימת התרגום הראשונה שלך!"
+            "בחרו את התוכן שלכם מלוח המחוונים של התרגום למטה וצרו את משימת התרגום הראשונה שלכם!"
          ],
          "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
-            "שנה את <a>הגדרות התרגום האוטומטי</a> (משימות תרגום בביצוע יושלמו עם ההגדרות הנוכחיות)."
+            "שנה את <a>הגדרות התרגום האוטומטי</a> שלך (משימות תרגום שנמצאות בתהליך יושלמו עם ההגדרות הנוכחיות)."
          ],
          "Read more about translating your site automatically.": [
-            "מידע נוסף אודות תרגום האתר שלך באופן אוטומטי."
+            "קראו עוד על תרגום האתר שלכם באופן אוטומטי."
          ],
          "Your site is being automatically translated!": [
-            "האתר שלך מתורגם באופן אוטומטי!"
+            "האתר שלכם מתורגם באופן אוטומטי!"
          ],
          "Calculating...": [
             "מחשב..."
          ],
          "Do not close WP admin!": [
-            "אלתסגור את WP admin!"
+            "אל תסגרו את לוח הבקרה של וורדפרס!"
          ],
          "The number of translations": [
             "מספר התרגומים"

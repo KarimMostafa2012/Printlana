@@ -53,7 +53,10 @@ class EnableATE implements IHandler {
 
 		return $result->map( Fns::tap( [ make( \WPML_TM_AMS_Synchronize_Actions::class ), 'synchronize_translators' ] ) )
 									->map( $this->confirmSiteKey() )
-		              ->bimap( pipe( Lst::make(), Lst::keyWith( 'error' ), Lst::nth(0) ), Fns::identity() );
+		              ->bimap(
+		              	$this->formatError(),
+		              	Fns::identity()
+		              );
 	}
 
 	/**
@@ -66,5 +69,16 @@ class EnableATE implements IHandler {
 			$confirmationService->confirm();
 			// Don't care about return value - Sync will handle fallback if confirmation failed
 		});
+	}
+
+	/**
+	 * Format error data to include both user-friendly message and raw response
+	 *
+	 * @return callable Function that transforms error structure
+	 */
+	private function formatError() {
+		return function( $errorData ) {
+			return [ 'error' => $errorData ];
+		};
 	}
 }

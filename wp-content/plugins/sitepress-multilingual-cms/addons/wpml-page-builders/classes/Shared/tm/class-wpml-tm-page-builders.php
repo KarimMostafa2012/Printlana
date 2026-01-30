@@ -254,7 +254,7 @@ class WPML_TM_Page_Builders {
 
 		foreach ( $patterns as $pattern ) {
 			if ( preg_match( $pattern, $innerMostGroup, $matches ) ) {
-				$url = wp_get_attachment_url( $matches[1] );
+				$url = wp_get_attachment_url( (int) $matches[1] );
 				if ( $url ) {
 					$field['image'] = $url;
 

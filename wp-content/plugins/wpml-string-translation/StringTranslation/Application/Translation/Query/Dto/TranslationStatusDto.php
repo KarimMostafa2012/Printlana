@@ -15,7 +15,10 @@ use WPML\PHP\ConstructableFromArrayTrait;
  *   reviewStatus: ReviewStatusString,
  *   jobId: int|null,
  *   method: MethodString,
- *   editor: EditorString
+ *   editor: EditorString,
+ *   isTranslated: bool,
+ *   translatorId: int|null,
+ *   ateJobId: int|null
  * }
  */
 final class TranslationStatusDto {
@@ -41,6 +44,9 @@ final class TranslationStatusDto {
 	/** @var int|null	*/
   private $translatorId;
 
+	/** @var int|null */
+	private $ateJobId;
+
 
 	public function __construct(
 	int $status,
@@ -49,7 +55,8 @@ final class TranslationStatusDto {
 	string $method = null,
 	string $editor = null,
 	bool $isTranslated = false,
-	int $translatorId = null
+	int $translatorId = null,
+	int $ateJobId = null
 	) {
 		$allowedReviewStatus = [ 'NEEDS_REVIEW', 'EDITING', 'ACCEPTED' ];
 		$allowedMethod       = [ 'duplicate', 'translation-service', 'automatic', 'manual', 'local-translator' ];
@@ -62,6 +69,7 @@ final class TranslationStatusDto {
 		$this->editor       = in_array( $editor, $allowedEditor, true ) ? $editor : null;
 		$this->isTranslated = $isTranslated;
 		$this->translatorId = $translatorId;
+		$this->ateJobId     = $ateJobId;
 	}
 
 
@@ -116,6 +124,13 @@ final class TranslationStatusDto {
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getAteJobId() {
+		return $this->ateJobId;
+	}
+
+	/**
 	 * @return TranslationStatusDtoArray
 	 */
 	public function toArray(): array {
@@ -127,6 +142,7 @@ final class TranslationStatusDto {
 			'editor'       => $this->editor,
 			'isTranslated' => $this->isTranslated,
 			'translatorId' => $this->translatorId,
+			'ateJobId'     => $this->ateJobId,
 		];
 	}
 

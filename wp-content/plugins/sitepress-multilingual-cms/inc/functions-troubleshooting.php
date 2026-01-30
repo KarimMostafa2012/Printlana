@@ -29,6 +29,7 @@ function icl_reset_wpml( $blog_id = false ) {
 			$wpdb->prefix . 'icl_translations',
 			$wpdb->prefix . 'icl_translation_status',
 			$wpdb->prefix . 'icl_translate_job',
+			$wpdb->prefix . 'icl_translate_unsolvable_jobs',
 			$wpdb->prefix . 'icl_translate',
 			$wpdb->prefix . 'icl_locale_map',
 			$wpdb->prefix . 'icl_flags',
@@ -175,7 +176,7 @@ function icl_reset_wpml( $blog_id = false ) {
 		if ( ! isset( $wpmu_sitewide_plugins[ WPML_PLUGIN_BASENAME ] ) ) {
 			remove_action( 'deactivate_' . WPML_PLUGIN_BASENAME, 'icl_sitepress_deactivate' );
 			deactivate_plugins( WPML_PLUGIN_BASENAME );
-			$ra                         = get_option( 'recently_activated' );
+			$ra                         = (array) get_option( 'recently_activated' );
 			$ra[ WPML_PLUGIN_BASENAME ] = time();
 			update_option( 'recently_activated', $ra );
 		} else {

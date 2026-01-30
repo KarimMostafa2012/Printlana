@@ -32,6 +32,7 @@ class WCML_Currencies_Payment_Gateways {
 		add_action( 'wp_loaded', [ $this, 'init_gateways' ] );
 
 		add_filter( 'woocommerce_gateway_description', [ $this, 'filter_gateway_description' ], 10, 2 );
+		add_filter( 'woocommerce_paypal_payments_gateway_description', [ $this, 'filter_paypal_payments_gateway_description' ], 10, 2 );
 		add_filter( 'option_woocommerce_stripe_settings', [ 'WCML_Payment_Gateway_Stripe', 'filter_stripe_settings' ] );
 		add_filter( 'option_woocommerce-ppcp-settings', [ 'WCML_Payment_Gateway_PayPal_V2', 'filter_ppcp_args' ] );
 
@@ -119,6 +120,24 @@ class WCML_Currencies_Payment_Gateways {
 		$this->init_gateways();
 
 		return $this->supported_gateways;
+	}
+
+	/**
+	 * @since WooCommerce PayPal Payments 3.3.0
+	 *
+	 * @param string $description Gateway description (already sanitized with wp_kses_post).
+	 * @param object $gateway     Gateway instance.
+	 * @see \WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway
+	 *
+	 * @return string
+	 */
+	public function filter_paypal_payments_gateway_description( $description, $gateway ) {
+		$id = \WPML\FP\Obj::prop( 'id', $gateway );
+		if ( is_null( $id ) ) {
+			return $description;
+		}
+
+		return $this->filter_gateway_description( $description, $id );
 	}
 
 	/**

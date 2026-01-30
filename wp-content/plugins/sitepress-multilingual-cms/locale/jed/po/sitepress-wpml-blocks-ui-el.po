@@ -7,11 +7,11 @@ msgstr ""
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
-msgstr "Προχωρημένα"
+msgstr "Σύνθετες"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "HTML άγκυρα"
+msgstr "Άγκυρα HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
@@ -19,7 +19,7 @@ msgstr "Προσθέστε μια συντόμευση σε αυτό το μπλ
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "Πρόσθετη(ες) κλάση(εις) CSS"
+msgstr "Πρόσθετες κλάσεις CSS"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
@@ -53,7 +53,7 @@ msgstr "Περιθώριο μπλοκ"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "Εσωτερικό περιθώριο μπλοκ"
+msgstr "Επένδυση μπλοκ"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -61,11 +61,11 @@ msgstr "ΓΛΩΣΣΑ"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Απόσταση γλώσσας"
+msgstr "Διάστιχο γλώσσας"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Εσωτερικό περιθώριο γλώσσας"
+msgstr "Επένδυση γλώσσας"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -101,11 +101,11 @@ msgstr "Ύψος"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "Απόσταση"
+msgstr "Διάστιχο"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Επιτρέπεται η αναδίπλωση σε πολλαπλές γραμμές"
+msgstr "Να επιτρέπεται η αναδίπλωση σε πολλές γραμμές"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -175,7 +175,7 @@ msgstr "Στοίχιση στοιχείων δεξιά"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Στοίχιση στοιχείων με ίσες αποστάσεις"
+msgstr "Στοίχιση στοιχείων με διάστημα μεταξύ τους"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -219,27 +219,27 @@ msgstr "Μικρό"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Εμφανίζει τον Εναλλάκτη Γλώσσας WPML."
+msgstr "Εμφανίζει τον επιλογέα γλώσσας του WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "Εναλλάκτης Γλώσσας"
+msgstr "Επιλογέας γλώσσας"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "εμφανίζει τον Εναλλάκτη Γλώσσας WPML"
+msgstr "εμφανίζει τον επιλογέα γλώσσας του WPML"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Εμφανίζει τον Εναλλάκτη Γλώσσας WPML. <br/> Μάθετε <a>πώς να μεταφράσετε αυτό το μπλοκ</a>."
+msgstr "Εμφανίζει τον επιλογέα γλώσσας του WPML. <br/> Μάθετε <a>πώς να μεταφράσετε αυτό το μπλοκ</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Εναλλάκτης Γλώσσας Πλοήγησης"
+msgstr "Επιλογέας γλώσσας πλοήγησης"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

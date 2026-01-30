@@ -1,14 +1,14 @@
-# Copyright (c) 2025 weDevs Pte. Ltd. All Rights Reserved.
+# Copyright (c) 2026 weDevs Pte. Ltd. All Rights Reserved.
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan Pro 4.2.1\n"
+"Project-Id-Version: Dokan Pro 4.2.3\n"
 "Report-Msgid-Bugs-To: https://wedevs.com/account/tickets/\n"
 "Last-Translator: support@wedevs.com\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-04T11:52:31+00:00\n"
+"POT-Creation-Date: 2026-01-14T10:17:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: dokan\n"
@@ -35,34 +35,34 @@ msgstr ""
 msgid "Dokan Inc."
 msgstr ""
 
-#: dokan-pro.php:593
+#: dokan-pro.php:597
 msgid "Activating"
 msgstr ""
 
-#: dokan-pro.php:594
+#: dokan-pro.php:598
 msgid "Deactivating"
 msgstr ""
 
-#: dokan-pro.php:595
+#: dokan-pro.php:599
 #: includes/Admin/Admin.php:78
 msgid "Amount you will get from sales in both percentage and fixed fee"
 msgstr ""
 
-#: dokan-pro.php:596
+#: dokan-pro.php:600
 msgid "It will override the default commission admin gets from each sales"
 msgstr ""
 
-#: dokan-pro.php:761
+#: dokan-pro.php:765
 #: assets/js/vue-pro-admin.js:1
 msgid "Starter"
 msgstr ""
 
-#: dokan-pro.php:766
+#: dokan-pro.php:770
 #: assets/js/vue-pro-admin.js:1
 msgid "Professional"
 msgstr ""
 
-#: dokan-pro.php:771
+#: dokan-pro.php:775
 #: modules/mangopay/includes/Processor/Wallet.php:75
 #: modules/mangopay/includes/Support/Helper.php:908
 #: modules/mangopay/templates/admin-gateway-settings.php:238
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Business"
 msgstr ""
 
-#: dokan-pro.php:776
+#: dokan-pro.php:780
 #: assets/js/vue-pro-admin.js:1
 msgid "Enterprise"
 msgstr ""
@@ -166,7 +166,8 @@ msgstr ""
 #: modules/subscription/includes/admin/admin.php:904
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1687
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1707
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
@@ -310,7 +311,7 @@ msgstr ""
 
 #: includes/Admin/Admin.php:582
 #: includes/Coupons/AdminCoupons.php:160
-#: includes/Coupons/AdminCoupons.php:944
+#: includes/Coupons/AdminCoupons.php:950
 #: modules/follow-store/includes/class-dokan-follow-store-my-account.php:42
 msgid "Vendors"
 msgstr ""
@@ -335,7 +336,7 @@ msgstr ""
 #: assets/js/analytics-report-orders.js:43
 #: assets/js/analytics-report-products.js:4
 #: modules/product-adv/assets/js/admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1617
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
 #: modules/subscription/assets/js/admin/dashboard/index.js:171
@@ -365,9 +366,11 @@ msgstr[1] ""
 #: assets/js/vue-pro-admin.js:1
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
 #: modules/report-abuse/assets/js/dokan-report-abuse-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2150
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2237
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/admin.js:1
 #: modules/store-reviews/assets/js/store-reviews.js:171
@@ -420,7 +423,7 @@ msgstr ""
 #: modules/simple-auction/templates/auction/auction-products-listing.php:246
 #: modules/store-support/module.php:1082
 #: modules/store-support/module.php:1161
-#: modules/store-support/module.php:1488
+#: modules/store-support/module.php:1486
 #: modules/subscription/templates/admin/related-orders-table.php:82
 #: modules/subscription/templates/dashboard/order-listing.php:19
 #: modules/subscription/templates/dashboard/order-listing.php:38
@@ -439,8 +442,10 @@ msgstr ""
 #: assets/js/vue-pro-frontend-shipping.js:1
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1757
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2142
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/rma/assets/js/vendor-dashboard.js:172
 #: modules/rma/assets/js/vendor-dashboard.js:175
@@ -631,7 +636,7 @@ msgstr ""
 #: modules/rma/includes/Ajax.php:36
 #: modules/rma/includes/Ajax.php:64
 #: modules/rma/includes/Ajax.php:214
-#: modules/store-support/module.php:2333
+#: modules/store-support/module.php:2331
 msgid "Invalid nonce"
 msgstr ""
 
@@ -827,7 +832,7 @@ msgstr ""
 #: modules/simple-auction/templates/auction/auction-products-listing.php:326
 #: modules/store-support/module.php:1083
 #: modules/store-support/module.php:1162
-#: modules/store-support/module.php:1489
+#: modules/store-support/module.php:1487
 #: modules/subscription/templates/admin/related-orders-table.php:81
 #: modules/subscription/templates/dashboard/order-listing.php:18
 #: modules/subscription/templates/dashboard/order-listing.php:35
@@ -840,8 +845,10 @@ msgstr ""
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2245
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2266
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/admin.js:1
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
@@ -1007,7 +1014,7 @@ msgstr ""
 #: modules/request-for-quotation/templates/quote-shipping-info-fields.php:15
 #: templates/settings/shipping.php:203
 #: templates/settings/shipping.php:233
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:293
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "State"
 msgstr ""
@@ -1068,7 +1075,7 @@ msgstr ""
 
 #: includes/Ajax.php:1873
 #: includes/woo-views/variation-admin-html.php:9
-#: modules/booking/module.php:682
+#: modules/booking/module.php:687
 #: modules/booking/templates/booking/persons/html-booking-person.php:9
 #: modules/booking/templates/booking/resources/html-booking-resource.php:9
 #: modules/booking/templates/booking/resources/resources.php:113
@@ -1208,7 +1215,7 @@ msgstr ""
 
 #: includes/Announcement/PostType.php:60
 #: includes/ProductBulkEdit.php:71
-#: modules/booking/module.php:681
+#: modules/booking/module.php:686
 #: modules/booking/templates/booking/product-list.php:148
 #: modules/booking/templates/booking/resources/resources.php:112
 #: modules/product-addon/templates/product-addon/html-global-admin.php:33
@@ -1229,8 +1236,10 @@ msgstr ""
 #: assets/js/vue-pro-admin.js:1
 #: assets/js/vue-pro-frontend-shipping.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:784
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:822
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
@@ -1238,7 +1247,7 @@ msgstr ""
 #: modules/store-reviews/assets/js/store-reviews.js:171
 #: modules/vendor-staff/assets/js/dokan-vendor-staff.js:171
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:109
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 #: modules/wholesale/assets/js/admin-wholesale-customer.js:1
 #: modules/wholesale/assets/js/admin.js:1
 msgid "Edit"
@@ -1292,35 +1301,35 @@ msgstr ""
 msgid "%s ago"
 msgstr ""
 
-#: includes/Assets.php:568
+#: includes/Assets.php:569
 msgid "Please provide a location name!"
 msgstr ""
 
-#: includes/Assets.php:569
+#: includes/Assets.php:570
 msgid "Please provide"
 msgstr ""
 
-#: includes/Assets.php:570
+#: includes/Assets.php:571
 msgid "Please provide a country!"
 msgstr ""
 
-#: includes/Assets.php:571
+#: includes/Assets.php:572
 msgid "Failed! Somthing went wrong"
 msgstr ""
 
-#: includes/Assets.php:572
+#: includes/Assets.php:573
 msgid "Facebook SDK is not found, or blocked by the browser. Can not initialize the chat."
 msgstr ""
 
-#: includes/Assets.php:573
+#: includes/Assets.php:574
 msgid "Insert SMS code"
 msgstr ""
 
-#: includes/Assets.php:574
+#: includes/Assets.php:575
 msgid "Upload a Photo"
 msgstr ""
 
-#: includes/Assets.php:575
+#: includes/Assets.php:576
 msgid "Insert Phone No."
 msgstr ""
 
@@ -1547,7 +1556,7 @@ msgid "Vendors that the coupon will be applied."
 msgstr ""
 
 #: includes/Coupons/AdminCoupons.php:179
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1457
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Exclude Vendors"
 msgstr ""
@@ -1571,7 +1580,7 @@ msgstr ""
 #: assets/js/analytics-report-orders.js:41
 #: assets/js/analytics-report-products.js:4
 #: assets/js/vendor-dashboard/reports/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:628
 #: modules/rma/assets/js/vendor-dashboard.js:172
 msgid "Products"
 msgstr ""
@@ -1633,44 +1642,44 @@ msgstr ""
 msgid "Check the coupons list"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:730
+#: includes/Coupons/AdminCoupons.php:736
 msgid "Coupon Type"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:731
+#: includes/Coupons/AdminCoupons.php:737
 #: assets/js/dokan-manual-order.js:182
 #: assets/js/dokan-vendor-dashboard-coupon.js:171
 msgid "Coupon Code"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:732
+#: includes/Coupons/AdminCoupons.php:738
 msgid "Coupon Price"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:733
+#: includes/Coupons/AdminCoupons.php:739
 msgid "Coupon Price Deduct From"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:736
+#: includes/Coupons/AdminCoupons.php:742
 #: assets/js/dokan-vendor-dashboard-coupon.js:171
 msgid "Admin Shared"
 msgstr ""
 
 #. translators: %1$s: Usage count, %2$s: Usage limit
-#: includes/Coupons/AdminCoupons.php:741
+#: includes/Coupons/AdminCoupons.php:747
 #: templates/coupon/marketplace-coupons.php:90
 #: templates/coupon/vendor-coupons.php:98
 msgid "%1$s / %2$s"
 msgstr ""
 
 #. translators: %s: Usage count
-#: includes/Coupons/AdminCoupons.php:744
+#: includes/Coupons/AdminCoupons.php:750
 #: templates/coupon/marketplace-coupons.php:93
 #: templates/coupon/vendor-coupons.php:101
 msgid "%s / &infin;"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:747
+#: includes/Coupons/AdminCoupons.php:753
 #: templates/coupon/marketplace-coupons.php:9
 #: templates/coupon/marketplace-coupons.php:83
 #: templates/coupon/vendor-coupons.php:8
@@ -1678,7 +1687,7 @@ msgstr ""
 msgid "Usage / Limit"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:748
+#: includes/Coupons/AdminCoupons.php:754
 #: templates/coupon/marketplace-coupons.php:10
 #: templates/coupon/marketplace-coupons.php:100
 #: templates/coupon/vendor-coupons.php:9
@@ -1686,25 +1695,25 @@ msgstr ""
 msgid "Expiry date"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:752
+#: includes/Coupons/AdminCoupons.php:758
 msgid "Admin Created a Coupon for Your Store."
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:873
+#: includes/Coupons/AdminCoupons.php:879
 msgid " (Marketplace)"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:889
+#: includes/Coupons/AdminCoupons.php:895
 msgid "Owner"
 msgstr ""
 
 #. translators: 1) card brand 2) last 4 digits
-#: includes/Coupons/AdminCoupons.php:904
+#: includes/Coupons/AdminCoupons.php:910
 #: includes/Emails/Announcement.php:168
-#: includes/Emails/CanceledRefundVendor.php:220
+#: includes/Emails/CanceledRefundVendor.php:219
 #: includes/Emails/MarkedOrderReceive.php:256
-#: includes/Emails/RefundRequest.php:183
-#: includes/Emails/RefundVendor.php:165
+#: includes/Emails/RefundRequest.php:181
+#: includes/Emails/RefundVendor.php:164
 #: includes/Emails/ShippingStatus.php:198
 #: includes/Emails/UpdatedProduct.php:175
 #: includes/Emails/VendorCouponUpdate.php:162
@@ -1714,7 +1723,7 @@ msgstr ""
 #: modules/booking/includes/emails/class-dokan-booking-email-cancelled.php:203
 #: modules/booking/includes/emails/class-dokan-booking-email-new.php:164
 #: modules/booking/includes/emails/class-dokan-booking-email-new.php:270
-#: modules/booking/module.php:679
+#: modules/booking/module.php:684
 #: modules/booking/templates/booking/my-bookings/all-bookings.php:150
 #: modules/booking/templates/booking/my-bookings/booking-details.php:167
 #: modules/booking/templates/booking/my-bookings/booking-details.php:258
@@ -1735,11 +1744,11 @@ msgstr ""
 #: modules/rma/includes/Emails/SendCouponEmail.php:192
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:187
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:261
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:185
-#: modules/store-support/includes/class-new-support-ticket-email.php:164
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:174
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:161
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:162
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:199
+#: modules/store-support/includes/class-new-support-ticket-email.php:173
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:179
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:171
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:172
 #: modules/stripe-express/includes/Subscriptions/ProductSubscription.php:361
 #: modules/stripe-express/includes/Subscriptions/ProductSubscription.php:402
 #: modules/stripe/includes/StripeConnect.php:622
@@ -1758,13 +1767,14 @@ msgstr ""
 #: assets/js/analytics-report-products.js:4
 #: assets/js/analytics-report-stock.js:1
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2139
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2153
 #: modules/store-reviews/assets/js/store-reviews.js:171
 #: modules/subscription/assets/js/admin/dashboard/index.js:171
 msgid "N/A"
 msgstr ""
 
-#: includes/Coupons/AdminCoupons.php:925
+#: includes/Coupons/AdminCoupons.php:931
 msgid "Owner:"
 msgstr ""
 
@@ -1807,7 +1817,7 @@ msgstr ""
 
 #: includes/Coupons/functions.php:274
 #: includes/Coupons/functions.php:276
-#: modules/export-import/templates/export-import/template_importer.php:59
+#: modules/export-import/templates/export-import/template_importer.php:83
 #: modules/live-search/classes/class-dokan-live-search.php:78
 #: modules/request-for-quotation/includes/Frontend/VendorDashboard.php:252
 #: modules/rma/includes/Api/WarrantyRequestController.php:307
@@ -1821,8 +1831,10 @@ msgstr ""
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1704
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2045
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
@@ -2101,7 +2113,7 @@ msgstr ""
 #: modules/elementor/includes/Tags/StoreName.php:27
 #: modules/elementor/includes/Widgets/StoreName.php:31
 #: modules/store-reviews/templates/emails/new-store-review-email.php:25
-#: modules/store-support/module.php:1486
+#: modules/store-support/module.php:1484
 #: assets/js/vue-pro-admin.js:1
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
@@ -2173,6 +2185,18 @@ msgstr ""
 msgid "Both"
 msgstr ""
 
+#: includes/Emails/AbstractRefund.php:25
+msgid "pending"
+msgstr ""
+
+#: includes/Emails/AbstractRefund.php:26
+msgid "approved"
+msgstr ""
+
+#: includes/Emails/AbstractRefund.php:27
+msgid "canceled"
+msgstr ""
+
 #: includes/Emails/Announcement.php:16
 msgid "These emails are sent to a vendor(s) who is are selected in a annoucement "
 msgstr ""
@@ -2189,11 +2213,11 @@ msgstr ""
 #. translators: 1: placeholders
 #. translators: %s available placeholders
 #: includes/Emails/Announcement.php:139
-#: includes/Emails/CanceledRefundVendor.php:192
+#: includes/Emails/CanceledRefundVendor.php:191
 #: includes/Emails/MarkedOrderReceive.php:216
 #: includes/Emails/ProductRejected.php:367
-#: includes/Emails/RefundRequest.php:143
-#: includes/Emails/RefundVendor.php:137
+#: includes/Emails/RefundRequest.php:141
+#: includes/Emails/RefundVendor.php:136
 #: includes/Emails/ShippingStatus.php:169
 #: includes/Emails/UpdatedProduct.php:138
 #: includes/Emails/VendorCouponUpdate.php:133
@@ -2217,12 +2241,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:148
 #: modules/rma/includes/Emails/SendCouponEmail.php:155
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:159
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:180
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:224
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:148
-#: modules/store-support/includes/class-new-support-ticket-email.php:136
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:137
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:133
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:134
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:162
+#: modules/store-support/includes/class-new-support-ticket-email.php:145
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:142
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:143
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:144
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:147
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:149
 #: modules/subscription/includes/emails/subscription-cancelled.php:153
@@ -2238,10 +2263,10 @@ msgid "Available placeholders: %s"
 msgstr ""
 
 #: includes/Emails/Announcement.php:142
-#: includes/Emails/CanceledRefundVendor.php:195
+#: includes/Emails/CanceledRefundVendor.php:194
 #: includes/Emails/ProductRejected.php:373
-#: includes/Emails/RefundRequest.php:146
-#: includes/Emails/RefundVendor.php:140
+#: includes/Emails/RefundRequest.php:144
+#: includes/Emails/RefundVendor.php:139
 #: includes/Emails/ShippingStatus.php:172
 #: includes/Emails/UpdatedProduct.php:141
 #: includes/Emails/VendorCouponUpdate.php:136
@@ -2267,12 +2292,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:151
 #: modules/rma/includes/Emails/SendCouponEmail.php:158
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:162
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:186
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:227
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:151
-#: modules/store-support/includes/class-new-support-ticket-email.php:139
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:140
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:136
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:137
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:165
+#: modules/store-support/includes/class-new-support-ticket-email.php:148
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:145
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:146
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:147
 #: modules/stripe-express/templates/admin/gateway-settings.php:13
 #: modules/stripe/includes/Settings/StripeConnect.php:8
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:150
@@ -2288,10 +2314,10 @@ msgid "Enable/Disable"
 msgstr ""
 
 #: includes/Emails/Announcement.php:144
-#: includes/Emails/CanceledRefundVendor.php:197
+#: includes/Emails/CanceledRefundVendor.php:196
 #: includes/Emails/ProductRejected.php:377
-#: includes/Emails/RefundRequest.php:148
-#: includes/Emails/RefundVendor.php:142
+#: includes/Emails/RefundRequest.php:146
+#: includes/Emails/RefundVendor.php:141
 #: includes/Emails/ShippingStatus.php:174
 #: includes/Emails/UpdatedProduct.php:143
 #: includes/Emails/VendorCouponUpdate.php:138
@@ -2308,12 +2334,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:153
 #: modules/rma/includes/Emails/SendCouponEmail.php:160
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:164
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:188
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:229
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:153
-#: modules/store-support/includes/class-new-support-ticket-email.php:141
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:142
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:138
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:139
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:167
+#: modules/store-support/includes/class-new-support-ticket-email.php:150
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:147
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:148
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:149
 #: modules/stripe-express/includes/Utilities/Abstracts/AuthenticationEmail.php:108
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:152
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:154
@@ -2328,11 +2355,11 @@ msgid "Enable this email notification"
 msgstr ""
 
 #: includes/Emails/Announcement.php:149
-#: includes/Emails/CanceledRefundVendor.php:201
+#: includes/Emails/CanceledRefundVendor.php:200
 #: includes/Emails/MarkedOrderReceive.php:237
 #: includes/Emails/ProductRejected.php:380
-#: includes/Emails/RefundRequest.php:164
-#: includes/Emails/RefundVendor.php:146
+#: includes/Emails/RefundRequest.php:162
+#: includes/Emails/RefundVendor.php:145
 #: includes/Emails/ShippingStatus.php:179
 #: includes/Emails/UpdatedProduct.php:156
 #: includes/Emails/VendorCouponUpdate.php:143
@@ -2355,12 +2382,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:157
 #: modules/rma/includes/Emails/SendCouponEmail.php:173
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:168
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:192
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:242
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:166
-#: modules/store-support/includes/class-new-support-ticket-email.php:145
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:155
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:142
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:143
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:180
+#: modules/store-support/includes/class-new-support-ticket-email.php:154
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:160
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:152
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:153
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:156
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:158
 #: modules/subscription/includes/emails/subscription-cancelled.php:171
@@ -2378,10 +2406,10 @@ msgid "Subject"
 msgstr ""
 
 #: includes/Emails/Announcement.php:157
-#: includes/Emails/CanceledRefundVendor.php:209
+#: includes/Emails/CanceledRefundVendor.php:208
 #: includes/Emails/MarkedOrderReceive.php:245
-#: includes/Emails/RefundRequest.php:172
-#: includes/Emails/RefundVendor.php:154
+#: includes/Emails/RefundRequest.php:170
+#: includes/Emails/RefundVendor.php:153
 #: includes/Emails/ShippingStatus.php:187
 #: includes/Emails/UpdatedProduct.php:164
 #: includes/Emails/VendorCouponUpdate.php:151
@@ -2403,12 +2431,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:165
 #: modules/rma/includes/Emails/SendCouponEmail.php:181
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:176
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:200
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:250
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:174
-#: modules/store-support/includes/class-new-support-ticket-email.php:153
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:163
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:150
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:151
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:188
+#: modules/store-support/includes/class-new-support-ticket-email.php:162
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:168
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:160
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:161
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:163
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:166
 #: modules/subscription/includes/emails/subscription-cancelled.php:179
@@ -2424,10 +2453,10 @@ msgid "Email heading"
 msgstr ""
 
 #: includes/Emails/Announcement.php:165
-#: includes/Emails/CanceledRefundVendor.php:217
+#: includes/Emails/CanceledRefundVendor.php:216
 #: includes/Emails/MarkedOrderReceive.php:253
-#: includes/Emails/RefundRequest.php:180
-#: includes/Emails/RefundVendor.php:162
+#: includes/Emails/RefundRequest.php:178
+#: includes/Emails/RefundVendor.php:161
 #: includes/Emails/ShippingStatus.php:195
 #: includes/Emails/UpdatedProduct.php:172
 #: includes/Emails/VendorCouponUpdate.php:159
@@ -2450,11 +2479,11 @@ msgstr ""
 #: modules/rma/includes/Emails/SendCouponEmail.php:189
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:184
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:258
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:182
-#: modules/store-support/includes/class-new-support-ticket-email.php:161
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:171
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:158
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:159
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:196
+#: modules/store-support/includes/class-new-support-ticket-email.php:170
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:176
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:168
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:169
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:170
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:174
 #: modules/subscription/includes/emails/subscription-cancelled.php:187
@@ -2470,10 +2499,10 @@ msgid "Additional content"
 msgstr ""
 
 #: includes/Emails/Announcement.php:166
-#: includes/Emails/CanceledRefundVendor.php:218
+#: includes/Emails/CanceledRefundVendor.php:217
 #: includes/Emails/MarkedOrderReceive.php:254
-#: includes/Emails/RefundRequest.php:181
-#: includes/Emails/RefundVendor.php:163
+#: includes/Emails/RefundRequest.php:179
+#: includes/Emails/RefundVendor.php:162
 #: includes/Emails/ShippingStatus.php:196
 #: includes/Emails/UpdatedProduct.php:173
 #: includes/Emails/VendorCouponUpdate.php:160
@@ -2496,11 +2525,11 @@ msgstr ""
 #: modules/rma/includes/Emails/SendCouponEmail.php:190
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:185
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:259
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:183
-#: modules/store-support/includes/class-new-support-ticket-email.php:162
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:172
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:159
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:160
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:197
+#: modules/store-support/includes/class-new-support-ticket-email.php:171
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:177
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:169
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:170
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:171
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:175
 #: modules/subscription/includes/emails/subscription-cancelled.php:188
@@ -2516,10 +2545,10 @@ msgid "Text to appear below the main email content."
 msgstr ""
 
 #: includes/Emails/Announcement.php:174
-#: includes/Emails/CanceledRefundVendor.php:226
+#: includes/Emails/CanceledRefundVendor.php:225
 #: includes/Emails/MarkedOrderReceive.php:262
-#: includes/Emails/RefundRequest.php:189
-#: includes/Emails/RefundVendor.php:171
+#: includes/Emails/RefundRequest.php:187
+#: includes/Emails/RefundVendor.php:170
 #: includes/Emails/ShippingStatus.php:204
 #: includes/Emails/UpdatedProduct.php:181
 #: includes/Emails/VendorCouponUpdate.php:168
@@ -2542,12 +2571,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:183
 #: modules/rma/includes/Emails/SendCouponEmail.php:198
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:193
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:214
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:267
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:191
-#: modules/store-support/includes/class-new-support-ticket-email.php:170
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:180
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:167
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:168
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:205
+#: modules/store-support/includes/class-new-support-ticket-email.php:179
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:185
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:177
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:178
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:179
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:183
 #: modules/subscription/includes/emails/subscription-cancelled.php:196
@@ -2563,10 +2593,10 @@ msgid "Email type"
 msgstr ""
 
 #: includes/Emails/Announcement.php:176
-#: includes/Emails/CanceledRefundVendor.php:228
+#: includes/Emails/CanceledRefundVendor.php:227
 #: includes/Emails/MarkedOrderReceive.php:264
-#: includes/Emails/RefundRequest.php:191
-#: includes/Emails/RefundVendor.php:173
+#: includes/Emails/RefundRequest.php:189
+#: includes/Emails/RefundVendor.php:172
 #: includes/Emails/ShippingStatus.php:206
 #: includes/Emails/UpdatedProduct.php:183
 #: includes/Emails/VendorCouponUpdate.php:170
@@ -2589,12 +2619,13 @@ msgstr ""
 #: modules/rma/includes/Emails/ConversationNotification.php:185
 #: modules/rma/includes/Emails/SendCouponEmail.php:200
 #: modules/rma/includes/Emails/SendWarrantyRequest.php:195
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:216
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:269
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:193
-#: modules/store-support/includes/class-new-support-ticket-email.php:172
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:182
-#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:169
-#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:170
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:207
+#: modules/store-support/includes/class-new-support-ticket-email.php:181
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:187
+#: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:179
+#: modules/store-support/includes/class-reply-to-user-support-ticket-email.php:180
 #: modules/stripe/includes/Subscriptions/InvoiceEmail.php:181
 #: modules/subscription/includes/emails/subscription-cancelled-vendor.php:185
 #: modules/subscription/includes/emails/subscription-cancelled.php:198
@@ -2609,19 +2640,19 @@ msgstr ""
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/Emails/CanceledRefundVendor.php:20
+#: includes/Emails/CanceledRefundVendor.php:19
 msgid "Dokan Refund Canceled"
 msgstr ""
 
-#: includes/Emails/CanceledRefundVendor.php:21
+#: includes/Emails/CanceledRefundVendor.php:20
 msgid "These emails are sent to vendor when a vendor refund request is canceled"
 msgstr ""
 
-#: includes/Emails/CanceledRefundVendor.php:57
+#: includes/Emails/CanceledRefundVendor.php:56
 msgid "[{site_title}] Your refund request is {status}"
 msgstr ""
 
-#: includes/Emails/CanceledRefundVendor.php:68
+#: includes/Emails/CanceledRefundVendor.php:67
 msgid "Refund request for order id #{order_id} is {status}"
 msgstr ""
 
@@ -2677,7 +2708,7 @@ msgid "Enable order marked as receive notification"
 msgstr ""
 
 #: includes/Emails/MarkedOrderReceive.php:228
-#: includes/Emails/RefundRequest.php:152
+#: includes/Emails/RefundRequest.php:150
 #: includes/Emails/UpdatedProduct.php:147
 #: modules/booking/includes/emails/class-dokan-booking-email-cancelled.php:175
 #: modules/product-qa/includes/Emails/Admin.php:153
@@ -2686,8 +2717,8 @@ msgstr ""
 #: modules/request-for-quotation/includes/Emails/UpdateQuote.php:271
 #: modules/rma/includes/Emails/SendCouponEmail.php:164
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:233
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:157
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:146
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:171
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:151
 #: modules/subscription/includes/emails/subscription-cancelled.php:162
 #: modules/vendor-support/includes/Emails/VendorSupportEmail.php:206
 #: modules/vendor-support/includes/Emails/VendorSupportReplyEmail.php:199
@@ -2704,7 +2735,7 @@ msgstr ""
 #. translators: %s: list of recipient
 #. translators: %s: default to email address.
 #: includes/Emails/MarkedOrderReceive.php:231
-#: includes/Emails/RefundRequest.php:156
+#: includes/Emails/RefundRequest.php:154
 #: includes/Emails/UpdatedProduct.php:150
 #: modules/booking/includes/emails/class-dokan-booking-email-cancelled.php:178
 #: modules/product-qa/includes/Emails/Admin.php:156
@@ -2713,8 +2744,8 @@ msgstr ""
 #: modules/request-for-quotation/includes/Emails/UpdateQuote.php:274
 #: modules/rma/includes/Emails/SendCouponEmail.php:167
 #: modules/store-reviews/classes/Emails/NewStoreReview.php:236
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:160
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:149
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:174
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:154
 #: modules/subscription/includes/emails/subscription-cancelled.php:165
 #: modules/vendor-verification/includes/Emails/RequestSubmission.php:214
 #: modules/wholesale/includes/emails/class-dokan-wholesale-email-registration.php:149
@@ -2801,35 +2832,35 @@ msgstr ""
 msgid "HTML"
 msgstr ""
 
-#: includes/Emails/RefundRequest.php:14
+#: includes/Emails/RefundRequest.php:12
 msgid "Dokan New Refund Request"
 msgstr ""
 
-#: includes/Emails/RefundRequest.php:15
+#: includes/Emails/RefundRequest.php:13
 msgid "These emails are sent to chosen recipient(s) when a vendor send request for refund"
 msgstr ""
 
-#: includes/Emails/RefundRequest.php:44
+#: includes/Emails/RefundRequest.php:42
 msgid "[{site_title}] A New refund request is made by {seller_name}"
 msgstr ""
 
-#: includes/Emails/RefundRequest.php:52
+#: includes/Emails/RefundRequest.php:50
 msgid "New Refund Request from - {seller_name}"
 msgstr ""
 
-#: includes/Emails/RefundVendor.php:15
+#: includes/Emails/RefundVendor.php:14
 msgid "Dokan Refund Processed"
 msgstr ""
 
-#: includes/Emails/RefundVendor.php:16
+#: includes/Emails/RefundVendor.php:15
 msgid "These emails are sent to vendor when a vendor refund request is processed"
 msgstr ""
 
-#: includes/Emails/RefundVendor.php:48
+#: includes/Emails/RefundVendor.php:47
 msgid "[{site_title}] Your refund request was {status}"
 msgstr ""
 
-#: includes/Emails/RefundVendor.php:58
+#: includes/Emails/RefundVendor.php:57
 msgid "Refund request for {order_id} is {status}"
 msgstr ""
 
@@ -3170,7 +3201,7 @@ msgstr ""
 #: modules/store-support/module.php:1107
 #: modules/store-support/module.php:1117
 #: modules/store-support/module.php:1276
-#: modules/store-support/module.php:1503
+#: modules/store-support/module.php:1501
 #: assets/js/analytics-report-statements.js:1
 #: modules/store-support/assets/dist/js/vendor-store-support.js:172
 msgid "#%s"
@@ -3193,7 +3224,7 @@ msgstr ""
 #: modules/delivery-time/templates/emails/update-admin-order-time-email.php:41
 #: modules/delivery-time/templates/emails/update-vendor-order-time-email.php:40
 #: modules/export-import/includes/importers/views/html-csv-import-done.php:54
-#: modules/export-import/templates/export-import/template_importer.php:60
+#: modules/export-import/templates/export-import/template_importer.php:84
 #: modules/geolocation/views/filters.php:56
 #: modules/geolocation/views/filters.php:60
 #: modules/geolocation/views/widget-form.php:8
@@ -3225,6 +3256,7 @@ msgstr ""
 #: assets/js/dokan-manual-order.js:203
 #: assets/js/dokan-vendor-dashboard-coupon.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
 #: modules/report-abuse/assets/js/dokan-report-abuse-admin.js:1
@@ -3460,8 +3492,8 @@ msgstr ""
 
 #: includes/functions.php:502
 #: modules/mangopay/includes/Processor/Kyc.php:284
-#: modules/razorpay/includes/Helper.php:640
-#: modules/razorpay/includes/Helper.php:655
+#: modules/razorpay/includes/Helper.php:642
+#: modules/razorpay/includes/Helper.php:657
 #: modules/report-abuse/includes/functions.php:176
 #: modules/report-abuse/module.php:119
 #: templates/orders/views/html-order-shipping.php:43
@@ -3784,7 +3816,9 @@ msgstr ""
 
 #: includes/Module.php:346
 #: modules/product-qa/includes/Admin.php:66
+#: modules/product-qa/includes/Admin/AdminMenu.php:33
 #: modules/product-qa/includes/Vendor.php:47
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Product Q&A"
 msgstr ""
 
@@ -3882,7 +3916,7 @@ msgstr ""
 #: modules/store-support/includes/Admin/Dashboard.php:48
 #: modules/store-support/module.php:123
 #: modules/store-support/module.php:346
-#: modules/store-support/module.php:2169
+#: modules/store-support/module.php:2167
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
 #: modules/store-support/assets/dist/js/dokan-admin-store-support.js:1
 #: modules/store-support/assets/js/dokan-admin-store-support.js:1
@@ -3971,7 +4005,7 @@ msgid "Communicate with vendors in your marketplace by queries and responses."
 msgstr ""
 
 #: includes/Module.php:575
-#: modules/vendor-verification/includes/Admin/Settings.php:38
+#: modules/vendor-verification/includes/Admin/Settings.php:39
 #: modules/vendor-verification/includes/Widgets/VerifiedMethodsList.php:128
 msgid "Vendor Verification"
 msgstr ""
@@ -4069,7 +4103,8 @@ msgstr ""
 
 #: includes/Module.php:692
 #: modules/request-for-quotation/templates/vendor-dashboard/vendor-quote-list-table.php:18
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:567
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2286
 msgid "Request for Quotation"
 msgstr ""
 
@@ -4170,7 +4205,8 @@ msgstr ""
 #: assets/js/analytics-report-customers.js:7
 #: assets/js/analytics-report-downloads.js:1
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1794
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2222
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
 #: modules/vendor-support/assets/js/admin-vendor-support.js:171
 #: modules/vendor-support/assets/js/vendor-vendor-support.js:171
@@ -4182,7 +4218,8 @@ msgstr ""
 #: modules/simple-auction/templates/auction/auction-product-edit.php:133
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1780
 msgid "Hidden"
 msgstr ""
 
@@ -4262,7 +4299,7 @@ msgstr ""
 #: modules/vendor-verification/includes/Models/VerificationRequest.php:448
 #: assets/js/product-rejection-admin.js:1
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2072
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/vendor-verification/assets/js/admin/dashboard/index.js:174
 #: modules/vendor-verification/assets/js/dokan-vendor-verification.js:174
@@ -4285,7 +4322,8 @@ msgstr ""
 #: assets/js/dokan-admin-refund.js:171
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1690
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2048
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/vendor-support/assets/js/admin-vendor-support.js:171
 #: modules/vendor-support/assets/js/vendor-vendor-support.js:171
@@ -4442,7 +4480,7 @@ msgstr ""
 #: modules/delivery-time/includes/StorePickup/StoreSettings.php:158
 #: modules/delivery-time/includes/Vendor.php:623
 #: modules/live-chat/includes/Talkjs.php:185
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:272
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:360
 #: assets/js/dokan-pro-admin-dashboard.js:171
 #: assets/js/vue-pro-admin.js:1
 #: modules/product-adv/assets/js/admin.js:1
@@ -4730,7 +4768,7 @@ msgstr ""
 
 #: includes/Reports.php:279
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:781
 msgid "Overview"
 msgstr ""
 
@@ -6175,14 +6213,14 @@ msgstr ""
 
 #: includes/Review.php:434
 #: includes/Review.php:549
-#: modules/store-support/module.php:1676
+#: modules/store-support/module.php:1674
 #: templates/coupon/listing.php:80
 msgid "&laquo;"
 msgstr ""
 
 #: includes/Review.php:435
 #: includes/Review.php:550
-#: modules/store-support/module.php:1677
+#: modules/store-support/module.php:1675
 #: templates/coupon/listing.php:81
 msgid "&raquo;"
 msgstr ""
@@ -6209,7 +6247,7 @@ msgstr ""
 
 #: includes/Review.php:895
 #: modules/booking/templates/booking/add-booking/html-create-booking-page.php:31
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:940
 msgid "Guest"
 msgstr ""
 
@@ -6585,7 +6623,7 @@ msgstr ""
 #: modules/paystack/templates/admin-settings-fields.php:15
 #: modules/razorpay/templates/admin-gateway-settings.php:21
 #: modules/stripe/includes/Settings/StripeConnect.php:17
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:126
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:135
 #: modules/table-rate-shipping/includes/Method.php:122
 #: modules/table-rate-shipping/templates/distance-rate/general-settings.php:5
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:173
@@ -6612,13 +6650,13 @@ msgid "Tax Status"
 msgstr ""
 
 #: includes/Shipping/Methods/VendorShipping.php:41
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:69
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:78
 #: modules/table-rate-shipping/includes/Method.php:64
 msgid "Cloning this class could cause catastrophic disasters!"
 msgstr ""
 
 #: includes/Shipping/Methods/VendorShipping.php:50
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:78
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:87
 #: modules/table-rate-shipping/includes/Method.php:73
 msgid "Unserializing is forbidden!"
 msgstr ""
@@ -6629,13 +6667,13 @@ msgid "Vendor Shipping"
 msgstr ""
 
 #: includes/Shipping/Methods/VendorShipping.php:63
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:95
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:104
 #: modules/table-rate-shipping/includes/Method.php:90
 msgid "Charge varying rates based on user defined conditions"
 msgstr ""
 
 #: includes/Shipping/Methods/VendorShipping.php:129
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:124
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:133
 #: modules/table-rate-shipping/includes/Method.php:120
 msgid "Method title"
 msgstr ""
@@ -6723,7 +6761,7 @@ msgstr ""
 #: modules/vendor-verification/includes/Models/VerificationRequest.php:449
 #: assets/js/dokan-admin-refund.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2057
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/subscription/assets/js/admin/dashboard/index.js:171
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
@@ -6959,7 +6997,7 @@ msgid "Table Rate"
 msgstr ""
 
 #: includes/Shipping/ShippingZone.php:408
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:99
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:108
 #: modules/table-rate-shipping/includes/Hooks.php:40
 msgid "Distance Rate"
 msgstr ""
@@ -6969,7 +7007,7 @@ msgid "Custom Shipping"
 msgstr ""
 
 #: includes/SocialLogin.php:237
-#: modules/vendor-verification/includes/Frontend/HybridauthHooks.php:111
+#: modules/vendor-verification/includes/Frontend/HybridauthHooks.php:130
 msgid "Something went wrong! please try again"
 msgstr ""
 
@@ -7012,17 +7050,17 @@ msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:311
-#: modules/vendor-verification/includes/Admin/Settings.php:99
+#: modules/vendor-verification/includes/Admin/Settings.php:100
 msgid "Configure your facebook API settings. %1$sGet Help%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:319
-#: modules/vendor-verification/includes/Admin/Settings.php:107
+#: modules/vendor-verification/includes/Admin/Settings.php:108
 msgid "Connect to Facebook"
 msgstr ""
 
 #: includes/SocialLogin.php:321
-#: modules/vendor-verification/includes/Admin/Settings.php:109
+#: modules/vendor-verification/includes/Admin/Settings.php:110
 msgid "You can successfully connect Facebook with your website."
 msgstr ""
 
@@ -7032,7 +7070,7 @@ msgid "If you don't have one and fill App ID and Secret below. %1$sCreate an App
 msgstr ""
 
 #: includes/SocialLogin.php:331
-#: modules/vendor-verification/includes/Admin/Settings.php:112
+#: modules/vendor-verification/includes/Admin/Settings.php:113
 msgid "Facebook App Settings"
 msgstr ""
 
@@ -7044,9 +7082,9 @@ msgstr ""
 #: includes/SocialLogin.php:390
 #: includes/SocialLogin.php:492
 #: modules/printful/includes/Admin/Settings.php:122
-#: modules/vendor-verification/includes/Admin/Settings.php:128
-#: modules/vendor-verification/includes/Admin/Settings.php:182
-#: modules/vendor-verification/includes/Admin/Settings.php:292
+#: modules/vendor-verification/includes/Admin/Settings.php:129
+#: modules/vendor-verification/includes/Admin/Settings.php:183
+#: modules/vendor-verification/includes/Admin/Settings.php:293
 msgid "Your store URL, which will be required in creating the App."
 msgstr ""
 
@@ -7056,113 +7094,113 @@ msgid "App ID"
 msgstr ""
 
 #: includes/SocialLogin.php:346
-#: modules/vendor-verification/includes/Admin/Settings.php:135
+#: modules/vendor-verification/includes/Admin/Settings.php:136
 msgid "You can get it from Facebook Developer platform -> Login -> Select  \"Add A New App\" -> Collect App ID."
 msgstr ""
 
 #: includes/SocialLogin.php:351
 #: modules/live-chat/includes/AdminSettings.php:100
-#: modules/vendor-verification/includes/Admin/Settings.php:141
+#: modules/vendor-verification/includes/Admin/Settings.php:142
 msgid "App Secret"
 msgstr ""
 
 #: includes/SocialLogin.php:353
 #: modules/printful/includes/Admin/Settings.php:144
-#: modules/vendor-verification/includes/Admin/Settings.php:143
+#: modules/vendor-verification/includes/Admin/Settings.php:144
 msgid "You can get it from Facebook Developer platform -> Login -> Select  \"Add A New App\" -> Collect App secret."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:362
-#: modules/vendor-verification/includes/Admin/Settings.php:153
+#: modules/vendor-verification/includes/Admin/Settings.php:154
 msgid "Configure your twitter API settings. %1$sGet Help%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:370
-#: modules/vendor-verification/includes/Admin/Settings.php:161
+#: modules/vendor-verification/includes/Admin/Settings.php:162
 msgid "Connect to Twitter"
 msgstr ""
 
 #: includes/SocialLogin.php:372
-#: modules/vendor-verification/includes/Admin/Settings.php:163
+#: modules/vendor-verification/includes/Admin/Settings.php:164
 msgid "You can successfully connect Twitter with your website."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:378
-#: modules/vendor-verification/includes/Admin/Settings.php:170
+#: modules/vendor-verification/includes/Admin/Settings.php:171
 msgid "If you don't have one and fill Consumer key and Secret below. %1$sCreate an App%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:382
-#: modules/vendor-verification/includes/Admin/Settings.php:166
+#: modules/vendor-verification/includes/Admin/Settings.php:167
 msgid "Twitter App Settings"
 msgstr ""
 
 #: includes/SocialLogin.php:389
-#: modules/vendor-verification/includes/Admin/Settings.php:180
+#: modules/vendor-verification/includes/Admin/Settings.php:181
 msgid "Callback URL"
 msgstr ""
 
 #: includes/SocialLogin.php:396
 #: modules/shipstation/views/settings.php:75
-#: modules/vendor-verification/includes/Admin/Settings.php:187
+#: modules/vendor-verification/includes/Admin/Settings.php:188
 msgid "Consumer Key"
 msgstr ""
 
 #: includes/SocialLogin.php:397
-#: modules/vendor-verification/includes/Admin/Settings.php:189
+#: modules/vendor-verification/includes/Admin/Settings.php:190
 msgid "You can get it from Twitter Developer platform -> Login -> Select  \"Create an App\" -> Input URL & integrate Twitter with Dokan. Go to \"Keys and Tokens\" -> View Keys -> Collect API key and use as Consumer Key."
 msgstr ""
 
 #: includes/SocialLogin.php:402
 #: modules/shipstation/views/settings.php:88
-#: modules/vendor-verification/includes/Admin/Settings.php:195
+#: modules/vendor-verification/includes/Admin/Settings.php:196
 msgid "Consumer Secret"
 msgstr ""
 
 #: includes/SocialLogin.php:404
-#: modules/vendor-verification/includes/Admin/Settings.php:197
+#: modules/vendor-verification/includes/Admin/Settings.php:198
 msgid "You can get it from Twitter Developer platform -> Login -> Select  \"Create an App\" -> Input URL & integrate Twitter with Dokan. Go to \"Keys and Tokens\" -> View Keys -> Collect API secret and use as Consumer secret."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:413
-#: modules/vendor-verification/includes/Admin/Settings.php:207
+#: modules/vendor-verification/includes/Admin/Settings.php:208
 msgid "Configure your google API settings. %1$sGet Help%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:421
-#: modules/vendor-verification/includes/Admin/Settings.php:215
+#: modules/vendor-verification/includes/Admin/Settings.php:216
 msgid "Connect to Google"
 msgstr ""
 
 #: includes/SocialLogin.php:423
-#: modules/vendor-verification/includes/Admin/Settings.php:217
+#: modules/vendor-verification/includes/Admin/Settings.php:218
 msgid "You can successfully connect to your Google account with your website."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:429
 #: includes/SocialLogin.php:480
-#: modules/vendor-verification/includes/Admin/Settings.php:280
+#: modules/vendor-verification/includes/Admin/Settings.php:281
 msgid "If you don't have one and fill Client ID and Secret below. %1$sCreate an App%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:433
-#: modules/vendor-verification/includes/Admin/Settings.php:221
+#: modules/vendor-verification/includes/Admin/Settings.php:222
 msgid "Google App Settings"
 msgstr ""
 
 #: includes/SocialLogin.php:440
 #: includes/SocialLogin.php:491
 #: includes/SocialLogin.php:542
-#: modules/vendor-verification/includes/Admin/Settings.php:290
+#: modules/vendor-verification/includes/Admin/Settings.php:291
 msgid "Redirect URL"
 msgstr ""
 
 #: includes/SocialLogin.php:441
-#: modules/vendor-verification/includes/Admin/Settings.php:237
+#: modules/vendor-verification/includes/Admin/Settings.php:238
 msgid "Your store URL, which will be required in syncing with Google API."
 msgstr ""
 
@@ -7174,13 +7212,13 @@ msgstr ""
 #: modules/paypal-marketplace/templates/admin-gateway-settings.php:103
 #: modules/printful/includes/Admin/Settings.php:135
 #: modules/stripe/includes/Settings/StripeConnect.php:109
-#: modules/vendor-verification/includes/Admin/Settings.php:243
-#: modules/vendor-verification/includes/Admin/Settings.php:297
+#: modules/vendor-verification/includes/Admin/Settings.php:244
+#: modules/vendor-verification/includes/Admin/Settings.php:298
 msgid "Client ID"
 msgstr ""
 
 #: includes/SocialLogin.php:448
-#: modules/vendor-verification/includes/Admin/Settings.php:245
+#: modules/vendor-verification/includes/Admin/Settings.php:246
 msgid "You can get it from Google Console Platform -> Google+API -> Enable -> Manage -> Credentials -> Create Credentials -> OAuth client ID -> Web Application -> Fill in the information & click Create. A pop up will show \"Client ID\"."
 msgstr ""
 
@@ -7188,44 +7226,44 @@ msgstr ""
 #: includes/SocialLogin.php:504
 #: modules/paypal-marketplace/templates/admin-gateway-settings.php:106
 #: modules/paypal-marketplace/templates/admin-gateway-settings.php:112
-#: modules/vendor-verification/includes/Admin/Settings.php:251
-#: modules/vendor-verification/includes/Admin/Settings.php:305
+#: modules/vendor-verification/includes/Admin/Settings.php:252
+#: modules/vendor-verification/includes/Admin/Settings.php:306
 msgid "Client Secret"
 msgstr ""
 
 #: includes/SocialLogin.php:455
-#: modules/vendor-verification/includes/Admin/Settings.php:253
+#: modules/vendor-verification/includes/Admin/Settings.php:254
 msgid "You can get it from Google Console Platform -> Google+API -> Enable -> Manage -> Credentials -> Create Credentials -> OAuth client ID -> Web Application -> Fill in the information & click Create. A pop up will show \"Client Credentials\"."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
 #: includes/SocialLogin.php:464
-#: modules/vendor-verification/includes/Admin/Settings.php:263
+#: modules/vendor-verification/includes/Admin/Settings.php:264
 msgid "Configure your linkedin API settings. %1$sGet Help%2$s"
 msgstr ""
 
 #: includes/SocialLogin.php:472
-#: modules/vendor-verification/includes/Admin/Settings.php:271
+#: modules/vendor-verification/includes/Admin/Settings.php:272
 msgid "Connect to Linkedin"
 msgstr ""
 
 #: includes/SocialLogin.php:474
-#: modules/vendor-verification/includes/Admin/Settings.php:273
+#: modules/vendor-verification/includes/Admin/Settings.php:274
 msgid "You can successfully connect LinkedIn with your website."
 msgstr ""
 
 #: includes/SocialLogin.php:484
-#: modules/vendor-verification/includes/Admin/Settings.php:276
+#: modules/vendor-verification/includes/Admin/Settings.php:277
 msgid "Linkedin App Settings"
 msgstr ""
 
 #: includes/SocialLogin.php:499
-#: modules/vendor-verification/includes/Admin/Settings.php:299
+#: modules/vendor-verification/includes/Admin/Settings.php:300
 msgid "You can get it from LinkedIn Developers platform -> Create an App -> Fill necessary info -> Click \"Create app\" -> \"Auth\" section -> Collect Client ID."
 msgstr ""
 
 #: includes/SocialLogin.php:506
-#: modules/vendor-verification/includes/Admin/Settings.php:307
+#: modules/vendor-verification/includes/Admin/Settings.php:308
 msgid "You can get it from LinkedIn Developers platform -> Create an App -> Fill necessary info -> Click \"Create app\" -> \"Auth\" section -> Collect Client Secret."
 msgstr ""
 
@@ -7318,7 +7356,7 @@ msgstr ""
 #: assets/js/dokan-manual-order.js:223
 #: assets/js/pro-frontend-shipping.js:171
 #: assets/js/vue-pro-frontend-shipping.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:457
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:171
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:173
 msgid "None"
@@ -7977,6 +8015,7 @@ msgstr ""
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
 #: modules/report-abuse/assets/js/dokan-report-abuse-admin.js:1
@@ -7986,8 +8025,7 @@ msgstr ""
 #: modules/store-reviews/assets/js/store-reviews.js:174
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
 #: modules/vendor-staff/assets/js/dokan-vendor-staff.js:171
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:116
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:429
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 #: modules/wholesale/assets/js/admin-wholesale-customer.js:1
 msgid "Delete"
 msgstr ""
@@ -8219,7 +8257,8 @@ msgstr ""
 #: includes/woo-views/variation-admin-html.php:261
 #: modules/product-adv/includes/Helper.php:513
 #: modules/product-adv/includes/Helper.php:529
-#: modules/subscription/api/class-subscription-controller.php:583
+#: modules/subscription/api/class-subscription-controller.php:584
+#: modules/subscription/api/class-subscription-controller.php:585
 #: modules/subscription/includes/classes/SubscriptionInvoice.php:107
 #: modules/subscription/templates/dashboard/pack-listing.php:181
 #: modules/subscription/templates/dashboard/pack-listing.php:212
@@ -8410,17 +8449,17 @@ msgid "The booking has been added successfully."
 msgstr ""
 
 #: modules/booking/includes/class-wc-booking-calendar.php:28
-#: modules/booking/module.php:259
+#: modules/booking/module.php:263
 msgid "Are you sure you want to remove this person type?"
 msgstr ""
 
 #: modules/booking/includes/class-wc-booking-calendar.php:31
-#: modules/booking/module.php:263
+#: modules/booking/module.php:267
 msgid "Are you sure you want to remove this resource?"
 msgstr ""
 
 #: modules/booking/includes/class-wc-booking-calendar.php:34
-#: modules/booking/module.php:266
+#: modules/booking/module.php:270
 #: modules/booking/templates/booking/new-product.php:557
 msgid "minutes"
 msgstr ""
@@ -8430,7 +8469,7 @@ msgid "hours"
 msgstr ""
 
 #: modules/booking/includes/class-wc-booking-calendar.php:36
-#: modules/booking/module.php:267
+#: modules/booking/module.php:271
 #: modules/subscription/includes/classes/Helper.php:155
 #: modules/subscription/assets/js/frontend-components.js:197
 #: modules/subscription/assets/js/vendor-single.js:171
@@ -8438,7 +8477,7 @@ msgid "days"
 msgstr ""
 
 #: modules/booking/includes/class-wc-booking-calendar.php:37
-#: modules/booking/module.php:268
+#: modules/booking/module.php:272
 msgid "Enter a name for the new resource"
 msgstr ""
 
@@ -8457,7 +8496,7 @@ msgstr ""
 #: assets/js/analytics-report-orders.js:41
 #: assets/js/dokan-manual-order.js:171
 #: modules/product-qa/assets/js/admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2128
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/admin.js:1
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
@@ -8618,7 +8657,7 @@ msgid "{product_title} - is Cancelled"
 msgstr ""
 
 #: modules/booking/includes/emails/class-dokan-booking-email-new.php:34
-#: modules/booking/module.php:419
+#: modules/booking/module.php:424
 msgid "Dokan New Booking"
 msgstr ""
 
@@ -8650,85 +8689,85 @@ msgstr ""
 msgid "Email Heading (Pending confirmation)"
 msgstr ""
 
-#: modules/booking/module.php:155
+#: modules/booking/module.php:158
 #: modules/booking/templates/booking/add-booking/html-create-booking-page.php:37
 msgid "Bookable Product"
 msgstr ""
 
-#: modules/booking/module.php:324
+#: modules/booking/module.php:329
 msgctxt "enhanced select"
 msgid "One result is available, press enter to select it."
 msgstr ""
 
-#: modules/booking/module.php:325
+#: modules/booking/module.php:330
 msgctxt "enhanced select"
 msgid "%qty% results are available, use up and down arrow keys to navigate."
 msgstr ""
 
-#: modules/booking/module.php:326
+#: modules/booking/module.php:331
 msgctxt "enhanced select"
 msgid "No matches found"
 msgstr ""
 
-#: modules/booking/module.php:327
+#: modules/booking/module.php:332
 msgctxt "enhanced select"
 msgid "Loading failed"
 msgstr ""
 
-#: modules/booking/module.php:328
+#: modules/booking/module.php:333
 msgctxt "enhanced select"
 msgid "Please enter 1 or more characters"
 msgstr ""
 
-#: modules/booking/module.php:329
+#: modules/booking/module.php:334
 msgctxt "enhanced select"
 msgid "Please enter %qty% or more characters"
 msgstr ""
 
-#: modules/booking/module.php:330
+#: modules/booking/module.php:335
 msgctxt "enhanced select"
 msgid "Please delete 1 character"
 msgstr ""
 
-#: modules/booking/module.php:331
+#: modules/booking/module.php:336
 msgctxt "enhanced select"
 msgid "Please delete %qty% characters"
 msgstr ""
 
-#: modules/booking/module.php:332
+#: modules/booking/module.php:337
 msgctxt "enhanced select"
 msgid "You can only select 1 item"
 msgstr ""
 
-#: modules/booking/module.php:333
+#: modules/booking/module.php:338
 msgctxt "enhanced select"
 msgid "You can only select %qty% items"
 msgstr ""
 
-#: modules/booking/module.php:334
+#: modules/booking/module.php:339
 msgctxt "enhanced select"
 msgid "Loading more results&hellip;"
 msgstr ""
 
-#: modules/booking/module.php:335
+#: modules/booking/module.php:340
 msgctxt "enhanced select"
 msgid "Searching&hellip;"
 msgstr ""
 
-#: modules/booking/module.php:420
+#: modules/booking/module.php:425
 msgid "New booking emails are sent to the admin when a new booking is created and paid. This email is also received when a Pending confirmation booking is created."
 msgstr ""
 
-#: modules/booking/module.php:458
-#: modules/booking/module.php:1235
+#: modules/booking/module.php:463
+#: modules/booking/module.php:1240
 msgid "Booking"
 msgstr ""
 
-#: modules/booking/module.php:489
+#: modules/booking/module.php:494
 msgid "You have no permission to view this booking page"
 msgstr ""
 
-#: modules/booking/module.php:656
+#: modules/booking/module.php:661
 #: modules/mangopay/includes/Checkout/Ajax.php:38
 #: modules/mangopay/includes/Checkout/Ajax.php:71
 #: modules/mangopay/includes/Checkout/Ajax.php:94
@@ -8737,12 +8776,12 @@ msgstr ""
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:125
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:168
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:209
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:304
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:333
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:487
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:573
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:622
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:651
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:392
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:421
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:576
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:662
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:711
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:740
 #: modules/product-enquiry/module.php:120
 #: modules/stripe-express/includes/WithdrawMethod/Ajax.php:58
 #: modules/stripe-express/includes/WithdrawMethod/Ajax.php:106
@@ -8751,58 +8790,58 @@ msgstr ""
 msgid "Nonce verification failed!"
 msgstr ""
 
-#: modules/booking/module.php:660
+#: modules/booking/module.php:665
 msgid "Please provide a resource name"
 msgstr ""
 
-#: modules/booking/module.php:863
-#: modules/booking/module.php:880
+#: modules/booking/module.php:868
+#: modules/booking/module.php:885
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: modules/booking/module.php:867
+#: modules/booking/module.php:872
 msgid "You have taken too long. Please go back and retry."
 msgstr ""
 
-#: modules/booking/module.php:925
+#: modules/booking/module.php:930
 msgid "Error Occured"
 msgstr ""
 
-#: modules/booking/module.php:940
+#: modules/booking/module.php:945
 msgid "All Booking Product"
 msgstr ""
 
-#: modules/booking/module.php:944
+#: modules/booking/module.php:949
 msgid "Add Booking Product"
 msgstr ""
 
-#: modules/booking/module.php:948
+#: modules/booking/module.php:953
 #: modules/booking/templates/booking/my-bookings/all-bookings.php:52
 msgid "Manage Bookings"
 msgstr ""
 
-#: modules/booking/module.php:952
+#: modules/booking/module.php:957
 msgid "Calendar"
 msgstr ""
 
-#: modules/booking/module.php:956
+#: modules/booking/module.php:961
 #: modules/booking/templates/booking/resources/html-booking-resources.php:100
 msgid "Manage Resources"
 msgstr ""
 
-#: modules/booking/module.php:960
+#: modules/booking/module.php:965
 msgid "Edit Booking Product"
 msgstr ""
 
-#: modules/booking/module.php:964
+#: modules/booking/module.php:969
 msgid "Edit Resource"
 msgstr ""
 
-#: modules/booking/module.php:968
+#: modules/booking/module.php:973
 msgid "Edit Booking"
 msgstr ""
 
-#: modules/booking/module.php:972
+#: modules/booking/module.php:977
 #: modules/booking/templates/booking/add-booking/html-create-booking-page-2.php:16
 #: modules/booking/templates/booking/add-booking/html-create-booking-page-2.php:37
 #: modules/booking/templates/booking/add-booking/html-create-booking-page-2.php:38
@@ -8811,43 +8850,43 @@ msgstr ""
 msgid "Add Booking"
 msgstr ""
 
-#: modules/booking/module.php:1210
+#: modules/booking/module.php:1215
 msgid "View booking menu"
 msgstr ""
 
-#: modules/booking/module.php:1213
+#: modules/booking/module.php:1218
 msgid "Manage booking products"
 msgstr ""
 
-#: modules/booking/module.php:1214
+#: modules/booking/module.php:1219
 msgid "Manage booking calendar"
 msgstr ""
 
-#: modules/booking/module.php:1215
+#: modules/booking/module.php:1220
 msgid "Manage bookings"
 msgstr ""
 
-#: modules/booking/module.php:1216
+#: modules/booking/module.php:1221
 msgid "Manage booking resource"
 msgstr ""
 
-#: modules/booking/module.php:1217
+#: modules/booking/module.php:1222
 msgid "Add booking product"
 msgstr ""
 
-#: modules/booking/module.php:1218
+#: modules/booking/module.php:1223
 msgid "Edit booking product"
 msgstr ""
 
-#: modules/booking/module.php:1219
+#: modules/booking/module.php:1224
 msgid "Delete booking product"
 msgstr ""
 
-#: modules/booking/module.php:1250
+#: modules/booking/module.php:1255
 msgid "Booking Person Discount (Amount Off Per Person)"
 msgstr ""
 
-#: modules/booking/module.php:1310
+#: modules/booking/module.php:1315
 #: modules/booking/templates/booking/new-product.php:373
 #: modules/booking/templates/booking/new-product.php:455
 #: modules/booking/templates/booking/new-product.php:536
@@ -8856,7 +8895,7 @@ msgstr ""
 msgid "Month(s)"
 msgstr ""
 
-#: modules/booking/module.php:1313
+#: modules/booking/module.php:1318
 #: modules/booking/templates/booking/new-product.php:374
 #: modules/booking/templates/booking/new-product.php:456
 #: modules/booking/templates/booking/new-product.php:538
@@ -8865,7 +8904,7 @@ msgstr ""
 msgid "Day(s)"
 msgstr ""
 
-#: modules/booking/module.php:1316
+#: modules/booking/module.php:1321
 #: modules/booking/templates/booking/new-product.php:375
 #: modules/booking/templates/booking/new-product.php:457
 #: modules/booking/templates/booking/new-product.php:539
@@ -8873,17 +8912,25 @@ msgstr ""
 msgid "Hour(s)"
 msgstr ""
 
-#: modules/booking/module.php:1319
+#: modules/booking/module.php:1324
 #: modules/booking/templates/booking/new-product.php:458
 msgid "Minute(s)"
 msgstr ""
 
-#: modules/booking/module.php:1440
+#: modules/booking/module.php:1445
 msgid "View order &rarr;"
 msgstr ""
 
-#: modules/booking/module.php:1442
+#: modules/booking/module.php:1447
 msgid "View all orders &rarr;"
+msgstr ""
+
+#: modules/booking/module.php:1601
+msgid "Enable Delivery Time for Booking Products"
+msgstr ""
+
+#: modules/booking/module.php:1602
+msgid "Control how delivery time will be shown in the checkout with booking product in cart."
 msgstr ""
 
 #: modules/booking/templates/booking/accommodation/admin/accommodation-fields.php:17
@@ -9402,14 +9449,15 @@ msgstr ""
 #: assets/js/dokan-pro-admin-dashboard.js:171
 #: assets/js/dokan-vendor-dashboard-coupon.js:177
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:61
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:271
 #: modules/rma/assets/js/vendor-dashboard.js:175
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
 #: modules/vendor-staff/assets/js/dokan-vendor-staff.js:171
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
 #: modules/vendor-support/assets/js/admin-vendor-support.js:177
 #: modules/vendor-support/assets/js/vendor-vendor-support.js:177
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:669
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Update"
 msgstr ""
 
@@ -9451,9 +9499,12 @@ msgstr ""
 #: modules/paystack/assets/js/dashboard.js:171
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/product.js:7
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:62
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:272
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:574
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1226
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/rma/assets/js/vendor-dashboard.js:175
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
@@ -9466,7 +9517,7 @@ msgstr ""
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
 #: modules/vendor-support/assets/js/admin-vendor-support.js:171
 #: modules/vendor-support/assets/js/vendor-vendor-support.js:171
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:646
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 #: modules/vendor-verification/assets/js/frontend/dashboard/index.js:171
 msgid "Cancel"
 msgstr ""
@@ -9614,7 +9665,7 @@ msgstr ""
 #: modules/seller-badge/includes/Widgets/SellerBadge.php:36
 #: modules/store-reviews/templates/emails/new-store-review-email.php:45
 #: modules/store-support/module.php:1080
-#: modules/store-support/module.php:1487
+#: modules/store-support/module.php:1485
 #: modules/stripe-express/templates/admin/gateway-settings.php:20
 #: modules/stripe/includes/Settings/StripeConnect.php:15
 #: templates/coupon/form.php:22
@@ -9857,7 +9908,7 @@ msgstr ""
 #: modules/product-addon/templates/product-addon/html-global-admin-add.php:53
 #: modules/product-addon/templates/product-addon/html-global-admin.php:14
 #: modules/table-rate-shipping/templates/classes-settings.php:8
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1784
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:171
 msgid "Priority"
@@ -10057,7 +10108,8 @@ msgstr ""
 #: templates/review/listing-table-tr.php:55
 #: assets/js/dashboard-reviews.js:1
 #: assets/js/dokan-announcement-admin.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1958
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2389
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/store-reviews.js:171
 msgid "Delete Permanently"
@@ -10091,7 +10143,7 @@ msgstr ""
 #: modules/simple-auction/templates/auction/auction-products-listing.php:356
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1691
 msgid "Scheduled"
 msgstr ""
 
@@ -10178,7 +10230,7 @@ msgstr ""
 #: modules/table-rate-shipping/templates/rows-settings.php:43
 #: assets/js/vue-pro-admin.js:1
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:173
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:595
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Label"
 msgstr ""
 
@@ -10510,17 +10562,17 @@ msgid "Please select a time on or after %2$s for %1$s."
 msgstr ""
 
 #. translators: %s: hour(s)
-#: modules/delivery-time/includes/Helper.php:824
+#: modules/delivery-time/includes/Helper.php:825
 msgid "This store needs %s hour(s) to process your delivery request"
 msgstr ""
 
 #. translators: %s: order ID
-#: modules/delivery-time/includes/Helper.php:953
+#: modules/delivery-time/includes/Helper.php:954
 msgid "Delivery #%1$s"
 msgstr ""
 
 #. translators: %s: order ID
-#: modules/delivery-time/includes/Helper.php:956
+#: modules/delivery-time/includes/Helper.php:957
 msgid "Store Pickup #%1$s"
 msgstr ""
 
@@ -10746,7 +10798,7 @@ msgstr ""
 #: modules/subscription/templates/dashboard/pack-listing.php:212
 #: modules/subscription/templates/dashboard/pack-listing.php:215
 #: modules/delivery-time/assets/js/delivery-time-dashboard.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1494
 msgid "Days"
 msgstr ""
 
@@ -11493,8 +11545,12 @@ msgstr ""
 
 #. translators: %s: Customer first name
 #. Translators: %s is the vendor's name.
+#. translators: %s: customer's display name (e.g. "John") - used in the greeting "Hi %s,"
+#. translators: %s: customer's display name (e.g. "John").
 #: modules/delivery-time/templates/emails/update-vendor-order-time-email.php:18
 #: modules/mangopay/templates/emails/mangopay-disconnect-notification.php:26
+#: modules/rma/templates/emails/plain/ma-status-changed.php:22
+#: modules/rma/templates/emails/rma-status-changed.php:37
 #: templates/emails/marked-order-receive.php:19
 #: templates/emails/plain/shipping-status.php:28
 #: templates/emails/shipping-status.php:26
@@ -11671,7 +11727,7 @@ msgstr ""
 #: modules/elementor/includes/Tags/StoreSupportButton.php:43
 #: modules/store-support/module.php:169
 #: modules/store-support/module.php:441
-#: modules/store-support/module.php:1952
+#: modules/store-support/module.php:1950
 #: modules/store-support/support-widget.php:151
 msgid "Get Support"
 msgstr ""
@@ -11765,8 +11821,8 @@ msgstr ""
 #: modules/vendor-staff/templates/vendor-staff/staffs.php:81
 #: assets/js/analytics-report-customers.js:19
 #: assets/js/analytics-report-customers.js:59
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:85
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:795
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/vendor-staff/assets/js/dokan-vendor-staff.js:171
 #: modules/wholesale/assets/js/admin-wholesale-customer.js:1
@@ -12389,6 +12445,12 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
+#: modules/export-import/includes/parsers.php:61
+#: modules/export-import/includes/parsers.php:283
+#: modules/export-import/templates/export-import/template_importer.php:40
+msgid "You do not have permission to import products."
+msgstr ""
+
 #: modules/export-import/module.php:292
 msgid "You have no permission to view this tool page"
 msgstr ""
@@ -12397,134 +12459,167 @@ msgstr ""
 msgid "View tools menu"
 msgstr ""
 
+#: modules/export-import/module.php:352
+#: modules/printful/includes/Ajax.php:41
+#: modules/printful/includes/Ajax.php:87
+#: modules/product-qa/includes/Ajax.php:32
+#: modules/product-qa/includes/Ajax.php:85
+#: modules/product-qa/includes/Ajax.php:126
+msgid "Security verification failed."
+msgstr ""
+
+#: modules/export-import/module.php:357
+msgid "You do not have permission to export products."
+msgstr ""
+
+#: modules/export-import/module.php:365
+msgid "Invalid export type."
+msgstr ""
+
 #. translators: %s: category name
-#: modules/export-import/module.php:417
+#: modules/export-import/module.php:453
 msgid "Failed to import category %s"
 msgstr ""
 
 #. translators: %s: post tag name
-#: modules/export-import/module.php:471
+#: modules/export-import/module.php:507
 msgid "Failed to import post tag %s"
 msgstr ""
 
 #. translators: 1: taxnomy name, 2: term name
 #. translators: 1: taxonomy name, 2: term name
-#: modules/export-import/module.php:535
-#: modules/export-import/module.php:699
+#: modules/export-import/module.php:571
+#: modules/export-import/module.php:735
 msgid "Failed to import %1$s %2$s"
 msgstr ""
 
 #. translators: 1: post title, 2: post type
-#: modules/export-import/module.php:562
+#: modules/export-import/module.php:598
 msgid "Failed to import &#8220;%1$s&#8221;: Invalid post type %2$s"
 msgstr ""
 
 #. translators: 1: singular label name, 2: post title
-#: modules/export-import/module.php:582
+#: modules/export-import/module.php:618
 msgid "%1$s &#8220;%2$s&#8221; already exists."
 msgstr ""
 
 #. translators: 1: singular label name, 2: post title
-#: modules/export-import/module.php:658
+#: modules/export-import/module.php:694
 msgid "Failed to import %1$s &#8220;%2$s&#8221;"
 msgstr ""
 
-#: modules/export-import/module.php:823
+#: modules/export-import/module.php:859
 msgid "Fetching attachments is not enabled"
 msgstr ""
 
-#: modules/export-import/module.php:842
+#: modules/export-import/module.php:878
 msgid "Invalid file type"
 msgstr ""
 
-#: modules/export-import/module.php:891
+#: modules/export-import/module.php:927
 msgid "Remote server did not respond"
 msgstr ""
 
 #. translators: 1; response show, 2: response show
-#: modules/export-import/module.php:898
+#: modules/export-import/module.php:934
 msgid "Remote server returned error response %1$d %2$s"
 msgstr ""
 
-#: modules/export-import/module.php:906
+#: modules/export-import/module.php:942
 msgid "Remote file is incorrect size"
 msgstr ""
 
-#: modules/export-import/module.php:912
+#: modules/export-import/module.php:948
 msgid "Zero size file downloaded"
 msgstr ""
 
 #. translators: %s: show max size
-#: modules/export-import/module.php:920
+#: modules/export-import/module.php:956
 msgid "Remote file is too large, limit is %s"
 msgstr ""
 
-#: modules/export-import/module.php:948
+#: modules/export-import/module.php:984
 msgid "All done."
 msgstr ""
 
-#: modules/export-import/module.php:948
+#: modules/export-import/module.php:984
 msgid "Have fun!"
 msgstr ""
 
-#: modules/export-import/module.php:960
-#: modules/export-import/module.php:970
+#: modules/export-import/module.php:996
+#: modules/export-import/module.php:1006
 msgid "Sorry, there has been an error."
 msgstr ""
 
-#: modules/export-import/module.php:961
+#: modules/export-import/module.php:997
 msgid "The file does not exist, please try again."
 msgstr ""
 
-#: modules/export-import/module.php:1197
+#: modules/export-import/module.php:1233
 msgid "Insufficient privileges to import products."
 msgstr ""
 
-#: modules/export-import/module.php:1201
+#: modules/export-import/module.php:1237
 msgid "No file found for product upload."
 msgstr ""
 
-#: modules/export-import/module.php:1394
+#: modules/export-import/module.php:1430
 #: modules/export-import/templates/export-import/template_importer.php:21
 #: modules/export-import/templates/export-import/template_importer.php:29
-#: modules/export-import/templates/export-import/template_importer.php:46
+#: modules/export-import/templates/export-import/template_importer.php:69
 #: modules/export-import/templates/export-import/template_importer_new.php:46
 #: modules/product-addon/templates/product-addon/html-addon-panel.php:39
 #: assets/js/vue-pro-admin.js:1
 msgid "Import"
 msgstr ""
 
-#: modules/export-import/module.php:1400
+#: modules/export-import/module.php:1436
 #: modules/export-import/templates/export-import/template_importer.php:22
-#: modules/export-import/templates/export-import/template_importer.php:52
-#: modules/export-import/templates/export-import/template_importer.php:62
+#: modules/export-import/templates/export-import/template_importer.php:75
+#: modules/export-import/templates/export-import/template_importer.php:86
 #: modules/export-import/templates/export-import/template_importer_new.php:54
 #: modules/product-addon/templates/product-addon/html-addon-panel.php:40
 msgid "Export"
 msgstr ""
 
-#: modules/export-import/module.php:1517
+#: modules/export-import/module.php:1553
 msgid "You do not have permission to create product category."
 msgstr ""
 
-#: modules/export-import/module.php:1580
-#: modules/export-import/module.php:1592
+#: modules/export-import/module.php:1616
+#: modules/export-import/module.php:1628
 msgid "Brands"
 msgstr ""
 
-#: modules/export-import/templates/export-import/template_importer.php:36
+#: modules/export-import/templates/export-import/template_importer.php:37
+msgid "Security verification failed. Please try again."
+msgstr ""
+
+#: modules/export-import/templates/export-import/template_importer.php:42
 msgid "Please select a xml file"
 msgstr ""
 
-#: modules/export-import/templates/export-import/template_importer.php:43
-msgid "Click Browse button and choose a XML file that you want to import."
+#: modules/export-import/templates/export-import/template_importer.php:50
+msgid "Invalid file type. Please upload an XML file."
+msgstr ""
+
+#: modules/export-import/templates/export-import/template_importer.php:53
+msgid "File too large. Maximum size is 50MB."
 msgstr ""
 
 #: modules/export-import/templates/export-import/template_importer.php:56
+msgid "File upload error occurred."
+msgstr ""
+
+#: modules/export-import/templates/export-import/template_importer.php:65
+msgid "Click Browse button and choose a XML file that you want to import."
+msgstr ""
+
+#: modules/export-import/templates/export-import/template_importer.php:79
 msgid "Chose your type of product and click export button to export all data in XML form"
 msgstr ""
 
-#: modules/export-import/templates/export-import/template_importer.php:61
+#: modules/export-import/templates/export-import/template_importer.php:85
 msgid "Variation"
 msgstr ""
 
@@ -12588,7 +12683,7 @@ msgid "Latest updates from {site_title}"
 msgstr ""
 
 #: modules/follow-store/includes/class-dokan-follow-store-my-account.php:43
-#: modules/store-support/module.php:2141
+#: modules/store-support/module.php:2139
 msgid "Logout"
 msgstr ""
 
@@ -12931,7 +13026,7 @@ msgid "In case the searched store is not found, the default location will be set
 msgstr ""
 
 #: modules/geolocation/class-geolocation-admin-settings.php:141
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:301
 msgid "Dhaka"
 msgstr ""
 
@@ -13126,8 +13221,8 @@ msgid "Bank IBAN"
 msgstr ""
 
 #: modules/germanized/includes/Helper.php:202
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:93
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:813
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Company Name"
 msgstr ""
@@ -13590,7 +13685,7 @@ msgstr ""
 #. translators: 1: Product title, 2: Gateway title
 #: modules/mangopay/includes/Cart/Manager.php:81
 #: modules/paypal-marketplace/includes/Cart/CartHandler.php:396
-#: modules/razorpay/includes/Cart/CartHandler.php:321
+#: modules/razorpay/includes/Cart/CartHandler.php:323
 msgid "<strong>Error!</strong> Could not add product %1$s to cart, this product/vendor is not eligible to be paid with %2$s"
 msgstr ""
 
@@ -13723,9 +13818,10 @@ msgstr ""
 msgid "Bank account already exists"
 msgstr ""
 
+#. translators: 1 field name.
 #: modules/mangopay/includes/Processor/BankAccount.php:131
 #: modules/mangopay/includes/Processor/BankAccount.php:142
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:363
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:452
 msgid "%s is required"
 msgstr ""
 
@@ -14083,7 +14179,7 @@ msgstr ""
 
 #: modules/mangopay/includes/Processor/Wallet.php:77
 #: modules/mangopay/includes/Support/Helper.php:907
-#: modules/razorpay/includes/Helper.php:632
+#: modules/razorpay/includes/Helper.php:634
 msgid "Individual"
 msgstr ""
 
@@ -14252,7 +14348,7 @@ msgstr ""
 #: modules/request-for-quotation/templates/quote-shipping-info-fields.php:5
 #: modules/table-rate-shipping/templates/distance-rate/general-settings.php:120
 #: modules/vendor-analytics/includes/functions.php:387
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:277
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/table-rate-shipping/assets/js/table-rate-shipping-vendor.js:173
 msgid "Country"
@@ -14373,9 +14469,9 @@ msgstr ""
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:91
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:129
 #: modules/mangopay/includes/WithdrawMethod/Ajax.php:172
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:308
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:491
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:577
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:396
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:580
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:666
 msgid "Pemission denied!"
 msgstr ""
 
@@ -14424,47 +14520,71 @@ msgstr ""
 msgid "No file type selected"
 msgstr ""
 
-#. translators: 1) input file name
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:233
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:250
+msgid "File upload error. Please try again."
+msgstr ""
+
+#. translators: 1 file name.
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:260
+msgid "File rejected for security reasons: %s"
+msgstr ""
+
+#. translators: 1 file name
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:268
 msgid "The file is not valid: %s"
 msgstr ""
 
-#. translators: 1) input file type
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:238
-msgid "Unsupported file type: %s. Supported types: .pdf, .jpeg, .jpg and .png only"
+#. translators: 1 file name.
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:288
+msgid "Unsupported file type: %s. Supported types: PDF, JPEG, JPG and PNG only"
+msgstr ""
+
+#. translators: 1 file name.
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:296
+msgid "Unable to read file: %s"
+msgstr ""
+
+#. translators: 1 file name.
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:311
+msgid "File content does not match expected type: %s"
+msgstr ""
+
+#. translators: 1 file name.
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:321
+msgid "File contains suspicious content: %s"
 msgstr ""
 
 #. translators: 1) identity proof
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:243
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:328
 msgid "This file is too small. Minimum 32KB required for %s"
 msgstr ""
 
 #. translators: 1) input doc type
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:248
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:333
 msgid "This file is too small. Minimum 1KB required for %s"
 msgstr ""
 
 #. translators: 1) input doc type
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:253
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:338
 msgid "This file is too big. Maximum 10MB allowed for %s"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:292
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:380
 msgid "KYC submitted successfully and asked for validation"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:314
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:341
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:402
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:429
 msgid "No vendor found!"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:321
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:409
 msgid "Account disconnected successfully."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:337
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:626
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:655
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:425
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:715
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:744
 #: modules/stripe-express/includes/WithdrawMethod/Ajax.php:62
 #: modules/stripe-express/includes/WithdrawMethod/Ajax.php:110
 #: modules/stripe-express/includes/WithdrawMethod/Ajax.php:138
@@ -14472,52 +14592,52 @@ msgstr ""
 msgid "Permission denied!"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:345
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:433
 msgid "Please read and accept the Terms and Conditions of MangoPay to proceed."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:368
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:457
 msgid "Type of User is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:372
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:461
 msgid "Type of Business is required"
 msgstr ""
 
 #. translators: 1) opening anchor tag with link, 2) closing anchor tag
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:398
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:487
 msgid "Your store address is required to be a MangoPay business user. Please go to your %1$sstore settings%2$s and update the address."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:420
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:509
 msgid "Company Number is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:422
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:511
 msgid "Company Number pattern is incorrect. Please provide a valid one."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:427
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:516
 msgid "Address is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:431
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:520
 msgid "Country is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:435
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:524
 msgid "City is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:439
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:528
 msgid "State is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:443
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:532
 msgid "Postcode is required"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:463
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:552
 #: modules/product-enquiry/module.php:157
 #: modules/product-enquiry/module.php:163
 #: modules/rma/includes/Ajax.php:40
@@ -14525,24 +14645,24 @@ msgstr ""
 msgid "Something went wrong!"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:466
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:475
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:555
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:564
 msgid "Account connected successfully."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:495
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:584
 msgid "Account is not connected with MangoPay. Please connect your account."
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:630
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:719
 msgid "No user id found!"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:659
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:748
 msgid "No user found!"
 msgstr ""
 
-#: modules/mangopay/includes/WithdrawMethod/Ajax.php:663
+#: modules/mangopay/includes/WithdrawMethod/Ajax.php:752
 msgid "No UBO declaration found!"
 msgstr ""
 
@@ -14598,7 +14718,7 @@ msgstr ""
 
 #: modules/mangopay/templates/admin-gateway-settings.php:63
 #: modules/mangopay/templates/admin-gateway-settings.php:69
-#: modules/vendor-verification/includes/Admin/Settings.php:394
+#: modules/vendor-verification/includes/Admin/Settings.php:395
 msgid "API Key"
 msgstr ""
 
@@ -14818,7 +14938,7 @@ msgstr ""
 #: assets/js/vue-pro-admin.js:1
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:419
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Add New"
 msgstr ""
 
@@ -16408,14 +16528,6 @@ msgstr ""
 msgid "Centimetre"
 msgstr ""
 
-#: modules/printful/includes/Ajax.php:41
-#: modules/printful/includes/Ajax.php:87
-#: modules/product-qa/includes/Ajax.php:32
-#: modules/product-qa/includes/Ajax.php:85
-#: modules/product-qa/includes/Ajax.php:126
-msgid "Security verification failed."
-msgstr ""
-
 #: modules/printful/includes/Ajax.php:48
 #: modules/printful/includes/Ajax.php:94
 msgid "Printful Integration is disabled."
@@ -16705,32 +16817,32 @@ msgstr ""
 msgid "When this option is enabled, customers will see the standard shipping methods as per marketplace settings."
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:53
+#: modules/product-addon/includes/class-frontend.php:50
 msgid "Addons"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:74
+#: modules/product-addon/includes/class-frontend.php:71
 msgid "Product Addons"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:92
+#: modules/product-addon/includes/class-frontend.php:89
 msgid "Set your field type for product addons which is applicable for all product or specific product category globally. You can control this setting seperately from individual products"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:116
+#: modules/product-addon/includes/class-frontend.php:113
 msgid "Error: Add-on not found"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:130
-#: modules/product-addon/includes/class-frontend.php:260
+#: modules/product-addon/includes/class-frontend.php:127
+#: modules/product-addon/includes/class-frontend.php:257
 msgid "Add-ons Group"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:138
+#: modules/product-addon/includes/class-frontend.php:135
 msgid "Add-on saved successfully"
 msgstr ""
 
-#: modules/product-addon/includes/class-frontend.php:161
+#: modules/product-addon/includes/class-frontend.php:158
 msgid "Add-on deleted successfully"
 msgstr ""
 
@@ -16772,44 +16884,44 @@ msgstr ""
 msgid "Multiple Choice"
 msgstr ""
 
-#: modules/product-addon/module.php:180
+#: modules/product-addon/module.php:177
 msgid "All fields must have a title and/or option name. Please review the settings highlighted in red border."
 msgstr ""
 
-#: modules/product-addon/module.php:181
+#: modules/product-addon/module.php:178
 #: modules/product-addon/templates/product-addon/html-addon.php:205
 msgid "Limit price range"
 msgstr ""
 
-#: modules/product-addon/module.php:182
+#: modules/product-addon/module.php:179
 #: modules/product-addon/templates/product-addon/html-addon.php:209
 msgid "Limit quantity range"
 msgstr ""
 
-#: modules/product-addon/module.php:183
+#: modules/product-addon/module.php:180
 #: modules/product-addon/templates/product-addon/html-addon.php:212
 #: modules/product-addon/templates/product-addon/html-addon.php:215
 msgid "Limit character length"
 msgstr ""
 
-#: modules/product-addon/module.php:184
+#: modules/product-addon/module.php:181
 #: modules/product-addon/templates/product-addon/html-addon.php:199
 msgid "Restrictions"
 msgstr ""
 
-#: modules/product-addon/module.php:185
+#: modules/product-addon/module.php:182
 msgid "Are you sure you want remove this add-on field?"
 msgstr ""
 
-#: modules/product-addon/module.php:186
+#: modules/product-addon/module.php:183
 msgid "Are you sure you want delete this option?"
 msgstr ""
 
-#: modules/product-addon/module.php:187
+#: modules/product-addon/module.php:184
 msgid "Add Image Swatch"
 msgstr ""
 
-#: modules/product-addon/module.php:188
+#: modules/product-addon/module.php:185
 msgid "Add Image"
 msgstr ""
 
@@ -16977,7 +17089,7 @@ msgstr ""
 #: modules/product-addon/templates/product-addon/html-global-admin-add.php:25
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1232
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
@@ -17674,6 +17786,13 @@ msgstr ""
 msgid "Product Q&A %s"
 msgstr ""
 
+#: modules/product-qa/includes/Admin/AdminMenu.php:44
+#: modules/product-qa/templates/vendor-header.php:12
+#: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-product-qa.js:171
+msgid "Product Questions & Answers"
+msgstr ""
+
 #: modules/product-qa/includes/Ajax.php:40
 #: modules/product-qa/includes/Ajax.php:91
 #: modules/product-qa/includes/Ajax.php:132
@@ -17999,6 +18118,7 @@ msgstr ""
 #: modules/product-qa/includes/Vendor.php:259
 #: modules/product-qa/templates/vendor-questions-row.php:69
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Answered"
 msgstr ""
@@ -18006,6 +18126,7 @@ msgstr ""
 #: modules/product-qa/includes/Vendor.php:260
 #: modules/product-qa/templates/vendor-questions-row.php:69
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Unanswered"
 msgstr ""
@@ -18165,12 +18286,6 @@ msgstr ""
 msgid "&larr; Back to List"
 msgstr ""
 
-#: modules/product-qa/templates/vendor-header.php:12
-#: modules/product-qa/assets/js/admin.js:1
-#: modules/product-qa/assets/js/dokan-product-qa.js:171
-msgid "Product Questions & Answers"
-msgstr ""
-
 #: modules/product-qa/templates/vendor-questions-filters.php:27
 #: modules/store-support/templates/store-support/support.php:49
 msgid "Select an option"
@@ -18192,6 +18307,7 @@ msgstr ""
 
 #: modules/product-qa/templates/vendor-questions-list.php:17
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Question"
 msgstr ""
@@ -18237,18 +18353,21 @@ msgid "Last Updated"
 msgstr ""
 
 #: modules/product-qa/templates/vendor-questions-single.php:80
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Delete Question"
 msgstr ""
 
 #: modules/product-qa/templates/vendor-questions-single.php:94
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Answer"
 msgstr ""
 
 #: modules/product-qa/templates/vendor-questions-single.php:111
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 #: modules/rma/assets/js/vendor-dashboard.js:172
 msgid "by"
@@ -18275,6 +18394,7 @@ msgstr ""
 #: assets/js/dokan-manual-order.js:263
 #: assets/js/dokan-manual-order.js:273
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Save"
 msgstr ""
@@ -18328,8 +18448,8 @@ msgid "Manage SEO for this product"
 msgstr ""
 
 #. translators: 1: Vendor products
-#: modules/razorpay/includes/Blocks/CartCheckoutBlockSupport.php:76
-#: modules/razorpay/includes/Cart/CartHandler.php:254
+#: modules/razorpay/includes/Blocks/CartCheckoutBlockSupport.php:80
+#: modules/razorpay/includes/Cart/CartHandler.php:256
 msgid "<strong>Error!</strong> Remove product %s and continue checkout, this product/vendor is not eligible to be paid with Razorpay"
 msgstr ""
 
@@ -18371,20 +18491,20 @@ msgid "Pay Now"
 msgstr ""
 
 #. translators: 1: Product title, 2: Gateway title
-#: modules/razorpay/includes/Cart/CartHandler.php:300
+#: modules/razorpay/includes/Cart/CartHandler.php:302
 msgid "<strong>Error!</strong> Could not add product %1$s to cart, Subscription product is not eligible to be paid with %2$s yet."
 msgstr ""
 
-#: modules/razorpay/includes/Cart/CartHandler.php:383
+#: modules/razorpay/includes/Cart/CartHandler.php:385
 msgid "Invalid order key. Please try again."
 msgstr ""
 
-#: modules/razorpay/includes/Cart/CartHandler.php:389
+#: modules/razorpay/includes/Cart/CartHandler.php:391
 #: modules/stripe/includes/IntentController.php:69
 msgid "Invalid order id. Please try again."
 msgstr ""
 
-#: modules/razorpay/includes/Cart/CartHandler.php:395
+#: modules/razorpay/includes/Cart/CartHandler.php:397
 msgid "Invalid order. Please try again."
 msgstr ""
 
@@ -18396,61 +18516,61 @@ msgstr ""
 msgid "This %s is not supported yet"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:63
+#: modules/razorpay/includes/Helper.php:65
 #: modules/razorpay/includes/PaymentMethods/Razorpay.php:112
 #: modules/razorpay/includes/WithdrawMethods/RegisterWithdrawMethods.php:86
 msgid "Dokan Razorpay"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:614
+#: modules/razorpay/includes/Helper.php:616
 msgid "Indian rupee"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:629
+#: modules/razorpay/includes/Helper.php:631
 msgid "Private Limited"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:630
+#: modules/razorpay/includes/Helper.php:632
 msgid "Proprietorship"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:631
+#: modules/razorpay/includes/Helper.php:633
 msgid "Partnership"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:633
+#: modules/razorpay/includes/Helper.php:635
 msgid "Public Limited"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:634
+#: modules/razorpay/includes/Helper.php:636
 msgid "LLP"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:635
+#: modules/razorpay/includes/Helper.php:637
 msgid "Trust"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:636
+#: modules/razorpay/includes/Helper.php:638
 msgid "Society"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:637
+#: modules/razorpay/includes/Helper.php:639
 msgid "NGO"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:638
+#: modules/razorpay/includes/Helper.php:640
 msgid "Not Yet Registered"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:639
+#: modules/razorpay/includes/Helper.php:641
 msgid "Education Institution"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:653
+#: modules/razorpay/includes/Helper.php:655
 msgid "Current"
 msgstr ""
 
-#: modules/razorpay/includes/Helper.php:654
+#: modules/razorpay/includes/Helper.php:656
 #: modules/seller-vacation/includes/class-dokan-seller-vacation-store-settings.php:94
 msgid "Saving"
 msgstr ""
@@ -18944,7 +19064,7 @@ msgstr ""
 #: modules/razorpay/templates/vendor-settings-account-register.php:118
 #: modules/razorpay/templates/vendor-settings-account-register.php:125
 #: modules/request-for-quotation/templates/quote-shipping-info-fields.php:61
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:307
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Address Line 1"
 msgstr ""
@@ -18952,7 +19072,7 @@ msgstr ""
 #: modules/razorpay/templates/vendor-settings-account-register.php:133
 #: modules/razorpay/templates/vendor-settings-account-register.php:140
 #: modules/request-for-quotation/templates/quote-shipping-info-fields.php:69
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:315
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Address Line 2"
 msgstr ""
@@ -19716,7 +19836,8 @@ msgstr ""
 
 #: modules/request-for-quotation/includes/Helper.php:915
 #: modules/request-for-quotation/includes/Helper.php:1265
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:910
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1580
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Add to quote"
 msgstr ""
@@ -19771,7 +19892,7 @@ msgstr ""
 #: assets/js/dashboard-reviews.js:1
 #: assets/js/dokan-admin-refund.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2060
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/vendor-verification/assets/js/admin/dashboard/index.js:174
 #: modules/vendor-verification/assets/js/dokan-vendor-verification.js:174
@@ -19783,26 +19904,26 @@ msgstr ""
 #: modules/vendor-subscription-product/includes/functions.php:24
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2063
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
 msgid "Expired"
 msgstr ""
 
 #: modules/request-for-quotation/includes/Model/Quote.php:41
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2051
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Updated"
 msgstr ""
 
 #: modules/request-for-quotation/includes/Model/Quote.php:42
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2054
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Accepted"
 msgstr ""
 
 #: modules/request-for-quotation/includes/Model/Quote.php:44
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2075
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Converted"
 msgstr ""
@@ -19814,7 +19935,11 @@ msgstr ""
 #: assets/js/dashboard-reviews.js:1
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1689
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1713
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1924
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2069
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2352
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/admin.js:1
 #: modules/store-reviews/assets/js/store-reviews.js:171
@@ -19854,7 +19979,7 @@ msgstr ""
 
 #: modules/request-for-quotation/templates/dokan-request-quote-shortcode-page.php:67
 #: modules/request-for-quotation/templates/quote_details.php:308
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:819
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Shipping Details"
 msgstr ""
@@ -20057,7 +20182,7 @@ msgstr ""
 #: modules/request-for-quotation/templates/emails/request-new-quote-email.php:28
 #: modules/request-for-quotation/templates/emails/request-update-quote-email.php:29
 #: modules/request-for-quotation/templates/quote-list.php:21
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2122
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Quote #"
 msgstr ""
@@ -20141,7 +20266,7 @@ msgstr ""
 #: modules/request-for-quotation/templates/emails/request-update-quote-email.php:175
 #: modules/request-for-quotation/templates/emails/request-update-quote-email.php:176
 #: modules/request-for-quotation/templates/quote_details.php:183
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:728
 msgid "Shipping Cost"
 msgstr ""
 
@@ -20191,8 +20316,8 @@ msgstr ""
 
 #: modules/request-for-quotation/templates/quote-additional-info-fields.php:5
 #: modules/request-for-quotation/templates/quote_details.php:397
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:97
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:605
 #: modules/vendor-verification/assets/js/admin/dashboard/index.js:174
 #: modules/vendor-verification/assets/js/dokan-vendor-verification.js:174
 msgid "Write here"
@@ -20200,7 +20325,7 @@ msgstr ""
 
 #: modules/request-for-quotation/templates/quote-customer-info-fields.php:5
 #: modules/request-for-quotation/templates/quote-customer-info-fields.php:8
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:77
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Full Name"
 msgstr ""
@@ -20209,8 +20334,8 @@ msgstr ""
 #: modules/request-for-quotation/templates/quote-customer-info-fields.php:24
 #: modules/vendor-staff/templates/form.php:42
 #: templates/global/dokan-registration.php:64
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:101
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:804
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Phone Number"
 msgstr ""
@@ -20243,7 +20368,7 @@ msgstr ""
 #: templates/review/listing-table-tr.php:62
 #: assets/js/dashboard-reviews.js:1
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2334
 #: modules/vendor-verification/assets/js/admin/dashboard/index.js:174
 #: modules/vendor-verification/assets/js/dokan-vendor-verification.js:174
 #: modules/vendor-verification/assets/js/vendor-single.js:171
@@ -20261,7 +20386,7 @@ msgid "Accept"
 msgstr ""
 
 #: modules/request-for-quotation/templates/quote-list.php:59
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2113
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Quote"
 msgstr ""
@@ -20848,6 +20973,30 @@ msgstr ""
 msgid "Refunds and return request is sent by ({customer_name})"
 msgstr ""
 
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:18
+msgid "Dokan RMA Status Changed"
+msgstr ""
+
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:19
+msgid "This email is sent to the customer when a warranty/request status is updated by vendor"
+msgstr ""
+
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:44
+msgid "The status of your RMA request has been updated to: {updated_status} for Order #{order_number}"
+msgstr ""
+
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:51
+msgid "Your RMA Request Status Has Been Updated"
+msgstr ""
+
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:208
+msgid "Notify admin"
+msgstr ""
+
+#: modules/rma/includes/Emails/WarrantyRequestStatusChanged.php:210
+msgid "Send a copy of this email to site admin"
+msgstr ""
+
 #. translators: %s: warranty label
 #: modules/rma/includes/Frontend.php:197
 msgid "Please select your %s first."
@@ -21100,6 +21249,45 @@ msgstr ""
 msgid "Total refunded amount in the time period"
 msgstr ""
 
+#. translators: %1$s: order number (e.g. 12345); %2$s: vendor display name (e.g. "Vendor Name").
+#: modules/rma/templates/emails/plain/ma-status-changed.php:28
+msgid "This is an email to notify you that your Return/Warranty request for Order #%1$s has been updated by the vendor, %2$s."
+msgstr ""
+
+#: modules/rma/templates/emails/plain/ma-status-changed.php:34
+#: modules/rma/templates/emails/rma-status-changed.php:56
+msgid "Here are the details of the update:"
+msgstr ""
+
+#. translators: %s: The request ID number (numeric), inserted into the string "Request ID: #%s".
+#. translators: %s: The request ID (numeric).
+#: modules/rma/templates/emails/plain/ma-status-changed.php:38
+#: modules/rma/templates/emails/rma-status-changed.php:62
+msgid "Request ID: #%s"
+msgstr ""
+
+#. translators: %s: The updated status label (e.g. "Approved", "Rejected").
+#. translators: %s: The updated status (e.g. "Approved", "Rejected").
+#: modules/rma/templates/emails/plain/ma-status-changed.php:43
+#: modules/rma/templates/emails/rma-status-changed.php:68
+msgid "Status: %s"
+msgstr ""
+
+#: modules/rma/templates/emails/plain/ma-status-changed.php:46
+#: modules/rma/templates/emails/rma-status-changed.php:73
+msgid "No further action is required from you at this time. You can view the full details and history of your request by visiting your account."
+msgstr ""
+
+#. translators: %s: Link to the RMA request page
+#: modules/rma/templates/emails/plain/ma-status-changed.php:50
+msgid "View Your RMA Request: %s"
+msgstr ""
+
+#: modules/rma/templates/emails/plain/ma-status-changed.php:54
+#: modules/rma/templates/emails/rma-status-changed.php:81
+msgid "Thank you for your patience."
+msgstr ""
+
 #. translators: %s from name.
 #. translators: 1: Username
 #. translators: 1: Store Name.
@@ -21186,6 +21374,14 @@ msgstr ""
 #: modules/rma/templates/emails/plain/send-warranty-request.php:56
 #: modules/rma/templates/emails/send-warranty-request.php:65
 msgid "Reason: %s"
+msgstr ""
+
+#: modules/rma/templates/emails/rma-status-changed.php:46
+msgid "This is an email to notify you that your Return/Warranty request for Order <a href=\"%1$s\">#%2$s</a> has been updated by the vendor, %3$s."
+msgstr ""
+
+#: modules/rma/templates/emails/rma-status-changed.php:77
+msgid "View Your RMA Request"
 msgstr ""
 
 #. translators: %s dashboard url.
@@ -21713,7 +21909,10 @@ msgstr ""
 #: modules/subscription/includes/admin/admin.php:906
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1688
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1697
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1710
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2066
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
@@ -23174,7 +23373,7 @@ msgstr ""
 
 #: modules/single-product-multiple-vendor/views/search/box-listing.php:39
 #: modules/single-product-multiple-vendor/views/search/box.php:125
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:635
 msgid "Search Product"
 msgstr ""
 
@@ -23205,6 +23404,7 @@ msgstr ""
 #: assets/js/dokan-manual-order.js:203
 #: assets/js/dokan-manual-order.js:221
 #: assets/js/vue-pro-admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Actions"
 msgstr ""
 
@@ -23417,49 +23617,49 @@ msgstr ""
 msgid "Store Support %1$s%2$s%3$s"
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:37
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:51
 msgid "Dokan New Support Ticket For Admin"
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:38
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:52
 msgid "New support ticket emails are sent to site admin when a new ticket is received."
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:60
-#: modules/store-support/includes/class-new-support-ticket-email.php:58
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:74
+#: modules/store-support/includes/class-new-support-ticket-email.php:67
 msgid "[{site_title}] A New Support Ticket"
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-admin-email.php:70
+#: modules/store-support/includes/class-new-support-ticket-admin-email.php:84
 msgid "A New Support Ticket Created."
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-email.php:35
+#: modules/store-support/includes/class-new-support-ticket-email.php:44
 msgid "Dokan New Support Ticket"
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-email.php:36
+#: modules/store-support/includes/class-new-support-ticket-email.php:45
 msgid "New support ticket emails are sent to chosen recipient(s) when a new ticket is received."
 msgstr ""
 
-#: modules/store-support/includes/class-new-support-ticket-email.php:68
+#: modules/store-support/includes/class-new-support-ticket-email.php:77
 msgid "A New Support Ticket"
 msgstr ""
 
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:33
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:38
 msgid "Dokan Reply To Admin Support Ticket From Vendor & Customer"
 msgstr ""
 
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:34
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:39
 msgid "An email sent to the admin when vendor or customer replies on a ticket depending on settings."
 msgstr ""
 
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:59
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:64
 #: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:60
 msgid "[{site_title}] A New Reply On Ticket #{ticket_id}"
 msgstr ""
 
-#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:69
+#: modules/store-support/includes/class-reply-to-admin-support-ticket-email.php:74
 #: modules/store-support/includes/class-reply-to-store-support-ticket-email.php:70
 msgid "A New Reply On Ticket #{ticket_id}"
 msgstr ""
@@ -23493,6 +23693,7 @@ msgstr ""
 #: assets/js/vue-pro-admin.js:1
 #: modules/product-adv/assets/js/admin.js:1
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/report-abuse/assets/js/dokan-report-abuse-admin.js:1
 #: modules/subscription/assets/js/subscription.js:1
 #: modules/wholesale/assets/js/admin-wholesale-customer.js:1
@@ -23766,7 +23967,7 @@ msgid "Enable Support in store"
 msgstr ""
 
 #: modules/store-support/includes/SettingsApi/Store.php:37
-#: modules/store-support/module.php:1936
+#: modules/store-support/module.php:1934
 msgid "Show support button in store"
 msgstr ""
 
@@ -23783,7 +23984,7 @@ msgid "Customize Support Button Text"
 msgstr ""
 
 #: modules/store-support/includes/SettingsApi/Store.php:69
-#: modules/store-support/module.php:1949
+#: modules/store-support/module.php:1947
 msgid "Support Button text"
 msgstr ""
 
@@ -23890,7 +24091,7 @@ msgstr ""
 #: modules/store-support/module.php:368
 #: modules/store-support/module.php:1149
 #: modules/store-support/module.php:1281
-#: modules/store-support/module.php:1539
+#: modules/store-support/module.php:1537
 #: templates/store-times/store-times.php:29
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
@@ -23911,7 +24112,7 @@ msgstr[1] ""
 #: modules/store-support/module.php:380
 #: modules/store-support/module.php:1141
 #: modules/store-support/module.php:1281
-#: modules/store-support/module.php:1531
+#: modules/store-support/module.php:1529
 #: templates/store-times/store-times.php:30
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
@@ -23972,7 +24173,7 @@ msgid "Sorry, something went wrong! Couldn't create the ticket."
 msgstr ""
 
 #: modules/store-support/module.php:1078
-#: modules/store-support/module.php:1485
+#: modules/store-support/module.php:1483
 #: modules/store-support/assets/dist/js/dokan-admin-store-support.js:1
 #: modules/store-support/assets/dist/js/vendor-store-support.js:171
 #: modules/store-support/assets/js/dokan-admin-store-support.js:1
@@ -24000,7 +24201,7 @@ msgid "Close Topic"
 msgstr ""
 
 #: modules/store-support/module.php:1175
-#: modules/store-support/module.php:1552
+#: modules/store-support/module.php:1550
 msgid "No tickets found!"
 msgstr ""
 
@@ -24015,124 +24216,124 @@ msgstr ""
 msgid "Referenced Order #%s"
 msgstr ""
 
-#: modules/store-support/module.php:1363
+#: modules/store-support/module.php:1361
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "Add Reply"
 msgstr ""
 
-#: modules/store-support/module.php:1363
+#: modules/store-support/module.php:1361
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "Ticket Closed"
 msgstr ""
 
-#: modules/store-support/module.php:1369
+#: modules/store-support/module.php:1367
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "(Adding reply will re-open the ticket)"
 msgstr ""
 
-#: modules/store-support/module.php:1383
+#: modules/store-support/module.php:1381
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "-- Change Status --"
 msgstr ""
 
-#: modules/store-support/module.php:1384
+#: modules/store-support/module.php:1382
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "Close Ticket"
 msgstr ""
 
-#: modules/store-support/module.php:1399
+#: modules/store-support/module.php:1397
 msgid "Leave a Reply"
 msgstr ""
 
-#: modules/store-support/module.php:1401
+#: modules/store-support/module.php:1399
 msgid "Cancel Reply"
 msgstr ""
 
-#: modules/store-support/module.php:1402
+#: modules/store-support/module.php:1400
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "Submit Reply"
 msgstr ""
 
 #. translators: %s: Login url link
-#: modules/store-support/module.php:1407
+#: modules/store-support/module.php:1405
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 
-#: modules/store-support/module.php:1416
+#: modules/store-support/module.php:1414
 msgid "This ticket has been closed. Open a new support ticket if you have any further query."
 msgstr ""
 
-#: modules/store-support/module.php:1429
+#: modules/store-support/module.php:1427
 msgid "Topic not found"
 msgstr ""
 
-#: modules/store-support/module.php:1461
-#: modules/store-support/module.php:2314
+#: modules/store-support/module.php:1459
+#: modules/store-support/module.php:2312
 #: modules/store-support/templates/store-support/support.php:35
 #: modules/store-support/assets/dist/js/vendor-store-support.js:173
 msgid "Support Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:1463
+#: modules/store-support/module.php:1461
 msgid "View Support Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:1516
+#: modules/store-support/module.php:1514
 #: modules/store-support/assets/dist/js/dokan-admin-store-support.js:1
 #: modules/store-support/assets/js/dokan-admin-store-support.js:1
 msgid "( No name )"
 msgstr ""
 
-#: modules/store-support/module.php:1527
+#: modules/store-support/module.php:1525
 msgid "open"
 msgstr ""
 
-#: modules/store-support/module.php:1530
+#: modules/store-support/module.php:1528
 msgid "re-open topic"
 msgstr ""
 
-#: modules/store-support/module.php:1535
+#: modules/store-support/module.php:1533
 msgid "closed"
 msgstr ""
 
-#: modules/store-support/module.php:1538
+#: modules/store-support/module.php:1536
 msgid "close topic"
 msgstr ""
 
-#: modules/store-support/module.php:1931
+#: modules/store-support/module.php:1929
 msgid "Enable Support"
 msgstr ""
 
-#: modules/store-support/module.php:1941
+#: modules/store-support/module.php:1939
 msgid "Show support button in single product"
 msgstr ""
 
-#: modules/store-support/module.php:2103
+#: modules/store-support/module.php:2101
 msgid "All Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:2106
+#: modules/store-support/module.php:2104
 msgid "Open Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:2109
+#: modules/store-support/module.php:2107
 msgid "Closed Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:2140
+#: modules/store-support/module.php:2138
 msgid "Seller Support Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:2153
+#: modules/store-support/module.php:2151
 msgid "Manage support ticket"
 msgstr ""
 
-#: modules/store-support/module.php:2266
+#: modules/store-support/module.php:2264
 msgid "Open Support Tickets"
 msgstr ""
 
-#: modules/store-support/module.php:2315
+#: modules/store-support/module.php:2313
 msgid "Support tickets raised in the time period"
 msgstr ""
 
@@ -25267,7 +25468,8 @@ msgid "Total Payment"
 msgstr ""
 
 #: modules/stripe-express/includes/Utilities/Traits/PaymentRequestUtils.php:444
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:672
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:743
 msgid "Subtotal"
 msgstr ""
 
@@ -26523,7 +26725,7 @@ msgstr ""
 msgid "No subscription is found."
 msgstr ""
 
-#: modules/subscription/api/class-subscription-controller.php:576
+#: modules/subscription/api/class-subscription-controller.php:577
 #: modules/subscription/templates/dashboard/pack-listing.php:47
 #: modules/subscription/assets/js/frontend-components.js:177
 msgid "unlimited"
@@ -27565,31 +27767,31 @@ msgstr ""
 msgid "Here are your subscription pack details:"
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:94
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:103
 msgid "Vendor Distance Rate Shipping"
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:127
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:136
 msgid "Vendor Distance Rate"
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:349
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:358
 msgid "Sorry, that shipping location is beyond our shipping radius."
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:360
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:369
 msgid "Sorry, that shipping location is beyond our shipping travel time."
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:371
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:380
 msgid "Sorry, the total weight of your chosen items is beyond what we can ship."
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:382
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:391
 msgid "Sorry, the total order cost is beyond what we can ship."
 msgstr ""
 
-#: modules/table-rate-shipping/includes/DistanceRateMethod.php:393
+#: modules/table-rate-shipping/includes/DistanceRateMethod.php:402
 msgid "Sorry, the total quantity of items is beyond what we can ship."
 msgstr ""
 
@@ -29012,6 +29214,7 @@ msgid "Order Date:"
 msgstr ""
 
 #: modules/vendor-subscription-product/templates/subscription/subscription-details.php:274
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/store-support/assets/dist/admin/dashboard/index.js:174
 #: modules/store-support/assets/dist/js/dokan-admin-store-support.js:1
 #: modules/store-support/assets/js/dokan-admin-store-support.js:1
@@ -29558,206 +29761,206 @@ msgstr ""
 msgid "Verified Only"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:40
-#: modules/vendor-verification/includes/Admin/Settings.php:42
+#: modules/vendor-verification/includes/Admin/Settings.php:41
+#: modules/vendor-verification/includes/Admin/Settings.php:43
 msgid "Vendor Verification Settings"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:43
-#: modules/vendor-verification/includes/Admin/Settings.php:91
+#: modules/vendor-verification/includes/Admin/Settings.php:44
+#: modules/vendor-verification/includes/Admin/Settings.php:92
 msgid "You can authenticate your vendors by authorizing vendors to connect their social profiles to their storefront."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:48
+#: modules/vendor-verification/includes/Admin/Settings.php:49
 msgid "Verification SMS Gateways"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:50
+#: modules/vendor-verification/includes/Admin/Settings.php:51
 msgid "Sms Gateway Verification Config"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:51
+#: modules/vendor-verification/includes/Admin/Settings.php:52
 msgid "Verification SMS Gateways Settings"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:52
+#: modules/vendor-verification/includes/Admin/Settings.php:53
 msgid "You can integrate SMS gateways to verify the contact information of the vendor."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:78
+#: modules/vendor-verification/includes/Admin/Settings.php:79
 msgid "Verified Icon"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:79
+#: modules/vendor-verification/includes/Admin/Settings.php:80
 msgid "Choose your preferred icon for verified stores in the marketplace."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:84
+#: modules/vendor-verification/includes/Admin/Settings.php:85
 msgid "Verification Methods"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:85
+#: modules/vendor-verification/includes/Admin/Settings.php:86
 msgid "Manage the verification methods vendors can use."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:90
+#: modules/vendor-verification/includes/Admin/Settings.php:91
 msgid "Social Connect"
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
-#: modules/vendor-verification/includes/Admin/Settings.php:116
+#: modules/vendor-verification/includes/Admin/Settings.php:117
 msgid "%1$sCreate an App%2$s. If you don't have one and fill App ID and Secret below."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:126
+#: modules/vendor-verification/includes/Admin/Settings.php:127
 msgid "Site Url"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:133
+#: modules/vendor-verification/includes/Admin/Settings.php:134
 msgid "App Id"
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
-#: modules/vendor-verification/includes/Admin/Settings.php:225
+#: modules/vendor-verification/includes/Admin/Settings.php:226
 msgid "If if you don't have one and fill Client ID and Secret below. %1$sCreate an App%2$s"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:235
+#: modules/vendor-verification/includes/Admin/Settings.php:236
 msgid "Redirect URI"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:325
+#: modules/vendor-verification/includes/Admin/Settings.php:326
 msgid "Sender Name"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:328
+#: modules/vendor-verification/includes/Admin/Settings.php:329
 msgid "Customized what name is displayed for \"Sender\"."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:332
+#: modules/vendor-verification/includes/Admin/Settings.php:333
 msgid "SMS Text"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:335
+#: modules/vendor-verification/includes/Admin/Settings.php:336
 msgid "Your verification code is: %CODE%"
 msgstr ""
 
 #. translators: 1) Opening strong tag, 2) Closing strong tag
-#: modules/vendor-verification/includes/Admin/Settings.php:338
+#: modules/vendor-verification/includes/Admin/Settings.php:339
 msgid "This will be displayed in SMS. %1$s%%CODE%%%2$s will be replaced by verification code"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:346
+#: modules/vendor-verification/includes/Admin/Settings.php:347
 msgid "SMS Sent Success"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:347
+#: modules/vendor-verification/includes/Admin/Settings.php:348
 msgid "SMS sent. Please enter your verification code"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:350
+#: modules/vendor-verification/includes/Admin/Settings.php:351
 msgid "Customize the pop up message on verification successful message delivery."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:354
+#: modules/vendor-verification/includes/Admin/Settings.php:355
 msgid "SMS Sent Error"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:355
+#: modules/vendor-verification/includes/Admin/Settings.php:356
 msgid "Unable to send sms. Contact admin"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:358
+#: modules/vendor-verification/includes/Admin/Settings.php:359
 msgid "Customize the pop up message for failed verification message delivery."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:362
+#: modules/vendor-verification/includes/Admin/Settings.php:363
 msgid "Active Gateway"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:365
+#: modules/vendor-verification/includes/Admin/Settings.php:366
 msgid "Select your preferred SMS Gateway."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:369
+#: modules/vendor-verification/includes/Admin/Settings.php:370
 msgid "Connect to Vonage"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:370
+#: modules/vendor-verification/includes/Admin/Settings.php:371
 msgid "Configure Vonage and connect to your site."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:377
+#: modules/vendor-verification/includes/Admin/Settings.php:378
 msgid "You can successfully connect to your Vonage account and log in from here."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
-#: modules/vendor-verification/includes/Admin/Settings.php:384
+#: modules/vendor-verification/includes/Admin/Settings.php:385
 msgid "Configure your gateway from %1s here %2s and fill the details below"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:388
+#: modules/vendor-verification/includes/Admin/Settings.php:389
 msgid "Vonage App Settings"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:395
+#: modules/vendor-verification/includes/Admin/Settings.php:396
 msgid "You can get it from https://www.vonage.com/ -> Create an Account -> Collect Key."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:401
+#: modules/vendor-verification/includes/Admin/Settings.php:402
 msgid "API Secret"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:403
+#: modules/vendor-verification/includes/Admin/Settings.php:404
 msgid "You can get it from https://www.vonage.com/ -> Create an Account -> Collect Secret."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:415
+#: modules/vendor-verification/includes/Admin/Settings.php:416
 msgid "Connect to Twilio"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:416
+#: modules/vendor-verification/includes/Admin/Settings.php:417
 msgid "Configure Twilio and connect to your site."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:423
+#: modules/vendor-verification/includes/Admin/Settings.php:424
 msgid "You can successfully connect to your Twilio account and log in from here."
 msgstr ""
 
 #. translators: 1) Opening anchor tag, 2) Closing anchor tag
-#: modules/vendor-verification/includes/Admin/Settings.php:430
+#: modules/vendor-verification/includes/Admin/Settings.php:431
 msgid "Configure your gateway from %1$s here %2$s and fill the details below"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:434
+#: modules/vendor-verification/includes/Admin/Settings.php:435
 msgid "Twilio App Settings"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:439
+#: modules/vendor-verification/includes/Admin/Settings.php:440
 msgid "From Number"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:441
+#: modules/vendor-verification/includes/Admin/Settings.php:442
 msgid "Type in the number to which recipients can respond to."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:446
+#: modules/vendor-verification/includes/Admin/Settings.php:447
 msgid "Account SID"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:448
+#: modules/vendor-verification/includes/Admin/Settings.php:449
 msgid "You can get it from https://www.twilio.com/ -> Create an Account -> Collect SID."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:454
+#: modules/vendor-verification/includes/Admin/Settings.php:455
 msgid "Auth Token"
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:456
+#: modules/vendor-verification/includes/Admin/Settings.php:457
 msgid "You can get it from https://www.twilio.com/ -> Create an Account -> Collect Token."
 msgstr ""
 
-#: modules/vendor-verification/includes/Admin/Settings.php:462
+#: modules/vendor-verification/includes/Admin/Settings.php:463
 msgid "SMS Code Type"
 msgstr ""
 
@@ -31768,7 +31971,8 @@ msgstr ""
 #: assets/js/dashboard-reviews.js:1
 #: assets/js/dokan-announcement-admin.js:171
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1941
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2371
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/store-reviews/assets/js/admin.js:1
 #: modules/store-reviews/assets/js/store-reviews.js:171
@@ -31818,7 +32022,7 @@ msgid "Delete permanently"
 msgstr ""
 
 #: templates/review/manage-reviews.php:31
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2316
 msgid "Mark Pending"
 msgstr ""
 
@@ -34899,6 +35103,7 @@ msgstr ""
 
 #: assets/js/dokan-pro-admin-dashboard.js:171
 #: modules/product-adv/assets/js/admin-product-adv.js:171
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/seller-badge/assets/js/admin-seller-badges.js:174
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
 #: modules/vendor-subscription-product/assets/js/user-subscription.js:171
@@ -34935,7 +35140,7 @@ msgid "Vendor List"
 msgstr ""
 
 #: assets/js/dokan-pro-admin-dashboard.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1741
 msgid "—"
 msgstr ""
 
@@ -34949,11 +35154,13 @@ msgstr ""
 
 #: assets/js/dokan-pro-announcement.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Read"
 msgstr ""
 
 #: assets/js/dokan-pro-announcement.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Unread"
 msgstr ""
 
@@ -34978,12 +35185,14 @@ msgstr ""
 
 #: assets/js/dokan-pro-announcement.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
 msgid "Mark as Read"
 msgstr ""
 
 #: assets/js/dokan-pro-announcement.js:171
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/store-support/assets/dist/admin/dashboard/index.js:171
 msgid "Mark as Unread"
 msgstr ""
@@ -35206,7 +35415,7 @@ msgid "Enter minimum coupon amount"
 msgstr ""
 
 #: assets/js/dokan-vendor-dashboard-coupon.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1360
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Exclude Products"
 msgstr ""
@@ -35217,7 +35426,7 @@ msgstr ""
 
 #: assets/js/dokan-vendor-dashboard-coupon.js:171
 #: assets/js/dokan-vendor-dashboard-coupon.js:177
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:542
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "This field is required"
 msgstr ""
 
@@ -35249,7 +35458,7 @@ msgstr ""
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 #: modules/seller-badge/assets/js/dokan-seller-badge-admin.js:1
 #: modules/vendor-staff/assets/js/dokan-vendor-staff.js:171
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:669
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Create"
 msgstr ""
 
@@ -35840,7 +36049,8 @@ msgid "Featured Vendors"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:578
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1247
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Save as Draft"
 msgstr ""
@@ -35850,7 +36060,8 @@ msgid "Announcement Settings"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1439
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1460
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Type to search"
 msgstr ""
@@ -36174,19 +36385,17 @@ msgid "Error processing delete request."
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:78
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:625
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Required"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:402
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "New Verification Method"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:403
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:407
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Create a new way for your vendors to verify their accounts."
 msgstr ""
 
@@ -36207,17 +36416,17 @@ msgid "Updating.."
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:599
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Name of the method"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:604
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "It will be shown to vendor as verification name"
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:611
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Help Text"
 msgstr ""
 
@@ -36226,7 +36435,7 @@ msgid "Provide brief instructions for completing the verification process."
 msgstr ""
 
 #: assets/js/vue-pro-admin.js:1
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:629
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Make this verification method mandatory for vendors."
 msgstr ""
 
@@ -36669,6 +36878,7 @@ msgstr ""
 
 #: modules/product-adv/assets/js/admin-product-adv.js:171
 #: modules/product-adv/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
 msgid "Select Product"
 msgstr ""
@@ -36722,8 +36932,9 @@ msgid "Error performing bulk action"
 msgstr ""
 
 #: modules/product-adv/assets/js/admin-product-adv.js:171
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/report-abuse/assets/js/admin/dashboard/index.js:171
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:612
 #: modules/store-reviews/assets/js/store-reviews.js:171
 #: modules/subscription/assets/js/admin/dashboard/index.js:174
 #: modules/vendor-verification/assets/js/admin/dashboard/index.js:174
@@ -36836,6 +37047,7 @@ msgid "Filter by Created Via"
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Are you sure you want to delete the Question?"
 msgstr ""
 
@@ -36848,10 +37060,12 @@ msgid "Question updated successfully."
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Are you sure you want to change the Question visibility?"
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 msgid "Are you sure you want to delete the Answer?"
 msgstr ""
 
@@ -36866,7 +37080,8 @@ msgid "Saving.."
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1780
 msgid "Visible"
 msgstr ""
 
@@ -36875,6 +37090,7 @@ msgid "Created at"
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Created:"
 msgstr ""
@@ -36884,6 +37100,7 @@ msgid "Updated at"
 msgstr ""
 
 #: modules/product-qa/assets/js/admin.js:1
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 #: modules/rma/assets/js/vendor-dashboard.js:175
 msgid "Last Updated:"
@@ -36909,12 +37126,97 @@ msgstr ""
 msgid "Saving..."
 msgstr ""
 
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Failed to load question"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Product Question & Answer Details"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "PRODUCT"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "VENDOR:"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Question updated successfully"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Failed to update question"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Enter your answer…"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+#: modules/product-qa/assets/js/dokan-product-qa.js:171
+msgid "Answer updated successfully"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Answer created successfully"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Failed to save answer"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid " | "
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Hide from product page"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Show in product page"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Delete Entire Q&A"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Question deleted successfully"
 msgstr ""
 
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Failed to delete question"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+#: modules/product-qa/assets/js/dokan-product-qa.js:171
+msgid "Answer deleted successfully"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+#: modules/product-qa/assets/js/dokan-product-qa.js:171
+msgid "Failed to delete answer"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Visibility status changed successfully"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Failed to change visibility"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Proceed"
+msgstr ""
+
+#: modules/product-qa/assets/js/dokan-admin-product-qa.js:171
+msgid "Action completed successfully"
 msgstr ""
 
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
@@ -36937,10 +37239,6 @@ msgid "Failed to update answer"
 msgstr ""
 
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
-msgid "Answer updated successfully"
-msgstr ""
-
-#: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Answer submitted successfully"
 msgstr ""
 
@@ -36954,14 +37252,6 @@ msgstr ""
 
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
 msgid "Delete Answer"
-msgstr ""
-
-#: modules/product-qa/assets/js/dokan-product-qa.js:171
-msgid "Answer deleted successfully"
-msgstr ""
-
-#: modules/product-qa/assets/js/dokan-product-qa.js:171
-msgid "Failed to delete answer"
 msgstr ""
 
 #: modules/product-qa/assets/js/dokan-product-qa.js:171
@@ -37114,399 +37404,406 @@ msgstr ""
 msgid "Filter by abuse reason"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:60
 msgid "Editing Customer Information"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:67
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Quote user"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:73
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:81
 msgid "Mr. John Doe"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:89
 msgid "udbyfunni@gmail.com"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:105
 msgid "e.g +1 555-123-4567"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Editing Shipping Details"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Select country"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Bangladesh"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "United States"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Canada"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "United Kingdom"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Select state"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "California"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "New York"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Road, Area etc"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Apartment, Suite etc"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "Expected Delivery Date"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:1
-msgid "e.g 10"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
-msgid "Quote Title is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Vendor is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
-msgid "Customer is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "At least one product is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Quantity must be greater than 0 for row #%d"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Offer price cannot be negative for row #%d"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Customer full name is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Customer email is required."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Shipping cost cannot be negative."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Failed to create quote."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
-msgid "Add New Quote"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Create Quote"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Quote Title"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Search Vendor"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "No products added yet"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Products & Cost"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "QTY."
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Offer Price"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
-msgid "Customer Information"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Select Customer"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Expected Delivery on"
-msgstr ""
-
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:193
 msgid "Quote List"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:201
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1889
 msgid "Quote Rules List"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:208
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "New Quote"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:208
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "New Quote Rules"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Move selected quotes to Trash?"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:269
+msgid "Editing Shipping Details"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Delete selected quotes permanently?"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:283
+msgid "Select country"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Search quotes…"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:285
+msgid "Bangladesh"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Select vendor"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:287
+msgid "United States"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Private"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:289
+msgid "Canada"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:291
+msgid "United Kingdom"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:299
+msgid "Select state"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:303
+msgid "California"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:305
+msgid "New York"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:311
+msgid "Road, Area etc"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:319
+msgid "Apartment, Suite etc"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:323
+msgid "Expected Delivery Date"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:327
+msgid "e.g 10"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:500
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
-msgid "Rules"
+msgid "Quote Title is required."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Price Visibility"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:501
+msgid "Vendor is required."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Search rules…"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:502
+#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
+msgid "Customer is required."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
-msgid "Delete selected rules permanently?"
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:503
+msgid "At least one product is required."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:505
+msgid "Quantity must be greater than 0 for row #%d"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:506
+msgid "Offer price cannot be negative for row #%d"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:509
+msgid "Customer full name is required."
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:510
+msgid "Customer email is required."
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:512
+msgid "Shipping cost cannot be negative."
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:552
+msgid "Failed to create quote."
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:569
+#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
+msgid "Add New Quote"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:582
+msgid "Create Quote"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:599
+msgid "Quote Title"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:615
+msgid "Search Vendor"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:658
+msgid "No products added yet"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:666
+msgid "Products & Cost"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:668
+msgid "QTY."
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:670
+msgid "Offer Price"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:753
+#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
+msgid "Customer Information"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:772
+msgid "Select Customer"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:844
+msgid "Expected Delivery on"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:909
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Price is hidden"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:939
 msgid "Wholesale customer"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1047
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Please enter rule name."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1050
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Please select at least one user role."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1053
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Please enter hide price text."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1056
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Please enter button text."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1061
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Please enter a valid positive integer for quote expiration days limit."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1095
 msgid "Failed to save quote rule."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1219
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Quote Rules"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1221
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Edit Rule"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1221
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Add New Rules"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1264
 msgid "Quote Rule Title"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1273
 msgid "Title here"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1282
 msgid "Rule Setting"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1290
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Apply on All Products"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1292
 msgid "Apply this rule to all products in your catalog."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1309
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Specific Products"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1311
 msgid "Apply this rule to a selection of products."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1326
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Include Products"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1329
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1363
 msgid "Search product"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1398
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Specific Categories"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1400
 msgid "Apply this rule to products in select categories."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1419
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Specific Vendors"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1421
 msgid "Apply this rule to products from specific vendors."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1436
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Include Vendors"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1482
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Expire Limit"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1484
 msgid "Quote remains valid for a set number of days after approval."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1503
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Type expiration day"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1514
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Hide Price"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1516
 msgid "Hide the price of products when this rule applies."
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1531
 msgid "Add to Cart Button Customization"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1538
 msgid "Add to Cart Button Visibility"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1541
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Replace Add to Cart button with a Quote Button"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1544
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Keep Add to Cart button and add a new Quote Button"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1569
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Custom Button Label"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1571
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Display the above label on custom button, e.g \"Request a Quote\""
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1590
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
 msgid "Apply quote for"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1610
+msgid "Rule Priority"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1624
 msgid "Order Priority will be 0>1>2>3… Last one in the list will get priority when two (or more) rules have same priority 0,0,0…"
 msgstr ""
 
-#: modules/request-for-quotation/assets/js/admin-panel/index.js:171
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1634
 msgid "Rule order"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1692
+msgid "Private"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1737
+#: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
+msgid "Rules"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1775
+msgid "Price Visibility"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1803
+msgid "Search rules…"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:1963
+msgid "Delete selected rules permanently?"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2231
+msgid "Search quotes…"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2241
+msgid "Select vendor"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2357
+msgid "Move selected quotes to Trash?"
+msgstr ""
+
+#: modules/request-for-quotation/assets/js/admin-panel/index.js:2394
+msgid "Delete selected quotes permanently?"
 msgstr ""
 
 #: modules/request-for-quotation/assets/js/dokan-request-a-quote-admin.js:1
@@ -39746,41 +40043,41 @@ msgstr ""
 msgid "Add note for this verification"
 msgstr ""
 
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:374
-msgid "Loading verification methods…"
-msgstr ""
-
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:392
-msgid "No verification methods found."
-msgstr ""
-
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:428
-msgid "Confirm Method Deletion"
-msgstr ""
-
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:430
-msgid "Are you sure you want to delete this verification method?"
-msgstr ""
-
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:431
-#: modules/vendor-verification/assets/js/frontend/dashboard/index.js:171
-msgid "This action cannot be undone."
-msgstr ""
-
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:575
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Update Verification Method"
 msgstr ""
 
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:575
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Create New Verification Method"
 msgstr ""
 
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:615
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Provide brief instruction for completing the verification process."
 msgstr ""
 
-#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:668
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
 msgid "Processing…"
+msgstr ""
+
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
+msgid "Loading verification methods…"
+msgstr ""
+
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
+msgid "No verification methods found."
+msgstr ""
+
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
+msgid "Confirm Method Deletion"
+msgstr ""
+
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
+msgid "Are you sure you want to delete this verification method?"
+msgstr ""
+
+#: modules/vendor-verification/assets/js/admin/dashboard/settings/index.js:171
+#: modules/vendor-verification/assets/js/frontend/dashboard/index.js:171
+msgid "This action cannot be undone."
 msgstr ""
 
 #: modules/vendor-verification/assets/js/frontend/dashboard/index.js:171

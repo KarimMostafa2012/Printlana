@@ -794,7 +794,8 @@ class Helper {
             $_product = wc_get_product( $values['data']->get_id() );
 
             // Continue if the product is downloadable or virtual
-            if ( $_product->is_downloadable() || $_product->is_virtual() ) {
+            $ignore_delivery_time_for_product = apply_filters( 'dokan_ignore_delivery_time_for_product', $_product->is_downloadable() || $_product->is_virtual(), $_product );
+            if ( $ignore_delivery_time_for_product ) {
                 continue;
             }
 

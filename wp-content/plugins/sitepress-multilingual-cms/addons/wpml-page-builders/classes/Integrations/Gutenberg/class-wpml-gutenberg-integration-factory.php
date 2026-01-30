@@ -47,6 +47,10 @@ class WPML_Gutenberg_Integration_Factory {
 			make( \WPML\PB\Gutenberg\Hooks\TranslationGuiLabels::class )
 		);
 
+		$integrations->add(
+			new \WPML\PB\Gutenberg\MediaHooksIntegration( $mainIntegration->get_config_option() )
+		);
+
 		return $integrations;
 	}
 
@@ -76,7 +80,8 @@ class WPML_Gutenberg_Integration_Factory {
 		return new WPML_Gutenberg_Integration(
 			$strings_in_block,
 			$config_option,
-			$strings_registration
+			$strings_registration,
+			$sitepress
 		);
 	}
 
@@ -97,6 +102,5 @@ class WPML_Gutenberg_Integration_Factory {
 		return $sitepress->is_translated_post_type(
 			WPML\PB\Gutenberg\ReusableBlocks\Translation::POST_TYPE
 		);
-
 	}
 }

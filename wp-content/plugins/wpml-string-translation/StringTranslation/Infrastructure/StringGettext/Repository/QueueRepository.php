@@ -376,6 +376,13 @@ class QueueRepository implements QueueRepositoryInterface {
 		foreach ( $pendingStringDomains as $domain ) {
 			$this->loadDomainProcessedStrings( $domain );
 
+			// Skip domains that appeared in filesystem after loadPendingStrings() was called.
+			// This handles race conditions where concurrent requests create new pending files.
+			if ( ! isset( $this->pendingStrings[ $domain ] ) ) {
+				continue;
+			}
+
+
 			foreach ( $this->pendingStrings[ $domain ] as $textAndContext => $string ) {
 				$key = $textAndContext;
 				foreach ( $string as $prop => $value ) {

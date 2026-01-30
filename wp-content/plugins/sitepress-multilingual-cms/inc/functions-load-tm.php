@@ -7,7 +7,6 @@ use WPML\TM\Jobs\Query\OrderQueryHelper;
 use WPML\TM\Jobs\Query\PackageQuery;
 use WPML\TM\Jobs\Query\PostQuery;
 use WPML\TM\Jobs\Query\QueryBuilder;
-use WPML\TM\Jobs\Query\StringQuery;
 use WPML\TM\Jobs\Query\StringsBatchQuery;
 use WPML\FP\Obj;
 use function WPML\Container\make;
@@ -688,12 +687,11 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	 * It returns a single instance of the class.
 	 *
 	 * @param bool $forceReload
-	 * @param bool $loadObsoleteStringQuery
 	 * @param bool $dontCache
 	 *
 	 * @return \WPML_TM_Jobs_Repository
 	 */
-	function wpml_tm_get_jobs_repository( $forceReload = false, $loadObsoleteStringQuery = true, $dontCache = false ) {
+	function wpml_tm_get_jobs_repository( $forceReload = false, $dontCache = false ) {
 		static $repository;
 
 		if ( ! $repository || $forceReload ) {
@@ -710,13 +708,6 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 					$wpdb,
 					new QueryBuilder( $limit_helper, $order_helper )
 				);
-
-				if ( $loadObsoleteStringQuery ) {
-					$subqueries[] = new StringQuery(
-						$wpdb,
-						new QueryBuilder( $limit_helper, $order_helper )
-					);
-				}
 				$subqueries[] = new StringsBatchQuery(
 					$wpdb,
 					new QueryBuilder( $limit_helper, $order_helper )

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Str;
+
 class WPML_String_Scanner {
 
 	const DEFAULT_DOMAIN = 'default';
@@ -717,5 +719,14 @@ class WPML_String_Scanner {
 		$path = $this->get_wpml_file()->get_relative_path( $path );
 		$path = $this->get_wpml_file()->fix_dir_separator( $path );
 		return $path;
+	}
+
+	/**
+	 * @param string $filepath
+	 *
+	 * @return bool
+	 */
+	protected function is_js_file( $filepath ) {
+		return Str::endsWith( '.js', $filepath );
 	}
 }

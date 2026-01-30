@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
-msgstr "Anslut denna webbplats till ditt %s-konto"
+msgstr "Anslut den här webbplatsen till ditt %s-konto"
 
 #: src/js/translationServices/components/AuthorizeModal.js:45
 msgid "Error"
@@ -65,4 +65,4 @@ msgstr "Beskrivning"
 
 #: src/js/translationServices/components/ServicesList.js:81
 msgid "Ranking"
-msgstr "Rankning"
+msgstr "Ranking"

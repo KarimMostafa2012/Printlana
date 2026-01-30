@@ -28,6 +28,9 @@ class WPML_Locale extends WP_Locale {
 			 * - preventing infinite recursion in get_word_count_type()
 			 */
 			$this->initialized = true;
+
+			unset( $GLOBALS['text_direction'] );
+
 			parent::__construct();
 		}
 	}

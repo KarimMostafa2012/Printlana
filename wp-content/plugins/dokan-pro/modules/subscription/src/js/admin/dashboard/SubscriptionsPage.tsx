@@ -189,7 +189,7 @@ const SubscriptionsPage = () => {
             label: __( 'End Date', 'dokan' ),
             enableSorting: true,
             render: ( { item }: { item: Subscription } ) => (
-                <div className="text-gray-900">{ item.end_date || '-' }</div>
+                <div className="text-gray-900">{ item.subscription_end_date || '-' }</div>
             ),
         },
         {

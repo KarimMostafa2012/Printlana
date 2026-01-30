@@ -181,7 +181,7 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 		if ( count( $this->product_images_ids ) ) {
 			$images_section = new WPML_Editor_UI_Field_Section( __( 'Images', 'woocommerce-multilingual' ) );
 			foreach ( $this->product_images_ids as $image_id ) {
-				$image = new WPML_Editor_UI_Field_Image( 'image-id-' . $image_id, $image_id, $this->data, true );
+				$image = new WPML_Editor_UI_Field_Image( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id, $image_id, $this->data, true );
 				$images_section->add_field( $image );
 			}
 			$this->add_field( $images_section );
@@ -446,10 +446,10 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 			}
 			$alt_text = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 			$alt_text = $alt_text ?: '';
-			$element_data[ 'image-id-' . $image_id . '-title' ]       = [ 'original' => $attachment_data->post_title ];
-			$element_data[ 'image-id-' . $image_id . '-caption' ]     = [ 'original' => $attachment_data->post_excerpt ];
-			$element_data[ 'image-id-' . $image_id . '-description' ] = [ 'original' => $attachment_data->post_content ];
-			$element_data[ 'image-id-' . $image_id . '-alt-text' ]    = [ 'original' => $alt_text ];
+			$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-title' ]       = [ 'original' => $attachment_data->post_title ];
+			$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-caption' ]     = [ 'original' => $attachment_data->post_excerpt ];
+			$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-description' ] = [ 'original' => $attachment_data->post_content ];
+			$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text' ]    = [ 'original' => $alt_text ];
 
 			$trnsl_prod_image = apply_filters( 'wpml_object_id', $image_id, 'attachment', false, $this->get_target_language() );
 			if ( null !== $trnsl_prod_image ) {
@@ -457,10 +457,10 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 				$trnsl_attachment_data = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT post_title,post_excerpt,post_content FROM {$this->wpdb->posts} WHERE ID = %d", $trnsl_prod_image ) );
 				$alt_text              = get_post_meta( $trnsl_prod_image, '_wp_attachment_image_alt', true );
 				$alt_text              = $alt_text ?: '';
-				$element_data[ 'image-id-' . $image_id . '-title' ]['translation']       = $trnsl_attachment_data->post_title;
-				$element_data[ 'image-id-' . $image_id . '-caption' ]['translation']     = $trnsl_attachment_data->post_excerpt;
-				$element_data[ 'image-id-' . $image_id . '-description' ]['translation'] = $trnsl_attachment_data->post_content;
-				$element_data[ 'image-id-' . $image_id . '-alt-text' ]['translation']    = $alt_text;
+				$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-title' ]['translation']       = $trnsl_attachment_data->post_title;
+				$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-caption' ]['translation']     = $trnsl_attachment_data->post_excerpt;
+				$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-description' ]['translation'] = $trnsl_attachment_data->post_content;
+				$element_data[ \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text' ]['translation']    = $alt_text;
 			}
 		}
 
@@ -799,15 +799,15 @@ class WCML_Editor_UI_Product_Job extends WPML_Editor_UI_Job {
 				$this->wpdb->update(
 					$this->wpdb->posts,
 					[
-						'post_title'   => $translations[ md5( 'image-id-' . $image_id . '-title' ) ],
-						'post_content' => $translations[ md5( 'image-id-' . $image_id . '-description' ) ],
-						'post_excerpt' => $translations[ md5( 'image-id-' . $image_id . '-caption' ) ],
+						'post_title'   => $translations[ md5( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-title' ) ],
+						'post_content' => $translations[ md5( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-description' ) ],
+						'post_excerpt' => $translations[ md5( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-caption' ) ],
 					],
 					[ 'id' => $trnsl_prod_image ]
 				);
 
-				if ( isset( $translations[ md5( 'image-id-' . $image_id . '-alt-text' ) ] ) ) {
-					update_post_meta( $trnsl_prod_image, '_wp_attachment_image_alt', $translations[ md5( 'image-id-' . $image_id . '-alt-text' ) ] );
+				if ( isset( $translations[ md5( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text' ) ] ) ) {
+					update_post_meta( $trnsl_prod_image, '_wp_attachment_image_alt', $translations[ md5( \WCML_TP_Support::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text' ) ] );
 				}
 			}
 		}

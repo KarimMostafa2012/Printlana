@@ -8,16 +8,16 @@
             "lang": "nl_NL"
          },
          "To display this Custom HTML block in a specific language, first place it inside a Group block.": [
-            "Om dit Aangepaste HTML-blok in een specifieke taal weer te geven, plaats je het eerst in een Groep-blok."
+            "Om dit aangepaste HTML-blok in een specifieke taal weer te geven, plaatst u het eerst in een Groepsblok."
          ],
          "Place inside Group block": [
-            "Plaats in Groep-blok"
+            "Plaats in Groepsblok"
          ],
          "All": [
             "Alles"
          ],
          "Display on language": [
-            "Weergave op taal"
+            "Weergeven in taal"
          ]
       }
    }

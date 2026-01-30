@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
-msgstr "一括同期を開始"
+msgstr "バッチ同期を開始"
 
 #: src/js/jobs/components/Actions/Cancel.js:35
 msgid "Cancel job"
@@ -15,7 +15,7 @@ msgstr "ジョブをキャンセル"
 
 #: src/js/jobs/components/Actions/ContinieReview.js:44
 msgid "Continue reviewing"
-msgstr "レビューを続ける"
+msgstr "レビューを続行"
 
 #: src/js/jobs/components/Actions/DownloadXLIFF.js:33
 msgid "Start downloading XLIFF file"
@@ -31,7 +31,7 @@ msgstr "翻訳を取得"
 
 #: src/js/jobs/components/Actions/Resign.js:35
 msgid "Resign"
-msgstr "辞退"
+msgstr "辞任"
 
 #: src/js/jobs/components/Actions/Review.js:46
 #: src/js/jobs/components/Actions/ReviewInATE.js:35
@@ -44,7 +44,7 @@ msgstr "翻訳"
 
 #: src/js/jobs/components/Actions/TakeAndTranslate.js:33
 msgid "Take and Translate"
-msgstr "取得して翻訳"
+msgstr "引き受けて翻訳"
 
 #: src/js/jobs/components/Actions/View.js:22
 msgid "View"
@@ -56,11 +56,11 @@ msgstr "翻訳を削除"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:56
 msgid "Keep Translations as Draft"
-msgstr "翻訳を下書きとして保存"
+msgstr "翻訳を下書きとして保持"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
 msgid "Never mind. I want to review these translations."
-msgstr "やめます。これらの翻訳をレビューしたいです。"
+msgstr "気にしないでください。これらの翻訳をレビューしたいです。"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
 #: src/js/jobs/components/Filters/ActionFilters.js:60
@@ -71,7 +71,7 @@ msgstr "キャンセル"
 msgid ""
 "This will remove the selected jobs from the Translations Queue without "
 "publishing them. What would you like to do with the translations?"
-msgstr "選択したジョブを公開せずに翻訳キューから削除します。翻訳をどうしますか？"
+msgstr "これにより、選択したジョブは公開されずに翻訳キューから削除されます。翻訳をどうしますか？"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
 msgid "Cancel Translation Review"
@@ -79,7 +79,7 @@ msgstr "翻訳レビューをキャンセル"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:39
 msgid "Bulk actions"
-msgstr "一括操作"
+msgstr "一括アクション"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:81
 #: src/js/jobs/components/Filters/ActionFilters.js:61
@@ -90,13 +90,13 @@ msgstr "適用"
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "複数の翻訳ジョブに適用される操作には数秒かかる場合があります。ページを離れないでください。"
+msgstr "複数の翻訳ジョブに適用されるアクションには数秒かかる場合があります。このページを離れないでください。"
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "複数の翻訳ジョブに適用される操作には数分かかる場合があります。ページを離れないでください。"
+msgstr "複数の翻訳ジョブに適用されるアクションには数分かかる場合があります。このページを離れないでください。"
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
@@ -123,7 +123,7 @@ msgstr "進行中"
 #: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
-msgstr "ダウンロード可能な翻訳"
+msgstr "翻訳ダウンロード準備完了"
 
 #: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
@@ -133,7 +133,7 @@ msgstr "完了"
 #: src/js/jobs/components/Cells/StatusCell.js:25
 #. placeholder is the string package type. Could be WP Forms, ACF Field Groups.
 msgid "%s are immediately published because they don't support draft mode."
-msgstr "%s はドラフトモードをサポートしていないため、即時公開されます。"
+msgstr "%sはドラフトモードをサポートしていないため、すぐに公開されます。"
 
 #: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
@@ -145,7 +145,7 @@ msgstr "下書き — レビュー待ち"
 
 #: src/js/jobs/components/Cells/StatusCell.js:43
 msgid "Review in progress"
-msgstr "レビュー進行中"
+msgstr "レビュー中"
 
 #: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
@@ -157,7 +157,7 @@ msgstr "下書き — レビュー進行中"
 
 #: src/js/jobs/components/Cells/StatusCell.js:51
 msgid "Insufficient funds"
-msgstr "残高不足"
+msgstr "資金不足"
 
 #: src/js/jobs/components/Cells/StatusCell.js:57
 #: src/js/jobs/model/store/columnsManagement.js:42
@@ -166,11 +166,11 @@ msgstr "更新が必要"
 
 #: src/js/jobs/components/Cells/TitleCell.js:14
 msgid "View original"
-msgstr "原文を表示"
+msgstr "オリジナルを表示"
 
 #: src/js/jobs/components/Cells/TitleCell.js:9
 msgid "(no title)"
-msgstr "（タイトルなし）"
+msgstr "(タイトルなし)"
 
 #: src/js/jobs/components/Cells/TranslatorCell.js:21
 #: src/js/jobs/components/Filters/FiltersList.js:63
@@ -224,7 +224,7 @@ msgstr "送信日 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:119
 msgid "Deadline (%s)"
-msgstr "締め切り (%s)"
+msgstr "期限 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:159
 msgid "Clear all filters"
@@ -242,11 +242,11 @@ msgstr "任意のWordPress翻訳者"
 
 #: src/js/jobs/components/Filters/Languages.js:72
 msgid "From"
-msgstr "開始"
+msgstr "から"
 
 #: src/js/jobs/components/Filters/Languages.js:84
 msgid "To"
-msgstr "終了"
+msgstr "まで"
 
 #: src/js/jobs/components/Filters/TranslatedBy.js:28
 msgid "Anyone"
@@ -266,43 +266,43 @@ msgstr "表示する列を選択"
 
 #: src/js/jobs/components/Table.js:128
 msgid "Sort descending"
-msgstr "降順で並べ替え"
+msgstr "降順でソート"
 
 #: src/js/jobs/components/Table.js:129
 msgid "Sort ascending"
-msgstr "昇順で並べ替え"
+msgstr "昇順でソート"
 
 #: src/js/jobs/components/Table.js:130
 msgid "Cancel sorting"
-msgstr "並べ替えをキャンセル"
+msgstr "ソートをキャンセル"
 
 #: src/js/jobs/components/Table.js:97
 msgid "The bulk action is running..."
-msgstr "一括操作を実行中..."
+msgstr "一括アクションを実行中..."
 
 #: src/js/jobs/components/XliffBox/Export.js:54
 msgid "Export all jobs to XLIFF 1.0"
-msgstr "すべてのジョブをXLIFF 1.0でエクスポート"
+msgstr "すべてのジョブをXLIFF 1.0にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:55
 msgid "Export all filtered jobs to XLIFF 1.0"
-msgstr "フィルターされたすべてのジョブをXLIFF 1.0でエクスポート"
+msgstr "すべてのフィルター済みジョブをXLIFF 1.0にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:61
 msgid "Export all jobs to XLIFF 1.1"
-msgstr "すべてのジョブをXLIFF 1.1でエクスポート"
+msgstr "すべてのジョブをXLIFF 1.1にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:62
 msgid "Export all filtered jobs to XLIFF 1.1"
-msgstr "フィルターされたすべてのジョブをXLIFF 1.1でエクスポート"
+msgstr "すべてのフィルター済みジョブをXLIFF 1.1にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:68
 msgid "Export all jobs to XLIFF 1.2"
-msgstr "すべてのジョブをXLIFF 1.2でエクスポート"
+msgstr "すべてのジョブをXLIFF 1.2にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:69
 msgid "Export all filtered jobs to XLIFF 1.2"
-msgstr "フィルターされたすべてのジョブをXLIFF 1.2でエクスポート"
+msgstr "すべてのフィルター済みジョブをXLIFF 1.2にエクスポート"
 
 #: src/js/jobs/components/XliffBox/Export.js:81
 msgid "Export"
@@ -326,11 +326,11 @@ msgstr "インポート"
 
 #: src/js/jobs/components/XliffBox/XliffBox.js:19
 msgid "Import / Export XLIFF"
-msgstr "XLIFF のインポート / エクスポート"
+msgstr "XLIFFのインポート/エクスポート"
 
 #: src/js/jobs/components/actionColumn.js:13
 msgid "Actions"
-msgstr "操作"
+msgstr "アクション"
 
 #: src/js/jobs/components/columns.js:113
 #: src/js/jobs/model/store/columnsManagement.js:90
@@ -339,7 +339,7 @@ msgstr "バッチ名"
 
 #: src/js/jobs/components/columns.js:184
 msgid "Filter by %s"
-msgstr "%sでフィルター"
+msgstr "%sでフィルタリング"
 
 #: src/js/jobs/components/columns.js:66
 #: src/js/jobs/model/store/columnsManagement.js:71
@@ -368,7 +368,7 @@ msgstr "翻訳を取得"
 
 #: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
 msgid "This action does not apply to any of the selected translation jobs"
-msgstr "この操作は選択された翻訳ジョブのいずれにも適用されません"
+msgstr "このアクションは、選択した翻訳ジョブには適用されません"
 
 #: src/js/jobs/model/store/applyTranslations.js:30
 msgid "Translations have been downloaded"
@@ -392,7 +392,7 @@ msgstr "翻訳レビューの承認に失敗しました！"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:38
 msgid "Failed approving translations for the following posts: "
-msgstr "次の投稿の翻訳承認に失敗しました："
+msgstr "以下の投稿の翻訳承認に失敗しました： "
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
@@ -400,7 +400,7 @@ msgstr "翻訳レビューが正常に承認されました！"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:57
 msgid "No valid jobs selected to approve translations reviews!"
-msgstr "翻訳レビューを承認するための有効なジョブが選択されていません！"
+msgstr "翻訳レビューを承認するために有効なジョブが選択されていません！"
 
 #: src/js/jobs/model/store/assignTranslator.js:17
 msgid "The translator has been assigned to the job"
@@ -409,7 +409,7 @@ msgstr "翻訳者がジョブに割り当てられました"
 #: src/js/jobs/model/store/assignTranslator.js:22
 #: src/js/jobs/model/store/openEditor.js:37
 msgid "The translator could not be assigned to the job"
-msgstr "翻訳者をジョブに割り当てることができませんでした"
+msgstr "翻訳者をジョブに割り当てられませんでした"
 
 #: src/js/jobs/model/store/cancelJobs.js:22
 msgid "The jobs have been cancelled"
@@ -449,7 +449,7 @@ msgstr "送信日"
 
 #: src/js/jobs/model/store/columnsManagement.js:114
 msgid "Deadline"
-msgstr "締め切り"
+msgstr "期限"
 
 #: src/js/jobs/model/store/columnsManagement.js:121
 msgid "Status"
@@ -481,7 +481,7 @@ msgstr "XLIFFファイルのダウンロードを完了できませんでした"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:20
 msgid "Could not load jobs for export"
-msgstr "エクスポート用のジョブを読み込めませんでした"
+msgstr "エクスポートするジョブを読み込めませんでした"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:44
 msgid "The export to XLIFF failed"
@@ -489,7 +489,7 @@ msgstr "XLIFFへのエクスポートに失敗しました"
 
 #: src/js/jobs/model/store/importXLIFF.js:26
 msgid "Imported %d jobs"
-msgstr "%d 件のジョブをインポートしました"
+msgstr "%d件のジョブをインポートしました"
 
 #: src/js/jobs/model/store/importXLIFF.js:27
 msgid "Imported one job"
@@ -521,7 +521,7 @@ msgstr "辞退するジョブを指定してください"
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
-msgstr "ジョブを辞退できませんでした：%s"
+msgstr "ジョブを辞退できませんでした: %s"
 
 #: src/js/jobs/model/store/resign.js:34
 msgid "Resigned from jobs"
@@ -537,7 +537,7 @@ msgstr "ジョブの辞退に失敗しました"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
-msgstr "高度なエディタのジョブ同期に失敗しました"
+msgstr "Advanced Editorジョブの同期に失敗しました"
 
 #: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
 msgid "Synchronization with the Professional Translation service has failed"
@@ -546,12 +546,12 @@ msgstr "プロフェッショナル翻訳サービスとの同期に失敗しま
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
 msgid_plural "%d translations have been downloaded"
-msgstr[0] "%d 翻訳がダウンロードされました"
+msgstr[0] "%d件の翻訳がダウンロードされました"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"
-msgstr "一括同期が正常に完了しました！"
+msgstr "バッチ同期が正常に完了しました！"
 
 #: src/js/jobs/model/store/translationBatchSync.js:88
 msgid "Batch sync couldn't be finished"
-msgstr "一括同期を完了できませんでした"
+msgstr "バッチ同期を完了できませんでした"

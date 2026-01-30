@@ -15,7 +15,7 @@ msgstr "בטל משימה"
 
 #: src/js/jobs/components/Actions/ContinieReview.js:44
 msgid "Continue reviewing"
-msgstr "המשך סקירה"
+msgstr "המשך בסקירה"
 
 #: src/js/jobs/components/Actions/DownloadXLIFF.js:33
 msgid "Start downloading XLIFF file"
@@ -36,7 +36,7 @@ msgstr "התפטר"
 #: src/js/jobs/components/Actions/Review.js:46
 #: src/js/jobs/components/Actions/ReviewInATE.js:35
 msgid "Review"
-msgstr "סקור"
+msgstr "סקירה"
 
 #: src/js/jobs/components/Actions/TakeAndTranslate.js:33
 msgid "Translate"
@@ -48,7 +48,7 @@ msgstr "קח ותרגם"
 
 #: src/js/jobs/components/Actions/View.js:22
 msgid "View"
-msgstr "צפה"
+msgstr "הצג"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:48
 msgid "Delete Translations"
@@ -71,7 +71,7 @@ msgstr "ביטול"
 msgid ""
 "This will remove the selected jobs from the Translations Queue without "
 "publishing them. What would you like to do with the translations?"
-msgstr "פעולה זו תסיר את המשימות הנבחרות מתור התרגומים מבלי לפרסם אותן. מה ברצונך לעשות עם התרגומים?"
+msgstr "פעולה זו תסיר את המשימות שנבחרו מתור התרגומים מבלי לפרסם אותן. מה תרצה לעשות עם התרגומים?"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
 msgid "Cancel Translation Review"
@@ -79,7 +79,7 @@ msgstr "בטל סקירת תרגום"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:39
 msgid "Bulk actions"
-msgstr "פעולות מרובות"
+msgstr "פעולות בכמות גדולה"
 
 #: src/js/jobs/components/BulkActions/BulkActions.js:81
 #: src/js/jobs/components/Filters/ActionFilters.js:61
@@ -90,13 +90,13 @@ msgstr "החל"
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "פעולות המוחלות על מספר משימות תרגום עשויות לקחת מספר שניות. אנא אל תעזוב את הדף."
+msgstr "פעולות המיושמות על מספר משימות תרגום עשויות להימשך מספר שניות. נא לא לעזוב את הדף."
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "פעולות המוחלות על מספר משימות תרגום עשויות לקחת מספר דקות. אנא אל תעזוב את הדף."
+msgstr "פעולות המיושמות על מספר משימות תרגום עשויות להימשך מספר דקות. נא לא לעזוב את הדף."
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
@@ -123,7 +123,7 @@ msgstr "בתהליך"
 #: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
-msgstr "התרגום מוכן להורדה"
+msgstr "תרגום מוכן להורדה"
 
 #: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
@@ -145,7 +145,7 @@ msgstr "טיוטה — ממתין לסקירה"
 
 #: src/js/jobs/components/Cells/StatusCell.js:43
 msgid "Review in progress"
-msgstr "סקירה מתבצעת"
+msgstr "סקירה בתהליך"
 
 #: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
@@ -166,7 +166,7 @@ msgstr "דורש עדכון"
 
 #: src/js/jobs/components/Cells/TitleCell.js:14
 msgid "View original"
-msgstr "צפה במקור"
+msgstr "הצג מקור"
 
 #: src/js/jobs/components/Cells/TitleCell.js:9
 msgid "(no title)"
@@ -180,15 +180,15 @@ msgstr "תרגום אוטומטי"
 
 #: src/js/jobs/components/Cells/TranslatorCell.js:42
 msgid "TP ID: %d"
-msgstr "TP ID: %d"
+msgstr "מזהה TP: %d"
 
 #: src/js/jobs/components/Filters/Buttons.js:8
 msgid "Reset"
-msgstr "אפס"
+msgstr "איפוס"
 
 #: src/js/jobs/components/Filters/Buttons.js:9
 msgid "Filter"
-msgstr "סנן"
+msgstr "סינון"
 
 #: src/js/jobs/components/Filters/FiltersList.js:103
 msgid "ID (%s)"
@@ -224,7 +224,7 @@ msgstr "תאריך שליחה (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:119
 msgid "Deadline (%s)"
-msgstr "תאריך יעד (%s)"
+msgstr "מועד אחרון (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:159
 msgid "Clear all filters"
@@ -242,7 +242,7 @@ msgstr "כל מתרגם וורדפרס"
 
 #: src/js/jobs/components/Filters/Languages.js:72
 msgid "From"
-msgstr "מ"
+msgstr "מאת"
 
 #: src/js/jobs/components/Filters/Languages.js:84
 msgid "To"
@@ -262,7 +262,7 @@ msgstr "כל הסוגים"
 
 #: src/js/jobs/components/Filters/VisibleColumns.js:16
 msgid "Select visible columns"
-msgstr "בחר עמודות נראות"
+msgstr "בחר עמודות גלויות"
 
 #: src/js/jobs/components/Table.js:128
 msgid "Sort descending"
@@ -278,7 +278,7 @@ msgstr "בטל מיון"
 
 #: src/js/jobs/components/Table.js:97
 msgid "The bulk action is running..."
-msgstr "הפעולה המרובה מתבצעת..."
+msgstr "פעולת הכמות הגדולה פועלת..."
 
 #: src/js/jobs/components/XliffBox/Export.js:54
 msgid "Export all jobs to XLIFF 1.0"
@@ -306,7 +306,7 @@ msgstr "ייצא את כל המשימות המסוננות ל-XLIFF 1.2"
 
 #: src/js/jobs/components/XliffBox/Export.js:81
 msgid "Export"
-msgstr "ייצא"
+msgstr "ייצוא"
 
 #: src/js/jobs/components/XliffBox/Import.js:38
 msgid "Select File"
@@ -322,11 +322,11 @@ msgstr "מייבא"
 
 #: src/js/jobs/components/XliffBox/Import.js:53
 msgid "Import"
-msgstr "ייבא"
+msgstr "ייבוא"
 
 #: src/js/jobs/components/XliffBox/XliffBox.js:19
 msgid "Import / Export XLIFF"
-msgstr "ייבא / ייצא XLIFF"
+msgstr "ייבוא / ייצוא XLIFF"
 
 #: src/js/jobs/components/actionColumn.js:13
 msgid "Actions"
@@ -360,7 +360,7 @@ msgstr "בטל סקירות תרגום"
 
 #: src/js/jobs/hooks/BulkActions/useCreateExportXLIFFAction.js:12
 msgid "Export to XLIFF %s"
-msgstr "ייצא ל-XLIFF %s"
+msgstr "ייצוא ל-XLIFF %s"
 
 #: src/js/jobs/hooks/BulkActions/useGetTranslationsAction.js:13
 msgid "Get translations"
@@ -380,7 +380,7 @@ msgstr "התרגום הורד"
 
 #: src/js/jobs/model/store/applyTranslations.js:36
 msgid "Translations could not be downloaded"
-msgstr "לא ניתן היה להוריד את התרגומים"
+msgstr "לא ניתן היה להוריד תרגומים"
 
 #: src/js/jobs/model/store/applyTranslations.js:37
 msgid "Translation could not be downloaded"
@@ -388,28 +388,28 @@ msgstr "לא ניתן היה להוריד את התרגום"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:10
 msgid "Approving translations reviews failed!"
-msgstr "אישור סקירות התרגומים נכשל!"
+msgstr "אישור סקירות תרגומים נכשל!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:38
 msgid "Failed approving translations for the following posts: "
-msgstr "אישור התרגומים נכשל עבור הפוסטים הבאים: "
+msgstr "אישור תרגומים עבור הפוסטים הבאים נכשל: "
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
-msgstr "סקירות התרגומים אושרו בהצלחה!"
+msgstr "סקירות תרגומים אושרו בהצלחה!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:57
 msgid "No valid jobs selected to approve translations reviews!"
-msgstr "לא נבחרו משימות תקפות לאישור סקירות תרגומים!"
+msgstr "לא נבחרו משימות חוקיות לאישור סקירות תרגומים!"
 
 #: src/js/jobs/model/store/assignTranslator.js:17
 msgid "The translator has been assigned to the job"
-msgstr "המתרגם הוקצה למשימה"
+msgstr "המתרגם שויך למשימה"
 
 #: src/js/jobs/model/store/assignTranslator.js:22
 #: src/js/jobs/model/store/openEditor.js:37
 msgid "The translator could not be assigned to the job"
-msgstr "לא ניתן היה להקצות את המתרגם למשימה"
+msgstr "לא ניתן היה לשייך את המתרגם למשימה"
 
 #: src/js/jobs/model/store/cancelJobs.js:22
 msgid "The jobs have been cancelled"
@@ -429,15 +429,15 @@ msgstr "לא ניתן היה לבטל את המשימה"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:26
 msgid "Translation reviews have been canceled"
-msgstr "סקירות התרגום בוטלו"
+msgstr "סקירות תרגום בוטלו"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:27
 msgid "Translation review has been canceled"
-msgstr "סקירת התרגום בוטלה"
+msgstr "סקירת תרגום בוטלה"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:33
 msgid "Translation reviews could not be canceled"
-msgstr "לא ניתן היה לבטל את סקירות התרגום"
+msgstr "לא ניתן היה לבטל סקירות תרגום"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:34
 msgid "Translation review could not be canceled"
@@ -445,11 +445,11 @@ msgstr "לא ניתן היה לבטל את סקירת התרגום"
 
 #: src/js/jobs/model/store/columnsManagement.js:106
 msgid "Sent on"
-msgstr "נשלח ב"
+msgstr "נשלח ב-"
 
 #: src/js/jobs/model/store/columnsManagement.js:114
 msgid "Deadline"
-msgstr "תאריך יעד"
+msgstr "מועד אחרון"
 
 #: src/js/jobs/model/store/columnsManagement.js:121
 msgid "Status"
@@ -481,7 +481,7 @@ msgstr "הורדת קובץ XLIFF לא הושלמה"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:20
 msgid "Could not load jobs for export"
-msgstr "לא ניתן לטעון משימות לייצוא"
+msgstr "לא ניתן היה לטעון משימות לייצוא"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:44
 msgid "The export to XLIFF failed"
@@ -497,7 +497,7 @@ msgstr "יובאה משימה אחת"
 
 #: src/js/jobs/model/store/importXLIFF.js:41
 msgid "Could not import any job"
-msgstr "לא ניתן לייבא אף משימה"
+msgstr "לא ניתן היה לייבא אף משימה"
 
 #: src/js/jobs/model/store/importXLIFF.js:45
 msgid "Import failed!"
@@ -513,11 +513,11 @@ msgstr "טוען משימות תרגום"
 
 #: src/js/jobs/model/store/jobs.js:82
 msgid "Jobs could not be loaded"
-msgstr "לא ניתן לטעון משימות"
+msgstr "לא ניתן היה לטעון משימות"
 
 #: src/js/jobs/model/store/resign.js:12
 msgid "Specify some jobs to resign"
-msgstr "ציין מספר משימות להתפטר מהן"
+msgstr "ציין משימות להתפטרות"
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
@@ -533,7 +533,7 @@ msgstr "התפטר ממשימה"
 
 #: src/js/jobs/model/store/resign.js:39
 msgid "Failed to resign from jobs"
-msgstr "נכשל בהתפטרות ממשימות"
+msgstr "ההתפטרות ממשימות נכשלה"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
@@ -546,8 +546,8 @@ msgstr "הסנכרון עם שירות התרגום המקצועי נכשל"
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
 msgid_plural "%d translations have been downloaded"
-msgstr[0] "%dהורד התרגום"
-msgstr[1] "%dהורדו תרגומים"
+msgstr[0] "הורד %d תרגום"
+msgstr[1] "הורדו %d תרגומים"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"

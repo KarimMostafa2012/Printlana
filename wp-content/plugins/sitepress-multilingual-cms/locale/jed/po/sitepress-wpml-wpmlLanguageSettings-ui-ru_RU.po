@@ -13,11 +13,11 @@ msgstr "Выберите тип файла изображения для фла�
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "Этот параметр влияет только на встроенные флаги WPML, а не на загруженные пользователем."
+msgstr "Эта опция влияет только на встроенные флаги WPML, а не на загруженные пользовательские."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
-msgstr "формат %s"
+msgstr "Формат %s"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:63
 msgid "Save"

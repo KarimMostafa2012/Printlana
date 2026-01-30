@@ -202,7 +202,7 @@ class WPML_TM_Jobs_List_Script_Data {
 	}
 
 	private function getTypesForFilter() {
-		$postTypeFilters = new PostTypeFilters( wpml_tm_get_jobs_repository( true, false ) );
+		$postTypeFilters = new PostTypeFilters( wpml_tm_get_jobs_repository( true ) );
 
 		return \wpml_collect( $postTypeFilters->get( [ 'include_unassigned' => true ] ) )
 			->map( function ( $label, $name ) {

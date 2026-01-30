@@ -13,7 +13,7 @@ msgstr "Scegli il tipo di file immagine per le bandiere"
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "Questa opzione ha effetto solo sulle bandiere integrate in WPML, non su quelle personalizzate caricate."
+msgstr "Questa opzione riguarda solo le bandiere WPML integrate, non quelle caricate personalizzate."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
@@ -29,4 +29,4 @@ msgstr "Il nuovo formato è stato salvato."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:25
 msgid "Failed to save the new format"
-msgstr "Salvataggio del nuovo formato non riuscito"
+msgstr "Impossibile salvare il nuovo formato"

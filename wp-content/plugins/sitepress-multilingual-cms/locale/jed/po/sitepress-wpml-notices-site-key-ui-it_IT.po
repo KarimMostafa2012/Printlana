@@ -15,7 +15,7 @@ msgstr "Chiave del sito:"
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:41
 msgid "Enter your site key here"
-msgstr "Inserisci qui la tua chiave del sito"
+msgstr "Inserisci qui la chiave del tuo sito"
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Registering..."
@@ -34,7 +34,7 @@ msgid ""
 "To continue using WPML features like automatic translation and plugin "
 "updates, please register your site again. Don’t worry, your existing "
 "content and translations are safe."
-msgstr "Per continuare a utilizzare le funzionalità di WPML come la traduzione automatica e gli aggiornamenti dei plugin, registra nuovamente il tuo sito. Non preoccuparti, i tuoi contenuti e le traduzioni esistenti sono al sicuro."
+msgstr "Per continuare a usare le funzionalità di WPML come la traduzione automatica e gli aggiornamenti dei plugin, registra di nuovo il tuo sito. Non preoccuparti, i tuoi contenuti e le tue traduzioni esistenti sono al sicuro."
 
 #: src/js/notices-site-key/components/SuccessMessage.js:30
 msgid "Site key registered successfully!"
@@ -46,4 +46,4 @@ msgstr "La pagina si ricaricherà tra %d secondi..."
 
 #: src/js/notices-site-key/hooks/useRegisterSiteKey.js:54
 msgid "Registration failed. Please try again."
-msgstr "Registrazione fallita. Per favore riprova."
+msgstr "Registrazione fallita. Riprova."

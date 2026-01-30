@@ -196,6 +196,10 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 			$element_type = get_post_type( $element_id );
 		}
 
+		if ( false === $element_type ) {
+			return $element_id;
+		}
+
 		$translated_id = apply_filters( 'wpml_object_id', $element_id, $element_type, true );
 
 		if ( is_string( $element_id ) ) {
@@ -366,5 +370,4 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 		}
 		return get_post_type( $id );
 	}
-
 }

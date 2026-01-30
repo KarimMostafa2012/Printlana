@@ -28,14 +28,21 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	 */
 	private $strings_registration;
 
+	/**
+	 * @var SitePress
+	 */
+	private $sitepress;
+
 	public function __construct(
 		WPML\PB\Gutenberg\StringsInBlock\StringsInBlock $strings_in_block,
 		WPML_Gutenberg_Config_Option $config_option,
-		WPML_Gutenberg_Strings_Registration $strings_registration
+		WPML_Gutenberg_Strings_Registration $strings_registration,
+		SitePress $sitepress
 	) {
 		$this->strings_in_blocks    = $strings_in_block;
 		$this->config_option        = $config_option;
 		$this->strings_registration = $strings_registration;
+		$this->sitepress            = $sitepress;
 	}
 
 	public function add_hooks() {
@@ -45,6 +52,7 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 		add_filter( 'wpml_config_array', array( $this, 'wpml_config_filter' ) );
 		add_filter( 'wpml_pb_should_body_be_translated', array( $this, 'should_body_be_translated_filter' ), PHP_INT_MAX, 3 );
 		add_filter( 'wpml_get_translatable_types', array( $this, 'remove_package_strings_type_filter' ), 11 );
+		add_action( 'save_post', array( $this, 'clear_translations_cache_on_post_save' ), 10, 2 );
 	}
 
 	/**
@@ -52,7 +60,7 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	 *
 	 * @return array
 	 */
-	function page_builder_support_required( $plugins ) {
+	public function page_builder_support_required( $plugins ) {
 		$plugins[] = self::PACKAGE_ID;
 
 		return $plugins;
@@ -60,9 +68,9 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 
 	/**
 	 * @param WP_Post $post
-	 * @param array $package_data
+	 * @param array   $package_data
 	 */
-	function register_strings( WP_Post $post, $package_data ) {
+	public function register_strings( WP_Post $post, $package_data ) {
 
 		if ( $this->is_gutenberg_post( $post ) && self::PACKAGE_ID === $package_data['kind'] ) {
 			$this->strings_registration->register_strings( $post, $package_data );
@@ -92,11 +100,11 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	}
 
 	/**
-	 * @param string $package_kind
-	 * @param int $translated_post_id
+	 * @param string  $package_kind
+	 * @param int     $translated_post_id
 	 * @param WP_Post $original_post
-	 * @param array $string_translations
-	 * @param string $lang
+	 * @param array   $string_translations
+	 * @param string  $lang
 	 */
 	public function string_translated(
 		$package_kind,
@@ -110,7 +118,6 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 			$content = $this->replace_strings_in_blocks( $original_post->post_content, $string_translations, $lang );
 			wpml_update_escaped_post( [ 'ID' => $translated_post_id, 'post_content' => $content ], $lang );
 		}
-
 	}
 
 	/**
@@ -128,8 +135,8 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	}
 
 	/**
-	 * @param array $blocks
-	 * @param array $string_translations
+	 * @param array  $blocks
+	 * @param array  $string_translations
 	 * @param string $lang
 	 *
 	 * @return array
@@ -182,7 +189,6 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 		}
 
 		return $content;
-
 	}
 
 	public static function has_non_empty_attributes( WP_Block_Parser_Block $block ) {
@@ -196,20 +202,18 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	 */
 	private static function render_inner_HTML( $block ) {
 
-		if ( isset ( $block->innerBlocks ) && count( $block->innerBlocks ) ) {
+		if ( isset( $block->innerBlocks ) && count( $block->innerBlocks ) ) {
 
 			if ( isset( $block->innerContent ) ) {
 				$content = self::render_inner_HTML_with_innerContent( $block );
 			} else {
 				$content = self::render_inner_HTML_with_guess_parts( $block );
 			}
-
 		} else {
 			$content = $block->innerHTML;
 		}
 
 		return $content;
-
 	}
 
 	/**
@@ -233,7 +237,7 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 				$content .= $inner_content;
 			} else {
 				$content .= self::render_block( $block->innerBlocks[ $inner_block_index ] );
-				$inner_block_index++;
+				++$inner_block_index;
 			}
 		}
 
@@ -277,14 +281,14 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 
 		$parts = array( $inner_HTML, '' );
 
-		switch( $block->blockName ) {
+		switch ( $block->blockName ) {
 			case 'core/media-text':
 				$html_to_find = '<div class="wp-block-media-text__content">';
 				$pos          = mb_strpos( $inner_HTML, $html_to_find ) + mb_strlen( $html_to_find );
-				$parts        = array(
+				$parts        = [
 					mb_substr( $inner_HTML, 0, $pos ),
-					mb_substr( $inner_HTML, $pos )
-				);
+					mb_substr( $inner_HTML, $pos ),
+				];
 				break;
 
 			default:
@@ -294,10 +298,10 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 					$parts = explode( $matches[0], $inner_HTML );
 					if ( count( $parts ) === 2 ) {
 						$match_mid_point = 1 + ( mb_strlen( $matches[0] ) - 3 ) / 2;
-						// This is the first ">" char plus half the remaining between the tags
+						// This is the first ">" char plus half the remaining between the tags.
 
 						$parts[0] .= mb_substr( $matches[0], 0, $match_mid_point );
-						$parts[1] = mb_substr( $matches[0], $match_mid_point ) . $parts[1];
+						$parts[1]  = mb_substr( $matches[0], $match_mid_point ) . $parts[1];
 					}
 				}
 				break;
@@ -356,7 +360,7 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 	 *
 	 * @param array $types
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public function remove_package_strings_type_filter( $types ) {
 
@@ -365,5 +369,34 @@ class WPML_Gutenberg_Integration implements \WPML\PB\Gutenberg\Integration {
 		}
 
 		return $types;
+	}
+
+	/**
+	 * @return WPML_Gutenberg_Config_Option
+	 */
+	public function get_config_option() {
+		return $this->config_option;
+	}
+
+	/**
+	 * Clear translations cache when a Gutenberg post is saved.
+	 * This ensures that style changes and other block updates are properly
+	 * synchronized to translations.
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 */
+	public function clear_translations_cache_on_post_save( $post_id, $post ) {
+		// Only process if this is a Gutenberg post.
+		if ( ! $this->is_gutenberg_post( $post ) ) {
+			return;
+		}
+
+		$trid = $this->sitepress->get_element_trid( $post_id, 'post_' . $post->post_type );
+
+		if ( $trid ) {
+			// Clear only the specific trid cache entry using wp_cache_delete directly.
+			wp_cache_delete( $trid, 'WPML_TM_ICL_Translations--translations' );
+		}
 	}
 }

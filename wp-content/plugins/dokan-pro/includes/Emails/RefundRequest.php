@@ -2,9 +2,7 @@
 
 namespace WeDevs\DokanPro\Emails;
 
-use WC_Email;
-
-class RefundRequest extends WC_Email {
+class RefundRequest extends AbstractRefund {
 
     /**
      * Constructor.

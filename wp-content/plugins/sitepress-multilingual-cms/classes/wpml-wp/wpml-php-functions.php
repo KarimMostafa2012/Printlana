@@ -119,7 +119,7 @@ class WPML_PHP_Functions {
 	 *
 	 * @return bool
 	 */
-	public function error_log( $message, $message_type = null, $destination = null, $extra_headers = null ) {
+	public function error_log( $message, $message_type = 0, $destination = null, $extra_headers = null ) {
 		return error_log( $message, $message_type, $destination, $extra_headers );
 	}
 

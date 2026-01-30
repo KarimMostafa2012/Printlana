@@ -7,9 +7,9 @@ class WPML_Translate_Link_Targets_UI extends WPML_TM_MCS_Section_UI {
 	private $wpdb;
 	/** @var WPML_Pro_Translation $pro_translation */
 	private $pro_translation;
-	/** @var  WPML_WP_API $wp_api */
+	/** @var WPML_WP_API $wp_api */
 	private $wp_api;
-	/** @var  SitePress $sitepress */
+	/** @var SitePress $sitepress */
 	private $sitepress;
 
 	public function __construct( $title, $wpdb, $sitepress, $pro_translation ) {
@@ -17,6 +17,18 @@ class WPML_Translate_Link_Targets_UI extends WPML_TM_MCS_Section_UI {
 		$this->wpdb            = $wpdb;
 		$this->pro_translation = $pro_translation;
 		$this->sitepress       = $sitepress;
+	}
+
+	/**
+	 * Conditionally adds hooks for the Translate Link Targets UI
+	 * Only adds the navigation link if there are links that need adjustment
+	 *
+	 * @return void
+	 */
+	public function add_hooks() {
+		if ( $this->links_need_adjustment() ) {
+			parent::add_hooks();
+		}
 	}
 
 	/**
@@ -56,5 +68,40 @@ class WPML_Translate_Link_Targets_UI extends WPML_TM_MCS_Section_UI {
 
 		return $output;
 	}
-}
 
+	/**
+	 * Check if links need adjustment
+	 *
+	 * @return bool
+	 */
+	private function links_need_adjustment() {
+		$global_state = new WPML_Translate_Link_Target_Global_State( $this->sitepress );
+		if ( $global_state->is_rescan_required() ) {
+			return true;
+		}
+
+		$posts_link_target = new WPML_Translate_Link_Targets_In_Posts(
+			$global_state,
+			$this->wpdb,
+			$this->pro_translation
+		);
+
+		if ( $posts_link_target->get_number_to_be_fixed( 0, 1 ) > 0 ) {
+			return true;
+		}
+
+		$wp_api              = $this->sitepress->get_wp_api();
+		$strings_link_target = new WPML_Translate_Link_Targets_In_Strings(
+			$global_state,
+			$this->wpdb,
+			$wp_api,
+			$this->pro_translation
+		);
+
+		if ( $strings_link_target->get_number_to_be_fixed( 0, 1 ) > 0 ) {
+			return true;
+		}
+
+		return false;
+	}
+}

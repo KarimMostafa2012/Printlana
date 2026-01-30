@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('dokan-react-components', 'dokan-stores-core', 'react', 'react-dom', 'react-jsx-runtime', 'wp-api-fetch', 'wp-components', 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-url'), 'version' => 'fc7e07e52e696f245530');
+<?php return array('dependencies' => array('dokan-react-components', 'dokan-stores-core', 'react', 'react-dom', 'react-jsx-runtime', 'wp-api-fetch', 'wp-components', 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-url'), 'version' => 'eae2db96b412fab120cd');

@@ -3,6 +3,7 @@
 namespace WPML\PB\BeaverBuilder\BeaverThemer;
 
 use WPML\Convert\Ids;
+use WPML\FP\Obj;
 use WPML\LIB\WP\Hooks;
 use function WPML\FP\spreadArgs;
 
@@ -14,9 +15,14 @@ class LocationHooks implements \IWPML_Backend_Action {
 
 	const EXCLUSIONS_RULES_KEY = '_fl_theme_builder_exclusions';
 
+	const BUILDER_DATA_KEY = \WPML_Beaver_Builder_Data_Settings::META_FIELD_KEY;
+
 	public function add_hooks() {
 		Hooks::onFilter( 'wpml_pb_copy_meta_field', 10, 4 )
 			->then( spreadArgs( [ $this, 'translateLocationRulesMeta' ] ) );
+
+		Hooks::onAction( 'wpml_pro_translation_completed', 10, 3 )
+			->then( spreadArgs( [ $this, 'translateConditionalLogic' ] ) );
 	}
 
 	/**
@@ -37,6 +43,81 @@ class LocationHooks implements \IWPML_Backend_Action {
 		}
 
 		return $copiedValue;
+	}
+
+	/**
+	 * @param int    $newPostId
+	 * @param array  $fields
+	 * @param object $job
+	 */
+	public function translateConditionalLogic( $newPostId, $fields, $job ) {
+		if ( get_post_type( $newPostId ) !== self::LAYOUT_CPT ) {
+			return;
+		}
+
+		$this->processBuilderDataConditionalLogic( $newPostId, Obj::prop( 'language_code', $job ) );
+	}
+
+	/**
+	 * @param int    $postId
+	 * @param string $lang
+	 */
+	private function processBuilderDataConditionalLogic( $postId, $lang ) {
+		$builderData = get_post_meta( $postId, self::BUILDER_DATA_KEY, true );
+		if ( ! $builderData || ! is_array( $builderData ) ) {
+			return;
+		}
+
+		$original = wp_json_encode( $builderData );
+
+		foreach ( $builderData as &$module ) {
+			if ( ! is_object( $module ) || ! isset( $module->settings->visibility_logic ) ) {
+				continue;
+			}
+
+			$module->settings->visibility_logic = $this->translateVisibilityLogic( $module->settings->visibility_logic, $lang );
+		}
+
+		if ( wp_json_encode( $builderData ) !== $original ) {
+			update_post_meta( $postId, self::BUILDER_DATA_KEY, $builderData );
+		}
+	}
+
+	/**
+	 * @param array  $visibilityLogic
+	 * @param string $lang
+	 *
+	 * @return array
+	 */
+	private function translateVisibilityLogic( $visibilityLogic, $lang ) {
+		foreach ( (array) $visibilityLogic as &$logicGroup ) {
+			foreach ( (array) $logicGroup as &$rule ) {
+				if ( is_object( $rule ) ) {
+					$rule = $this->translateConditionalRule( $rule, $lang );
+				}
+			}
+		}
+
+		return $visibilityLogic;
+	}
+
+	/**
+	 * @param object $rule
+	 * @param string $lang
+	 *
+	 * @return object
+	 */
+	private function translateConditionalRule( $rule, $lang ) {
+		if ( isset( $rule->type ) && 'wordpress/archive-term' === $rule->type && isset( $rule->term, $rule->taxonomy ) ) {
+			$rule->term = self::translateElement( $rule->term, $rule->taxonomy, $lang );
+		} elseif ( isset( $rule->type ) && 'wordpress/post' === $rule->type && isset( $rule->post ) ) {
+			$post_type = get_post_type( $rule->post );
+			if ( $post_type ) {
+				$rule->post = self::translateElement( $rule->post, $post_type, $lang );
+			}
+		}
+
+		return $rule;
 	}
 
 	/**
@@ -78,10 +159,14 @@ class LocationHooks implements \IWPML_Backend_Action {
 	 * @return string|null
 	 */
 	private static function getLayoutLanguage( $translatedPostId ) {
-		return apply_filters( 'wpml_element_language_code', null, [
-			'element_id'   => $translatedPostId,
-			'element_type' => self::LAYOUT_CPT,
-		] );
+		return apply_filters(
+			'wpml_element_language_code',
+			null,
+			[
+				'element_id'   => $translatedPostId,
+				'element_type' => self::LAYOUT_CPT,
+			]
+		);
 	}
 
 	/**

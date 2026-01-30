@@ -11,7 +11,7 @@ msgstr "קבל מפתח לאתר זה"
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:30
 msgid "Site key:"
-msgstr "מפתח האתר:"
+msgstr "מפתח אתר:"
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:41
 msgid "Enter your site key here"
@@ -19,7 +19,7 @@ msgstr "הזן את מפתח האתר שלך כאן"
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Registering..."
-msgstr "רושם..."
+msgstr "נרשם..."
 
 #: src/js/notices-site-key/components/SiteKeyForm.js:50
 msgid "Register"
@@ -34,7 +34,7 @@ msgid ""
 "To continue using WPML features like automatic translation and plugin "
 "updates, please register your site again. Don’t worry, your existing "
 "content and translations are safe."
-msgstr "כדי להמשיך להשתמש בתכונות WPML כמו תרגום אוטומטי ועדכוני תוספים, אנא רשום את האתר שלך מחדש. אל דאגה, התוכן והתרגומים הקיימים שלך בטוחים."
+msgstr "כדי להמשיך להשתמש בתכונות WPML כמו תרגום אוטומטי ועדכוני תוספים, אנא רשום את האתר שלך שוב. אל דאגה, התוכן והתרגומים הקיימים שלך בטוחים."
 
 #: src/js/notices-site-key/components/SuccessMessage.js:30
 msgid "Site key registered successfully!"
@@ -42,8 +42,8 @@ msgstr "מפתח האתר נרשם בהצלחה!"
 
 #: src/js/notices-site-key/components/SuccessMessage.js:31
 msgid "Page will reload in %d seconds..."
-msgstr "העמוד יטען מחדש בעוד %d שניות..."
+msgstr "הדף ייטען מחדש בעוד %d שניות..."
 
 #: src/js/notices-site-key/hooks/useRegisterSiteKey.js:54
 msgid "Registration failed. Please try again."
-msgstr "הרישום נכשל. אנא נסה שוב."
+msgstr "ההרשמה נכשלה. אנא נסה שוב."

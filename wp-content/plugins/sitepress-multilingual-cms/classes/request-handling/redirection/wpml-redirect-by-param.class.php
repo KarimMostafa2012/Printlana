@@ -73,6 +73,9 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 				$termId = $termId[0];
 			}
 
+      if ( ! ctype_digit( $termId ) ) {
+        return false;
+      }
 			$potential_translation = $wpml_term_translations->term_id_in( (int) $termId, $lang_code );
 		}
 		/** @var String $parameter */

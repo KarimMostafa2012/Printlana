@@ -45,7 +45,7 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "当 WPML 设置为自动翻译您网站的内容时，目前无法连接翻译服务。要使用翻译服务，请在 <LinkToSettingsPage /> 页面上更改您的翻译模式。"
+msgstr "当 WPML 设置为自动翻译您的网站内容时，目前无法连接翻译服务。要使用翻译服务，请在 <LinkToSettingsPage /> 页面更改您的翻译模式。"
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"

@@ -3,7 +3,7 @@ Contributors: moyasar
 Tags: Gateway, Payment, Credit Card, Apple Pay, STC Pay
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 7.3.3
+Stable tag: 7.3.6
 Requires PHP: 5.6
 Language: en_US, ar
 URI: https://moyasar.com
@@ -60,6 +60,16 @@ For more information, please visit: our website https://moyasar.com
 
 
 == Changelog ==
+
+= v7.3.6 =
+- Fixed: Explicitly import sprintf from wp.i18n
+
+= v7.3.5 =
+- Fixed: Duplicate issue when applying a coupon to an order.
+
+= v7.3.4 =
+- Fixed: Applepay gets the price from  WC()->cart->get_totals()['total'] function
+- Feature: Add moyasar logos
 
 = v7.3.3 =
 - Fixed: trigger WC()->cart->calculate_totals when applying a coupon to ensure accurate totals

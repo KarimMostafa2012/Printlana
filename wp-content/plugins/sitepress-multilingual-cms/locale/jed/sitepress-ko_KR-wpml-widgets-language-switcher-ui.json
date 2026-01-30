@@ -8,16 +8,16 @@
             "lang": "ko_KR"
          },
          "To display this Custom HTML block in a specific language, first place it inside a Group block.": [
-            "이 사용자 정의 HTML 블록을 특정 언어로 표시하려면 먼저 그룹 블록 내에 배치하세요."
+            "이 사용자 정의 HTML 블록을 특정 언어로 표시하려면 먼저 그룹 블록 안에 배치하세요."
          ],
          "Place inside Group block": [
-            "그룹 블록 내에 배치"
+            "그룹 블록 안에 배치"
          ],
          "All": [
             "모두"
          ],
          "Display on language": [
-            "언어에 표시"
+            "언어별 표시"
          ]
       }
    }

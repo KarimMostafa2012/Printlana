@@ -306,6 +306,29 @@ class SubscriptionPack extends VendorSubscription {
     }
 
     /**
+     * Get subscription end date
+     *
+     * @return string|null
+     */
+    public function subscription_end_date() {
+        if ( $this->is_recurring() ) {
+            $pack_start_date = $this->get_pack_start_date();
+            $subscription_end_date = new \DateTime( $pack_start_date );
+            $subscription_end_date->modify( '+ 1 ' . $this->get_period_type() );
+            //$subscription_end_date->modify( '-1 day' );
+            $subscription_end_date = $subscription_end_date->format( 'Y-m-d H:i:s' );
+        } else {
+            $subscription_end_date = $this->get_pack_end_date();
+        }
+
+        return apply_filters(
+            'dokan_get_vendor_subscription_end_date',
+            $subscription_end_date,
+            $this
+        );
+    }
+
+    /**
      * Get number of products against a subscripton pack
      *
      * @return int

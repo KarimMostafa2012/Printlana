@@ -65,17 +65,29 @@ jQuery(function ($) {
         $.post(ajaxurl, data);
     });
 
+    $('#nav-add-archive').click(function () {
+        $('#add-archive').attr('class', 'wps-view');
+        $('#add-mass').attr('class', 'wps-hide');
+        $('#add-simple').attr('class', 'wps-hide');
+        $('#nav-add-mass').attr('class', 'not-current');
+        $('#nav-add-simple').attr('class', 'not-current');
+        $('#nav-add-archive').attr('class', 'current');
+    });
     $('#nav-add-mass').click(function () {
         $('#add-mass').attr('class', 'wps-view');
         $('#add-simple').attr('class', 'wps-hide');
+        $('#add-archive').attr('class', 'wps-hide');
         $('#nav-add-mass').attr('class', 'current');
         $('#nav-add-simple').attr('class', 'not-current');
+        $('#nav-add-archive').attr('class', 'not-current');
     });
     $('#nav-add-simple').click(function () {
         $('#add-simple').attr('class', 'wps-view');
         $('#add-mass').attr('class', 'wps-hide');
+        $('#add-archive').attr('class', 'wps-hide');
         $('#nav-add-mass').attr('class', 'not-current');
         $('#nav-add-simple').attr('class', 'current');
+        $('#nav-add-archive').attr('class', 'not-current');
     });
 
     // multiple select with AJAX search

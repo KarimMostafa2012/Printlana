@@ -381,15 +381,16 @@ class WCML_Upgrade {
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->prefix}icl_strings
-                                  SET context = 'WooCommerce Endpoints', name = %s
+                                  SET context = %s, name = %s
                                   WHERE context = 'WordPress' AND name = %s",
+					WCML_Url_Translation::WC_STRING_CONTEXT,
 					$endpoint_key,
 					'Endpoint slug: ' . $endpoint_key
 				)
 			);
 
 			// Update domain_name_context_md5 value.
-			$string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = 'WooCommerce Endpoints' AND name = %s", $endpoint_key ) );
+			$string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = %s AND name = %s", WCML_Url_Translation::WC_STRING_CONTEXT, $endpoint_key ) );
 
 			if ( $string_id ) {
 				$wpdb->query(
@@ -397,7 +398,7 @@ class WCML_Upgrade {
 						"UPDATE {$wpdb->prefix}icl_strings
                               SET domain_name_context_md5 = %s
                               WHERE id = %d",
-						md5( $endpoint_key, 'WooCommerce Endpoints' ),
+						md5( $endpoint_key, WCML_Url_Translation::WC_STRING_CONTEXT ),
 						$string_id
 					)
 				);

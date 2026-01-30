@@ -4,6 +4,8 @@ use function WCML\functions\getSetting;
 use WCML\Utilities\WCTaxonomies;
 
 class WCML_Terms {
+	/** @see \WC_Cache_Helper::init */
+	const PRIORITY_AFTER_WC_CACHE_HELPER = 20;
 
 	const PRODUCT_SHIPPING_CLASS           = 'product_shipping_class';
 	private $ALL_TAXONOMY_TERMS_TRANSLATED = 0;
@@ -67,6 +69,9 @@ class WCML_Terms {
 		add_action( 'created_term_translation', [ $this, 'set_flag_to_sync' ], 10, 3 );
 
 		add_filter( 'woocommerce_get_product_subcategories_cache_key', [ $this, 'add_lang_parameter_to_cache_key' ] );
+
+		add_action( 'clean_term_cache', [ $this, 'flush_term_cache_added_by_wc_and_wcml' ], self::PRIORITY_AFTER_WC_CACHE_HELPER, 2 );
+		add_action( 'edit_terms', [ $this, 'flush_term_cache_added_by_wc_and_wcml' ], self::PRIORITY_AFTER_WC_CACHE_HELPER, 2 );
 	}
 
 	public function admin_menu_setup() {
@@ -1089,6 +1094,11 @@ class WCML_Terms {
 		return $this->wcml_get_term_by_id( $term_id, $taxonomy );
 	}
 
+	/**
+	 * @param string $taxonomy
+	 *
+	 * @return bool
+	 */
 	public function is_translatable_wc_taxonomy( $taxonomy ) {
 		if ( in_array( $taxonomy, [ 'product_type', 'product_visibility' ], true ) ) {
 			return false;
@@ -1142,5 +1152,38 @@ class WCML_Terms {
 	 */
 	public function add_lang_parameter_to_cache_key( $key ) {
 		return $key . '-' . $this->sitepress->get_current_language();
+	}
+
+	/**
+	 * Flush the term cache added by WooCommerce and WCML.
+	 *
+	 * @see WC_Cache_Helper::clean_term_cache(), WCML_Terms::add_lang_parameter_to_cache_key()
+	 * @param array|int $ids
+	 * @param string    $taxonomy
+	 * @return void
+	 */
+	public function flush_term_cache_added_by_wc_and_wcml( $ids, $taxonomy ) {
+		if ( 'product_cat' === $taxonomy ) {
+			$ids = is_array( $ids ) ? $ids : [ $ids ];
+
+			$clear_ids = [ 0 ];
+
+			foreach ( $ids as $id ) {
+				$clear_ids[] = $id;
+				$clear_ids   = array_merge( $clear_ids, get_ancestors( $id, 'product_cat', 'taxonomy' ) );
+			}
+
+			$clear_ids = array_unique( $clear_ids );
+
+			$lang = apply_filters( 'wpml_current_language', null );
+
+			foreach ( $clear_ids as $id ) {
+				wp_cache_delete( "product-category-hierarchy-{$id}-{$lang}", 'product_cat' );
+			}
+		}
+	}
+
+	public static function wpml_is_product_shipping_class_set_as_translated() {
+		return apply_filters( 'wpml_is_translated_taxonomy', false, self::PRODUCT_SHIPPING_CLASS );
 	}
 }

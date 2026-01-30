@@ -140,6 +140,7 @@ class Loader implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 				'jobIdPlaceHolder'     => self::JOB_ID_PLACEHOLDER,
 				'languages'            => $isAteActive ? $getLanguages() : [],
 				'isTranslationManager' => User::canManageTranslations(),
+				'isTranslatorOrHigher'        => User::isTranslator() || User::canManageTranslations(),
 
 				'shouldTranslateEverything'   =>
 					Option::shouldTranslateEverything()
@@ -176,32 +177,13 @@ class Loader implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	public static function getNotEnoughCreditPopup() {
 		$isTranslationManager = User::canManageTranslations();
 
-		$content = $isTranslationManager
-			? __(
-				"There is an issue with automatic translation that needs your attention.",
-				'wpml-translation-management'
-			)
-			: __(
-				" There is an issue with automatic translation that needs attention from a translation manager.",
-				'wpml-translation-management'
-			);
-
-		$fix = __( 'Fix it to continue translating automatically', 'wpml-translation-management' );
-
 		$primaryButton = $isTranslationManager
-			? '<button class="wpml-antd-button wpml-antd-button-primary" onclick="CREDITS_ACTION">' . $fix . '</button>'
+			? '<button class="wpml-antd-button wpml-antd-button-primary" onclick="BUTTON_ACTION">BUTTON_TEXT</button>'
 			: '';
 
-		$translate = __( 'Translate content myself', 'wpml-translation-management' );
-
-		$secondaryButton = UIPage::isTMDashboard( $_GET ) || ! $isTranslationManager
-			? ''
-			: '<button class="wpml-antd-button wpml-antd-button-secondary" onclick="window.location.href=\'TRANSLATE_LINK\'">' . $translate . '</button>';
-
 		return '<div class="wpml-not-enough-credit-popup">' .
-		       '<p>' . $content . '</p>' .
+		       '<p>MESSAGE_TEXT</p>' .
 		       $primaryButton .
-		       $secondaryButton .
 		       '</div>';
 	}
 

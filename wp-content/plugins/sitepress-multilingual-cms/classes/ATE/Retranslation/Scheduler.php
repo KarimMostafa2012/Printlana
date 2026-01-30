@@ -19,7 +19,7 @@ class Scheduler {
 	}
 
 	public function scheduleNextRun() {
-		update_option( self::LAST_CALL_OPTION, time() );
+		update_option( self::LAST_CALL_OPTION, time(), false );
 	}
 
 	public function disable() {

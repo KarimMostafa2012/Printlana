@@ -19,10 +19,7 @@ class Dokan_Product_Addon_Frontend {
         add_action( 'dokan_render_settings_content', [ $this, 'render_settings_content' ], 10 );
         add_action( 'pre_get_posts', [ $this, 'render_vendor_global_addons' ], 99 );
         add_action( 'template_redirect', [ $this, 'handle_addon_formdata' ], 10 );
-        // Only hook AJAX for frontend/vendor dashboard, not admin
-        if ( ! is_admin() || ( wp_doing_ajax() && ! current_user_can( 'manage_options' ) ) ) {
-            add_action( 'wp_ajax_wc_pao_get_addon_options', [ $this, 'ajax_get_addon_options' ], 8 );
-        }
+        add_action( 'wp_ajax_dokan_pao_get_addon_options', [ $this, 'ajax_get_addon_options' ], 8 );
     }
 
     /**
@@ -323,8 +320,6 @@ class Dokan_Product_Addon_Frontend {
      * @return void
      */
     public function ajax_get_addon_options() {
-        dokan_remove_hook_for_anonymous_class( 'wp_ajax_wc_pao_get_addon_options', 'WC_Product_Addons_Admin', 'ajax_get_addon_options', 10 );
-
         check_ajax_referer( 'wc-pao-get-addon-options', 'security' );
 
         global $product_addons;

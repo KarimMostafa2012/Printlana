@@ -2,16 +2,16 @@
 
 namespace WPML\Setup\Endpoint;
 
-use OTGS\Installer\FP\Either;
 use WPML\Ajax\IHandler;
 use WPML\Collect\Support\Collection;
+use WPML\FP\Either;
 use WPML\Setup\Option;
 use function WPML\Container\make;
 
 class EnableAte implements IHandler {
 
 	public function run( Collection $data ) {
-		if ( ! Option::isTMAllowed() ) {
+		if ( !Option::isTMAllowed() ) {
 			return Either::left( __( 'A user does not have a proper license to enable ATE.', 'sitepress' ) );
 		}
 
@@ -19,8 +19,7 @@ class EnableAte implements IHandler {
 			return Either::of( true );
 		}
 		Option::setTranslateEverythingDefault();
-		make( \WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE::class )->run( wpml_collect( [] ) );
 
-		return Either::of( true );
+		return make( \WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE::class )->run( wpml_collect( [] ) );
 	}
 }

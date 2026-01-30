@@ -11,19 +11,19 @@
             "zamiast tego ukryj tłumaczenia."
          ],
          "Error happened! Please try again.": [
-            "Wystąpił błąd! Spróbuj ponownie później."
+            "Wystąpił błąd! Spróbuj ponownie."
          ],
          "Cancel": [
             "Anuluj"
          ],
          "Choose Content to Automatically Translate into": [
-            "Wybierz treści, które mają być automatycznie tłumaczone na język"
+            "Wybierz zawartość do automatycznego przetłumaczenia na"
          ],
          "Save Changes and Enable Automatic Translation": [
             "Zapisz zmiany i włącz automatyczne tłumaczenie"
          ],
          "Cancel Language Changes": [
-            "Anuluj zmiany dotyczące języka"
+            "Anuluj zmiany języka"
          ],
          "Save": [
             "Zapisz"
@@ -35,28 +35,28 @@
             "Dodaj nowy język"
          ],
          "Never mind - don't add new languages": [
-            "Nie ważne – nie dodawaj nowych języków"
+            "Nieważne – nie dodawaj nowych języków"
          ],
          "Never mind - don't add new language": [
-            "Nie ważne – nie dodawaj nowego języka"
+            "Nieważne – nie dodawaj nowego języka"
          ],
          "Choose which content to translate into the new language": [
-            "Zdecyduj, które treści przetłumaczyć na nowy język"
+            "Wybierz, którą zawartość przetłumaczyć na nowy język"
          ],
          "Automatically translate all my posts and pages, plus new content as I create it.": [
-            "Automatycznie tłumacz moje wszystkie posty i strony oraz nowe treści."
+            "Automatycznie tłumacz wszystkie moje posty i strony, a także nową zawartość, gdy ją tworzę."
          ],
          "Only automatically translate new content.": [
-            "Automatycznie tłumacz tylko nową treść."
+            "Automatycznie tłumacz tylko nową zawartość."
          ],
          "Which content do you want to translate into the new language?": [
-            "Które treści chcesz przetłumaczyć na nowy język?"
+            "Którą zawartość chcesz przetłumaczyć na nowy język?"
          ],
          "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
-            "Gdy zezwolisz na automatyczne tłumaczenie, ta treść zostanie <a>przetłumaczona automatycznie</a>."
+            "Po wznowieniu automatycznego tłumaczenia ta zawartość zostanie <a>przetłumaczona automatycznie</a>."
          ],
          "You can still translate existing content any time from the Translation Management Dashboard.": [
-            "Wciąż możesz tłumaczyć istniejące treści z poziomu panelu zarządzania tłumaczeniami."
+            "Nadal możesz tłumaczyć istniejącą zawartość w dowolnym momencie z panelu zarządzania tłumaczeniami."
          ]
       }
    }

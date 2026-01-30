@@ -439,6 +439,7 @@ class WPML_TM_ATE_AMS_Endpoints {
 			[
 				'pagination_token' => $paginationToken,
 				'page'             => $page,
+				'wpml_version'     => '4.9.0'
 			]
 		);
 	}

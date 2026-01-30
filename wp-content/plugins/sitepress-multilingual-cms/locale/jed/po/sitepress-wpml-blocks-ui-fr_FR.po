@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
-msgstr "Avancé(es)"
+msgstr "Avancé"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
@@ -15,15 +15,15 @@ msgstr "Ancre HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Ajouter un raccourci à ce bloc au moment de télécharger la page à l’aide de l’URL “#anchor”."
+msgstr "Ajoutez un raccourci vers ce bloc lors du chargement de la page en utilisant l’URL « #anchor »."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "Classe(s) CSS supplémentaire(s)"
+msgstr "Classe(s) CSS additionnelle(s)"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "Séparer les multiples classes avec des espaces."
+msgstr "Séparez les classes multiples par des espaces."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -45,27 +45,27 @@ msgstr "Dimensions"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
-msgstr "Bloc"
+msgstr "BLOC"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "Marge de bloc"
+msgstr "Marge du bloc"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "Marge intérieure du bloc"
+msgstr "Rembourrage du bloc"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
-msgstr "Langue"
+msgstr "LANGUE"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Espacement de langue"
+msgstr "Espacement de la langue"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Marge intérieure de langue"
+msgstr "Rembourrage de la langue"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -73,7 +73,7 @@ msgstr "Affichage"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
-msgstr "Afficher l’indicateur"
+msgstr "Afficher le drapeau"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
@@ -89,7 +89,7 @@ msgstr "Style"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
-msgstr "Paramètres d’indicateurs"
+msgstr "Paramètres du drapeau"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
 msgid "Width"
@@ -105,11 +105,11 @@ msgstr "Espacement"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Permettre le retour à la ligne sur des lignes multiples"
+msgstr "Autoriser le retour à la ligne"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "Ouvrir d’un clic"
+msgstr "Ouvrir au clic"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
@@ -117,7 +117,7 @@ msgstr "Afficher la flèche"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
 msgid "Layout"
-msgstr "Mise en page"
+msgstr "Disposition"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
@@ -138,20 +138,20 @@ msgstr "Arrière-plan"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:121
 msgid "Language Text"
-msgstr "Texte de langue"
+msgstr "Texte de la langue"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:126
 msgid "Language Background"
-msgstr "Arrière-plan de langue"
+msgstr "Arrière-plan de la langue"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:131
 msgid "Current language text"
-msgstr "Texte actuel de la langue"
+msgstr "Texte de la langue actuelle"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:136
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
 msgid "Current language background"
-msgstr "Arrière-plan actuel de la langue"
+msgstr "Arrière-plan de la langue actuelle"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
@@ -163,19 +163,19 @@ msgstr "Code"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "Aligner les éléments à gauche"
+msgstr "Justifier les éléments à gauche"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "Aligner les éléments au centre"
+msgstr "Justifier les éléments au centre"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "Aligner les éléments à droite"
+msgstr "Justifier les éléments à droite"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Aligner l'espace des éléments entre"
+msgstr "Justifier les éléments avec espacement"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -199,7 +199,7 @@ msgstr "Grand"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Extra grand"
+msgstr "Très grand"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -235,7 +235,7 @@ msgstr "affiche le sélecteur de langue WPML"
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Affiche le sélecteur de langue WPML. <br/> Découvrez <a>comment traduire ce bloc</a>."
+msgstr "Affiche le sélecteur de langue WPML. <br/> Apprenez <a>comment traduire ce bloc</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"

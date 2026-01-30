@@ -7,17 +7,17 @@ msgstr ""
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:30
 msgid "Choose the image file type for flags"
-msgstr "Wybierz typ plików obrazu dla flag"
+msgstr "Wybierz typ pliku obrazu dla flag"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:32
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "Ta opcja dotyczy wyłącznie wbudowanych flag WPML, a nie przesłanych flag niestandardowych."
+msgstr "Ta opcja dotyczy tylko wbudowanych flag WPML, a nie niestandardowych, przesłanych flag."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
-msgstr "%s format"
+msgstr "Format %s"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:63
 msgid "Save"
@@ -25,8 +25,8 @@ msgstr "Zapisz"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:20
 msgid "The new format has been saved."
-msgstr "Zapisano nowy format."
+msgstr "Nowy format został zapisany."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:25
 msgid "Failed to save the new format"
-msgstr "Zapis nowego formatu nie powiódł się"
+msgstr "Nie udało się zapisać nowego formatu"

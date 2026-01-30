@@ -16,7 +16,7 @@ msgstr "Genehmigt!"
 #: src/js/translationReview/components/AcceptedText.js:9
 #: src/js/translationReview/components/PublishedText.js:9
 msgid "Loading the next translation for review..."
-msgstr "Die nächste zu überprüfende Übersetzung wird geladen ..."
+msgstr "Lade die nächste Übersetzung zur Überprüfung..."
 
 #: src/js/translationReview/components/BackButton.js:7
 msgid "Back"
@@ -26,11 +26,11 @@ msgstr "Zurück"
 msgid ""
 "Turn off to not automatically load the next translation after finishing "
 "this review."
-msgstr "Schalten Sie dies aus, um nach Beenden dieser Überprüfung nicht automatisch die nächste Übersetzung zu laden."
+msgstr "Deaktivieren, um die nächste Übersetzung nach Abschluss dieser Überprüfung nicht automatisch zu laden."
 
 #: src/js/translationReview/components/ContinueReviewToggle.js:18
 msgid "Turn on to automatically load the next translation after finishing this  ."
-msgstr "Aktivieren Sie diese Option, um nach Abschluss dieser Übersetzung automatisch die nächste Übersetzung zu laden."
+msgstr "Aktivieren, um die nächste Übersetzung nach Abschluss dieser Überprüfung automatisch zu laden."
 
 #: src/js/translationReview/components/EditButton.js:10
 msgid "Edit"
@@ -58,11 +58,11 @@ msgstr "Veröffentlicht!"
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Bitte warten Sie, die Übersetzung wird übernommen ..."
+msgstr "Bitte warten, Übersetzung wird angewendet..."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Beim Übernehmen der Übersetzung ist ein Fehler aufgetreten."
+msgstr "Beim Anwenden der Übersetzung ist ein Fehler aufgetreten."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."

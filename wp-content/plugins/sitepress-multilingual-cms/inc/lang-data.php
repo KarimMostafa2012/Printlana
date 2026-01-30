@@ -283,6 +283,7 @@ function icl_get_languages_locales() {
 			'sr'      => 'sr_RS',
 			'su'      => 'su_ID',
 			'sv'      => 'sv_SE',
+			'sw'      => 'sw',
 			'ta'      => 'ta_IN',
 			'tg'      => 'tg_TJ',
 			'th'      => 'th',

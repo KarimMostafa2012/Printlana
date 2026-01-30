@@ -97,6 +97,7 @@ const TableRow = ( {
                                 menuPortalTarget={ document.querySelector(
                                     '.dokan-layout'
                                 ) }
+                                menuPosition='fixed'
                                 options={ shippingClassOptions }
                                 onChange={ handleSelectChange( 'rate_class' ) }
                                 value={ shippingClassOptions.find(
@@ -112,6 +113,7 @@ const TableRow = ( {
                                 menuPortalTarget={ document.querySelector(
                                     '.dokan-layout'
                                 ) }
+                                menuPosition='fixed'
                                 options={ rateConditionOptions }
                                 onChange={ handleSelectChange(
                                     'rate_condition'

@@ -7,26 +7,26 @@ msgstr ""
 
 #: src/js/ate-cloned-sites/components/CloseButton.js:15
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 #: src/js/ate-cloned-sites/components/ContactSupport.js:9
 msgid ""
 "Please take a screenshot of this message and report this issue to <a>WPML "
 "support</a>."
-msgstr ""
+msgstr "이 메시지를 스크린샷으로 찍어 <a>WPML 지원팀</a>에 보고해 주세요."
 
 #: src/js/ate-cloned-sites/components/UnregistrationInfo.js:7
 msgid ""
 "WPML has automatically unregistered your site as part of this wizard. After "
 "you close it, you’ll see a prompt to register the site again. This is "
 "expected, your content and translations are safe."
-msgstr "이 마법사의 일환으로 WPML이 자동으로 귀하의 사이트 등록을 해제했습니다. 마법사를 닫은 후 사이트를 다시 등록하라는 메시지가 표시될 것입니다. 이는 예상된 절차이며, 귀하의 콘텐츠와 번역은 안전합니다."
+msgstr "WPML이 이 마법사의 일부로 사이트 등록을 자동으로 취소했습니다. 마법사를 닫으면 사이트를 다시 등록하라는 메시지가 표시됩니다. 이는 예상된 동작이며, 콘텐츠와 번역은 안전합니다."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:10
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:9
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:10
 msgid "You’re all set"
-msgstr ""
+msgstr "모든 설정이 완료되었습니다."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:23
 msgid ""
@@ -38,25 +38,25 @@ msgstr "이 사이트는 원본 사이트 %s의 사본이며 현재 자동 번�
 msgid ""
 "If you’d like to use automatic translation here in the future, you can "
 "either <a1>add credits</a1> or <a2>share them from the original site</a2>."
-msgstr "향후 여기서 자동 번역을 사용하고 싶으시다면, <a1>크레딧을 추가</a1>하거나 <a2>원본 사이트에서 크레딧을 공유</a2>할 수 있습니다."
+msgstr "앞으로 여기서 자동 번역을 사용하려면 <a1>크레딧을 추가</a1>하거나 <a2>원본 사이트에서 공유</a2>할 수 있습니다."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:52
 msgid ""
 "There was an error checking for credits to share. Please take a screenshot "
 "of this message and report it in <a>WPML support</a>."
-msgstr ""
+msgstr "공유할 크레딧을 확인하는 중 오류가 발생했습니다. 이 메시지를 스크린샷으로 찍어 <a>WPML 지원팀</a>에 보고해 주세요."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:36
 msgid ""
 "To link %s and %s so they share automatic translation credits, follow these "
 "steps:"
-msgstr "%s와 %s를 연결하여 자동 번역 크레딧을 공유하려면 다음 단계를 따르세요:"
+msgstr "%s과 %s을 연결하여 자동 번역 크레딧을 공유하려면 다음 단계를 따르세요."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:47
 msgid ""
 "Open <a>this link</a> to access the original site’s admin area. (You can’t "
 "access this screen by visiting %s directly.)"
-msgstr "원본 사이트의 관리자 영역에 접근하려면 <a>이 링크</a>를 열어주세요. (%s에 직접 방문해서는 이 화면에 접근할 수 없습니다.)"
+msgstr "<a>이 링크</a>를 열어 원본 사이트의 관리 영역에 액세스하세요. (%s을 직접 방문하여 이 화면에 액세스할 수 없습니다.)"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:59
 msgid "Click <b>Copy migration code</b> on that page."
@@ -75,12 +75,12 @@ msgstr "마이그레이션 코드"
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:75
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:76
 msgid "Continue"
-msgstr "계속하기"
+msgstr "계속"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:82
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:95
 msgid "Go back"
-msgstr "돌아가기"
+msgstr "뒤로 가기"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:9
 msgid "Connect Automatic Translation Credits"
@@ -90,7 +90,7 @@ msgstr "자동 번역 크레딧 연결"
 msgid ""
 "WPML was unable to copy your site's translations, translation memory, and "
 "glossary to this new URL."
-msgstr "WPML이 사이트의 번역, 번역 메모리 및 용어집을 이 새로운 URL로 복사하지 못했습니다."
+msgstr "WPML이 사이트의 번역, 번역 메모리 및 용어집을 이 새 URL로 복사할 수 없었습니다."
 
 #: src/js/ate-cloned-sites/steps/CopyError.js:7
 msgid "Error with copying translation information to new URL"
@@ -98,19 +98,19 @@ msgstr "새 URL로 번역 정보 복사 중 오류 발생"
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:12
 msgid "This site and its copy on %s are now sharing automatic translation credits."
-msgstr "이 사이트와 %s의 복사본이 이제 자동 번역 크레딧을 공유하고 있습니다."
+msgstr "이제 이 사이트와 %s에 있는 사본이 자동 번역 크레딧을 공유하고 있습니다."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:30
 msgid ""
 "Any credits you add to one site will be available on both. If you stop "
 "using this site, your credits will remain safe."
-msgstr "한 사이트에 추가한 크레딧은 두 사이트 모두에서 사용 가능합니다. 이 사이트 사용을 중단하더라도 크레딧은 안전하게 유지됩니다."
+msgstr "어느 사이트에 추가하는 크레딧이든 양쪽 사이트에서 모두 사용할 수 있습니다. 이 사이트 사용을 중단하더라도 크레딧은 안전하게 유지됩니다."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:15
 msgid ""
 "WPML was unable to connect your old and new URLs to share automatic "
 "translation credits."
-msgstr "WPML이 자동 번역 크레딧을 공유하기 위해 이전 URL과 새 URL을 연결하지 못했습니다."
+msgstr "WPML이 자동 번역 크레딧을 공유하기 위해 이전 및 새 URL을 연결할 수 없었습니다."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:7
 msgid "Error with sharing automatic translation credits"
@@ -120,13 +120,13 @@ msgstr "자동 번역 크레딧 공유 중 오류 발생"
 msgid ""
 "The site on %s has %d credits for automatic translation. Do you want to "
 "share these credits with this new site %s?"
-msgstr "%s의 사이트에는 자동 번역을 위한 %d 크레딧이 있습니다. 이 크레딧을 새 사이트 %s와 공유하시겠습니까?"
+msgstr "%s에 있는 사이트에는 자동 번역을 위한 %d 크레딧이 있습니다. 이 크레딧을 이 새 사이트 %s과 공유하시겠습니까?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:19
 msgid ""
 "The site on %s has a pay-as-you-go subscription for automatic translation. "
 "Do you want to share these credits between %s and this new location (%s)?"
-msgstr "%s의 사이트에 자동 번역을 위한 종량제 구독이 있습니다. 이 크레딧을 %s와 이 새로운 위치 (%s) 간에 공유하시겠습니까?"
+msgstr "%s에 있는 사이트에는 자동 번역을 위한 종량제 구독이 있습니다. 이 크레딧을 %s과 이 새 위치 (%s) 간에 공유하시겠습니까?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:66
 msgid "Yes (recommended)"
@@ -134,20 +134,20 @@ msgstr "예 (권장)"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:68
 msgid "In the next step, you’ll approve the use of same credits on both sites."
-msgstr "다음 단계에서 두 사이트에서 동일한 크레딧 사용을 승인하게 됩니다."
+msgstr "다음 단계에서 양쪽 사이트에서 동일한 크레딧 사용을 승인하게 됩니다."
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:71
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:61
 msgid "No"
-msgstr "아니오"
+msgstr "아니요"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:73
 msgid "You’ll need to assign new credits or set up pay-as-you-go."
-msgstr "새로운 크레딧을 할당하거나 사용한 만큼 지불하는 방식을 설정해야 합니다."
+msgstr "새 크레딧을 할당하거나 종량제 요금제를 설정해야 합니다."
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:87
 msgid "What happens when you share credits between sites?"
-msgstr "사이트 간 크레딧을 공유하면 어떻게 되나요?"
+msgstr "사이트 간에 크레딧을 공유하면 어떻게 되나요?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:9
 msgid "Translation credits for this site"
@@ -155,37 +155,37 @@ msgstr "이 사이트의 번역 크레딧"
 
 #: src/js/ate-cloned-sites/steps/Initial.js:10
 msgid "WPML detected a change in your site’s URL"
-msgstr "WPML이 사이트 URL의 변경을 감지했습니다"
+msgstr "WPML이 사이트 URL 변경을 감지했습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:21
 msgid "You can now continue translating content on this site as usual."
-msgstr "이제 이 사이트에서 평소와 같이 콘텐츠 번역을 계속할 수 있습니다."
+msgstr "이제 이 사이트에서 평소처럼 콘텐츠 번역을 계속할 수 있습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:32
 msgid ""
 "Just a reminder: there shouldn’t be another copy of this site running at "
 "%s. If there is, automatic translation won’t work correctly on that site."
-msgstr "주의사항: %s에서 이 사이트의 다른 복사본이 실행되고 있어서는 안 됩니다. 만약 그렇다면, 해당 사이트에서 자동 번역이 올바르게 작동하지 않을 것입니다."
+msgstr "참고로, %s에서 이 사이트의 다른 사본이 실행 중이어서는 안 됩니다. 만약 그렇다면 해당 사이트에서 자동 번역이 제대로 작동하지 않습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:33
 msgid "You indicated that the original site at %s is no longer active. This means:"
-msgstr "귀하께서 %s의 원본 사이트가 더 이상 활성화되지 않았다고 표시하셨습니다. 이는 다음을 의미합니다:"
+msgstr "%s에 있는 원본 사이트가 더 이상 활성화되어 있지 않다고 표시했습니다. 이는 다음을 의미합니다."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:37
 msgid "Automatic translation will no longer work on the old site"
-msgstr "이전 사이트에서 자동 번역이 더 이상 작동하지 않습니다"
+msgstr "이전 사이트에서 자동 번역이 더 이상 작동하지 않습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:40
 msgid "Accessing the old site may trigger warnings on this site"
-msgstr "이전 사이트에 접속하면 이 사이트에서 경고가 발생할 수 있습니다"
+msgstr "이전 사이트에 액세스하면 이 사이트에서 경고가 발생할 수 있습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:50
 msgid "Please confirm:"
-msgstr "다음 사항을 확인해 주세요:"
+msgstr "확인해 주세요."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:61
 msgid "I understand and confirm that <b>%s</b> is no longer in use."
-msgstr "<b>%s</b>가 더 이상 사용되지 않는다는 것을 이해하고 확인합니다."
+msgstr "<b>%s</b>이 더 이상 사용되지 않음을 이해하고 확인합니다."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:78
 msgid "Back"
@@ -193,11 +193,11 @@ msgstr "뒤로"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:9
 msgid "Please Confirm"
-msgstr "확인해 주세요"
+msgstr "확인해 주세요."
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:16
 msgid "WPML was unable to update our records with your new URL."
-msgstr "WPML이 새 URL로 기록을 업데이트하지 못했습니다."
+msgstr "WPML이 새 URL로 기록을 업데이트할 수 없었습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:7
 msgid "Error with moving translation information to new URL"
@@ -205,11 +205,11 @@ msgstr "새 URL로 번역 정보 이동 중 오류 발생"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:34
 msgid "It looks like this site was previously at %s and is now running on %s."
-msgstr "이 사이트가 이전에 %s에 있었고 현재 %s에서 실행 중인 것 같습니다."
+msgstr "이 사이트는 이전에 %s에 있었고 이제 %s에서 실행되는 것 같습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:42
 msgid "Is the original site still available at %s?"
-msgstr "원본 사이트가 여전히 %s에서 사용 가능합니까?"
+msgstr "원본 사이트가 %s에서 여전히 사용 가능합니까?"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:54
 msgid "Yes"
@@ -219,38 +219,38 @@ msgstr "예"
 msgid ""
 "The original site is still running and this is just a copy of the original "
 "site"
-msgstr "원본 사이트는 여전히 실행 중이며 이는 단지 원본 사이트의 복사본입니다"
+msgstr "원본 사이트는 여전히 실행 중이며 이것은 원본 사이트의 사본일 뿐입니다."
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:64
 msgid "I moved the site to this new address and this is now the main site"
-msgstr "사이트를 이 새 주소로 이전했으며 이제 이곳이 메인 사이트입니다"
+msgstr "사이트를 이 새 주소로 이동했으며 이제 이것이 메인 사이트입니다."
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:8
 msgid "WPML Detected a New Site Address"
-msgstr "WPML이 새 사이트 주소를 감지했습니다"
+msgstr "WPML이 새 사이트 주소를 감지했습니다."
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:80
 msgid "How to manage translations when migrating from development to production"
-msgstr "개발 환경에서 프로덕션 환경으로 이전 시 번역을 관리하는 방법"
+msgstr "개발에서 프로덕션으로 마이그레이션할 때 번역을 관리하는 방법"
 
 #: src/js/ate-cloned-sites/steps/NoAdmin.js:11
 msgid ""
 "Looks like this site is a copy of a different site, or moved to a different "
 "URL. Please contact your translation manager to update Translation "
 "Management plugin configuration."
-msgstr "이 사이트가 다른 사이트의 복사본이거나 다른 URL로 이동된 것 같습니다. 번역 관리자에게 연락하여 번역 관리 플러그인 구성을 업데이트하세요."
+msgstr "이 사이트는 다른 사이트의 사본이거나 다른 URL로 이동한 것 같습니다. 번역 관리 플러그인 구성을 업데이트하려면 번역 관리자에게 문의하세요."
 
 #: src/js/ate-cloned-sites/steps/NoAdmin.js:5
 msgid "Site Moved or Copied - Action Required"
-msgstr "사이트 이동 또는 복사됨 - 조치 필요"
+msgstr "사이트 이동 또는 복사 - 조치 필요"
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:36
 msgid "You or someone else moved this site to %s. Please keep in mind that:"
-msgstr "귀하 또는 다른 사람이 이 사이트를 %s로 이동했습니다. 다음 사항을 유의하세요:"
+msgstr "귀하 또는 다른 사람이 이 사이트를 %s으로 이동했습니다. 다음 사항을 명심하세요."
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:50
 msgid "Translations that you do at %s will not appear on this site."
-msgstr "%s에서 수행한 번역은 이 사이트에 나타나지 않습니다."
+msgstr "%s에서 수행하는 번역은 이 사이트에 나타나지 않습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:56
 msgid "You cannot edit translations on this site."
@@ -260,76 +260,76 @@ msgstr "이 사이트에서 번역을 편집할 수 없습니다."
 msgid ""
 "The site at %s is using the same credits for automatic translation as this "
 "site."
-msgstr "%s의 사이트는 이 사이트와 동일한 자동 번역 크레딧을 사용하고 있습니다."
+msgstr "%s에 있는 사이트는 이 사이트와 동일한 자동 번역 크레딧을 사용하고 있습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:76
 msgid ""
 "If you didn't intend to move this site to %s, you can <a>indicate that this "
 "site should be at %s</a>."
-msgstr "의도적으로 이 사이트를 %s로 이동하지 않았다면, <a>이 사이트가 %s에 있어야 한다고 표시</a>할 수 있습니다."
+msgstr "이 사이트를 %s으로 이동할 의도가 없었다면, <a>이 사이트가 %s에 있어야 한다고 표시</a>할 수 있습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:9
 msgid "This site has moved to a new location"
-msgstr "이 사이트가 새로운 위치로 이동되었습니다"
+msgstr "이 사이트가 새 위치로 이동했습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMove.js:96
 msgid ""
 "If you prefer not to move this site, you can <a>mark it as a copy</a> and "
 "enable automatic translation for it."
-msgstr "이 사이트를 이동하지 않기를 원한다면, <a>복사본으로 표시</a>하고 자동 번역을 활성화할 수 있습니다."
+msgstr "이 사이트를 이동하지 않으려면 <a>사본으로 표시</a>하고 자동 번역을 활성화할 수 있습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:38
 msgid ""
 "Moving the site back here will mean that you will be able to translate on "
 "this domain again, but you will not be able to update translations at %s."
-msgstr "사이트를 여기로 다시 이동하면 이 도메인에서 다시 번역할 수 있지만, %s에서는 번역을 업데이트할 수 없게 됩니다."
+msgstr "사이트를 다시 여기로 이동하면 이 도메인에서 다시 번역할 수 있지만, %s에서는 번역을 업데이트할 수 없습니다."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:50
 msgid "Yes - move back here"
-msgstr "예 - 여기로 다시 이동합니다"
+msgstr "예 - 여기로 다시 이동"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:56
 msgid "No - keep the site on %s"
-msgstr "아니오 - %s에 사이트를 유지합니다"
+msgstr "아니요 - 사이트를 %s에 유지"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:9
 msgid "Are you sure that this site should run on %s and not %s?"
-msgstr "이 사이트가 %s가 아닌 %s에서 실행되어야 한다고 확신하십니까?"
+msgstr "이 사이트가 %s이 아닌 %s에서 실행되어야 한다고 확신하십니까?"
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:16
 msgid ""
 "WPML noticed that your site is being accessed from a different domain or "
 "URL."
-msgstr "WPML이 귀하의 사이트가 다른 도메인이나 URL에서 접속되고 있음을 감지했습니다."
+msgstr "WPML이 사이트가 다른 도메인 또는 URL에서 액세스되고 있음을 감지했습니다."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:21
 msgid ""
 "To make sure everything continues working correctly, including automatic "
 "translation and site registration, we need to verify and update your site "
 "settings."
-msgstr "자동 번역 및 사이트 등록을 포함한 모든 기능이 계속 올바르게 작동하도록 하기 위해 사이트 설정을 확인하고 업데이트해야 합니다."
+msgstr "자동 번역 및 사이트 등록을 포함하여 모든 것이 올바르게 계속 작동하도록 하려면 사이트 설정을 확인하고 업데이트해야 합니다."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:26
 msgid "This will only take a moment."
-msgstr "이 작업은 잠시만 소요됩니다."
+msgstr "잠시만 기다려 주세요."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:36
 msgid "Start Migration"
-msgstr "이전 시작"
+msgstr "마이그레이션 시작"
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:17
 msgid ""
 "If you didn't change your main domain and only logged in through a "
 "secondary domain, select this option."
-msgstr "주 도메인을 변경하지 않고 보조 도메인을 통해서만 로그인한 경우 이 옵션을 선택하세요."
+msgstr "메인 도메인을 변경하지 않고 보조 도메인을 통해 로그인한 경우 이 옵션을 선택하세요."
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:23
 msgid "Something went wrong"
-msgstr "문제가 발생했습니다"
+msgstr "문제가 발생했습니다."
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:39
 msgid "I just logged in from a secondary domain"
-msgstr "보조 도메인을 통해 로그인했습니다"
+msgstr "보조 도메인에서 로그인했습니다."
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:48
 msgid "You're all set!"
@@ -339,4 +339,4 @@ msgstr "모든 설정이 완료되었습니다!"
 msgid ""
 "This domain is now registered as a secondary domain and WPML will recognize "
 "it correctly."
-msgstr "이 도메인은 이제 보조 도메인으로 등록되었으며 WPML이 올바르게 인식할 것입니다."
+msgstr "이 도메인은 이제 보조 도메인으로 등록되었으며 WPML이 이를 올바르게 인식할 것입니다."

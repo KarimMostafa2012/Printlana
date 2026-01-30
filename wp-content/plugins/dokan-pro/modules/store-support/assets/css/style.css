@@ -114,6 +114,10 @@
     margin-top: 20px;
 }
 
+.dokan-dss-chat-box.main-topic .dokan-customer-chat-text {
+    white-space: pre-line;
+}
+
 .dokan-main-topic {
     width: 98%;
     background-color: white;
@@ -172,8 +176,7 @@
 
 .dokan-dss-chat-box .dokan-chat-info-box .dokan-chat-text {
     border-radius: 0px 10px 10px 10px;
-    display: flex;
-    align-items: center;
+    display: block;
     padding: 20px;
     margin-top: 9px;
 }
@@ -191,10 +194,6 @@
 .dokan-dss-chat-box .dokan-chat-info-box .dokan-admin-chat-text {
     background: #f2faff;
     color: #1a9ed4;
-}
-
-.dokan-dss-chat-box .dokan-chat-info-box .dokan-chat-text p {
-    margin: 0;
 }
 
 .dokan-dss-chat-box .dokan-chat-action-box {
@@ -252,14 +251,10 @@
     .dokan-dss-chat-box .dokan-chat-info-box .dokan-chat-text {
         background: #f2faff;
         border-radius: 0px 10px 10px 10px;
-        display: flex;
-        align-items: center;
+        display: block;
         padding: 20px;
         color: #1a9ed4;
         margin-top: 10px;
-    }
-    .dokan-dss-chat-box .dokan-chat-info-box .dokan-chat-text p {
-        margin: 0;
     }
     .dokan-dss-chat-box .dokan-chat-action-box {
         width: 10%;

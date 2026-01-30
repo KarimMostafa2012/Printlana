@@ -73,7 +73,7 @@ class WPML_Debug_Information {
 				'MaxInputVars'    => ini_get( 'max_input_vars' ),
 				'MBString'        => $this->sitepress->get_wp_api()->extension_loaded( 'mbstring' ),
 				'libxml'          => $this->sitepress->get_wp_api()->extension_loaded( 'libxml' ),
-			),
+			) + $this->get_opcache_info(),
 		);
 
 		return $core;
@@ -156,5 +156,34 @@ class WPML_Debug_Information {
 		}
 
 		return $json_data;
+	}
+
+	/**
+	 * Get OPcache status information
+	 *
+	 * @return array OPcache status details
+	 */
+	function get_opcache_info() {
+		$opcache_info = array();
+
+		// Check if OPcache extension is loaded
+		if ( ! function_exists( 'opcache_get_status' ) ) {
+			$opcache_info['OPcache'] = 'Not Installed';
+			return $opcache_info;
+		}
+
+		// Get OPcache status (false = don't include script details)
+		$status = @opcache_get_status( false );
+
+		// If status is false, OPcache is installed but disabled or restricted
+		if ( false === $status ) {
+			$opcache_info['OPcache'] = 'Installed but Disabled';
+			return $opcache_info;
+		}
+
+		// OPcache is enabled
+		$opcache_info['OPcache'] = 'Enabled';
+
+		return $opcache_info;
 	}
 }

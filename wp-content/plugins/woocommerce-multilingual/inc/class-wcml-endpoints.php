@@ -21,6 +21,8 @@ class WCML_Endpoints {
 	private $endpointsToTranslations = [];
 	/** @var array */
 	private $translatedEndpointsInDatabase = [];
+	/** @var array */
+	private $editAddressSlugs = [];
 
 	/** @var array<string,string> */
 	private $endpointKeysToOptions = [
@@ -53,14 +55,13 @@ class WCML_Endpoints {
 	public function add_hooks() {
 		add_action( 'init', [ $this, 'migrate_ones_string_translations' ], 8 );
 
-		add_action( 'init', [ $this, 'initQueryVars' ], 9 );
-		add_filter( 'woocommerce_get_query_vars', [ $this, 'registerAndTranslate' ], 99 );
-
 		add_filter( 'wpml_registered_endpoints', [ $this, 'unregisterWcEndpointsFromWpml' ] );
 
 		if ( ! is_admin() ) {
-			add_filter( 'option_rewrite_rules', [ $this, 'adjustRewriteRules' ], 0 );
+			add_action( 'init', [ $this, 'initQueryVars' ], 9 );
 			add_action( 'init', [ $this, 'translateOptions' ] );
+			add_filter( 'woocommerce_get_query_vars', [ $this, 'registerAndTranslate' ], 99 );
+			add_filter( 'option_rewrite_rules', [ $this, 'adjustRewriteRules' ], 0 );
 		}
 
 		add_filter( 'wpml_endpoint_url_value', [ $this, 'filter_endpoint_url_value' ], 10, 2 );
@@ -99,10 +100,13 @@ class WCML_Endpoints {
 
 				if ( $existing_string_id ) {
 
+					// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 					$existing_wcml_string_id = $this->wpdb->get_var(
-						$this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings
-											WHERE context = %s AND name = %s",
-						'WooCommerce Endpoints', $endpoint_key )
+						$this->wpdb->prepare(
+							"SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE context = %s AND name = %s",
+							WCML_Url_Translation::WC_STRING_CONTEXT,
+							$endpoint_key
+						)
 					);
 
 					if ( $existing_wcml_string_id ) {
@@ -116,11 +120,16 @@ class WCML_Endpoints {
 					}
 				} else {
 
+					// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 					$this->wpdb->query(
-						$this->wpdb->prepare( "UPDATE {$this->wpdb->prefix}icl_strings
+						$this->wpdb->prepare(
+							"UPDATE {$this->wpdb->prefix}icl_strings
                                   SET context = %s
-                                  WHERE context = 'WooCommerce Endpoints' AND name = %s",
-						WPML_Endpoints_Support::STRING_CONTEXT, $endpoint_key )
+                                  WHERE context = %s AND name = %s",
+							WPML_Endpoints_Support::STRING_CONTEXT,
+							WCML_Url_Translation::WC_STRING_CONTEXT,
+							$endpoint_key
+						)
 					);
 
 					$string_id = $this->wpdb->get_var( $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE context = %s AND name = %s", WPML_Endpoints_Support::STRING_CONTEXT, $endpoint_key ) );
@@ -337,35 +346,42 @@ class WCML_Endpoints {
 				if ( array_key_exists( $k, $adjustedRewriteRules ) ) {
 					continue;
 				}
+				// Keep the current rewrite rule.
 				$adjustedRewriteRules[ $k ] = $v;
+
+				// Maybe insert the rewrite rule for the endpoint translation.
+				$newKey = false;
 				if ( 0 === strpos( $k, $endpoint . '(/(.*))?/?$' ) ) {
-					$newKey                          = str_replace(
+					$newKey = str_replace(
 						$endpoint . '(/(.*))?/?$',
 						$endpointTranslation . '(/(.*))?/?$',
 						$k
 					);
-					$newValue                        = str_replace(
-						'&' . $endpoint . '=',
-						'&' . $endpointTranslation . '=&' . $endpoint . '=',
-						$v
-					);
-					$adjustedRewriteRules[ $newKey ] = $newValue;
-					continue;
-				}
-				if ( false !== strpos( $k, '/' . $endpoint . '(/(.*))?/?$' ) ) {
-					$newKey                          = str_replace(
+				} elseif ( false !== strpos( $k, '/' . $endpoint . '(/(.*))?/?$' ) ) {
+					$newKey = str_replace(
 						'/' . $endpoint . '(/(.*))?/?$',
 						'/' . $endpointTranslation . '(/(.*))?/?$',
 						$k
 					);
-					$newValue                        = str_replace(
-						'&' . $endpoint . '=',
-						'&' . $endpointTranslation . '=&' . $endpoint . '=',
-						$v
-					);
-					$adjustedRewriteRules[ $newKey ] = $newValue;
+				}
+
+				if ( ! $newKey ) {
 					continue;
 				}
+
+				preg_match(
+					'/&' . $endpoint . '=\$matches\[(\d+)\]/',
+					$v,
+					$matches
+				);
+				$matchesValue = isset( $matches[1] ) ? '$matches[' . $matches[1] . ']' : '';
+				$newValue     = str_replace(
+					'&' . $endpoint . '=' . $matchesValue,
+					'&' . $endpointTranslation . '=' . $matchesValue . '&' . $endpoint . '=' . $matchesValue,
+					$v
+				);
+
+				$adjustedRewriteRules[ $newKey ] = $newValue;
 			}
 			$rewriteRules = $adjustedRewriteRules;
 		}
@@ -530,6 +546,9 @@ class WCML_Endpoints {
 	 * @return string
 	 */
 	private function get_translated_edit_address_slug( $slug, $language = false ) {
+		if ( $language && isset( $this->editAddressSlugs[ $language ][ $slug ] ) ) {
+			return $this->editAddressSlugs[ $language ][ $slug ];
+		}
 
 		/** @var WCML_WC_Strings $strings */
 		$strings          = $this->woocommerce_wpml->strings;
@@ -545,6 +564,10 @@ class WCML_Endpoints {
 			} else {
 				$translated_slug = _x( $slug, 'edit-address-slug', 'woocommerce' );
 			}
+		}
+
+		if ( $language ) {
+			$this->editAddressSlugs[ $language ][ $slug ] = $translated_slug;
 		}
 
 		return $translated_slug;
@@ -598,13 +621,35 @@ class WCML_Endpoints {
 	}
 
 	/**
+	 * @param string      $value
+	 * @param string      $switcherLanguage
+	 * @param string|bool $postLanguage
+	 *
+	 * @return string
+	 */
+	private function adjustCurrentLsEndpointValue( $value, $switcherLanguage, $postLanguage ) {
+		if ( $postLanguage ) {
+			$edit_address_shipping = sanitize_title( $this->get_translated_edit_address_slug( 'shipping', $postLanguage ) );
+			$edit_address_billing  = sanitize_title( $this->get_translated_edit_address_slug( 'billing', $postLanguage ) );
+
+			if ( urldecode( $value ) === $edit_address_shipping ) {
+				$value = sanitize_title( $this->get_translated_edit_address_slug( 'shipping', $switcherLanguage ) );
+			} elseif ( urldecode( $value ) === $edit_address_billing ) {
+				$value = sanitize_title( $this->get_translated_edit_address_slug( 'billing', $switcherLanguage ) );
+			}
+		}
+
+		return $value;
+	}
+
+	/**
 	 * @param string $url
-	 * @param string $post_lang
+	 * @param string $postLanguage
 	 * @param array  $data
 	 * @param array  $current_endpoint
 	 */
-	public function add_endpoint_to_current_ls_language_url( $url, $post_lang, $data, $current_endpoint ) {
-		$current_endpoint = $this->get_current_endpoint( $data['code'] );
+	public function add_endpoint_to_current_ls_language_url( $url, $postLanguage, $data, $current_endpoint ) {
+		$current_endpoint = $this->getCurrentLsEndpoint( $data['code'], $postLanguage );
 
 		if ( $current_endpoint ) {
 			$url = apply_filters( 'wpml_get_endpoint_url', $current_endpoint['endpoint'], $current_endpoint['value'], $url );
@@ -614,11 +659,12 @@ class WCML_Endpoints {
 	}
 
 	/**
-	 * @param string $language
+	 * @param string      $switcherLanguage
+	 * @param string|bool $postLanguage
 	 *
 	 * @return array<string,string>
 	 */
-	private function get_current_endpoint( $language ) {
+	private function getCurrentLsEndpoint( $switcherLanguage, $postLanguage ) {
 		global $wp;
 
 		$current_endpoint = [];
@@ -629,8 +675,8 @@ class WCML_Endpoints {
 				&& array_key_exists( $key, $this->originalEndpoints )
 			) {
 				$current_endpoint['key']      = $key;
-				$current_endpoint['endpoint'] = $this->translateEndpoint( $key, $this->originalEndpoints[ $key ], $language, false );
-				$current_endpoint['value']    = $wp->query_vars[ $endpointTranslation ];
+				$current_endpoint['endpoint'] = $this->translateEndpoint( $key, $this->originalEndpoints[ $key ], $switcherLanguage, false );
+				$current_endpoint['value']    = $this->adjustCurrentLsEndpointValue( $wp->query_vars[ $endpointTranslation ], $switcherLanguage, $postLanguage );
 				break;
 			}
 		}
@@ -642,8 +688,8 @@ class WCML_Endpoints {
 		foreach ( $this->originalEndpoints as $key => $endpoint ) {
 			if ( isset( $wp->query_vars[ $endpoint ] ) ) {
 				$current_endpoint['key']      = $key;
-				$current_endpoint['endpoint'] = $this->translateEndpoint( $key, $endpoint, $language, false );
-				$current_endpoint['value']    = $wp->query_vars[ $endpoint ];
+				$current_endpoint['endpoint'] = $this->translateEndpoint( $key, $endpoint, $switcherLanguage, false );
+				$current_endpoint['value']    = $this->adjustCurrentLsEndpointValue( $wp->query_vars[ $endpoint ], $switcherLanguage, $postLanguage );
 				break;
 			}
 		}

@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
-msgstr "חבר אתר זה לחשבון %s שלך"
+msgstr "חבר את האתר הזה לחשבון %s שלך"
 
 #: src/js/translationServices/components/AuthorizeModal.js:45
 msgid "Error"
@@ -19,13 +19,13 @@ msgstr "« השתמש בשירות תרגום אחר"
 
 #: src/js/translationServices/components/AuthorizeModal.js:62
 msgid "Authenticate"
-msgstr "בצע אימות"
+msgstr "אימות"
 
 #: src/js/translationServices/components/Connect.js:22
 msgid ""
 "Visit <link_to_service /> to request an API Token. This token allows WPML "
 "to connect to <service_name /> to send and receive jobs."
-msgstr "בקר ב-<link_to_service /> כדילבקש אסימון API. אסימון זה יאפשר ל-WPML להתחבר ל-. <service_name /> כדי לשלוח משימות ולקבל אותן."
+msgstr "בקר ב-<link_to_service /> כדי לבקש אסימון API. אסימון זה מאפשר ל-WPML להתחבר ל-<service_name /> כדי לשלוח ולקבל משימות."
 
 #: src/js/translationServices/components/SearchForm.js:10
 msgid "Search translation services"
@@ -45,7 +45,7 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "כרגע לא ניתן לחבר שירות תרגום כאשר WPML מוגדר לתרגום האתר באופן אוטומטי. כדי להשתמש בשירות תרגום, שנה את מצב התרגום בדף <LinkToSettingsPage />."
+msgstr "לא ניתן כרגע לחבר שירות תרגום כאשר WPML מוגדר לתרגם את תוכן האתר שלך באופן אוטומטי. כדי להשתמש בשירות תרגום, אנא שנה את מצב התרגום שלך בדף <LinkToSettingsPage />."
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"
@@ -53,7 +53,7 @@ msgstr "תיעוד"
 
 #: src/js/translationServices/components/ServicesList.js:57
 msgid "Activate"
-msgstr "הפעל"
+msgstr "הפעלה"
 
 #: src/js/translationServices/components/ServicesList.js:69
 msgid "Name"

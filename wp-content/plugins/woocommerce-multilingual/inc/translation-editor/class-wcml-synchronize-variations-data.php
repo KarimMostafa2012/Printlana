@@ -287,11 +287,17 @@ class WCML_Synchronize_Variations_Data {
 		delete_transient( 'wc_product_children_' . $tr_product_id );
 		delete_transient( '_transient_wc_product_children_ids_' . $tr_product_id );
 
-		// This is independdent of variations translations
+		// This is independent of variations translations
 		// Might be managed in the higher level with variations prices and downloadable options.
 		$this->sync_prices_variation_ids( $product_id, $tr_product_id, $lang );
 
 		add_action( 'save_post', [ $wpml_post_translations, 'save_post_actions' ], 100, 2 );
+
+		foreach ( $current_variations as $current_post_variation ) {
+			if ( in_array( (int) $current_post_variation->ID, $translation_variations['update'], true ) ) {
+				wp_cache_delete( $current_post_variation->ID, 'post_meta' );
+			}
+		}
 	}
 
 	/**

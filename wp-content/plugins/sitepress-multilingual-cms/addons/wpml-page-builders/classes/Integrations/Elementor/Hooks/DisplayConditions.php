@@ -85,12 +85,12 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	 */
 	private function processDisplayConditions( $conditions ) {
 		return array_map(
-			function( $conditionJson ) {
-				$condition = $this->parseConditionJson( $conditionJson );
+			function ( $conditionJson ) {
+				$condition = $this->parseCondition( $conditionJson );
 
 				if ( null !== $condition ) {
-					  $condition     = $this->convertCondition( $condition );
-					  $conditionJson = wp_json_encode( $condition );
+					$condition     = $this->convertCondition( $condition );
+					$conditionJson = wp_json_encode( $condition );
 				}
 
 				return $conditionJson;
@@ -100,15 +100,24 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param string $conditionJson
+	 * @param mixed $condition
 	 *
 	 * @return array|null
 	 */
-	private function parseConditionJson( $conditionJson ) {
-		$condition = json_decode( $conditionJson, true );
-		if ( json_last_error() === JSON_ERROR_NONE && is_array( $condition ) ) {
+	private function parseCondition( $condition ) {
+		if ( is_array( $condition ) ) {
 			return $condition;
 		}
+
+		if ( ! is_string( $condition ) ) {
+			return null;
+		}
+
+		$decoded = json_decode( $condition, true );
+		if ( json_last_error() === JSON_ERROR_NONE && is_array( $decoded ) ) {
+			return $decoded;
+		}
+
 		return null;
 	}
 
@@ -119,7 +128,7 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	 */
 	private function convertCondition( $condition ) {
 		return array_map(
-			function( $conditionGroup ) {
+			function ( $conditionGroup ) {
 				return $this->convertConditionIds( $conditionGroup );
 			},
 			$condition
@@ -128,11 +137,11 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 
 	/**
 	 * @param array $conditionGroups
-	 * 
+	 *
 	 * @return array
 	 */
 	private function convertConditionIds( $conditionGroups ) {
-		$isSingleLegacyCondition = $conditionGroups && array_keys( $conditionGroups )[0] !== 0;
+		$isSingleLegacyCondition = $conditionGroups && 0 !== array_keys( $conditionGroups )[0];
 
 		$result = $isSingleLegacyCondition ? [ $conditionGroups ] : $conditionGroups;
 
@@ -150,12 +159,12 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	/**
 	 * @param array $conditionGroup
 	 * @param array $configForCondition
-	 * 
+	 *
 	 * @return array
 	 */
 	private function convertIdsForCondition( $conditionGroup, $configForCondition ) {
 		$conditionGroup[ $configForCondition['field'] ] = array_map(
-			function( $term ) use ( $configForCondition ) {
+			function ( $term ) use ( $configForCondition ) {
 				if ( 'term' === $configForCondition['type'] ) {
 					return $this->convertTermId( $term );
 				} else {
@@ -170,7 +179,7 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 
 	/**
 	 * @param string $condition
-	 * 
+	 *
 	 * @return array|null
 	 */
 	private function getConfigForCondition( $condition ) {
@@ -180,7 +189,7 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 
 	/**
 	 * @param array $term
-	 * 
+	 *
 	 * @return array
 	 */
 	private function convertTermId( $term ) {
@@ -199,7 +208,7 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 
 	/**
 	 * @param array $item
-	 * 
+	 *
 	 * @return array
 	 */
 	private function convertPostId( $item ) {
@@ -221,5 +230,4 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	private function convertId( $elementId, $elementType ) {
 		return apply_filters( 'wpml_object_id', $elementId, $elementType, true );
 	}
-
 }

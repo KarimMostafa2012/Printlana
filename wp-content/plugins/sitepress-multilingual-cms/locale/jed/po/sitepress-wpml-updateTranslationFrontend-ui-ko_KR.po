@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "번역을 적용하는 중입니다. 잠시만 기다려주세요."
+msgstr "잠시만 기다려 주세요. 번역을 적용하는 중입니다."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."

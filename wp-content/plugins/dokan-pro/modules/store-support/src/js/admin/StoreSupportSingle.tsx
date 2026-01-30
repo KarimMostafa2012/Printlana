@@ -589,7 +589,7 @@ const StoreSupportSingle = ( {
                                     </div>
 
                                     { /* Content */ }
-                                    <RawHTML className="text-gray-700 text-sm leading-relaxed">
+                                    <RawHTML className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
                                         { message.content }
                                     </RawHTML>
 

@@ -9,7 +9,7 @@ msgstr ""
 msgid ""
 "To display this Custom HTML block in a specific language, first place it "
 "inside a Group block."
-msgstr "Για να εμφανίσετε αυτό το μπλοκ Προσαρμοσμένης HTML σε συγκεκριμένη γλώσσα, τοποθετήστε το πρώτα μέσα σε ένα μπλοκ Ομάδας."
+msgstr "Για να εμφανίσετε αυτό το προσαρμοσμένο μπλοκ HTML σε μια συγκεκριμένη γλώσσα, τοποθετήστε το πρώτα μέσα σε ένα μπλοκ Ομάδας."
 
 #: src/js/widgets-language-switcher/LanguageSwitcher.js:126
 msgid "Place inside Group block"
@@ -21,4 +21,4 @@ msgstr "Όλα"
 
 #: src/js/widgets-language-switcher/LanguageSwitcher.js:56
 msgid "Display on language"
-msgstr "Προβολή σε γλώσσα"
+msgstr "Εμφάνιση ανά γλώσσα"

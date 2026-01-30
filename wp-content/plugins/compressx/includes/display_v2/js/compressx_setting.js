@@ -68,7 +68,8 @@ jQuery(document).ready(function ()
 
         var settings = {
             size_settings: {},
-            list_view_setting: {}
+            list_view_setting: {},
+            cache_control_setting: {}
         };
 
         jQuery('input[option="size_setting"]').each(function() {
@@ -83,6 +84,12 @@ jQuery(document).ready(function ()
             settings.list_view_setting[name] = checked ? '1' : '0';
         });
 
+        jQuery('input[option="cache_control_setting"]').each(function() {
+            var name = jQuery(this).attr('name');
+            var checked = jQuery(this).is(':checked');
+            settings.cache_control_setting[name] = checked ? '1' : '0';
+        });
+
         var select_folders = jQuery('#compressx_exclude_dir_node').find('.cx-remove-custom-exclude-tree');
         var json = {};
         jQuery.each(select_folders, function ()
@@ -94,6 +101,7 @@ jQuery(document).ready(function ()
 
         var exclude_node=JSON.stringify(json);
 
+        //
         var ajax_data = {
             'action': 'compressx_v2_save_settings',
             'settings': JSON.stringify(settings),

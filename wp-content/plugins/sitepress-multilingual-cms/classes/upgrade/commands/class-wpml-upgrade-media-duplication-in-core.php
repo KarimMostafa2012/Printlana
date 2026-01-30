@@ -40,11 +40,6 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 	 * @return bool
 	 */
 	public function run_admin() {
-		if ( $this->has_notice() ) {
-			$this->create_or_refresh_notice();
-			return false;
-		}
-
 		if ( $this->find_posts_altered_between_402_and_404() ) {
 			/**
 			 * The rest of the upgrade needs to run when all the custom post types are registered
@@ -58,6 +53,12 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 	}
 
 	public function deferred_upgrade_admin() {
+		// Admin notices should be checked on or after init.
+		if ( $this->has_notice() ) {
+			$this->create_or_refresh_notice();
+			return;
+		}
+
 		list( $is_complete ) = $this->process_upgrade();
 
 		if ( ! $is_complete ) { // We could not complete the upgrade in the same request

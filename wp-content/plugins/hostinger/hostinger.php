@@ -3,10 +3,10 @@
  * Plugin Name: Hostinger Tools
  * Plugin URI: https://hostinger.com
  * Description: Hostinger WordPress plugin.
- * Version: 3.0.56
+ * Version: 3.0.57
  * Requires at least: 5.5
  * Tested up to: 6.9
- * Requires PHP: 8.0
+ * Requires PHP: 8.1
  * Author: Hostinger
  * License: GPL v3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -25,7 +25,7 @@ use Hostinger\WpMenuManager\Manager;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'HOSTINGER_VERSION' ) ) {
-    define( 'HOSTINGER_VERSION', '3.0.56' );
+    define( 'HOSTINGER_VERSION', '3.0.57' );
 }
 
 if ( ! defined( 'HOSTINGER_ABSPATH' ) ) {

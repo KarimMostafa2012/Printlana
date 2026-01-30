@@ -120,6 +120,7 @@ class Page_Loader extends Base
             add_submenu_page( $this->main_slug, esc_html__( 'Min Max Bulk Edit', 'woo-min-max-quantity-step-control-single' ) . $proString,  __( 'Min Max Bulk Edit', 'woo-min-max-quantity-step-control-single' ), $capability, 'wcmmq-product-quick-edit', [$this, 'product_quick_edit'] );
         }
         
+        add_submenu_page( $this->main_slug, esc_html__( 'Browse Plugins', 'woo-min-max-quantity-step-control-single' ),  esc_html__( 'Browse Plugins', 'woo-min-max-quantity-step-control-single' ), $capability, 'wcmmq-browse-plugins', [$this, 'browse_plugins_html'] );
 
         //License Menu if pro version is getter or equal V2.0.8.4
         if( is_object( $this->license ) && version_compare($this->pro_version, '2.0.8.4', '>=')){
@@ -225,12 +226,43 @@ class Page_Loader extends Base
 
             wp_register_style( $this->plugin_prefix . '-new-admin', $this->base_url . 'assets/css/new-admin.css', false, $this->dev_version );
             wp_enqueue_style( $this->plugin_prefix . '-new-admin' );
-
+            $this->live_chat_script();
         }
         wp_register_style( $this->plugin_prefix . '-notice', $this->base_url . 'assets/css/notice.css', false, $this->dev_version );
         wp_enqueue_style( $this->plugin_prefix . '-notice' );
 
         
+    }
+
+
+    /**
+     * Adding live chat script in admin footer
+     *
+     * @return void
+     */
+    protected function live_chat_script()
+    {
+        /**
+         * how to disable live chat
+         * add_filter('wpt_live_chat_bool','__return_false');
+         */
+        $live_chat_bool = apply_filters( 'wpt_live_chat_bool', true );
+        if( ! $live_chat_bool ) return;
+        ?>
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/628f5d4f7b967b1179915ad7/1g4009033';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        <!--End of Tawk.to Script-->
+        <?php
     }
 
     /**
@@ -348,6 +380,15 @@ class Page_Loader extends Base
         printf( wp_kses_post( $full_message ), esc_html( $message ), esc_url( $link ), esc_html( $link_label ) );
     }
 
+    public function browse_plugins_html()
+    {
+        //In future, I will make it like min max plugin - which I already did
+        // add_filter( 'plugins_api_result', [$this, 'plugins_api_result'], 1, 3 );
+        $this->topbar_sub_title = __( 'Browse our Plugins','woo-product-table' );
+        include $this->topbar_file;
+        include $this->page_folder_dir . 'browse-plugins.php';
+    }
+
     /**
      * Displays an admin notice offering a discount for Woo Product Table Pro.
      *
@@ -363,7 +404,6 @@ class Page_Loader extends Base
     public function discount_notice()
     {
         return;
-        if( wcmmq_is_old_dir() ) return;
 
         if( $this->is_premium_installed ) return;
 
@@ -374,8 +414,8 @@ class Page_Loader extends Base
         if( ! $campaign_bool ) return;
 
         $logo = WC_MMQ_BASE_URL . 'assets/images/brand/social/min-max.png';
-        $link_label = __( 'Claim Your Coupon', 'woo-product-table' );
-        $link = wcmmq_fs()->checkout_url() . '&coupon=BIZZSPECIAL15';
+        $link_label = __( 'Claim Your Coupon', 'woo-min-max-quantity-step-control-single' );
+        $link = 'https://codeastrology.com/min-max-quantity/pricing/&discount=DISCOUNT';
         $plug_name = __( 'Min Max Control Pro', 'woo-min-max-quantity-step-control-single' );
 
         global $current_screen;
@@ -389,11 +429,11 @@ class Page_Loader extends Base
         
         ?>
         <div class="notice <?php echo esc_attr( $is_dissmissable_class ); ?> notice-warning updated wcmmq-discount-notice">
-            <div class="wpt-license-notice-inside">
-                <img src="<?php echo esc_url( $logo ); ?>" class="wpt-license-brand-logo">
+            <div class="wcmmq-license-notice-inside">
+                <img src="<?php echo esc_url( $logo ); ?>" class="wcmmq-license-brand-logo">
                 🎉 <span style="color: #d00;font-weight:bold;">Unlock 20% OFF</span> <strong><?php echo esc_html( $plug_name ); ?></strong> - Use your coupon at checkout (Limited time)
-                <a class="wpt-get-discount" href="<?php echo esc_url( $link ); ?>" target="_blank"><?php echo esc_html( $link_label ); ?></a>
-                <a class="wpt-get-free" href="https://profiles.wordpress.org/codersaiful/#content-plugins" target="_blank">Free plugins for you</a>
+                <a class="wcmmq-get-discount" href="<?php echo esc_url( $link ); ?>" target="_blank"><?php echo esc_html( $link_label ); ?></a>
+                <a class="wcmmq-get-free" href="https://profiles.wordpress.org/codersaiful/#content-plugins" target="_blank">Free plugins for you</a>
             </div>
         </div>
         <?php

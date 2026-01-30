@@ -26,8 +26,9 @@ class Taxonomies extends Synchronizer {
 	 * @param string $language
 	 */
 	private function runForTranslation( $productId, $translationId, $language ) {
-		$taxonomyExceptions = [ 'product_type', 'product_visibility' ];
-		$taxonomies          = $taxonomyExceptions;
+		$taxonomyExceptions = [ 'product_type', 'product_visibility' ]; // ?
+		$taxonomySyncEmpty  = [ \WCML_Terms::PRODUCT_SHIPPING_CLASS ];
+		$taxonomies         = $taxonomyExceptions;
 		if ( $this->sitepress->get_setting( 'sync_post_taxonomies' ) ) {
 			$taxonomies = get_object_taxonomies( 'product' );
 		}
@@ -40,6 +41,9 @@ class Taxonomies extends Synchronizer {
 		}
 		if ( ! is_wp_error( $allTerms ) ) {
 			foreach ( $taxonomies as $taxonomy ) {
+				if ( ! apply_filters( 'wpml_is_translated_taxonomy', false, $taxonomy ) ) {
+					$taxonomyExceptions[] = $taxonomy;
+				}
 				$ttIds   = [];
 				$ttNames = [];
 				$terms   = array_filter(
@@ -48,7 +52,7 @@ class Taxonomies extends Synchronizer {
 						return $term->taxonomy === $taxonomy;
 					}
 				);
-				if ( ! $terms ) {
+				if ( ! $terms && ! in_array( $taxonomy, $taxonomySyncEmpty, true ) ) {
 					continue;
 				}
 				foreach ( $terms as $term ) {
@@ -59,7 +63,7 @@ class Taxonomies extends Synchronizer {
 					$ttIds[] = $term->term_taxonomy_id;
 				}
 
-				if ( $this->woocommerceWpml->terms->is_translatable_wc_taxonomy( $taxonomy ) ) {
+				if ( $this->woocommerceWpml->terms->is_translatable_wc_taxonomy( $taxonomy ) && ! in_array( $taxonomy, $taxonomyExceptions, true ) ) {
 					$this->setTranslatedTerms( $ttIds, $language, $taxonomy, $translationId );
 				} else {
 					wp_set_post_terms( $translationId, $ttNames, $taxonomy );

@@ -39,6 +39,14 @@ Like the plugin? Leave a [review](https://wordpress.org/support/plugin/weight-ba
 
 == Changelog ==
 
+= 6.13.0 =
+* Improve the appearance of the Save, Undo, Redo buttons.
+* Move the settings icon into the table header.
+* Fix "from" field of the Weight/Value dropdown is not automatically focused.
+* Fix the replacement suggestion for zero-length ranges having fractional numbers in the Weight/Value dropdown.
+* Improve wording.
+* Other UI tweaks.
+
 = 6.12.1 =
 * Don't show the legacy global config tab by default for new installations.
 

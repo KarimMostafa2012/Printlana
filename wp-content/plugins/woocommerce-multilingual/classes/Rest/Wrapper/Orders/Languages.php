@@ -40,22 +40,32 @@ class Languages extends Handler {
 	 * @return \WP_REST_Response
 	 */
 	public function prepare( $response, $object, $request ) {
-		$language      = get_query_var( 'lang' );
+		$language = $request->get_param( 'lang' );
+		if ( empty( $language ) ) {
+			$language = apply_filters( 'wpml_default_language', null );
+		}
+
 		$orderLanguage = \WCML_Orders::getLanguage( $this->get_id( $object ) );
 
 		if ( $orderLanguage !== $language ) {
 			$lineItems = Obj::propOr( [], 'line_items', $response->data );
 			foreach ( $lineItems as $k => $item ) {
-				$translatedProductId = wpml_object_id_filter( $item['product_id'], 'product', false, $language );
+				$translatedProductId   = wpml_object_id_filter( $item['product_id'], 'product', false, $language );
+				$translatedVariationId = ( empty( $item['variation_id'] ) ) ? 0 : wpml_object_id_filter( $item['variation_id'], 'product_variation', false, $language );
+
 				if ( $translatedProductId ) {
-					$translatedProduct                                = get_post( $translatedProductId );
 					$response->data['line_items'][ $k ]['product_id'] = $translatedProductId;
-					if ( 'product_variation' === $translatedProduct->post_type ) {
-						$postParent = get_post( $translatedProduct->post_parent );
-						$postName   = $postParent->post_title;
-					} else {
-						$postName = $translatedProduct->post_title;
+
+					$translatedProduct = get_post( $translatedProductId );
+					$postName          = $translatedProduct->post_title;
+
+					if ( $translatedVariationId ) {
+						$response->data['line_items'][ $k ]['variation_id'] = $translatedVariationId;
+
+						$translatedVariation = get_post( $translatedVariationId );
+						$postName            = $translatedVariation->post_title;
 					}
+
 					$response->data['line_items'][ $k ]['name'] = $postName;
 				}
 			}

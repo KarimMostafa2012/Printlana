@@ -7,35 +7,35 @@ msgstr ""
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
-msgstr "Vorbereitung läuft..."
+msgstr "Wird vorbereitet..."
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:77
 msgid "All jobs have been cancelled"
-msgstr "Alle Aufträge wurden storniert."
+msgstr "Alle Aufträge wurden storniert"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:79
 msgid "There is no more jobs to cancel"
-msgstr "Keine Aufträge zum Stornieren"
+msgstr "Es gibt keine weiteren Aufträge zum Stornieren"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:82
 msgid "The jobs cancellation has failed"
-msgstr "Die Auftragsstornierung ist fehlgeschlagen."
+msgstr "Die Auftragsstornierung ist fehlgeschlagen"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
 msgid "Cancel in-progress automatic jobs"
-msgstr "In Bearbeitung befindliche automatische Aufträge abbrechen"
+msgstr "Laufende automatische Aufträge stornieren"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
 msgid "Domain name has been updated"
-msgstr "Domainname aktualisiert"
+msgstr "Domainname wurde aktualisiert"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
 msgid "Domain name update has been failed"
-msgstr "Domainname nicht aktualisiert"
+msgstr "Aktualisierung des Domainnamens ist fehlgeschlagen"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
 msgid "Update domain name in language switcher settings"
-msgstr "Aktualisieren Sie den Domainnamen in den Einstellungen des Sprachumschalters."
+msgstr "Domainnamen in den Einstellungen des Sprachumschalters aktualisieren"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:7
 msgid "Disclaimer: MySQL Disk Space"
@@ -47,7 +47,7 @@ msgid ""
 "tables reduces its data size, but does not automatically free up disk space "
 "in MySQL. To reclaim disk space, a table rebuild is required—a risky "
 "operation not performed automatically by this tool."
-msgstr "Die Bereinigung und Komprimierung der Tabellen wp_icl_translate und wp_icl_translation_status reduziert deren Datengröße, gibt aber nicht automatisch Speicherplatz in MySQL frei. Um Speicherplatz zurückzugewinnen, ist ein Tabellen-Rebuild erforderlich – ein riskanter Vorgang, der von diesem Tool nicht automatisch durchgeführt wird."
+msgstr "Das Bereinigen und Komprimieren der Tabellen wp_icl_translate und wp_icl_translation_status reduziert deren Datengröße, gibt aber nicht automatisch Speicherplatz in MySQL frei. Um Speicherplatz zurückzugewinnen, ist ein Tabellen-Rebuild erforderlich – ein riskanter Vorgang, der von diesem Tool nicht automatisch durchgeführt wird."
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:38
 msgid "Optimize translation tables"
@@ -59,7 +59,7 @@ msgstr "Migration des vorherigen Zustands"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:58
 msgid "Translation Elements Migration"
-msgstr "Migration der Übersetzungselemente"
+msgstr "Migration von Übersetzungselementen"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:64
 msgid "Processed"
@@ -71,11 +71,11 @@ msgstr "Fehler"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:82
 msgid "Success"
-msgstr "Erfolgreich"
+msgstr "Erfolg"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:83
 msgid "Database tables optimization completed successfully."
-msgstr "Die Optimierung der Datenbanktabellen wurde erfolgreich abgeschlossen."
+msgstr "Optimierung der Datenbanktabellen erfolgreich abgeschlossen."
 
 #: src/js/troubleshooting/optimizeDbTables/components/ResourceWarningAlert.js:7
 msgid "Warning"
@@ -86,7 +86,7 @@ msgid ""
 "This process is resource-intensive and may take a significant amount of "
 "time. It is recommended to run this optimization during periods of low "
 "traffic."
-msgstr "Dieser Prozess ist ressourcenintensiv und kann erhebliche Zeit in Anspruch nehmen. Es wird empfohlen, diese Optimierung während Zeiten mit geringem Datenverkehr durchzuführen."
+msgstr "Dieser Prozess ist ressourcenintensiv und kann eine erhebliche Zeit in Anspruch nehmen. Es wird empfohlen, diese Optimierung in Zeiten geringen Datenverkehrs durchzuführen."
 
 #: src/js/troubleshooting/optimizeDbTables/index.js:16
 msgid "Database Tables Optimization"
@@ -94,48 +94,48 @@ msgstr "Optimierung der Datenbanktabellen"
 
 #: src/js/troubleshooting/refreshLicense/RefreshLicense.js:14
 msgid "Refresh license data to recognise license update"
-msgstr "Laden Sie die Lizenzdaten neu, um die Lizenzaktualisierung zu bestätigen."
+msgstr "Lizenzdaten aktualisieren, um Lizenzaktualisierung zu erkennen"
 
 #: src/js/troubleshooting/refreshLicense/useRefreshLicense.js:36
 msgid "WPML License has been refreshed"
-msgstr "WPML-Lizenz aktualisiert"
+msgstr "WPML-Lizenz wurde aktualisiert"
 
 #: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:11
 msgid "Translate Everything Automatically is not active."
-msgstr "Automatisches Übersetzen von allem ist nicht aktiv."
+msgstr "Alles automatisch übersetzen ist nicht aktiv."
 
 #: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
-msgstr "Fehlgeschlagene automatische Übersetzungen erneut versuchen"
+msgstr "Hängengebliebene automatische Übersetzungen erneut versuchen"
 
 #: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
-msgstr "Sendet Übersetzungsaufträge erneut, die aufgrund eines vorübergehenden Problems nicht verarbeitet werden konnten, während Automatisches Übersetzen von allem aktiv war."
+msgstr "Sendet Übersetzungsaufträge erneut, die aufgrund eines temporären Problems nicht verarbeitet werden konnten, während „Alles automatisch übersetzen“ aktiv war."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:10
 msgid "Checking for stuck translation jobs..."
-msgstr "Suche nach fehlgeschlagenen Übersetzungsaufträgen..."
+msgstr "Suche nach hängengebliebenen Übersetzungsaufträgen..."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:13
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
-msgstr[0] "Verarbeitung... Bisher %s fehlgeschlagene Übersetzung gefunden"
-msgstr[1] "Verarbeitung... Bisher %s fehlgeschlagene Übersetzungen gefunden"
+msgstr[0] "Verarbeitung... Bisher %s hängengebliebene Übersetzung gefunden"
+msgstr[1] "Verarbeitung... Bisher %s hängengebliebene Übersetzungen gefunden"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
 "Something went wrong while checking for stuck translation jobs. Please "
 "<a>contact WPML support</a>."
-msgstr "Bei der Suche nach fehlgeschlagenen Übersetzungsaufträgen ist etwas schiefgegangen. Bitte <a>kontaktiere den WPML-Support</a>."
+msgstr "Beim Überprüfen auf hängengebliebene Übersetzungsaufträge ist ein Fehler aufgetreten. Bitte <a>kontaktieren Sie den WPML-Support</a>."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:37
 msgid "No stuck translation jobs found."
-msgstr "Keine fehlgeschlagenen Übersetzungsaufträge gefunden."
+msgstr "Keine hängengebliebenen Übersetzungsaufträge gefunden."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "%s fehlgeschlagener Übersetzungsauftrag gefunden. WPML wird diesen automatisch im Hintergrund übersetzen.\nDu kannst den Fortschritt im Übersetzungs-Dashboard überprüfen."
-msgstr[1] "%s fehlgeschlagene Übersetzungsaufträge gefunden. WPML wird diese automatisch im Hintergrund übersetzen.\nDu kannst den Fortschritt im Übersetzungs-Dashboard überprüfen."
+msgstr[0] "Es wurde %s hängengebliebener Übersetzungsauftrag gefunden. WPML übersetzt ihn automatisch im Hintergrund.\nSie können den Fortschritt im Übersetzungs-Dashboard überprüfen."
+msgstr[1] "Es wurden %s hängengebliebene Übersetzungsaufträge gefunden. WPML übersetzt sie automatisch im Hintergrund.\nSie können den Fortschritt im Übersetzungs-Dashboard überprüfen."

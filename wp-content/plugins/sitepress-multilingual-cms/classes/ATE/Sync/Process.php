@@ -14,7 +14,9 @@ use WPML_TM_ATE_API;
 use WPML_TM_ATE_Job_Repository;
 use WPML\TM\ATE\Log\Storage;
 use WPML\TM\ATE\Log\Entry;
+use WPML\Translation\TranslateJobErrorServiceFactory;
 use function WPML\FP\pipe;
+use WPML\TM\Jobs\JobLog;
 
 class Process {
 
@@ -40,7 +42,22 @@ class Process {
 		$result          = new Result();
 
 		if ( $args->page ) {
+			JobLog::maybeInitRequest();
+			JobLog::createNewGroup(
+				JobLog::GROUP_ID_SYNC_JOBS,
+				'Sending jobs to sync - run sync on pages',
+				[
+					'args' => get_object_vars( $args ),
+				]
+			);
 			$result = $this->runSyncOnPages( $result, $args );
+			JobLog::add(
+				'Sync result',
+				[
+					'result' => get_object_vars( $result ),
+				]
+			);
+			JobLog::finishCurrentGroup();
 		} else {
 			$includeManualAndLongstandingJobs  = (bool) Obj::propOr( true , 'includeManualAndLongstandingJobs', $args);
 			$result = $this->runSyncInit( $result, $includeManualAndLongstandingJobs );
@@ -65,7 +82,7 @@ class Process {
 		$result->jobs = $this->handleJobs( $jobs );
 
 		if ( !$result->jobs ){
-			Storage::add( Entry::createForType(
+			$log = Entry::createForType(
 				EventsTypes::JOBS_SYNC,
 				[
 					'numberOfPages'     => $args->numberOfPages,
@@ -73,7 +90,18 @@ class Process {
 					'downloadQueueSize' => $result->downloadQueueSize,
 					'nextPage'          => $result->nextPage,
 				]
-			) );
+			);
+
+			JobLog::add(
+				'No jobs in sync results',
+				$log
+			);
+			Storage::add( $log );
+		}
+
+		if ( isset( $data->eta ) && ( ! isset( $data->eta->available ) || false !== $data->eta->available ) ) {
+			$result->eta            = $data->eta;
+			$result->eta->available = true;
 		}
 
 		if ( $args->numberOfPages > $args->page ) {
@@ -99,17 +127,39 @@ class Process {
 
 
 		if ( $ateJobIds ) {
+			JobLog::maybeInitRequest();
+			JobLog::createNewGroup(
+				JobLog::GROUP_ID_SYNC_JOBS,
+				'Sending jobs to sync - sync init',
+				[
+					'ateJobIds'                        => $ateJobIds,
+					'includeManualAndLongstandingJobs' => $includeManualAndLongstandingJobs,
+				]
+			);
 			$this->ateRepository->increment_ate_sync_count( $ateJobIds );
 			$data = $this->api->sync_all( $ateJobIds );
 
 			$jobs         = Obj::propOr( [], 'items', $data );
 			$result->jobs = $this->handleJobs( $jobs );
 
+			if ( isset( $data->eta ) && ( ! isset( $data->eta->available ) || false !== $data->eta->available ) ) {
+				$result->eta            = $data->eta;
+				$result->eta->available = true;
+			}
+
 			if ( isset( $data->next->pagination_token, $data->next->pages_number ) ) {
 				$result->ateToken      = $data->next->pagination_token;
 				$result->numberOfPages = $data->next->pages_number;
 				$result->nextPage      = 1; // We start pagination at 1 to avoid carrying a falsy value.
 			}
+
+			JobLog::add(
+				'Sync results',
+				[
+					'result' => get_object_vars( $result ),
+				]
+			);
+			JobLog::finishCurrentGroup();
 		}
 
 		return $result;
@@ -132,32 +182,32 @@ class Process {
 	 * @return Job[] $items
 	 */
 	private function handleJobs( array $items ) {
-		$setStatus = function ( $status ) {
-			return pipe(
-				Fns::tap( Jobs::setStatus( Fns::__, $status ) ),
-				Obj::assoc('status', $status)
-			);
-		};
-
-		$updateStatus = Logic::cond( [
-			[
-				Relation::propEq( 'status', \WPML_TM_ATE_API::CANCELLED_STATUS ),
-				$setStatus( ICL_TM_NOT_TRANSLATED ),
-			],
-			[
-				Relation::propEq( 'status', \WPML_TM_ATE_API::SHOULD_HIDE_STATUS ),
-				$setStatus( ICL_TM_ATE_CANCELLED ),
-			],
-			[
-				Fns::always( true ),
-				Fns::identity(),
-			]
-		] );
-
 		return wpml_collect( $items )
 			->map( [ Job::class, 'fromAteResponse' ] )
 			->map( Obj::over( Obj::lensProp( 'jobId' ), Map::fromRid() ) ) // wpmlJobId returned by ATE endpoint represents RID column in wp_icl_translation_status
-			->map( $updateStatus )
+			->each( function( $job ) {
+				if ( $job->isUnsolvable ) {
+					$this->logUnsolvableJob( $job );
+				}
+			} )
 			->toArray();
+	}
+
+	/**
+	 * Log unsolvable job error to the database.
+	 *
+	 * @param Job $job
+	 *
+	 * @return void
+	 */
+	private function logUnsolvableJob( $job ) {
+		$service = TranslateJobErrorServiceFactory::create();
+		$service->logError(
+			$job->jobId,
+			$job->ateJobId,
+			'SyncError',
+			$job->message ?: 'Job marked as unsolvable by ATE',
+			[ 'ateStatus' => $job->ateStatus ]
+		);
 	}
 }

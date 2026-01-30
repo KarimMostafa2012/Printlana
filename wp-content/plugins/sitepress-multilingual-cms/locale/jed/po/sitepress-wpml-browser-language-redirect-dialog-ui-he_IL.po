@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "כיצד ניתוב מחדש של שפת הדפדפן משפיע על יצירת האינדקסים של Google"
+msgstr "כיצד הפניית שפת הדפדפן משפיעה על אינדוקס גוגל"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
@@ -15,7 +15,7 @@ msgstr "תיעוד"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "ניתוב מחדש משפיע על יצירת האינדקסים של Google ועל תוצאות החיפוש"
+msgstr "הפניית דפדפן משפיעה על אינדוקס גוגל ועל תוצאות החיפוש"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
@@ -30,14 +30,14 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "כאשר אתה מנתב אורחים מחדש בהתאם לשפה שלהם, אתה גם מנתב מחדש את Google. Google רוצה לראות את האתר שלך בדיוק כפי שאורחים רואים אותו, כולל כל ניתוב מחדש שאתה מחיל."
+msgstr "כאשר אתה מפנה מבקרים על בסיס השפה שלהם, אתה מפנה גם את גוגל. גוגל רוצה לראות את האתר שלך בדיוק כפי שהמבקרים רואים אותו, כולל כל ההפניות שאתה מיישם."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "זה בסדר לנתב מחדש אורחים על בסיס השפה שלהם, אבל עליך להבין שזה משפיע על SEO."
+msgstr "מותר להפנות מבקרים על בסיס השפה שלהם, אך עליך להבין שתכונה זו משפיעה על SEO."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"
-msgstr "לפני שתמשיך, אנו ממליצים שתקרא שני עמודים אלו:"
+msgstr "לפני שתמשיך, אנו ממליצים לקרוא את שני הדפים הבאים:"

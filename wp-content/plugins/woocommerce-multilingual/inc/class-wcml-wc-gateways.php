@@ -48,6 +48,7 @@ class WCML_WC_Gateways {
 	public function on_init_hooks() {
 		add_filter( 'woocommerce_gateway_title', [ $this, 'translate_gateway_title' ], 10, 2 );
 		add_filter( 'woocommerce_gateway_description', [ $this, 'translate_gateway_description' ], 10, 2 );
+		add_filter( 'woocommerce_paypal_payments_gateway_description', [ $this, 'translate_paypal_payments_gateway_description' ], 10, 2 );
 
 		if ( WcAdminPages::isPaymentSettings() ) {
 			$this->load_bacs_gateway_currency_selector_hooks();
@@ -135,6 +136,24 @@ class WCML_WC_Gateways {
 
 	public function translate_gateway_title( $title, $gateway_id ) {
 		return $this->get_translated_gateway_string( $title, $gateway_id, 'title' );
+	}
+
+	/**
+	 * @since WooCommerce PayPal Payments 3.3.0
+	 *
+	 * @param string $description Gateway description (already sanitized with wp_kses_post).
+	 * @param object $gateway     Gateway instance.
+	 * @see \WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway
+	 *
+	 * @return string
+	 */
+	public function translate_paypal_payments_gateway_description( $description, $gateway ) {
+		$id = \WPML\FP\Obj::prop( 'id', $gateway );
+		if ( is_null( $id ) ) {
+			return $description;
+		}
+
+		return $this->translate_gateway_description( $description, $id );
 	}
 
 	public function translate_gateway_description( $description, $gateway_id ) {

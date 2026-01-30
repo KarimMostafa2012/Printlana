@@ -8,13 +8,13 @@
             "lang": "pl_PL"
          },
          "Please wait, applying translation..": [
-            "Proszę czekać, trwa zastosowanie tłumaczenia..."
+            "Proszę czekać, trwa stosowanie tłumaczenia..."
          ],
          "There was an error in applying translation.": [
             "Wystąpił błąd podczas stosowania tłumaczenia."
          ],
          "Someone is already reviewing this translation. Please try again later.": [
-            "Ktoś już sprawdza to tłumaczenie. Spróbuj ponownie później."
+            "Ktoś już przegląda to tłumaczenie. Spróbuj ponownie później."
          ]
       }
    }

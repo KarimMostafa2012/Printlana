@@ -27,7 +27,7 @@ class Groups {
 			return $elements;
 		}
 
-		$flattenGroup = function( $element ) use ( $groups ) {
+		$flattenGroup = function ( $element ) use ( $groups ) {
 			if ( ! isset( $element['extradata'] ) ) {
 				return $element;
 			}
@@ -138,7 +138,7 @@ class Groups {
 	 *
 	 * @return string[]
 	 */
-	private static function getBlockGroup( string $groupIds ) : array {
+	private static function getBlockGroup( string $groupIds ): array {
 		$blockId = null;
 
 		if ( preg_match( '/block-\d+/', $groupIds, $matches ) ) {
@@ -210,12 +210,12 @@ class Groups {
 	}
 
 	/**
-	 * @param string $string
+	 * @param string $groupLabel
 	 *
 	 * @return array{string[], string}
 	 */
-	public static function parseGroupLabel( $string ) {
-		list( $groups, $title ) = explode( self::LABEL_SEPARATOR, $string, 2 );
+	public static function parseGroupLabel( $groupLabel ) {
+		list( $groups, $title ) = explode( self::LABEL_SEPARATOR, $groupLabel, 2 );
 
 		return [
 			explode( self::PATH_SEPARATOR, $groups ),
@@ -225,14 +225,13 @@ class Groups {
 
 	/**
 	 * @param string $groupLabel
-	 * @param string $imageId
+	 * @param int    $imageId
 	 *
 	 * @return string
 	 */
 	public static function appendImageIdToGroupLabel( $groupLabel, $imageId ) {
 		list( $group, $title ) = explode( self::LABEL_SEPARATOR, $groupLabel, 2 );
 
-		return $group . '-' . $imageId . self::LABEL_SEPARATOR . $title;
+		return $group . '-' . (string) $imageId . self::LABEL_SEPARATOR . $title;
 	}
-
 }

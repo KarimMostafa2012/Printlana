@@ -68,7 +68,7 @@ class ATEDetailedErrorMessage {
 	 */
 	private static function hasValidExplainedMessage( $errorDetails ) {
 		$hasExplainedMessage = pipe(
-			Obj::path( [ 'error_data', 0, 'explained_message' ] ),
+			Obj::pathOr( '', [ 'error_data', 0, 'explained_message' ] ),
 			Str::len(),
 			Cast::toBool()
 		);

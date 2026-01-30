@@ -91,6 +91,9 @@ class Render {
 		if ( $linkQuery->length > 0 ) {
 			$link = $linkQuery->item( $linkQuery->length - 1 );
 			$link->setAttribute( 'href', $languageItem->getUrl() );
+			/* translators: %s: language name */
+			$ariaLabel = sprintf( __( 'Switch to %s', 'sitepress' ), $languageItem->getNativeName() );
+			$link->setAttribute( 'aria-label', $ariaLabel );
 			$textTarget = $link;
 		}
 

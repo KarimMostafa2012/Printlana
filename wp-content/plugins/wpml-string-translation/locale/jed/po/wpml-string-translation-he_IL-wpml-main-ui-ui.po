@@ -2,12 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: he\n"
+"Language: he_IL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/main-ui/components/Actions.js:46
 msgid "Edit"
-msgstr "לַעֲרוֹך"
+msgstr "עריכה"
 
 #: src/js/main-ui/components/Actions.js:57
 msgid "Shift+Tab"
@@ -15,7 +15,7 @@ msgstr "Shift+Tab"
 
 #: src/js/main-ui/components/Actions.js:62
 msgid "Tab"
-msgstr "כרטיסייה"
+msgstr "Tab"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
@@ -23,7 +23,7 @@ msgstr "תרגום ל:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
-msgstr "העתק מהמקור"
+msgstr "העתקה מהמקור"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
@@ -31,19 +31,19 @@ msgstr "השתמש ב-Shift+Enter כדי להוסיף שורה חדשה."
 
 #: src/js/main-ui/components/EditTranslationPopup.js:97
 msgid "Original:"
-msgstr "מְקוֹרִי:"
+msgstr "מקור:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "לְהוֹסִיף %s תִרגוּם"
+msgstr "הוסף תרגום %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
-msgstr "לַעֲרוֹך %s תִרגוּם"
+msgstr "ערוך תרגום %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "לְהוֹסִיף%s תרגום (המחרוזת מופיעה באתר ואינה מתורגמת)"
+msgstr "הוסף תרגום %s (המחרוזת מופיעה באתר ואינה מתורגמת)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
@@ -51,15 +51,15 @@ msgstr "שפת מקור %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "מחכה למתרגם ל %s"
+msgstr "ממתין למתרגם ל-%s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
-msgstr "מתבצע תרגום ל %s"
+msgstr "תרגום מתבצע ל-%s"
 
 #: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
-msgstr "בסל לתרגום ל %s"
+msgstr "בסל לתרגום ל-%s"
 
 #: src/js/main-ui/components/notification.js:13
 msgid "Translation saved."

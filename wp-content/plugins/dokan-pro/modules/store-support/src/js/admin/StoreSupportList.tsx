@@ -338,8 +338,11 @@ const StoreSupportList = ( {
                 10
             );
 
+            if ( activeTab === 'open' ) setTotalItems( openCount );
+            else if ( activeTab === 'closed' ) setTotalItems( closedCount );
+            else setTotalItems( total );
+
             setTickets( data );
-            setTotalItems( total );
             setTabCounts( {
                 all: allCount,
                 open: openCount,

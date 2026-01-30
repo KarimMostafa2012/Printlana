@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.32.0 - 16-09-2025 */
+/*! elementor-pro - v3.34.0 - 29-01-2026 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -1692,9 +1692,7 @@ const htmlDecodeTextContent = input => {
   return doc.documentElement.textContent;
 };
 exports.htmlDecodeTextContent = htmlDecodeTextContent;
-const replaceUtmPlaceholders = function () {
-  let link = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let utms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+const replaceUtmPlaceholders = (link = '', utms = {}) => {
   if (!link || !utms) {
     return link;
   }
@@ -1722,7 +1720,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.ListSettingSection = ListSettingSection;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
@@ -1731,17 +1728,16 @@ var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const DEFAULT_VISIBLE_ITEMS_COUNT = 16;
-function ListSettingSection(_ref) {
-  let {
-    items,
-    title,
-    loading,
-    settings,
-    onSettingChange,
-    settingKey,
-    disabled = false,
-    tooltip = false
-  } = _ref;
+function ListSettingSection({
+  items,
+  title,
+  loading,
+  settings,
+  onSettingChange,
+  settingKey,
+  disabled = false,
+  tooltip = false
+}) {
   const [showMore, setShowMore] = (0, _react.useState)(false);
   return /*#__PURE__*/_react.default.createElement(_ui.Box, {
     key: settingKey,
@@ -1795,12 +1791,9 @@ function ListSettingSection(_ref) {
       indeterminate: settings.length > 0 && settings.length !== items.length,
       onChange: (e, checked) => {
         if (checked) {
-          onSettingChange(items.map(_ref2 => {
-            let {
-              value
-            } = _ref2;
-            return value;
-          }), true);
+          onSettingChange(items.map(({
+            value
+          }) => value), true);
         } else {
           onSettingChange([], true);
         }
@@ -1933,19 +1926,18 @@ var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ ".
 var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-const SettingSection = _ref => {
-  let {
-    checked = false,
-    title,
-    description,
-    children,
-    settingKey,
-    onSettingChange,
-    hasToggle = true,
-    disabled = false,
-    notExported = false,
-    tooltip = false
-  } = _ref;
+const SettingSection = ({
+  checked = false,
+  title,
+  description,
+  children,
+  settingKey,
+  onSettingChange,
+  hasToggle = true,
+  disabled = false,
+  notExported = false,
+  tooltip = false
+}) => {
   const getToggle = () => {
     if (notExported) {
       return /*#__PURE__*/_react.default.createElement(_ui.Typography, {
@@ -2042,16 +2034,15 @@ var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ ".
 var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-const SubSetting = _ref => {
-  let {
-    label,
-    settingKey,
-    onSettingChange,
-    checked = false,
-    disabled = false,
-    notExported = false,
-    tooltip = false
-  } = _ref;
+const SubSetting = ({
+  label,
+  settingKey,
+  onSettingChange,
+  checked = false,
+  disabled = false,
+  notExported = false,
+  tooltip = false
+}) => {
   const getToggle = () => {
     if (notExported) {
       return /*#__PURE__*/_react.default.createElement(_ui.Typography, {
@@ -2121,7 +2112,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.KitContentCustomizationDialog = KitContentCustomizationDialog;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -2135,18 +2125,50 @@ var _useKitCustomizationTaxonomies = __webpack_require__(/*! ../hooks/use-kit-cu
 var _useKitCustomizationCustomPostTypes = __webpack_require__(/*! ../hooks/use-kit-customization-custom-post-types */ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-custom-post-types.js");
 var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
 var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function KitContentCustomizationDialog(_ref) {
-  let {
-    open,
-    handleClose,
-    handleSaveChanges,
-    data,
-    isImport,
-    isOldExport,
-    isOldElementorVersion
-  } = _ref;
+const MEDIA_FORMAT_OPTIONS = {
+  LINK: 'link',
+  CLOUD: 'cloud'
+};
+const MEDIA_FORMAT_CONFIG = [{
+  value: MEDIA_FORMAT_OPTIONS.LINK,
+  title: (0, _i18n.__)('Link to media', 'elementor-pro'),
+  description: (0, _i18n.__)('Stores only the URLs. The export stays light, but files load only while the original site is online.', 'elementor-pro')
+}, {
+  value: MEDIA_FORMAT_OPTIONS.CLOUD,
+  title: (0, _i18n.__)('Save media to the cloud', 'elementor-pro'),
+  description: (0, _i18n.__)('All images and files are stored with the template. Keeps everything intact, but the file is larger.', 'elementor-pro')
+}];
+const transformAnalyticsData = (payload, pageOptions, taxonomyOptions, customPostTypes) => {
+  const optionsArray = [{
+    key: 'pages',
+    options: pageOptions
+  }, {
+    key: 'taxonomies',
+    options: taxonomyOptions
+  }, {
+    key: 'customPostTypes',
+    options: customPostTypes
+  }];
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, optionsArray);
+  }
+  return transformed;
+};
+function KitContentCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion,
+  isCloudKitsEligible = false,
+  showMediaFormatValidation = false
+}) {
   const initialState = data.includes.includes('content');
   const {
     isLoading: isPagesLoading,
@@ -2169,7 +2191,8 @@ function KitContentCustomizationDialog(_ref) {
   } = (0, _useKitCustomizationCustomPostTypes.useKitCustomizationCustomPostTypes)({
     data
   });
-  const unselectedValues = (0, _react.useRef)(data.analytics?.customization?.content || []);
+  const alertRef = (0, _react.useRef)(null);
+  const mediaFormatSectionRef = (0, _react.useRef)(null);
   const [settings, setSettings] = (0, _react.useState)(() => {
     if (data.customization.content) {
       return data.customization.content;
@@ -2178,7 +2201,8 @@ function KitContentCustomizationDialog(_ref) {
       pages: [],
       menus: initialState,
       taxonomies: [],
-      customPostTypes: []
+      customPostTypes: [],
+      mediaFormat: MEDIA_FORMAT_OPTIONS.LINK
     };
   });
   (0, _react.useEffect)(() => {
@@ -2189,7 +2213,8 @@ function KitContentCustomizationDialog(_ref) {
       pages: [],
       menus: false,
       taxonomies: [],
-      customPostTypes: []
+      customPostTypes: [],
+      mediaFormat: MEDIA_FORMAT_OPTIONS.LINK
     });
   }, [open, data.includes]);
   (0, _react.useEffect)(() => {
@@ -2198,12 +2223,9 @@ function KitContentCustomizationDialog(_ref) {
     }
     setSettings(prevSettings => ({
       ...prevSettings,
-      pages: isPagesLoaded || isImport ? data.customization.content?.pages || pageOptions.map(_ref2 => {
-        let {
-          value
-        } = _ref2;
-        return value;
-      }) : prevSettings.pages
+      pages: isPagesLoaded || isImport ? data.customization.content?.pages || pageOptions.map(({
+        value
+      }) => value) : prevSettings.pages
     }));
   }, [open, data.includes, data.customization.content?.pages, isPagesLoaded, isImport, pageOptions]);
   (0, _react.useEffect)(() => {
@@ -2212,12 +2234,9 @@ function KitContentCustomizationDialog(_ref) {
     }
     setSettings(prevSettings => ({
       ...prevSettings,
-      taxonomies: isTaxonomiesLoaded || isImport ? data.customization.content?.taxonomies || taxonomyOptions.map(_ref3 => {
-        let {
-          value
-        } = _ref3;
-        return value;
-      }) : prevSettings.taxonomies
+      taxonomies: isTaxonomiesLoaded || isImport ? data.customization.content?.taxonomies || taxonomyOptions.map(({
+        value
+      }) => value) : prevSettings.taxonomies
     }));
   }, [open, data.includes, data.customization.content?.taxonomies, isTaxonomiesLoaded, isImport, taxonomyOptions]);
   (0, _react.useEffect)(() => {
@@ -2226,12 +2245,9 @@ function KitContentCustomizationDialog(_ref) {
     }
     setSettings(prevSettings => ({
       ...prevSettings,
-      customPostTypes: customPostTypes ? data.customization.content?.customPostTypes || customPostTypes.map(_ref4 => {
-        let {
-          value
-        } = _ref4;
-        return value;
-      }) : prevSettings.customPostTypes
+      customPostTypes: customPostTypes ? data.customization.content?.customPostTypes || customPostTypes.map(({
+        value
+      }) => value) : prevSettings.customPostTypes
     }));
   }, [open, data.includes, data.customization.content?.customPostTypes, customPostTypes]);
   (0, _react.useEffect)(() => {
@@ -2244,10 +2260,32 @@ function KitContentCustomizationDialog(_ref) {
     }));
   }, [open, data.includes, data.customization.content?.menus, data.uploadedData?.manifest, isImport]);
   (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      mediaFormat: data.customization.content?.mediaFormat || MEDIA_FORMAT_OPTIONS.LINK
+    }));
+  }, [open, data.includes, data.customization.content?.mediaFormat]);
+  (0, _react.useEffect)(() => {
     if (open) {
       window.elementorModules?.appsEventTracking?.AppsEventTracking?.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitExportCustomizationEdit);
     }
   }, [open]);
+  (0, _react.useEffect)(() => {
+    if (showMediaFormatValidation) {
+      setTimeout(() => {
+        const targetElement = alertRef.current || mediaFormatSectionRef.current;
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      });
+    }
+  }, [showMediaFormatValidation]);
   const handleSettingsChange = (settingKey, payload) => {
     setSettings(prev => ({
       ...prev,
@@ -2275,15 +2313,13 @@ function KitContentCustomizationDialog(_ref) {
       return null;
     }
     return isImport && !isPagesExported() ? /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
-      title: (0, _i18n.__)('Site pages', 'elementor'),
+      title: (0, _i18n.__)('Site pages', 'elementor-pro'),
       settingKey: "pages",
       notExported: true
     }) : /*#__PURE__*/_react.default.createElement(_customizationListSettingSection.ListSettingSection, {
       settingKey: "pages",
-      title: (0, _i18n.__)('Site pages', 'elementor'),
+      title: (0, _i18n.__)('Site pages', 'elementor-pro'),
       onSettingChange: selectedPages => {
-        const isAllselected = selectedPages.length === pageOptions.length;
-        unselectedValues.current = isAllselected ? unselectedValues.current = unselectedValues.current.filter(val => 'pages' !== val) : [...unselectedValues.current, 'pages'];
         handleSettingsChange('pages', selectedPages);
       },
       settings: settings.pages,
@@ -2300,22 +2336,139 @@ function KitContentCustomizationDialog(_ref) {
     return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
       checked: settings.menus,
       disabled: isImport && !isMenusExported() || !(0, _useTier.isHighTier)(),
-      title: (0, _i18n.__)('Menus', 'elementor'),
+      title: (0, _i18n.__)('Menus', 'elementor-pro'),
       settingKey: "menus",
       tooltip: !(0, _useTier.isHighTier)(),
       onSettingChange: (key, isChecked) => {
-        unselectedValues.current = isChecked ? unselectedValues.current.filter(value => value !== key) : [...unselectedValues.current, key];
         handleSettingsChange(key, isChecked);
       }
     });
+  };
+  const renderMediaFormatSection = () => {
+    if (isImport) {
+      return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+        title: (0, _i18n.__)('Media format', 'elementor-pro'),
+        settingKey: "mediaFormat",
+        hasToggle: false
+      }, /*#__PURE__*/_react.default.createElement(_ui.Alert, {
+        icon: /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, {
+          color: "info",
+          viewBox: "0 0 24 24"
+        }, /*#__PURE__*/_react.default.createElement("path", {
+          d: "M11.8623 14.7549C12.3665 14.8061 12.7598 15.2322 12.7598 15.75C12.7598 16.2678 12.3665 16.6939 11.8623 16.7451L11.7598 16.75H11.75C11.1977 16.75 10.75 16.3023 10.75 15.75C10.75 15.1977 11.1977 14.75 11.75 14.75H11.7598L11.8623 14.7549Z",
+          fill: "currentColor"
+        }), /*#__PURE__*/_react.default.createElement("path", {
+          d: "M11.75 7C12.1642 7 12.5 7.33579 12.5 7.75V12.75C12.5 13.1642 12.1642 13.5 11.75 13.5C11.3358 13.5 11 13.1642 11 12.75V7.75C11 7.33579 11.3358 7 11.75 7Z",
+          fill: "currentColor"
+        }), /*#__PURE__*/_react.default.createElement("path", {
+          fillRule: "evenodd",
+          clipRule: "evenodd",
+          d: "M11.75 2C17.1348 2 21.5 6.36522 21.5 11.75C21.5 17.1348 17.1348 21.5 11.75 21.5C6.36522 21.5 2 17.1348 2 11.75C2 6.36522 6.36522 2 11.75 2ZM11.75 3.5C7.19365 3.5 3.5 7.19365 3.5 11.75C3.5 16.3063 7.19365 20 11.75 20C16.3063 20 20 16.3063 20 11.75C20 7.19365 16.3063 3.5 11.75 3.5Z",
+          fill: "currentColor"
+        })),
+        sx: {
+          backgroundColor: 'transparent',
+          p: 0
+        }
+      }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        color: "text.primary"
+      }, /*#__PURE__*/_react.default.createElement("strong", null, (0, _i18n.__)('Note:', 'elementor-pro')), " ", (0, _i18n.__)('The media will be uploaded automatically, just as it was saved during export', 'elementor-pro'))));
+    }
+    if (!isImport && !isCloudKitsEligible) {
+      return null;
+    }
+    return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+      ref: mediaFormatSectionRef,
+      description: (0, _i18n.__)('Select how do you want to save & export the media files.', 'elementor-pro'),
+      title: (0, _i18n.__)('Media format', 'elementor-pro'),
+      settingKey: "mediaFormat",
+      hasToggle: false,
+      disabled: !(0, _useTier.isHighTier)(),
+      tooltip: !(0, _useTier.isHighTier)()
+    }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      sx: {
+        pt: 2.5
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.FormControl, {
+      component: "fieldset",
+      disabled: !(0, _useTier.isHighTier)(),
+      sx: {
+        width: '100%'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.RadioGroup, {
+      value: settings.mediaFormat,
+      onChange: event => {
+        handleSettingsChange('mediaFormat', event.target.value);
+      },
+      sx: {
+        width: '100%'
+      }
+    }, MEDIA_FORMAT_CONFIG.map((option, index) => /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      key: option.value,
+      sx: {
+        border: 1,
+        borderColor: settings.mediaFormat === option.value ? 'info.light' : 'divider',
+        borderRadius: 2,
+        p: 1,
+        mb: index < MEDIA_FORMAT_CONFIG.length - 1 ? 1.5 : 0,
+        width: '100%'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+      value: option.value,
+      control: /*#__PURE__*/_react.default.createElement(_ui.Radio, {
+        color: "info",
+        "data-testid": `media-format-${option.value}`
+      }),
+      label: /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        sx: {
+          mb: 0.25
+        }
+      }, option.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        color: "text.secondary"
+      }, option.description)),
+      sx: {
+        alignItems: 'flex-start',
+        m: 0,
+        width: '100%'
+      }
+    }))))), showMediaFormatValidation && /*#__PURE__*/_react.default.createElement(_ui.Alert, {
+      ref: alertRef,
+      icon: /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, {
+        color: "error",
+        viewBox: "0 0 24 24"
+      }, /*#__PURE__*/_react.default.createElement("path", {
+        d: "M11.8623 14.7549C12.3665 14.8061 12.7598 15.2322 12.7598 15.75C12.7598 16.2678 12.3665 16.6939 11.8623 16.7451L11.7598 16.75H11.75C11.1977 16.75 10.75 16.3023 10.75 15.75C10.75 15.1977 11.1977 14.75 11.75 14.75H11.7598L11.8623 14.7549Z",
+        fill: "currentColor"
+      }), /*#__PURE__*/_react.default.createElement("path", {
+        d: "M11.75 7C12.1642 7 12.5 7.33579 12.5 7.75V12.75C12.5 13.1642 12.1642 13.5 11.75 13.5C11.3358 13.5 11 13.1642 11 12.75V7.75C11 7.33579 11.3358 7 11.75 7Z",
+        fill: "currentColor"
+      }), /*#__PURE__*/_react.default.createElement("path", {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M11.75 2C17.1348 2 21.5 6.36522 21.5 11.75C21.5 17.1348 17.1348 21.5 11.75 21.5C6.36522 21.5 2 17.1348 2 11.75C2 6.36522 6.36522 2 11.75 2ZM11.75 3.5C7.19365 3.5 3.5 7.19365 3.5 11.75C3.5 16.3063 7.19365 20 11.75 20C16.3063 20 20 16.3063 20 11.75C20 7.19365 16.3063 3.5 11.75 3.5Z",
+        fill: "currentColor"
+      })),
+      sx: {
+        mt: 2,
+        ml: 1,
+        backgroundColor: 'transparent',
+        p: 0
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+      variant: "body2",
+      color: "text.primary"
+    }, /*#__PURE__*/_react.default.createElement("strong", null, (0, _i18n.__)('Note:', 'elementor-pro')), " ", (0, _i18n.__)('To export a ZIP, go to Edit Content, choose \'Link to Media\', then Export as ZIP.', 'elementor-pro'), /*#__PURE__*/_react.default.createElement("br", null), (0, _i18n.__)('Or, save this template to the cloud instead.', 'elementor-pro')))));
   };
   const renderTaxonomiesSection = () => {
     if (isImport && isOldExport) {
       return null;
     }
     return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
-      description: (0, _i18n.__)('Group your content by type, topic, or any structure you choose.', 'elementor'),
-      title: (0, _i18n.__)('Taxonomies', 'elementor'),
+      description: (0, _i18n.__)('Group your content by type, topic, or any structure you choose.', 'elementor-pro'),
+      title: (0, _i18n.__)('Taxonomies', 'elementor-pro'),
       settingKey: "taxonomies",
       notExported: isImport && !isTaxonomiesExported(),
       hasToggle: false
@@ -2331,12 +2484,11 @@ function KitContentCustomizationDialog(_ref) {
       return /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
         key: taxonomy.value,
         label: taxonomy.label,
-        settingKey: "taxonomies",
+        settingKey: `taxonomies_${taxonomy.value}`,
         checked: settings.taxonomies.includes(taxonomy.value),
         disabled: !(0, _useTier.isHighTier)(),
         tooltip: !(0, _useTier.isHighTier)(),
         onSettingChange: (key, isChecked) => {
-          unselectedValues.current = isChecked ? unselectedValues.current.filter(val => taxonomy.value !== val) : [...unselectedValues.current, taxonomy.value];
           setSettings(prevState => {
             const selectedTaxonomies = isChecked ? [...prevState.taxonomies, taxonomy.value] : prevState.taxonomies.filter(value => value !== taxonomy.value);
             return {
@@ -2350,40 +2502,33 @@ function KitContentCustomizationDialog(_ref) {
   };
   return /*#__PURE__*/_react.default.createElement(_kitCustomizationDialog.KitCustomizationDialog, {
     open: open,
-    title: (0, _i18n.__)('Edit content', 'elementor'),
+    title: (0, _i18n.__)('Edit content', 'elementor-pro'),
     handleClose: handleClose,
     handleSaveChanges: () => {
-      const hasEnabledCustomization = settings.pages.length > 0 || settings.menus || settings.customPostTypes.length > 0 || settings.taxonomies.length > 0;
-      handleSaveChanges('content', settings, hasEnabledCustomization, unselectedValues.current);
+      const hasEnabledCustomization = settings.pages.length > 0 || settings.menus || settings.customPostTypes.length > 0 || settings.taxonomies.length > 0 || settings.mediaFormat !== MEDIA_FORMAT_OPTIONS.LINK;
+      const transformedAnalytics = transformAnalyticsData(settings, pageOptions, taxonomyOptions, customPostTypes);
+      handleSaveChanges('content', settings, hasEnabledCustomization, transformedAnalytics);
     }
   }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
     sx: {
       position: 'relative'
     },
     gap: 2
-  }, isOldElementorVersion && /*#__PURE__*/_react.default.createElement(_upgradeVersionBanner.UpgradeVersionBanner, null), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, renderPagesSection(), renderMenusSection(), isImport && !isCustomPostTypesExported() ? /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
-    title: (0, _i18n.__)('Custom post types', 'elementor'),
+  }, isOldElementorVersion && /*#__PURE__*/_react.default.createElement(_upgradeVersionBanner.UpgradeVersionBanner, null), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, renderPagesSection(), isImport && !isCustomPostTypesExported() ? /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    title: (0, _i18n.__)('Custom post types', 'elementor-pro'),
     settingKey: "customPostTypes",
     notExported: true
   }) : /*#__PURE__*/_react.default.createElement(_customizationListSettingSection.ListSettingSection, {
     settingKey: "customPostTypes",
-    title: (0, _i18n.__)('Custom post types', 'elementor'),
+    title: (0, _i18n.__)('Custom post types', 'elementor-pro'),
     onSettingChange: selectedCustomPostTypes => {
-      const filteredUnselectedValues = unselectedValues.current.filter(value => !customPostTypes.includes(value));
-      const isAllChecked = selectedCustomPostTypes.length === customPostTypes.length;
-      unselectedValues.current = isAllChecked ? filteredUnselectedValues.filter(value => value !== 'customPostTypes') : [...filteredUnselectedValues, ...customPostTypes.filter(cpt => !selectedCustomPostTypes.includes(cpt)).map(_ref5 => {
-        let {
-          value
-        } = _ref5;
-        return value;
-      }), 'customPostTypes'];
       handleSettingsChange('customPostTypes', selectedCustomPostTypes);
     },
     settings: settings.customPostTypes,
     items: customPostTypes,
     disabled: isImport && undefined === data?.uploadedData?.manifest['custom-post-type-title'] || !(0, _useTier.isHighTier)(),
     tooltip: !(0, _useTier.isHighTier)()
-  }), renderTaxonomiesSection()), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
+  }), renderMediaFormatSection(), renderMenusSection(), renderTaxonomiesSection()), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
 }
 KitContentCustomizationDialog.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -2392,7 +2537,9 @@ KitContentCustomizationDialog.propTypes = {
   isOldElementorVersion: PropTypes.bool,
   handleClose: PropTypes.func.isRequired,
   handleSaveChanges: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  isCloudKitsEligible: PropTypes.bool,
+  showMediaFormatValidation: PropTypes.bool
 };
 
 /***/ }),
@@ -2417,15 +2564,14 @@ var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function KitCustomizationDialog(_ref) {
-  let {
-    open,
-    title,
-    handleClose,
-    handleSaveChanges,
-    children,
-    saveDisabled = false
-  } = _ref;
+function KitCustomizationDialog({
+  open,
+  title,
+  handleClose,
+  handleSaveChanges,
+  children,
+  saveDisabled = false
+}) {
   return /*#__PURE__*/_react.default.createElement(_ui.Dialog, {
     open: open,
     onClose: handleClose,
@@ -2478,7 +2624,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.KitSettingsCustomizationDialog = KitSettingsCustomizationDialog;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
@@ -2488,18 +2633,25 @@ var _kitCustomizationDialog = __webpack_require__(/*! ./kit-customization-dialog
 var _upgradeNoticeBanner = __webpack_require__(/*! ./upgrade-notice-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js");
 var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
 var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function KitSettingsCustomizationDialog(_ref) {
-  let {
-    open,
-    handleClose,
-    handleSaveChanges,
-    data,
-    isImport,
-    isOldExport,
-    isOldElementorVersion
-  } = _ref;
+const transformAnalyticsData = payload => {
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, []);
+  }
+  return transformed;
+};
+function KitSettingsCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion
+}) {
   const getState = (0, _react.useCallback)(initialState => {
     if (!data.includes.includes('settings')) {
       return {
@@ -2548,7 +2700,6 @@ function KitSettingsCustomizationDialog(_ref) {
     };
   }, [data.includes, data?.uploadedData?.manifest, data?.customization?.settings, isImport, isOldExport]);
   const initialState = data.includes.includes('settings');
-  const unselectedValues = (0, _react.useRef)(data.analytics?.customization?.settings || []);
   const [settings, setSettings] = (0, _react.useState)(() => {
     if (data.customization.settings) {
       return data.customization.settings;
@@ -2570,8 +2721,7 @@ function KitSettingsCustomizationDialog(_ref) {
       window.elementorModules?.appsEventTracking?.AppsEventTracking?.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitExportCustomizationEdit);
     }
   }, [open]);
-  const handleToggleChange = (settingKey, isChecked) => {
-    unselectedValues.current = isChecked ? unselectedValues.current.filter(val => settingKey !== val) : [...unselectedValues.current, settingKey];
+  const handleToggleChange = settingKey => {
     setSettings(prev => ({
       ...prev,
       [settingKey]: !prev[settingKey]
@@ -2583,7 +2733,8 @@ function KitSettingsCustomizationDialog(_ref) {
     handleClose: handleClose,
     handleSaveChanges: () => {
       const hasEnabledCustomization = settings.theme || settings.globalColors || settings.globalFonts || settings.themeStyleSettings || settings.generalSettings || settings.experiments || settings.customFonts || settings.customIcons || settings.customCode;
-      handleSaveChanges('settings', settings, hasEnabledCustomization, unselectedValues.current);
+      const transformedAnalytics = transformAnalyticsData(settings);
+      handleSaveChanges('settings', settings, hasEnabledCustomization, transformedAnalytics);
     }
   }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
     sx: {
@@ -2646,21 +2797,24 @@ function KitSettingsCustomizationDialog(_ref) {
     onSettingChange: handleToggleChange,
     checked: settings.customFonts,
     disabled: isImport && !data?.uploadedData?.manifest?.['custom-fonts'] || !(0, _useTier.isHighTier)(),
-    tooltip: !(0, _useTier.isHighTier)()
+    tooltip: !(0, _useTier.isHighTier)(),
+    notExported: isImport && !data?.uploadedData?.manifest?.['custom-fonts']
   }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
     label: (0, _i18n.__)('Custom icons', 'elementor'),
     settingKey: "customIcons",
     onSettingChange: handleToggleChange,
     checked: settings.customIcons,
     disabled: isImport && !data?.uploadedData?.manifest?.['custom-icons'] || !(0, _useTier.isHighTier)(),
-    tooltip: !(0, _useTier.isHighTier)()
+    tooltip: !(0, _useTier.isHighTier)(),
+    notExported: isImport && !data?.uploadedData?.manifest?.['custom-icons']
   }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
     label: (0, _i18n.__)('Custom code', 'elementor'),
     settingKey: "customCode",
     onSettingChange: handleToggleChange,
     checked: settings.customCode,
     disabled: isImport && !data?.uploadedData?.manifest?.['custom-code'] || !(0, _useTier.isHighTier)(),
-    tooltip: !(0, _useTier.isHighTier)()
+    tooltip: !(0, _useTier.isHighTier)(),
+    notExported: isImport && !data?.uploadedData?.manifest?.['custom-code']
   }))))), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
 }
 KitSettingsCustomizationDialog.propTypes = {
@@ -2690,7 +2844,6 @@ Object.defineProperty(exports, "__esModule", ({
 exports.KitTemplatesCustomizationDialog = KitTemplatesCustomizationDialog;
 exports.hasTemplatesForExportGroup = void 0;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
@@ -2700,8 +2853,16 @@ var _upgradeNoticeBanner = __webpack_require__(/*! ./upgrade-notice-banner */ ".
 var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
 var _themeBuilderCustomization = __webpack_require__(/*! ./theme-builder-customization */ "../core/app/modules/import-export-customization/assets/js/components/theme-builder-customization.js");
 var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const transformAnalyticsData = payload => {
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, []);
+  }
+  return transformed;
+};
 const hasTemplatesForExportGroup = (exportGroup, manifest) => {
   if (!manifest?.templates) {
     return false;
@@ -2716,18 +2877,16 @@ const hasTemplatesForExportGroup = (exportGroup, manifest) => {
   });
 };
 exports.hasTemplatesForExportGroup = hasTemplatesForExportGroup;
-function KitTemplatesCustomizationDialog(_ref) {
-  let {
-    open,
-    handleClose,
-    handleSaveChanges,
-    data,
-    isImport,
-    isOldExport,
-    isOldElementorVersion
-  } = _ref;
+function KitTemplatesCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion
+}) {
   const initialState = data.includes.includes('templates');
-  const unselectedValues = (0, _react.useRef)(data.analytics?.customization?.templates || []);
   const getState = (0, _react.useCallback)(parentInitialState => {
     if (!data.includes.includes('templates')) {
       return {
@@ -2784,7 +2943,6 @@ function KitTemplatesCustomizationDialog(_ref) {
     }
   }, [open]);
   const handleToggleChange = (settingKey, isChecked) => {
-    unselectedValues.current = isChecked ? unselectedValues.current.filter(val => settingKey !== val) : [...unselectedValues.current, settingKey];
     setTemplates(prev => ({
       ...prev,
       [settingKey]: {
@@ -2799,7 +2957,8 @@ function KitTemplatesCustomizationDialog(_ref) {
     handleClose: handleClose,
     handleSaveChanges: () => {
       const hasEnabledCustomization = templates.siteTemplates?.enabled || templates.themeBuilder?.enabled || templates.globalWidgets?.enabled;
-      handleSaveChanges('templates', templates, hasEnabledCustomization, unselectedValues.current);
+      const transformedAnalytics = transformAnalyticsData(templates);
+      handleSaveChanges('templates', templates, hasEnabledCustomization, transformedAnalytics);
     },
     minHeight: "auto"
   }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
@@ -2817,8 +2976,7 @@ function KitTemplatesCustomizationDialog(_ref) {
   }), /*#__PURE__*/_react.default.createElement(_themeBuilderCustomization.ThemeBuilderCustomization, {
     state: templates.themeBuilder,
     settingKey: "themeBuilder",
-    onStateChange: function (key, newState) {
-      let mergeMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    onStateChange: (key, newState, mergeMode = false) => {
       setTemplates(prev => {
         if (mergeMode) {
           return {
@@ -2874,7 +3032,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.ThemeBuilderCustomization = ThemeBuilderCustomization;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -2896,15 +3053,14 @@ const ExternalLinkIcon = props => {
     fill: "currentColor"
   }));
 };
-function ThemeBuilderCustomization(_ref) {
-  let {
-    state,
-    settingKey,
-    onStateChange,
-    data,
-    disabled,
-    tooltip = false
-  } = _ref;
+function ThemeBuilderCustomization({
+  state,
+  settingKey,
+  onStateChange,
+  data,
+  disabled,
+  tooltip = false
+}) {
   const isImport = data.hasOwnProperty('uploadedData');
   const [conflicts, setConflicts] = (0, _react.useState)([]);
   const [loading, setLoading] = (0, _react.useState)(false);
@@ -2920,8 +3076,7 @@ function ThemeBuilderCustomization(_ref) {
     setLoading(true);
     try {
       const actualConflicts = data?.uploadedData?.conflicts ? Object.entries(data.uploadedData.conflicts) : [];
-      const formattedConflicts = actualConflicts.map(_ref2 => {
-        let [importedTemplateId, conflictsList] = _ref2;
+      const formattedConflicts = actualConflicts.map(([importedTemplateId, conflictsList]) => {
         const importedTemplate = data?.uploadedData?.manifest?.templates?.[importedTemplateId];
         const firstConflict = conflictsList[0];
         return {
@@ -3185,13 +3340,12 @@ var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-const UpgradeTooltip = _ref => {
-  let {
-    children,
-    disabled = false,
-    tooltip = false,
-    ...props
-  } = _ref;
+const UpgradeTooltip = ({
+  children,
+  disabled = false,
+  tooltip = false,
+  ...props
+}) => {
   if (disabled && tooltip) {
     return /*#__PURE__*/_react.default.createElement(_ui.Tooltip, (0, _extends2.default)({
       title: (0, _i18n.__)('Upgrade your plan to choose which elements to adjust.', 'elementor'),
@@ -3309,31 +3463,25 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.useCustomPostTypes = useCustomPostTypes;
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _react = __webpack_require__(/*! react */ "react");
-function useCustomPostTypes() {
-  let {
-    include = []
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function useCustomPostTypes({
+  include = []
+} = {}) {
   const [customPostTypes, setCustomPostTypes] = (0, _react.useState)([]);
   (0, _react.useEffect)(() => {
     const cpt = Object.assign({}, elementorAppConfig['import-export-customization']?.summaryTitles?.content?.customPostTypes || {});
     if (include.length) {
-      Object.entries(elementorAppConfig['import-export-customization']?.summaryTitles?.content || {}).forEach(_ref => {
-        let [postType, post] = _ref;
+      Object.entries(elementorAppConfig['import-export-customization']?.summaryTitles?.content || {}).forEach(([postType, post]) => {
         if (include.includes(postType)) {
           cpt[postType] = post;
         }
       });
     }
     if (Object.keys(cpt).length) {
-      setCustomPostTypes(Object.entries(cpt).map(_ref2 => {
-        let [postType, post] = _ref2;
-        return {
-          value: postType,
-          label: post.single
-        };
-      }));
+      setCustomPostTypes(Object.entries(cpt).map(([postType, post]) => ({
+        value: postType,
+        label: post.single
+      })));
     }
   }, []);
   return {
@@ -3359,10 +3507,9 @@ exports.useKitCustomizationCustomPostTypes = useKitCustomizationCustomPostTypes;
 __webpack_require__(/*! core-js/modules/es.array.push.js */ "../node_modules/core-js/modules/es.array.push.js");
 var _react = __webpack_require__(/*! react */ "react");
 var _useCustomPostTypes = __webpack_require__(/*! ./use-custom-post-types */ "../core/app/modules/import-export-customization/assets/js/hooks/use-custom-post-types.js");
-function useKitCustomizationCustomPostTypes(_ref) {
-  let {
-    data
-  } = _ref;
+function useKitCustomizationCustomPostTypes({
+  data
+}) {
   const isImport = data?.hasOwnProperty('uploadedData');
   const {
     customPostTypes: builtInCustomPostTypes
@@ -3418,11 +3565,10 @@ Object.defineProperty(exports, "__esModule", ({
 exports.useKitCustomizationPages = useKitCustomizationPages;
 var _react = __webpack_require__(/*! react */ "react");
 var _usePages = __webpack_require__(/*! ./use-pages */ "../core/app/modules/import-export-customization/assets/js/hooks/use-pages.js");
-function useKitCustomizationPages(_ref) {
-  let {
-    data,
-    open
-  } = _ref;
+function useKitCustomizationPages({
+  data,
+  open
+}) {
   const isImport = data?.hasOwnProperty('uploadedData');
   const {
     isLoading,
@@ -3435,15 +3581,13 @@ function useKitCustomizationPages(_ref) {
     if (!isImport) {
       return loadedPagesOptions;
     }
-    const elementorPages = Object.entries(data?.uploadedData?.manifest?.content?.page || {}).map(_ref2 => {
-      let [id, page] = _ref2;
+    const elementorPages = Object.entries(data?.uploadedData?.manifest?.content?.page || {}).map(([id, page]) => {
       return {
         value: id,
         label: page.title
       };
     });
-    const wpPages = Object.entries(data?.uploadedData?.manifest?.['wp-content']?.page || {}).map(_ref3 => {
-      let [id, page] = _ref3;
+    const wpPages = Object.entries(data?.uploadedData?.manifest?.['wp-content']?.page || {}).map(([id, page]) => {
       return {
         value: id,
         label: page.title
@@ -3475,11 +3619,10 @@ Object.defineProperty(exports, "__esModule", ({
 exports.useKitCustomizationTaxonomies = useKitCustomizationTaxonomies;
 var _react = __webpack_require__(/*! react */ "react");
 var _useTaxonomies = __webpack_require__(/*! ./use-taxonomies */ "../core/app/modules/import-export-customization/assets/js/hooks/use-taxonomies.js");
-function useKitCustomizationTaxonomies(_ref) {
-  let {
-    data,
-    open
-  } = _ref;
+function useKitCustomizationTaxonomies({
+  data,
+  open
+}) {
   const isImport = data?.hasOwnProperty('uploadedData');
   const {
     isLoading,
@@ -3535,10 +3678,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.usePages = usePages;
 var _react = __webpack_require__(/*! react */ "react");
-function usePages() {
-  let {
-    skipLoading = false
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function usePages({
+  skipLoading = false
+} = {}) {
   const [pages, setPages] = (0, _react.useState)([]);
   const [isLoading, setIsLoading] = (0, _react.useState)(false);
   const [error, setError] = (0, _react.useState)(null);
@@ -3631,7 +3773,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.useTaxonomies = useTaxonomies;
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 var _react = __webpack_require__(/*! react */ "react");
 const fetchTaxonomies = async () => {
   const requestUrl = `${elementorCommon.config.urls.rest}wp/v2/taxonomies`;
@@ -3648,11 +3789,10 @@ const fetchTaxonomies = async () => {
   }
   return Object.values(result);
 };
-function useTaxonomies() {
-  let {
-    skipLoading = false,
-    exclude = []
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function useTaxonomies({
+  skipLoading = false,
+  exclude = []
+} = {}) {
   const [taxonomies, setTaxonomies] = (0, _react.useState)([]);
   const [isLoading, setIsLoading] = (0, _react.useState)(false);
   const [error, setError] = (0, _react.useState)(null);
@@ -3769,6 +3909,58 @@ class Module {
   }
 }
 exports["default"] = Module;
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js":
+/*!************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.transformValueForAnalytics = exports.getTotalAvailableCount = exports.ANALYTICS_TRANSFORM_RULES = void 0;
+const ANALYTICS_TRANSFORM_RULES = exports.ANALYTICS_TRANSFORM_RULES = {
+  STRING: value => value,
+  BOOLEAN: value => value,
+  EMPTY_ARRAY: () => 'None',
+  FULL_ARRAY: () => 'All',
+  PARTIAL_ARRAY: () => 'Partial'
+};
+const getTotalAvailableCount = (key, optionsArray) => {
+  const optionsMap = optionsArray.reduce((map, {
+    key: optionKey,
+    options
+  }) => {
+    map[optionKey] = options.length;
+    return map;
+  }, {});
+  return optionsMap[key] || 0;
+};
+exports.getTotalAvailableCount = getTotalAvailableCount;
+const transformValueForAnalytics = (key, value, optionsArray) => {
+  if ('string' === typeof value || 'boolean' === typeof value) {
+    return ANALYTICS_TRANSFORM_RULES[(typeof value).toUpperCase()](value);
+  }
+  if ('object' === typeof value && value !== null && !Array.isArray(value) && 'enabled' in value) {
+    return value.enabled;
+  }
+  if (Array.isArray(value)) {
+    if (0 === value.length) {
+      return ANALYTICS_TRANSFORM_RULES.EMPTY_ARRAY();
+    }
+    const totalAvailable = getTotalAvailableCount(key, optionsArray);
+    const isFullSelection = value.length === totalAvailable;
+    return isFullSelection ? ANALYTICS_TRANSFORM_RULES.FULL_ARRAY() : ANALYTICS_TRANSFORM_RULES.PARTIAL_ARRAY();
+  }
+  return value;
+};
+exports.transformValueForAnalytics = transformValueForAnalytics;
 
 /***/ }),
 
@@ -3950,12 +4142,12 @@ var _baseContext = _interopRequireDefault(__webpack_require__(/*! ./base-context
 var _commands = __webpack_require__(/*! ../data/commands */ "../core/app/modules/site-editor/assets/js/data/commands/index.js");
 const Context = exports.Context = _react.default.createContext();
 class ConditionsProvider extends _baseContext.default {
-  static propTypes = (() => ({
+  static propTypes = {
     children: PropTypes.any.isRequired,
     currentTemplate: PropTypes.object.isRequired,
     onConditionsSaved: PropTypes.func.isRequired,
     validateConflicts: PropTypes.bool
-  }))();
+  };
   static defaultProps = {
     validateConflicts: true
   };
@@ -4120,8 +4312,7 @@ class ConditionsProvider extends _baseContext.default {
    * @param {any}     args
    * @param {boolean} shouldCheckConflicts
    */
-  updateConditionItemState(id, args) {
-    let shouldCheckConflicts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  updateConditionItemState(id, args, shouldCheckConflicts = true) {
     if (args.name) {
       args.subOptions = this.conditionsConfig.getSubOptions(args.name);
     }
@@ -4165,8 +4356,7 @@ class ConditionsProvider extends _baseContext.default {
    *
    * @param {boolean} shouldCheckConflicts
    */
-  createConditionItemInState() {
-    let shouldCheckConflicts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  createConditionItemInState(shouldCheckConflicts = true) {
     const defaultCondition = this.props.currentTemplate.defaultCondition,
       newCondition = new _condition.default({
         name: defaultCondition,
@@ -4235,7 +4425,7 @@ var _default = exports["default"] = ConditionsProvider;
 /*!*****************************************************************************!*\
   !*** ../core/app/modules/site-editor/assets/js/context/models/condition.js ***!
   \*****************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -4244,9 +4434,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 class Condition {
-  id = (() => elementorCommon.helpers.getUniqueId())();
+  id = elementorCommon.helpers.getUniqueId();
   default = '';
   type = 'include';
   name = '';
@@ -4349,11 +4538,10 @@ class ConditionsConfig {
    * @return {Array} Condition options
    */
   getOptions() {
-    return this.getSubOptions('general', true).map(_ref => {
-      let {
-        label,
-        value
-      } = _ref;
+    return this.getSubOptions('general', true).map(({
+      label,
+      value
+    }) => {
       return {
         label,
         value
@@ -4368,8 +4556,7 @@ class ConditionsConfig {
    * @param {boolean} isSubItem
    * @return {Array} Sub options
    */
-  getSubOptions(itemName) {
-    let isSubItem = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  getSubOptions(itemName, isSubItem = false) {
     const config = this.config[itemName];
     if (!config) {
       return [];
@@ -4460,9 +4647,9 @@ var _commands = __webpack_require__(/*! ../data/commands */ "../core/app/modules
 var _component = _interopRequireDefault(__webpack_require__(/*! ../data/component */ "../core/app/modules/site-editor/assets/js/data/component.js"));
 const Context = exports.Context = _react.default.createContext();
 class TemplatesProvider extends _baseContext.default {
-  static propTypes = (() => ({
+  static propTypes = {
     children: PropTypes.object.isRequired
-  }))();
+  };
   static actions = {
     FETCH: 'fetch',
     DELETE: 'delete',
@@ -4490,11 +4677,10 @@ class TemplatesProvider extends _baseContext.default {
   componentDidMount() {
     this.fetchTemplates();
   }
-  importTemplates(_ref) {
-    let {
-      fileName,
-      fileData
-    } = _ref;
+  importTemplates({
+    fileName,
+    fileData
+  }) {
     return this.executeAction(TemplatesProvider.actions.IMPORT, () => $e.data.create(_commands.Templates.signature, {
       fileName,
       fileData
@@ -4556,8 +4742,7 @@ class TemplatesProvider extends _baseContext.default {
       };
     });
   }
-  updateTemplatesState(callback) {
-    let clearCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  updateTemplatesState(callback, clearCache = true) {
     if (clearCache) {
       $e.data.deleteCache($e.components.get(_component.default.namespace), _commands.Templates.signature);
     }
@@ -4781,8 +4966,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
  *
  * @param {any} templateType
  */
-function useTemplatesScreenshot() {
-  let templateType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+function useTemplatesScreenshot(templateType = null) {
   const {
     updateTemplateItemState,
     templates
@@ -4817,8 +5001,7 @@ function useTemplatesScreenshot() {
  * @param {any} templateType
  * @return {boolean} should screenshot template
  */
-function shouldScreenshotTemplate(template) {
-  let templateType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+function shouldScreenshotTemplate(template, templateType = null) {
   if (templateType) {
     return false;
   }
@@ -5811,17 +5994,14 @@ var _templates = __webpack_require__(/*! ../context/templates */ "../core/app/mo
 var _backButton = _interopRequireDefault(__webpack_require__(/*! ../molecules/back-button */ "../core/app/modules/site-editor/assets/js/molecules/back-button.js"));
 var _hooks = __webpack_require__(/*! @elementor/hooks */ "@elementor/hooks");
 // The hook `useConfirmAction` comes from the core plugin, so it is possible that it is not available.
-const useConfirmActionFallback = _ref => {
-  let {
-    action
-  } = _ref;
-  return {
-    runAction: action,
-    dialog: {
-      isOpen: false
-    }
-  };
-};
+const useConfirmActionFallback = ({
+  action
+}) => ({
+  runAction: action,
+  dialog: {
+    isOpen: false
+  }
+});
 const useConfirmAction = _hooks.useConfirmAction ?? useConfirmActionFallback;
 function Import() {
   const {
@@ -6414,8 +6594,7 @@ function normalizeInitialPosts(posts) {
  * @param {Object} attrs
  * @return {Array} Posts array
  */
-function updatePostsAttrs(posts, id) {
-  let attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+function updatePostsAttrs(posts, id, attrs = {}) {
   return posts.map(post => {
     if (post.id !== id) {
       return post;
@@ -6475,10 +6654,9 @@ function useIFrameMessageListener(inProgressPosts, setPosts) {
  * @param {number} numberOfScreenshotInParallel
  * @return {{inProgress: Array, succeed: Array, failed: Array, posts: Array, queue: Array}} An array of posts, queue, inProgress, succeed, failed
  */
-function useScreenshot(initialPosts) {
-  let {
-    numberOfScreenshotInParallel
-  } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultOptions;
+function useScreenshot(initialPosts, {
+  numberOfScreenshotInParallel
+} = defaultOptions) {
   const [posts, setPosts] = useState([]);
 
   // Holds some kind of computed value of the `posts` state,
@@ -8107,38 +8285,6 @@ module.exports = function (argument) {
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/add-to-unscopables.js":
-/*!***************************************************************!*\
-  !*** ../node_modules/core-js/internals/add-to-unscopables.js ***!
-  \***************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "../node_modules/core-js/internals/well-known-symbol.js");
-var create = __webpack_require__(/*! ../internals/object-create */ "../node_modules/core-js/internals/object-create.js");
-var defineProperty = (__webpack_require__(/*! ../internals/object-define-property */ "../node_modules/core-js/internals/object-define-property.js").f);
-
-var UNSCOPABLES = wellKnownSymbol('unscopables');
-var ArrayPrototype = Array.prototype;
-
-// Array.prototype[@@unscopables]
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-if (ArrayPrototype[UNSCOPABLES] === undefined) {
-  defineProperty(ArrayPrototype, UNSCOPABLES, {
-    configurable: true,
-    value: create(null)
-  });
-}
-
-// add a key to Array.prototype[@@unscopables]
-module.exports = function (key) {
-  ArrayPrototype[UNSCOPABLES][key] = true;
-};
-
-
-/***/ }),
-
 /***/ "../node_modules/core-js/internals/an-object.js":
 /*!******************************************************!*\
   !*** ../node_modules/core-js/internals/an-object.js ***!
@@ -8818,21 +8964,6 @@ module.exports = {};
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/html.js":
-/*!*************************************************!*\
-  !*** ../node_modules/core-js/internals/html.js ***!
-  \*************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "../node_modules/core-js/internals/get-built-in.js");
-
-module.exports = getBuiltIn('document', 'documentElement');
-
-
-/***/ }),
-
 /***/ "../node_modules/core-js/internals/ie8-dom-define.js":
 /*!***********************************************************!*\
   !*** ../node_modules/core-js/internals/ie8-dom-define.js ***!
@@ -9247,134 +9378,6 @@ module.exports = Math.trunc || function trunc(x) {
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/object-create.js":
-/*!**********************************************************!*\
-  !*** ../node_modules/core-js/internals/object-create.js ***!
-  \**********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-/* global ActiveXObject -- old IE, WSH */
-var anObject = __webpack_require__(/*! ../internals/an-object */ "../node_modules/core-js/internals/an-object.js");
-var definePropertiesModule = __webpack_require__(/*! ../internals/object-define-properties */ "../node_modules/core-js/internals/object-define-properties.js");
-var enumBugKeys = __webpack_require__(/*! ../internals/enum-bug-keys */ "../node_modules/core-js/internals/enum-bug-keys.js");
-var hiddenKeys = __webpack_require__(/*! ../internals/hidden-keys */ "../node_modules/core-js/internals/hidden-keys.js");
-var html = __webpack_require__(/*! ../internals/html */ "../node_modules/core-js/internals/html.js");
-var documentCreateElement = __webpack_require__(/*! ../internals/document-create-element */ "../node_modules/core-js/internals/document-create-element.js");
-var sharedKey = __webpack_require__(/*! ../internals/shared-key */ "../node_modules/core-js/internals/shared-key.js");
-
-var GT = '>';
-var LT = '<';
-var PROTOTYPE = 'prototype';
-var SCRIPT = 'script';
-var IE_PROTO = sharedKey('IE_PROTO');
-
-var EmptyConstructor = function () { /* empty */ };
-
-var scriptTag = function (content) {
-  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
-};
-
-// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
-var NullProtoObjectViaActiveX = function (activeXDocument) {
-  activeXDocument.write(scriptTag(''));
-  activeXDocument.close();
-  var temp = activeXDocument.parentWindow.Object;
-  // eslint-disable-next-line no-useless-assignment -- avoid memory leak
-  activeXDocument = null;
-  return temp;
-};
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var NullProtoObjectViaIFrame = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = documentCreateElement('iframe');
-  var JS = 'java' + SCRIPT + ':';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  html.appendChild(iframe);
-  // https://github.com/zloirock/core-js/issues/475
-  iframe.src = String(JS);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(scriptTag('document.F=Object'));
-  iframeDocument.close();
-  return iframeDocument.F;
-};
-
-// Check for document.domain and active x support
-// No need to use active x approach when document.domain is not set
-// see https://github.com/es-shims/es5-shim/issues/150
-// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
-// avoid IE GC bug
-var activeXDocument;
-var NullProtoObject = function () {
-  try {
-    activeXDocument = new ActiveXObject('htmlfile');
-  } catch (error) { /* ignore */ }
-  NullProtoObject = typeof document != 'undefined'
-    ? document.domain && activeXDocument
-      ? NullProtoObjectViaActiveX(activeXDocument) // old IE
-      : NullProtoObjectViaIFrame()
-    : NullProtoObjectViaActiveX(activeXDocument); // WSH
-  var length = enumBugKeys.length;
-  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
-  return NullProtoObject();
-};
-
-hiddenKeys[IE_PROTO] = true;
-
-// `Object.create` method
-// https://tc39.es/ecma262/#sec-object.create
-// eslint-disable-next-line es/no-object-create -- safe
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    EmptyConstructor[PROTOTYPE] = anObject(O);
-    result = new EmptyConstructor();
-    EmptyConstructor[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = NullProtoObject();
-  return Properties === undefined ? result : definePropertiesModule.f(result, Properties);
-};
-
-
-/***/ }),
-
-/***/ "../node_modules/core-js/internals/object-define-properties.js":
-/*!*********************************************************************!*\
-  !*** ../node_modules/core-js/internals/object-define-properties.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "../node_modules/core-js/internals/descriptors.js");
-var V8_PROTOTYPE_DEFINE_BUG = __webpack_require__(/*! ../internals/v8-prototype-define-bug */ "../node_modules/core-js/internals/v8-prototype-define-bug.js");
-var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "../node_modules/core-js/internals/object-define-property.js");
-var anObject = __webpack_require__(/*! ../internals/an-object */ "../node_modules/core-js/internals/an-object.js");
-var toIndexedObject = __webpack_require__(/*! ../internals/to-indexed-object */ "../node_modules/core-js/internals/to-indexed-object.js");
-var objectKeys = __webpack_require__(/*! ../internals/object-keys */ "../node_modules/core-js/internals/object-keys.js");
-
-// `Object.defineProperties` method
-// https://tc39.es/ecma262/#sec-object.defineproperties
-// eslint-disable-next-line es/no-object-defineproperties -- safe
-exports.f = DESCRIPTORS && !V8_PROTOTYPE_DEFINE_BUG ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var props = toIndexedObject(Properties);
-  var keys = objectKeys(Properties);
-  var length = keys.length;
-  var index = 0;
-  var key;
-  while (length > index) definePropertyModule.f(O, key = keys[index++], props[key]);
-  return O;
-};
-
-
-/***/ }),
-
 /***/ "../node_modules/core-js/internals/object-define-property.js":
 /*!*******************************************************************!*\
   !*** ../node_modules/core-js/internals/object-define-property.js ***!
@@ -9543,27 +9546,6 @@ module.exports = function (object, names) {
     ~indexOf(result, key) || push(result, key);
   }
   return result;
-};
-
-
-/***/ }),
-
-/***/ "../node_modules/core-js/internals/object-keys.js":
-/*!********************************************************!*\
-  !*** ../node_modules/core-js/internals/object-keys.js ***!
-  \********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var internalObjectKeys = __webpack_require__(/*! ../internals/object-keys-internal */ "../node_modules/core-js/internals/object-keys-internal.js");
-var enumBugKeys = __webpack_require__(/*! ../internals/enum-bug-keys */ "../node_modules/core-js/internals/enum-bug-keys.js");
-
-// `Object.keys` method
-// https://tc39.es/ecma262/#sec-object.keys
-// eslint-disable-next-line es/no-object-keys -- safe
-module.exports = Object.keys || function keys(O) {
-  return internalObjectKeys(O, enumBugKeys);
 };
 
 
@@ -10055,39 +10037,6 @@ module.exports = function (name) {
       : createWellKnownSymbol('Symbol.' + name);
   } return WellKnownSymbolsStore[name];
 };
-
-
-/***/ }),
-
-/***/ "../node_modules/core-js/modules/es.array.includes.js":
-/*!************************************************************!*\
-  !*** ../node_modules/core-js/modules/es.array.includes.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var $ = __webpack_require__(/*! ../internals/export */ "../node_modules/core-js/internals/export.js");
-var $includes = (__webpack_require__(/*! ../internals/array-includes */ "../node_modules/core-js/internals/array-includes.js").includes);
-var fails = __webpack_require__(/*! ../internals/fails */ "../node_modules/core-js/internals/fails.js");
-var addToUnscopables = __webpack_require__(/*! ../internals/add-to-unscopables */ "../node_modules/core-js/internals/add-to-unscopables.js");
-
-// FF99+ bug
-var BROKEN_ON_SPARSE = fails(function () {
-  // eslint-disable-next-line es/no-array-prototype-includes -- detection
-  return !Array(1).includes();
-});
-
-// `Array.prototype.includes` method
-// https://tc39.es/ecma262/#sec-array.prototype.includes
-$({ target: 'Array', proto: true, forced: BROKEN_ON_SPARSE }, {
-  includes: function includes(el /* , fromIndex = 0 */) {
-    return $includes(this, el, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables('includes');
 
 
 /***/ }),

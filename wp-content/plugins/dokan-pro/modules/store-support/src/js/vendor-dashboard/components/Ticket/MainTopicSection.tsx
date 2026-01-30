@@ -45,7 +45,7 @@ export default function MainTopicSection( { ticket }: MainTopicSectionProps ) {
                     { /* Main Topic Content */ }
                     <div className="dokan-chat-text dokan-customer-chat-text mb-4">
                         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                            <RawHTML className="prose max-w-none text-gray-800">
+                            <RawHTML className="prose max-w-none text-gray-800 whitespace-pre-line">
                                 { ticket.content }
                             </RawHTML>
                         </div>

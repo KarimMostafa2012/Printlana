@@ -8,49 +8,49 @@
             "lang": "vi"
          },
          "WPML has detected changed or new MO files": [
-            "WPML đã phát hiện thay đổi hoặc mới MO các tập tin"
+            "WPML đã phát hiện các tệp MO đã thay đổi hoặc mới"
          ],
          "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
-            "Có tệp .mo mới hoặc được cập nhật. WPML cần quét chúng để tìm chuỗi dịch."
+            "Có các tệp .mo mới hoặc đã cập nhật. WPML cần quét chúng để tìm chuỗi dịch."
          ],
          "Scan translation files": [
-            "Quét tập tin dịch"
+            "Quét tệp dịch"
          ],
          "Scanned %1$d of %2$d files...": [
-            "Đã quét %1$d của %2$d các tập tin..."
+            "Đã quét %1$d trong số %2$d tệp..."
          ],
          "Generated files for %1$d of %2$d sites...": [
-            "Các tập tin được tạo cho %1$d của %2$d các trang web..."
+            "Đã tạo tệp cho %1$d trong số %2$d trang web..."
          ],
          "Generated %1$d of %2$d files...": [
-            "Đã tạo %1$d của %2$d các tập tin..."
+            "Đã tạo %1$d trong số %2$d tệp..."
          ],
          "WPML needs to generate .mo files": [
             "WPML cần tạo tệp .mo"
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
-            "Dịch chuỗi WPML sử dụng tệp .mo thay vì lệnh gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện ở giao diện người dùng. Tuy nhiên, thư mục chứa các tệp .mo này không mở để ghi."
+            "WPML String Translation sử dụng tệp .mo thay vì gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện trên giao diện người dùng. Tuy nhiên, thư mục chứa các tệp .mo này không được phép ghi."
          ],
          "Please use your admin control panel or an FTP program to make the following folder writeable:": [
-            "Vui lòng sử dụng bảng điều khiển quản trị viên của bạn hoặc chương trình FTP để làm cho thư mục sau có thể ghi được:"
+            "Vui lòng sử dụng bảng điều khiển quản trị hoặc chương trình FTP để cấp quyền ghi cho thư mục sau:"
          ],
          "There was a problem creating the .mo files": [
             "Đã xảy ra sự cố khi tạo tệp .mo"
          ],
          "You can try again now or try again later by going to ": [
-            "Bạn có thể thử lại ngay bây giờ hoặc thử lại sau bằng cách truy cập "
+            "Bạn có thể thử lại bây giờ hoặc thử lại sau bằng cách truy cập "
          ],
          "Translations are missing from the front-end until you generate .mo files": [
-            "Bản dịch bị thiếu ở giao diện người dùng cho đến khi bạn tạo tệp .mo"
+            "Bản dịch bị thiếu trên giao diện người dùng cho đến khi bạn tạo tệp .mo"
          ],
          "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
-            "Trang web của bạn không có tệp .mo mà WPML cần để hiển thị các chuỗi đã dịch ở giao diện người dùng. Để tạo các tệp .mo này, hãy nhớ truy cập "
+            "Trang web của bạn không có các tệp .mo mà WPML cần để hiển thị các chuỗi đã dịch trên giao diện người dùng. Để tạo các tệp .mo này, hãy nhớ truy cập "
          ],
          "WPML->Theme and plugins localization.": [
-            "WPML->Bản địa hóa chủ đề và plugin."
+            "WPML->Bản địa hóa giao diện và plugin."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
-            "Dịch chuỗi WPML sử dụng tệp .mo thay vì lệnh gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện ở giao diện người dùng."
+            "WPML String Translation sử dụng tệp .mo thay vì gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện trên giao diện người dùng."
          ],
          "Try again": [
             "Thử lại"
@@ -59,10 +59,10 @@
             "Tạo tệp .mo"
          ],
          "Close this message": [
-            "Đóng tin nhắn này"
+            "Đóng thông báo này"
          ],
          "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
-            "Tìm văn bản bổ sung mà WordPress, chủ đề và plugin đã tạo và chọn văn bản cần dịch"
+            "Tìm các văn bản bổ sung mà WordPress, giao diện và plugin đã tạo và chọn những văn bản cần dịch"
          ],
          "Choose texts for translation": [
             "Chọn văn bản để dịch"
@@ -71,25 +71,25 @@
             "Một số bản dịch đã thay đổi"
          ],
          "Scan the selected components to make new texts available for translation.": [
-            "Quét các thành phần đã chọn để cung cấp văn bản mới cho bản dịch."
+            "Quét các thành phần đã chọn để cung cấp các văn bản mới để dịch."
          ],
          "Select all": [
             "Chọn tất cả"
          ],
          "Plugins:": [
-            "Bổ sung:"
+            "Plugin:"
          ],
          "Themes:": [
-            "Chủ đề:"
+            "Giao diện:"
          ],
          "Core:": [
             "Cốt lõi:"
          ],
          "Can't find the strings you're looking to translate?": [
-            "Không thể tìm thấy chuỗi bạn đang muốn dịch?"
+            "Không tìm thấy chuỗi bạn muốn dịch?"
          ],
          "Most likely you cannot see the strings you want to translate because:": [
-            "Rất có thể bạn không nhìn thấy được chuỗi bạn muốn dịch vì:"
+            "Rất có thể bạn không thấy các chuỗi bạn muốn dịch vì:"
          ],
          "Texts are not selected for translation": [
             "Văn bản không được chọn để dịch"

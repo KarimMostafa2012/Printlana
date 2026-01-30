@@ -61,6 +61,15 @@ class DistanceRateMethod extends WC_Shipping_Method {
     public $default;
 
     /**
+     * Available rates.
+     *
+     * @since 3.4.2
+     *
+     * @var array
+     */
+    private array $available_rates;
+
+    /**
      * Cloning is forbidden. Will deactivate prior 'instances' users are running
      *
      * @since 3.4.2

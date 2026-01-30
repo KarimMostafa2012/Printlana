@@ -2,7 +2,6 @@
 
 namespace WeDevs\DokanPro\Emails;
 
-use WC_Email;
 use WeDevs\DokanPro\Refund\Refund;
 
 /**
@@ -10,7 +9,7 @@ use WeDevs\DokanPro\Refund\Refund;
  *
  * @since 3.3.6
  */
-class CanceledRefundVendor extends WC_Email {
+class CanceledRefundVendor extends AbstractRefund {
 
     /**
      * Constructor.
@@ -90,7 +89,7 @@ class CanceledRefundVendor extends WC_Email {
         $order_id      = $refund->get_order_id();
         $refund_amount = wc_format_decimal( $refund->get_refund_amount(), false, true );
         $refund_reason = $refund->get_refund_reason();
-        $status        = 'canceled';
+        $status        = $this->get_translated_status( 'canceled' );
         $seller_mail   = $seller->get_email();
         $order_url     = esc_url(
             add_query_arg(

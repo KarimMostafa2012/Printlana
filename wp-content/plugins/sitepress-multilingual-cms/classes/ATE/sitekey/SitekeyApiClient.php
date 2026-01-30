@@ -13,11 +13,16 @@ class SitekeyApiClient {
 	/** @var SitekeyProvider */
 	private $sitekeyProvider;
 
+	/** @var SitekeyLogger */
+	private $logger;
+
 	/**
 	 * @param SitekeyProvider $sitekeyProvider
+	 * @param SitekeyLogger $logger
 	 */
-	public function __construct( SitekeyProvider $sitekeyProvider ) {
+	public function __construct( SitekeyProvider $sitekeyProvider, SitekeyLogger $logger ) {
 		$this->sitekeyProvider = $sitekeyProvider;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -29,7 +34,7 @@ class SitekeyApiClient {
 		$sitekey = $this->sitekeyProvider->getSitekey();
 
 		if ( ! $sitekey ) {
-			$this->logError( 'Site key is empty' );
+			$this->logger->logError( 'Site key is empty' );
 			return false;
 		}
 
@@ -47,22 +52,14 @@ class SitekeyApiClient {
 			$result = make( \WPML_TM_AMS_API::class )->send_sitekey( $sitekey );
 
 			if ( ! $result ) {
-				$this->logError( 'AMS API returned false' );
+				$this->logger->logError( 'AMS API returned false' );
 			}
 
 			return (bool) $result;
 		} catch ( \Exception $e ) {
-			$this->logError( $e->getMessage() );
+			$this->logger->logError( $e->getMessage() );
 			return false;
 		}
 	}
 
-	/**
-	 * Log error during site key sync.
-	 *
-	 * @param string $message
-	 */
-	private function logError( $message ) {
-		error_log( sprintf( 'WPML: Failed to send site key to AMS: %s', $message ) );
-	}
 }

@@ -1251,10 +1251,10 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return WPML_Notices
 	 */
 	public function get_admin_notices() {
-		global $wpml_admin_notices;
+		global $wpml_admin_notices, $sitepress;
 
 		if ( ! $wpml_admin_notices ) {
-			$wpml_admin_notices = new WPML_Notices( new WPML_Notice_Render() );
+			$wpml_admin_notices = new WPML_Notices( new WPML_Notice_Render(), $sitepress );
 			$wpml_admin_notices->init_hooks();
 		}
 

@@ -225,19 +225,104 @@ class Ajax {
         $doc_type    = sanitize_text_field( wp_unslash( $_REQUEST['doc_type'] ) );
         $total_files = count( $file_names );
 
+        // Define allowed file types and their corresponding MIME types and magic numbers
+        $allowed_types = array(
+            'pdf' => array(
+                'ext' => 'pdf',
+                'mime' => array( 'application/pdf' ),
+                'magic' => array( '25504446' ), // %PDF
+            ),
+            'jpg' => array(
+                'ext' => array( 'jpg', 'jpeg' ),
+                'mime' => array( 'image/jpeg', 'image/jpg' ),
+                'magic' => array( 'ffd8ff' ), // JPEG
+            ),
+            'png' => array(
+                'ext' => 'png',
+                'mime' => array( 'image/png' ),
+                'magic' => array( '89504e47' ), // PNG
+            ),
+        );
+
         for ( $index = 0; $index < $total_files; ++$index ) {
-            $fileinfo = wp_check_filetype_and_ext( $file_tmpnames[ $index ], $file_names[ $index ] );
+            // Validate file exists and is uploaded properly
+            if ( empty( $file_tmpnames[ $index ] ) || ! is_uploaded_file( $file_tmpnames[ $index ] ) ) {
+                wp_send_json_error( __( 'File upload error. Please try again.', 'dokan' ) );
+            }
+
+            // Sanitize and validate file name
+            $original_name = $file_names[ $index ];
+            $safe_filename = sanitize_file_name( $original_name );
+
+            // Check for double extensions and suspicious patterns
+            if ( preg_match( '/\.(php|phtml|php3|php4|php5|pl|py|jsp|asp|sh|cgi|exe|scr|bat|com|pif|vbs|js|jar|class)(\.|$)/i', $safe_filename ) ) {
+                // translators: 1 file name.
+                wp_send_json_error( sprintf( __( 'File rejected for security reasons: %s', 'dokan' ), $original_name ) );
+            }
+
+            // WordPress file type validation
+            $fileinfo = wp_check_filetype_and_ext( $file_tmpnames[ $index ], $safe_filename );
 
             if ( ! $fileinfo['ext'] || ! $fileinfo['type'] ) {
-                /* translators: 1) input file name */
-                wp_send_json_error( sprintf( __( 'The file is not valid: %s', 'dokan' ), $file_names[ $index ] ) );
+                // translators: 1 file name
+                wp_send_json_error( sprintf( __( 'The file is not valid: %s', 'dokan' ), $original_name ) );
             }
 
-            if ( ! preg_match( '#pdf|application/pdf|image\/jpeg|image\/jpg|image\/png#i', $file_types[ $index ] ) ) {
-                /* translators: 1) input file type */
-                wp_send_json_error( sprintf( __( 'Unsupported file type: %s. Supported types: .pdf, .jpeg, .jpg and .png only', 'dokan' ), $file_types[ $index ] ) );
+            // Validate against whitelist
+            $file_valid = false;
+            $detected_type = '';
+
+            foreach ( $allowed_types as $type => $config ) {
+                $extensions = is_array( $config['ext'] ) ? $config['ext'] : array( $config['ext'] );
+
+                if ( in_array( $fileinfo['ext'], $extensions, true ) &&
+                    in_array( $fileinfo['type'], $config['mime'], true ) ) {
+                    $file_valid = true;
+                    $detected_type = $type;
+                    break;
+                }
             }
 
+            if ( ! $file_valid ) {
+                // translators: 1 file name.
+                wp_send_json_error( sprintf( __( 'Unsupported file type: %s. Supported types: PDF, JPEG, JPG and PNG only', 'dokan' ), $fileinfo['type'] ) );
+            }
+
+            // Validate file content by checking magic numbers (file signatures)
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+            $file_content = file_get_contents( $file_tmpnames[ $index ], false, null, 0, 8 );
+            if ( false === $file_content ) {
+                // translators: 1 file name.
+                wp_send_json_error( sprintf( __( 'Unable to read file: %s', 'dokan' ), $original_name ) );
+            }
+
+            $file_hex = bin2hex( $file_content );
+            $magic_valid = false;
+
+            foreach ( $allowed_types[ $detected_type ]['magic'] as $magic ) {
+                if ( 0 === strpos( strtolower( $file_hex ), strtolower( $magic ) ) ) {
+                    $magic_valid = true;
+                    break;
+                }
+            }
+
+            if ( ! $magic_valid ) {
+                // translators: 1 file name.
+                wp_send_json_error( sprintf( __( 'File content does not match expected type: %s', 'dokan' ), $original_name ) );
+            }
+
+            // Additional security checks
+            // Check for embedded PHP code in images
+            if ( in_array( $detected_type, array( 'jpg', 'png' ), true ) ) {
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+                $file_content_check = file_get_contents( $file_tmpnames[ $index ] );
+                if ( false !== $file_content_check && preg_match( '/<\?php|<\?=|<script/i', $file_content_check ) ) {
+                    // translators: 1 file name.
+                    wp_send_json_error( sprintf( __( 'File contains suspicious content: %s', 'dokan' ), $original_name ) );
+                }
+            }
+
+            // File size validation
             if ( $file_sizes[ $index ] < 32000 && $doc_type === KycDocumentType::IdentityProof ) {
                 /* translators: 1) identity proof */
                 wp_send_json_error( sprintf( __( 'This file is too small. Minimum 32KB required for %s', 'dokan' ), KycDocumentType::IdentityProof ) );
@@ -252,6 +337,9 @@ class Ajax {
                 /* translators: 1) input doc type */
                 wp_send_json_error( sprintf( __( 'This file is too big. Maximum 10MB allowed for %s', 'dokan' ), $doc_type ) );
             }
+
+            // Update file names array with sanitized names
+            $file_names[ $index ] = $safe_filename;
         }
 
         // Step-1: Create a document
@@ -360,6 +448,7 @@ class Ajax {
             if ( ! empty( $_POST[ $key ] ) ) {
                 $data[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
             } elseif ( ! empty( $field['required'] ) ) {
+                // translators: 1 field name.
                 $error_notice[] = sprintf( esc_html__( '%s is required', 'dokan' ), $field['label'] );
             }
         }
@@ -402,7 +491,7 @@ class Ajax {
                         [
                             'a' => [
                                 'href' => true,
-                            ]
+                            ],
                         ]
                     )
                 );

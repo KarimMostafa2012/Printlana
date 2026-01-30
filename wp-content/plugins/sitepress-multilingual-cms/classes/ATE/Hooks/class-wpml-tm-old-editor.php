@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
+
 class WPML_TM_Old_Editor implements IWPML_Action {
 	const ACTION = 'icl_ajx_custom_call';
 
@@ -29,7 +31,15 @@ class WPML_TM_Old_Editor implements IWPML_Action {
 				return;
 			}
 
+			// Get previous value to detect changes
+			$previous_old_editor = get_option( WPML_TM_Old_Jobs_Editor::OPTION_NAME, null );
+
 			update_option( WPML_TM_Old_Jobs_Editor::OPTION_NAME, $old_editor );
+
+			// Capture PostHog event only when the setting actually changes
+			if ( $previous_old_editor !== $old_editor ) {
+				$this->capture_ate_for_old_translations_event( $old_editor );
+			}
 
 			if ( WPML_TM_Editors::WPML === $old_editor && $this->is_ate_enabled_and_manager_wizard_completed() ) {
 				$text   = __( 'You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you\'ll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings.', 'sitepress' );
@@ -49,6 +59,27 @@ class WPML_TM_Old_Editor implements IWPML_Action {
 	 */
 	private function is_ate_enabled_and_manager_wizard_completed() {
 		return WPML_TM_ATE_Status::is_enabled_and_activated() && (bool) get_option( WPML_TM_Wizard_Options::WIZARD_COMPLETE_FOR_MANAGER, false );
+	}
+
+	/**
+	 * Capture PostHog event when ATE for old translations setting is changed.
+	 *
+	 * @param string $old_editor The editor selected for old translations.
+	 */
+	private function capture_ate_for_old_translations_event( $old_editor ) {
+		// Skip if PostHog is not enabled
+		if ( ! \WPML\PostHog\State\PostHogState::isEnabled() ) {
+			return;
+		}
+
+		$event_props = array(
+			'enabled' => WPML_TM_Editors::ATE === $old_editor,
+		);
+
+		// Capture the event
+		\WPML\PostHog\Event\CaptureEvent::capture(
+			( new EventInstanceService() )->getATEForOldTranslationsEnabledEvent( $event_props )
+		);
 	}
 
 }

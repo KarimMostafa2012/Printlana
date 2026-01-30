@@ -5,7 +5,7 @@ Tags: woocommerce, search, product search, woocommerce search, live search
 Requires at least: 4.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.50
+Stable tag: 3.52
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -288,6 +288,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 [View full changelog](https://advanced-woo-search.com/guide/free-version/?utm_source=wp-repo&utm_medium=listing&utm_campaign=aws-repo)
 
+= 3.52 ( 2026-01-20 ) =
+* Add - Integration with Uncode theme
+
+= 3.51 ( 2026-01-05 ) =
+* Update - Integration for Hestia theme. Fix search bar styles
+
 = 3.50 ( 2025-12-15 ) =
 * Update - Tested with WC 10.4
 * Update - GA event parameters. Add new aws_has_results value
@@ -475,12 +481,3 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix - Add new parameters for orderby function
 * Fix - Automatically index products that were restored from the trash
 * Dev - Fix functions naming
-
-= 3.13 ( 2024-08-05 ) =
-* Add - Integration with EAN for WooCommerce by WPFactory plugin
-* Fix - Bug with search results filtering via third party plugins
-* Fix - Bug when filtering product variations on search results page
-* Dev - New function to get current page id
-
-= 3.12 ( 2024-07-19 ) =
-* Fix - Bug with search results page taxonomies filters

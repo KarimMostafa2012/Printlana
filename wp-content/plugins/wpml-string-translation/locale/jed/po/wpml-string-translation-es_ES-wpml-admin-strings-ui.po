@@ -2,12 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/admin-strings/texts.js:10
 msgid "Not included in String Translation"
-msgstr "No incluido en la Traducción de cadenas"
+msgstr "No incluido en la traducción de cadenas"
 
 #: src/js/admin-strings/texts.js:11
 msgid "Registered and locked"
@@ -35,11 +35,11 @@ msgstr "Error de comunicación"
 
 #: src/js/admin-strings/texts.js:20
 msgid "The action failed."
-msgstr "La acción fracasó."
+msgstr "La acción falló."
 
 #: src/js/admin-strings/texts.js:22
 msgid "All (%d)"
-msgstr "Todos (%d)"
+msgstr "Todos los (%d)"
 
 #: src/js/admin-strings/texts.js:23
 msgid "Included in String Translation (%d)"
@@ -51,7 +51,7 @@ msgstr "No incluido en la traducción de cadenas (%d)"
 
 #: src/js/admin-strings/texts.js:26
 msgid "This setting is locked by a WPML configuration file."
-msgstr "Este ajuste está bloqueado por un archivo de configuración de WPML."
+msgstr "Esta configuración está bloqueada por un archivo de configuración de WPML."
 
 #: src/js/admin-strings/texts.js:28
 msgid "Option"
@@ -71,7 +71,7 @@ msgstr "Estado"
 
 #: src/js/admin-strings/texts.js:34
 msgid "Export as a WPML configuration file"
-msgstr "Exportar como archivo de configuración WPML"
+msgstr "Exportar como archivo de configuración de WPML"
 
 #: src/js/admin-strings/texts.js:35
 msgid "Cancel"
@@ -79,18 +79,18 @@ msgstr "Cancelar"
 
 #: src/js/admin-strings/texts.js:36
 msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr "Guarda lo siguiente en un wpml-config.xml en la raíz de tu tema o plugin."
+msgstr "Guarde lo siguiente en un archivo wpml-config.xml en la raíz de su tema o plugin."
 
 #: src/js/admin-strings/texts.js:38
 msgid "No options found."
-msgstr "No se han encontrado opciones."
+msgstr "No se encontraron opciones."
 
 #: src/js/admin-strings/texts.js:39
 msgid ""
 "Make sure you saved your theme options at least once. Some themes only add "
 "these to the wp_options table after the user explicitly saves changes to "
 "the theme defaults."
-msgstr "Asegúrate de haber guardado las opciones de tu tema al menos una vez. Algunos temas sólo las añaden a la tabla wp_options después de que el usuario guarde explícitamente los cambios en los valores predeterminados del tema."
+msgstr "Asegúrese de haber guardado las opciones de su tema al menos una vez. Algunos temas solo las añaden a la tabla wp_options después de que el usuario guarda explícitamente los cambios en los valores predeterminados del tema."
 
 #: src/js/admin-strings/texts.js:6
 msgid "Add to String Translation"

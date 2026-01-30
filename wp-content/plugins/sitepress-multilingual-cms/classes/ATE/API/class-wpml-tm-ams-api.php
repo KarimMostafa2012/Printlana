@@ -11,6 +11,7 @@ use WPML\FP\Relation;
 use WPML\FP\Either;
 use WPML\TM\ATE\API\ErrorMessages;
 use WPML\FP\Fns;
+use WPML\TM\Jobs\JobLog;
 use function WPML\FP\pipe;
 use WPML\FP\Logic;
 use WPML\TM\ATE\API\CachedAMSAPI;
@@ -249,7 +250,12 @@ class WPML_TM_AMS_API {
 		} );
 
 		$handleErrorResponse = $this->handleErrorResponse( $logErrorResponse, $getErrors );
-		$handleGeneralError  = $handleErrorResponse( Fns::identity(), pipe( [ ErrorMessages::class, 'invalidResponse' ], Either::left() ) );
+		$handleGeneralError  = $handleErrorResponse(
+			Fns::identity(),
+			function( $uuid, $response ) {
+				return Either::left( ErrorMessages::invalidResponse( $uuid, $response ) );
+			}
+		);
 		$handle409Error      = $this->handle409Error( $handleErrorResponse, $makeRequest );
 
 		return Either::of( $uuid )
@@ -286,7 +292,9 @@ class WPML_TM_AMS_API {
 					ErrorMessages::serverUnavailableHeader(),
 					[ 'responseError' => $response->get_error_message(), 'website_uuid' => $uuid ]
 				);
-				$msg = $this->ping_healthy_wpml_endpoint() ? ErrorMessages::serverUnavailable( $uuid ) : ErrorMessages::offline( $uuid );
+				$msg = $this->ping_healthy_wpml_endpoint()
+					? ErrorMessages::serverUnavailable( $uuid, $response )
+					: ErrorMessages::offline( $uuid, $response );
 
 				return Either::left( $msg );
 			}
@@ -322,7 +330,7 @@ class WPML_TM_AMS_API {
 			if ( $shouldHandleError( $error ) ) {
 				$logErrorResponse( $error, $uuid );
 
-				return $errorHandler( $uuid );
+				return $errorHandler( $uuid, $response );
 			}
 
 			return Either::of( $data );
@@ -332,7 +340,7 @@ class WPML_TM_AMS_API {
 	private function handle409Error($handleErrorResponse, $makeRequest) {
 		$is409Error = Logic::both( Fns::identity(), pipe( invoke( 'get_error_code' ), Relation::equals( 409 ) ) );
 
-		return $handleErrorResponse($is409Error, function ( $uuid ) use ( $makeRequest ) {
+		return $handleErrorResponse($is409Error, function ( $uuid, $response ) use ( $makeRequest ) {
 			$uuid = wpml_get_site_id( WPML_TM_ATE::SITE_ID_SCOPE, true );
 
 			return $makeRequest( $uuid );
@@ -349,7 +357,7 @@ class WPML_TM_AMS_API {
 					[ 'responseError' => ErrorMessages::bodyWithoutRequiredFields(), 'response' => json_encode( $response ), 'website_uuid' => $uuid ]
 				);
 
-				return Either::left( ErrorMessages::invalidResponse( $uuid ) );
+				return Either::left( ErrorMessages::invalidResponse( $uuid, $response ) );
 			}
 
 			return Either::of( $data );
@@ -839,6 +847,14 @@ class WPML_TM_AMS_API {
 	private function request( $method, $url, array $params = null ) {
 		$lock = $this->clonedSitesHandler->checkCloneSiteLock( $url );
 		if ( $lock ) {
+			JobLog::add(
+				'WPML_TM_AMS_API request lock check failed',
+				[
+					'method' => $method,
+					'url'    => $url,
+					'params' => $params,
+				]
+			);
 			return $lock;
 		}
 
@@ -863,7 +879,27 @@ class WPML_TM_AMS_API {
 			$args['body'] = $body ?: '';
 		}
 
-		$response = $this->wp_http->request( $this->add_versions_to_url( $url ), $args );
+		$versioned_url = $this->add_versions_to_url( $url );
+
+		JobLog::addExtraLogData( 'apiCall', $url );
+		JobLog::add(
+			'WPML_TM_AMS_API request',
+			[
+				'method'        => $method,
+				'url'           => $url,
+				'params'        => $params,
+				'versioned_url' => $versioned_url,
+				'args'          => $args,
+			]
+		);
+		$response = $this->wp_http->request( $versioned_url, $args );
+		JobLog::add(
+			'WPML_TM_AMS_API request response',
+			[
+				'response' => $response,
+			]
+		);
+		JobLog::removeExtraLogData( 'apiCall' );
 
 		if ( ! is_wp_error( $response ) ) {
 			$response = $this->clonedSitesHandler->handleClonedSiteError( $response );

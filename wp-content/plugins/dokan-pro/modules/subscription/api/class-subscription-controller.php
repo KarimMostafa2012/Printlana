@@ -562,6 +562,7 @@ class Dokan_REST_Subscription_Controller extends DokanRESTController {
         }
 
         $end_date   = $subscription->get_pack_end_date();
+        $subscription_end_date = $subscription->subscription_end_date();
         $order_id   = get_user_meta( $seller->get_id(), 'product_order_id', true );
 
         $data = [
@@ -581,6 +582,7 @@ class Dokan_REST_Subscription_Controller extends DokanRESTController {
             'subscription_trial_until' => $subscription->get_trial_end_date(),
             'start_date'               => dokan_format_date( $subscription->get_pack_start_date() ),
             'end_date'                 => 'unlimited' === $end_date ? __( 'Unlimited', 'dokan' ) : dokan_format_date( $end_date ),
+            'subscription_end_date'    => 'unlimited' === $subscription_end_date ? __( 'Unlimited', 'dokan' ) : dokan_format_date( $subscription_end_date ),
             'current_date'             => dokan_format_date(),
             'status'                   => $subscription->has_subscription(),
             'is_recurring'             => $subscription->has_recurring_pack(),

@@ -2,15 +2,17 @@
 
 namespace WPML\TM\TranslationDashboard\EncodedFieldsValidation;
 
+use WPML\Core\Component\Base64Detection\Application\Service\Base64DetectionService;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
+use WPML\Infrastructure\Dic;
 use WPML\LIB\WP\Post;
 use WPML\TM\TranslationDashboard\SentContentMessages;
 use function WPML\FP\spreadArgs;
 
 class Validator {
-	/** @var \WPML_Encoding_Validation */
-	private $encoding_validation;
+	/** @var Base64DetectionService */
+	private $base64Detector;
 	/** @var \WPML_Element_Translation_Package */
 	private $package_helper;
 	/** @var SentContentMessages */
@@ -21,17 +23,24 @@ class Validator {
 	private $pbFactory;
 
 	public function __construct(
-		\WPML_Encoding_Validation $encoding_validation,
 		\WPML_Element_Translation_Package $package_helper,
 		SentContentMessages $sentContentMessages,
 		FieldTitle $fieldTitle,
 		\WPML_PB_Factory $pbFactory
 	) {
-		$this->encoding_validation = $encoding_validation;
+		$this->base64Detector      = $this->getBase64DetectionService();
 		$this->package_helper      = $package_helper;
 		$this->sentContentMessages = $sentContentMessages;
 		$this->fieldTitle          = $fieldTitle;
 		$this->pbFactory           = $pbFactory;
+	}
+
+
+	private function getBase64DetectionService() {
+		/** @var Dic $wpml_dic */
+		global $wpml_dic;
+
+		return $wpml_dic->make( Base64DetectionService::class );
 	}
 
 	/**
@@ -175,21 +184,19 @@ class Validator {
 	private function findPostsWithEncodedFields( $postIds ) {
 		$appendPackage = function ( \WP_Post $post ) {
 			$package = $this->package_helper->create_translation_package( $post->ID, true );
+
 			return [ $post, $package ];
 		};
 
 		$isFieldEncoded = function ( $field ) {
 			$decodedFieldData = base64_decode( $field['data'] );
 
-			return array_key_exists( 'format', $field )
-			             && 'base64' === $field['format']
-			             && $this->encoding_validation->is_base64_with_100_chars_or_more( $decodedFieldData );
-
-			/**
-			 * @todo : we should handle not to block the whole job from being translated but instead we should exclude the problematic field from the job and send it to be translated without that field.
-			 * @todo check Youtrack ticket
-			 * @see : https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-1694
-			 */
+			return array_key_exists( 'format', $field ) &&
+			       'base64' === $field['format'] &&
+			       (
+				       $this->base64Detector->isBase64EncodedText( $decodedFieldData ) ||
+				       $this->base64Detector->containsBase64EncodedText( $decodedFieldData )
+			       );
 		};
 
 		$getInvalidFieldData = function ( $field, $slug ) {
@@ -236,14 +243,19 @@ class Validator {
 			];
 		};
 
+		$isEncodedContent = function ( $content ) {
+			return $this->base64Detector->isBase64EncodedText( $content ) ||
+			       $this->base64Detector->containsBase64EncodedText( $content );
+		};
+
 		/**
 		 * @param \WPML_Package $package
 		 *
 		 * @return ErrorEntry|null
 		 */
-		$tryToGetError = function ( $package ) use ( $getInvalidFieldData ) {
+		$tryToGetError = function ( $package ) use ( $getInvalidFieldData, $isEncodedContent ) {
 			$invalidFields = \wpml_collect( Obj::propOr( [], 'string_data', $package ) )
-				->filter( [ $this->encoding_validation, 'is_base64_with_100_chars_or_more' ] )
+				->filter( $isEncodedContent )
 				->map( $getInvalidFieldData )
 				->values()
 				->toArray();

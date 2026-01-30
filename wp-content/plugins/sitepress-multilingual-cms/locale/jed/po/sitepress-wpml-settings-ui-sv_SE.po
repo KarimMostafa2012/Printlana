@@ -9,17 +9,17 @@ msgstr ""
 msgid ""
 "You must use the Advanced Translation Editor if you want to translate your "
 "content automatically."
-msgstr "Använd avancerad översättningsredigerare för automatisk översättning."
+msgstr "Du måste använda den avancerade översättningsredigeraren om du vill översätta ditt innehåll automatiskt."
 
 #: src/js/settings/UI/Troubleshooting.js:26
 msgid "Synchronize translators and translation managers with ATE"
-msgstr "Synkronisera översättare och chefer med ATE"
+msgstr "Synkronisera översättare och översättningsansvariga med ATE"
 
 #: src/js/settings/UI/Troubleshooting.js:36
 msgid ""
 "Please try again in a few minutes. If the problem persists, please contact "
 "%sWPML support%s."
-msgstr "Vänligen försök igen om några minuter. Om problemet kvarstår, vänligen kontakta %sWPML-support%s."
+msgstr "Försök igen om några minuter. Om problemet kvarstår, kontakta %sWPML-support%s."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:104
 msgid "Save"
@@ -27,20 +27,20 @@ msgstr "Spara"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:73
 msgid "Please confirm this translation setting"
-msgstr "Bekräfta översättningsinställningen"
+msgstr "Vänligen bekräfta denna översättningsinställning"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:76
 msgid "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item."
 msgid_plural "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing items."
-msgstr[0] "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbart kommer WPML automatiskt att översätta det befintliga objektet %1$d."
-msgstr[1] "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbart kommer WPML automatiskt att översätta de befintliga objekten %1$d."
+msgstr[0] "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbara kommer WPML automatiskt att översätta det %1$d befintliga objektet."
+msgstr[1] "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbara kommer WPML automatiskt att översätta de %1$d befintliga objekten."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
 msgid ""
 "Your site is set to translate all content automatically. When you make "
 "<PostTypesNames /> translatable, WPML will automatically translate all "
 "future content."
-msgstr "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbar kommer WPML automatiskt att översätta allt framtida innehåll."
+msgstr "Din webbplats är inställd på att översätta allt innehåll automatiskt. När du gör <PostTypesNames /> översättningsbara kommer WPML automatiskt att översätta allt framtida innehåll."
 
 #: src/js/settings/components/ConfirmNewTranslatablePostType.js:88
 msgid "Are you OK with paying for this?"
@@ -60,7 +60,7 @@ msgstr "Ja, översätt <b>befintligt</b> och <b>framtida</b> innehåll automatis
 
 #: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:64
 msgid "Yes, but only translate <b>future</b> content automatically"
-msgstr "Ja, men översätt bara <b>framtida</b> innehåll automatiskt"
+msgstr "Ja, men översätt endast <b>framtida</b> innehåll automatiskt"
 
 #: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:65
 msgid "Yes, translate <b>future</b> content automatically"

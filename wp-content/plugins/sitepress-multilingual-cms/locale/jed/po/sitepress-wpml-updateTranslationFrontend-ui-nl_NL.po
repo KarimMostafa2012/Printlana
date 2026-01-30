@@ -7,7 +7,7 @@ msgstr ""
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Een ogenblik geduld, bezig met toepassen van vertaling..."
+msgstr "Even geduld, vertaling wordt toegepast.."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
@@ -15,4 +15,4 @@ msgstr "Er is een fout opgetreden bij het toepassen van de vertaling."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
-msgstr "Iemand anders is deze vertaling al aan het beoordelen. Probeer het later opnieuw."
+msgstr "Iemand is deze vertaling al aan het beoordelen. Probeer het later opnieuw."

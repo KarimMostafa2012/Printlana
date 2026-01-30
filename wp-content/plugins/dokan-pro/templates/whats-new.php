@@ -4,6 +4,126 @@
  */
 $changelog = [
     [
+        'version'  => 'Version 4.2.3',
+        'released' => '2026-01-14',
+        'changes'  => [
+            'Fix' => [
+                [
+                    'title'       => 'Resolve vendor staff failed to load product advertisement for due to ownership validation.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'PHP 8.2 deprecation warnings in Store Support module.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Handle vendor verification OAuth redirection.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolve Dokan Rank Math module was broken due to the use of a legacy Rank Math namespace.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Vendor Support modules ticket ID and title not clickable in mobile view.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolve multiple PHP 8.2 compatibility warnings to ensure more stable operation.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolve Product QA visibility issues for improve vendor staff REST API responses.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Social profile inputs UI inconsistencies for bold border.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolve cancelled subscriptions incorrectly showing as valid for unlimited time.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolve UI inconsistencies when adding product add-on fields from the Vendor Dashboard.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 4.2.2',
+        'released' => '2025-12-30',
+        'changes'  => [
+            'New' => [
+                [
+                    'title'       => 'Razorpay Payment Gateway now supports subscriptions, including Vendor Subscriptions, Simple Subscriptions and Reverse Withdrawal.',
+                    'description' => '',
+                ],
+            ],
+            'Improvement' => [
+                [
+                    'title'       => 'Added email notification to customers when vendors update RMA request status.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Enhanced Product Q&A admin with a modern UI for a better user experience.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Admin setting added for booking product to enable or disable delivery time in checkout.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Hide delivery time option for booking product in checkout based on admin setting.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Support new YouTube URL format in vendor social profiles.',
+                    'description' => '',
+                ],
+            ],
+            'Fix' => [
+                [
+                    'title'       => 'Translate properly the cancelled refund email text.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Added strict validation and content scanning to prevent malicious file uploads in the Export/Import module.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Hardened the file deletion process to prevent unauthorized removal of server files via the Export/Import module.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Enhanced security for document uploads in the Mangopay module with stricter file validation.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Updated delivery calendar behavior when vendors have no available delivery days.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Improved chat and support message formatting: preserved line breaks, switched chat text blocks to block flow, and standardized paragraph spacing across desktop and mobile.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Store Support Ticket list totals now reflect the active filter (Open / Closed / All), showing accurate counts per tab.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Store Support ticket reply emails now respect topic-level notification settings; replies are skipped when notifications for that topic are turned off to avoid unwanted emails.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Resolved an issue where Table Rates screen in the vendor dashboard, the dropdowns for "Shipping class" and "Condition" do not work properly in the new UI.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
         'version'  => 'Version 4.2.0',
         'released' => '2025-11-24',
         'changes'  => [

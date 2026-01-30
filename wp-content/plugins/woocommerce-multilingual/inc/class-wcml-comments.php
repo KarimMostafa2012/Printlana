@@ -76,6 +76,23 @@ class WCML_Comments {
 		add_filter( 'the_comments', [ $this, 'translate_product_ids' ] );
 
 		add_filter( 'wpml_skip_comment_duplication', [ $this, 'skip_review_duplication' ], 10, 3 );
+
+		add_action( 'pre_get_comments', [ $this, 'maybe_invalidate_comment_cache' ] );
+	}
+
+	/**
+	 * Invalidate comment cache when comment queries are about to be executed for product reviews.
+	 *
+	 * @param WP_Comment_Query $query The comment query object.
+	 */
+	public function maybe_invalidate_comment_cache( $query ) {
+		if ( isset( $query->query_vars['post_id'] ) && $query->query_vars['post_id'] ) {
+			$product_id = $query->query_vars['post_id'];
+
+			if ( 'product' === get_post_type( $product_id ) ) {
+				wp_cache_flush_group( 'comment-queries' );
+			}
+		}
 	}
 
 	/**
@@ -446,12 +463,12 @@ class WCML_Comments {
 
 		$ratingTerm = get_term_by( 'name', 'rated-' . $rating, 'product_visibility' );
 
-		$productsCountInCurrentLanguage = $this->wpdb->get_var( $this->wpdb->prepare( "                
-                SELECT COUNT( DISTINCT tr.object_id ) 
-                FROM {$this->wpdb->term_relationships} tr
-                LEFT JOIN {$this->wpdb->prefix}icl_translations t ON t.element_id = tr.object_id 
-                WHERE tr.term_taxonomy_id = %d AND t.element_type='post_product' AND t.language_code = %s                 
-        ", $ratingTerm->term_taxonomy_id, $this->sitepress->get_current_language() ) );
+		$productsCountInCurrentLanguage = $this->wpdb->get_var( $this->wpdb->prepare( "
+                SELECT COUNT( DISTINCT tr.object_id )
+                FROM %s tr
+                LEFT JOIN %s t ON t.element_id = tr.object_id
+                WHERE tr.term_taxonomy_id = %d AND t.element_type='post_product' AND t.language_code = %s
+        ", $this->wpdb->term_relationships, $this->wpdb->prefix . 'icl_translations', $ratingTerm->term_taxonomy_id, $this->sitepress->get_current_language() ) );
 
 		return "({$productsCountInCurrentLanguage})";
 	}

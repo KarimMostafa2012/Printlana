@@ -5,7 +5,7 @@ Description: WPS Bidouille fournit des informations sur son site WordPress et co
 Donate link: https://www.paypal.me/donateWPServeur
 Author: WPServeur, NicolasKulka, Benoti, wpformation
 Author URI: https://wpserveur.net
-Version: 1.33.2
+Version: 1.33.3
 Requires at least: 4.2
 Tested up to: 6.8
 Domain Path: languages
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'WPS_BIDOUILLE_VERSION', '1.33.2' );
+define( 'WPS_BIDOUILLE_VERSION', '1.33.3' );
 define( 'WPS_BIDOUILLE_FOLDER', 'wps-bidouille' );
 define( 'WPS_BIDOUILLE_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WPS_BIDOUILLE_API_URL', 'https://www.wpserveur.net/wp-json/' );

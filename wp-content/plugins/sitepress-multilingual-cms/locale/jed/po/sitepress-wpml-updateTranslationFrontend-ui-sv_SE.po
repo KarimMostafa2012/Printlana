@@ -7,12 +7,12 @@ msgstr ""
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Vänligen vänta, tillämpar översättning..."
+msgstr "Vänta, översättningen tillämpas.."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Det uppstod ett fel vid tillämpning av översättningen."
+msgstr "Ett fel uppstod vid tillämpning av översättningen."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
-msgstr "Någon granskar redan denna översättning. Vänligen försök igen senare."
+msgstr "Någon granskar redan den här översättningen. Försök igen senare."

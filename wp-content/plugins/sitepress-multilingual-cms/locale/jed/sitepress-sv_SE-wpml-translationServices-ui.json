@@ -8,7 +8,7 @@
             "lang": "sv_SE"
          },
          "Connect this site to your %s account": [
-            "Anslut denna webbplats till ditt %s-konto"
+            "Anslut den här webbplatsen till ditt %s-konto"
          ],
          "Error": [
             "Fel"
@@ -47,7 +47,7 @@
             "Beskrivning"
          ],
          "Ranking": [
-            "Rankning"
+            "Ranking"
          ]
       }
    }

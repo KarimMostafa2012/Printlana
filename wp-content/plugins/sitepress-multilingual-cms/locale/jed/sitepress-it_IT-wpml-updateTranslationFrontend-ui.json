@@ -8,13 +8,13 @@
             "lang": "it_IT"
          },
          "Please wait, applying translation..": [
-            "Attendere prego, sto applicando la traduzione..."
+            "Attendi, applicazione della traduzione in corso..."
          ],
          "There was an error in applying translation.": [
-            "Si è verificato un errore nell'applicare la traduzione."
+            "Si è verificato un errore durante l'applicazione della traduzione."
          ],
          "Someone is already reviewing this translation. Please try again later.": [
-            "Qualcuno sta già revisionando questa traduzione. Si prega di riprovare più tardi."
+            "Qualcuno sta già revisionando questa traduzione. Riprova più tardi."
          ]
       }
    }

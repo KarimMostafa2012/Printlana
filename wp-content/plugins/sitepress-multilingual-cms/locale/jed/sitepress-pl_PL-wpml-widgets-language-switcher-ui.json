@@ -8,16 +8,16 @@
             "lang": "pl_PL"
          },
          "To display this Custom HTML block in a specific language, first place it inside a Group block.": [
-            "Aby wyświetlić ten blok Niestandardowego HTML w określonym języku, najpierw umieść go wewnątrz bloku Grupy."
+            "Aby wyświetlić ten niestandardowy blok HTML w określonym języku, najpierw umieść go w bloku Grupa."
          ],
          "Place inside Group block": [
-            "Umieść wewnątrz bloku Grupy"
+            "Umieść w bloku Grupa"
          ],
          "All": [
             "Wszystkie"
          ],
          "Display on language": [
-            "Wyświetlaj w języku"
+            "Wyświetl w języku"
          ]
       }
    }

@@ -2,24 +2,24 @@
 # This file is distributed under the same license as the WPML String Translation plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML String Translation 3.4.1\n"
+"Project-Id-Version: WPML String Translation 3.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpml-string-translation\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-24T13:13:29+00:00\n"
+"POT-Creation-Date: 2025-12-05T14:38:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wpml-string-translation\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Plugin Name of the plugin
 #: plugin.php
 msgid "WPML String Translation"
-msgstr "Traducción de cadenas Wpml"
+msgstr "WPML String Translation"
 
 #. Plugin URI of the plugin
 #: plugin.php
@@ -28,13 +28,13 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: plugin.php
-msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">WPML String Translation 3.4.1 release notes</a>"
-msgstr "Añade capacidades de localización de temas y plugins a WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentación</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-4-1/\">Notas de la versión WPML String Translation 3.4.1</a>"
+msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">WPML String Translation 3.3.0-dev release notes</a>"
+msgstr "Añade capacidades de localización de temas y plugins a WPML | <a href=\"https://wpml.org/documentation/getting-started-guide/string-translation/\">Documentación</a> | <a href=\"https://wpml.org/version/wpml-string-translation-3-3-0-dev/\">Notas de la versión de WPML String Translation 3.3.0-dev</a>"
 
 #. Author of the plugin
 #: plugin.php
 msgid "OnTheGoSystems"
-msgstr "Onthegosystems"
+msgstr "OnTheGoSystems"
 
 #. Author URI of the plugin
 #: plugin.php
@@ -43,11 +43,11 @@ msgstr "http://www.onthegosystems.com/"
 
 #: classes/API/rest/mo/Import.php:65
 msgid "WPML found %s new or updated .mo files. Their texts were added to the translations table."
-msgstr "WPML encontró %s archivos .mo nuevos o actualizados. Sus textos fueron añadidos a la tabla de traducciones."
+msgstr "WPML encontró %s archivos .mo nuevos o actualizados. Sus textos se añadieron a la tabla de traducciones."
 
 #: classes/AutoRegisterStringsNotice.php:26
 msgid "Click here to enable it"
-msgstr "Haga clic aquí para habilitarlo"
+msgstr "Haga clic aquí para activarlo"
 
 #: classes/AutoRegisterStringsNotice.php:27
 msgid "String auto registration is disabled. "
@@ -66,7 +66,7 @@ msgstr "Error: inténtelo de nuevo"
 
 #: classes/class-wpml-st-string-statuses.php:14
 msgid "Translation complete"
-msgstr "Traducción terminada"
+msgstr "Traducción completa"
 
 #: classes/class-wpml-st-string-statuses.php:17
 msgid "Partial translation"
@@ -74,27 +74,27 @@ msgstr "Traducción parcial"
 
 #: classes/class-wpml-st-string-statuses.php:20
 msgid "Translation needs update"
-msgstr "La traducción requiere ser actualizada."
+msgstr "La traducción necesita actualización"
 
 #: classes/class-wpml-st-string-statuses.php:23
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:403
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:443
 msgid "Not translated"
-msgstr "Sin traducir"
+msgstr "No traducido"
 
 #: classes/class-wpml-st-string-statuses.php:26
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:391
 #: menu/string-translation.php:214
 msgid "Waiting for translator"
-msgstr "En espera del traductor"
+msgstr "Esperando traductor"
 
 #: classes/class-wpml-st-verify-dependencies.php:36
 msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
-msgstr "Active el plugin CMS Multilingüe de WPML para que funcione la Traducción de cadenas de WPML."
+msgstr "Por favor, active WPML Multilingual CMS para que WPML String Translation funcione."
 
 #: classes/class-wpml-st-verify-dependencies.php:45
 msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
-msgstr "La Traducción de cadenas de WPML está habilitada pero no activa. Primero actualice  WPML."
+msgstr "WPML String Translation está activado pero no es efectivo, porque WPML está desactualizado. Por favor, actualice WPML primero."
 
 #: classes/filters/class-wpml-st-taxonomy-labels-translation.php:205
 msgid "Missing parameters"
@@ -102,45 +102,45 @@ msgstr "Parámetros faltantes"
 
 #: classes/filters/class-wpml-st-taxonomy-labels-translation.php:230
 msgid "Invalid nonce"
-msgstr "Valor de seguridad (nonce) no válido"
+msgstr "Nonce no válido"
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:230
 msgid "Nonce value is invalid"
-msgstr " El valor nonce no es válido."
+msgstr "El valor nonce no es válido"
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:237
 msgid "Automatic string registration will remain active for <span class='counter-msg'>%s</span>. Please visit the site's front-end to allow WPML to find strings for translation."
-msgstr "El registro automático de cadenas permanecerá activo durante <span class=“counter-msg”>%s</span>. Por favor, visite el frontend del sitio para permitir que WPML encuentre cadenas para traducir."
+msgstr "El registro automático de cadenas permanecerá activo durante <span class='counter-msg'>%s</span>. Por favor, visite la parte frontal del sitio para permitir que WPML encuentre cadenas para traducir."
 
 #: classes/gettext-hooks/AutoRegisterSettings.php:242
 msgid "* This feature is only intended for sites that are in development. It will significantly slow down the site, but help you find strings that WPML cannot detect in the PHP code."
-msgstr "* Esta función solo es para sitios que están en desarrollo. Disminuirá el sitio significativamente, pero le ayudará a encontrar cadenas que WPML no puede detectar en el código PHP."
+msgstr "* Esta función solo está destinada a sitios en desarrollo. Ralentizará significativamente el sitio, pero le ayudará a encontrar cadenas que WPML no puede detectar en el código PHP."
 
 #: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:30
 msgid "Use theme or plugin text domains when gettext calls do not use a string literal"
-msgstr "Use textdomains de temas o plugins automáticamente cuando las llamadas gettext no usan una cadena literal."
+msgstr "Usar dominios de texto de temas o plugins cuando las llamadas gettext no usan un literal de cadena"
 
 #: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:31
 msgid "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name."
-msgstr "Algunos temas y plugines no definen adecuadamente el textdomain (segundo argumento) en las llamadas GetText. Cuando usted seleccione esta opción, WPML supondrá que las cadenas que se encuentran en las llamadas GetText de los archivos PHP del tema y plugin deben tener el textdomain con el nombre del tema o plugin."
+msgstr "Algunos temas y plugins no establecen correctamente el dominio de texto (segundo argumento) en las llamadas GetText. Cuando selecciona esta opción, WPML asumirá que las cadenas encontradas en las llamadas GetText en los archivos PHP del tema y del plugin deben tener el dominio de texto con el nombre del tema/plugin."
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:40
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:40
 msgid "Scan selected plugins for strings"
-msgstr "Analizar los plugines seleccionados en busca de cadenas"
+msgstr "Escanear plugins seleccionados en busca de cadenas"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:41
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:38
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:41
-#: inc/wpml-string-translation.class.php:548
+#: inc/wpml-string-translation.class.php:551
 msgid "Completely translated strings"
-msgstr "Cadena traducida completamente"
+msgstr "Cadenas completamente traducidas"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:42
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:39
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:42
 msgid "Strings in need of translation"
-msgstr "Cadena sin terminar de traducir"
+msgstr "Cadenas que necesitan traducción"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:43
 msgid "Plugins"
@@ -149,9 +149,9 @@ msgstr "Plugins"
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:44
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:41
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:44
-#: inc/wpml-string-translation.class.php:546
+#: inc/wpml-string-translation.class.php:549
 msgid "Textdomain"
-msgstr "Textdomain"
+msgstr "Dominio de texto"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:45
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:42
@@ -195,11 +195,11 @@ msgstr "Escaneado"
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:91
 #: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:78
 msgid "Needs re-scanning"
-msgstr "Necesita volver a escanear"
+msgstr "Necesita volver a escanearse"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:37
 msgid "Scan selected themes for strings"
-msgstr "Analizar los temas seleccionados en busca de cadenas"
+msgstr "Escanear temas seleccionados en busca de cadenas"
 
 #: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:40
 msgid "Themes"
@@ -211,40 +211,40 @@ msgstr "Núcleo"
 
 #: classes/MO/File/FailureHooks.php:87
 msgid "WPML String Translation is attempting to write .mo files with translations to folder:"
-msgstr "Traducción de cadenas de WPML está intentado escribir los archivos .mo con traducciones en la carpeta:"
+msgstr "WPML String Translation está intentando escribir archivos .mo con traducciones en la carpeta:"
 
 #: classes/MO/File/FailureHooks.php:92
 msgid "This folder appears to be not writable. This is blocking translation for strings from appearing on the site."
-msgstr "Al parecer, esta carpeta no se puede escribir. La misma está impidiendo que la traducción de las cadenas aparezcan en el sitio web."
+msgstr "Esta carpeta parece no tener permisos de escritura. Esto está impidiendo que las traducciones de las cadenas aparezcan en el sitio."
 
 #: classes/MO/File/FailureHooks.php:97
 msgid "If this is a %1$slocal development site%2$s, make sure that your local server can write to this folder."
-msgstr "Si este es un %1$ssitio de desarrollo local%2$s, asegúrese de que su servidor local pueda escribir en esta carpeta."
+msgstr "Si se trata de un %1$ssitio de desarrollo local%2$s, asegúrese de que su servidor local pueda escribir en esta carpeta."
 
 #: classes/MO/File/FailureHooks.php:102
 msgid "If it's an %1$sonline site%2$s, contact your hosting company and request that they make that folder writable."
-msgstr "Si es un %1$ssitio en línea%2$s, contacte a su empresa de alojamiento y solicite que hagan esa carpeta escribible."
+msgstr "Si es un %1$ssitio en línea%2$s, póngase en contacto con su empresa de alojamiento y solicite que hagan que esa carpeta sea escribible."
 
 #: classes/MO/File/FailureHooks.php:110
 msgid "WPML's documentation on troubleshooting .mo files generation."
-msgstr "La documentación de WPML sobre la solución de problemas de generación de archivos .mo."
+msgstr "Documentación de WPML sobre la resolución de problemas de generación de archivos .mo."
 
 #: classes/MO/File/FailureHooks.php:114
 msgid "For more details, see %s."
-msgstr "Para obtener más detalles, consulte %s."
+msgstr "Para más detalles, consulte %s."
 
 #: classes/po-import/class-wpml-po-import-strings.php:32
 msgid "File upload error"
-msgstr "Error al cargar el archivo"
+msgstr "Error de carga de archivo"
 
 #. translators: 1: Language name, 2: Language name, 3: Opening anchor tag, 4: Closing anchor tag.
 #: classes/po-import/class-wpml-po-import-strings.php:83
 msgid "You're trying to import strings that are already registered in %1$s. To import them as %2$s, first %3$schange the source language of existing strings%4$s using String Translation. Then, try importing them again."
-msgstr "Está intentando importar cadenas que ya están registradas en %1$s. Para importarlas como %2$s, primero %3$scambie el idioma de origen de las cadenas existentes%4$s utilizando String Translation. Posteriormente, intente importarlas nuevamente."
+msgstr "Está intentando importar cadenas que ya están registradas en %1$s. Para importarlas como %2$s, primero %3$scambie el idioma de origen de las cadenas existentes%4$s usando String Translation. Luego, intente importarlas de nuevo."
 
 #: classes/privacy/class-wpml-st-privacy-content.php:19
 msgid "WPML String Translation will send all strings to WPML’s Advanced Translation Editor and to the translation services which are used."
-msgstr "La Traducción de cadenas de WPML enviará todas las cadenas al Editor de traducción avanzado de WPML y a los servicios de traducción que se utilizan."
+msgstr "WPML String Translation enviará todas las cadenas al Editor de Traducción Avanzado de WPML y a los servicios de traducción que se utilicen."
 
 #. translators: %s: translation dashboard link
 #: classes/SendStringsForTranslationNotice.php:21
@@ -253,11 +253,11 @@ msgstr "Para traducir cadenas automáticamente, por sus traductores o un servici
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:54
 msgid "Set different slugs in different languages for %s."
-msgstr "Establecer diferentes slugs en diferentes idiomas para %s."
+msgstr "Establezca slugs diferentes en diferentes idiomas para %s."
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:55
 msgid "Not marked as 'complete'. Press 'Save' to enable."
-msgstr "No se marcó como 'Terminada'. Pulse 'Guardar' para activar."
+msgstr "No marcado como “completo”. Pulse “Guardar” para activar."
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:56
 msgid "(original)"
@@ -265,15 +265,15 @@ msgstr "(original)"
 
 #: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:66
 msgid "%s slugs are set to be translated, but they are missing their translation"
-msgstr "Se definieron %s slugs para traducir, pero falta su traducción"
+msgstr "Los slugs de %s están configurados para ser traducidos, pero les falta su traducción"
 
 #: classes/string-tracking/class-wpml-st-string-positions-in-source.php:52
 msgid "No records found"
-msgstr "No se han encontrado registros"
+msgstr "No se encontraron registros"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:28
 msgid "Language of domains"
-msgstr "Idioma de dominios"
+msgstr "Idioma de los dominios"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:30
 #: inc/wpml-string-translation.class.php:498
@@ -292,15 +292,15 @@ msgstr "Cancelar"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:36
 msgid "Select for which domain to set the language: "
-msgstr "Seleccione para qué dominio establecer el idioma:"
+msgstr "Seleccione para qué dominio establecer el idioma: "
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:41
 msgid "-- Please select --"
-msgstr "-- Seleccionar --"
+msgstr "-- Por favor, seleccione --"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:78
 msgid "This domain currently has the following strings:"
-msgstr "Actualmente, este dominio contiene las siguientes cadenas:"
+msgstr "Este dominio tiene actualmente las siguientes cadenas:"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:85
 msgid "Current source language"
@@ -308,15 +308,15 @@ msgstr "Idioma de origen actual"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:86
 msgid "Number of strings"
-msgstr "Cantidad de cadenas"
+msgstr "Número de cadenas"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:96
 msgid "Set the source language of these strings to:"
-msgstr "Establecer el idioma de origen de estas cadenas en:"
+msgstr "Establecer el idioma de origen de estas cadenas a:"
 
 #: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:108
 msgid "Use this language as the default language for new strings in this domain"
-msgstr "Usar este idioma como el idioma predeterminado para las cadenas nuevas de este dominio"
+msgstr "Usar este idioma como idioma predeterminado para nuevas cadenas en este dominio"
 
 #: classes/string-translation-ui/class-wpml-change-string-language-select.php:31
 msgid "Change the language of selected strings"
@@ -324,7 +324,7 @@ msgstr "Cambiar el idioma de las cadenas seleccionadas"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:63
 msgid "No strings found"
-msgstr "No se han encontrado cadenas"
+msgstr "No se encontraron cadenas"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:79
 msgid "Processing"
@@ -341,7 +341,7 @@ msgstr "Contexto"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:163
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:103
-#: inc/wpml-string-translation.class.php:544
+#: inc/wpml-string-translation.class.php:547
 msgid "Name"
 msgstr "Nombre"
 
@@ -362,11 +362,11 @@ msgstr "Cadena"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:182
 msgid "All %d strings on this page are selected."
-msgstr "Todas las %d cadenas en esta página están seleccionadas."
+msgstr "Todas las %d cadenas de esta página están seleccionadas."
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:183
 msgid "Select all strings that match this search"
-msgstr "Seleccionar todas las cadenas que coincidan con esta búsqueda"
+msgstr "Seleccionar todas las cadenas que coinciden con esta búsqueda"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:184
 msgid "All %d strings from all pages are selected."
@@ -374,23 +374,23 @@ msgstr "Todas las %d cadenas de todas las páginas están seleccionadas."
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:185
 msgid "Unselect all strings that match this search"
-msgstr "Deseleccionar todas las cadenas que coincidan con esta búsqueda"
+msgstr "Deseleccionar todas las cadenas que coinciden con esta búsqueda"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:290
 msgid "Preview string on site"
-msgstr "Vista previa de la cadena en el sitio"
+msgstr "Previsualizar cadena en el sitio"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:291
 msgid "This preview shows where the selected string appears on your site’s front-end."
-msgstr "Esta vista previa muestra dónde aparece la cadena seleccionada en el frontend de su sitio."
+msgstr "Esta previsualización muestra dónde aparece la cadena seleccionada en la parte frontal de su sitio."
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:292
 msgid "Frontend preview"
-msgstr "Vista previa del frontend"
+msgstr "Previsualización en el frontend"
 
 #: classes/string-translation-ui/class-wpml-string-translation-table.php:295
 msgid "Preview where this string appears on your site"
-msgstr "Vista previa de dónde aparece esta cadena en su sitio"
+msgstr "Previsualizar dónde aparece esta cadena en su sitio"
 
 #: classes/string-translation-ui/class-wpml-translation-priority-select.php:20
 msgid "Change translation priority of selected strings"
@@ -402,7 +402,7 @@ msgstr "Descartar todos los avisos"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:41
 msgid "Also prevent similar messages in the future?"
-msgstr "¿También detener avisos similares en el futuro?"
+msgstr "¿También evitar mensajes similares en el futuro?"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:42
 msgid "No - keep showing these message"
@@ -410,11 +410,41 @@ msgstr "No, seguir mostrando estos mensajes"
 
 #: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:43
 msgid "Yes - disable these notifications completely"
-msgstr "Sí, desactivar estas notificaciones definitivamente"
+msgstr "Sí, desactivar estas notificaciones completamente"
 
-#: classes/strings-scanning/wpml-st-theme-plugin-scan-dir-ajax.php:52
+#: classes/strings-scanning/JS/SettingsHooks.php:67
+msgid "Detect strings in JavaScript files"
+msgstr "Detectar cadenas en archivos JavaScript"
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:73
+msgid "When enabled, WPML tracks JavaScript files loaded on your site's pages. Texts (strings) from these files will be included when you scan a theme or plugin in %1$sWPML > Theme and plugins localization%2$s."
+msgstr "Cuando está activado, WPML rastrea los archivos JavaScript cargados en las páginas de su sitio. Los textos (cadenas) de estos archivos se incluirán al escanear un tema o plugin en %1$sWPML > Traducción de temas y plugins%2$s."
+
+#. translators: Placeholders are for open and close bold tag
+#: classes/strings-scanning/JS/SettingsHooks.php:93
+msgid "%1$sNote:%2$s This feature may affect site performance. We recommend disabling it after scanning is complete."
+msgstr "%1$sNota:%2$s Esta función puede afectar al rendimiento del sitio. Recomendamos deshabilitarla una vez finalizado el escaneo."
+
+#: classes/strings-scanning/JS/SettingsHooks.php:122
+#: inc/wpml-string-translation.class.php:443
+#: inc/wpml-string-translation.class.php:444
+msgid "String Translation"
+msgstr "String Translation"
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:131
+msgid "JavaScript file scanning is active and may affect performance. %1$sDisable this feature%2$s in WPML Settings once your texts (strings) are registered."
+msgstr "El escaneo de archivos JavaScript está activo y puede afectar al rendimiento. %1$sDesactive esta función%2$s en los ajustes de WPML una vez que sus textos (cadenas) estén registrados."
+
+#. translators: Placeholders are for open and close link tag
+#: classes/strings-scanning/JS/SettingsHooks.php:138
+msgid "Missing texts (strings) after scanning? %1$sEnable Scan strings in JavaScript files%2$s in WPML Settings, visit the page containing the string, then scan again."
+msgstr "¿Faltan textos (cadenas) después del escaneo? %1$sActive la opción Escanear cadenas en archivos JavaScript%2$s en los ajustes de WPML, visite la página que contiene la cadena y, a continuación, escanee de nuevo."
+
+#: classes/strings-scanning/wpml-st-theme-plugin-scan-dir-ajax.php:54
 msgid "Files already scanned."
-msgstr "Archivos ya analizados."
+msgstr "Archivos ya escaneados."
 
 #: classes/support/class-wpml-st-support-info-filter.php:27
 msgid "Multibyte String extension"
@@ -422,54 +452,54 @@ msgstr "Extensión Multibyte String"
 
 #: classes/support/class-wpml-st-support-info-filter.php:28
 msgid "Loaded"
-msgstr "Cargado"
+msgstr "Cargada"
 
 #: classes/support/class-wpml-st-support-info-filter.php:28
 msgid "Not loaded"
-msgstr "No cargado"
+msgstr "No cargada"
 
 #: classes/support/class-wpml-st-support-info-filter.php:31
 msgid "Multibyte String extension is required for WPML String Translation."
-msgstr "Se requiere la extención Multibyte String para la Traducción de cadenas de WPML."
-
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:48
-msgctxt "MO Import blocked short 1/3"
-msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
-msgstr "WPML no puede reemplazar los archivos .mo debido a problemas técnicos en la tabla de la Traducción de cadenas."
+msgstr "La extensión Multibyte String es necesaria para WPML String Translation."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:54
+msgctxt "MO Import blocked short 1/3"
+msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
+msgstr "WPML no puede reemplazar archivos .mo debido a problemas técnicos en la tabla de String Translation."
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:60
 msgctxt "MO Import blocked short 2/3"
 msgid "WPML support team knows how to fix it."
-msgstr "El equipo de soporte de WPML sabe como solucionarlo."
+msgstr "El equipo de soporte de WPML sabe cómo solucionarlo."
 
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:61
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:67
 msgctxt "MO Import blocked short 3/3"
 msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\" >support thread</a> and we'll fix it for you."
-msgstr "Agregue un mensaje en el  <a href=\"%s\" target=\"_blank\" >hilo de soporte</a> correspondiente y nosotros lo solucionaremos por usted."
-
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:73
-msgctxt "MO Import blocked 1/4"
-msgid "There is a problem with the String Translation table in your site."
-msgstr "Hay un problema con la tabla de Traducción de cadenas de su sitio."
+msgstr "Por favor, añada un mensaje en el <a href=\"%s\" target=\"_blank\" >hilo de soporte</a> relevante y lo solucionaremos por usted."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:79
-msgctxt "MO Import blocked 2/4"
-msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
-msgstr "En este momento, este problema no está causando complicaciones en la ejecución del sitio, pero puede convertirse en un problema grave en el futuro."
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "Hay un problema con la tabla de String Translation en su sitio."
 
 #: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:85
+msgctxt "MO Import blocked 2/4"
+msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
+msgstr "Este problema no está causando un problema en el funcionamiento del sitio ahora mismo, pero puede convertirse en un problema crítico en el futuro."
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:91
 msgctxt "MO Import blocked 3/4"
 msgid "WPML support team knows how to fix it."
-msgstr "El equipo de soporte de WPML sabe como solucionarlo."
+msgstr "El equipo de soporte de WPML sabe cómo solucionarlo."
 
-#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:92
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:98
 msgctxt "MO Import blocked 4/4"
 msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\">support thread</a> and we'll fix it for you."
-msgstr "Agregue un mensaje en el <a href=\"%s\" target=\"_blank\" >hilo de soporte</a> correspondiente y nosotros lo solucionaremos por usted."
+msgstr "Por favor, añada un mensaje en el <a href=\"%s\" target=\"_blank\">hilo de soporte</a> relevante y lo solucionaremos por usted."
 
 #: classes/Troubleshooting/BackendHooks.php:33
 msgid "Show custom MO Files Pre-generation dialog box"
-msgstr "Mostrar cuadro de diálogo de Pregeneración de archivos MO personalizado"
+msgstr "Mostrar cuadro de diálogo de pregeneración de archivos MO personalizados"
 
 #: classes/Troubleshooting/BackendHooks.php:40
 msgid "Cleanup and optimize string tables"
@@ -477,15 +507,15 @@ msgstr "Limpiar y optimizar tablas de cadenas"
 
 #: classes/Troubleshooting/BackendHooks.php:41
 msgid "Cleanup and optimization completed!"
-msgstr "¡Limpieza y optimización completados!"
+msgstr "¡Limpieza y optimización completadas!"
 
 #: classes/Troubleshooting/BackendHooks.php:46
 msgid "Check for string issues"
-msgstr "Comprueba si hay problemas con las cadenas"
+msgstr "Comprobar problemas de cadenas"
 
 #: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:43
 msgid "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings."
-msgstr "WPML necesita actualizar la base de datos. Esto ayudará a mejorar el desempeño de WPML al obtener las cadenas traducidas."
+msgstr "WPML necesita actualizar la base de datos. Esta actualización ayudará a mejorar el rendimiento de WPML al obtener cadenas traducidas."
 
 #: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:45
 msgid "Update Now"
@@ -502,15 +532,15 @@ msgstr "Cerrar"
 
 #: classes/upgrade/repair-schema/wpml-st-repair-strings-schema.php:84
 msgid "We have detected a problem with some tables in the database. Please contact %1$sWPML support%2$s to get this fixed."
-msgstr "Hemos detectado un problema con algunas tablas en la base de datos. Por favor, póngase en contacto con el %1$ssoporte de WPML%2$s para solucionar esto."
+msgstr "Hemos detectado un problema con algunas tablas en la base de datos. Por favor, póngase en contacto con el %1$ssoporte de WPML%2$s para solucionarlo."
 
 #: inc/auto-download-locales.php:140
 msgid "Updated %s translation is available"
-msgstr "La traducción al %s actualizada está disponible"
+msgstr "Hay una traducción actualizada de %s disponible"
 
 #: inc/auto-download-locales.php:144
 msgid "Review changes and update"
-msgstr "Revisar cambios y guardar"
+msgstr "Revisar cambios y actualizar"
 
 #: inc/auto-download-locales.php:153
 msgid "No updates found."
@@ -518,7 +548,7 @@ msgstr "No se encontraron actualizaciones."
 
 #: inc/auto-download-locales.php:209
 msgid "Failed downloading the language information file."
-msgstr "No se pudo descargar el archivo de información del idioma."
+msgstr "Error al descargar el archivo de información de idioma."
 
 #: inc/auto-download-locales.php:210
 msgid "Errors: %s"
@@ -526,48 +556,48 @@ msgstr "Errores: %s"
 
 #: inc/auto-download-locales.php:212
 msgid "Failed downloading the language information file. Please go back and try a little later."
-msgstr "No se pudo descargar el archivo de información del idioma. Regrese y vuelva a intentarlo más tarde."
+msgstr "Error al descargar el archivo de información de idioma. Por favor, vuelva atrás e inténtelo un poco más tarde."
 
-#: inc/functions.php:1117
+#: inc/functions.php:1150
 msgid "Translations for strings updated"
 msgstr "Traducciones de cadenas actualizadas"
 
 #: inc/gettext/wpml-po-import.class.php:99
 msgid "No string found"
-msgstr "No se han encontrado cadenas"
+msgstr "No se encontró ninguna cadena"
 
-#: inc/gettext/wpml-string-scanner.class.php:82
+#: inc/gettext/wpml-string-scanner.class.php:84
 msgid "Scan successful: WPML found %s strings."
 msgstr "Escaneo exitoso: WPML encontró %s cadenas."
 
-#: inc/gettext/wpml-string-scanner.class.php:83
+#: inc/gettext/wpml-string-scanner.class.php:85
 msgid "The following files were processed:"
 msgstr "Se procesaron los siguientes archivos:"
 
-#: inc/gettext/wpml-string-scanner.class.php:90
+#: inc/gettext/wpml-string-scanner.class.php:92
 msgid " They were added to the translations table."
-msgstr "Se añadieron a la tabla de traducciones."
+msgstr " Se añadieron a la tabla de traducciones."
 
-#: inc/gettext/wpml-theme-string-scanner.class.php:36
+#: inc/gettext/wpml-theme-string-scanner.class.php:40
 msgid "Scanning file: %s"
-msgstr "Analizando archivo: %s"
+msgstr "Escaneando archivo: %s"
 
-#: inc/gettext/wpml-theme-string-scanner.class.php:41
+#: inc/gettext/wpml-theme-string-scanner.class.php:44
 msgid "Skipping file: %s"
-msgstr "Se omitirá el archivo: %s"
+msgstr "Saltando archivo: %s"
 
 #: inc/package-translation/inc/wpml-package-translation-helper.class.php:673
 msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
-msgstr "Algunas de las cadenas seleccionadas pertenecen a paquetes. Solo puedes cambiar el idioma de estas cadenas si se seleccionan todas las cadenas del paquete."
+msgstr "Algunas de las cadenas seleccionadas pertenecen a paquetes. Solo puede cambiar el idioma de estas cadenas si se seleccionan todas las cadenas de los paquetes."
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:35
 msgid "Package Management"
-msgstr "Administración de paquetes"
+msgstr "Gestión de paquetes"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:36
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:37
 msgid "Display packages for this kind:"
-msgstr "Mostrar paquetes para esta clase:"
+msgstr "Mostrar paquetes de este tipo:"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:65
 msgid "Delete Selected Packages"
@@ -577,7 +607,7 @@ msgstr "Eliminar paquetes seleccionados"
 msgid ""
 "Are you sure you want to delete these packages?\n"
 "Their strings and translations will be deleted too."
-msgstr "¿Estás seguro de que quieres eliminar estos paquetes?\nSus cadenas y traducciones también se eliminarán."
+msgstr "¿Está seguro de que desea eliminar estos paquetes?\nSus cadenas y traducciones también se eliminarán."
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:98
 msgid "Select All"
@@ -585,7 +615,7 @@ msgstr "Seleccionar todo"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:102
 msgid "Kind"
-msgstr "Clase"
+msgstr "Tipo"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:104
 msgid "Info"
@@ -601,11 +631,11 @@ msgstr "La traducción está en curso"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:114
 msgid "Default package language"
-msgstr "Idioma predeterminado de paquete"
+msgstr "Idioma predeterminado del paquete"
 
 #: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:123
 msgid "No packages found"
-msgstr "No se han encontrado paquetes"
+msgstr "No se encontraron paquetes"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:76
 msgid "WPML Translation"
@@ -613,7 +643,7 @@ msgstr "Traducción de WPML"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:78
 msgid "Send to translation"
-msgstr "Enviar para traducir"
+msgstr "Enviar a traducción"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:80
 msgid "Translate strings"
@@ -625,11 +655,11 @@ msgstr "Estado de la traducción:"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:86
 msgid "Language of this %1$s is %2$s"
-msgstr "El idioma de %1$s es %2$s"
+msgstr "El idioma de este %1$s es %2$s"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:89
 msgid "There is nothing to translate."
-msgstr "No hay nada para traducir."
+msgstr "No hay nada que traducir."
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:394
 msgid "In progress"
@@ -637,7 +667,7 @@ msgstr "En curso"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:400
 msgid "Complete"
-msgstr "Terminada"
+msgstr "Completo"
 
 #: inc/package-translation/inc/wpml-package-translation-metabox.class.php:411
 msgid "Needs update"
@@ -651,11 +681,11 @@ msgstr "En la cesta de traducción"
 msgid ""
 "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n"
 "\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
-msgstr "No puedes añadir paquetes en este idioma a la cesta porque ya contiene entradas, paquetes o cadenas de otro idioma de origen!\n\t\t\t\t\t O bien envías la cesta actual y luego añades la entrada o eliminas las entradas de otro idioma de la cesta actual."
+msgstr "No puede añadir paquetes en este idioma a la cesta, ya que ya contiene entradas, paquetes o cadenas de otro idioma de origen.\n\t\t\t\t\tEnvíe la cesta actual y luego añada la entrada o elimine las entradas de idioma diferente en la cesta actual"
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:144
 msgid "Please select at least one language to translate into."
-msgstr "Por favor seleccione al menos un idioma al cual traducir."
+msgstr "Por favor, seleccione al menos un idioma al que traducir."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:163
 msgid "Please select at least one document to translate."
@@ -663,11 +693,11 @@ msgstr "Por favor, seleccione al menos un documento para traducir."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:255
 msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already in progress."
-msgstr "Se ignorará la entrada \"%1$s\" para %2$s porque la traducción ya está en progreso."
+msgstr "La entrada “%1$s” se ignorará para %2$s, porque la traducción ya está en curso."
 
 #: inc/package-translation/inc/wpml-package-translation-tm.class.php:268
 msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already waiting for translator."
-msgstr "Se ignorará la entrada \"%1$s\" para %2$s porque la traducción está a la espera del traductor."
+msgstr "La entrada “%1$s” se ignorará para %2$s, porque la traducción ya está esperando al traductor."
 
 #: inc/package-translation/inc/wpml-package-translation-ui.class.php:65
 #: inc/package-translation/inc/wpml-package-translation-ui.class.php:66
@@ -676,11 +706,11 @@ msgstr "Paquetes"
 
 #: inc/package-translation/inc/wpml-package-translation.class.php:523
 msgid "WPML Package Translation is active but requires both the <a href=\"%s\">WPML core</a> and WPML String Translation plugins to function properly."
-msgstr "WPML Package Translation está activo pero requiere tanto el <a href=\"%s\">núcleo de WPML</a> como el plugin WPML String Translation para funcionar correctamente."
+msgstr "WPML Package Translation está activo pero requiere tanto el <a href=\"%s\">núcleo de WPML</a> como los plugins WPML String Translation para funcionar correctamente."
 
 #: inc/wpml-localization.class.php:205
 msgid "No TextDomain"
-msgstr "No hay TextDomain"
+msgstr "Sin dominio de texto"
 
 #: inc/wpml-localization.class.php:235
 msgid "Translate strings in %s"
@@ -689,11 +719,6 @@ msgstr "Traducir cadenas en %s"
 #: inc/wpml-localization.class.php:236
 msgid "All strings in %s"
 msgstr "Todas las cadenas en %s"
-
-#: inc/wpml-string-translation.class.php:443
-#: inc/wpml-string-translation.class.php:444
-msgid "String Translation"
-msgstr "Traducción de cadenas"
 
 #: inc/wpml-string-translation.class.php:486
 msgid "Show page builder packages"
@@ -707,74 +732,71 @@ msgstr "Configurar"
 msgid "Scan strings in themes, plugins and WordPress"
 msgstr "Escanear cadenas en temas, plugins y WordPress"
 
-#: inc/wpml-string-translation.class.php:545
+#: inc/wpml-string-translation.class.php:548
 msgid "Status"
 msgstr "Estado"
 
-#: inc/wpml-string-translation.class.php:547
+#: inc/wpml-string-translation.class.php:550
 msgid "Action"
 msgstr "Acción"
 
-#: inc/wpml-string-translation.class.php:549
+#: inc/wpml-string-translation.class.php:552
 msgid "Strings that need translation"
 msgstr "Cadenas que necesitan traducción"
 
-#: inc/wpml-string-translation.class.php:575
+#: inc/wpml-string-translation.class.php:578
 msgid "Scan selected components for strings"
-msgstr "Escanear componentes seleccionados para cadenas"
+msgstr "Escanear componentes seleccionados en busca de cadenas"
 
-#: inc/wpml-string-translation.class.php:612
+#: inc/wpml-string-translation.class.php:615
 msgid "WPML could not detect the translation files (.mo) for %s. To fix this, visit your site's frontend in a secondary language."
 msgid_plural "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
-msgstr[0] "WPML no pudo detectar los archivos de traducción (.mo) para %s. Para solucionarlo, visite el frontend de su sitio en un idioma secundario."
-msgstr[1] "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
-msgstr[2] "WPML no pudo detectar los archivos de traducción (.mo) para %s y %s. Para solucionarlo, visite el frontend de su sitio en un idioma secundario."
+msgstr[0] "WPML no pudo detectar los archivos de traducción (.mo) para %s. Para solucionarlo, visite la interfaz de su sitio en un idioma secundario."
+msgstr[1] "WPML no pudo detectar los archivos de traducción (.mo) para %s y %s. Para solucionarlo, visite la interfaz de su sitio en un idioma secundario."
 
-#: inc/wpml-string-translation.class.php:646
+#: inc/wpml-string-translation.class.php:649
 msgid "This will load the translation files and WPML will be able to scan them."
 msgstr "Esto cargará los archivos de traducción y WPML podrá escanearlos."
 
-#: inc/wpml-string-translation.class.php:667
+#: inc/wpml-string-translation.class.php:670
 msgid "Scan the selected components to make new texts available for translation."
-msgstr "Escanee los componentes seleccionados para hacer que los nuevos textos estén disponibles para traducción."
+msgstr "Escanee los componentes seleccionados para que los nuevos textos estén disponibles para su traducción."
 
-#: inc/wpml-string-translation.class.php:671
+#: inc/wpml-string-translation.class.php:674
 msgid "Updated or new translation files detected"
-msgstr "Se detectaron archivos de traducción nuevos o actualizados"
+msgstr "Archivos de traducción actualizados o nuevos detectados"
 
-#: inc/wpml-string-translation.class.php:672
+#: inc/wpml-string-translation.class.php:675
 msgid "WPML has found new or updated translation (.mo) files and needs to scan them to find translatable strings."
 msgstr "WPML ha encontrado archivos de traducción (.mo) nuevos o actualizados y necesita escanearlos para encontrar cadenas traducibles."
 
-#: inc/wpml-string-translation.class.php:673
+#: inc/wpml-string-translation.class.php:676
 msgid "Select affected components"
 msgstr "Seleccionar componentes afectados"
 
 #: menu/auto-download-mo.php:41
 msgid "%d new translation was added."
 msgid_plural "%d new translations were added."
-msgstr[0] "%d Se ha añadido una nueva traducción."
-msgstr[1] "%d new translations were added."
-msgstr[2] "%d Se han añadido nuevas traducciones."
+msgstr[0] "Se añadió %d nueva traducción."
+msgstr[1] "Se añadieron %d nuevas traducciones."
 
 #: menu/auto-download-mo.php:58
 msgid "%d translation was updated."
 msgid_plural "%d translations were updated."
-msgstr[0] "%d Se actualizó la traducción."
-msgstr[1] "%d translations were updated."
-msgstr[2] "%d Se actualizaron las traducciones."
+msgstr[0] "Se actualizó %d traducción."
+msgstr[1] "Se actualizaron %d traducciones."
 
 #: menu/auto-download-mo.php:65
 msgid "No action performed. Please select the strings that you need to update or add."
-msgstr "No se realizó ninguna acción. Seleccione las cadenas que necesite actualizar o agregar."
+msgstr "No se realizó ninguna acción. Por favor, seleccione las cadenas que necesita actualizar o añadir."
 
 #: menu/auto-download-mo.php:75
 msgid "Auto-download WordPress translations"
-msgstr "Descargar traducciones de WordPress automáticamente"
+msgstr "Descargar automáticamente traducciones de WordPress"
 
 #: menu/auto-download-mo.php:79
 msgid "Success!"
-msgstr "Operación exitosa"
+msgstr "¡Éxito!"
 
 #: menu/auto-download-mo.php:87
 #: menu/auto-download-mo.php:214
@@ -783,7 +805,7 @@ msgstr "Comprobar otros idiomas"
 
 #: menu/auto-download-mo.php:91
 msgid "Missing version number for translation."
-msgstr "Falta número de versión de traducción."
+msgstr "Falta el número de versión para la traducción."
 
 #: menu/auto-download-mo.php:95
 msgid "Invalid language: %s"
@@ -791,7 +813,7 @@ msgstr "Idioma no válido: %s"
 
 #: menu/auto-download-mo.php:108
 msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
-msgstr "Esta actualización incluye %d cadenas nuevas y %d cadenas actualizadas. Puede revisar las cadenas a continuación. Luego, diríjase al <a%s>final de esta página</a> y haga clic en el botón Continuar."
+msgstr "Esta actualización incluye %d cadenas nuevas y %d cadenas actualizadas. Puede revisar las cadenas a continuación. Luego, vaya a la <a%s>parte inferior de esta página</a> y haga clic en el botón Continuar."
 
 #: menu/auto-download-mo.php:122
 msgid "Updated translations (%d)"
@@ -818,7 +840,7 @@ msgstr "Traducción"
 
 #: menu/auto-download-mo.php:200
 msgid "Add the new translations."
-msgstr "Agregar las traducciones nuevas."
+msgstr "Añadir las nuevas traducciones."
 
 #: menu/auto-download-mo.php:206
 msgid "Proceed"
@@ -826,15 +848,15 @@ msgstr "Continuar"
 
 #: menu/auto-download-mo.php:213
 msgid "There is nothing to be updated or to be added."
-msgstr "No hay nada para actualizar ni agregar."
+msgstr "No hay nada que actualizar o añadir."
 
 #: menu/string-translation-translate-options.php:2
 msgid "Admin Texts Translation"
-msgstr "Traducción de texto de administración"
+msgstr "Traducción de textos de administración"
 
 #: menu/string-translation-translate-options.php:13
 msgid "Translate texts you can customize from the WordPress admin but which appear on the front-end."
-msgstr "Traduzca textos que puede personalizar desde el admin de WordPress pero que aparecen en el frontend."
+msgstr "Traducir textos que puede personalizar desde el administrador de WordPress pero que aparecen en la parte frontal."
 
 #: menu/string-translation-translate-options.php:16
 msgid "This includes strings like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
@@ -842,19 +864,19 @@ msgstr "Esto incluye cadenas como texto de pie de página, avisos de derechos de
 
 #: menu/string-translation-translate-options.php:19
 msgid "Learn more about %1$stranslating admin and settings strings.%2$s"
-msgstr "Aprenda más sobre %1$sla traducción de cadenas de administración y configuración.%2$s"
+msgstr "Más información sobre %1$sla traducción de cadenas de administración y configuración.%2$s"
 
 #: menu/string-translation-translate-options.php:29
 msgid "Return to String Translation"
-msgstr "Volver a Traducción de cadenas"
+msgstr "Volver a String Translation"
 
 #: menu/string-translation.php:104
 msgid "This is the list of strings that are not used or they are linked to wrong translation data."
-msgstr "Es la lista de cadenas que no se utilizan o están vinculadas a datos de traducción erróneos."
+msgstr "Esta es la lista de cadenas que no se utilizan o que están vinculadas a datos de traducción incorrectos."
 
 #: menu/string-translation.php:116
 msgid "These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom of this screen%2$s. You can exclude individual strings by clearing the check boxes next to them."
-msgstr "Estas son las cadenas que encontramos en el archivo .po. Revíselas detenidamente. Luego, pulse el botón 'agregar' o 'cancelar' en la %1$sparte inferior de esta pantalla%2$s. Puede excluir segmentos individuales deseleccionando las casillas que tienen al lado."
+msgstr "Estas son las cadenas que encontramos en su archivo .po. Por favor, revíselas cuidadosamente. Luego, haga clic en los botones “añadir” o “cancelar” en la %1$sparte inferior de esta pantalla%2$s. Puede excluir cadenas individuales desmarcando las casillas junto a ellas."
 
 #: menu/string-translation.php:182
 msgid "Name: %s"
@@ -862,7 +884,7 @@ msgstr "Nombre: %s"
 
 #: menu/string-translation.php:193
 msgid "Add selected strings"
-msgstr "Agregar las cadenas seleccionadas."
+msgstr "Añadir cadenas seleccionadas"
 
 #: menu/string-translation.php:200
 msgid "Display:"
@@ -874,7 +896,7 @@ msgstr "Todas las cadenas"
 
 #: menu/string-translation.php:213
 msgid "Translation needed"
-msgstr "Traducción pendiente"
+msgstr "Traducción necesaria"
 
 #: menu/string-translation.php:215
 msgid "Partial Translation"
@@ -882,7 +904,7 @@ msgstr "Traducción parcial"
 
 #: menu/string-translation.php:216
 msgid "Auto-registered, translation needed"
-msgstr "Auto-registrado, se necesita traducción"
+msgstr "Registrado automáticamente, necesita traducción"
 
 #: menu/string-translation.php:222
 msgid "Search for:"
@@ -890,7 +912,7 @@ msgstr "Buscar:"
 
 #: menu/string-translation.php:224
 msgid "Search"
-msgstr "Búsqueda"
+msgstr "Buscar"
 
 #: menu/string-translation.php:240
 msgid "Exact match"
@@ -898,7 +920,7 @@ msgstr "Coincidencia exacta"
 
 #: menu/string-translation.php:254
 msgid "Search in both the original language and in translations. Searching in translations may take a bit of time."
-msgstr "Busque tanto en el idioma original como en las traducciones. La búsqueda en las traducciones puede llevar un poco de tiempo."
+msgstr "Buscar tanto en el idioma original como en las traducciones. La búsqueda en las traducciones puede llevar un poco de tiempo."
 
 #: menu/string-translation.php:256
 msgid "Include translations"
@@ -926,15 +948,15 @@ msgstr "Filtrar"
 
 #: menu/string-translation.php:304
 msgid "Showing only strings that contain %s"
-msgstr "Mostrar solo cadenas que contengan %s"
+msgstr "Mostrando solo cadenas que contienen %s"
 
 #: menu/string-translation.php:306
 msgid "x &nbsp;Clear filters"
-msgstr "x &nbsp;Limpiar filtros"
+msgstr "x &nbsp;Borrar filtros"
 
 #: menu/string-translation.php:317
 msgid "Can't find the strings you're looking to translate? Add more strings for translation."
-msgstr "¿No encuentra las cadenas que desea traducir? Agregue más cadenas para traducir."
+msgstr "¿No encuentra las cadenas que busca traducir? Añada más cadenas para traducir."
 
 #: menu/string-translation.php:319
 #: menu/string-translation.php:640
@@ -946,19 +968,19 @@ msgstr "¿No encuentra las cadenas que desea traducir? Agregue más cadenas para
 #: menu/string-translation.php:965
 #: menu/string-translation.php:1044
 msgid "Click to toggle"
-msgstr "Pulse para activar/desactivar"
+msgstr "Haga clic para alternar"
 
 #: menu/string-translation.php:332
 msgid "Strings in the theme and plugins"
-msgstr "Cadenas en el tema y plugins"
+msgstr "Cadenas en el tema y los plugins"
 
 #: menu/string-translation.php:338
 msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
-msgstr "Traduzca textos del frontend que puede personalizar desde el admin de WordPress como texto de pie de página, avisos de derechos de autor, opciones y configuraciones de plugins, formato de hora, textos de widgets y más."
+msgstr "Traduzca los textos de la interfaz que puede personalizar desde el administrador de WordPress, como el texto del pie de página, los avisos de derechos de autor, las opciones y ajustes de los plugins, el formato de la hora, los textos de los widgets y mucho más."
 
 #: menu/string-translation.php:339
 msgid "Translating Strings From Admin and Settings"
-msgstr "Traducción de Cadenas de Administración y Configuración"
+msgstr "Traducción de cadenas del administrador y la configuración"
 
 #: menu/string-translation.php:343
 msgid "Translate texts in admin screens"
@@ -968,11 +990,11 @@ msgstr "Traducir textos en pantallas de administración"
 #: menu/string-translation.php:355
 #: menu/string-translation.php:361
 msgid "Translate User Meta Information"
-msgstr "Traducir Información Meta de Usuario"
+msgstr "Traducir información meta de usuario"
 
 #: menu/string-translation.php:351
 msgid "Making User Meta Information Translatable"
-msgstr "Hacer Traducible la Información Meta de Usuario"
+msgstr "Hacer que la información meta de usuario sea traducible"
 
 #: menu/string-translation.php:364
 msgid "Data saved"
@@ -980,15 +1002,15 @@ msgstr "Datos guardados"
 
 #: menu/string-translation.php:368
 msgid "WPML allows you to translate user information like the name, nickname, biography, and more."
-msgstr "WPML le permite traducir información de usuario como el nombre, apodo, biografía y más."
+msgstr "WPML le permite traducir información de usuario como el nombre, el apodo, la biografía y mucho más."
 
 #: menu/string-translation.php:371
 msgid "Select the user roles whose information you want to make translatable and then use the String Translation page to translate it."
-msgstr "Seleccione los roles de usuario cuya información desea hacer traducible y luego use la página de Traducción de Cadenas para traducirla."
+msgstr "Seleccione los roles de usuario cuya información desea hacer traducible y luego use la página de Traducción de cadenas para traducirla."
 
 #: menu/string-translation.php:375
 msgid "Learn more about %1$stranslating user meta information.%2$s"
-msgstr "Aprenda más sobre %1$sla traducción de información meta de usuario.%2$s"
+msgstr "Más información sobre %1$sla traducción de información meta de usuario.%2$s"
 
 #: menu/string-translation.php:402
 msgid "Select all"
@@ -1016,13 +1038,13 @@ msgstr "Mostrar todos los resultados"
 
 #: menu/string-translation.php:581
 msgid "You have selected strings belonging to a package. Please select all strings from the affected package or unselect these strings."
-msgstr "Ha seleccionado cadenas que pertenecen a un paquete. Seleccione todas las cadenas del paquete afectado o deseleccione estas cadenas."
+msgstr "Ha seleccionado cadenas que pertenecen a un paquete. Seleccione todas las cadenas del paquete afectado o anule la selección de estas cadenas."
 
 #: menu/string-translation.php:583
 msgid ""
 "Are you sure you want to delete these strings?\n"
 "Their translations will be deleted too."
-msgstr "¿Estás seguro de que quieres borrar estas cadenas?\nSus traducciones también se borrarán."
+msgstr "¿Está seguro de que desea eliminar estas cadenas?\nSus traducciones también se eliminarán."
 
 #: menu/string-translation.php:584
 msgid "WPML could not delete the strings"
@@ -1030,7 +1052,7 @@ msgstr "WPML no pudo eliminar las cadenas"
 
 #: menu/string-translation.php:587
 msgid "Delete selected strings"
-msgstr "Eliminar las cadenas seleccionadas"
+msgstr "Eliminar cadenas seleccionadas"
 
 #: menu/string-translation.php:616
 msgid "Utilities"
@@ -1038,19 +1060,19 @@ msgstr "Utilidades"
 
 #: menu/string-translation.php:629
 msgid "Auto register untranslated strings"
-msgstr "Registrar automáticamente cadenas no traducidas"
+msgstr "Registro automático de cadenas sin traducir"
 
 #: menu/string-translation.php:634
 msgid "This feature is disabled. %1$sClick here to enable it.%2$s"
-msgstr "Esta función está desactivada. %1$sHaga clic aquí para habilitarla.%2$s"
+msgstr "Esta función está deshabilitada. %1$sHaga clic aquí para habilitarla.%2$s"
 
 #: menu/string-translation.php:647
 msgid "WPML can detect untranslated strings and automatically register them for translation. WPML will register any untranslated strings encountered while browsing the site."
-msgstr "WPML detecta y registra automáticamente textos no traducidos al navegar."
+msgstr "WPML puede detectar cadenas sin traducir y registrarlas automáticamente para su traducción. WPML registrará cualquier cadena sin traducir que encuentre al navegar por el sitio."
 
 #: menu/string-translation.php:656
 msgid "Untranslated strings that I encounter while logged in"
-msgstr "Cadenas no traducidas que encuentro mientras estoy conectado"
+msgstr "Cadenas sin traducir que encuentro mientras estoy conectado"
 
 #: menu/string-translation.php:657
 msgid "recommended"
@@ -1058,15 +1080,15 @@ msgstr "recomendado"
 
 #: menu/string-translation.php:667
 msgid "Untranslated strings that all logged in, logged out users, and site visitors encounter"
-msgstr "Cadenas no traducidas que encuentran todos los usuarios conectados, desconectados y visitantes del sitio"
+msgstr "Cadenas sin traducir que encuentran todos los usuarios conectados, desconectados y visitantes del sitio"
 
 #: menu/string-translation.php:677
 msgid "Disable auto register of untranslated strings"
-msgstr "Desactivar el registro automático de cadenas no traducidas"
+msgstr "Deshabilitar el registro automático de cadenas sin traducir"
 
 #: menu/string-translation.php:685
 msgid "Save settings"
-msgstr "Guardar configuración"
+msgstr "Guardar ajustes"
 
 #: menu/string-translation.php:714
 msgid "Translate strings automatically, with your translators or a translation service"
@@ -1074,7 +1096,7 @@ msgstr "Traducir cadenas automáticamente, con sus traductores o un servicio de 
 
 #: menu/string-translation.php:723
 msgid "Use WPML's %1$sTranslation Dashboard%2$s to send strings to translation."
-msgstr "Use el %1$sPanel de Traducción%2$s de WPML para enviar cadenas a traducir."
+msgstr "Use el %1$sPanel de traducción%2$s de WPML para enviar cadenas a traducir."
 
 #: menu/string-translation.php:734
 msgid "Import / export .po"
@@ -1098,7 +1120,7 @@ msgstr "Inglés"
 
 #: menu/string-translation.php:784
 msgid "Also create translations according to the .po file"
-msgstr "También crear traducciones según el archivo .po."
+msgstr "También crear traducciones según el archivo .po"
 
 #: menu/string-translation.php:798
 msgid "Select what the strings are for:"
@@ -1110,7 +1132,7 @@ msgstr "Nuevo"
 
 #: menu/string-translation.php:817
 msgid "Select from existing"
-msgstr "Seleccione de los existentes"
+msgstr "Seleccionar de existentes"
 
 #: menu/string-translation.php:824
 #: menu/string-translation.php:883
@@ -1119,19 +1141,19 @@ msgstr "Enviar"
 
 #: menu/string-translation.php:825
 msgid "Please enter a domain!"
-msgstr "Introduzca un dominio."
+msgstr "¡Introduzca un dominio!"
 
 #: menu/string-translation.php:826
 msgid "Please select the .po file to upload!"
-msgstr "¡Por favor seleccione el archivo .po para cargar!"
+msgstr "¡Seleccione el archivo .po para subir!"
 
 #: menu/string-translation.php:834
 msgid "Export strings into .po/.pot file"
-msgstr "Exportar las cadenas a un archivo .po/.pot"
+msgstr "Exportar cadenas a archivo .po/.pot"
 
 #: menu/string-translation.php:839
 msgid "PO export may be glitchy. We are working to fix it."
-msgstr "La exportación de PO podría tener defectos. Estamos trabajando para solucionarlo."
+msgstr "La exportación PO puede tener fallos. Estamos trabajando para solucionarlo."
 
 #: menu/string-translation.php:847
 msgid "Select domain:"
@@ -1147,19 +1169,19 @@ msgstr "Eliminar cadenas por dominio"
 
 #: menu/string-translation.php:915
 msgid "Set the original language of themes and plugins"
-msgstr "Establecer el idioma original de temas y plugins"
+msgstr "Establecer el idioma original de los temas y plugins"
 
 #: menu/string-translation.php:924
 msgid "By default WPML assumes that strings in themes and plugins are in English. If you're using a theme or plugin that has strings in other languages you can set the language of text-domains."
-msgstr "Por defecto, WPML asume que las cadenas en temas y plugins están en inglés. Si estás usando un tema o plugin que tiene cadenas en otros idiomas, puedes configurar el idioma de los dominios de texto."
+msgstr "Por defecto, WPML asume que las cadenas en temas y plugins están en inglés. Si está utilizando un tema o plugin que tiene cadenas en otros idiomas, puede establecer el idioma de los dominios de texto."
 
 #: menu/string-translation.php:944
 msgid "Not seeing strings that you are looking for?"
-msgstr "¿No ves las cadenas que estás buscando?"
+msgstr "¿No ve las cadenas que busca?"
 
 #: menu/string-translation.php:953
 msgid "You can add to the String Translations table texts that appear in the admin screens of the theme and plugins. To do this, go to %1$sAdmin Texts Translation%2$s"
-msgstr "Puedes agregar a la tabla de Traducciones de Cadenas textos que aparecen en las pantallas de administración del tema y los plugins. Para hacer esto, ve a %1$sTraducción de Textos de Administración%2$s"
+msgstr "Puede añadir a la tabla de Traducción de cadenas textos que aparecen en las pantallas de administración del tema y los plugins. Para ello, vaya a %1$sTraducción de textos de administración%2$s"
 
 #: menu/string-translation.php:963
 msgid "Translate User properties"
@@ -1167,11 +1189,11 @@ msgstr "Traducir propiedades de usuario"
 
 #: menu/string-translation.php:991
 msgid "none"
-msgstr "no hay"
+msgstr "ninguno"
 
 #: menu/string-translation.php:996
 msgid "Choose the user roles you would like to make translatable: %s"
-msgstr "Elige los roles de usuario que te gustaría hacer traducibles: %s"
+msgstr "Elija los roles de usuario que desea hacer traducibles: %s"
 
 #: menu/string-translation.php:1023
 #: menu/string-translation.php:1025
@@ -1180,51 +1202,51 @@ msgstr "Editar roles de usuario"
 
 #: menu/string-translation.php:1029
 msgid "Translating User Meta Information With WPML"
-msgstr "Traduciendo Información de Meta de Usuario Con WPML"
+msgstr "Traducción de información meta de usuario con WPML"
 
 #: menu/string-translation.php:1042
 #: menu/string-translation.php:1075
 msgid "Track where strings appear on the site"
-msgstr "Realizar un seguimiento para ver dónde aparecen las cadenas en el sitio."
+msgstr "Rastrear dónde aparecen las cadenas en el sitio"
 
 #: menu/string-translation.php:1053
 msgid ""
 "This feature helps you find where the text (strings) appears on your site, so you can translate it more easily. \n"
 "\t\t\t\t\t\t\t\t\t\t\tIt may slow down your site while it's running, so it's best to use it only during development. \n"
 "\t\t\t\t\t\t\t\t\t\t\tRemember to turn it off when your site goes live to keep things running smoothly."
-msgstr "Esta función te ayuda a encontrar dónde aparece el texto (cadenas) en tu sitio, para que puedas traducirlo más fácilmente. \n\t\t\t\t\t\t\t\t\t\t	Puede ralentizar tu sitio mientras se está ejecutando, por lo que es mejor usarla solo durante el desarrollo. \n\t\t\t\t\t\t\t\t\t\t	Recuerda desactivarla cuando tu sitio esté en línea para mantener las cosas funcionando sin problemas."
+msgstr "Esta función le ayuda a encontrar dónde aparece el texto (cadenas) en su sitio, para que pueda traducirlo más fácilmente. \n\t\t\t\t\t\t\t\t\t\t\tPuede ralentizar su sitio mientras se ejecuta, por lo que es mejor usarlo solo durante el desarrollo. \n\t\t\t\t\t\t\t\t\t\t\tRecuerde desactivarlo cuando su sitio esté en vivo para que todo funcione sin problemas."
 
 #: menu/string-translation.php:1062
 msgid "Learn more about finding strings"
-msgstr "Aprende más sobre cómo encontrar cadenas"
+msgstr "Más información sobre cómo encontrar cadenas"
 
 #: menu/string-translation.php:1082
 msgid "Highlight color for strings"
-msgstr "Color de resaltado para las cadenas"
+msgstr "Color de resaltado para cadenas"
 
 #: menu/string-translation.php:1116
 msgid "String Tracking Enabled"
-msgstr "Seguimiento de Cadenas Activado"
+msgstr "Seguimiento de cadenas habilitado"
 
 #: menu/string-translation.php:1117
 msgid "OK"
-msgstr "OK"
+msgstr "Aceptar"
 
 #: menu/string-translation.php:1121
 msgid "WPML will now track where your site's text (strings) appears as you browse both the admin and front-end."
-msgstr "WPML ahora rastreará dónde aparece el texto (cadenas) de tu sitio mientras navegas tanto por el panel de administración como por el frontend."
+msgstr "WPML ahora rastreará dónde aparece el texto (cadenas) de su sitio mientras navega tanto por el administrador como por la interfaz."
 
 #: menu/string-translation.php:1128
 msgid "Be sure to turn off this feature before your site goes live to avoid performance issues."
-msgstr "Asegúrate de desactivar esta función antes de que tu sitio esté en línea para evitar problemas de rendimiento."
+msgstr "Asegúrese de desactivar esta función antes de que su sitio esté en vivo para evitar problemas de rendimiento."
 
 #: menu/_slug-translation-options.php:7
 msgid "Slug translations"
-msgstr "Traducción de slugs"
+msgstr "Traducciones de slugs"
 
 #: menu/_slug-translation-options.php:17
 msgid "Translate base slugs of custom post types and taxonomies (via WPML -> Taxonomy translation)."
-msgstr "Traduce los slugs base de tipos de publicaciones personalizadas y taxonomías (a través de WPML -> Traducción de taxonomías)."
+msgstr "Traducir slugs base de tipos de entrada personalizados y taxonomías (a través de WPML -> Traducción de taxonomías)."
 
 #: menu/_slug-translation-options.php:23
 msgid "Save"
@@ -1232,7 +1254,7 @@ msgstr "Guardar"
 
 #: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:49
 msgid "Inactive Widgets"
-msgstr "Widgets Inactivos"
+msgstr "Widgets inactivos"
 
 #: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:57
 msgid "Widgets"

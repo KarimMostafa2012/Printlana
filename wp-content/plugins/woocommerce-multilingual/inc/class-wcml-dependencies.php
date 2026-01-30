@@ -182,7 +182,10 @@ class WCML_Dependencies {
 	 */
 	public function check_for_translatable_default_taxonomies() {
 
-		$default_taxonomies = [ 'product_cat', 'product_tag', 'product_shipping_class' ];
+		$default_taxonomies = [
+			\WCML\Utilities\WCTaxonomies::TAXONOMY_PRODUCT_CATEGORY,
+			\WCML\Utilities\WCTaxonomies::TAXONOMY_PRODUCT_TAG,
+		];
 		$show_error         = false;
 
 		foreach ( $default_taxonomies as $taxonomy ) {

@@ -142,7 +142,10 @@ class WPML_TM_Translation_Status_Display {
        				translations.trid,
        			    translate_job.job_id,
        				translate_job.editor,
-       				translate_job.automatic
+       				translate_job.automatic,
+       				job_error.error_type,
+       				job_error.error_message,
+       				job_error.counter AS error_counter
 				FROM {$this->wpdb->prefix}icl_languages languages
 				LEFT JOIN {$this->wpdb->prefix}icl_translations translations
 					ON languages.code = translations.language_code
@@ -150,9 +153,12 @@ class WPML_TM_Translation_Status_Display {
 					ON translations.translation_id = translation_status.translation_id
 				JOIN {$this->wpdb->prefix}icl_translate_job translate_job
 					ON translate_job.rid = translation_status.rid AND translate_job.revision IS NULL
-				WHERE languages.active = 1
-					AND {$trids_query}
-					OR translations.trid IS NULL",
+				LEFT JOIN {$this->wpdb->prefix}icl_translate_unsolvable_jobs job_error
+				ON job_error.job_id = translate_job.job_id
+				AND translation_status.status IN (1, 2)
+			WHERE languages.active = 1
+				AND {$trids_query}
+				OR translations.trid IS NULL",
 			ARRAY_A
 		);
 		foreach ( $stats as $element ) {
@@ -163,6 +169,13 @@ class WPML_TM_Translation_Status_Display {
 
 	public function filter_status_css_class( $css_class, $post_id, $lang, $trid ) {
 		$this->maybe_load_stats( $trid );
+
+		// Check if job has unsolvable error (SyncError or DownloadError with counter >= 3)
+		if ( $this->has_unsolvable_error( $trid, $lang ) ) {
+			$css_class = 'otgs-ico-warning';
+			return $css_class;
+		}
+
 		$element_id  = $this->post_translations->get_element_id( $lang, $trid );
 		$source_lang = $this->post_translations->get_source_lang_code( $element_id );
 		$post_status = $this->get_post_status( $post_id );
@@ -197,6 +210,12 @@ class WPML_TM_Translation_Status_Display {
 		$source_lang = $this->post_translations->get_element_lang_code( $original_post_id );
 
 		$this->maybe_load_stats( $trid );
+
+		// Check if job has unsolvable error
+		if ( $this->has_unsolvable_error( $trid, $lang ) ) {
+			$text = __( 'Translation job encountered an error and needs to be resent', 'sitepress' );
+			return $text;
+		}
 		if ( ( $this->is_remote( $trid, $lang ) && $this->is_in_progress( $trid, $lang ) ) || $this->it_needs_retry( $trid, $lang ) ) {
 			$ts_name = TranslationProxy::get_service_name( intval( $this->statuses[ $trid ][ $lang ]['translation_service'] ) );
 			$text    = sprintf( __( 'Waiting for translation from %s', 'sitepress' ), $ts_name );
@@ -292,6 +311,15 @@ class WPML_TM_Translation_Status_Display {
 		}
 
 		$this->maybe_load_stats( $trid );
+
+		// Check if job has unsolvable error - make it non-clickable
+		if ( $this->has_unsolvable_error( $trid, $lang ) ) {
+			$link = '';
+			$this->original_links[ $post_id ][ $lang ][ $trid ] = '';
+			$this->tm_editor_links[ $post_id ][ $lang ][ $trid ] = '';
+			return $link;
+		}
+
 		$is_remote        = $this->is_remote( $trid, $lang );
 		$is_in_progress   = $this->is_in_progress( $trid, $lang );
 		$does_need_update = (bool) Obj::pathOr( false, [ $trid, $lang, 'needs_update' ], $this->statuses );
@@ -375,6 +403,9 @@ class WPML_TM_Translation_Status_Display {
 
 		$this->maybe_load_stats( $trid );
 
+		$status = $this->status_helper->get_status( false, $trid, $lang );
+		$action = 0 === $status ? 'add' : 'edit';
+
 		$Attributes = [
 			'original-link'      => $this->original_links[ $post_id ][ $lang ][ $trid ],
 			'tm-editor-link'     => $this->tm_editor_links[ $post_id ][ $lang ][ $trid ],
@@ -382,7 +413,14 @@ class WPML_TM_Translation_Status_Display {
 			'trid'               => $trid,
 			'language'           => $lang,
 			'user-can-translate' => $this->is_lang_pair_allowed( $lang, null, $post_id ) ? 'yes' : 'no',
-			'should-ate-sync'    => $this->shouldATESync( $trid, $lang ) ? '1' : '0',
+			'should-ate-sync'    => ( ! $this->has_unsolvable_error( $trid, $lang ) && $this->shouldATESync( $trid, $lang ) ) ? '1' : '0',
+			'source_lang'        => $this->post_translations->get_element_lang_code( $post_id ),
+			'action'             => $action,
+			'post_id'            => $post_id,
+			'has-error'          => $this->has_unsolvable_error( $trid, $lang ) ? '1' : '0',
+			'error-type'         => isset( $this->statuses[ $trid ][ $lang ]['error_type'] )
+				? esc_attr( $this->statuses[ $trid ][ $lang ]['error_type'] )
+				: '',
 		];
 		if ( isset( $this->statuses[ $trid ][ $lang ]['job_id'] ) ) {
 			$Attributes['tm-job-id'] = esc_attr( $this->statuses[ $trid ][ $lang ]['job_id'] );
@@ -672,5 +710,36 @@ class WPML_TM_Translation_Status_Display {
 			: __( '%s translation awaiting first available translator', 'sitepress' );
 
 		return sprintf( $status_txt, $language_details['display_name'] );
+	}
+
+	/**
+	 * Check if job has an error that should display as unsolvable.
+	 *
+	 * @param int    $trid
+	 * @param string $lang
+	 *
+	 * @return bool
+	 */
+	private function has_unsolvable_error( $trid, $lang ) {
+		if ( ! isset( $this->statuses[ $trid ][ $lang ]['error_type'] ) ) {
+			return false;
+		}
+
+		$error_type = $this->statuses[ $trid ][ $lang ]['error_type'];
+
+		// SyncError: Always unsolvable
+		if ( $error_type === 'SyncError' ) {
+			return true;
+		}
+
+		// DownloadError: Unsolvable if counter >= 3
+		if ( $error_type === 'DownloadError' ) {
+			$counter = isset( $this->statuses[ $trid ][ $lang ]['error_counter'] )
+				? (int) $this->statuses[ $trid ][ $lang ]['error_counter']
+				: 0;
+			return $counter >= 3;
+		}
+
+		return false;
 	}
 }

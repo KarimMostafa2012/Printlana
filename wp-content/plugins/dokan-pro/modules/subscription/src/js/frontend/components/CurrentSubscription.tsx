@@ -282,7 +282,7 @@ const CurrentSubscription = ( {
                                                 'Your subscription has been cancelled! However, it is still active till %s.',
                                                 'dokan'
                                             ),
-                                            subscription?.end_date
+                                            subscription?.subscription_end_date
                                         ) }
                                         className="mt-4"
                                     ></DokanAlert>

@@ -146,11 +146,9 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 		$button_text = __( 'Fix now', 'sitepress' );
 
 		$notice_text = <<<HTML
-<div style="display: flex; align-items: center;" data-testid="wpml-minimum-requirements-notice">
+<div class="wpml-minimum-requirements-notice" data-testid="wpml-minimum-requirements-notice">
     <span>{$message}</span>
-    <a href="{$support_url}" style="margin-left: 15px;
-	     background-color: #373737; color: white; text-decoration: none;
-	     padding: 5px 10px; border-radius: 3px;">{$button_text}
+    <a href="{$support_url}" class="wpml-button base-btn gray-dark-btn">{$button_text}
     </a>
 </div>
 HTML;

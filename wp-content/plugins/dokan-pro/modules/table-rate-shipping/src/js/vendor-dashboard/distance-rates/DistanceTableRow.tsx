@@ -95,6 +95,7 @@ export const DistanceTableRow = ( {
                                 menuPortalTarget={ document.querySelector(
                                     '.dokan-layout'
                                 ) }
+                                menuPosition='fixed'
                                 options={ rateConditionOptions }
                                 onChange={ handleSelectChange(
                                     'rate_condition'

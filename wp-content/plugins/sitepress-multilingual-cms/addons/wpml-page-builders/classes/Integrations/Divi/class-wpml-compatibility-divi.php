@@ -185,7 +185,7 @@ class WPML_Compatibility_Divi implements \IWPML_DIC_Action, \IWPML_Backend_Actio
 		$handle_content = false;
 
 		preg_match( '/global_module="([0-9]+)"/', $shortcode['attributes'], $matches );
-		$excluded = json_decode( get_post_meta( $matches[1], '_et_pb_excluded_global_options', true ), true );
+		$excluded = json_decode( get_post_meta( (int) $matches[1], '_et_pb_excluded_global_options', true ), true );
 
 		if ( is_array( $excluded ) && count( $excluded ) > 0 ) {
 			$attributes = $this->get_translatable_shortcode_attributes( $shortcode['tag'] );

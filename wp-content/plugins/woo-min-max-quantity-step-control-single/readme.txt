@@ -1,11 +1,11 @@
 === Min Max Control - Min Max Quantity & Step Control for WooCommerce ===
-Contributors: codersaiful,codeastrology,mdibrahimk48,unikforce,fazlebari,rafiul17
+Contributors: codersaiful,bizzplugin,codeastrology,mdibrahimk48,unikforce,fazlebari,rafiul17
 Donate link: https://donate.stripe.com/6oE9E33TD92Xav66or
 Tags: woocommerce limit quantities, WC Min Max Quantities, min and max to purchase, limit quantity, customize woocommerce quantity
 Requires at least: 4.0.0
 Tested up to: 6.9
 Requires PHP: 5.4
-Stable tag: 7.0.3
+Stable tag: 8.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -255,6 +255,27 @@ We’ll provide support via [support ticket](https://codeastrology.com/my-suppor
 
 
 == Changelog ==
+
+= 8.0.1 =
+* Fixed: Min max step setting saving issue has been fixed.
+* Fixed: Textdomain loading issue has been fixed.
+* Bug Fixed.
+
+= 8.0.0 =
+* Vendor library removed.
+* Added: Browse Plugins page added.
+* Tested with latest WooCommerce and WordPress version.
+* Bug Fixed.
+
+
+= 7.0.4 =
+* Fixed: Cart block quantity issue has been fixed.
+* Fixed: Cart page condition issue has been fixed.
+* Fixed: '_load_textdomain_just_in_time' notice issue has been fixed.
+* Added: New filter hook `wcmmq_cart_block_quantity_args` added for cart block quantity args control.
+* Fixed: Cart block quantity issue has been fixed.
+* Optimized Code.
+* Bug Fixed.
 
 = 7.0.3 =
 * Fixed: Data saving issue has been fixed.

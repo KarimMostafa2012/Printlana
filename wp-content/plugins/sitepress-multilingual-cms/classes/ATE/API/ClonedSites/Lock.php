@@ -4,6 +4,7 @@
 namespace WPML\TM\ATE\ClonedSites;
 
 use WPML\FP\Obj;
+use WPML\API\Settings;
 use WPML\TM\ATE\API\FingerprintGenerator;
 use function WPML\Container\make;
 
@@ -65,6 +66,15 @@ class Lock {
 	}
 
 	public function unlock() {
+		$lockData = $this->getLockData();
+
+		Settings::setAndSave( 'migrated_site',
+			[
+				'old_url' => $lockData['urlCurrentlyRegisteredInAMS'],
+				'new_url' => $lockData['urlUsedToMakeRequest'],
+			]
+		);
+
 		static::doUnlock();
 	}
 

@@ -15,31 +15,31 @@ msgstr "Se han cancelado todos los trabajos"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:79
 msgid "There is no more jobs to cancel"
-msgstr "No hay más trabajos para cancelar"
+msgstr "No hay más trabajos que cancelar"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:82
 msgid "The jobs cancellation has failed"
-msgstr "La cancelación de trabajos ha fallado"
+msgstr "La cancelación de los trabajos ha fallado"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
 msgid "Cancel in-progress automatic jobs"
-msgstr "Cancelar los trabajos automáticos en curso"
+msgstr "Cancelar trabajos automáticos en curso"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
 msgid "Domain name has been updated"
-msgstr "Se ha actualizado el nombre de dominio"
+msgstr "El nombre de dominio se ha actualizado"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
 msgid "Domain name update has been failed"
-msgstr "La actualización del nombre de dominio falló"
+msgstr "La actualización del nombre de dominio ha fallado"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
 msgid "Update domain name in language switcher settings"
-msgstr "Actualice el nombre de dominio en la configuración del selector de idioma"
+msgstr "Actualizar el nombre de dominio en la configuración del selector de idioma"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:7
 msgid "Disclaimer: MySQL Disk Space"
-msgstr "Aviso legal: Espacio en disco de MySQL"
+msgstr "Descargo de responsabilidad: espacio en disco de MySQL"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:8
 msgid ""
@@ -47,7 +47,7 @@ msgid ""
 "tables reduces its data size, but does not automatically free up disk space "
 "in MySQL. To reclaim disk space, a table rebuild is required—a risky "
 "operation not performed automatically by this tool."
-msgstr "Limpiar y comprimir las tablas wp_icl_translate y wp_icl_translation_status reduce su tamaño de datos, pero no libera automáticamente espacio en disco en MySQL. Para recuperar espacio en disco, se requiere una reconstrucción de la tabla, una operación arriesgada que esta herramienta no realiza automáticamente."
+msgstr "La limpieza y compresión de las tablas wp_icl_translate y wp_icl_translation_status reduce el tamaño de sus datos, pero no libera automáticamente espacio en disco en MySQL. Para recuperar espacio en disco, se requiere una reconstrucción de la tabla, una operación arriesgada que esta herramienta no realiza automáticamente."
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:38
 msgid "Optimize translation tables"
@@ -55,7 +55,7 @@ msgstr "Optimizar tablas de traducción"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:47
 msgid "Previous State Migration"
-msgstr "Migración del estado anterior"
+msgstr "Migración de estado anterior"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:58
 msgid "Translation Elements Migration"
@@ -75,7 +75,7 @@ msgstr "Éxito"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:83
 msgid "Database tables optimization completed successfully."
-msgstr "La optimización de las tablas de la base de datos se ha completado con éxito."
+msgstr "La optimización de las tablas de la base de datos se ha completado correctamente."
 
 #: src/js/troubleshooting/optimizeDbTables/components/ResourceWarningAlert.js:7
 msgid "Warning"
@@ -86,19 +86,19 @@ msgid ""
 "This process is resource-intensive and may take a significant amount of "
 "time. It is recommended to run this optimization during periods of low "
 "traffic."
-msgstr "Este proceso consume muchos recursos y puede llevar bastante tiempo. Se recomienda ejecutar esta optimización durante periodos de poco tráfico."
+msgstr "Este proceso consume muchos recursos y puede tardar mucho tiempo. Se recomienda ejecutar esta optimización durante períodos de bajo tráfico."
 
 #: src/js/troubleshooting/optimizeDbTables/index.js:16
 msgid "Database Tables Optimization"
-msgstr "Optimización de tablas de la base de datos"
+msgstr "Optimización de tablas de base de datos"
 
 #: src/js/troubleshooting/refreshLicense/RefreshLicense.js:14
 msgid "Refresh license data to recognise license update"
-msgstr "Actualice los datos de la licencia para reconocer la actualización de la licencia"
+msgstr "Actualizar los datos de la licencia para reconocer la actualización de la licencia"
 
 #: src/js/troubleshooting/refreshLicense/useRefreshLicense.js:36
 msgid "WPML License has been refreshed"
-msgstr "Se ha actualizado la licencia de WPML"
+msgstr "La licencia de WPML se ha actualizado"
 
 #: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:11
 msgid "Translate Everything Automatically is not active."
@@ -112,11 +112,11 @@ msgstr "Reintentar traducciones automáticas atascadas"
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
-msgstr "Reenvía los trabajos de traducción que no se pudieron procesar debido a un problema temporal mientras Traducir todo automáticamente estaba activo."
+msgstr "Reenvía los trabajos de traducción que no pudieron procesarse debido a un problema temporal mientras Traducir todo automáticamente estaba activo."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:10
 msgid "Checking for stuck translation jobs..."
-msgstr "Comprobando trabajos de traducción atascados..."
+msgstr "Buscando trabajos de traducción atascados..."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:13
 msgid "Processing... %s stuck translation found so far"
@@ -128,7 +128,7 @@ msgstr[1] "Procesando... %s traducciones atascadas encontradas hasta ahora"
 msgid ""
 "Something went wrong while checking for stuck translation jobs. Please "
 "<a>contact WPML support</a>."
-msgstr "Algo salió mal al comprobar los trabajos de traducción atascados. Por favor, <a>contacta con el soporte de WPML</a>."
+msgstr "Algo salió mal al buscar trabajos de traducción atascados. Por favor, <a>contacte con el soporte de WPML</a>."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:37
 msgid "No stuck translation jobs found."
@@ -137,5 +137,5 @@ msgstr "No se encontraron trabajos de traducción atascados."
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:41
 msgid "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard."
 msgid_plural "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard."
-msgstr[0] "%s trabajo de traducción atascado encontrado. WPML lo traducirá automáticamente en segundo plano.\nPuedes comprobar el progreso en el Panel de traducción."
-msgstr[1] "%s trabajos de traducción atascados encontrados. WPML los traducirá automáticamente en segundo plano.\nPuedes comprobar su progreso en el Panel de traducción."
+msgstr[0] "Se encontró %s trabajo de traducción atascado. WPML lo traducirá automáticamente en segundo plano.\nPuede comprobar el progreso en el Panel de traducción."
+msgstr[1] "Se encontraron %s trabajos de traducción atascados. WPML los traducirá automáticamente en segundo plano.\nPuede comprobar su progreso en el Panel de traducción."

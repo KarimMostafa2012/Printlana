@@ -10,11 +10,11 @@ msgid ""
 "The wpml-config.xml file in the root folder of your theme and plugins tells "
 "WPML which content is translatable. You can override these settings with "
 "your own custom settings by adding them below."
-msgstr "El archivo wpml-config.xml ubicado en la carpeta raíz del tema y los plugines comunica a WPML qué contenido es para traducir. Puede reemplazar esta configuración con su propia configuración personalizada agregándola a continuación."
+msgstr "El archivo wpml-config.xml en la carpeta raíz de su tema y plugins le indica a WPML qué contenido es traducible. Puede anular esta configuración con su propia configuración personalizada añadiéndola a continuación."
 
 #: src/js/xmlConfigEditor/components/Container.js:29
 msgid "Read more about language configuration files."
-msgstr "Más información sobre los archivos de configuración de idioma."
+msgstr "Leer más sobre los archivos de configuración de idioma."
 
 #: src/js/xmlConfigEditor/components/Controls.js:22
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:33
@@ -27,11 +27,11 @@ msgstr "Error"
 
 #: src/js/xmlConfigEditor/components/SideBar.js:14
 msgid "Shortcuts"
-msgstr "Shortcuts"
+msgstr "Atajos"
 
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:19
 msgid "Fold/Unfold code"
-msgstr "Código plegado/desplegado"
+msgstr "Plegar/desplegar código"
 
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:26
 msgid "Auto format"

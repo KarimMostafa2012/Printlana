@@ -264,6 +264,10 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
                     add_action( 'wp_head', array( $this, 'techstore_wp_head' ) );
                 }
 
+                if ( 'Uncode' === $this->current_theme ) {
+                    add_action( 'wp_head', array( $this, 'uncode_wp_head' ) );
+                }
+
                 // WP Bottom Menu
                 if ( defined( 'WP_BOTTOM_MENU_VERSION' ) ) {
                     add_action( 'wp_head', array( $this, 'wp_bottom_menu_wp_head' ) );
@@ -305,6 +309,10 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
                 add_action( 'wp_enqueue_scripts', array( $this,  'elessi_wp_enqueue_scripts' ), 9999999 );
                 add_action( 'aws_search_page_filters', array( $this,  'elessi_aws_search_page_filters' ), 1 );
                 add_filter( 'woocommerce_get_filtered_term_product_counts_query', array( $this, 'elessi_woocommerce_get_filtered_term_product_counts_query' ), 9999999 );
+            }
+
+            if ( 'Hestia' === $this->current_theme ) {
+                add_action( 'wp_head', array( $this, 'hestia_wp_head' ) );
             }
 
             // Product Visibility by User Role for WooCommerce plugin
@@ -1711,7 +1719,7 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
          * Hestia them fix header search form
          */
         public function hestia_after_primary_navigation_addons( $form ) {
-            $form = str_replace('class="aws-wrapper', ' style="height:35px;" class="aws-wrapper', $form );
+            $form = str_replace('class="aws-wrapper', ' class="aws-wrapper', $form );
             $output  = '';
             $output .= '<li class="hestia-search-in-menu">';
                 $output .= '<div class="hestia-nav-search">';
@@ -1727,9 +1735,11 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
             }
             $script = '
                 function aws_results_layout( styles, options ) {
-                    styles.width = 200;
-                    styles.left = styles.left - 200;
-                    styles.top = styles.top + 40;
+                    if ( options.form.closest(".hestia-search-in-menu").length > 0 ) {
+                        styles.width = 200;
+                        styles.left = styles.left - 200;
+                        styles.top = styles.top + 40;
+                    }
                     return styles;
                 }
                 AwsHooks.add_filter( "aws_results_layout", aws_results_layout );
@@ -1737,6 +1747,20 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
             wp_add_inline_script( 'aws-script', $script);
             wp_add_inline_script( 'aws-pro-script', $script);
         }
+        public function hestia_wp_head() { ?>
+            <style>
+                .aws-wrapper {
+                    margin-bottom: 0 !important;
+                }
+                .aws-container .aws-search-field {
+                    background-image: none !important;
+                    border: 1px solid #d8d8d8 !important;
+                }
+                .aws-container .aws-search-form {
+                    padding-bottom: 0 !important;
+                }
+            </style>
+        <?php }
 
         /*
          * Open Shop theme header styles
@@ -1881,6 +1905,42 @@ if ( ! class_exists( 'AWS_Integrations' ) ) :
             <style>
                 .hw-nav-search form.hw-search {
                     visibility: hidden;
+                }
+            </style>
+        <?php }
+
+        /*
+         * Add custom styles for Uncode theme
+         */
+        public function uncode_wp_head() { ?>
+            <style>
+                .overlay.overlay-search .search-container .aws-container {
+                    display: inline-block;
+                    width: 100%;
+                    max-width: 600px;
+                    max-width: 60vw;
+                }
+                .overlay.overlay-search .search-container .aws-container .aws-search-form,
+                .overlay.overlay-search .search-container .aws-container .aws-search-form .aws-form-btn {
+                    background: transparent;
+                    border-color: rgba(255, 255, 255, 0.25);
+                }
+                .overlay.overlay-search .search-container .aws-container .aws-search-form {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    height: auto;
+                }
+                .overlay.overlay-search .search-container .aws-container .aws-search-form .aws-wrapper {
+                    overflow: visible;
+                }
+                .overlay.overlay-search .search-container .aws-container .aws-search-field {
+                    border-color: rgba(255, 255, 255, 0.25);
+                    color: #fff;
+                    font-size: 16px;
+                    padding: 12px 24px;
+                }
+                .overlay.overlay-search .search-container .aws-container .aws-search-form .aws-search-btn_icon {
+                    color: #fff;
                 }
             </style>
         <?php }

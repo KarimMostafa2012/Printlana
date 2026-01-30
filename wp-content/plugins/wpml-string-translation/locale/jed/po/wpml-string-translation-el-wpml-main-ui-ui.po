@@ -19,15 +19,15 @@ msgstr "Tab"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
-msgstr "Μετάφραση προς:"
+msgstr "Μετάφραση σε:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
-msgstr "Αντιγραφή πρωτοτύπου"
+msgstr "Αντιγραφή από το πρωτότυπο"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
-msgstr "Shift+Enter: νέα γραμμή."
+msgstr "Χρησιμοποιήστε Shift+Enter για να προσθέσετε μια νέα γραμμή."
 
 #: src/js/main-ui/components/EditTranslationPopup.js:97
 msgid "Original:"
@@ -35,36 +35,36 @@ msgstr "Πρωτότυπο:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "Προσθήκη %s"
+msgstr "Προσθήκη μετάφρασης %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
-msgstr "Επεξεργασία %s"
+msgstr "Επεξεργασία μετάφρασης %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "Προσθήκη %s (αμετάφραστο)"
+msgstr "Προσθήκη μετάφρασης %s (η συμβολοσειρά εμφανίζεται στον ιστότοπο και δεν μεταφράζεται)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
-msgstr "Γλώσσα πηγής %s"
+msgstr "Πρωτότυπη γλώσσα %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "Αναμονή μεταφραστή %s"
+msgstr "Αναμονή για μεταφραστή σε %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
-msgstr "Μετάφραση σε εξέλιξη %s"
+msgstr "Μετάφραση σε εξέλιξη σε %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
-msgstr "Σε αναμονή %s"
+msgstr "Στο καλάθι για μετάφραση σε %s"
 
 #: src/js/main-ui/components/notification.js:13
 msgid "Translation saved."
-msgstr "Αποθήκευση επιτυχής."
+msgstr "Η μετάφραση αποθηκεύτηκε."
 
 #: src/js/main-ui/components/notification.js:17
 msgid "Translation update failed."
-msgstr "Αποτυχία ενημέρωσης."
+msgstr "Η ενημέρωση μετάφρασης απέτυχε."

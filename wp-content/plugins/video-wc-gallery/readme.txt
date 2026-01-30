@@ -1,19 +1,21 @@
 === Video Gallery for WooCommerce ===
-Contributors: martinvalchev
-Donate link: https://linktr.ee/martinvalchev
+Contributors: nitramix, martinvalchev
+Donate link: https://nitramix.com/donate/
 Tags: video gallery, video player, product video, for woocommerce, product page
 Requires at least: 5.3
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.41
+Stable tag: 2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Video Gallery: Add WordPress library videos to product pages with customization. Requires WooCommerce activation.
+Video Gallery for WooCommerce: Add WordPress library videos to product pages with customization. Requires WooCommerce activation.
 
 == Description ==
 
 Introducing the Video Gallery for WooCommerce plugin - the perfect solution for businesses looking to enhance their product pages with visually engaging content. With this powerful plugin, adding video files from the WP library is a breeze, and they will be beautifully showcased on the product page. The plugin comes packed with a variety of additional options to help customize the display of videos on your site, including the ability to move videos around on the page to your desired position. You can also change the video file icon and color to match your brand's aesthetic. Video clip settings are fully customizable, giving you control over autoplay, sound, and loop options, as well as the ability to show or hide video control options. Please note that in order to use this plugin, the Woocommerce plugin must be activated. Upgrade your product pages today with Video Gallery for WooCommerce!
+
+**🚀 Looking for more features?** Check out our PRO version with YouTube integration, unlimited videos, custom SVG icons, SEO optimization, and priority support!
 
 The options for this plugin include:
 
@@ -27,6 +29,28 @@ The options for this plugin include:
 *   Manage your media library with ease
 *   Increase conversions by showcasing your products with multimedia content
 *   Compatible with Woocommerce plugin to ensure seamless integration with your online store
+
+**FREE Version Limitations:**
+*   Limited to 20 products with video
+*   Limited to 2 videos per product
+*   WordPress Media Library videos only (no YouTube support)
+*   Basic video icons only
+*   Basic thumbnail generation
+*   Basic SEO video
+
+**🚀 Upgrade to PRO Version:**
+Get access to advanced features including up to 6 videos per product, YouTube integration, custom SVG icons, optimized thumbnails, SEO settings, and premium support!
+
+**PRO Version Features:**
+*   **Unlimited products with video**
+*   **Up to 6 videos per product** - Showcase products from multiple angles
+*   **YouTube video integration** - Embed videos directly from YouTube
+*   **Custom SVG icons** - Use your own brand icons
+*   **Optimized thumbnails** - Automatic thumbnail generation
+*   **SEO settings** - Custom titles and descriptions per video
+*   **Premium support** - Priority email support
+
+**[Purchase PRO Version](https://nitramix.com/projects/video-gallery-for-woocommerce/)**
 
 The helper libraries plugin uses the following:
 
@@ -46,7 +70,18 @@ To install this plugin:
 
 1. Install the plugin through the WordPress admin interface, or upload the plugin folder to /wp-content/plugins/ using ftp.
 2. Activate the plugin through the 'Plugins' screen in WordPress. On a Multisite you can either network activate it or let users activate it individually.
-3. Go to WordPress Admin > WooCommerce > Settings > Video Gallery for WooCommerce
+3. Go to the "Video Gallery" admin menu in your WordPress dashboard
+
+How to add a video to a product
+
+1. Go to Products in WooCommerce.
+2. Click Edit on the product you want to add a video to.
+3. Scroll down to the Product Data section.
+4. Open the tab "Video Gallery for WooCommerce".
+5. You will see the option to add a video from your media library.
+6. After adding a video, make sure to click Update to save the changes.
+
+
 
 == Frequently Asked Questions ==
 
@@ -60,14 +95,53 @@ Yes, Video Gallery for WooCommerce comes with a variety of customization options
 Yes, you can choose from a range of video clip settings, such as autoplay, sound, and loop options, as well as the ability to show or hide video control options.
 = Is Video Gallery for WooCommerce compatible with other WordPress themes and plugins? =
 Video Gallery for WooCommerce is compatible with most WordPress themes and plugins, although some may require additional customization. It is designed to seamlessly integrate with Woocommerce, ensuring a smooth user experience.
+= Is there a PRO version with more features? =
+Yes! The PRO version unlocks advanced features including Unlimited products with video, up to 6 videos per product, YouTube integration, custom SVG icons, optimized thumbnails, SEO settings, and priority support. Visit [Video Gallery for WooCommerce PRO](https://nitramix.com/projects/video-gallery-for-woocommerce/) to learn more and purchase.
+= What's the difference between FREE and PRO versions? =
+The FREE version supports basic video functionality with limit 20 products with vide and up to 2 videos per product. The PRO version includes unlimited videos, YouTube support, custom icons, advanced SEO, and premium support.
 
 == Screenshots ==
 
 1. Settings
 2. Product settings
-3. Product pages
+3. All Products
+4. Product pages
+5. PRO - Embed videos directly from YouTube
+6. PRO - Video SEO settings
+7. PRO - Thumbnails optimization settings
+8. PRO - Custom SVG icon
 
 == Changelog ==
+
+= 2.4 =
+* **Improvement:** By visualization and code
+**Release date: January 5, 2026**
+
+= 2.3 =
+* **Fix:** Function to pause a video if we move to another slide in the gallery - optimized
+**Release date: December 18, 2025**
+
+= 2.2 =
+* **Added:** Added basic support for Blocksy theme
+**Release date: December 12, 2025**
+
+= 2.1 =
+* **Added:** Function to pause a video if we move to another slide in the gallery 
+* **Added:** Product list column indicator for videos
+* **Added:** Show counter above products table for products with video
+* **Added:** Delete videos from product by ID
+* **Added:** Products with video 20 limit
+* **Improvement:** Code cleanup and improvements
+**Release date: December 10, 2025**
+
+= 2.0 =
+* **Added:** Admin menu and redesign 
+* **Fix:** When the browser is Safari and the settings are to repeat the video and the controls are disabled
+* **Fix:** crossorigin errors
+* **Improvement:** Redesign admin products Video Gallery tab
+* **Improvement:** Code cleanup and improvements
+* Tested with WordPress 6.9
+**Release date: December 3, 2025**
 
 = 1.41 =
 * **Updated:** Outdated templates
@@ -84,16 +158,16 @@ Video Gallery for WooCommerce is compatible with most WordPress themes and plugi
 **Release date: May 24, 2025**
 
 = 1.38 =
-* **Improved:** Enhanced CSS styling for video thumbnails to ensure consistent sizing for Flatsome theme
-* **Fixed:** Vertical gallery layout for Flatsome theme
-* **Added:** Better support for video thumbnails in product galleries for Flatsome theme
-* **Improved:** Code optimization for better performance
-**Release date: March 12, 2025**
+ * **Improved:** Enhanced CSS styling for video thumbnails to ensure consistent sizing for Flatsome theme
+ * **Fixed:** Vertical gallery layout for Flatsome theme
+ * **Added:** Better support for video thumbnails in product galleries for Flatsome theme
+ * **Improved:** Code optimization for better performance
+ **Release date: March 12, 2025**
 
 = 1.37 =
-* **Fix:** Fatal error when product object is not properly initialized by page builders or themes
-* **Added:** Validation checks for product object to ensure compatibility with various page builders
-**Release date: March 10, 2025**
+ * **Fix:** Fatal error when product object is not properly initialized by page builders or themes
+ * **Added:** Validation checks for product object to ensure compatibility with various page builders
+ **Release date: March 10, 2025**
 
 = 1.36 =
 * **Fix:** Issue with Default Form Values in variable products
@@ -247,6 +321,9 @@ Video Gallery for WooCommerce is compatible with most WordPress themes and plugi
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Added an admin menu with a full redesign, fixed Safari playback issues when repeat is enabled and controls are disabled, resolved crossorigin errors, improved the Video Gallery tab design, cleaned up the code, and confirmed compatibility with WordPress 6.9.
 
 = 1.20 =
 * To generate new thumbnail sizes you will need to in the product edit delete the video and add it again add the video to generate new thumbnails and save

@@ -12,6 +12,39 @@ jQuery('#cx_hide_big_update').click(function()
     });
 });
 
+jQuery('#cx_show_size_threshold_tip').on('click', function()
+{
+    jQuery('#cx_size_threshold_tip').slideToggle(150);
+});
+
+jQuery('input:radio[name=compression_mode]').click(function(e)
+{
+    if(jQuery(this).prop('checked'))
+    {
+        //var $saveButton = jQuery("#cx-v2-save-settings");
+
+        let value = jQuery(this).prop('value');
+        if(value==='smart')
+        {
+            //$saveButton.css({ 'pointer-events': 'none', 'opacity': '0.4' });
+
+            jQuery("#compressx_general_quality_setting").hide();
+            jQuery("#compressx_smart_quality_setting").show();
+            jQuery("#cx_compression_mode_smart").closest('label').addClass('compressx-v2-bg-white');
+            jQuery("#cx_compression_mode_general").closest('label').removeClass('compressx-v2-bg-white');
+        }
+        else if(value==='general')
+        {
+            //$saveButton.css({ 'pointer-events': 'auto', 'opacity': '1' });
+
+            jQuery("#compressx_general_quality_setting").show();
+            jQuery("#compressx_smart_quality_setting").hide();
+            jQuery("#cx_compression_mode_general").closest('label').addClass('compressx-v2-bg-white');
+            jQuery("#cx_compression_mode_smart").closest('label').removeClass('compressx-v2-bg-white');
+        }
+    }
+});
+
 jQuery('#cx_convert_to_webp').click(function()
 {
     var value = '0';

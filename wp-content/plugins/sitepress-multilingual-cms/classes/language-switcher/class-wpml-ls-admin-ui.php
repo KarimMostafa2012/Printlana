@@ -1,6 +1,7 @@
 <?php
 
 use WPML\API\Sanitize;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
 
 class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 
@@ -112,11 +113,48 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 	public function save_settings_action() {
 		if ( $this->has_valid_nonce() && isset( $_POST['settings'] ) ) {
 			$new_settings = $this->parse_request_settings( 'settings' );
+
+			// Get old settings BEFORE saving to detect changes
+			$old_settings = $this->settings->get_settings();
+
 			$this->settings->save_settings( $new_settings );
+
+			// Captures PostHog event for footer LS enable/disable if it's changed.
+			$this->capturePostHogEventForFooterLSChange( $old_settings, $new_settings );
+
 			$this->maybe_complete_setup_wizard_step( $new_settings );
 			$this->sitepress->get_wp_api()->wp_send_json_success( esc_html__( 'Settings saved', 'sitepress' ) );
 		} else {
 			$this->sitepress->get_wp_api()->wp_send_json_error( esc_html__( "You can't do that!", 'sitepress' ) );
+		}
+	}
+
+	/**
+	 * Capture PostHog event when footer language switcher state changes
+	 *
+	 * @param array $oldSettings The settings before saving
+	 * @param array $newSettings The new settings being saved
+	 */
+	private function capturePostHogEventForFooterLSChange( $oldSettings, $newSettings ) {
+		// Get the old footer switcher state (from database/slot object)
+		$oldFooterLSEnabled = isset( $oldSettings['statics']['footer'] )
+		                      && $oldSettings['statics']['footer']->get( 'show' );
+
+		// Get the new footer switcher state (from POST data)
+		// Note: Unchecked checkboxes don't send any data, so the key won't exist
+		$newFooterLSEnabled = isset( $newSettings['statics']['footer']['show'] )
+		                      && ! empty( $newSettings['statics']['footer']['show'] );
+
+		// Only capture event if the state has changed
+		if ( $oldFooterLSEnabled !== $newFooterLSEnabled ) {
+			$eventProps = array(
+				'enabled' => $newFooterLSEnabled,
+				'source'  => 'languages_page',
+			);
+
+			\WPML\PostHog\Event\CaptureEvent::capture(
+				( new EventInstanceService() )->getFooterLanguageSwitcherToggledEvent( $eventProps )
+			);
 		}
 	}
 

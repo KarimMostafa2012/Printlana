@@ -278,6 +278,33 @@ abstract class Hooks implements IWPML_Backend_Action, IWPML_DIC_Action, IWPML_RE
 		if ( $language ) {
 			$this->wcmlStrings->set_string_language( $value, $context, $name, $language );
 		}
+
+		$this->flushWpmlStringTranslationCache( $context, $name );
+	}
+
+	/**
+	 * Flush specific WPML string translation cache key
+	 * Flush 'WPML_Register_String_Filter::' . $domain cache group
+	 * Flush domain cache key from 'WPML_Register_String_Filter' group
+	 *
+	 * @param string $domain The string domain (context).
+	 * @param string $name   The string name.
+	 */
+	protected function flushWpmlStringTranslationCache( $domain, $name ) {
+		$key = md5( $domain . '_' . $name );
+
+		wp_cache_delete( $key, 'wpml-string-translation' );
+
+		if ( function_exists( 'wp_cache_supports' ) && wp_cache_supports( 'flush_group' ) ) {
+			wp_cache_flush_group( 'WPML_Register_String_Filter::' . $domain );
+		}
+
+		wp_cache_delete( $domain, 'WPML_Register_String_Filter' );
+
+		wp_cache_delete( \WCML_Endpoints::STRING_CONTEXT, \WCML_Endpoints::class );
+		if ( class_exists( \WPML_Endpoints_Support::class ) ) {
+			wp_cache_delete( \WPML_Endpoints_Support::STRING_CONTEXT, \WPML_Endpoints_Support::class );
+		}
 	}
 
 	/**

@@ -5,7 +5,7 @@ jQuery( function( $ ) {
 		getAddonOptions: function() {
 			var data = {
 				security:  wc_pao_params.nonce.get_addon_options,
-				action: 'wc_pao_get_addon_options',
+				action: 'dokan_pao_get_addon_options',
 			};
 
 			return $.ajax( {
@@ -18,7 +18,7 @@ jQuery( function( $ ) {
 		getAddonField: function() {
 			var data = {
 				security:  wc_pao_params.nonce.get_addon_field,
-				action: 'wc_pao_get_addon_field',
+				action: 'dokan_pao_get_addon_field',
 			};
 
 			return $.ajax( {

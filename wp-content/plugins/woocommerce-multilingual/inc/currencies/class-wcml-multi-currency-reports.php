@@ -70,19 +70,16 @@ class WCML_Multi_Currency_Reports {
 
 		if ( $isReportsPage ) { //wc-reports - 2.1.x, woocommerce_reports 2.0.x
 
-			$wcml_reports_set_currency_nonce = wp_create_nonce( 'reports_set_currency' );
-
-			wc_enqueue_js( "
+			$wcml_reports_set_currency_nonce  = esc_js( wp_create_nonce( 'reports_set_currency' ) );
+			$wcml_reports_set_currency_script = <<<JS
                 jQuery('#dropdown_shop_report_currency').on('change', function(){
-                    jQuery('#dropdown_shop_report_currency_chosen').after('&nbsp;' + icl_ajxloaderimg);
-                    jQuery('#dropdown_shop_report_currency_chosen a.chosen-single').css('color', '#aaa');
                     jQuery.ajax({
                         url: ajaxurl,
                         type: 'post',
                         data: {
                             action: 'wcml_reports_set_currency',
                             currency: jQuery('#dropdown_shop_report_currency').val(),
-                            wcml_nonce: '" . $wcml_reports_set_currency_nonce . "'
+                            wcml_nonce: '$wcml_reports_set_currency_nonce'
                             },
                         success: function( response ){
                             if(typeof response.error !== 'undefined'){
@@ -93,7 +90,12 @@ class WCML_Multi_Currency_Reports {
                         }
                     })
                 });
-            " );
+JS;
+
+			$handle = 'wcml_reports_set_currency_dropdown';
+			wp_register_script( $handle, '', [ 'jquery' ], WCML_VERSION, true );
+			wp_enqueue_script( $handle );
+			wp_add_inline_script( $handle, $wcml_reports_set_currency_script );
 
 			$this->reports_currency = $_COOKIE['_wcml_reports_currency'] ?? wcml_get_woocommerce_currency_option();
 

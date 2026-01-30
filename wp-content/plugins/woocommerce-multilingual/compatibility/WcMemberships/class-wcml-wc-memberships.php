@@ -110,7 +110,7 @@ class WCML_WC_Memberships implements \IWPML_Action {
 	 */
 	private function get_members_area_endpoint() {
 		$endpoint            = get_option( 'woocommerce_myaccount_members_area_endpoint', 'members-area' );
-		$string_context      = class_exists( 'WPML_Endpoints_Support' ) ? WPML_Endpoints_Support::STRING_CONTEXT : 'WooCommerce Endpoints';
+		$string_context      = WCML_Url_Translation::get_endpoints_string_context();
 		$translated_endpoint = apply_filters( 'wpml_translate_single_string', $endpoint, $string_context, 'members_area' );
 
 		return [
