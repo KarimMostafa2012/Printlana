@@ -1,15 +1,18 @@
 jQuery(document).ready(function ($) {
+    if (typeof homeland_admin === 'undefined') return;
+
     // 1. Highlighted Elements Preview & Modal
     var $modal = $('#homeland-modal');
     var currentElementIndex = null;
 
     // Disable all links in admin preview
-    $('.homeland-admin-preview').on('click', 'a', function (e) {
+    $(document).on('click', '.homeland-admin-preview a', function (e) {
         e.preventDefault();
         e.stopPropagation();
     });
 
-    $('.homeland-admin-preview').on('click', '.h-card, .h-small-card', function (e) {
+    // Delegate click to cards
+    $(document).on('click', '.homeland-admin-preview .h-card, .homeland-admin-preview .h-small-card', function (e) {
         e.preventDefault();
 
         var allCards = $('.homeland-admin-preview').find('.h-card, .h-small-card');
@@ -30,7 +33,7 @@ jQuery(document).ready(function ($) {
             $('#modal-preview-img').hide();
         }
 
-        $modal.fadeIn();
+        $modal.css('display', 'flex').hide().fadeIn();
     });
 
     $('.homeland-modal-close').click(function () {
@@ -42,7 +45,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Reset Elements
-    $('.homeland-reset-btn').click(function (e) {
+    $(document).on('click', '.homeland-reset-btn', function (e) {
         e.preventDefault();
         if (confirm('Are you sure you want to reset all highlighted elements to defaults?')) {
             $.post(homeland_admin.ajax_url, {
@@ -79,7 +82,7 @@ jQuery(document).ready(function ($) {
     });
 
     // 2. Carousel Bulk Add
-    $('.homeland-bulk-add').click(function (e) {
+    $(document).on('click', '.homeland-bulk-add', function (e) {
         e.preventDefault();
         var bulk_uploader = wp.media({
             title: 'Select Images to Add as Slides',
@@ -93,6 +96,7 @@ jQuery(document).ready(function ($) {
 
             if (ids.length > 0) {
                 var $btn = $('.homeland-bulk-add');
+                var originalText = $btn.text();
                 $btn.prop('disabled', true).text('Adding...');
                 $.post(homeland_admin.ajax_url, {
                     action: 'homeland_bulk_add',
@@ -103,7 +107,7 @@ jQuery(document).ready(function ($) {
                         location.reload();
                     } else {
                         alert('Error: ' + response.data);
-                        $btn.prop('disabled', false).text('Bulk Add Slides');
+                        $btn.prop('disabled', false).text(originalText);
                     }
                 });
             }

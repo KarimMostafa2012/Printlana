@@ -29,7 +29,6 @@
     transform: scale(0.85);
     transform-origin: top center;
     margin-bottom: -60px;
-    /* Offset scale shrinkage */
 }
 
 /* Modal Styling */
@@ -43,11 +42,12 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
 }
 
 .homeland-modal-content {
     background-color: #fff;
-    margin: 3% auto;
     padding: 40px;
     border: none;
     width: 550px;
@@ -107,6 +107,7 @@
     border: 1px solid #ccd0d4;
     border-left: 4px solid #2271b1;
     border-radius: 4px;
+    clear: both;
 }
 
 .homeland-shortcode-box h3 {
@@ -125,14 +126,18 @@
 }
 
 /* Carousel Page Buttons */
-.wp-admin .restrict_manage_posts .button.action {
-    margin-left: 5px;
+.homeland-carousel-actions {
+    margin: 10px 0;
+    display: inline-block;
+}
+
+.homeland-carousel-actions .button.action {
+    margin-right: 5px;
 }
 
 @media (max-width: 600px) {
     .homeland-modal-content {
         width: 95%;
-        margin-top: 10%;
         padding: 20px;
     }
 }
