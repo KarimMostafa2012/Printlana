@@ -90,19 +90,20 @@ jQuery(document).ready(function ($) {
     // 2. Carousel Bulk Add
     $(document).on('click', '.homeland-bulk-add', function (e) {
         e.preventDefault();
+        var $btn = $(this);
+        var originalText = $btn.text();
+
         var bulk_uploader = wp.media({
             title: 'Select Images to Add as Slides',
             button: { text: 'Add to Carousel' },
             multiple: true
         }).on('select', function () {
-            var selection = bulk_uploader.state().get('selection');
+            var selection = bulk_uploader.state().get('selection').toJSON();
             var ids = selection.map(function (attachment) {
                 return attachment.id;
             });
 
             if (ids.length > 0) {
-                var $btn = $(this);
-                var originalText = $btn.text();
                 $btn.prop('disabled', true).text('Adding...');
                 $.post(homeland_admin.ajax_url, {
                     action: 'homeland_bulk_add',

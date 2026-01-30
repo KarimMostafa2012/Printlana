@@ -201,7 +201,12 @@ function homeland_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
 
 function homeland_admin_assets($hook) {
-    if (strpos($hook, 'homeland') === false && strpos($hook, 'hp_carousel_slide') === false) return;
+    global $post_type;
+    $is_homeland_page = (strpos($hook, 'homeland') !== false);
+    $is_carousel_post_type = (isset($post_type) && $post_type === 'hp_carousel_slide') || (isset($_GET['post_type']) && $_GET['post_type'] === 'hp_carousel_slide');
+    
+    if (!$is_homeland_page && !$is_carousel_post_type) return;
+
     wp_enqueue_media();
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
     wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.0');
@@ -294,7 +299,7 @@ function homeland_carousel_admin_buttons() {
     ?>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
-            $('.wp-header-end').after('<div class="homeland-carousel-actions"><button type="button" class="button action homeland-bulk-add">Bulk Add Slides</button> <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button action">Add New Slide</a></div>');
+            $('.wp-header-end').after('<div class="homeland-carousel-actions" style="display:inline-block; margin: 0 10px; vertical-align: middle;"><button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button> <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button">Add New Slide</a></div>');
         });
     </script>
     <?php
