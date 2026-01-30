@@ -31,6 +31,38 @@
     margin-bottom: -60px;
 }
 
+/* Local-style Text Properties for Admin Preview */
+.homeland-preview-container .h-card,
+.homeland-preview-container .h-small-card {
+    font-family: 'Beiruti', sans-serif !important;
+}
+
+.homeland-preview-container .h-promo {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #000014 !important;
+}
+
+.homeland-preview-container .h-small-promo {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #000014 !important;
+}
+
+.homeland-preview-container .h-text-group {
+    bottom: 40px !important;
+    left: 24px !important;
+    right: 24px !important;
+}
+
+.homeland-preview-container .h-small-text-group {
+    bottom: 24px !important;
+    left: 24px !important;
+    right: 24px !important;
+}
+
 /* Modal Styling */
 .homeland-modal {
     display: none;
@@ -91,14 +123,6 @@
     color: #475569;
 }
 
-.homeland-image-preview-wrap {
-    background: #f8fafc;
-    padding: 20px;
-    border: 2px dashed #e2e8f0;
-    border-radius: 12px;
-    text-align: center;
-}
-
 /* Standardized Shortcode Box */
 .homeland-shortcode-box {
     margin: 40px 0;
@@ -141,11 +165,4 @@
     height: 30px;
     line-height: 28px;
     margin-right: 5px;
-}
-
-@media (max-width: 600px) {
-    .homeland-modal-content {
-        width: 95%;
-        padding: 20px;
-    }
 }
