@@ -54,6 +54,15 @@ def deploy_to_server():
 
         print(f"[+] Output:\n{full_output.strip()}")
 
+        # Read homeland.php
+        print(f"\n[*] Reading remote homeland.php...")
+        cat_command = f"cat {REMOTE_PATH}/wp-content/plugins/homeland/homeland.php"
+        stdin, stdout, stderr = ssh.exec_command(cat_command)
+        remote_content = stdout.read().decode('utf-8')
+        print(f"[+] Remote Content Length: {len(remote_content)} bytes")
+        # Print first 20 lines to verify
+        print(f"[+] Remote Content Preview (First 20 lines):\n{remote_content[:500]}")
+
         # Close connection
         ssh.close()
         print(f"\n[+] Deployment completed successfully!")
