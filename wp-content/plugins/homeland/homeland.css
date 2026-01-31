@@ -475,7 +475,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 .discount-card .off-text {
     position: absolute;
     right: 25px;
-    bottom: -15px;
+    bottom: -2px;
     font-family: 'Inter', sans-serif !important;
     font-style: normal;
     font-weight: 700;
