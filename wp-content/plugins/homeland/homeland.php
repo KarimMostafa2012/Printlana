@@ -483,7 +483,16 @@ function homeland_carousel_admin_buttons() {
     ?>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
-            $('.wp-header-end').before('<div class="homeland-carousel-actions" style="margin-left: 15px; display: inline-flex; align-items: center; gap: 8px; vertical-align: middle;"><button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button> <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button">Add New Slide</a></div>');
+            var buttons = '<div class="homeland-carousel-actions" style="display:inline-flex; align-items:center; gap:8px; margin-left:15px; vertical-align:middle;">' +
+                          '<button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button>' +
+                          '<a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button">Add New Slide</a>' +
+                          '</div>';
+            
+            if ($('.wp-heading-inline').length) {
+                $('.wp-heading-inline').after(buttons);
+            } else {
+                $('.wp-header-end').before(buttons);
+            }
         });
     </script>
     <?php
@@ -494,10 +503,14 @@ function homeland_common_admin_footer() {
     $screen = get_current_screen();
     if (!$screen) return;
     
-    if ($screen->id === 'edit-hp_carousel_slide') {
-        homeland_render_shortcode_box('[homeland_carousel]');
-    } elseif ($screen->id === 'edit-discount_card') {
-        homeland_render_shortcode_box('[discount_card id="YOUR_ID"]');
+    if ($screen->id === 'edit-hp_carousel_slide' || $screen->id === 'edit-discount_card') {
+        echo '<div class="wrap" style="clear:both; margin-top:40px; margin-bottom: 60px;">';
+        if ($screen->id === 'edit-hp_carousel_slide') {
+            homeland_render_shortcode_box('[homeland_carousel]');
+        } else {
+            homeland_render_shortcode_box('[discount_card id="YOUR_ID"]');
+        }
+        echo '</div>';
     }
 }
 add_action('admin_footer', 'homeland_common_admin_footer');
