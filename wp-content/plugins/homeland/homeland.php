@@ -304,6 +304,67 @@ function homeland_save_dc_meta($post_id) {
 }
 add_action('save_post', 'homeland_save_dc_meta');
 
+// 3.2 List Table Toggle Logic & Columns
+function homeland_dc_columns($columns) {
+    $new_columns = array();
+    foreach ($columns as $key => $value) {
+        $new_columns[$key] = $value;
+        if ($key === 'title') {
+            $new_columns['dc_status'] = 'Active Status';
+        }
+    }
+    return $new_columns;
+}
+add_filter('manage_discount_card_posts_columns', 'homeland_dc_columns');
+
+function homeland_dc_column_content($column, $post_id) {
+    if ($column === 'dc_status') {
+        $is_active = get_post_meta($post_id, '_dc_active', true) === '1';
+        $url = add_query_arg(array(
+            'action' => 'homeland_toggle_dc',
+            'dc_id' => $post_id,
+            'nonce' => wp_create_nonce('homeland_toggle_' . $post_id)
+        ), admin_url('edit.php?post_type=discount_card'));
+
+        if ($is_active) {
+            echo '<a href="' . esc_url($url) . '" class="button button-small" style="background:#d4edda; color:#155724; border-color:#c3e6cb;">Active</a>';
+        } else {
+            echo '<a href="' . esc_url($url) . '" class="button button-small">Inactive</a>';
+        }
+    }
+}
+add_action('manage_discount_card_posts_custom_column', 'homeland_dc_column_content', 10, 2);
+
+function homeland_handle_dc_toggle() {
+    if (isset($_GET['action']) && $_GET['action'] === 'homeland_toggle_dc' && isset($_GET['dc_id'])) {
+        $post_id = intval($_GET['dc_id']);
+        if (!wp_verify_nonce($_GET['nonce'], 'homeland_toggle_' . $post_id)) return;
+        if (!current_user_can('edit_post', $post_id)) return;
+
+        $is_active = get_post_meta($post_id, '_dc_active', true) === '1';
+        
+        if (!$is_active) {
+            // Activating: Check max 4
+            $active_query = new WP_Query(array(
+                'post_type' => 'discount_card',
+                'meta_key' => '_dc_active',
+                'meta_value' => '1',
+                'posts_per_page' => -1
+            ));
+            if ($active_query->found_posts >= 4) {
+                wp_die('You can only have a maximum of 4 active discount cards. Please deactivate one before activating a new one.');
+            }
+            update_post_meta($post_id, '_dc_active', '1');
+        } else {
+            update_post_meta($post_id, '_dc_active', '0');
+        }
+
+        wp_redirect(admin_url('edit.php?post_type=discount_card'));
+        exit;
+    }
+}
+add_action('admin_init', 'homeland_handle_dc_toggle');
+
 // 4. Assets
 function homeland_enqueue_assets() {
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
@@ -408,70 +469,91 @@ add_shortcode('homeland_carousel', 'homeland_carousel_shortcode');
 // 7.1 Discount Card Shortcode & Rendering
 function homeland_render_discount_card($args) {
     $attr = shortcode_atts(array('id' => 0), $args);
-    $post_id = $attr['id'];
-    if (!$post_id) return '';
+    $post_ids = array();
 
-    $title = get_post_meta($post_id, '_dc_title', true);
-    $percentage = get_post_meta($post_id, '_dc_percentage', true);
-    $color = get_post_meta($post_id, '_dc_color', true) ?: '#F9B110';
-    $superscript = get_post_meta($post_id, '_dc_superscript', true) ?: 'UP TO';
-    $subscript = get_post_meta($post_id, '_dc_subscript', true) ?: 'OFF';
+    if ($attr['id']) {
+        $post_ids[] = $attr['id'];
+    } else {
+        // Fetch up to 4 active cards
+        $dc_query = new WP_Query(array(
+            'post_type' => 'discount_card',
+            'meta_key' => '_dc_active',
+            'meta_value' => '1',
+            'posts_per_page' => 4,
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
+        ));
+        if ($dc_query->have_posts()) {
+            while ($dc_query->have_posts()) {
+                $dc_query->the_post();
+                $post_ids[] = get_the_ID();
+            }
+        }
+        wp_reset_postdata();
+    }
 
-    // Parse percentage digits for special rendering
-    $p_str = (string)$percentage;
-    $digits = str_split($p_str);
-    
-    // SVG Knockout Effect for % (mimicking local JS logic in PHP)
-    // We'll generate the HTML/SVG directly here
+    if (empty($post_ids)) return '';
+
     ob_start();
-    ?>
-    <div class="discount-card" style="--card-bg-color: <?php echo esc_attr($color); ?>;">
-        <div class="top-section">
-            <div class="content">
-                <div class="header"><?php echo esc_html($title); ?></div>
-                <div class="up-to"><?php echo esc_html($superscript); ?></div>
-                
-                <div class="percentage-group">
-                    <?php 
-                    $count = count($digits);
-                    foreach ($digits as $i => $digit) : 
-                        $is_last = ($i === $count - 1);
-                        if ($is_last) : 
-                            // Final digit with % knockout
-                            ?>
-                            <div class="digit-container last-digit" style="position: relative; display: inline-block;">
-                                <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <mask id="percentMask-<?php echo $post_id; ?>">
-                                            <rect width="100" height="150" fill="white" />
-                                            <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="black" transform="scale(1, 1.2)" transform-origin="75 115">%</text>
-                                        </mask>
-                                    </defs>
-                                    <text x="10" y="120" font-family="CustomNumbers" font-size="120" font-weight="900" fill="black" mask="url(#percentMask-<?php echo $post_id; ?>)" transform="scale(1, 1.2)" transform-origin="10 120"><?php echo esc_html($digit); ?></text>
-                                    <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="none" stroke="black" stroke-width="2" transform="scale(1, 1.2)" transform-origin="75 115" style="opacity: 0.15;">%</text>
-                                </svg>
-                            </div>
-                            <?php
-                        else :
-                            // Normal digit
-                            ?>
-                            <span class="digit" style="font-family: 'CustomNumbers'; font-size: 120px; font-weight: 900; transform: scale(1, 1.2); display: inline-block; transform-origin: center bottom; margin: 0 -2px;"><?php echo esc_html($digit); ?></span>
-                            <?php
-                        endif;
-                    endforeach; ?>
+    echo '<div class="discount-cards-container" style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center; width:100%; padding: 40px 0;">';
+    
+    foreach ($post_ids as $post_id) {
+        $title = get_post_meta($post_id, '_dc_title', true);
+        $percentage = get_post_meta($post_id, '_dc_percentage', true);
+        $color = get_post_meta($post_id, '_dc_color', true) ?: '#F9B110';
+        $superscript = get_post_meta($post_id, '_dc_superscript', true) ?: 'UP TO';
+        $subscript = get_post_meta($post_id, '_dc_subscript', true) ?: 'OFF';
+
+        $p_str = (string)$percentage;
+        $digits = str_split($p_str);
+        ?>
+        <div class="discount-card" style="--card-bg-color: <?php echo esc_attr($color); ?>;">
+            <div class="top-section">
+                <div class="content">
+                    <div class="header"><?php echo esc_html($title); ?></div>
+                    <div class="up-to"><?php echo esc_html($superscript); ?></div>
+                    
+                    <div class="percentage-group">
+                        <?php 
+                        $count = count($digits);
+                        foreach ($digits as $i => $digit) : 
+                            $is_last = ($i === $count - 1);
+                            if ($is_last) : 
+                                ?>
+                                <div class="digit-container last-digit" style="position: relative; display: inline-block;">
+                                    <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <mask id="percentMask-<?php echo $post_id; ?>">
+                                                <rect width="100" height="150" fill="white" />
+                                                <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="black" transform="scale(1, 1.2)" transform-origin="75 115">%</text>
+                                            </mask>
+                                        </defs>
+                                        <text x="10" y="120" font-family="CustomNumbers" font-size="120" font-weight="900" fill="black" mask="url(#percentMask-<?php echo $post_id; ?>)" transform="scale(1, 1.2)" transform-origin="10 120"><?php echo esc_html($digit); ?></text>
+                                        <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="none" stroke="black" stroke-width="2" transform="scale(1, 1.2)" transform-origin="75 115" style="opacity: 0.15;">%</text>
+                                    </svg>
+                                </div>
+                                <?php
+                            else :
+                                ?>
+                                <span class="digit" style="font-family: 'CustomNumbers'; font-size: 120px; font-weight: 900; transform: scale(1, 1.2); display: inline-block; transform-origin: center bottom; margin: 0 -2px;"><?php echo esc_html($digit); ?></span>
+                                <?php
+                            endif;
+                        endforeach; ?>
+                    </div>
+                    
+                    <div class="off-text"><?php echo esc_html($subscript); ?></div>
                 </div>
-                
-                <div class="off-text"><?php echo esc_html($subscript); ?></div>
+            </div>
+            
+            <div class="divider-line"></div>
+            
+            <div class="bottom-section">
+                <button class="redeem-button">احصل على العرض</button>
             </div>
         </div>
-        
-        <div class="divider-line"></div>
-        
-        <div class="bottom-section">
-            <button class="redeem-button">احصل على العرض</button>
-        </div>
-    </div>
-    <?php
+        <?php
+    }
+    echo '</div>';
     return ob_get_clean();
 }
 add_shortcode('discount_card', 'homeland_render_discount_card');
@@ -508,7 +590,8 @@ function homeland_common_admin_footer() {
         if ($screen->id === 'edit-hp_carousel_slide') {
             homeland_render_shortcode_box('[homeland_carousel]');
         } else {
-            homeland_render_shortcode_box('[discount_card id="YOUR_ID"]');
+            homeland_render_shortcode_box('[discount_card]');
+            echo '<p style="margin-top: -30px; color: #666; font-style: italic;">Note: This shortcode will display all active discount cards (max 4).</p>';
         }
         echo '</div>';
     }

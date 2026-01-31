@@ -540,3 +540,20 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 .discount-card .redeem-button:hover {
     transform: scale(1.02);
 }
+
+/* --- Discount Cards Multi-Container --- */
+.discount-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+    .discount-cards-container {
+        gap: 20px;
+        padding: 20px 0;
+    }
+}
