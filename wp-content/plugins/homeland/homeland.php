@@ -483,19 +483,24 @@ function homeland_carousel_admin_buttons() {
     ?>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
-            $('.wp-header-end').after('<div class="homeland-carousel-actions" style="display:inline-block; margin: 0 10px; vertical-align: middle;"><button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button> <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button">Add New Slide</a></div>');
+            $('.wp-header-end').before('<div class="homeland-carousel-actions" style="margin-left: 15px; display: inline-flex; align-items: center; gap: 8px; vertical-align: middle;"><button type="button" class="button button-primary homeland-bulk-add">Bulk Add Slides</button> <a href="<?php echo admin_url('post-new.php?post_type=hp_carousel_slide'); ?>" class="button">Add New Slide</a></div>');
         });
     </script>
     <?php
 }
 add_action('admin_head', 'homeland_carousel_admin_buttons');
 
-function homeland_carousel_admin_footer() {
+function homeland_common_admin_footer() {
     $screen = get_current_screen();
-    if (!$screen || $screen->id !== 'edit-hp_carousel_slide') return;
-    homeland_render_shortcode_box('[homeland_carousel]');
+    if (!$screen) return;
+    
+    if ($screen->id === 'edit-hp_carousel_slide') {
+        homeland_render_shortcode_box('[homeland_carousel]');
+    } elseif ($screen->id === 'edit-discount_card') {
+        homeland_render_shortcode_box('[discount_card id="YOUR_ID"]');
+    }
 }
-add_action('admin_footer', 'homeland_carousel_admin_footer');
+add_action('admin_footer', 'homeland_common_admin_footer');
 
 // 9. AJAX
 function homeland_bulk_add_ajax() {
