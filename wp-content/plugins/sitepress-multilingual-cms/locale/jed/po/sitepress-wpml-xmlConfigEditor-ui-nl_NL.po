@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/xmlConfigEditor/components/Container.js:25
 msgid ""
 "The wpml-config.xml file in the root folder of your theme and plugins tells "
 "WPML which content is translatable. You can override these settings with "
 "your own custom settings by adding them below."
-msgstr "Het wpml-config.xml bestand in de hoofdmap van je thema en plugins vertelt WPML welke inhoud vertaalbaar is. Je kunt deze instellingen overschrijven met je eigen aangepaste instellingen door ze hieronder toe te voegen."
+msgstr "Het wpml-config.xml-bestand in de hoofdmap van uw thema en plug-ins vertelt WPML welke inhoud vertaalbaar is. U kunt deze instellingen overschrijven met uw eigen aangepaste instellingen door ze hieronder toe te voegen."
 
 #: src/js/xmlConfigEditor/components/Container.js:29
 msgid "Read more about language configuration files."
@@ -29,8 +31,8 @@ msgstr "Snelkoppelingen"
 
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:19
 msgid "Fold/Unfold code"
-msgstr "Code ontvouwen/vouwen"
+msgstr "Code invouwen/uitvouwen"
 
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:26
 msgid "Auto format"
-msgstr "AutoOpmaak"
+msgstr "Automatisch formatteren"

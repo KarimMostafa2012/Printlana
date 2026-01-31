@@ -95,7 +95,7 @@ class AdminUrl {
 	}
 
 	/**
-	 * @param ?int $step
+	 * @param ?string $step
 	 */
 	public static function getSetup( $step = null ) : string {
 		$args         = [];

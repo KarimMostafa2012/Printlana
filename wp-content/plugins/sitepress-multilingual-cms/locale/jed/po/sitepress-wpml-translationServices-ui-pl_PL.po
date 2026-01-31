@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
@@ -23,11 +25,11 @@ msgstr "Uwierzytelnij"
 msgid ""
 "Visit <link_to_service /> to request an API Token. This token allows WPML "
 "to connect to <service_name /> to send and receive jobs."
-msgstr "Odwiedź <link_to_service />, aby poprosić o token API. Ten token pozwala WPML połączyć się z <service_name />, aby wysyłać i odbierać zadania."
+msgstr "Odwiedź <link_to_service />, aby poprosić o token API. Ten token umożliwia WPML połączenie z <service_name /> w celu wysyłania i odbierania zadań."
 
 #: src/js/translationServices/components/SearchForm.js:10
 msgid "Search translation services"
-msgstr "Szukaj usług tłumaczeniowych"
+msgstr "Wyszukaj usługi tłumaczeniowe"
 
 #: src/js/translationServices/components/SearchForm.js:12
 msgid "Search"
@@ -43,7 +45,7 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "Obecnie nie jest możliwe połączenie usługi tłumaczeniowej, gdy WPML jest ustawiony na automatyczne tłumaczenie treści witryny. Aby skorzystać z usługi tłumaczeniowej, proszę zmienić tryb tłumaczenia na stronie <LinkToSettingsPage />."
+msgstr "Obecnie nie można połączyć usługi tłumaczeniowej, gdy WPML jest ustawiony na automatyczne tłumaczenie zawartości witryny. Aby skorzystać z usługi tłumaczeniowej, zmień tryb tłumaczenia na stronie <LinkToSettingsPage />."
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"

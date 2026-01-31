@@ -6,8 +6,13 @@ use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
 use WPML\Ajax\IHandler;
 use WPML\API\Settings;
 use WPML\Collect\Support\Collection;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
+use WPML\Core\LanguageNegotiation;
 use WPML\FP\Either;
+use WPML\Legacy\SharedKernel\Installer\Application\Query\WpmlActivePluginsQuery;
 use WPML\LIB\WP\User;
+use WPML\PostHog\Event\CaptureSetupWizardCompletedEvent;
+use WPML\PostHog\State\PostHogState;
 use WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE;
 use WPML\TranslationRoles\Service\AdministratorRoleManager;
 use WPML\UrlHandling\WPLoginUrlConverter;
@@ -34,8 +39,9 @@ class FinishStep implements IHandler {
 
 		$wpmlInstallation = wpml_get_setup_instance();
 		$originalLanguage = Option::getOriginalLang();
+		$translationLangs = Option::getTranslationLangs();
 		$wpmlInstallation->finish_step1( $originalLanguage );
-		$wpmlInstallation->finish_step2( Lst::append( $originalLanguage, Option::getTranslationLangs() ) );
+		$wpmlInstallation->finish_step2( Lst::append( $originalLanguage, $translationLangs ) );
 		$wpmlInstallation->finish_installation();
 
 		self::enableFooterLanguageSwitcher();
@@ -83,7 +89,59 @@ class FinishStep implements IHandler {
 		WPLoginUrlConverter::enable( true );
 		AdminLanguageSwitcher::enable();
 
+		$aiTranslationData = $data->get( 'ai_translation_data', null );
+
+		$this->captureWizardFinishedEvent([
+			'original_language' => $originalLanguage,
+			'translation_languages' => $translationLangs,
+			'ai_translation_data' => $aiTranslationData,
+		]);
+
 		return Right::of( true );
+	}
+
+
+	private function captureWizardFinishedEvent( $eventData ) {
+
+		if ( ! PostHogState::isEnabled() ) {
+			return;
+		}
+
+		$eventData['translation_mode']            = Option::getTranslationMode();
+		$eventData['language_negotiation_mode']   = LanguageNegotiation::getModeAsString();
+		$eventData['domains']                     = LanguageNegotiation::getDomains() ?: [];
+		$eventData['site_key']                    = function_exists( 'OTGS_Installer' ) && OTGS_Installer() ? (string) OTGS_Installer()->get_site_key( 'wpml' ) : null;
+		$eventData['is_predefined_sitekey_saved'] = function_exists( 'OTGS_Installer' )
+		                                            && OTGS_Installer()
+		                                            && defined( 'OTGS_INSTALLER_SITE_KEY_WPML' )
+		                                            && OTGS_INSTALLER_SITE_KEY_WPML
+		                                            && OTGS_Installer()->get_site_key( 'wpml' ) === OTGS_INSTALLER_SITE_KEY_WPML;
+		$eventData['is_tm_allowed']               = Option::isTMAllowed();
+		$eventData['support_step_value']          = class_exists( 'OTGS_Installer_WP_Share_Local_Components_Setting' ) && \OTGS_Installer_WP_Share_Local_Components_Setting::get_setting( 'wpml' );
+		$eventData['wpml_active_plugins']         = ( new WpmlActivePluginsQuery() )->getActivePlugins();
+
+		// Add AI Translation step values if available
+		if ( ! empty( $eventData['ai_translation_data'] ) && is_array( $eventData['ai_translation_data'] ) ) {
+			$eventData['ai_translation_step_values'] = [
+				'product_or_service'  => isset( $eventData['ai_translation_data']['product_or_service'] ) ?
+					sanitize_text_field( $eventData['ai_translation_data']['product_or_service'] ) :
+					'',
+				'website_description' => isset( $eventData['ai_translation_data']['website_description'] ) ?
+					sanitize_text_field( $eventData['ai_translation_data']['website_description'] ) :
+					'',
+				'target_audience'     => isset( $eventData['ai_translation_data']['target_audience'] ) ?
+					sanitize_text_field( $eventData['ai_translation_data']['target_audience'] ) :
+					'',
+			];
+		} else {
+			$eventData['ai_translation_step_values'] = null;
+		}
+
+		// Remove the raw ai_translation_data as we've processed it
+		unset( $eventData['ai_translation_data'] );
+
+		$event = ( new EventInstanceService() )->getWizardCompletedEvent( $eventData );
+		CaptureSetupWizardCompletedEvent::capture( $event );
 	}
 
 	private static function enableFooterLanguageSwitcher() {

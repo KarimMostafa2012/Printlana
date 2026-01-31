@@ -40,28 +40,6 @@ class InvoicePaymentSucceeded implements WebhookHandleable {
     }
 
     /**
-     * Modify query params.
-     *
-     * @since 3.4.3
-     *
-     * @param array $query
-     * @param array $query_vars
-     *
-     * @return array
-     */
-    public function handle_custom_query_var( $query, $query_vars ) {
-        if ( ! empty( $query_vars['search_transaction'] ) ) {
-            $query['meta_query'][] = [
-                'key'       => '_dokan_stripe_payment_capture_id',
-                'value'     => $query_vars['search_transaction'],
-                'compare'   => '=',
-            ];
-        }
-
-        return $query;
-    }
-
-    /**
      * Handle the event.
      *
      * @since 3.0.3
@@ -142,22 +120,22 @@ class InvoicePaymentSucceeded implements WebhookHandleable {
             $stripe_order_total = (float) $invoice->amount_paid / 100;
 
             // check if transaction already recorded
-            add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', [ $this, 'handle_custom_query_var' ], 10, 2 );
-            $query = new WC_Order_Query(
+            $orders = wc_get_orders(
                 [
-                    'search_transaction' => $stripe_transaction_id,
                     'customer_id'        => $subscription_order->get_customer_id(),
                     'limit'              => 1,
-                    'type'               => 'shop_order',
                     'orderby'            => 'date',
                     'order'              => 'DESC',
                     'return'             => 'ids',
+                    'meta_query'         => [
+                        [
+                            'key'     => '_dokan_stripe_payment_capture_id',
+                            'value'   => $stripe_transaction_id,
+                            'compare' => '=',
+                        ],
+                    ],
                 ]
             );
-
-            $orders = $query->get_orders();
-
-            remove_filter( 'woocommerce_order_data_store_cpt_get_orders_query', [ $this, 'handle_custom_query_var' ], 10 );
 
             if ( ! empty( $orders ) ) {
                 // transaction is already recorded

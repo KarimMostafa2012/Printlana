@@ -105,7 +105,7 @@ class Module {
         add_action( 'wp_enqueue_scripts', [ $this, 'load_scripts' ] );
         add_filter( 'dokan_set_template_path', [ $this, 'load_product_addon_templates' ], 10, 3 );
         add_action( 'woocommerce_before_add_to_cart_button', [ $this, 'load_vendor_staff_addons' ], 9 );
-        add_action( 'wp_ajax_wc_pao_get_addon_field', [ $this, 'ajax_get_addon_field' ], 1 );
+        add_action( 'wp_ajax_dokan_pao_get_addon_field', [ $this, 'ajax_get_addon_field' ], 1 );
     }
 
     /**

@@ -1,12 +1,17 @@
 <?php
 
 use WCML\TranslationJob\Hooks;
+use function WCML\functions\flushProductCachePrefixById;
 
 class WCML_TP_Support {
 
 	const CUSTOM_FIELD_NAME = 'wc_variation_field:';
 
 	const DOWNLOADABLE_FILES_TRANSLATABLE_FIELDS = [ 'name', 'file' ];
+
+	const PRIORITY_SAVE_VARIATION_CUSTOM_FIELDS_TRANSLATION = 20;
+
+	const PACKAGE_IMAGE_KEY_PREFIX = 'image-id-';
 
 	/** @var woocommerce_wpml */
 	private $woocommerce_wpml;
@@ -57,12 +62,37 @@ class WCML_TP_Support {
 		add_action( 'wpml_pro_translation_completed', [
 			$this,
 			'save_variation_custom_fields_translations'
-		], 20, 3 ); //after WCML_Products
+		], self::PRIORITY_SAVE_VARIATION_CUSTOM_FIELDS_TRANSLATION, 3 ); //after WCML_Products
 
-		if ( ! defined( 'WPML_MEDIA_VERSION' ) ) {
-			add_filter( 'wpml_tm_translation_job_data', [ $this, 'append_images_to_translation_package' ], 10, 2 );
-			add_action( 'wpml_translation_job_saved', [ $this, 'save_images_translations' ], 10, 3 );
+		add_action(
+			'wpml_pro_translation_completed',
+			[
+				$this,
+				'flush_variable_product_cache_prefix',
+			],
+			self::PRIORITY_SAVE_VARIATION_CUSTOM_FIELDS_TRANSLATION + 10,
+			3
+		);
+
+		add_filter( 'wpml_tm_translation_job_data', [ $this, 'append_images_to_translation_package' ], 10, 2 );
+		add_action( 'wpml_translation_job_saved', [ $this, 'save_images_translations' ], 10, 3 );
+
+		add_filter( 'wpml_custom_field_settings_override_lock_render', [ $this, 'set_wpml_term_custom_field_thumbnail_id_as_read_only' ], 10, 2 );
+	}
+
+	/**
+	 * @param bool $override
+	 * @param WPML_Custom_Field_Setting $setting
+	 * @return bool
+	 */
+	public function set_wpml_term_custom_field_thumbnail_id_as_read_only( $override, $setting ) {
+		if ( 'thumbnail_id' === $setting->get_index() && ( $setting instanceof WPML_Term_Custom_Field_Setting ) ) {
+			if( WPML_COPY_CUSTOM_FIELD === $setting->status() ) {
+				$setting->make_read_only();
+			}
 		}
+
+		return $override;
 	}
 
 	/**
@@ -75,7 +105,6 @@ class WCML_TP_Support {
 		if ( $this->isWpPostAWcProduct( $post ) ) {
 
 			$product      = wc_get_product( $post->ID );
-			$product_type = $product->get_type();
 
 			if ( ! empty( $product ) ) {
 
@@ -114,7 +143,7 @@ class WCML_TP_Support {
 		$translated_attributes = [];
 		$translated_labels     = $this->woocommerce_wpml->attributes->get_attr_label_translations( $post_id );
 
-		foreach ( $data as $data_key => $value ) {
+		foreach ( $data as $value ) {
 
 			if ( $value['finished'] && isset( $value['field_type'] ) && strpos( $value['field_type'], 'wc_attribute_' ) === 0 ) {
 
@@ -155,7 +184,9 @@ class WCML_TP_Support {
 				if( isset( $original_attributes[ $attribute_key ] ) ){
 					$product_attributes[ $attribute_key ]          = $original_attributes[ $attribute_key ];
 					$product_attributes[ $attribute_key ]['name']  = $attribute['name'];
-					$product_attributes[ $attribute_key ]['value'] = join( ' | ', $attribute['values'] );
+					$product_attributes[ $attribute_key ]['value'] = isset( $attribute['values'] )
+						? join( ' | ', $attribute['values'] )
+						: $product_attributes[ $attribute_key ]['value'];
 
 					$translated_labels[ $job->language_code ][ $attribute_key ] = $attribute['name'];
 				}
@@ -197,7 +228,7 @@ class WCML_TP_Support {
 
 			$allowed_variations_types = apply_filters( 'wcml_xliff_allowed_variations_types', [ 'variable' ] );
 
-			if ( $product && in_array( $product->get_type(), $allowed_variations_types, true ) ) {
+			if ( $product instanceof WC_Product && in_array( $product->get_type(), $allowed_variations_types, true ) ) {
 
 				$variations = $this->woocommerce_wpml->sync_variations_data->get_product_variations( $post->ID );
 
@@ -240,7 +271,7 @@ class WCML_TP_Support {
 
 			$allowed_variations_types = apply_filters( 'wcml_xliff_allowed_variations_types', [ 'variable' ] );
 
-			if ( $product && in_array( $product->get_type(), $allowed_variations_types, true ) ) {
+			if ( $product instanceof WC_Product && in_array( $product->get_type(), $allowed_variations_types, true ) ) {
 
 				$variations = $this->woocommerce_wpml->sync_variations_data->get_product_variations( $post->ID );
 
@@ -295,7 +326,7 @@ class WCML_TP_Support {
 
 			$allowed_types = [ 'simple' ];
 
-			if ( $product && in_array( $product->get_type(), $allowed_types, true ) ) {
+			if ( $product instanceof WC_Product && in_array( $product->get_type(), $allowed_types, true ) ) {
 
 				$meta_value = get_post_meta( $post->ID, WCML_Downloadable_Products::DOWNLOADABLE_FILES_META, true );
 
@@ -346,7 +377,7 @@ class WCML_TP_Support {
 				} else {
 					global $wpml_post_translations;
 					$translations            = $wpml_post_translations->get_element_translations( $variation_id );
-					$translated_variation_id = isset( $translations[ $language ] ) ? $translations[ $language ] : false;
+					$translated_variation_id = $translations[ $language ] ?? false;
 				}
 
 				if ( $translated_variation_id ) {
@@ -370,15 +401,15 @@ class WCML_TP_Support {
 			foreach ( $product_images as $image_id ) {
 				/** @var stdClass */
 				$attachment_data = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT post_title,post_excerpt,post_content FROM {$this->wpdb->posts} WHERE ID = %d", $image_id ) );
-				if ( ! $attachment_data ) {
+				if ( ! is_object( $attachment_data ) ) {
 					continue;
 				}
 				$alt_text = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-				$alt_text = $alt_text ? $alt_text : '';
-				$this->add_to_package( $package, 'image-id-' . $image_id . '-title', $attachment_data->post_title );
-				$this->add_to_package( $package, 'image-id-' . $image_id . '-caption', $attachment_data->post_excerpt );
-				$this->add_to_package( $package, 'image-id-' . $image_id . '-description', $attachment_data->post_content );
-				$this->add_to_package( $package, 'image-id-' . $image_id . '-alt-text', $alt_text );
+				$alt_text = $alt_text ?: '';
+				$this->add_to_package( $package, self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-title', $attachment_data->post_title );
+				$this->add_to_package( $package, self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-caption', $attachment_data->post_excerpt );
+				$this->add_to_package( $package, self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-description', $attachment_data->post_content );
+				$this->add_to_package( $package, self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text', $alt_text );
 
 			}
 		}
@@ -428,19 +459,19 @@ class WCML_TP_Support {
 	private function get_image_data( $image_id, $data ) {
 		$image_data = [];
 
-		foreach ( $data as $data_key => $value ) {
+		foreach ( $data as $value ) {
 			if ( $value['finished'] && isset( $value['field_type'] ) ) {
-				if ( strpos( $value['field_type'], 'image-id-' . $image_id ) === 0 ) {
-					if ( $value['field_type'] === 'image-id-' . $image_id . '-title' ) {
+				if ( strpos( $value['field_type'], self::PACKAGE_IMAGE_KEY_PREFIX . $image_id ) === 0 ) {
+					if ( $value['field_type'] === self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-title' ) {
 						$image_data['title'] = $value['data'];
 					}
-					if ( $value['field_type'] === 'image-id-' . $image_id . '-caption' ) {
+					if ( $value['field_type'] === self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-caption' ) {
 						$image_data['caption'] = $value['data'];
 					}
-					if ( $value['field_type'] === 'image-id-' . $image_id . '-description' ) {
+					if ( $value['field_type'] === self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-description' ) {
 						$image_data['description'] = $value['data'];
 					}
-					if ( $value['field_type'] === 'image-id-' . $image_id . '-alt-text' ) {
+					if ( $value['field_type'] === self::PACKAGE_IMAGE_KEY_PREFIX . $image_id . '-alt-text' ) {
 						$image_data['alt-text'] = $value['data'];
 					}
 				}
@@ -457,5 +488,17 @@ class WCML_TP_Support {
 			'format'    => 'base64'
 		];
 
+	}
+
+	/**
+	 * @param int                                        $post_id
+	 * @param array                                      $data
+	 * @param bool|stdClass|WPML_Element_Translation_Job $job
+	 * @return void|null
+	 */
+	public function flush_variable_product_cache_prefix( $post_id, $data, $job ) {
+		if ( Hooks::isProduct( $job ) ) {
+			flushProductCachePrefixById( $post_id );
+		}
 	}
 }

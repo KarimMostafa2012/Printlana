@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
+
 class WPML_Root_Page_Actions {
 
 	/** @var array $sp_settings */
@@ -217,6 +219,13 @@ class WPML_Root_Page_Actions {
 			);
 
 			do_action( 'wpml_translation_update', array_merge( $update_args, array( 'type' => 'after_delete' ) ) );
+
+			\WPML\PostHog\Event\CaptureEvent::capture(
+				( new EventInstanceService() )->getRootPageSavedEvent( [
+					'root_page_id'     => $post->ID,
+					'root_page_status' => $post->post_status,
+				] )
+			);
 		}
 	}
 

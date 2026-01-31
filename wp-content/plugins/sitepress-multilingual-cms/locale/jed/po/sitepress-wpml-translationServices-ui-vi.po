@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
@@ -23,7 +25,7 @@ msgstr "Xác thực"
 msgid ""
 "Visit <link_to_service /> to request an API Token. This token allows WPML "
 "to connect to <service_name /> to send and receive jobs."
-msgstr "Truy cập <link_to_service /> để yêu cầu một API Token. Token này cho phép WPML kết nối với <service_name /> để gửi và nhận các công việc."
+msgstr "Truy cập <link_to_service /> để yêu cầu Mã thông báo API. Mã thông báo này cho phép WPML kết nối với <service_name /> để gửi và nhận công việc."
 
 #: src/js/translationServices/components/SearchForm.js:10
 msgid "Search translation services"
@@ -43,7 +45,7 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "Hiện tại không thể kết nối dịch vụ dịch thuật khi WPML được cài đặt để tự động dịch nội dung trang web của bạn. Để sử dụng dịch vụ dịch thuật, vui lòng thay đổi chế độ dịch thuật của bạn trên trang <LinkToSettingsPage />."
+msgstr "Hiện không thể kết nối dịch vụ dịch thuật khi WPML được đặt để tự động dịch nội dung trang web của bạn. Để sử dụng dịch vụ dịch thuật, vui lòng thay đổi chế độ dịch của bạn trên trang <LinkToSettingsPage />."
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"

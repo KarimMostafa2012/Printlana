@@ -1,7 +1,8 @@
 /**
  * @description Moyasar Triggers
  */
-const __mysr_triggers = window.wp.i18n.__
+const { __, sprintf } = window.wp.i18n;
+const __mysr_triggers = __;
 
 class MoyasarTriggers {
 

@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -13,7 +15,7 @@ msgstr "HTML 锚点"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "使用 \"#anchor\" URL 加载页面时，为该区块添加快捷方式。"
+msgstr "使用 “#anchor” URL 加载页面时，为此区块添加快捷方式。"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -21,7 +23,7 @@ msgstr "附加 CSS 类"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "用空格分隔多个班级。"
+msgstr "用空格分隔多个类。"
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -30,7 +32,7 @@ msgstr "颜色"
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
 msgid "px"
-msgstr "px"
+msgstr "像素"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
@@ -47,11 +49,11 @@ msgstr "区块"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "块边距"
+msgstr "区块外边距"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "区块填充"
+msgstr "区块内边距"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -63,11 +65,11 @@ msgstr "语言间距"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "语言填充"
+msgstr "语言内边距"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "显示器"
+msgstr "显示"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
@@ -79,11 +81,11 @@ msgstr "显示语言名称"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "显示语言名称"
+msgstr "以以下形式显示语言名称"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
-msgstr "风格"
+msgstr "样式"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
@@ -103,7 +105,7 @@ msgstr "间距"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "允许多行包装"
+msgstr "允许换行"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -119,11 +121,11 @@ msgstr "布局"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "理由"
+msgstr "对齐"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
-msgstr "定向"
+msgstr "方向"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
@@ -161,23 +163,23 @@ msgstr "代码"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "左对齐项目"
+msgstr "项目左对齐"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "证明项目中心"
+msgstr "项目居中对齐"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "证明项目正确"
+msgstr "项目右对齐"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "说明项目之间的空间"
+msgstr "项目两端对齐"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
-msgstr "横向"
+msgstr "水平"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
 msgid "Vertical"
@@ -197,11 +199,11 @@ msgstr "大"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "特大号"
+msgstr "特大"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
-msgstr "腹肌"
+msgstr "Ab"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
 msgid "AB"
@@ -213,11 +215,11 @@ msgstr "ab"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
 msgid "Small"
-msgstr "小号"
+msgstr "小"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "显示WPML语言切换器。"
+msgstr "显示 WPML 语言切换器。"
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
@@ -227,13 +229,13 @@ msgstr "语言切换器"
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "显示WPML语言切换器"
+msgstr "显示 WPML 语言切换器"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "显示WPML语言切换器。<br/>了解<a>如何翻译此区块</a>。"
+msgstr "显示 WPML 语言切换器。<br/> 了解 <a>如何翻译此区块</a>。"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
@@ -241,4 +243,4 @@ msgstr "导航语言切换器"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"
-msgstr "重置全部"
+msgstr "全部重置"

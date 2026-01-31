@@ -171,13 +171,28 @@ class HTML extends Base {
 		if ( $translationFromPageBuilder === $text ) {
 			$string_id = $this->get_string_id( $block->blockName, $text );
 			if ( (int) Obj::path( [ $string_id, $lang, 'status' ], $string_translations ) === ICL_TM_COMPLETE ) {
-				return self::preserveNewLines( $text, $string_translations[ $string_id ][ $lang ]['value'] );
+				$translation = $string_translations[ $string_id ][ $lang ]['value'];
+				$translation = $this->encodeStandaloneLessThan( $translation );
+				return self::preserveNewLines( $text, $translation );
 			} else {
 				return null;
 			}
 		} else {
 			return $translationFromPageBuilder;
 		}
+	}
+
+	/**
+	 * Encodes standalone less-than characters to prevent DOMDocument truncation.
+	 *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlpb-769/
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	private function encodeStandaloneLessThan( $text ) {
+		return preg_replace( '/<(?![a-zA-Z][a-zA-Z0-9-:]*[\s\/>]|\/[a-zA-Z]|!)/', '&lt;', $text );
 	}
 
 	private static function preserveNewLines( $original, $translation ) {

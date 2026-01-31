@@ -1,4 +1,4 @@
-import DragIcon from './DragIcon';
+import DragIcon from '../common/DragIcon';
 import { __ } from '@wordpress/i18n';
 import { TableRate } from '../definations';
 import { SortableList } from '@dokan/components';
@@ -22,7 +22,7 @@ interface TableRowProps {
     rateConditionOptions: Array< { value: string; label: string } >;
 }
 
-export const TableRow = ( {
+const TableRow = ( {
     tableData,
     selectedRows,
     handleOrderUpdate,
@@ -97,6 +97,7 @@ export const TableRow = ( {
                                 menuPortalTarget={ document.querySelector(
                                     '.dokan-layout'
                                 ) }
+                                menuPosition='fixed'
                                 options={ shippingClassOptions }
                                 onChange={ handleSelectChange( 'rate_class' ) }
                                 value={ shippingClassOptions.find(
@@ -112,6 +113,7 @@ export const TableRow = ( {
                                 menuPortalTarget={ document.querySelector(
                                     '.dokan-layout'
                                 ) }
+                                menuPosition='fixed'
                                 options={ rateConditionOptions }
                                 onChange={ handleSelectChange(
                                     'rate_condition'

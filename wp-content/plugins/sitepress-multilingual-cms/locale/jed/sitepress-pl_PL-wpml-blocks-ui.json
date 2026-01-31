@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "pl_PL"
          },
          "Advanced": [
             "Zaawansowane"
@@ -15,7 +17,7 @@
             "Dodaj skrót do tego bloku podczas ładowania strony, używając adresu URL „#anchor”."
          ],
          "Additional CSS class(es)": [
-            "Dodatkowa klasa(y) CSS"
+            "Dodatkowe klasy CSS"
          ],
          "Separate multiple classes with spaces.": [
             "Oddziel wiele klas spacjami."
@@ -51,7 +53,7 @@
             "Wypełnienie języka"
          ],
          "Display": [
-            "Wyświetlanie"
+            "Wyświetl"
          ],
          "Show flag": [
             "Pokaż flagę"
@@ -78,7 +80,7 @@
             "Odstępy"
          ],
          "Allow wrapping to multiple lines": [
-            "Zezwól na zawijanie do wielu linii"
+            "Zezwalaj na zawijanie do wielu linii"
          ],
          "Open on click": [
             "Otwórz po kliknięciu"
@@ -123,7 +125,7 @@
             "Wyrównaj elementy do lewej"
          ],
          "Justify items center": [
-            "Wyrównaj elementy do środka"
+            "Wyśrodkuj elementy"
          ],
          "Justify items right": [
             "Wyrównaj elementy do prawej"
@@ -171,10 +173,10 @@
             "wyświetla przełącznik języków WPML"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "Wyświetla przełącznik języków WPML. <br/> Dowiedz się <a>jak przetłumaczyć ten blok</a>."
+            "Wyświetla przełącznik języków WPML. <br/> Dowiedz się, <a>jak przetłumaczyć ten blok</a>."
          ],
          "Navigation Language Switcher": [
-            "Nawigacyjny przełącznik języków"
+            "Przełącznik języków nawigacji"
          ],
          "Reset all": [
             "Resetuj wszystko"

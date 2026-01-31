@@ -538,6 +538,9 @@ class WPML_String_Translation {
 				</div>
 				<div id="wpml-st-localization-section" class="wpml-section-content wpml-section-content-wide">';
 		$this->renderChangedMoFilesBlock( $plugin_localization );
+
+		do_action( 'wpml_st_before_localization_ui_table' );
+
 		echo '		<table id="wpml-st-localization-table" class="widefat striped">';
 		/** @phpstan-ignore-next-line */
 		echo $localization->renderTemplate( 'theme-plugin-localization-ui-table-header.twig', [

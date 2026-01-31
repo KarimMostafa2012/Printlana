@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -13,15 +15,15 @@ msgstr "עוגן HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "הוסף קיצור דרך לבלוק זה בעת טעינת העמוד באמצעות כתובת ה-URL \"#anchor\"."
+msgstr "הוסף קיצור דרך לבלוק זה בעת טעינת הדף באמצעות כתובת ה-URL \"#anchor\"."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "מחלקות CSS נוספות"
+msgstr "מחלקת CSS נוספת"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "הפרד בין מספר מחלקות באמצעות רווחים."
+msgstr "הפרד מספר מחלקות באמצעות רווחים."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -47,11 +49,11 @@ msgstr "בלוק"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "שוליים של הבלוק"
+msgstr "שולי בלוק"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "ריפוד של הבלוק"
+msgstr "ריפוד בלוק"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -59,11 +61,11 @@ msgstr "שפה"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "מרווח בין שפות"
+msgstr "רווח בין שפות"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "ריפוד של השפה"
+msgstr "ריפוד שפה"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -79,7 +81,7 @@ msgstr "הצג שם שפה"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "הצג את שם השפה ב"
+msgstr "הצג שם שפה ב-"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -99,7 +101,7 @@ msgstr "גובה"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "מרווח"
+msgstr "רווח"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
@@ -173,7 +175,7 @@ msgstr "יישר פריטים לימין"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "יישר פריטים עם רווח ביניהם"
+msgstr "יישר פריטים ברווח שווה"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -217,28 +219,28 @@ msgstr "קטן"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "מציג את מחליף השפות של WPML."
+msgstr "מציג את בורר השפות של WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "מחליף שפות"
+msgstr "בורר שפות"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "מציג את מחליף השפות של WPML"
+msgstr "מציג את בורר השפות של WPML"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "מציג את מחליף השפות של WPML. <br/> למד <a>כיצד לתרגם בלוק זה</a>."
+msgstr "מציג את בורר השפות של WPML. <br/> למד <a>כיצד לתרגם את הבלוק הזה</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "מחליף שפות לניווט"
+msgstr "בורר שפות ניווט"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"
-msgstr "אפס הכל"
+msgstr "איפוס הכל"

@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -17,45 +19,45 @@ msgstr "προς:"
 
 #: src/js/components/language/LanguagePairs.js:93
 msgid "Select %s"
-msgstr "Επίλεξε %s"
+msgstr "Επιλέξτε %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "Ορίστε ζεύγη γλωσσών για τον Μεταφραστή %s:"
+msgstr "Ορισμός ζεύγους/ζευγών γλωσσών για τον μεταφραστή %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
-msgstr "+ Προσθέστε περισσότερα ζεύγη γλωσσών για αυτόν τον μεταφραστή"
+msgstr "+ Προσθήκη περισσότερων ζευγών γλωσσών για αυτόν τον μεταφραστή"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
 msgid "Translation Memory was successfully copied to Advanced Translation Editor."
-msgstr "Η Μνήμη Μετάφρασης αντιγράφηκε με επιτυχία στον Προηγμένο Επεξεργαστή Μετάφρασης."
+msgstr "Η Μεταφραστική Μνήμη αντιγράφηκε επιτυχώς στο Advanced Translation Editor."
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
 msgid "Deactivate ICanLocalize.com as Translation Service on this site"
-msgstr "Απενεργοποίηση του ICanLocalize.com ως Υπηρεσία Μετάφρασης σε αυτόν τον ιστότοπο"
+msgstr "Απενεργοποιήστε το ICanLocalize.com ως Υπηρεσία Μετάφρασης σε αυτόν τον ιστότοπο"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
 msgid ""
 "Missing a translator? Or were new jobs since the last copy of the "
 "Translation Memory?"
-msgstr "Λείπει κάποιος μεταφραστής; Ή υπήρχαν νέες εργασίες από την τελευταία αντιγραφή της Μνήμης Μετάφρασης;?"
+msgstr "Λείπει κάποιος μεταφραστής; Ή υπήρξαν νέες εργασίες από την τελευταία αντιγραφή της Μεταφραστικής Μνήμης;"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:25
 msgid "Enter here your ICanLocalize authentication details."
-msgstr "Εισάγετε εδώ τα στοιχεία ταυτοποίησης του ICanLocalize."
+msgstr "Εισαγάγετε εδώ τα στοιχεία ελέγχου ταυτότητας του ICanLocalize."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:33
 msgid "API Token:"
-msgstr "Διακριτικό API:"
+msgstr "Κλειδί API:"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:43
 msgid "Please enter valid value for ICL token."
-msgstr "Παρακαλώ εισάγετε έγκυρη τιμή για το διακριτικό ICL."
+msgstr "Παρακαλούμε εισαγάγετε έγκυρη τιμή για το κλειδί ICL."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:50
 msgid "Enter ICL API token here"
-msgstr "Εισάγετε το διακριτικό API του ICL εδώ"
+msgstr "Εισαγάγετε το κλειδί API του ICL εδώ"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:62
 msgid "Submit"
@@ -63,11 +65,11 @@ msgstr "Υποβολή"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:78
 msgid "Sign up"
-msgstr "Εγγραφείτε"
+msgstr "Εγγραφή"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:84
 msgid "to ICanLocalize to receive your API token."
-msgstr "στο ICanLocalize για να λάβετε το διακριτικό API σας."
+msgstr "στο ICanLocalize για να λάβετε το κλειδί API σας."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:91
 msgid "Already have an account? Login and"
@@ -75,15 +77,15 @@ msgstr "Έχετε ήδη λογαριασμό; Συνδεθείτε και"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:98
 msgid "get your token."
-msgstr "λάβετε το διακριτικό σας."
+msgstr "λάβετε το κλειδί σας."
 
 #: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
 msgid "Copy new Translation Memory to Advanced Translation Memory"
-msgstr "Αντιγραφή νέας Μνήμης Μετάφρασης στην Προηγμένη Μνήμη Μετάφρασης"
+msgstr "Αντιγραφή νέας Μεταφραστικής Μνήμης στο Advanced Translation Memory"
 
 #: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
 msgid "Import translation memory"
-msgstr "Εισαγωγή μνήμης μετάφρασης"
+msgstr "Εισαγωγή μεταφραστικής μνήμης"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
 msgid "ICanLocalize is already deactivated on this site"
@@ -93,11 +95,11 @@ msgstr "Το ICanLocalize είναι ήδη απενεργοποιημένο σ�
 msgid ""
 "You can still import Translators or Copy Translation Memory to Advanced "
 "Translator Editor"
-msgstr "Μπορείτε ακόμα να εισάγετε Μεταφραστές ή να Αντιγράψετε τη Μνήμη Μετάφρασης στον Προηγμένο Επεξεργαστή Μετάφρασης"
+msgstr "Μπορείτε ακόμα να εισαγάγετε Μεταφραστές ή να αντιγράψετε τη Μεταφραστική Μνήμη στο Advanced Translator Editor"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
 msgid "Move from ICanLocalize.com to Advanced Translation Editor"
-msgstr "Μετάβαση από το ICanLocalize.com στον Προηγμένο Επεξεργαστή Μετάφρασης"
+msgstr "Μετακίνηση από το ICanLocalize.com στον προηγμένο επεξεργαστή μετάφρασης"
 
 #: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
 #: src/js/icl-to-ate-migration/components/Translators/Button.js:21
@@ -125,7 +127,7 @@ msgstr "Όνομα"
 
 #: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:59
 msgid "Language Pairs"
-msgstr "Ζεύγη Γλωσσών"
+msgstr "Ζεύγη γλωσσών"
 
 #: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
 msgid "Not supported pairs:"
@@ -137,7 +139,7 @@ msgstr "Το ICanLocalize.com απενεργοποιήθηκε"
 
 #: src/js/icl-to-ate-migration/model/translationMemory.js:12
 msgid "Translate memory is imported"
-msgstr "Η μνήμη μετάφρασης εισήχθη"
+msgstr "Η μεταφραστική μνήμη εισάγεται"
 
 #: src/js/icl-to-ate-migration/model/translators.js:26
 msgid "There is no translators in ICL"
@@ -149,7 +151,7 @@ msgstr "Οι μεταφραστές αποθηκεύτηκαν"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
-msgstr "Η μεταφόρτωση του αρχείου %s απέτυχε."
+msgstr "Η μεταφόρτωση αρχείου %s απέτυχε."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:69
 msgid "Flag"
@@ -163,7 +165,7 @@ msgstr "Αρχείο σημαίας"
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "Μόλις προσθέσατε γλώσσα. Στη συνέχεια, επιλέξτε την ως την προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
+msgstr "Μόλις προσθέσατε μια γλώσσα. Στη συνέχεια, επιλέξτε την ως προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -181,7 +183,7 @@ msgstr "Προσθήκη νέας γλώσσας"
 msgid ""
 "Create a country-specific language by choosing the general language from "
 "the list below. Then, choose the country it should be localized for."
-msgstr "Δημιουργήστε μια γλώσσα ειδική για μια χώρα επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα. Στη συνέχεια, επιλέξτε τη χώρα για την οποία πρέπει να τοπικοποιηθεί."
+msgstr "Δημιουργήστε μια γλώσσα ειδική για τη χώρα επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα. Στη συνέχεια, επιλέξτε τη χώρα για την οποία θα πρέπει να εντοπιστεί."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:229
 msgid ""
@@ -192,7 +194,7 @@ msgstr "Επιλέγοντας έναν συνδυασμό που υπάρχει
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:242
 msgid "Cannot find?"
-msgstr "Δεν μπορείτε να βρείτε;?"
+msgstr "Δεν μπορείτε να βρείτε;"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:244
 msgid "Click here"
@@ -202,7 +204,7 @@ msgstr "Κάντε κλικ εδώ"
 msgid ""
 "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
 ", \"pt-br\", \"zh-hans\""
-msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “-”. Π.χ: “fr”, “pt-br”, “zh-hans”"
+msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “-”. Π.χ.: “fr”, “pt-br”, “zh-hans”"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:308
 msgid "Language"
@@ -226,7 +228,7 @@ msgstr "Αντιστοίχιση γλώσσας"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:404
 msgid "Don't map this language"
-msgstr "Μην αντιστοιχίσετε αυτή τη γλώσσα"
+msgstr "Να μην αντιστοιχιστεί αυτή η γλώσσα"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:418
 msgid "Default locale"
@@ -236,7 +238,7 @@ msgstr "Προεπιλεγμένη τοπική ρύθμιση"
 msgid ""
 "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
 ", \"de_DE\", \"zh_Hant_TW\""
-msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “_”. Π.χ: “de”, “de_DE”, “zh_Hant_TW”"
+msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “_”. Π.χ.: “de”, “de_DE”, “zh_Hant_TW”"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:435
 msgid "hreflang"
@@ -244,7 +246,7 @@ msgstr "hreflang"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:449
 msgid "Encode url?"
-msgstr "Κωδικοποίηση url;?"
+msgstr "Κωδικοποίηση URL;"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:45
 msgid "Flags must be:"
@@ -264,11 +266,11 @@ msgstr " (απαιτείται)"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:483
 msgid "Please fill in the field"
-msgstr "Παρακαλώ συμπληρώστε το πεδίο"
+msgstr "Παρακαλούμε συμπληρώστε το πεδίο"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:49
 msgid "PNG, SVG, or JPG files"
-msgstr "Αρχεία PNG, SVG, ή JPG"
+msgstr "Αρχεία PNG, SVG ή JPG"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:501
 msgid "Save language"
@@ -276,11 +278,11 @@ msgstr "Αποθήκευση γλώσσας"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:52
 msgid "18 x 12 pixels"
-msgstr "18 x 12 pixel"
+msgstr "18 x 12 εικονοστοιχεία"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:55
 msgid "Read more about "
-msgstr "Διαβάστε περισσότερα για "
+msgstr "Διαβάστε περισσότερα σχετικά με "
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:60
 msgid ""
@@ -292,7 +294,7 @@ msgstr "Το όνομα της γλώσσας σας όπως θα εμφανί�
 msgid ""
 "A unique value that identifies the language in the database and URL. Once "
 "saved, the language code cannot be changed."
-msgstr "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και τη διεύθυνση URL. Μόλις αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
+msgstr "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και στο URL. Μόλις αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:62
 msgid ""
@@ -302,20 +304,20 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "Εάν η προσαρμοσμένη γλώσσα σας είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, εάν η προσαρμοσμένη γλώσσα σας είναι τα Ελβετικά Γερμανικά, μπορείτε να αντιστοιχίσετε στα Γερμανικά ως τη γλώσσα που θα χρησιμοποιηθεί για τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση. Εάν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σας σε μια υπάρχουσα γλώσσα, οι λειτουργίες ορθογραφικού ελέγχου και αυτόματης μετάφρασης δεν θα είναι διαθέσιμες σε αυτή τη γλώσσα."
+msgstr "Εάν η προσαρμοσμένη γλώσσα σας είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, εάν η προσαρμοσμένη γλώσσα σας είναι τα Ελβετικά-Γερμανικά, μπορείτε να αντιστοιχίσετε στα Γερμανικά ως τη γλώσσα που θα χρησιμοποιηθεί για τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση. Εάν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σας σε μια υπάρχουσα γλώσσα, οι λειτουργίες ορθογραφικού ελέγχου και αυτόματης μετάφρασης δεν θα είναι διαθέσιμες σε αυτήν τη γλώσσα."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
 "The value WPML checks when loading translations from MO and PO files. The "
 "default locale is included in the filenames in your /wp-content/languages/ "
 "folder in your WordPress setup."
-msgstr "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοπική ρύθμιση περιλαμβάνεται στα ονόματα αρχείων στον φάκελο  /wp-content/languages/ στη ρύθμιση του WordPress."
+msgstr "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοπική ρύθμιση περιλαμβάνεται στα ονόματα αρχείων στον φάκελο /wp-content/languages/ στην εγκατάσταση του WordPress."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:69
 msgid ""
 "Google uses the hreflang attribute to direct users to sites in their "
 "relevant language and location. Examples:"
-msgstr "Η Google χρησιμοποιεί το χαρακτηριστικό hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη σχετική γλώσσα και τοποθεσία τους. Παραδείγματα:"
+msgstr "Η Google χρησιμοποιεί το χαρακτηριστικό hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στην αντίστοιχη γλώσσα και τοποθεσία τους. Παραδείγματα:"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:71
 msgid "All English-speaking users: en"
@@ -323,17 +325,17 @@ msgstr "Όλοι οι αγγλόφωνοι χρήστες: en"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:72
 msgid "English for UK users: en-gb"
-msgstr "Αγγλικά για χρήστες του Ηνωμένου Βασιλείου: en-gb"
+msgstr "Αγγλικά για χρήστες Ηνωμένου Βασιλείου: en-gb"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:73
 msgid "English for US users: en-us"
-msgstr "Αγγλικά για χρήστες των ΗΠΑ: en-us"
+msgstr "Αγγλικά για χρήστες ΗΠΑ: en-us"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:81
 msgid ""
 "Determines if URLs in this language are encoded or use ASCII characters (if "
 "unsure, leave it as \"No\")."
-msgstr "Καθορίζει εάν οι διευθύνσεις URL σε αυτή τη γλώσσα είναι κωδικοποιημένες ή χρησιμοποιούν χαρακτήρες ASCII (εάν δεν είστε σίγουροι, αφήστε το ως “Όχι”)."
+msgstr "Καθορίζει εάν τα URL σε αυτήν τη γλώσσα κωδικοποιούνται ή χρησιμοποιούν χαρακτήρες ASCII (αν δεν είστε σίγουροι, αφήστε το ως “Όχι”)."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:98
 msgid "adding a custom language"
@@ -341,7 +343,7 @@ msgstr "προσθήκη προσαρμοσμένης γλώσσας"
 
 #: src/js/setup/components/Steps/Languages.js:110
 msgid "What are the languages of your site?"
-msgstr "Ποιες είναι οι γλώσσες του ιστότοπού σας;?"
+msgstr "Ποιες είναι οι γλώσσες του ιστότοπού σας;"
 
 #: src/js/setup/components/Steps/Languages.js:120
 msgid "Default language"
@@ -349,7 +351,7 @@ msgstr "Προεπιλεγμένη γλώσσα"
 
 #: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
-msgstr "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;?"
+msgstr "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;"
 
 #: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
@@ -357,11 +359,11 @@ msgstr "Γλώσσες μετάφρασης"
 
 #: src/js/setup/components/Steps/Languages.js:135
 msgid "Which languages do you want to translate your site into?"
-msgstr "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;?"
+msgstr "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
-msgstr "Εάν δεν μπορείτε να βρείτε τις γλώσσες που χρειάζεστε στη λίστα"
+msgid "If you cannot find languages that you need in the list,"
+msgstr "Εάν δεν μπορείτε να βρείτε τις γλώσσες που χρειάζεστε στη λίστα,"
 
 #: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"

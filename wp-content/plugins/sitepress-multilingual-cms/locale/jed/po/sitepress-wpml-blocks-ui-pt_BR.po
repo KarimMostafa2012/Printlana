@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -21,7 +23,7 @@ msgstr "Classe(s) CSS adicional(is)"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "Separe múltiplas classes com espaços."
+msgstr "Separe várias classes com espaços."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -67,7 +69,7 @@ msgstr "Preenchimento do idioma"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "Exibição"
+msgstr "Exibir"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
@@ -103,7 +105,7 @@ msgstr "Espaçamento"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Permitir quebra em múltiplas linhas"
+msgstr "Permitir quebra em várias linhas"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -119,7 +121,7 @@ msgstr "Layout"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "Alinhamento"
+msgstr "Justificativa"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
@@ -161,19 +163,19 @@ msgstr "Código"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "Alinhar itens à esquerda"
+msgstr "Justificar itens à esquerda"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "Alinhar itens ao centro"
+msgstr "Justificar itens ao centro"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "Alinhar itens à direita"
+msgstr "Justificar itens à direita"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Alinhar itens com espaço entre"
+msgstr "Justificar itens com espaço entre eles"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -217,27 +219,27 @@ msgstr "Pequeno"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Exibe o Seletor de Idiomas do WPML."
+msgstr "Exibe o seletor de idioma do WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "Seletor de Idiomas"
+msgstr "Seletor de idioma"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "exibe o Seletor de Idiomas do WPML"
+msgstr "exibe o seletor de idioma do WPML"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Exibe o Seletor de Idiomas do WPML. <br/> Saiba <a>como traduzir este bloco</a>."
+msgstr "Exibe o seletor de idioma do WPML. <br/> Saiba <a>como traduzir este bloco</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Seletor de Idiomas de Navegação"
+msgstr "Seletor de idioma de navegação"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

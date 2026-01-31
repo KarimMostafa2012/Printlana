@@ -273,7 +273,7 @@ abstract class WPML_TM_AMS_Translation_Abstract_Console_Section {
 			'tm_user_name'         => esc_js( $currentSender->username ),
 			'tm_user_display_name' => esc_js( $currentSender->displayName ),
 			'website_uuid'         => esc_js( $this->auth->get_site_id() ),
-			'site_key'             => esc_js( apply_filters( 'otgs_installer_get_sitekey_wpml', null ) ),
+			'site_key'             => esc_js($this->sitepress->get_sitekey()),
 			'dependencies'         => [
 				'sitepress-multilingual-cms' => [
 					'version' => ICL_SITEPRESS_VERSION,

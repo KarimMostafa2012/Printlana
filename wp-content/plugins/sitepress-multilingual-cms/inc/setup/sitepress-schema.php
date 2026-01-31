@@ -4,6 +4,7 @@
  */
 
 use WPML\Infrastructure\WordPress\Component\Translation\Domain\Links\Repository;
+use WPML\TM\Upgrade\Commands\CreateUnsolvableJobsTable;
 use WPML\Upgrade\Commands\CreateBackgroundTaskTable;
 
 function icl_reset_language_data() {
@@ -324,25 +325,6 @@ function icl_sitepress_activate() {
 			}
 		}
 
-		/* string translation - start */
-		$icl_translation_sql = "
-             CREATE TABLE IF NOT EXISTS {$wpdb->prefix}icl_core_status (
-            `id` BIGINT NOT NULL auto_increment,
-            `rid` BIGINT NOT NULL,
-            `module` VARCHAR( 16 ) NOT NULL ,
-            `origin` VARCHAR( 64 ) NOT NULL ,
-            `target` VARCHAR( 64 ) NOT NULL ,
-            `status` SMALLINT NOT NULL,
-            `tp_revision` INT NOT NULL DEFAULT 1,
-            `ts_status` TEXT NULL DEFAULT NULL,
-            PRIMARY KEY ( `id` ) ,
-            INDEX ( `rid` )
-            ) {$charset_collate}
-      ";
-		if ( $wpdb->query( $icl_translation_sql ) === false ) {
-			throw new Exception( $wpdb->last_error );
-		}
-
 		$icl_translation_sql = "
             CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}icl_content_status` (
             `rid` BIGINT NOT NULL ,
@@ -394,6 +376,11 @@ function icl_sitepress_activate() {
 			throw new Exception( $wpdb->last_error );
 		}
 
+		// Create tables for translate jobs errors.
+		$icl_translation_jobs_errors_table_task = CreateUnsolvableJobsTable::create_table_if_not_exists( $wpdb );
+		if ( ! $icl_translation_jobs_errors_table_task ) {
+			throw new Exception( $wpdb->last_error );
+		}
 	} catch ( Exception $e ) {
 		trigger_error( $e->getMessage(), E_USER_ERROR );
 		exit;

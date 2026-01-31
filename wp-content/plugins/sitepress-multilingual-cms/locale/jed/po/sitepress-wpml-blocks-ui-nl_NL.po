@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -9,15 +11,15 @@ msgstr "Geavanceerd"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "HTML anker"
+msgstr "HTML-anker"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Voeg een snelkoppeling aan dit blok toe bij het laden van de pagina met de \"#anchor\" URL."
+msgstr "Voeg een snelkoppeling toe aan dit blok bij het laden van de pagina met de URL “#anchor”."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "Toegevoegde CSS klasse(n)"
+msgstr "Extra CSS-klasse(n)"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
@@ -43,7 +45,7 @@ msgstr "Afmetingen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
-msgstr "Block"
+msgstr "BLOK"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
@@ -51,7 +53,7 @@ msgstr "Blokmarge"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "Blokvulling"
+msgstr "Blokopvulling"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
@@ -63,11 +65,11 @@ msgstr "Taalafstand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Taal opvulling"
+msgstr "Taalopvulling"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "Weergeven"
+msgstr "Weergave"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
@@ -87,7 +89,7 @@ msgstr "Stijl"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
-msgstr "Vlag instellingen"
+msgstr "Vlaginstellingen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
 msgid "Width"
@@ -99,19 +101,19 @@ msgstr "Hoogte"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "Spatiëring"
+msgstr "Afstand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Terugloop naar meerdere regels toestaan"
+msgstr "Meerdere regels toestaan"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "Openen bij klik"
+msgstr "Openen bij klikken"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
-msgstr "Pijl weergeven"
+msgstr "Pijl tonen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
 msgid "Layout"
@@ -144,12 +146,12 @@ msgstr "Taalachtergrond"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:131
 msgid "Current language text"
-msgstr "Huidige taaltekst"
+msgstr "Tekst huidige taal"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:136
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
 msgid "Current language background"
-msgstr "Huidige taalachtergrond"
+msgstr "Achtergrond huidige taal"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
@@ -173,7 +175,7 @@ msgstr "Items rechts uitlijnen"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Items gelijkmatig verdelen"
+msgstr "Items ruimte tussen uitlijnen"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -189,7 +191,7 @@ msgstr "Normaal"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
 msgid "Medium"
-msgstr "Medium"
+msgstr "Gemiddeld"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
 msgid "Large"
@@ -197,7 +199,7 @@ msgstr "Groot"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Extra groot"
+msgstr "X-groot"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -217,27 +219,27 @@ msgstr "Klein"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Toont de WPML Taalwisselaar."
+msgstr "Toont de WPML-taalschakelaar."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
 msgid "Language Switcher"
-msgstr "Taalwisselaar"
+msgstr "Taalschakelaar"
 
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "toont de WPML Taalwisselaar"
+msgstr "toont de WPML-taalschakelaar"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Toont de WPML Taalwisselaar. <br/> Leer <a>hoe u dit blok kunt vertalen</a>."
+msgstr "Toont de WPML-taalschakelaar. <br/> Leer <a>hoe u dit blok vertaalt</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Navigatie Taalwisselaar"
+msgstr "Navigatietaalschakelaar"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

@@ -2,6 +2,7 @@ import { useState, useEffect, RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useToast } from '@getdokan/dokan-ui';
 import { PriceHtml, DokanButton } from '@dokan/components';
+import { applyFilters } from '@wordpress/hooks';
 
 const PricingCard = ( {
     pack,
@@ -62,6 +63,43 @@ const PricingCard = ( {
             ? pack.recurring_period_interval + ' ' + pack.recurring_period_type
             : pack.recurring_period_type;
 
+    const actoins = () => {
+        return (
+            <div className="px-6 min-w-full">
+                <DokanButton
+                    variant="primary"
+                    link={ ! hasManagePermission }
+                    onClick={ preventPackSwitching }
+                    disabled={ hasManagePermission }
+                    href={
+                        isActiveSubscription()
+                            ? currentPackProduct?.permalink
+                            : `?add-to-cart=${ packId }`
+                    }
+                    className={ `m-0 w-full py-2 px-4 dokan-btn ${
+                        isActiveSubscription() ? 'dokan-btn-secondary' : ''
+                    }` }
+                >
+                    { subscriptionId && currentSubscription?.order_id
+                        ? isActiveSubscription()
+                            ? __( 'Your Pack', 'dokan' )
+                            : __( 'Switch Pack', 'dokan' )
+                        : pack.allowed_trial === 'yes'
+                        ? __( 'Start Free Trial', 'dokan' )
+                        : __( 'Buy Now', 'dokan' ) }
+                </DokanButton>
+            </div>
+        );
+    };
+
+    const Actions = applyFilters(
+        'dokan-vendor-subscription-actions',
+        actoins,
+        isActiveSubscription,
+        pack,
+        currentSubscription
+    );
+
     return (
         <div
             className={ `flex flex-col justify-start items-start py-6 bg-white rounded-lg shadow-sm border ${
@@ -116,30 +154,7 @@ const PricingCard = ( {
                 </ul>
             </div>
 
-            <div className="px-6 min-w-full">
-                <DokanButton
-                    variant="primary"
-                    link={ ! hasManagePermission }
-                    onClick={ preventPackSwitching }
-                    disabled={ hasManagePermission }
-                    href={
-                        isActiveSubscription()
-                            ? currentPackProduct?.permalink
-                            : `?add-to-cart=${ packId }`
-                    }
-                    className={ `m-0 w-full py-2 px-4 dokan-btn ${
-                        isActiveSubscription() ? 'dokan-btn-secondary' : ''
-                    }` }
-                >
-                    { subscriptionId && currentSubscription?.order_id
-                        ? isActiveSubscription()
-                            ? __( 'Your Pack', 'dokan' )
-                            : __( 'Switch Pack', 'dokan' )
-                        : pack.allowed_trial === 'yes'
-                        ? __( 'Start Free Trial', 'dokan' )
-                        : __( 'Buy Now', 'dokan' ) }
-                </DokanButton>
-            </div>
+            <Actions />
 
             <div className="prose flex items-center w-full gap-2 border-t text-gray-500 border-gray-200 mt-8 pt-6 px-6 !box-border *:div:!box-border *:max-w-full">
                 { pack.description ? (

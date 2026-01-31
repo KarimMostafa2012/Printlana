@@ -22,7 +22,7 @@ class Base {
 	 * @param string           $elementSlug e.g. "page", "category", ...
 	 * @param string|null      $elementType "post" or "taxonomy".
 	 *
-	 * @return array|int
+	 * @return array|int|string
 	 */
 	public static function convertIds( $ids, $elementSlug, $elementType = null ) {
 		// In this context, it's probably better to always fall back to original.

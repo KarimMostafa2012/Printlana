@@ -34,10 +34,10 @@ class WCML_WC_Subscriptions implements \IWPML_Action {
 	public function add_hooks() {
 		add_action( 'init', [ $this, 'init' ], 9 );
 		add_filter( 'wcml_variation_term_taxonomy_ids', [ $this, 'wcml_variation_term_taxonomy_ids' ] );
+		add_filter( 'wcml_endpoint_keys_to_options', [ $this, 'endpoint_keys_to_options' ] );
+		add_filter( 'wcml_register_endpoints_store_urls', [ $this, 'register_endpoints_store_urls' ] );
+		add_filter( 'wcml_endpoints_translation_controls', [ $this, 'register_translation_controls' ] );
 		add_filter( 'woocommerce_subscription_lengths', [ $this, 'woocommerce_subscription_lengths' ], 10, 2 );
-
-		add_filter( 'wcml_register_endpoints_query_vars', [ $this, 'register_endpoint' ], 10, 3 );
-		add_filter( 'wcml_endpoint_permalink_filter', [ $this, 'endpoint_permalink_filter' ], 10, 2 );
 
 		add_action( 'woocommerce_subscriptions_product_options_pricing', [ $this, 'show_pointer_info' ] );
 		add_action( 'woocommerce_variable_subscription_pricing', [ $this, 'show_pointer_info' ] );
@@ -91,29 +91,6 @@ class WCML_WC_Subscriptions implements \IWPML_Action {
 		}
 
 		return isset( $new_subscription_ranges ) ? $new_subscription_ranges : $subscription_ranges;
-	}
-
-	/**
-	 * @param array           $query_vars
-	 * @param array           $wc_vars
-	 * @param \WCML_Endpoints $wcmlEndpoints
-	 *
-	 * @return array
-	 */
-	public function register_endpoint( $query_vars, $wc_vars, $wcmlEndpoints ) {
-		$query_vars['view-subscription'] = $wcmlEndpoints->get_endpoint_translation( 'view-subscription' );
-		$query_vars['subscriptions']     = $wcmlEndpoints->get_endpoint_translation( 'subscriptions' );
-
-		return $query_vars;
-	}
-
-	public function endpoint_permalink_filter( $endpoint, $key ) {
-
-		if ( 'view-subscription' === $key ) {
-			return 'view-subscription';
-		}
-
-		return $endpoint;
 	}
 
 	public function show_pointer_info() {
@@ -265,6 +242,42 @@ class WCML_WC_Subscriptions implements \IWPML_Action {
 
 		return $url;
 
+	}
+
+	/**
+	 * @param array<string,string> $endpoint_keys_to_options
+	 *
+	 * @return array<string,string>
+	 */
+	public function endpoint_keys_to_options( $endpoint_keys_to_options ) {
+		$endpoint_keys_to_options['view-subscription']           = 'woocommerce_myaccount_view_subscription_endpoint';
+		$endpoint_keys_to_options['subscriptions']               = 'woocommerce_myaccount_subscriptions_endpoint';
+		$endpoint_keys_to_options['subscription-payment-method'] = 'woocommerce_myaccount_subscription_payment_method_endpoint';
+		return $endpoint_keys_to_options;
+	}
+
+	/**
+	 * @param array<string,string> $store_urls
+	 *
+	 * @return array<string,string>
+	 */
+	public function register_endpoints_store_urls( $store_urls ) {
+		$store_urls['view-subscription']           = get_option( 'woocommerce_myaccount_view_subscription_endpoint', 'view-subscription' );
+		$store_urls['subscriptions']               = get_option( 'woocommerce_myaccount_subscriptions_endpoint', 'subscriptions' );
+		$store_urls['subscription-payment-method'] = get_option( 'woocommerce_myaccount_subscription_payment_method_endpoint', 'subscription-payment-method' );
+		return $store_urls;
+	}
+
+	/**
+	 * @param array<string,string> $translation_controls
+	 *
+	 * @return array<string,string>
+	 */
+	public function register_translation_controls( $translation_controls ) {
+		$translation_controls['view-subscription']           = 'woocommerce_myaccount_view_subscription_endpoint';
+		$translation_controls['subscriptions']               = 'woocommerce_myaccount_subscriptions_endpoint';
+		$translation_controls['subscription-payment-method'] = 'woocommerce_myaccount_subscription_payment_method_endpoint';
+		return $translation_controls;
 	}
 
 }

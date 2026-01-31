@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
 msgid "Preparing..."
@@ -29,15 +31,15 @@ msgstr "Domännamnet har uppdaterats"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
 msgid "Domain name update has been failed"
-msgstr "Uppdateringen av domännamnet misslyckades"
+msgstr "Uppdatering av domännamn misslyckades"
 
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
 msgid "Update domain name in language switcher settings"
-msgstr "Uppdatera domännamn i inställningarna för språkväxlare"
+msgstr "Uppdatera domännamn i inställningar för språkbytare"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:7
 msgid "Disclaimer: MySQL Disk Space"
-msgstr "Ansvarsfriskrivning: MySQL-diskutrymme"
+msgstr "Friskrivning: MySQL-diskutrymme"
 
 #: src/js/troubleshooting/optimizeDbTables/components/DiskSpaceDisclaimerAlert.js:8
 msgid ""
@@ -45,7 +47,7 @@ msgid ""
 "tables reduces its data size, but does not automatically free up disk space "
 "in MySQL. To reclaim disk space, a table rebuild is required—a risky "
 "operation not performed automatically by this tool."
-msgstr "Rensning och komprimering av tabellerna wp_icl_translate och wp_icl_translation_status minskar deras datastorlek, men frigör inte automatiskt diskutrymme i MySQL. För att återvinna diskutrymme krävs en ombyggnad av tabellen - en riskfylld operation som inte utförs automatiskt av detta verktyg."
+msgstr "Rengöring och komprimering av tabellerna wp_icl_translate och wp_icl_translation_status minskar dess datastorlek, men frigör inte automatiskt diskutrymme i MySQL. För att återta diskutrymme krävs en tabellombyggnad – en riskabel operation som inte utförs automatiskt av detta verktyg."
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:38
 msgid "Optimize translation tables"
@@ -53,7 +55,7 @@ msgstr "Optimera översättningstabeller"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:47
 msgid "Previous State Migration"
-msgstr "Tidigare tillståndsmigration"
+msgstr "Tidigare tillståndsmigrering"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:58
 msgid "Translation Elements Migration"
@@ -61,7 +63,7 @@ msgstr "Migrering av översättningselement"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:64
 msgid "Processed"
-msgstr "Bearbetat"
+msgstr "Bearbetad"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:72
 msgid "Error"
@@ -69,7 +71,7 @@ msgstr "Fel"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:82
 msgid "Success"
-msgstr "Lyckades"
+msgstr "Framgång"
 
 #: src/js/troubleshooting/optimizeDbTables/components/OptimizeDbTables.js:83
 msgid "Database tables optimization completed successfully."
@@ -102,31 +104,31 @@ msgstr "WPML-licensen har uppdaterats"
 msgid "Translate Everything Automatically is not active."
 msgstr "Översätt allt automatiskt är inte aktivt."
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:45
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:49
 msgid "Retry stuck automatic translations"
 msgstr "Försök igen med fastnade automatiska översättningar"
 
-#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:50
+#: src/js/troubleshooting/retryStuckJobs/RetryStuckJobs.js:54
 msgid ""
 "Resends translation jobs that couldn't be processed due to a temporary "
 "issue while Translate Everything Automatically was active."
-msgstr "Skickar om översättningsjobb som inte kunde behandlas på grund av ett tillfälligt problem medan Översätt allt automatiskt var aktivt."
+msgstr "Skickar om översättningsjobb som inte kunde bearbetas på grund av ett tillfälligt problem medan Översätt allt automatiskt var aktivt."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:10
 msgid "Checking for stuck translation jobs..."
-msgstr "Kontrollerar fastnade översättningsjobb..."
+msgstr "Kontrollerar om det finns fastnade översättningsjobb..."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:13
 msgid "Processing... %s stuck translation found so far"
 msgid_plural "Processing... %s stuck translations found so far"
-msgstr[0] "Bearbetar... %s fastnad översättning hittad hittills"
-msgstr[1] "Bearbetar... %s fastnade översättningar hittade hittills"
+msgstr[0] "Bearbetar... %s fastnad översättning hittills"
+msgstr[1] "Bearbetar... %s fastnade översättningar hittills"
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:25
 msgid ""
 "Something went wrong while checking for stuck translation jobs. Please "
 "<a>contact WPML support</a>."
-msgstr "Något gick fel vid kontrollen av fastnade översättningsjobb. Vänligen <a>kontakta WPML-supporten</a>."
+msgstr "Något gick fel när fastnade översättningsjobb kontrollerades. Vänligen <a>kontakta WPML-support</a>."
 
 #: src/js/troubleshooting/retryStuckJobs/Utils/getStatusMessage.js:37
 msgid "No stuck translation jobs found."

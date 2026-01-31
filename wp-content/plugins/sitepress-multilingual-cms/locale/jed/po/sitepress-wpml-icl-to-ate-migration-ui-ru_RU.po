@@ -2,26 +2,28 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
-msgstr "С:"
+msgstr "От:"
 
 #: src/js/components/language/LanguagePairs.js:69
 msgid "--Choose language--"
-msgstr "--Выберите язык--"
+msgstr "--Выбрать язык--"
 
 #: src/js/components/language/LanguagePairs.js:81
 msgid "to:"
-msgstr "на:"
+msgstr "до:"
 
 #: src/js/components/language/LanguagePairs.js:93
 msgid "Select %s"
-msgstr "Выбери %s"
+msgstr "Выбрать %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "Установите языковые пары для переводчика %s:"
+msgstr "Установить языковую пару(ы) для переводчика %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
@@ -33,21 +35,21 @@ msgstr "Память переводов успешно скопирована в
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
 msgid "Deactivate ICanLocalize.com as Translation Service on this site"
-msgstr "Деактивировать ICanLocalize.com как службу переводов на этом сайте"
+msgstr "Деактивировать ICanLocalize.com как службу перевода на этом сайте"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
 msgid ""
 "Missing a translator? Or were new jobs since the last copy of the "
 "Translation Memory?"
-msgstr "Не хватает переводчика? Или появились новые задания с момента последнего копирования Памяти переводов?"
+msgstr "Отсутствует переводчик? Или были новые задания с момента последнего копирования памяти переводов?"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:25
 msgid "Enter here your ICanLocalize authentication details."
-msgstr "Введите здесь ваши данные аутентификации ICanLocalize."
+msgstr "Введите здесь свои данные для аутентификации ICanLocalize."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:33
 msgid "API Token:"
-msgstr "API Токен:"
+msgstr "Токен API:"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:43
 msgid "Please enter valid value for ICL token."
@@ -55,7 +57,7 @@ msgstr "Пожалуйста, введите действительное зна
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:50
 msgid "Enter ICL API token here"
-msgstr "Введите API токен ICL здесь"
+msgstr "Введите токен ICL API здесь"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:62
 msgid "Submit"
@@ -67,7 +69,7 @@ msgstr "Зарегистрироваться"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:84
 msgid "to ICanLocalize to receive your API token."
-msgstr "в ICanLocalize, чтобы получить ваш API токен."
+msgstr "в ICanLocalize, чтобы получить свой токен API."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:91
 msgid "Already have an account? Login and"
@@ -75,11 +77,11 @@ msgstr "Уже есть аккаунт? Войдите и"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:98
 msgid "get your token."
-msgstr "получите ваш токен."
+msgstr "получите свой токен."
 
 #: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
 msgid "Copy new Translation Memory to Advanced Translation Memory"
-msgstr "Скопировать новую Память переводов в Расширенную память переводов"
+msgstr "Скопировать новую память переводов в Расширенную память переводов"
 
 #: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
 msgid "Import translation memory"
@@ -93,11 +95,11 @@ msgstr "ICanLocalize уже деактивирован на этом сайте"
 msgid ""
 "You can still import Translators or Copy Translation Memory to Advanced "
 "Translator Editor"
-msgstr "Вы все еще можете импортировать переводчиков или копировать Память переводов в Расширенный редактор переводов"
+msgstr "Вы все еще можете импортировать переводчиков или скопировать память переводов в Расширенный редактор переводов"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
 msgid "Move from ICanLocalize.com to Advanced Translation Editor"
-msgstr "Перейти с ICanLocalize.com на Расширенный редактор переводов"
+msgstr "Перейти с ICanLocalize.com на расширенный редактор переводов"
 
 #: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
 #: src/js/icl-to-ate-migration/components/Translators/Button.js:21
@@ -163,7 +165,7 @@ msgstr "Файл флага"
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "Вы только что добавили язык. Далее выберите его как язык сайта по умолчанию или язык перевода."
+msgstr "Вы только что добавили язык. Далее выберите его в качестве языка по умолчанию для сайта или языка перевода."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -171,7 +173,7 @@ msgstr "Язык добавлен"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:192
 msgid "The value \"%s\" already exists"
-msgstr "Значение “%s” уже существует"
+msgstr "Значение «%s» уже существует"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:215
 msgid "Add a new language"
@@ -202,7 +204,7 @@ msgstr "Нажмите здесь"
 msgid ""
 "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
 ", \"pt-br\", \"zh-hans\""
-msgstr "Неверный формат. Может содержать только строчные буквы и “-”. Например: “fr”, “pt-br”, “zh-hans”"
+msgstr "Неверный формат. Он может содержать только строчные буквы и «-». Например: «fr», «pt-br», «zh-hans»"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:308
 msgid "Language"
@@ -236,7 +238,7 @@ msgstr "Локаль по умолчанию"
 msgid ""
 "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
 ", \"de_DE\", \"zh_Hant_TW\""
-msgstr "Неверный формат. Может содержать только строчные буквы и “_”. Например: “de”, “de_DE”, “zh_Hant_TW”"
+msgstr "Неверный формат. Он может содержать только строчные буквы и «_». Например: «de», «de_DE», «zh_Hant_TW»"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:435
 msgid "hreflang"
@@ -286,13 +288,13 @@ msgstr "Подробнее о "
 msgid ""
 "The name of your language as it will appear on your site's language "
 "switcher."
-msgstr "Название вашего языка, как оно будет отображаться в переключателе языков на вашем сайте."
+msgstr "Название вашего языка, как оно будет отображаться в переключателе языков вашего сайта."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:61
 msgid ""
 "A unique value that identifies the language in the database and URL. Once "
 "saved, the language code cannot be changed."
-msgstr "Уникальное значение, которое идентифицирует язык в базе данных и URL. После сохранения код языка изменить нельзя."
+msgstr "Уникальное значение, которое идентифицирует язык в базе данных и URL. После сохранения код языка нельзя изменить."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:62
 msgid ""
@@ -302,7 +304,7 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "Если ваш пользовательский язык похож на существующий язык, вы можете использовать проверку орфографии и автоматический перевод существующего языка. Например, если ваш пользовательский язык - швейцарский немецкий, вы можете сопоставить его с немецким языком для проверки орфографии и автоматического перевода. Если вы не сопоставите ваш пользовательский язык с существующим языком, функции проверки орфографии и автоматического перевода будут недоступны для этого языка."
+msgstr "Если ваш пользовательский язык похож на существующий язык, вы можете использовать проверку орфографии и автоматический перевод существующего языка. Например, если ваш пользовательский язык — швейцарско-немецкий, вы можете сопоставить его с немецким языком для проверки орфографии и автоматического перевода. Если вы не сопоставите свой пользовательский язык с существующим языком, функции проверки орфографии и автоматического перевода будут недоступны для этого языка."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
@@ -319,7 +321,7 @@ msgstr "Google использует атрибут hreflang для направ�
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:71
 msgid "All English-speaking users: en"
-msgstr "Все англоязычные пользователи: en"
+msgstr "Все англоговорящие пользователи: en"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:72
 msgid "English for UK users: en-gb"
@@ -333,15 +335,15 @@ msgstr "Английский для пользователей из США: en-u
 msgid ""
 "Determines if URLs in this language are encoded or use ASCII characters (if "
 "unsure, leave it as \"No\")."
-msgstr "Определяет, кодируются ли URL-адреса на этом языке или используют символы ASCII (если не уверены, оставьте “Нет”)."
+msgstr "Определяет, кодируются ли URL-адреса на этом языке или используют символы ASCII (если не уверены, оставьте «Нет»)."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:98
 msgid "adding a custom language"
-msgstr "добавлении пользовательского языка"
+msgstr "добавление пользовательского языка"
 
 #: src/js/setup/components/Steps/Languages.js:110
 msgid "What are the languages of your site?"
-msgstr "Какие языки на вашем сайте?"
+msgstr "Какие языки используются на вашем сайте?"
 
 #: src/js/setup/components/Steps/Languages.js:120
 msgid "Default language"
@@ -349,7 +351,7 @@ msgstr "Язык по умолчанию"
 
 #: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
-msgstr "Какой текущий язык вашего веб-сайта?"
+msgstr "Какой язык сейчас используется на вашем сайте?"
 
 #: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
@@ -357,11 +359,11 @@ msgstr "Языки перевода"
 
 #: src/js/setup/components/Steps/Languages.js:135
 msgid "Which languages do you want to translate your site into?"
-msgstr "На какие языки вы хотите перевести ваш сайт?"
+msgstr "На какие языки вы хотите перевести свой сайт?"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
-msgstr "Если вы не можете найти нужные языки в списке"
+msgid "If you cannot find languages that you need in the list,"
+msgstr "Если вы не можете найти нужные языки в списке,"
 
 #: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"

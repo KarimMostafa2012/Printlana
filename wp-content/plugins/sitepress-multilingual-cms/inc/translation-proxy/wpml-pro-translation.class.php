@@ -282,122 +282,6 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		return $this->sitepress->get_wp_api();
 	}
 
-	/**
-	 *
-	 * Cancel translation for given cms_id
-	 *
-	 * @param $rid
-	 * @param $cms_id
-	 *
-	 * @return bool
-	 */
-	function cancel_translation( $rid, $cms_id ) {
-		/**
-		 * @var WPML_String_Translation|null $WPML_String_Translation
-		 * @var TranslationManagement   $iclTranslationManagement
-		 */
-		global $WPML_String_Translation, $iclTranslationManagement;
-
-		$res = false;
-		if ( empty( $cms_id ) ) { // it's a string
-			if ( $WPML_String_Translation ) {
-				$res = $WPML_String_Translation->cancel_remote_translation( $rid );
-			}
-		} else {
-			$translation_id = $this->cms_id_helper->get_translation_id( $cms_id );
-
-			if ( $translation_id ) {
-				$iclTranslationManagement->cancel_translation_request( $translation_id );
-				$res = true;
-			}
-		}
-
-		return $res;
-	}
-
-	/**
-	 *
-	 * Downloads translation from TP and updates its document
-	 *
-	 * @param $translation_proxy_job_id
-	 * @param $cms_id
-	 *
-	 * @return bool|string
-	 */
-	function download_and_process_translation( $translation_proxy_job_id, $cms_id ) {
-		global $wpdb;
-
-		if ( empty( $cms_id ) ) { // it's a string
-			// TODO: [WPML 3.3] this should be handled as any other element type in 3.3
-			$target = $wpdb->get_var( $wpdb->prepare( "SELECT target FROM {$wpdb->prefix}icl_core_status WHERE rid=%d", $translation_proxy_job_id ) );
-
-			return $this->process_translated_string( $translation_proxy_job_id, $target );
-		} else {
-			$translation_id = $this->cms_id_helper->get_translation_id( $cms_id, TranslationProxy::get_current_service() );
-
-			return ! empty( $translation_id ) && $this->add_translated_document( $translation_id, $translation_proxy_job_id );
-		}
-	}
-
-	/**
-	 * @param int $translation_id
-	 * @param int $translation_proxy_job_id
-	 *
-	 * @return bool
-	 */
-	function add_translated_document( $translation_id, $translation_proxy_job_id ) {
-		global $wpdb, $sitepress;
-		$project = TranslationProxy::get_current_project();
-
-		$translation_info = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}icl_translations WHERE translation_id=%d", $translation_id ) );
-		$translation      = $project->fetch_translation( $translation_proxy_job_id );
-		if ( ! $translation ) {
-			$this->errors = array_merge( $this->errors, $project->errors );
-		} else {
-			$translation = apply_filters( 'icl_data_from_pro_translation', $translation );
-		}
-		$ret = true;
-
-		if ( ! empty( $translation ) && strpos( $translation, 'xliff' ) !== false ) {
-			try {
-				/** @var $job_xliff_translation WP_Error|array */
-				$job_xliff_translation = $this->xliff_reader_factory
-					->general_xliff_import()->import( $translation, $translation_id );
-				if ( is_wp_error( $job_xliff_translation ) ) {
-					$this->add_error( $job_xliff_translation->get_error_message() );
-
-					return false;
-				}
-				kses_remove_filters();
-				wpml_tm_save_data( $job_xliff_translation );
-				kses_init();
-
-				$translations = $sitepress->get_element_translations( $translation_info->trid, $translation_info->element_type, false, true, true );
-				if ( isset( $translations[ $translation_info->language_code ] ) ) {
-					$translation = $translations[ $translation_info->language_code ];
-					if ( isset( $translation->element_id ) && $translation->element_id ) {
-						$translation_post_type_prepared = $wpdb->prepare( "SELECT post_type FROM $wpdb->posts WHERE ID=%d", array( $translation->element_id ) );
-						$translation_post_type          = $wpdb->get_var( $translation_post_type_prepared );
-					} else {
-						$translation_post_type = implode( '_', array_slice( explode( '_', $translation_info->element_type ), 1 ) );
-					}
-					if ( $translation_post_type == 'page' ) {
-						$url = get_option( 'home' ) . '?page_id=' . $translation->element_id;
-					} else {
-						$url = get_option( 'home' ) . '?p=' . $translation->element_id;
-					}
-					$project->update_job( $translation_proxy_job_id, $url );
-				} else {
-					$project->update_job( $translation_proxy_job_id );
-				}
-			} catch ( Exception $e ) {
-				$ret = false;
-			}
-		}
-
-		return $ret;
-	}
-
 	private static function content_get_link_paths( $body ) {
 
 		$regexp_links = array(
@@ -570,7 +454,18 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 				$updatePost['post_excerpt'] = $newExcerpt;
 			}
 
-			$updatePost && $wpdb->update( $wpdb->posts, $updatePost, [ 'ID' => $element_id ] );
+			if ( ! empty( $updatePost ) ) {
+				$updated = $wpdb->update(
+					$wpdb->posts,
+					$updatePost,
+					[ 'ID' => $element_id ]
+				);
+
+				// Delete the post cache because we are updating the post via SQL directly.
+				if ( false !== $updated ) {
+					clean_post_cache( $element_id );
+				}
+			}
 		} elseif ( $element_type == 'string' && $new_body != $body ) {
 			if ( 'LINK' === $string_type ) {
 				$new_body = str_replace( array( '<a href="', '">removeit</a>' ), array( '', '' ), $new_body );
@@ -590,7 +485,8 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 
 		$links_fixed_status_factory = new WPML_Links_Fixed_Status_Factory( $wpdb, new WPML_WP_API() );
 		$links_fixed_status         = $links_fixed_status_factory->create( $element_id, $wpml_element_type );
-		$links_fixed_status->set( Lst::length( $links ) === Lst::length( $translatedLinks ) );
+		// wpmldev-2742 deprecated links_fixed; new translations always set it true, only upgraded legacy content can still store false.
+		$links_fixed_status->set( true );
 
 		if ( $this->is_language_switched ) {
 			$this->is_language_switched = false;
@@ -670,21 +566,6 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		return $show_box_style;
 	}
 
-	private function process_translated_string( $translation_proxy_job_id, $language ) {
-		$project     = TranslationProxy::get_current_project();
-		$translation = $project->fetch_translation( $translation_proxy_job_id );
-		$translation = apply_filters( 'icl_data_from_pro_translation', $translation );
-		$ret         = false;
-		$translation = $this->xliff_reader_factory->string_xliff_reader()->get_data( $translation );
-		if ( $translation ) {
-			$ret = icl_translation_add_string_translation( $translation_proxy_job_id, $translation, $language );
-			if ( $ret ) {
-				$project->update_job( $translation_proxy_job_id );
-			}
-		}
-
-		return $ret;
-	}
 
 	private function add_error( $project_error ) {
 		$this->errors[] = $project_error;

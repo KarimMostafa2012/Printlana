@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:22
 msgid "hide the translations instead."
-msgstr "ซ่อนการแปลแทน."
+msgstr "ซ่อนคำแปลแทน"
 
 #: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:84
 msgid "Error happened! Please try again."
-msgstr "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง."
+msgstr "เกิดข้อผิดพลาด! โปรดลองอีกครั้ง"
 
 #: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:92
 msgid "Cancel"
@@ -50,30 +52,30 @@ msgstr "ไม่เป็นไร - ไม่ต้องเพิ่มภา
 
 #: src/js/languages/components/ConfirmNewLanguage.js:98
 msgid "Choose which content to translate into the new language"
-msgstr "เลือกเนื้อหาที่ต้องการแปลเป็นภาษาใหม่"
+msgstr "เลือกเนื้อหาที่จะแปลเป็นภาษาใหม่"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:23
 msgid ""
 "Automatically translate all my posts and pages, plus new content as I "
 "create it."
-msgstr "แปลโพสต์และหน้าทั้งหมดของฉันโดยอัตโนมัติ รวมถึงเนื้อหาใหม่ขณะที่ฉันสร้าง."
+msgstr "แปลโพสต์และหน้าทั้งหมดของฉันโดยอัตโนมัติ รวมถึงเนื้อหาใหม่เมื่อฉันสร้างขึ้น"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:24
 msgid "Only automatically translate new content."
-msgstr "แปลเฉพาะเนื้อหาใหม่โดยอัตโนมัติ."
+msgstr "แปลเฉพาะเนื้อหาใหม่โดยอัตโนมัติ"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:26
 msgid "Which content do you want to translate into the new language?"
-msgstr "คุณต้องการแปลเนื้อหาใดเป็นภาษาใหม่?"
+msgstr "คุณต้องการแปลเนื้อหาใดเป็นภาษาใหม่"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:29
 msgid ""
 "When you unpause automatic translation, this content will be <a>translated "
 "automatically</a>."
-msgstr "เมื่อคุณยกเลิกการหยุดชั่วคราวการแปลอัตโนมัติ เนื้อหานี้จะได้รับการ<a>แปลโดยอัตโนมัติ</a>."
+msgstr "เมื่อคุณยกเลิกการหยุดชั่วคราวการแปลอัตโนมัติ เนื้อหานี้จะถูก<a>แปลโดยอัตโนมัติ</a>"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:62
 msgid ""
 "You can still translate existing content any time from the Translation "
 "Management Dashboard."
-msgstr "คุณยังสามารถแปลเนื้อหาที่มีอยู่ได้ทุกเมื่อจากแดชบอร์ดการจัดการการแปล."
+msgstr "คุณยังคงสามารถแปลเนื้อหาที่มีอยู่ได้ตลอดเวลาจากแดชบอร์ดการจัดการการแปล"

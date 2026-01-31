@@ -1,3 +1,125 @@
+v4.2.3 ( Jan 14, 2026 )
+-----------------------------------
+- **fix:** Resolve vendor staff failed to load product advertisement for due to ownership validation.
+- **fix:** PHP 8.2 deprecation warnings in Store Support module.
+- **fix:** Handle vendor verification OAuth redirection.
+- **fix:** Resolve Dokan Rank Math module was broken due to the use of a legacy Rank Math namespace.
+- **fix:** Vendor Support modules ticket ID and title not clickable in mobile view.
+- **fix:** Resolve multiple PHP 8.2 compatibility warnings to ensure more stable operation.
+- **fix:** Resolve Product QA visibility issues for improve vendor staff REST API responses.
+- **fix:** Social profile inputs UI inconsistencies for bold border.
+- **fix:** Resolve cancelled subscriptions incorrectly showing as valid for unlimited time.
+- **fix:** Resolve UI inconsistencies when adding product add-on fields from the Vendor Dashboard.
+
+v4.2.2 ( Dec 30, 2025 )
+-----------------------------------
+- **new:** Razorpay Payment Gateway now supports subscriptions, including Vendor Subscriptions, Simple Subscriptions and Reverse Withdrawal.
+- **update:** Added email notification to customers when vendors update RMA request status.
+- **update:** Enhanced Product Q&A admin with a modern UI for a better user experience.
+- **update:** Admin setting added for booking product to enable or disable delivery time in checkout.
+- **update:** Hide delivery time option for booking product in checkout based on admin setting.
+- **update:** Support new YouTube URL format in vendor social profiles.
+- **fix:** Translate properly the cancelled refund email text.
+- **fix:** Added strict validation and content scanning to prevent malicious file uploads in the Export/Import module.
+- **fix:** Hardened the file deletion process to prevent unauthorized removal of server files via the Export/Import module.
+- **fix:** Enhanced security for document uploads in the Mangopay module with stricter file validation.
+- **fix:** Updated delivery calendar behavior when vendors have no available delivery days.
+- **fix:** Improved chat and support message formatting: preserved line breaks, switched chat text blocks to block flow, and standardized paragraph spacing across desktop and mobile.
+- **fix:** Store Support Ticket list totals now reflect the active filter (Open / Closed / All), showing accurate counts per tab.
+- **fix:** Store Support ticket reply emails now respect topic-level notification settings; replies are skipped when notifications for that topic are turned off to avoid unwanted emails.
+- **fix:** Resolved an issue where Table Rates screen in the vendor dashboard, the dropdowns for "Shipping class" and "Condition" do not work properly in the new UI.
+
+v4.2.1 ( Dec 04, 2025 )
+-----------------------------------
+- **new:** Added options to the "Filter by Order Type" dropdown to filter by Product Advertisement and Subscription orders.
+- **update:** Added compatibility to correctly display admin-configured banner dimensions in the admin vendor settings.
+- **update:** Removed the XML import/export options from the Vendor Dashboard as following of WooCommerce similarity.
+- **update:** Modernized the Admin's Store Support page interface (UI), making it simpler to manage vendor issues.
+- **update:** Enhanced the RMA API by adding eligibility flags in order responses for easier return or warranty actions.
+- **update:** Added a new API endpoint to fetch RMA details like types, reasons, and warranty information.
+- **update:** Added a new API endpoint to submit new RMA requests (with product, type, reason, and notes selection).
+- **update:** Removed the Wirecard payment gateway from Dokan.
+- **update:** Added Store Support API points for customers to create support tickets directly to vendors.
+- **update:** Added an API point for customers to view their existing support tickets.
+- **update:** Added a vendor API point for responding to customer tickets.
+- **fix:** Resolved an issue where failed transactions (like insufficient funds) left bookings in `unpaid` status, incorrectly showing the resource as unavailable for future attempts.
+- **fix:** Corrected how the subscription product name displays on the vendor's single-page subscription information.
+- **fix:** Fixed inconsistencies in Vendor delivery time settings and calendar page permissions.
+- **fix:** Corrected the default toggle switch states when creating a new vendor.
+- **fix:** Added compatibility support for including product variations in manual order requests.
+- **fix:** Prevented a deprecation warning from appearing in the Vendor Support module.
+- **fix:** Prevented a deprecation warning from appearing in the Booking module.
+- **fix:** Fixed an issue preventing the admin from uploading the WooCommerce product featured image for Dokan modules.
+- **fix:** Resolved an issue where the Elementor modal was not working correctly for Dokan Pro availability settings.
+
+v4.2.0 ( Nov 24, 2025 )
+-----------------------------------
+- **new:** Vendors can now add their TikTok profile in their social settings to connect with more customers.
+- **new:** Introduced a weekly email digest for "New Product Added" notifications, reducing email clutter by sending customers a single, clean summary of updates from their followed stores.
+- **update:** Redesigned the Admin's Abuse Report page for a cleaner and more intuitive user experience.
+- **update:** Modernized the Admin's Subscription List page, making it faster and easier to manage subscriptions.
+- **update:** Updated the Announcements section in the Admin Panel with a fresh, user-friendly layout.
+- **update:** Redesigned the Wholesale management section in the Admin Panel for improved usability.
+- **update:** Improved the Product Advertisement section in the Admin Panel with a modern and intuitive design.
+- **update:** Revamped the Admin's Refunds page with a modern UI for a smoother workflow.
+- **update:** Upgraded the Seller Badge management pages (list, create, and edit) with a modern design for an improved user experience.
+- **update:** Modernized the Vendor Store Categories UI in the Admin Dashboard for better navigation and management.
+- **update:** Redesigned the License page UI in the Admin Dashboard for enhanced clarity and ease of use.
+- **update:** Integrated RMA (Return Merchandise Authorization) data with the WooCommerce Store API for better developer access.
+- **update:** Ensured full compatibility for Pro features with the new vendor full-width dashboard layout.
+- **update:** Strengthened security by adding authorization checks to the wholesale customer registration process as a security patch.
+- **fix:** Fixed a map rendering issue in Live Search results when the 'Replace Current Content' option was enabled.
+- **fix:** Resolved an issue where the 'Place Order' button appeared incorrectly while the PayPal Smart Button was loading.
+
+v4.1.4 ( Nov 12, 2025 )
+-----------------------------------
+- **new:** Vendors can now set an order preparation "buffer time" in hours for more precise delivery scheduling.
+- **update:** Redesigned the Admin's Vendor Verification page with a modern look, making it easier and faster to manage new vendor applications.
+- **update:** The Vendor Support module is now available on all subscription plans, allowing more vendors to connect directly with admin for any problem.
+- **update:** Wrapped the store review title and content fields with `Tooltip` to display the full text on hover. Improved text wrapping and line clamping for better readability and user experience.
+- **fix:** Improved the layout and button consistency on the manual order creation pop-up for a more intuitive experience.
+- **fix:** Resolved an issue where renewal orders were not being created correctly for vendor subscriptions, ensuring billing cycles now process reliably.
+- **fix:** Vendors can now successfully purchase product advertisements even if the admin has not connected their Stripe account.
+- **fix:** Corrected an issue where images were not displaying correctly in the "Image" choice type for Product Add-ons.
+- **fix:** The "Full day" option in the store time settings now works correctly, ensuring accurate store availability.
+- **fix:** The vendor dashboard now displays the correct subscription status message after changing plans.
+- **fix:** All Products" option is now displayed correctly when editing Product Add-ons.
+- **fix:** Resolved an issue that prevented admins from uploading product images while Dokan Pro was active.
+
+v4.1.3 ( Oct 28, 2025 )
+-----------------------------------
+- **new:** Redesigned the Store Reviews section in the Admin Panel for a more intuitive and user-friendly layout.
+- **new:** Redesigned the distance rate shipping with modern UI for a better user experience.
+- **update:** Load login modal on the single store page when a guest user clicks on the 'Chat Now' button
+- **update:** Admin Dashboard vendor list UI with Modern Design and Improved User Experience.
+- **fix:** Updating a coupon’s description now also updates legacy content fields for better integration and display compatibility.
+- **fix:** 0% discount is no longer flagged as an error when free shipping is enabled on vendor coupons.
+- **fix:** Enable status selection for warranty request based on current status
+
+v4.1.2 ( Oct 16, 2025 )
+-----------------------------------
+- **new:** Introduced Vendor Support Module to establish a dedicated, centralized system for Vendor-to-Admin communication, issue discussion and track via ticket system.
+- **new:** Added Auction Anti-Sniping functionality with configurable time extension settings, accessible directly from the Vendor Dashboard for improved auction fairness.
+- **fix:** Resolved an issue ensuring that Admin-only subscription packages remain correctly hidden from the vendor dashboard when the WooCommerce Simple Auctions plugin is active.
+- **fix:** Corrected a problem where booking products were not properly displayed for selection on the coupon creation/update forms within the vendor dashboard.
+
+v4.1.1 ( Oct 09, 2025 )
+-----------------------------------
+
+- **feat:** Introduced Dokan Paystack, a dedicated payment gateway designed to unlock the African market by enabling seamless customer payments, automated commission handling, and direct vendor withdrawals.
+- **feat:** Store the gateway fee in the dokan_vendor_balance table as a debit entry, with the gateway provider reference.
+- **feat:** Redesigned Store Support interface using React for real-time updates, advanced filtering (customer, date range, keyword), and improved performance. Replaced full page reloads with a responsive, modern user experience.
+- **update:** Capture PayPal standard button payment on order processed.
+- **fix:** Display the vendor gateway fee in the vendor dashboard report statement
+- **fix:** Correctly calculate the vendor balance after a refund, considering the gateway fee.
+
+v4.1.0 ( Sep 30, 2025 )
+-----------------------------------
+
+- **feat:** AI-powered Product Image Enhancement for Vendors with AI Engines such as Gemini (Supported Model: 2.5 Flash Image aka Nano Banana) and BRIA AI (Supported Model: BRIA 2.3 Image-Prompt).
+- **update:** Razorpay vendor registration to use v2 API with enhanced address validation.
+- **fix:** Automatically update product geolocation data when vendor store location changes.
+
 v4.0.10 ( Sep 26, 2025 )
 -----------------------------------
 

@@ -2,6 +2,8 @@
 
 class WPML_Tax_Permalink_Filters implements IWPML_Action {
 
+	const CACHE_GROUP = 'icl_tax_permalink_filter';
+
 	/** @var WPML_Translation_Element_Factory */
 	private $term_element_factory;
 
@@ -41,7 +43,7 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 		$tag    = is_object( $tag ) ? $tag : get_term( $tag, $taxonomy );
 		$tag_id = $tag ? $tag->term_id : 0;
 
-		$cache = $this->cache_factory->create_cache_item( 'icl_tax_permalink_filter', array(
+		$cache = $this->cache_factory->create_cache_item( self::CACHE_GROUP, array(
 			$tag_id,
 			$taxonomy,
 			$this->is_link_for_language_switcher()

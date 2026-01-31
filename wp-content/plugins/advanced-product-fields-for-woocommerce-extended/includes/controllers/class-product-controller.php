@@ -22,55 +22,55 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 
         public function __construct()
         {
-            add_action('woocommerce_before_add_to_cart_button',             [$this, 'display_field_groups']);
+            add_action( 'woocommerce_before_add_to_cart_button',            [ $this, 'display_field_groups' ] );
 
-            add_action('wp_footer',                                         [$this, 'add_custom_js_and_html'], 999999);
+            add_action( 'wp_footer',                                        [ $this, 'add_custom_js_and_html' ], 999999 );
 
-            add_filter('woocommerce_add_to_cart_validation',                [$this, 'validate_cart_data'], 10, 6);
+            add_filter('woocommerce_add_to_cart_validation',                [ $this, 'validate_cart_data' ], 10, 6 );
 
-            add_action('woocommerce_after_checkout_validation',             [$this, 'validate_at_checkout'], 10, 2 );
+            add_action('woocommerce_after_checkout_validation',             [ $this, 'validate_at_checkout' ], 10, 2 );
 
-	        add_filter('woocommerce_add_cart_item_data',                    [$this, 'add_fields_to_cart_item'], 10, 4);
+	        add_filter('woocommerce_add_cart_item_data',                    [ $this, 'add_fields_to_cart_item' ], 10, 4 );
 
-            add_action('woocommerce_add_to_cart',                           [$this, 'split_cart_items_by_quantity'], 10, 6);
+            add_action('woocommerce_add_to_cart',                           [ $this, 'split_cart_items_by_quantity' ], 10, 6 );
 
-            add_action('woocommerce_before_calculate_totals',               [$this, 'add_prices_to_cart_item'], 2000, 1);
+            add_action('woocommerce_before_calculate_totals',               [ $this, 'add_prices_to_cart_item' ], 2000 );
 
-	        add_action('woocommerce_before_mini_cart',                      [$this, 'mini_cart_subtotal']);
+	        add_action('woocommerce_before_mini_cart',                      [ $this, 'mini_cart_subtotal' ] );
 
-            add_filter('woocommerce_get_item_data',                         [$this, 'display_fields_on_cart_and_checkout'],10, 2);
+            add_filter('woocommerce_get_item_data',                         [ $this, 'display_fields_on_cart_and_checkout' ], 10, 2 );
 
-            add_action('woocommerce_checkout_create_order_line_item',       [$this, 'add_meta_to_order_item'],20, 4);
+            add_action('woocommerce_checkout_create_order_line_item',       [ $this, 'add_meta_to_order_item' ], 20, 4 );
 
-	        add_filter('woocommerce_order_item_get_formatted_meta_data',    [$this, 'format_fields_in_order'],10,2);
+	        add_filter('woocommerce_order_item_get_formatted_meta_data',    [ $this, 'format_fields_in_order' ], 10, 2);
 
-            add_action('woocommerce_before_order_itemmeta',                 [$this, 'set_admin_screen_flag'] );
-            add_action('woocommerce_after_order_itemmeta',                  [$this, 'unset_admin_screen_flag'] );
+            add_action('woocommerce_before_order_itemmeta',                 [ $this, 'set_admin_screen_flag' ] );
+            add_action('woocommerce_after_order_itemmeta',                  [ $this, 'unset_admin_screen_flag' ] );
 
-            add_filter('woocommerce_product_add_to_cart_text',              [$this, 'change_add_to_cart_text'], 10, 2);
+            add_filter('woocommerce_product_add_to_cart_text',              [ $this, 'change_add_to_cart_text' ], 10, 2 );
 
-            add_filter('woocommerce_product_supports',                      [$this, 'check_product_support'], 10, 3);
+            add_filter('woocommerce_product_supports',                      [ $this, 'check_product_support'], 10, 3 );
 
-            add_filter('woocommerce_product_add_to_cart_url',               [$this, 'set_add_to_cart_url'], 10, 2);
+            add_filter('woocommerce_product_add_to_cart_url',               [ $this, 'set_add_to_cart_url'], 10, 2 );
 
-            add_filter('woocommerce_single_product_image_thumbnail_html',   [$this, 'add_attachment_id_to_html'], 10, 2 );
+            add_filter('woocommerce_single_product_image_thumbnail_html',   [ $this, 'add_attachment_id_to_html'], 10, 2 );
 
-	        add_filter('woocommerce_order_again_cart_item_data',            [$this, 'order_again_cart_item_data'], 10, 3);
-	        add_filter('woocommerce_add_order_again_cart_item',             [$this, 'calculate_prices_for_ordered_again_item'], 11, 2);
+	        add_filter('woocommerce_order_again_cart_item_data',            [ $this, 'order_again_cart_item_data'], 10, 3 );
+	        add_filter('woocommerce_add_order_again_cart_item',             [ $this, 'calculate_prices_for_ordered_again_item' ], 11, 2 );
 
-	        add_action('wp_head',                                           [$this, 'add_lookup_tables']);
-	        add_action('wp_footer',                                         [$this, 'add_lookup_tables_code'] );
+	        add_action('wp_head',                                           [ $this, 'add_lookup_tables' ] );
+	        add_action('wp_footer',                                         [ $this, 'add_lookup_tables_code' ] );
 
-	        add_action('woocommerce_after_cart_item_name',                  [$this, 'add_edit_link'],10, 2);
-            add_action('woocommerce_blocks_loaded',                         [$this, 'extend_store_api']); 
-            add_action('wp_footer',                                         [$this, 'add_edit_link_for_cart_block'] ); 
-	        add_filter('woocommerce_product_single_add_to_cart_text',       [$this, 'change_add_to_cart_button_text']);
-	        add_filter('woocommerce_add_to_cart_redirect',                  [$this, 'change_add_to_cart_redirect'], 10, 2);
-	        add_filter('woocommerce_quantity_input_args',                   [$this, 'change_add_to_cart_quantity'],20,2);
+	        add_action('woocommerce_after_cart_item_name',                  [ $this, 'add_edit_link' ], 10, 2 );
+            add_action('woocommerce_blocks_loaded',                         [ $this, 'extend_store_api' ] ); 
+            add_action('wp_footer',                                         [ $this, 'add_edit_link_for_cart_block' ] ); 
+	        add_filter('woocommerce_product_single_add_to_cart_text',       [ $this, 'change_add_to_cart_button_text' ] );
+	        add_filter('woocommerce_add_to_cart_redirect',                  [ $this, 'change_add_to_cart_redirect' ], 10, 2 );
+	        add_filter('woocommerce_quantity_input_args',                   [ $this, 'change_add_to_cart_quantity' ], 20, 2 );
 
-	        add_filter('woocommerce_get_price_html',                        [$this, 'change_price_html'], 100, 2);
+	        add_filter('woocommerce_get_price_html',                        [ $this, 'change_price_html' ], 100, 2 );
 
-            add_filter('woocommerce_available_variation',                   [$this, 'set_variant_data'], 10, 3);
+            add_filter('woocommerce_available_variation',                   [ $this, 'set_variant_data' ], 10, 3 );
 
         }
 
@@ -268,35 +268,44 @@ namespace SW_WAPF_PRO\Includes\Controllers {
             <?php
         }
 
-        public function set_add_to_cart_url($url, $product) {
-            if($product->get_type() === 'external')
-                return $url;
+        public function check_product_support( $support, $feature, $product ) {
 
-            if(Field_Groups::product_has_field_group($product))
-                return apply_filters('wapf/add_to_cart_url', $product->get_permalink(), $product,$url);
-
-            return $url;
-        }
-
-        public function check_product_support($support, $feature, $product)
-        {
-            if($feature === 'ajax_add_to_cart' && Field_Groups::product_has_field_group($product) )
+            if( $feature === 'ajax_add_to_cart' && Field_Groups::product_has_field_group( $product ) ) {
                 $support = false;
+            }
 
             return $support;
         }
 
-        public function change_add_to_cart_text($text, $product) {
-            if(!$product->is_in_stock())
+        public function change_add_to_cart_text( $text, $product ) {
+
+            if( ! $product->is_in_stock() ) {
                 return $text;
+            }
 
-            if (in_array($product->get_type(), ['grouped', 'external'] ))
+            if ( in_array( $product->get_type(), [ 'grouped', 'external' ] ) ) {
                 return $text;
+            }
 
-            if( Field_Groups::product_has_field_group($product) )
-	            return esc_html(get_option('wapf_add_to_cart_text', __('Select options','sw-wapf')));
+            if( Field_Groups::product_has_field_group( $product ) ) {
+                return esc_html( get_option( 'wapf_add_to_cart_text', __( 'Select options', 'sw-wapf' ) ) );
+            }
 
-            return $text;
+                        return $text;
+
+        }
+
+        public function set_add_to_cart_url( $url, $product ) {
+
+            if( $product->get_type() === 'external' ) {
+                return $url;
+            }
+
+            if( Field_Groups::product_has_field_group( $product ) ) {
+                return apply_filters( 'wapf/add_to_cart_url', $product->get_permalink(), $product, $url );
+            }
+
+            return $url;
 
         }
 
@@ -339,17 +348,22 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 
 	                    if( empty( $the_product_id ) ) return $passed; 
 
-        	$field_groups = Field_Groups::get_field_groups_of_product ($the_product_id );
+                    	$field_groups = Field_Groups::get_field_groups_of_product( $the_product_id );
 
-	        if( empty( $field_groups ) ) return $passed;
+	        if( empty( $field_groups ) ) {
+                return $passed;
+            }
 
 	        $skip_fieldgroup_validation = false;
 	        $field_group_ids = isset( $_REQUEST['wapf_field_groups'] ) ? sanitize_text_field( $_REQUEST['wapf_field_groups'] ) : false;
-	        if( ! empty( $cart_item_data ) && $is_order_again )
-		        $skip_fieldgroup_validation = true;
 
-	        if( isset( $_GET['add-to-cart'] ) && is_numeric( $_GET['add-to-cart'] ) && ! $field_group_ids )
-		        $skip_fieldgroup_validation = true;
+	        if( ! empty( $cart_item_data ) && $is_order_again ) {
+                $skip_fieldgroup_validation = true;
+            }
+
+	        if( isset( $_GET['add-to-cart'] ) && is_numeric( $_GET['add-to-cart'] ) && ! $field_group_ids ) {
+                $skip_fieldgroup_validation = true;
+            }
 
 	        $skip_fieldgroup_validation = apply_filters( 'wapf/skip_fieldgroup_validation', $skip_fieldgroup_validation );
 
@@ -369,7 +383,7 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 	        }
 
 	        $files = File_Upload::create_uploaded_file_array();
-	        Cache::set_files($files); 
+	        Cache::set_files( $files ); 
 
             $validation = Cart::validate_cart_data( $field_groups, $passed, $product_id, $qty, $variation_id, $is_order_again, $cart_item_data );
 
@@ -695,7 +709,9 @@ namespace SW_WAPF_PRO\Includes\Controllers {
 
 		    global $product;
 
-		    if( !$product ) return;
+		    if( ! $product ) {
+                return;
+            }
 
 		    if( in_array( $product->get_type(), [ 'grouped', 'external' ] ) ) return;
 
@@ -714,7 +730,7 @@ namespace SW_WAPF_PRO\Includes\Controllers {
                 $fields         = [];
 
                 if( isset( $cart[ $cart_item_key ] ) ) {
-                    $fields = array_merge(  $cart[ $cart_item_key ][ 'wapf' ] ?? [], $cart[ $cart_item_key ][ '_wapf_children' ] ?? [] );
+                    $fields = array_merge( $cart[ $cart_item_key ][ 'wapf' ] ?? [], $cart[ $cart_item_key ][ '_wapf_children' ] ?? [] );
                 }
 
                 			    foreach( $fields as $f ) {

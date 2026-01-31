@@ -49,6 +49,8 @@ class NonceChecker implements Loadie {
 				'el-export-logs-with-columns'
 			];
 
+            
+
 			if ( ! in_array( $action, $allowed_actions ) ) {
 				return;
 			}
@@ -77,6 +79,7 @@ class NonceChecker implements Loadie {
 				return;
 			}
 
+            
 			if ( strpos( $action, 'el-log-list-' ) === 0 ) {
 				if ( ! isset( $_REQUEST[ LogListPage::LOG_LIST_ACTION_NONCE_FIELD ] ) ) {
 					return;
@@ -117,6 +120,7 @@ class NonceChecker implements Loadie {
 		 *
 		 * @param array $_REQUEST Request data.
 		 */
+
 		do_action( $action, $_REQUEST );
 	}
 }

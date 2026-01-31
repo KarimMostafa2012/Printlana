@@ -33,32 +33,9 @@ class WPML_Taxonomy_Translation_Help_Notice {
 		$this->sitepress          = $sitepress;
 	}
 
-	public function __sleep() {
-		return array( 'wpml_admin_notices', 'notice' );
-	}
-
-	public function __wakeup() {
-		global $sitepress;
-		$this->sitepress = $sitepress;
-	}
-
 	public function add_hooks() {
 		add_action( 'admin_init', array( $this, 'add_help_notice' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function should_display_help_notice() {
-		$display_notice = false;
-		$taxonomy       = $this->get_current_translatable_taxonomy();
-		$notice         = $this->get_notice();
-		if ( $notice && $taxonomy && $taxonomy->name === $notice->get_id() && $this->taxonomy_term_screen() ) {
-			$display_notice = true;
-		}
-
-		return $display_notice;
 	}
 
 	/**
@@ -75,15 +52,7 @@ class WPML_Taxonomy_Translation_Help_Notice {
 	 * @return WP_Taxonomy|false
 	 */
 	private function get_current_translatable_taxonomy() {
-		$taxonomy = false;
-		if ( array_key_exists( 'taxonomy', $_GET )
-			 && ! empty( $_GET['taxonomy'] )
-			 && $this->is_translatable_taxonomy( $_GET['taxonomy'] )
-		) {
-			$taxonomy = get_taxonomy( $_GET['taxonomy'] );
-		}
-
-		return $taxonomy;
+		return self::get_current_translatable_taxonomy_static();
 	}
 
 	/**
@@ -100,15 +69,112 @@ class WPML_Taxonomy_Translation_Help_Notice {
 		return $this->get_notice();
 	}
 
+	/**
+	 * Add the taxonomy help notice to the admin notices system.
+	 *
+	 * Uses a serializable validator object instead of a closure to prevent
+	 * serialization errors when notices are stored in the database.
+	 *
+	 * @since 4.6.15 Changed to use WPML_Taxonomy_Notice_Display_Validator
+	 */
 	private function add_term_help_notice_to_admin_notices() {
 		$notice = $this->get_notice();
 		$notice->set_css_class_types( 'info' );
-		$notice->add_display_callback( array( $this, 'should_display_help_notice' ) );
+		// Use a serializable validator object to prevent closure serialization errors.
+		// The validator stores only the taxonomy ID (string) and can be safely serialized.
+		// Type cast to string to satisfy PHPStan (WPML_Notice::get_id() returns int|string).
+		$taxonomy_id = (string) $notice->get_id();
+		$validator   = new WPML_Taxonomy_Notice_Display_Validator( $taxonomy_id );
+		$notice->add_display_callback( $validator );
 		$action = $this->wpml_admin_notices->get_new_notice_action( esc_html__( 'Dismiss', 'sitepress' ), '#', false, false, false );
 		$action->set_js_callback( 'wpml_dismiss_taxonomy_translation_notice' );
 		$action->set_group_to_dismiss( $notice->get_group() );
 		$notice->add_action( $action );
 		$this->wpml_admin_notices->add_notice( $notice );
+	}
+
+	/**
+	 * Validate if a taxonomy notice should be displayed on the current page.
+	 *
+	 * This static method is called by the validator object during runtime to determine
+	 * if the notice should be shown. It checks if we're on a taxonomy term screen and
+	 * if the current taxonomy matches the taxonomy ID stored in the notice.
+	 *
+	 * @param string $taxonomy_id The taxonomy slug to validate (e.g., 'product_cat', 'category').
+	 * @return bool True if the notice should be displayed, false otherwise.
+	 */
+	public static function validate_display_for_taxonomy( $taxonomy_id ) {
+		if ( ! self::is_taxonomy_term_screen_static() ) {
+			return false;
+		}
+
+		$current_taxonomy = self::get_current_translatable_taxonomy_static();
+		if ( $current_taxonomy && $current_taxonomy->name === $taxonomy_id ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if the current admin screen is a taxonomy term screen.
+	 */
+	private static function is_taxonomy_term_screen_static() {
+		$screen = get_current_screen();
+
+		if ( ! $screen ) {
+			return false;
+		}
+
+		return in_array( $screen->base, array( 'edit-tags', 'term' ), true );
+	}
+
+	/**
+	 * Get the current translatable taxonomy from the URL parameter.
+	 *
+	 * Retrieves and validates the taxonomy from the 'taxonomy' URL parameter,
+	 * ensuring it exists and is configured as translatable in WPML.
+	 */
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading taxonomy from URL for display purposes only.
+	private static function get_current_translatable_taxonomy_static() {
+		if ( empty( $_GET['taxonomy'] ) ) {
+			return false;
+		}
+
+		$taxonomy_slug = sanitize_key( $_GET['taxonomy'] );
+
+		if ( ! self::is_translatable_taxonomy_static( $taxonomy_slug ) ) {
+			return false;
+		}
+
+		return get_taxonomy( $taxonomy_slug );
+	}
+
+	/**
+	 * @param string $taxonomy The taxonomy slug to check.
+	 * @return bool True if the taxonomy is translatable, false otherwise.
+	 *
+	 * Check if a taxonomy is configured as translatable in WPML.
+	 *
+	 * Verifies that the taxonomy exists and is in the list of translatable
+	 * taxonomies for its associated post type.
+	 */
+	private static function is_translatable_taxonomy_static( $taxonomy ) {
+		global $sitepress;
+
+		if ( ! $sitepress ) {
+			return false;
+		}
+
+		$taxonomy_object = get_taxonomy( $taxonomy );
+		if ( ! $taxonomy_object ) {
+			return false;
+		}
+
+		$post_type               = isset( $taxonomy_object->object_type[0] ) ? $taxonomy_object->object_type[0] : 'post';
+		$translatable_taxonomies = $sitepress->get_translatable_taxonomies( true, $post_type );
+
+		return in_array( $taxonomy, $translatable_taxonomies, true );
 	}
 
 	/**
@@ -129,16 +195,6 @@ class WPML_Taxonomy_Translation_Help_Notice {
 
 		return '<a href="' . esc_url( $url ) . '">' .
 			   sprintf( esc_html__( ' %s translation', 'sitepress' ), $taxonomy->labels->singular_name ) . '</a>';
-	}
-
-	private function taxonomy_term_screen() {
-		$screen                  = get_current_screen();
-		$is_taxonomy_term_screen = false;
-		if ( 'edit-tags' === $screen->base || 'term' === $screen->base ) {
-			$is_taxonomy_term_screen = true;
-		}
-
-		return $is_taxonomy_term_screen;
 	}
 
 	/**
@@ -172,23 +228,5 @@ class WPML_Taxonomy_Translation_Help_Notice {
 			);
 			wp_enqueue_script( 'wpml-dismiss-taxonomy-help-notice' );
 		}
-	}
-
-	/**
-	 * @param string $taxonomy
-	 *
-	 * @return bool
-	 */
-	private function is_translatable_taxonomy( $taxonomy ) {
-		$is_translatable = false;
-
-		$taxonomy_object = get_taxonomy( $taxonomy );
-		if ( $taxonomy_object ) {
-			$post_type               = isset( $taxonomy_object->object_type[0] ) ? $taxonomy_object->object_type[0] : 'post';
-			$translatable_taxonomies = $this->sitepress->get_translatable_taxonomies( true, $post_type );
-			$is_translatable         = in_array( $taxonomy, $translatable_taxonomies );
-		}
-
-		return $is_translatable;
 	}
 }

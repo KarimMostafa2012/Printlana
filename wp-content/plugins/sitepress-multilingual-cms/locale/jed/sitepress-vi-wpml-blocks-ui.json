@@ -3,25 +3,27 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi"
          },
          "Advanced": [
             "Nâng cao"
          ],
          "HTML anchor": [
-            "Điểm neo HTML"
+            "Neo HTML"
          ],
          "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            "Thêm lối tắt đến khối này khi tải trang bằng cách sử dụng URL <q id=\"q-first-1\">#anchor</q>."
+            "Thêm lối tắt vào khối này khi tải trang bằng URL “#anchor”."
          ],
          "Additional CSS class(es)": [
             "Lớp CSS bổ sung"
          ],
          "Separate multiple classes with spaces.": [
-            "Phân tách nhiều lớp bằng dấu cách."
+            "Tách nhiều lớp bằng dấu cách."
          ],
          "Color": [
-            "Màu sắc"
+            "Màu"
          ],
          "px": [
             "px"
@@ -60,7 +62,7 @@
             "Hiển thị tên ngôn ngữ"
          ],
          "Display language name in": [
-            "Hiển thị tên ngôn ngữ bằng"
+            "Hiển thị tên ngôn ngữ trong"
          ],
          "Style": [
             "Kiểu"
@@ -78,10 +80,10 @@
             "Khoảng cách"
          ],
          "Allow wrapping to multiple lines": [
-            "Cho phép xuống dòng"
+            "Cho phép xuống nhiều dòng"
          ],
          "Open on click": [
-            "Mở khi nhấp chuột"
+            "Mở khi nhấp"
          ],
          "Show arrow": [
             "Hiển thị mũi tên"
@@ -147,7 +149,7 @@
             "Lớn"
          ],
          "X-Large": [
-            "Cực lớn"
+            "Rất lớn"
          ],
          "Ab": [
             "Ab"
@@ -162,7 +164,7 @@
             "Nhỏ"
          ],
          "Displays the WPML Language Switcher.": [
-            "Hiển thị Bộ chuyển đổi ngôn ngữ WPML."
+            "Hiển thị bộ chuyển đổi ngôn ngữ WPML."
          ],
          "Language Switcher": [
             "Bộ chuyển đổi ngôn ngữ"

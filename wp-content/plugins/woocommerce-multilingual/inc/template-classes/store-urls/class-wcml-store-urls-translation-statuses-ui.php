@@ -2,21 +2,22 @@
 
 use WPML\Core\Twig_SimpleFunction;
 
-/**
- * Created by OnTheGo Systems
- */
 class WCML_Store_URLs_Translation_Statuses_UI extends WCML_Templates_Factory {
 
 	private $base;
 	private $active_languages;
 	private $value;
+	/**
+	 * @var woocommerce_wpml
+	 */
 	private $woocommerce_wpml;
+	/**
+	 * @var SitePress
+	 */
 	private $sitepress;
 
 
 	/**
-	 * WCML_Store_URLs_Translation_Statuses_UI constructor.
-	 *
 	 * @param string           $base
 	 * @param array            $active_languages
 	 * @param bool             $value

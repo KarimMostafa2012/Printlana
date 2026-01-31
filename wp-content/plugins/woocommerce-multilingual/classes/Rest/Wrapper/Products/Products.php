@@ -102,7 +102,6 @@ class Products extends Handler {
 		$langCode       = $getParam( 'lang' );
 		$translationOf  = $getParam( 'translation_of' );
 		$trid           = null;
-		$sourceLangCode = null;
 
 		if ( $langCode ) {
 

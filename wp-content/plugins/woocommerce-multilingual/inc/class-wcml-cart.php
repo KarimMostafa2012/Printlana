@@ -135,8 +135,8 @@ class WCML_Cart {
 
 	public function wcml_removed_cart_items_widget( $args = [] ) {
 
-		if ( ! empty( $this->woocommerce->session ) ) {
-			$removed_cart_items = new WCML_Removed_Cart_Items_UI( $args, $this->woocommerce_wpml, $this->sitepress, $this->woocommerce );
+		if ( $this->woocommerce->session instanceof WC_Session ) {
+			$removed_cart_items = new WCML_Removed_Cart_Items_UI( $this->woocommerce_wpml, $this->sitepress, $this->woocommerce );
 			$preview            = $removed_cart_items->get_view();
 
 			if ( ! isset( $args['echo'] ) || $args['echo'] ) {
@@ -167,7 +167,7 @@ class WCML_Cart {
 				WC()->cart->remove_cart_item( $item_key );
 			}
 
-			if ( ! empty( $this->woocommerce->session ) ) {
+			if ( $this->woocommerce->session instanceof WC_Session ) {
 				$this->woocommerce->session->set( 'wcml_removed_items', serialize( $removed_products ) );
 			}
 		}
@@ -184,9 +184,20 @@ class WCML_Cart {
 		$this->woocommerce->session->__unset( 'wcml_switched_type' );
 	}
 
+	/**
+	 * @param $exc
+	 * @param $current_currency
+	 * @param $new_currency
+	 * @param bool $return
+	 *
+	 * @return array|mixed|void
+	 */
 	public function cart_switching_currency( $exc, $current_currency, $new_currency, $return = false ) {
 
-		$cart_for_session = ! is_null( WC()->cart ) ? array_filter( WC()->cart->get_cart_contents() ) : false;
+		$cart_for_session = false;
+		if ( WC()->cart instanceof WC_Cart ) {
+			$cart_for_session = array_filter( WC()->cart->get_cart_contents() );
+		}
 
 		if ( $this->woocommerce_wpml->settings['cart_sync']['currency_switch'] == WCML_CART_SYNC || empty( $cart_for_session ) ) {
 			return $exc;
@@ -205,11 +216,9 @@ class WCML_Cart {
 
 		if ( $return ) {
 			return [ 'prevent_switching' => $html ];
-		} else {
-			wp_send_json_success( [ 'prevent_switching' => $html ] );
 		}
 
-		return true;
+		wp_send_json_success( [ 'prevent_switching' => $html ] );
 	}
 
 	public function cart_alert( $dialog_title, $confirmation_message, $switch_to, $stay_in, $switch_to_value, $stay_in_value = false, $language_switch = false ) {
@@ -424,7 +433,7 @@ class WCML_Cart {
 		$data_hash = '';
 
 		if ( function_exists( 'wc_get_cart_item_data_hash' ) ) {
-			$hash_product_object = wc_get_product( $cart_item['variation_id'] ? $cart_item['variation_id'] : $cart_item['product_id'] );
+			$hash_product_object = wc_get_product( $cart_item['variation_id'] ?: $cart_item['product_id'] );
 			if ( $hash_product_object ) {
 				$data_hash = wc_get_cart_item_data_hash( $hash_product_object );
 			}

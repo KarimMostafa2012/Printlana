@@ -57,7 +57,11 @@ class CartCheckoutBlockSupport extends AbstractPaymentMethodType {
             $available_vendors = [];
 
             foreach ( $items as $item ) {
-                $product_id                                                          = $item->get_product_id();
+                /** @var \WC_Order_Item_Product $item */
+                $product_id = $item->get_product_id();
+                if ( Helper::should_skip_product( $product_id ) ) {
+					continue;
+				}
                 $available_vendors[ get_post_field( 'post_author', $product_id ) ][] = wc_get_product( $product_id );
             }
 
@@ -117,9 +121,7 @@ class CartCheckoutBlockSupport extends AbstractPaymentMethodType {
             $payment_activated = 'yes' === $gateways[ $this->name ]->enabled;
         }
 
-        $module_active = dokan_pro()->module->is_active( 'razorpay');
-
-        if ( $payment_activated && $module_active ) {
+        if ( $payment_activated ) {
             return true;
         }
 

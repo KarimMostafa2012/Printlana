@@ -136,11 +136,11 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
                 case 'text':
                     $data = trim( sanitize_text_field( $data ) );
-                    return empty( $data ) ? $fallback : $data;
+                    return empty( $data ) && $data !== '0' ? $fallback : $data;
 
                                 case 'textarea':
                     $data = trim( sanitize_textarea_field( $data ) );
-                    return empty( $data ) ? $fallback : $data;
+                    return empty( $data ) && $data !== '0' ? $fallback : $data;
 
                                     case 'options':
                     $data = trim( sanitize_text_field( '' . $data ) );
@@ -536,22 +536,23 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
 		private static $formula_functions = [];
 
-	    public static function add_formula_function($func,$callback) {
-	    	self::$formula_functions[$func] = $callback;
+	    public static function add_formula_function( $func, $callback ) {
+	    	self::$formula_functions[ $func ] = $callback;
 	    }
 
 	    public static function get_all_formula_functions() {
-	    	return apply_filters('wapf/fx/functions', array_keys(self::$formula_functions));
+	    	return apply_filters( 'wapf/fx/functions', array_keys( self::$formula_functions ) );
 	    }
 
-	    public static function split_formula_variables($str) {
-	    	$open = 0;
+	    public static function split_formula_variables( $str ): array {
+
+            	    	$open = 0;
 	    	$paramStr = '';
 	    	$params = [];
-	    	$chars = self::split_multibyte_string($str);
-			$len = count($chars);
+	    	$chars = self::split_multibyte_string( $str );
+			$len = count( $chars );
 
-	    	for($i=0;$i<$len;$i++) {
+	    	for( $i=0; $i < $len; $i++ ) {
 			    if ($chars[$i] === ';' && $open === 0) {
 				    $params[] = $paramStr;
 				    $paramStr = '';
@@ -567,8 +568,10 @@ namespace SW_WAPF_PRO\Includes\Classes {
 		    if (strlen($paramStr) > 0 || count($params) === 0) {
 			    $params[] = $paramStr;
 		    }
-		    return array_map('trim',$params);
-	    }
+
+            		    return array_map( 'trim', $params );
+
+            	    }
 
 		public static function closing_bracket_index($str,$from_pos) {
 			$arr = str_split($str);
@@ -587,7 +590,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 			return strlen($str)-1;
 		}
 
-		public static function replace_in_formula($str,$qty,$base_price,$val,$options_total = 0,$cart_fields = [], $product_id = null, $clone_idx = 0) {
+		public static function replace_in_formula( $str, $qty, $base_price, $val, $options_total = 0, $cart_fields = [], $product_id = null, $clone_idx = 0 ) {
 
 
 	    				$str = str_replace( ['[qty]','[price]','[x]','[options_total]'], [$qty,$base_price,$val,$options_total], $str );
@@ -669,7 +672,8 @@ namespace SW_WAPF_PRO\Includes\Classes {
         }
 
         public static function parse_math_string( $str, $cart_fields = [], $evaluate = true, $additional_info = [] ) {
-	        $str = htmlspecialchars_decode( $str ); 
+
+            	        $str = htmlspecialchars_decode( $str ); 
 
 	    	$functions = self::get_all_formula_functions();
 
@@ -684,16 +688,18 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
 			        $solution = '';
 
-			        if(isset(self::$formula_functions[$functions[$i]])) {
+			        if( isset( self::$formula_functions[ $functions[$i] ] ) ) {
 			        	$callable = self::$formula_functions[$functions[$i]];
-				        $solution = $callable($args,[
-				        	'fields' => $cart_fields,
-					        'product_id' => isset($additional_info['product_id']) ? $additional_info['product_id'] : null
-				        ]);
+				        $solution = $callable( $args, [
+				        	'fields'        => $cart_fields,
+					        'product_id'    => $additional_info[ 'product_id' ] ?? null,
+                            'clone_index'   => $additional_info[ 'clone_index' ] ?? 0,
+				        ] );
 			        } else {
-			        	$solution = apply_filters('wapf/fx/solve',$solution,$functions[$i],$args);
+			        	$solution = apply_filters( 'wapf/fx/solve', $solution, $functions[$i], $args );
 			        }
-			        $str = substr($str,0,$idx) . $solution . substr($str,$b+1);
+
+                    			        $str = substr( $str, 0, $idx ) . $solution . substr( $str,$b + 1 );
 
 		        }
 
@@ -794,19 +800,20 @@ namespace SW_WAPF_PRO\Includes\Classes {
 					return $x['name'] === $var_name;
 				});
 
-				if($var) {
-					$valu = $var['default'];
+				if( $var ) {
+
+                    					$value = $var['default'];
 
 					foreach ( $var['rules'] as $rule ) {
-						if(Fields::is_valid_rule($fields,$rule['field'],$rule['condition'],$rule['value'],$product_id,$cart_item_fields,$clone_idx,$qty)){
-							$valu = $rule['variable'];
+						if( Fields::is_valid_rule( $fields, $rule['field'], $rule['condition'], $rule['value'], $product_id, $cart_item_fields, $clone_idx, $qty ) ) {
+							$value = $rule['variable'];
 							break;
 						}
 					}
 
 					return Helper::parse_math_string(
 						Helper::replace_in_formula(
-							Helper::evaluate_variables($valu,$fields,$variables,$product_id,$clone_idx,$base_price,$val,$qty,$options_total,$cart_item_fields)
+							Helper::evaluate_variables( $value,$fields,$variables,$product_id,$clone_idx,$base_price,$val,$qty,$options_total,$cart_item_fields)
 							,$qty,$base_price,$val,$options_total,$cart_item_fields,$product_id, $clone_idx)
 						,$cart_item_fields, true, ['product_id' => $product_id ]);
 				}
@@ -815,7 +822,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 			}, $str );
 		}
 
-		#endregion
+        		#endregion
 
                 public static function values_to_simple_string(  $cartitem_field, $cart_item, $context = 'cart' ) {
 

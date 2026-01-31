@@ -99,10 +99,10 @@ class WPML_Gutenberg_Strings_Registration {
 	}
 
 	/**
-	 * @param array $blocks
-	 * @param array $package_data
-	 * @param int   $post_id
-	 * @param array $crumbs
+	 * @param array    $blocks
+	 * @param array    $package_data
+	 * @param int|null $post_id
+	 * @param array    $crumbs
 	 */
 	private function register_blocks( array $blocks, array $package_data, $post_id, $crumbs = [] ) {
 
@@ -123,7 +123,7 @@ class WPML_Gutenberg_Strings_Registration {
 				$newCrumbs[] = $group;
 			}
 
-			$this->sequence ++;
+			++$this->sequence;
 
 			if ( empty( $strings ) ) {
 				if ( $post_id ) {
@@ -170,11 +170,11 @@ class WPML_Gutenberg_Strings_Registration {
 		}
 	}
 
-	private function isLayoutBlock( WP_Block_Parser_Block $block ) : bool {
+	private function isLayoutBlock( WP_Block_Parser_Block $block ): bool {
 		return isset( $block->attrs['layout'] );
 	}
 
-	private function getGroupIdOfBlock( WP_Block_Parser_Block $block, int $sequence ) : string {
+	private function getGroupIdOfBlock( WP_Block_Parser_Block $block, int $sequence ): string {
 		return str_replace( '/', '-', $block->blockName ) . '-' . $sequence;
 	}
 
@@ -184,7 +184,7 @@ class WPML_Gutenberg_Strings_Registration {
 
 		if ( $string_id ) {
 			$string->set_location( $this->string_location );
-			$this->string_location++;
+			++$this->string_location;
 		}
 	}
 

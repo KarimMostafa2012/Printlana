@@ -2,10 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "Επίδραση Γλωσσικής Ανακατεύθυνσης στην Ευρετηρίαση Google"
+msgstr "Πώς η ανακατεύθυνση γλώσσας του προγράμματος περιήγησης επηρεάζει την ευρετηρίαση της Google"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
@@ -13,11 +15,11 @@ msgstr "Τεκμηρίωση"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "Ανακατεύθυνση επηρεάζει ευρετηρίαση Google"
+msgstr "Η ανακατεύθυνση του προγράμματος περιήγησης επηρεάζει την ευρετηρίαση και τα αποτελέσματα αναζήτησης της Google"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
-msgstr "Κατανοητό, ενεργοποίηση"
+msgstr "Το κατάλαβα, ενεργοποίηση ούτως ή άλλως"
 
 #: src/js/browser-language-redirect-dialog/texts.js:5
 msgid "Cancel"
@@ -28,14 +30,14 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "Ανακατεύθυνση βάσει γλώσσας επηρεάζει Google."
+msgstr "Όταν ανακατευθύνετε τους επισκέπτες με βάση τη γλώσσα τους, ανακατευθύνετε και την Google. Η Google θέλει να βλέπει τον ιστότοπό σας ακριβώς όπως τον βλέπουν οι επισκέπτες, συμπεριλαμβανομένων τυχόν ανακατευθύνσεων που εφαρμόζετε."
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "Ανακατεύθυνση αποδεκτή, αλλά επηρεάζει SEO."
+msgstr "Είναι εντάξει να ανακατευθύνετε τους επισκέπτες με βάση τη γλώσσα τους, αλλά πρέπει να συνειδητοποιήσετε ότι αυτή η λειτουργία επηρεάζει το SEO."
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"
-msgstr "Συνιστάται ανάγνωση δύο σελίδων"
+msgstr "Πριν προχωρήσετε, σας συνιστούμε να διαβάσετε αυτές τις δύο σελίδες:"

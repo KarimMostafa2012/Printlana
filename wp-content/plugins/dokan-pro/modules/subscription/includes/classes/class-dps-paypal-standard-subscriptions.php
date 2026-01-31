@@ -399,23 +399,23 @@ class DPS_PayPal_Standard_Subscriptions {
 
                     if ( $is_renewal ) {
                         // check if transaction already recorded
-                        add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', __CLASS__ . '::handle_custom_query_var', 10, 2 );
-
-                        $query = new WC_Order_Query(
-                            array(
-                                'search_transaction' => $transaction_details['txn_id'],
+                        $orders = wc_get_orders(
+                            [
                                 'customer_id'        => $order->get_customer_id(),
                                 'limit'              => 1,
                                 'type'               => 'shop_order',
                                 'orderby'            => 'date',
                                 'order'              => 'DESC',
                                 'return'             => 'ids',
-                            )
+                                'meta_query'  => [
+                                    [
+                                        'key'     => '_transaction_id',
+                                        'value'   => $transaction_details['txn_id'],
+                                        'compare' => '=',
+                                    ],
+                                ],
+                            ]
                         );
-
-                        $orders = $query->get_orders();
-
-                        remove_filter( 'woocommerce_order_data_store_cpt_get_orders_query', __CLASS__ . '::handle_custom_query_var' );
 
                         if ( ! empty( $orders ) ) {
                             // transaction is already recorded
@@ -527,28 +527,6 @@ class DPS_PayPal_Standard_Subscriptions {
 
         // Prevent default IPN handling for subscription txn_types
         exit;
-    }
-
-    /**
-     * Handles custom query variables
-     *
-     * @since 3.4.3
-     *
-     * @param array $query
-     * @param array $query_vars
-     *
-     * @return array
-     */
-    public static function handle_custom_query_var( $query, $query_vars ) {
-        if ( ! empty( $query_vars['search_transaction'] ) ) {
-            $query['meta_query'][] = [
-                'key'       => '_dokan_paypal_payment_capture_id',
-                'value'     => $query_vars['search_transaction'],
-                'compare'   => '=',
-            ];
-        }
-
-        return $query;
     }
 
     /**

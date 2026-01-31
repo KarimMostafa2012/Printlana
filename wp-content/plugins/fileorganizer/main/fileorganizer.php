@@ -75,8 +75,10 @@ function fileorganizer_render_page(){
 	fileorganizer_page_header();
 
 	echo '<div id="fileorganizer_elfinder"></div>';
-
-	fileorganizer_page_footer();
+	
+	if(!defined('SITEPAD')){
+		fileorganizer_page_footer();
+	}
 	
 	// Editor configurations
 	$elfinder_config = 'url: fileorganizer_ajaxurl,

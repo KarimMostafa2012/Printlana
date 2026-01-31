@@ -767,7 +767,7 @@ class WPML_TM_Menus_Settings extends WPML_TM_Menus {
 					$compatibility_reports_after_setup_args['sharing_data_details_url'] = "https://wpml.org/documentation/privacy-policy-and-gdpr-compliance/optional-data-sharing/?utm_source=plugin&utm_medium=gui&utm_campaign=wpml-settings";
 
 					$compatibility_reports_after_setup_args['custom_radio_label_yes'] = esc_html__(
-						'YES, send this information to wpml.org to improve my site’s maintenance and support',
+						'Yes, send this information to wpml.org to improve my site’s maintenance and support',
 						'wpml-translation-management'
 					);
 					$compatibility_reports_after_setup_args['custom_radio_label_no']  = esc_html__(

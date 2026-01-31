@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
@@ -11,19 +13,19 @@ msgstr "Αποστολή για μετάφραση"
 msgid ""
 "This content is being automatically translated. If you want to do something "
 "different with it cancel translation jobs first."
-msgstr "Αυτό το περιεχόμενο μεταφράζεται αυτόματα. Εάν θέλετε να κάνετε κάτι διαφορετικό με αυτό, ακυρώστε πρώτα τις εργασίες μετάφρασης."
+msgstr "Αυτό το περιεχόμενο μεταφράζεται αυτόματα. Αν θέλετε να κάνετε κάτι διαφορετικό με αυτό, ακυρώστε πρώτα τις εργασίες μετάφρασης."
 
 #: src/js/ate/enable/init.js:53
 msgid "Connecting to WPML’s Advanced Translation Editor"
-msgstr "Σύνδεση με τον Προηγμένο Επεξεργαστή Μετάφρασης του WPML"
+msgstr "Σύνδεση με το πρόγραμμα επεξεργασίας σύνθετων μεταφράσεων του WPML"
 
 #: src/js/ate/enable/init.js:67
 msgid "Try again"
-msgstr "Δοκιμάστε ξανά"
+msgstr "Προσπαθήστε ξανά"
 
 #: src/js/ate/review/init.js:17
 msgid "You don't have the rights to review this language"
-msgstr "Δεν έχετε τα δικαιώματα για να αναθεωρήσετε αυτή τη γλώσσα"
+msgstr "Δεν έχετε τα δικαιώματα να ελέγξετε αυτήν τη γλώσσα"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:33
 msgid "translations"
@@ -31,11 +33,11 @@ msgstr "μεταφράσεις"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:34
 msgid "left in the queue"
-msgstr "απομένουν στην ουρά"
+msgstr "που απομένουν στην ουρά"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:43
 msgid "Translation on hold"
-msgstr "Μετάφραση σε αναμονή"
+msgstr "Η μετάφραση σε αναμονή"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:45
 #: src/js/ate/status-bar/components/constants.js:16
@@ -54,6 +56,13 @@ msgstr "%d λεπτά απομένουν"
 msgid "less than 1 min remaining"
 msgstr "λιγότερο από 1 λεπτό απομένει"
 
+#: src/js/ate/status-bar/components/constants.js:105
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] "%d μετάφραση σε αναμονή για έλεγχο"
+msgstr[1] "%d μεταφράσεις σε αναμονή για έλεγχο"
+
 #: src/js/ate/status-bar/components/constants.js:14
 #: src/js/ate/translate-everything/components/Status/index.js:50
 msgid "Automatic translation status"
@@ -61,86 +70,83 @@ msgstr "Κατάσταση αυτόματης μετάφρασης"
 
 #: src/js/ate/status-bar/components/constants.js:18
 msgid "Translate Everything Automatically"
-msgstr "Αυτόματη Μετάφραση Όλων"
+msgstr "Μετάφραση όλων αυτόματα"
 
 #: src/js/ate/status-bar/components/constants.js:20
 msgid "Translate Everything Automatically is active"
-msgstr "Η Αυτόματη Μετάφραση Όλων είναι ενεργή"
-
-#: src/js/ate/status-bar/components/constants.js:22
-msgid "Translate Everything Automatically is paused"
-msgstr "Η Αυτόματη Μετάφραση Όλων έχει τεθεί σε παύση"
+msgstr "Η αυτόματη μετάφραση όλων είναι ενεργή"
 
 #: src/js/ate/status-bar/components/constants.js:24
-msgid "Translate Everything Automatically is stopped"
-msgstr "Η Αυτόματη Μετάφραση Όλων έχει σταματήσει"
+msgid "Translate Everything Automatically is paused — payment required"
+msgstr "Η αυτόματη μετάφραση όλων είναι σε παύση — απαιτείται πληρωμή"
 
 #: src/js/ate/status-bar/components/constants.js:26
-msgid "Out of Credits for Automatic Translation"
-msgstr "Εξαντλήθηκαν οι Μονάδες για Αυτόματη Μετάφραση"
+msgid "Automatic translation is paused — payment required"
+msgstr "Η αυτόματη μετάφραση είναι σε παύση — απαιτείται πληρωμή"
 
-#: src/js/ate/status-bar/components/constants.js:29
-msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgstr[0] "Έχετε <b>1</b> προπληρωμένη μονάδα μετάφρασης στον λογαριασμό σας στο wpml.org. Αναθέστε αυτές τις μονάδες στον ιστότοπό σας για να ξεκινήσετε τη χρήση αυτόματης μετάφρασης"
-msgstr[1] "Έχετε <b>%s</b> προπληρωμένες μονάδες μετάφρασης στον λογαριασμό σας στο wpml.org. Αναθέστε αυτές τις μονάδες στον ιστότοπό σας για να ξεκινήσετε τη χρήση αυτόματης μετάφρασης"
+#: src/js/ate/status-bar/components/constants.js:28
+msgid ""
+"We couldn’t process your payment. Click “Pay now” to complete the "
+"transaction and resume automatic translation."
+msgstr "Δεν μπορέσαμε να επεξεργαστούμε την πληρωμή σας. Κάντε κλικ στο “Πληρωμή τώρα” για να ολοκληρώσετε τη συναλλαγή και να συνεχίσετε την αυτόματη μετάφραση."
 
-#: src/js/ate/status-bar/components/constants.js:41
+#: src/js/ate/status-bar/components/constants.js:32
+msgid "Translate Everything automatically is paused - not enough credits"
+msgstr "Η αυτόματη μετάφραση όλων είναι σε παύση - δεν υπάρχουν αρκετές πιστώσεις"
+
+#: src/js/ate/status-bar/components/constants.js:34
+msgid "Automatic translation is paused — not enough credits"
+msgstr "Η αυτόματη μετάφραση είναι σε παύση — δεν υπάρχουν αρκετές πιστώσεις"
+
+#: src/js/ate/status-bar/components/constants.js:36
+msgid "Translation will resume automatically once you assign more credits."
+msgstr "Η μετάφραση θα συνεχιστεί αυτόματα μόλις εκχωρήσετε περισσότερες πιστώσεις."
+
+#: src/js/ate/status-bar/components/constants.js:38
+msgid "You have %s prepaid translation credit in your WPML account. Assign these credits to this site to resume automatic translation"
+msgid_plural "You have %s prepaid translation credits in your WPML account. Assign these credits to this site to resume automatic translation"
+msgstr[0] "Έχετε %s προπληρωμένη πίστωση μετάφρασης στον λογαριασμό σας στο WPML. Εκχωρήστε αυτές τις πιστώσεις σε αυτόν τον ιστότοπο για να συνεχίσετε την αυτόματη μετάφραση"
+msgstr[1] "Έχετε %s προπληρωμένες πιστώσεις μετάφρασης στον λογαριασμό σας στο WPML. Εκχωρήστε αυτές τις πιστώσεις σε αυτόν τον ιστότοπο για να συνεχίσετε την αυτόματη μετάφραση"
+
+#: src/js/ate/status-bar/components/constants.js:72
 #: src/js/ate/status-bar/components/sending/index.js:10
 msgid "Preparing content for translation"
 msgstr "Προετοιμασία περιεχομένου για μετάφραση"
 
-#: src/js/ate/status-bar/components/constants.js:43
+#: src/js/ate/status-bar/components/constants.js:74
 #: src/js/ate/status-bar/components/sending/index.js:9
 msgid "Preparing more content for translation"
 msgstr "Προετοιμασία περισσότερου περιεχομένου για μετάφραση"
 
-#: src/js/ate/status-bar/components/constants.js:45
-msgid "An error occured, fix it to continue."
-msgstr "Παρουσιάστηκε ένα σφάλμα, διορθώστε το για να συνεχίσετε."
-
-#: src/js/ate/status-bar/components/constants.js:47
-msgid ""
-"There is an issue with automatic translation that needs your attention. Fix "
-"it to continue."
-msgstr "Υπάρχει ένα πρόβλημα με την αυτόματη μετάφραση που χρειάζεται την προσοχή σας. Διορθώστε το για να συνεχίσετε."
-
-#: src/js/ate/status-bar/components/constants.js:50
+#: src/js/ate/status-bar/components/constants.js:77
 #. %s is replaced by the name of the language.
 msgid ""
 "Your default language, %s, must be mapped to a supported language in order "
 "to use automatic translation."
 msgstr "Η προεπιλεγμένη γλώσσα σας, %s, πρέπει να αντιστοιχιστεί σε μια υποστηριζόμενη γλώσσα για να χρησιμοποιήσετε την αυτόματη μετάφραση."
 
-#: src/js/ate/status-bar/components/constants.js:58
+#: src/js/ate/status-bar/components/constants.js:85
 #. %s is replaced by the language(s) name.
 msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
 msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
 msgstr[0] "Η γλώσσα σας, %s, πρέπει να αντιστοιχιστεί σε μια υποστηριζόμενη γλώσσα για να χρησιμοποιήσετε την αυτόματη μετάφραση."
 msgstr[1] "Οι ακόλουθες γλώσσες στον ιστότοπό σας πρέπει να αντιστοιχιστούν σε μια υποστηριζόμενη γλώσσα για να χρησιμοποιήσετε την αυτόματη μετάφραση: %s"
 
-#: src/js/ate/status-bar/components/constants.js:68
+#: src/js/ate/status-bar/components/constants.js:95
 msgid ""
 "Content in those languages: %s, cannot be automatically translated unless "
 "you map them to a language that's different from the default."
-msgstr "Το περιεχόμενο σε αυτές τις γλώσσες: %s, δεν μπορεί να μεταφραστεί αυτόματα εκτός αν τις αντιστοιχίσετε σε μια γλώσσα διαφορετική από την προεπιλεγμένη."
-
-#: src/js/ate/status-bar/components/constants.js:78
-#. %d is replaced by the number of jobs to review.
-msgid "%d translation waiting for review"
-msgid_plural "%d translations waiting for review"
-msgstr[0] "%d μετάφραση αναμένει αναθεώρηση"
-msgstr[1] "%d μεταφράσεις αναμένουν αναθεώρηση"
+msgstr "Το περιεχόμενο σε αυτές τις γλώσσες: %s, δεν μπορεί να μεταφραστεί αυτόματα, εκτός αν τις αντιστοιχίσετε σε μια γλώσσα διαφορετική από την προεπιλεγμένη."
 
 #: src/js/ate/status-bar/components/credit/index.js:100
 msgid "Account credits used"
-msgstr "Χρησιμοποιημένες μονάδες λογαριασμού"
+msgstr "Χρησιμοποιήθηκαν πιστώσεις λογαριασμού"
 
 #: src/js/ate/status-bar/components/credit/index.js:110
 msgid ""
 "Once you’ve used all your prepaid credits, we’ll invoice you for any "
 "additional credits you use after the end of the month"
-msgstr "Αφού χρησιμοποιήσετε όλες τις προπληρωμένες μονάδες σας, θα σας τιμολογήσουμε για τυχόν επιπλέον μονάδες που χρησιμοποιείτε μετά το τέλος του μήνα"
+msgstr "Μόλις χρησιμοποιήσετε όλες τις προπληρωμένες πιστώσεις σας, θα σας τιμολογήσουμε για τυχόν επιπλέον πιστώσεις που θα χρησιμοποιήσετε μετά το τέλος του μήνα"
 
 #: src/js/ate/status-bar/components/credit/index.js:115
 msgid "Payment limit:"
@@ -148,22 +154,22 @@ msgstr "Όριο πληρωμής:"
 
 #: src/js/ate/status-bar/components/credit/index.js:116
 msgid "%s credits"
-msgstr "%s μονάδες"
+msgstr "%s πιστώσεις"
 
 #: src/js/ate/status-bar/components/credit/index.js:119
 msgid "Credits used:"
-msgstr "Χρησιμοποιημένες μονάδες:"
+msgstr "Χρησιμοποιημένες πιστώσεις:"
 
 #: src/js/ate/status-bar/components/credit/index.js:123
 msgid "Credits left:"
-msgstr "Εναπομείνασες μονάδες:"
+msgstr "Απομένουσες πιστώσεις:"
 
 #: src/js/ate/status-bar/components/credit/index.js:133
 msgid ""
 "The number of credit you will receive an invoice for at the end of the "
 "month. View your pay-as-you-go details in your site’s automatic translation "
 "settings."
-msgstr "Ο αριθμός των μονάδων για τις οποίες θα λάβετε τιμολόγιο στο τέλος του μήνα. Δείτε τις λεπτομέρειες πληρωμής-ανά-χρήση στις ρυθμίσεις αυτόματης μετάφρασης του ιστοτόπου σας."
+msgstr "Ο αριθμός των πιστώσεων για τις οποίες θα λάβετε τιμολόγιο στο τέλος του μήνα. Δείτε τις λεπτομέρειες πληρωμής ανά χρήση στις ρυθμίσεις αυτόματης μετάφρασης του ιστότοπού σας."
 
 #: src/js/ate/status-bar/components/credit/index.js:139
 msgid "Calculating"
@@ -171,36 +177,51 @@ msgstr "Υπολογισμός"
 
 #: src/js/ate/status-bar/components/credit/index.js:59
 msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
-msgstr "Εναπομείνασες προπληρωμένες μονάδες που έχουν ανατεθεί σε αυτόν τον ιστότοπο στο WPML.org."
+msgstr "Απομένουσες προπληρωμένες πιστώσεις που έχουν εκχωρηθεί σε αυτόν τον ιστότοπο στο WPML.org."
 
 #: src/js/ate/status-bar/components/credit/index.js:73
 msgid "Prepaid credits left"
-msgstr "Εναπομείνασες προπληρωμένες μονάδες"
+msgstr "Προπληρωμένες πιστώσεις που απομένουν"
 
 #: src/js/ate/status-bar/components/credit/index.js:99
 msgid "Pay-as-you-go credits used"
-msgstr "Χρησιμοποιημένες μονάδες πληρωμής-ανά-χρήση"
+msgstr "Χρησιμοποιημένες πιστώσεις πληρωμής ανά χρήση"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:25
 msgid "Your site doesn't meet WPML's minimum requirements"
 msgstr "Ο ιστότοπός σας δεν πληροί τις ελάχιστες απαιτήσεις του WPML"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:31
-#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
 msgid "Fix it"
-msgstr "Διόρθωση"
+msgstr "Διορθώστε το"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:17
 msgid "Stop"
 msgstr "Διακοπή"
 
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+#: src/js/ate/status-icons/StatusUpdater.js:133
+msgid "Pay now"
+msgstr "Πληρωμή τώρα"
+
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:34
-msgid "Assign credits now"
-msgstr "Ανάθεση μονάδων τώρα"
+#: src/js/ate/status-icons/StatusUpdater.js:134
+msgid "Get more credits"
+msgstr "Αποκτήστε περισσότερες πιστώσεις"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:42
+msgid "Assign credits"
+msgstr "Εκχωρήστε πιστώσεις"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:8
 msgid "Resume"
 msgstr "Συνέχιση"
+
+#: src/js/ate/status-icons/StatusUpdater.js:159
+msgid ""
+"This translation couldn't be completed due to an unexpected error. Please "
+"try resending it."
+msgstr "Αυτή η μετάφραση δεν ήταν δυνατό να ολοκληρωθεί λόγω ενός μη αναμενόμενου σφάλματος. Παρακαλούμε δοκιμάστε να την ξαναστείλετε."
 
 #: src/js/ate/status-icons/StatusUpdater.js:80
 msgid "Refreshing translation status"
@@ -214,7 +235,7 @@ msgstr "Διαβάστε περισσότερα για το πώς να μετα
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
 msgid "Let's Start Translating!"
-msgstr "Ας Ξεκινήσουμε τη Μετάφραση!"
+msgstr "Ας ξεκινήσουμε τη μετάφραση!"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
 msgid ""
@@ -230,7 +251,7 @@ msgstr "Αλλάξτε τις <a>ρυθμίσεις αυτόματης μετά�
 
 #: src/js/ate/translate-everything/components/Status/index.js:115
 msgid "Read more about translating your site automatically."
-msgstr "Διαβάστε περισσότερα για την αυτόματη μετάφραση του ιστοτόπου σας."
+msgstr "Διαβάστε περισσότερα για την αυτόματη μετάφραση του ιστότοπού σας."
 
 #: src/js/ate/translate-everything/components/Status/index.js:49
 msgid "Your site is being automatically translated!"
@@ -242,7 +263,7 @@ msgstr "Υπολογισμός..."
 
 #: src/js/ate/translate-everything/components/Status/index.js:88
 msgid "Do not close WP admin!"
-msgstr "Μην κλείσετε το διαχειριστικό περιβάλλον του WP!"
+msgstr "Μην κλείσετε το WP admin!"
 
 #: src/js/ate/translate-everything/components/Status/index.js:96
 msgid "The number of translations"

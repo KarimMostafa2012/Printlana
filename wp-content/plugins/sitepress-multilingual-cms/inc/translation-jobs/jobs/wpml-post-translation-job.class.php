@@ -90,7 +90,7 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 				if ( $field_data ) {
 					$wpdb->update( $wpdb->prefix . 'icl_translate',
 						array(
-							'field_data_translated' => FieldCompression::compress( $field_data ),
+							'field_data_translated' => FieldCompression::compressAndTrack( $field_data, true, $job_id ),
 							'field_finished'        => 1
 						),
 						array( 'tid' => $element->tid )
@@ -274,12 +274,12 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 			} else {
 				$wpdb->update(
 					$translate_table,
-					[ 'field_data_translated' => FieldCompression::compress( $term->name, false ), 'field_finished' => 1 ],
+					[ 'field_data_translated' => FieldCompression::compressAndTrack( $term->name, false, $job_id ), 'field_finished' => 1 ],
 					[ 'field_type' => 't_' . $term->original_term_id, 'job_id' => $job_id ]
 				);
 				$wpdb->update(
 					$translate_table,
-					[ 'field_data_translated' => FieldCompression::compress( $term->description, false ), 'field_finished' => 1 ],
+					[ 'field_data_translated' => FieldCompression::compressAndTrack( $term->description, false, $job_id ), 'field_finished' => 1 ],
 					[ 'field_type' => 'tdesc_' . $term->original_term_id, 'job_id' => $job_id ]
 				);
 
@@ -287,7 +287,7 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 				foreach ( $meta_values as $meta ) {
 					$wpdb->update(
 						$translate_table,
-						[ 'field_finished' => 1, 'field_data_translated' => FieldCompression::compress( $meta->meta_value, false )  ],
+						[ 'field_finished' => 1, 'field_data_translated' => FieldCompression::compressAndTrack( $meta->meta_value, false, $job_id )  ],
 						[ 'job_id' => $job_id, 'field_type' => 'tfield-' . $meta->meta_key . '-' . $term->original_term_id ]
 					);
 				}

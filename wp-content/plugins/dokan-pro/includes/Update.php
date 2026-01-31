@@ -5,6 +5,8 @@ namespace WeDevs\DokanPro;
 use WeDevs\DokanPro\Dependencies\Appsero\Client;
 use WeDevs\DokanPro\Dependencies\Appsero\License;
 use WeDevs\DokanPro\Dependencies\Appsero\Updater;
+use WeDevs\DokanPro\Admin\License\AdminMenu;
+use WeDevs\DokanPro\Admin\License\RestController;
 
 /**
  * Dokan Update class
@@ -28,12 +30,20 @@ class Update {
     private $product_id = 'dokan-pro';
 
     /**
+     * Appsero Client Instance
+     *
+     * @var Client
+     */
+    private $client;
+
+    /**
      * Initialize the class
      */
     public function __construct() {
         $this->init_appsero();
 
-        add_action( 'init', [ $this, 'add_menu_page' ] );
+        // Register License admin route (non-module)
+        ( new AdminMenu() )->register_hooks();
 
         if ( is_multisite() ) {
             if ( is_main_site() ) {
@@ -44,6 +54,8 @@ class Update {
         }
 
         add_action( 'in_plugin_update_message-' . plugin_basename( DOKAN_PRO_FILE ), [ $this, 'plugin_update_message' ] );
+
+        add_action( 'rest_api_init', [ $this, 'register_license_routes' ] );
     }
 
     /**
@@ -52,10 +64,10 @@ class Update {
      * @return void
      */
     public function init_appsero() {
-        $client = new Client( '8f0a1669-b8db-46eb-9fc4-02ac5bfe89e7', 'Dokan Pro', DOKAN_PRO_FILE );
+        $this->client = new Client( '8f0a1669-b8db-46eb-9fc4-02ac5bfe89e7', 'Dokan Pro', DOKAN_PRO_FILE );
 
         // track plugin install
-        $insights = $client->insights();
+        $insights = $this->client->insights();
 
         if ( false === $insights->tracking_allowed() ) {
             $insights->optin();
@@ -77,7 +89,7 @@ class Update {
 
         $insights->hide_notice()->init_plugin();
 
-        $this->license = $client->license();
+        $this->license = $this->client->license();
 
         // just to be safe if old Appsero SDK is being used
         if ( method_exists( $this->license, 'set_option_key' ) ) {
@@ -85,25 +97,7 @@ class Update {
         }
 
         // Active automatic updater
-        Updater::init( $client );
-    }
-
-    /**
-     * Add the menu page for the license
-     *
-     * @return void
-     */
-    public function add_menu_page() {
-        $args = [
-            'type'        => 'submenu',
-            'menu_title'  => __( 'License', 'dokan' ),
-            'page_title'  => __( 'Dokan Pro License', 'dokan' ),
-            'capability'  => 'manage_options',
-            'parent_slug' => 'dokan',
-            'menu_slug'   => 'dokan_updates',
-        ];
-
-        $this->license->add_settings_page( $args );
+        Updater::init( $this->client );
     }
 
     /**
@@ -122,13 +116,13 @@ class Update {
             'type'        => 'alert',
             'title'       => __( 'Activate Dokan Pro License', 'dokan' ),
             // translators: %1$s is the URL to the Dokan Pro license activation page.
-            'description' => sprintf( __( 'Please <a href="%1$s">enter</a> your valid <strong>Dokan Pro</strong> plugin license key to unlock more features, premium support and future updates.', 'dokan' ), admin_url( 'admin.php?page=dokan_updates' ) ),
+            'description' => sprintf( __( 'Please <a href="%1$s">enter</a> your valid <strong>Dokan Pro</strong> plugin license key to unlock more features, premium support and future updates.', 'dokan' ), admin_url( 'admin.php?page=dokan-dashboard#/license' ) ),
             'priority'    => 1,
             'actions'     => [
                 [
                     'type'   => 'primary',
                     'text'   => __( 'Activate License', 'dokan' ),
-                    'action' => admin_url( 'admin.php?page=dokan_updates' ),
+                    'action' => admin_url( 'admin.php?page=dokan-dashboard#/license' ),
                 ],
             ],
             'scope' => 'global',
@@ -153,7 +147,7 @@ class Update {
 
         $upgrade_notice = sprintf(
             '</p><p class="dokan-pro-plugin-upgrade-notice" style="background: #dc4b02;color: #fff;padding: 10px;">Please <a href="%s" target="_blank">activate</a> your license key for getting regular updates and support',
-            admin_url( 'admin.php?page=dokan_updates' )
+            admin_url( 'admin.php?page=dokan-dashboard#/license' )
         );
 
         echo apply_filters( $this->product_id . '_in_plugin_update_message', wp_kses_post( $upgrade_notice ) );
@@ -246,5 +240,16 @@ class Update {
         $license_data = $this->license->get_license();
 
         return ! empty( $license_data['key'] );
+    }
+
+    /**
+     * Registers the license-related REST API routes.
+     *
+     * @since 4.2.0
+     *
+     * @return void
+     */
+    public function register_license_routes() {
+        ( new RestController( $this->license, $this->client ) )->register_routes();
     }
 }

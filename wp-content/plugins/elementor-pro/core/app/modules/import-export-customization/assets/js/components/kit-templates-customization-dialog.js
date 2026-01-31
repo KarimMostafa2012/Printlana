@@ -1,6 +1,6 @@
 import { Stack } from '@elementor/ui';
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as PropTypes from 'prop-types';
 import { SettingSection } from './customization-setting-section';
 import { KitCustomizationDialog } from './kit-customization-dialog';
@@ -8,6 +8,17 @@ import { UpgradeNoticeBanner } from './upgrade-notice-banner';
 import { isHighTier } from '../hooks/use-tier';
 import { ThemeBuilderCustomization } from './theme-builder-customization';
 import { UpgradeVersionBanner } from './upgrade-version-banner';
+import { transformValueForAnalytics } from '../utils/analytics-transformer';
+
+const transformAnalyticsData = ( payload ) => {
+	const transformed = {};
+
+	for ( const [ key, value ] of Object.entries( payload ) ) {
+		transformed[ key ] = transformValueForAnalytics( key, value, [] );
+	}
+
+	return transformed;
+};
 
 export const hasTemplatesForExportGroup = ( exportGroup, manifest ) => {
 	if ( ! manifest?.templates ) {
@@ -35,7 +46,6 @@ export function KitTemplatesCustomizationDialog( {
 	isOldElementorVersion,
 } ) {
 	const initialState = data.includes.includes( 'templates' );
-	const unselectedValues = useRef( data.analytics?.customization?.templates || [] );
 
 	const getState = useCallback( ( parentInitialState ) => {
 		if ( ! data.includes.includes( 'templates' ) ) {
@@ -99,10 +109,6 @@ export function KitTemplatesCustomizationDialog( {
 	}, [ open ] );
 
 	const handleToggleChange = ( settingKey, isChecked ) => {
-		unselectedValues.current = isChecked
-			? unselectedValues.current.filter( ( val ) => settingKey !== val )
-			: [ ...unselectedValues.current, settingKey ];
-
 		setTemplates( ( prev ) => ( {
 			...prev,
 			[ settingKey ]: {
@@ -119,7 +125,8 @@ export function KitTemplatesCustomizationDialog( {
 			handleClose={ handleClose }
 			handleSaveChanges={ () => {
 				const hasEnabledCustomization = templates.siteTemplates?.enabled || templates.themeBuilder?.enabled || templates.globalWidgets?.enabled;
-				handleSaveChanges( 'templates', templates, hasEnabledCustomization, unselectedValues.current );
+				const transformedAnalytics = transformAnalyticsData( templates );
+				handleSaveChanges( 'templates', templates, hasEnabledCustomization, transformedAnalytics );
 			} }
 			minHeight="auto"
 		>

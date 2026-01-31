@@ -13,6 +13,7 @@ use function \WPML\FP\invoke;
 use WPML\TM\Jobs\Utils;
 use WPML\FP\Relation;
 use WPML\FP\Obj;
+use WPML\TM\Jobs\JobLog;
 
 /**
  * Class WPML_Element_Translation_Package
@@ -100,13 +101,21 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 		if ( apply_filters( 'wpml_is_external', false, $post ) ) {
 			/** @var stdClass $post */
 			$original_id   = isset( $post->post_id ) ? $post->post_id : $post->ID;
+
+			JobLog::add( 'Creating external translation package for post `' . $original_id . '`' );
+
 			$type          = self::PACKAGE_TYPE_EXTERNAL;
 			$cachedPackage = $this->getCached( $original_id, $type, $isOriginal );
 			if ( null !== $cachedPackage ) {
+				JobLog::add( 'Found cached package for post `' . $original_id . '`' );
 				return $cachedPackage;
 			}
 
 			$post_contents = (array) $post->string_data;
+			JobLog::add(
+				'Creating post contents in translation package for post `' . $original_id . '`',
+				$post_contents
+			);
 
 			if ( isset( $post->title ) ) {
 				$package['title'] = apply_filters( 'wpml_tm_external_translation_job_title', $post->title, $original_id );
@@ -121,9 +130,13 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 			}
 		} else {
 			$original_id   = $post->ID;
+
+			JobLog::add( 'Creating translation package for post `' . $original_id . '`' );
+
 			$type          = self::PACKAGE_TYPE_POST;
 			$cachedPackage = $this->getCached( $original_id, $type, $isOriginal );
 			if ( null !== $cachedPackage ) {
+				JobLog::add( 'Found cached package for post `' . $original_id . '`' );
 				return $cachedPackage;
 			}
 
@@ -153,6 +166,10 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 			}
 
 			$post_contents = array_merge( $post_contents, $this->get_taxonomy_fields( $post ) );
+			JobLog::add(
+				'Creating post contents in translation package for post `' . $original_id . '`',
+				$post_contents
+			);
 		}
 
 		$package['contents']['original_id'] = array(
@@ -238,8 +255,9 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 	 * @param array $translation_package
 	 * @param int   $job_id
 	 * @param array $prev_translation
+	 * @param bool  $addJobLogs
 	 */
-	public function save_package_to_job( array $translation_package, $job_id, $prev_translation ) {
+	public function save_package_to_job( array $translation_package, $job_id, $prev_translation, $addJobLogs = false ) {
 		global $wpdb;
 
 		$show = $wpdb->hide_errors();
@@ -275,10 +293,10 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 				$job_translate['field_format'],
 				$job_translate['field_translate'],
         $job_translate['field_format'] === 'base64' ?
-          FieldCompression::compress( $job_translate['field_data'] ) :
+          FieldCompression::compressAndTrack( $job_translate['field_data'], true, $job_translate['job_id'] ) :
           $job_translate['field_data'],
         $job_translate['field_format'] === 'base64' ?
-          FieldCompression::compress( $job_translate['field_data_translated'] ) :
+          FieldCompression::compressAndTrack( $job_translate['field_data_translated'], true, $job_translate['job_id'] ) :
           $job_translate['field_data_translated'],
 				$job_translate['field_finished']
 			);
@@ -290,6 +308,9 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 				'(job_id, content_id, field_type, field_wrap_tag, field_format, field_translate, field_data, field_data_translated, field_finished) ' .
 				'VALUES ' . implode( ', ', $inserts )
 			);
+			if ( $addJobLogs ) {
+				JobLog::add( 'New icl_translate records created', $inserts );
+			}
 		}
 
 		$wpdb->show_errors( $show );
@@ -588,10 +609,10 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 
 				// $getMeta :: int → string → object
 				$getMeta = curryN(
-					2,
-					function ( $termId, $key ) {
+					3,
+					function ( $termId, $termTaxonomyId, $key ) {
 						return (object) [
-							'id'   => $termId,
+							'id'   => $termTaxonomyId,
 							'key'  => $key,
 							'meta' => get_term_meta( $termId, $key ),
 						];
@@ -610,7 +631,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 
 				// $get :: [metakeys] → [[fieldId, $fieldVal]]
 				$get = pipe(
-					Fns::map( $getMeta( $term->term_taxonomy_id ) ),
+					Fns::map( $getMeta( $term->term_id, $term->term_taxonomy_id ) ),
 					Fns::filter( $hasMeta ),
 					Fns::map( $makeField )
 				);

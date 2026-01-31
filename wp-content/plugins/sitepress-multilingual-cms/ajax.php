@@ -2,6 +2,7 @@
 
 use WPML\UrlHandling\WPLoginUrlConverter;
 use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
 
 /**
  * @package wpml-core
@@ -244,8 +245,37 @@ switch ( $request ) {
 		$unlocked_options = ! empty( $_POST['icl_sync_tax_unlocked'] ) ? $_POST['icl_sync_tax_unlocked'] : [];
 		/** @var WPML_Settings_Helper $settings_helper */
 		$settings_helper = wpml_load_settings_helper();
+
+		// Get previous unlocked settings to detect newly unlocked items
+		$previous_unlocked = $sitepress->get_setting( 'taxonomies_unlocked_option', [] );
+
 		$settings_helper->update_taxonomy_unlocked_settings( $unlocked_options );
 		$settings_helper->update_taxonomy_sync_settings( $new_options );
+
+		// Capture PostHog event for newly unlocked taxonomies
+		foreach ( $unlocked_options as $slug => $is_unlocked ) {
+			$was_previously_unlocked = isset( $previous_unlocked[ $slug ] ) ? (int) $previous_unlocked[ $slug ] : 0;
+			$is_now_unlocked         = (int) $is_unlocked;
+
+			// Only capture event if item was just unlocked (changed from 0 to 1)
+			if ( $is_now_unlocked === 1 && $was_previously_unlocked === 0 ) {
+				$taxonomy_object = get_taxonomy( $slug );
+
+				if ( $taxonomy_object ) {
+					$event_props = [
+						'type'          => 'taxonomy',
+						'slug'          => $slug,
+						'name'          => isset( $taxonomy_object->label ) ? $taxonomy_object->label : $slug,
+						'singular_name' => isset( $taxonomy_object->labels->singular_name ) ? $taxonomy_object->labels->singular_name : $slug,
+					];
+
+					\WPML\PostHog\Event\CaptureEvent::capture(
+						( new EventInstanceService() )->getTaxonomyUnlockedEvent( $event_props )
+					);
+				}
+			}
+		}
+
 		echo '1|';
 		break;
 	case 'icl_custom_posts_sync_options':
@@ -255,9 +285,38 @@ switch ( $request ) {
 		$unlocked_options = ! empty( $_POST['icl_sync_custom_posts_unlocked'] ) ? $_POST['icl_sync_custom_posts_unlocked'] : [];
 		/** @var WPML_Settings_Helper $settings_helper */
 		$settings_helper = wpml_load_settings_helper();
+
+		// Get previous unlocked settings to detect newly unlocked items
+		$previous_unlocked = $sitepress->get_setting( 'custom_posts_unlocked_option', [] );
+
 		$settings_helper->update_cpt_unlocked_settings( $unlocked_options );
 		$settings_helper->update_cpt_sync_settings( $new_options );
 		$customPostTypes = ( new WPML_Post_Types( $sitepress ) )->get_translatable_and_readonly();
+
+		// Capture PostHog event for newly unlocked post types
+		foreach ( $unlocked_options as $slug => $is_unlocked ) {
+			$was_previously_unlocked = isset( $previous_unlocked[ $slug ] ) ? (int) $previous_unlocked[ $slug ] : 0;
+			$is_now_unlocked         = (int) $is_unlocked;
+
+			// Only capture event if item was just unlocked (changed from 0 to 1)
+			if ( $is_now_unlocked === 1 && $was_previously_unlocked === 0 ) {
+				$post_type_object = get_post_type_object( $slug );
+
+				if ( $post_type_object ) {
+					$event_props = [
+						'type'          => 'post_type',
+						'slug'          => $slug,
+						'name'          => isset( $post_type_object->labels->name ) ? $post_type_object->labels->name : $slug,
+						'singular_name' => isset( $post_type_object->labels->singular_name ) ? $post_type_object->labels->singular_name : $slug,
+					];
+
+					\WPML\PostHog\Event\CaptureEvent::capture(
+						( new EventInstanceService() )->getPostTypeUnlockedEvent( $event_props )
+					);
+				}
+			}
+		}
+
 		echo '1|';
 		break;
 	case 'copy_from_original':
@@ -492,11 +551,6 @@ switch ( $request ) {
 		break;
 	// inc/translation-proxy/wpml-pro-translation.class.php
 	case 'set_pickup_mode':
-		user_is_manager_or_exit();
-		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
-		break;
-	//inc/upgrade-functions/upgrade-2.0.0.php
-	case 'wpml_upgrade_2_0_0':
 		user_is_manager_or_exit();
 		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
 		break;

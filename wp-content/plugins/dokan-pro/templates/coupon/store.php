@@ -3,8 +3,8 @@
         <span class="inside">
             <div class="coupon-title"><?php printf( __( '%s Discount', 'dokan' ), $coupon_amount_formatted ); ?></div>
             <div class="coupon-body">
-                <?php if ( !empty( $coupon->post_content ) ) { ?>
-                    <span class="coupon-details"><?php echo esc_html( $coupon->post_content ); ?></span>
+                <?php if ( ! empty( $coupon_description ) ) { ?>
+                    <span class="coupon-details"><?php echo esc_html( $coupon_description ); ?></span>
                 <?php } ?>
                 <span class="coupon-code"><?php printf( __( 'Coupon Code: <strong>%s</strong>', 'dokan' ), $coupon->post_title ); ?></span>
 

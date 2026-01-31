@@ -21,16 +21,15 @@ class WCML_WC_Gateways {
 	/** @var SitePress|NullSitePress */
 	private $sitepress;
 
-	/**
-	 * @param woocommerce_wpml        $woocommerce_wpml
-	 * @param SitePress|NullSitePress $sitepress
-	 */
 	public function __construct( woocommerce_wpml $woocommerce_wpml, ISitePress $sitepress ) {
+		/* @phpstan-ignore assign.propertyType */
 		$this->sitepress        = $sitepress;
 		$this->woocommerce_wpml = $woocommerce_wpml;
 
+		/* @phpstan-ignore method.notFound */
 		$this->current_language = $this->sitepress->get_current_language();
 		if ( 'all' === $this->current_language ) {
+			/* @phpstan-ignore method.notFound */
 			$this->current_language = $this->sitepress->get_default_language();
 		}
 	}
@@ -49,6 +48,7 @@ class WCML_WC_Gateways {
 	public function on_init_hooks() {
 		add_filter( 'woocommerce_gateway_title', [ $this, 'translate_gateway_title' ], 10, 2 );
 		add_filter( 'woocommerce_gateway_description', [ $this, 'translate_gateway_description' ], 10, 2 );
+		add_filter( 'woocommerce_paypal_payments_gateway_description', [ $this, 'translate_paypal_payments_gateway_description' ], 10, 2 );
 
 		if ( WcAdminPages::isPaymentSettings() ) {
 			$this->load_bacs_gateway_currency_selector_hooks();
@@ -108,28 +108,25 @@ class WCML_WC_Gateways {
 	 * @param WC_Payment_Gateway $gateway
 	 */
 	public function payment_gateways_filters( $gateway ) {
-
+		/* @phpstan-ignore isset.property */
 		if ( isset( $gateway->id ) ) {
 			$this->translate_gateway_strings( $gateway );
 		}
 
 	}
 
-	/**
-	 * @param WC_Payment_Gateway $gateway
-	 */
-	public function translate_gateway_strings( $gateway ) {
-
+	public function translate_gateway_strings( WC_Payment_Gateway $gateway ) {
+		// @todo debug
+		/* @phpstan-ignore isset.property */
 		if ( isset( $gateway->enabled ) && 'no' !== $gateway->enabled ) {
-
 			if ( isset( $gateway->instructions ) ) {
 				$gateway->instructions = $this->translate_gateway_instructions( $gateway->instructions, $gateway->id );
 			}
-
+			/* @phpstan-ignore isset.property */
 			if ( isset( $gateway->description ) ) {
 				$gateway->description = $this->translate_gateway_description( $gateway->description, $gateway->id );
 			}
-
+			/* @phpstan-ignore isset.property */
 			if ( isset( $gateway->title ) ) {
 				$gateway->title = $this->translate_gateway_title( $gateway->title, $gateway->id );
 			}
@@ -139,6 +136,24 @@ class WCML_WC_Gateways {
 
 	public function translate_gateway_title( $title, $gateway_id ) {
 		return $this->get_translated_gateway_string( $title, $gateway_id, 'title' );
+	}
+
+	/**
+	 * @since WooCommerce PayPal Payments 3.3.0
+	 *
+	 * @param string $description Gateway description (already sanitized with wp_kses_post).
+	 * @param object $gateway     Gateway instance.
+	 * @see \WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway
+	 *
+	 * @return string
+	 */
+	public function translate_paypal_payments_gateway_description( $description, $gateway ) {
+		$id = \WPML\FP\Obj::prop( 'id', $gateway );
+		if ( is_null( $id ) ) {
+			return $description;
+		}
+
+		return $this->translate_gateway_description( $description, $id );
 	}
 
 	public function translate_gateway_description( $description, $gateway_id ) {

@@ -129,6 +129,8 @@ class WPML_Sync_Term_Meta_Action {
 			$wpdb->query( $insert_prepared );
 		}
 
+		wp_cache_delete( $term_id_to, 'term_meta' );
+
 		/**
 		 * @param int    $term_id_from The term_id of the source term.
 		 * @param int    $term_id_to   The term_id of the destination term.

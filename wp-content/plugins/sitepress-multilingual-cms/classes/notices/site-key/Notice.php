@@ -44,12 +44,12 @@ class Notice implements \IWPML_Action, \IWPML_Backend_Action {
 		if ( ! $this->isSiteKeyDefined() ) {
 			// Create the regular notice (for non-translation pages)
 			$regularNotice = $this->createNotice( self::NOTICE_ID, true );
-			$regularNotice->add_display_callback( [ $this, 'shouldDisplayRegularNotice' ] );
+			$regularNotice->add_display_callback( [ self::class, 'shouldDisplayRegularNotice' ] );
 			$this->notices->add_notice( $regularNotice );
 
 			// Create the translation page notice (non-dismissible)
 			$translationNotice = $this->createNotice( self::NOTICE_ID_TRANSLATION, false );
-			$translationNotice->add_display_callback( [ $this, 'shouldDisplayTranslationNotice' ] );
+			$translationNotice->add_display_callback( [ self::class, 'shouldDisplayTranslationNotice' ] );
 			$this->notices->add_notice( $translationNotice );
 		} else {
 			// Remove both notices if site key is defined
@@ -59,12 +59,12 @@ class Notice implements \IWPML_Action, \IWPML_Backend_Action {
 	}
 
 	private function isSiteKeyDefined(): bool {
-    // If the function is not defined, we cannot verify the site key, so we assume it is defined.
-    if ( ! function_exists( 'OTGS_Installer' ) ) {
-      return true;
-    }
+		// If the function is not defined, we cannot verify the site key, so we assume it is defined.
+		if ( ! function_exists( 'OTGS_Installer' ) ) {
+			return true;
+		}
 
-    return (bool) \OTGS_Installer()->get_site_key( 'wpml' );
+		return (bool) \OTGS_Installer()->get_site_key( 'wpml' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Notice implements \IWPML_Action, \IWPML_Backend_Action {
 		);
 	}
 
-	private function isWpmlPageResponsibleForTranslation(): bool {
+	private static function isWpmlPageResponsibleForTranslation(): bool {
 		return UIPage::isTranslationManagement( $_GET ) || UIPage::isTranslationQueue( $_GET );
 	}
 
@@ -133,8 +133,8 @@ class Notice implements \IWPML_Action, \IWPML_Backend_Action {
 	 *
 	 * @return bool
 	 */
-	public function shouldDisplayRegularNotice() {
-		return ! $this->isWpmlPageResponsibleForTranslation();
+	public static function shouldDisplayRegularNotice() {
+		return ! self::isWpmlPageResponsibleForTranslation();
 	}
 
 	/**
@@ -143,7 +143,7 @@ class Notice implements \IWPML_Action, \IWPML_Backend_Action {
 	 *
 	 * @return bool
 	 */
-	public function shouldDisplayTranslationNotice() {
-		return $this->isWpmlPageResponsibleForTranslation();
+	public static function shouldDisplayTranslationNotice() {
+		return self::isWpmlPageResponsibleForTranslation();
 	}
 }

@@ -14,6 +14,45 @@ class Jobs {
 	const LONGSTANDING_AT_ATE_SYNC_COUNT = 100;
 
 	/**
+	 * Returns the SQL fragment for LEFT JOIN with error data per job.
+	 *
+	 * @return string
+	 */
+	private function getLatestErrorJoinSQL() {
+		global $wpdb;
+
+		return "
+			LEFT JOIN {$wpdb->prefix}icl_translate_unsolvable_jobs latest_error 
+				ON latest_error.job_id = jobs.job_id
+		";
+	}
+
+	/**
+	 * Returns the SQL fragment for WHERE condition that excludes jobs with errors.
+	 *
+	 * Exclusion rules:
+	 * - Exclude jobs with SyncError (any counter value)
+	 * - Exclude jobs with DownloadError when counter >= 3
+	 * - Include jobs with other error types (not explicitly handled)
+	 * - Include jobs without errors
+	 *
+	 * @return string
+	 */
+	private function getErrorExclusionWhereSQL() {
+		return "
+			AND (
+				latest_error.job_id IS NULL
+				OR (
+					latest_error.error_type NOT IN ('SyncError', 'DownloadError')
+				)
+				OR (
+					latest_error.error_type = 'DownloadError' AND latest_error.counter < 3
+				)
+			)
+		";
+	}
+
+	/**
 	 * Each string inside string batch is counted separately.
 	 * Therefore, if we have two string batches and the first one has 3 strings inside and another 2,
 	 * we will count it as 5=3+2 instead of 2.
@@ -44,6 +83,9 @@ class Jobs {
 					string_batches.batch_id = original_translations.element_id AND translations.element_type = 'st-batch_strings'
         ";
 		}
+
+		$sql .= $this->getLatestErrorJoinSQL();
+
 		$sql .= "
 				WHERE jobs.job_id IN (
 					SELECT MAX(jobs.job_id) FROM {$wpdb->prefix}icl_translate_job jobs			
@@ -54,6 +96,8 @@ class Jobs {
 				AND translation_status.status = %d				
 				AND translations.source_language_code = %s
 		";
+
+		$sql .= $this->getErrorExclusionWhereSQL();
 
 		if ( ! $includeLongstanding ) {
 			$sql .= " AND jobs.ate_sync_count < %d";
@@ -74,13 +118,20 @@ class Jobs {
 				SELECT COUNT(jobs.job_id)
 				FROM {$wpdb->prefix}icl_translate_job jobs
 				INNER JOIN {$wpdb->prefix}icl_translation_status translation_status ON translation_status.rid = jobs.rid
+		";
+
+		$sql .= $this->getLatestErrorJoinSQL();
+
+		$sql .= "
 				WHERE jobs.job_id IN (
 					SELECT MAX(jobs.job_id) FROM {$wpdb->prefix}icl_translate_job jobs			
 					GROUP BY jobs.rid
 				) 
 				AND jobs.editor = %s
-				AND translation_status.status = %d				
+				AND translation_status.status = %d
 		";
+
+		$sql .= $this->getErrorExclusionWhereSQL();
 
 		return (int) $wpdb->get_var( $wpdb->prepare( $sql, \WPML_TM_Editors::ATE, ICL_TM_IN_PROGRESS ) );
 	}
@@ -138,14 +189,22 @@ class Jobs {
 				SELECT jobs.job_id
 				FROM {$wpdb->prefix}icl_translate_job jobs
 				INNER JOIN {$wpdb->prefix}icl_translation_status translation_status ON translation_status.rid = jobs.rid
+		";
+
+		$sql .= $this->getLatestErrorJoinSQL();
+
+		$sql .= "
 				WHERE jobs.job_id IN (
 					SELECT MAX(jobs.job_id) FROM {$wpdb->prefix}icl_translate_job jobs			
 					GROUP BY jobs.rid
 				) 
 				AND jobs.editor = %s
 				AND translation_status.status = %d
-				LIMIT 1
 		";
+
+		$sql .= $this->getErrorExclusionWhereSQL();
+
+		$sql .= " LIMIT 1";
 
 		return (bool) $wpdb->get_var( $wpdb->prepare( $sql, \WPML_TM_Editors::ATE, ICL_TM_IN_PROGRESS ) );
 	}
@@ -162,7 +221,13 @@ class Jobs {
 		$sql = "
 				SELECT jobs.editor_job_id
 				FROM {$wpdb->prefix}icl_translate_job jobs
-			    INNER JOIN {$wpdb->prefix}icl_translation_status translation_status ON translation_status.rid = jobs.rid
+			    INNER JOIN {$wpdb->prefix}icl_translation_status translation_status 
+			        ON translation_status.rid = jobs.rid
+		";
+
+		$sql .= $this->getLatestErrorJoinSQL();
+
+		$sql .= "
 				WHERE jobs.job_id IN (
 	                SELECT MAX(jobs.job_id) FROM {$wpdb->prefix}icl_translate_job jobs			
 					GROUP BY jobs.rid
@@ -170,6 +235,8 @@ class Jobs {
 	            AND jobs.editor = %s
 				AND ( translation_status.status = %d OR translation_status.status = %d )
 		";
+
+		$sql .= $this->getErrorExclusionWhereSQL();
 
 		if ( ! $includeManualAndLongstandingJobs ) {
 			$sql .= " AND jobs.ate_sync_count < %d AND jobs.automatic = 1";

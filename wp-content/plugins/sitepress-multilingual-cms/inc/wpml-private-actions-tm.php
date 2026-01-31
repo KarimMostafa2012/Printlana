@@ -46,10 +46,10 @@ function action_wpml_tm_save_data( $data ) {
 
 add_action( 'wpml_save_translation_data', 'action_wpml_tm_save_data', 10, 1 );
 
-function wpml_tm_add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom = null ) {
+function wpml_tm_add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom = null, $addJobLogs = false ) {
 
 	$helper = new WPML_TM_Action_Helper();
-	return $helper->add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom );
+	return $helper->add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom, $addJobLogs );
 }
 
 add_action( 'wpml_add_translation_job', 'wpml_tm_add_translation_job', 10, 4 );

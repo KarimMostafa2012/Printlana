@@ -136,6 +136,7 @@ class Reports {
             'icon'       => '<i class="fas fa-chart-line"></i>',
             'url'        => dokan_get_navigation_url( 'reports' ) . ( $is_analytics_available ? '?path=%2Fanalytics%2Fproducts' : '' ),
             'pos'        => 60,
+            'icon_name'  => 'ChartPie',
             'permission' => 'dokan_view_report_menu',
         );
 

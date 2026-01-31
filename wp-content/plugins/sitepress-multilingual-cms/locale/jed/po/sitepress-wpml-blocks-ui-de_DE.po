@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -13,7 +15,7 @@ msgstr "HTML-Anker"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Fügen Sie eine Verknüpfung zu diesem Block hinzu, wenn Sie die Seite mit der „#anchor“-URL laden."
+msgstr "Fügen Sie diesem Block beim Laden der Seite über die URL „#anchor“ eine Verknüpfung hinzu."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -21,7 +23,7 @@ msgstr "Zusätzliche CSS-Klasse(n)"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "Trennen Sie mehrere Klassen durch Leerzeichen."
+msgstr "Mehrere Klassen durch Leerzeichen trennen."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
@@ -39,35 +41,35 @@ msgstr "%"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
 msgid "Dimensions"
-msgstr "Maße"
+msgstr "Abmessungen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
-msgstr "Block"
+msgstr "BLOCK"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "Blockrand"
+msgstr "Block-Rand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
-msgstr "Block-Abstand"
+msgstr "Block-Innenabstand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
 msgid "LANGUAGE"
-msgstr "Sprache"
+msgstr "SPRACHE"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Leerzeichen"
+msgstr "Sprachabstand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Sprachabstand"
+msgstr "Sprach-Innenabstand"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "Anzeigen"
+msgstr "Anzeige"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
@@ -75,11 +77,11 @@ msgstr "Flagge anzeigen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
-msgstr "Sprachname anzeigen"
+msgstr "Sprachnamen anzeigen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "Sprachname anzeigen in"
+msgstr "Sprachnamen anzeigen in"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -107,7 +109,7 @@ msgstr "Umbruch auf mehrere Zeilen zulassen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "Beim Anklicken öffnen"
+msgstr "Beim Klicken öffnen"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
@@ -119,15 +121,15 @@ msgstr "Layout"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
 msgid "Justification"
-msgstr "Rechtfertigung"
+msgstr "Ausrichtung"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
 msgid "Orientation"
-msgstr "Ausrichtung"
+msgstr "Orientierung"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
-msgstr "Typographie"
+msgstr "Typografie"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:116
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
@@ -165,7 +167,7 @@ msgstr "Elemente links ausrichten"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "Elemente in der Mitte ausrichten"
+msgstr "Elemente zentrieren"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
@@ -173,7 +175,7 @@ msgstr "Elemente rechts ausrichten"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Elemente mit Leerzeichen ausrichten"
+msgstr "Elemente mit Abstand dazwischen ausrichten"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -197,7 +199,7 @@ msgstr "Groß"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Sehr groß"
+msgstr "X-groß"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -227,7 +229,7 @@ msgstr "Sprachumschalter"
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "Zeigt den WPML-Sprachumschalter an."
+msgstr "zeigt den WPML-Sprachumschalter an"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
@@ -237,7 +239,7 @@ msgstr "Zeigt den WPML-Sprachumschalter an. <br/> Erfahren Sie, <a>wie Sie diese
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Umschalter für Navigationssprache"
+msgstr "Navigations-Sprachumschalter"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

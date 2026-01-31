@@ -239,7 +239,7 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 				SELECT ID
 				' . $this->get_from_join_snippet()
 				. $this->get_where_snippet() . ' p.post_name = %s
-				ORDER BY p.post_parent = %d DESC
+				ORDER BY p.post_parent = %d DESC, p.ID DESC
 				',
 				$page_name_for_query,
 				$post_parent

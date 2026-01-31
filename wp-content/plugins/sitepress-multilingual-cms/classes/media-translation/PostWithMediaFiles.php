@@ -140,11 +140,12 @@ class PostWithMediaFiles {
 				continue;
 			}
 
-			$texts = $this->get_image_texts( $copied_media_id );
+			$copied_media_filepath = get_post_meta( $copied_media_id, '_wp_attached_file', true );
+			$texts                 = $this->get_image_texts( $copied_media_id );
 
 			$translations = $this->sitepress->get_element_translations( $trid, 'post_attachment', true, true );
 			foreach ( $translations as $translation ) {
-				if ( $translation->language_code === $default_language_code || (int) $translation->element_id === (int) $copied_media_id ) {
+				if ( is_null( $translation->source_language_code ) || $translation->language_code === $default_language_code || (int) $translation->element_id === (int) $copied_media_id ) {
 					continue;
 				}
 
@@ -153,6 +154,15 @@ class PostWithMediaFiles {
 					$texts['caption'] !== $translation_texts['caption'] ||
 					$texts['description'] !== $translation_texts['description'] ||
 					$texts['alt'] !== $translation_texts['alt']
+				) {
+					continue;
+				}
+
+				$translation_media_filepath = get_post_meta( $translation->element_id, '_wp_attached_file', true );
+				if (
+					! is_string( $copied_media_filepath ) ||
+					! is_string( $translation_media_filepath ) ||
+					$copied_media_filepath !== $translation_media_filepath
 				) {
 					continue;
 				}
@@ -218,7 +228,10 @@ class PostWithMediaFiles {
 			delete_metadata_by_mid( 'post', $mid );
 		}
 
+		// When we delete the attachment entry from the database for the translation there is no reason to even allow a file deletion from the filesystem.
+		add_filter( 'wp_delete_file', '__return_false', PHP_INT_MAX );
 		do_action( 'delete_post', $post_id, $post );
+		remove_filter( 'wp_delete_file', '__return_false', PHP_INT_MAX );
 		$result = $wpdb->delete( $wpdb->posts, array( 'ID' => $post_id ) );
 		if ( ! $result ) {
 			return false;
@@ -230,11 +243,6 @@ class PostWithMediaFiles {
 		return $post;
 	}
 
-	private function get_post_media_ids( $field_name ) {
-		$media_ids = get_post_meta( $this->post_id, $field_name, true );
-		return empty( $media_ids ) ? array() : $media_ids;
-	}
-
 	public function get_usages_of_media_file_in_posts( $media_file_id ) {
 		return [
 			$this->usage_of_media_files_in_posts->getUsagesAsCopy( $media_file_id ),
@@ -244,31 +252,49 @@ class PostWithMediaFiles {
 
 	public function extract_and_save_media_ids() {
 		$post_media_data = $this->get_media_data_from_post_content_and_meta();
+		list(
+			$copied_media_file_ids,
+			$referenced_media_file_ids
+			) = self::extract_media_ids( $post_media_data );
+		$this->update_usages_of_media_files_in_posts(
+			$copied_media_file_ids,
+			$referenced_media_file_ids
+		);
 
+		update_post_meta( $this->post_id, self::COPIED_MEDIA_IDS_SETTING, $copied_media_file_ids );
+		update_post_meta( $this->post_id, self::REFERENCED_MEDIA_IDS_SETTING, $referenced_media_file_ids );
+	}
+
+	public static function extract_media_ids( $post_media_data ) {
 		$copied_media_file_ids     = [];
 		$referenced_media_file_ids = [];
 
 		if ( is_array( $post_media_data ) && isset( $post_media_data[0] ) && isset( $post_media_data[1] ) ) {
-			$copied_media_file_ids     = is_array( $post_media_data[0] ) ? $this->extract_attachment_ids( $post_media_data[0] ) : [];
-			$referenced_media_file_ids = is_array( $post_media_data[1] ) ? $this->extract_attachment_ids( $post_media_data[1] ) : [];
+			$copied_media_file_ids     = is_array( $post_media_data[0] ) ? self::extract_attachment_ids( $post_media_data[0] ) : [];
+			$referenced_media_file_ids = is_array( $post_media_data[1] ) ? self::extract_attachment_ids( $post_media_data[1] ) : [];
 		}
 
-		$this->usage_of_media_files_in_posts->updateUsages(
+		return [
+			$copied_media_file_ids,
+			$referenced_media_file_ids,
+		];
+	}
+
+	private function update_usages_of_media_files_in_posts( $copied_media_file_ids, $referenced_media_file_ids ) {
+		return $this->usage_of_media_files_in_posts->updateUsages(
 			$this->post_id,
-			$this->get_post_media_ids( self::COPIED_MEDIA_IDS_SETTING ),
-			$this->get_post_media_ids( self::REFERENCED_MEDIA_IDS_SETTING ),
+			$this->get_copied_media_ids(),
+			$this->get_referenced_media_ids(),
 			$copied_media_file_ids,
 			$referenced_media_file_ids
 		);
-		update_post_meta( $this->post_id, self::COPIED_MEDIA_IDS_SETTING, $copied_media_file_ids );
-		update_post_meta( $this->post_id, self::REFERENCED_MEDIA_IDS_SETTING, $referenced_media_file_ids );
 	}
 
 	public function remove_usage_of_media_files_in_post() {
 		$this->usage_of_media_files_in_posts->updateUsages(
 			$this->post_id,
-			$this->get_post_media_ids( self::COPIED_MEDIA_IDS_SETTING ),
-			$this->get_post_media_ids( self::REFERENCED_MEDIA_IDS_SETTING ),
+			$this->get_copied_media_ids(),
+			$this->get_referenced_media_ids(),
 			[],
 			[]
 		);
@@ -279,10 +305,10 @@ class PostWithMediaFiles {
 	 *
 	 * @return array
 	 */
-	private function extract_attachment_ids( $post_media_data ) {
+	private static function extract_attachment_ids( $post_media_data ) {
 		$media_file_ids = [];
 		foreach ( $post_media_data as $media_data ) {
-			if ( in_array( $media_data['attachment_id'], $media_file_ids ) ) {
+			if ( in_array( $media_data['attachment_id'], $media_file_ids ) || is_null( $media_data['attachment_id'] ) ) {
 				continue;
 			}
 
@@ -292,13 +318,16 @@ class PostWithMediaFiles {
 		return $media_file_ids;
 	}
 
-	public function get_media_data_from_post_content_and_meta() {
+	/**
+	 * @param bool $get_attachment_ids_from_urls
+	 */
+	public function get_media_data_from_post_content_and_meta( $get_attachment_ids_from_urls = true ) {
 		$post = get_post( $this->post_id );
 		if ( ! $post ) {
 			return [ [], [] ];
 		}
 
-		list( $copied_media_ids, $referenced_media_ids ) = $this->copied_and_referenced_media_extractor->extract( $post );
+		list( $copied_media_ids, $referenced_media_ids ) = $this->copied_and_referenced_media_extractor->extract( $post, $get_attachment_ids_from_urls );
 
 		$media_localization_settings = MediaSettings::get_setting( 'media_files_localization' );
 		if ( $media_localization_settings['custom_fields'] ) {
@@ -308,7 +337,7 @@ class PostWithMediaFiles {
 			foreach ( $custom_media_ids as $custom_media_id ) {
 				$referenced_media_ids[] = [
 					'attributes'    => [
-						'src'     => wp_get_attachment_url( $custom_media_id ),
+						'src'     => null,
 						'alt'     => '',
 						'caption' => '',
 					],
@@ -321,7 +350,7 @@ class PostWithMediaFiles {
 			foreach ( $gallery_media_ids as $gallery_media_id ) {
 				$referenced_media_ids[] = [
 					'attributes'    => [
-						'src'     => wp_get_attachment_url( $gallery_media_id ),
+						'src'     => null,
 						'alt'     => '',
 						'caption' => '',
 					],
@@ -364,7 +393,7 @@ class PostWithMediaFiles {
 			$post_media_data = $this->copied_and_referenced_media_extractor->extract( $post );
 
 			if ( is_array( $post_media_data ) && isset( $post_media_data[1] ) ) {
-				$referenced_media_file_ids = is_array( $post_media_data[1] ) ? $this->extract_attachment_ids( $post_media_data[1] ) : [];
+				$referenced_media_file_ids = is_array( $post_media_data[1] ) ? self::extract_attachment_ids( $post_media_data[1] ) : [];
 				$media_ids = array_merge(
 					$media_ids,
 					$referenced_media_file_ids

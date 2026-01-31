@@ -3,16 +3,18 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi"
          },
          "Choose the image file type for flags": [
             "Chọn loại tệp hình ảnh cho cờ"
          ],
          "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
-            "Chỉ ảnh hưởng đến cờ WPML tích hợp."
+            "Tùy chọn này chỉ ảnh hưởng đến cờ WPML tích hợp sẵn, không ảnh hưởng đến cờ tùy chỉnh đã tải lên."
          ],
          "%s format": [
-            "%sđịnh dạng"
+            "Định dạng %s"
          ],
          "Save": [
             "Lưu"
@@ -21,7 +23,7 @@
             "Định dạng mới đã được lưu."
          ],
          "Failed to save the new format": [
-            "Không lưu được định dạng mới"
+            "Không thể lưu định dạng mới"
          ]
       }
    }

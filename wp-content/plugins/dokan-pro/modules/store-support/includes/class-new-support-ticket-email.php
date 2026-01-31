@@ -24,6 +24,19 @@ if ( ! class_exists( 'Dokan_New_Support_Ticket' ) ) :
     class Dokan_New_Support_Ticket extends WC_Email {
 
         /**
+         * Vendor shop info.
+         *
+         * @var array
+         */
+        protected $store_info;
+
+        /**
+         * Ticket topic ID.
+         *
+         * @var int
+         */
+        protected $topic_id;
+        /**
          * Constructor.
          */
         public function __construct() {

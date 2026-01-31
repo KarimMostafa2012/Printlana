@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -13,7 +15,7 @@ msgstr "HTML-ankare"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Lägg till en genväg till detta block när sidan laddas med hjälp av “#anchor” URL:en."
+msgstr "Lägg till en genväg till det här blocket när sidan laddas med URL:en “#anchor”."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -39,7 +41,7 @@ msgstr "%"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
 msgid "Dimensions"
-msgstr "Dimensioner"
+msgstr "Mått"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
 msgid "BLOCK"
@@ -47,7 +49,7 @@ msgstr "BLOCK"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
 msgid "Block margin"
-msgstr "Blockmarginaler"
+msgstr "Blockmarginal"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
 msgid "Block padding"
@@ -59,7 +61,7 @@ msgstr "SPRÅK"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Språkavstånd"
+msgstr "Språkmellanrum"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
@@ -67,7 +69,7 @@ msgstr "Språkutfyllnad"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
-msgstr "Visning"
+msgstr "Visa"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
 msgid "Show flag"
@@ -75,11 +77,11 @@ msgstr "Visa flagga"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
 msgid "Show language name"
-msgstr "Visa språknamn"
+msgstr "Visa språkets namn"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "Visa språknamn i"
+msgstr "Visa språkets namn i"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -87,7 +89,7 @@ msgstr "Stil"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
 msgid "Flag settings"
-msgstr "Flagginställningar"
+msgstr "Flagga inställningar"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
 msgid "Width"
@@ -99,11 +101,11 @@ msgstr "Höjd"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
 msgid "Spacing"
-msgstr "Avstånd"
+msgstr "Mellanrum"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Tillåt radbrytning till flera rader"
+msgstr "Tillåt radbrytning"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
@@ -161,19 +163,19 @@ msgstr "Kod"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
 msgid "Justify items left"
-msgstr "Justera objekt till vänster"
+msgstr "Justera objekt vänster"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
 msgid "Justify items center"
-msgstr "Centrera objekt"
+msgstr "Justera objekt center"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
 msgid "Justify items right"
-msgstr "Justera objekt till höger"
+msgstr "Justera objekt höger"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Fördela objekt jämnt"
+msgstr "Justera objekt med utrymme emellan"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
@@ -197,7 +199,7 @@ msgstr "Stor"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Extra stor"
+msgstr "X-stor"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -217,7 +219,7 @@ msgstr "Liten"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Visar WPML språkväljaren."
+msgstr "Visar WPML-språkväljaren."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47
@@ -227,13 +229,13 @@ msgstr "Språkväljare"
 #: src/js/blocks/LanguageSwitcher/index.js:43
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:48
 msgid "displays the WPML Language Switcher"
-msgstr "visar WPML språkväljaren"
+msgstr "visar WPML-språkväljaren"
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:30
 msgid ""
 "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
 "block</a>."
-msgstr "Visar WPML språkväljaren. <br/> Lär dig <a>hur du översätter detta block</a>."
+msgstr "Visar WPML-språkväljaren. <br/> Lär dig <a>hur du översätter det här blocket</a>."
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"

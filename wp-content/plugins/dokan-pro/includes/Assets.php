@@ -47,11 +47,18 @@ class Assets {
     /**
      * Enqueue admin analytics scripts
      *
+     * @param string $hook
+     *
      * @return void
      */
-    public function enqueue_admin_analytics_scripts() {
+    public function enqueue_admin_analytics_scripts( $hook ) {
 		// Enqueue the scripts for seller filter in analytics report.
 		wp_enqueue_script( 'dokan-pro-react-admin' );
+
+		if ( 'dokan_page_dokan-dashboard' === $hook ) {
+			wp_enqueue_style( 'dokan-pro-admin-dashboard' );
+			wp_enqueue_script( 'dokan-pro-admin-dashboard' );
+		}
     }
 
     /**
@@ -262,6 +269,7 @@ class Assets {
 
         $react_assets = include DOKAN_PRO_DIR . '/assets/js/admin-react.asset.php';
         $react_deps = $react_assets['dependencies'] ?? [];
+        $jquery_blockui = \WeDevs\Dokan\Assets::get_wc_handler( 'jquery-blockui' );
 
         // Analytics report scripts.
         $react_vendor_analytics_assets = include DOKAN_PRO_DIR . '/assets/js/vendor-dashboard/reports/index.asset.php';
@@ -299,7 +307,7 @@ class Assets {
             ],
             'dokan-pro-vue-frontend-shipping' => [
                 'src'       => DOKAN_PRO_PLUGIN_ASSEST . '/js/vue-pro-frontend-shipping' . $this->suffix . '.js',
-                'deps'      => [ 'jquery', 'wp-i18n', 'dokan-vue-vendor', 'dokan-vue-bootstrap', 'underscore', 'jquery-blockui' ],
+                'deps'      => [ 'jquery', 'wp-i18n', 'dokan-vue-vendor', 'dokan-vue-bootstrap', 'underscore', $jquery_blockui ],
                 'version'   => $this->script_version,
                 'in_footer' => true,
             ],
@@ -386,8 +394,18 @@ class Assets {
             ];
         }
 
-        $reviews_script_file = DOKAN_PRO_DIR . '/assets/js/dashboard-reviews.asset.php';
+        $admin_dashboard_asset = DOKAN_PRO_DIR . '/assets/js/dokan-pro-admin-dashboard.asset.php';
+		if ( file_exists( $admin_dashboard_asset ) ) {
+			$dashboard_asset = include $admin_dashboard_asset;
+			$scripts['dokan-pro-admin-dashboard'] = [
+				'src'       => DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin-dashboard.js',
+				'deps'      => array_merge( $dashboard_asset['dependencies'], [ 'dokan-admin-dashboard' ] ),
+				'version'   => $dashboard_asset['version'],
+				'in_footer' => true,
+			];
+		}
 
+        $reviews_script_file = DOKAN_PRO_DIR . '/assets/js/dashboard-reviews.asset.php';
         if ( file_exists( $reviews_script_file ) ) {
             $dashboard_product_reviews = require $reviews_script_file;
             $dependencies = $dashboard_product_reviews['dependencies'];
@@ -496,6 +514,16 @@ class Assets {
                 'version' => $social['version'],
             ];
         }
+
+	    $admin_dashboard_asset = DOKAN_PRO_DIR . '/assets/js/dokan-pro-admin-dashboard.asset.php';
+	    if ( file_exists( $admin_dashboard_asset ) ) {
+		    $dashboard_asset = include $admin_dashboard_asset;
+		    $styles['dokan-pro-admin-dashboard'] = [
+			    'src'     => DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin-dashboard.css',
+			    'deps'    => [ 'dokan-admin-dashboard' ],
+			    'version' => $dashboard_asset['version'],
+		    ];
+	    }
 
         return $styles;
     }

@@ -15,7 +15,7 @@ if( ! function_exists('dd') ){
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
         $file = $backtrace['file'] ?? 'Unknown file';
         $line = $backtrace['line'] ?? 'Unknown line';
-        echo '<div style="background: #e1e1e1;border-left: 3px solid #888;padding: 15px;margin: 15px 0;font-family: monospace;border-radius: 6px;overflow-x: auto;">';
+        echo '<div style="    margin-left: 200px !important;background: #e1e1e1;border-left: 3px solid #888;padding: 15px;margin: 15px 0;font-family: monospace;border-radius: 6px;overflow-x: auto;">';
         echo '<div style="margin-bottom: 10px;color: #3F51B5;">';
         echo "🛠️ <strong>File:</strong> <span style='color:#8d8d8d;'>$file</span> on line <span style='color:#4b4b4b;'>$line</span>";
         echo '</div>';
@@ -99,4 +99,26 @@ function wcmmq_get_message( $keyword, $prefix = WC_MMQ_PREFIX ){
     }
                       
     return WC_MMQ::getOption( $f_keyword );
+}
+
+
+/**
+ * Check is premium version active or not
+ * 
+ * even old pro version(WC_Min_Max_Quantity) is active then also return true
+ *
+ * @return boolean
+ */
+function wcmmq_is_premium(){
+    if( defined( 'WC_MMQ_PRO_VERSION' ) ) return true;
+    
+    return false;
+}
+/**
+ * Check is premium version installed or not
+ *
+ * @return boolean
+ */
+function wcmmq_is_premium_installed(){
+    return wcmmq_is_premium();
 }

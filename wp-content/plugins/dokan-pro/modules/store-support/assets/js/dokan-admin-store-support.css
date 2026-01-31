@@ -23,20 +23,20 @@
   font-weight: bold;
 }
 
-.chat-box[data-v-f79966cc] {
+.chat-box[data-v-3946b8f4] {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
-.chat-box .chat-image-box[data-v-f79966cc] {
+.chat-box .chat-image-box[data-v-3946b8f4] {
   width: 8%;
   display: flex;
   justify-content: center;
   align-content: stretch;
   margin-left: 10px;
 }
-.chat-box .chat-image-box .chat-image-container[data-v-f79966cc] {
+.chat-box .chat-image-box .chat-image-container[data-v-3946b8f4] {
   display: inline-block;
   position: relative;
   width: 30px;
@@ -44,83 +44,86 @@
   overflow: hidden;
   border-radius: 50%;
 }
-.chat-box .chat-image-box .chat-image-container .chat-image[data-v-f79966cc] {
+.chat-box .chat-image-box .chat-image-container .chat-image[data-v-3946b8f4] {
   width: auto;
   height: 100%;
 }
-.chat-box .chat-info-box[data-v-f79966cc] {
+.chat-box .chat-info-box[data-v-3946b8f4] {
   width: 88%;
 }
-.chat-box .chat-info-box .chat-sender-info[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-sender-info[data-v-3946b8f4] {
   display: flex;
   justify-content: space-between;
   height: 28px;
   align-items: center;
 }
-.chat-box .chat-info-box .chat-sender-info .chat-user-box[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-sender-info .chat-user-box[data-v-3946b8f4] {
   color: #717171;
   font-weight: 600;
   font-size: 0.9rem;
 }
-.chat-box .chat-info-box .chat-time-box[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-time-box[data-v-3946b8f4] {
   color: rgba(120, 129, 143, 0.5);
   font-weight: 400;
   float: right;
   margin-top: 9px;
 }
-.chat-box .chat-info-box .chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-text[data-v-3946b8f4] {
   border-radius: 0px 10px 10px 10px;
   display: flex;
   align-items: center;
   padding: 20px;
   margin-top: 10px;
 }
-.chat-box .chat-info-box .admin-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .admin-chat-text[data-v-3946b8f4] {
   background: #f2faff;
   color: #1a9ed4;
+  white-space: pre-line;
 }
-.chat-box .chat-info-box .customer-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .customer-chat-text[data-v-3946b8f4] {
   background: #f6f6f6;
   color: #717171;
+  white-space: pre-line;
 }
-.chat-box .chat-info-box .vendor-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .vendor-chat-text[data-v-3946b8f4] {
   background: #f3f3ff;
   color: #5353bb;
+  white-space: pre-line;
 }
-.chat-box .chat-action-box[data-v-f79966cc] {
+.chat-box .chat-action-box[data-v-3946b8f4] {
   width: 6%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.chat-box .chat-action-box .chat-delete[data-v-f79966cc] {
+.chat-box .chat-action-box .chat-delete[data-v-3946b8f4] {
   margin-top: 10px;
   display: none;
   visibility: hidden;
   color: #e0e6f0;
   cursor: pointer;
 }
-.chat-box .chat-action-box .chat-delete[data-v-f79966cc]:hover {
+.chat-box .chat-action-box .chat-delete[data-v-3946b8f4]:hover {
   color: #f2624d;
 }
-.chat-box:hover .chat-delete[data-v-f79966cc] {
+.chat-box:hover .chat-delete[data-v-3946b8f4] {
   display: block;
   visibility: visible;
 }
 @media only screen and (max-width: 1000px) {
-.chat-box[data-v-f79966cc] {
+.chat-box[data-v-3946b8f4] {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
-.chat-box .chat-image-box[data-v-f79966cc] {
+.chat-box .chat-image-box[data-v-3946b8f4] {
     width: 13%;
     display: flex;
     justify-content: center;
     align-content: stretch;
 }
-.chat-box .chat-image-box .chat-image-container[data-v-f79966cc] {
+.chat-box .chat-image-box .chat-image-container[data-v-3946b8f4] {
     display: inline-block;
     position: relative;
     width: 30px;
@@ -128,64 +131,67 @@
     overflow: hidden;
     border-radius: 50%;
 }
-.chat-box .chat-image-box .chat-image-container .chat-image[data-v-f79966cc] {
+.chat-box .chat-image-box .chat-image-container .chat-image[data-v-3946b8f4] {
     width: auto;
     height: 100%;
 }
-.chat-box .chat-info-box[data-v-f79966cc] {
+.chat-box .chat-info-box[data-v-3946b8f4] {
     width: 77%;
 }
-.chat-box .chat-info-box .chat-sender-info[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-sender-info[data-v-3946b8f4] {
     display: flex;
     justify-content: space-between;
     height: 28px;
     align-items: center;
 }
-.chat-box .chat-info-box .chat-sender-info .chat-user-box[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-sender-info .chat-user-box[data-v-3946b8f4] {
     color: #717171;
     font-weight: 600;
     font-size: 0.9rem;
 }
-.chat-box .chat-info-box .chat-sender-info .chat-time-box[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-sender-info .chat-time-box[data-v-3946b8f4] {
     color: rgba(120, 129, 143, 0.5);
     font-weight: 400;
 }
-.chat-box .chat-info-box .chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .chat-text[data-v-3946b8f4] {
     border-radius: 0px 10px 10px 10px;
     display: flex;
     align-items: center;
     padding: 20px;
     margin-top: 10px;
 }
-.chat-box .chat-info-box .admin-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .admin-chat-text[data-v-3946b8f4] {
     background: #f2faff;
     color: #1a9ed4;
+    white-space: pre-line;
 }
-.chat-box .chat-info-box .customer-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .customer-chat-text[data-v-3946b8f4] {
     background: #f6f6f6;
     color: #717171;
+    white-space: pre-line;
 }
-.chat-box .chat-info-box .vendor-chat-text[data-v-f79966cc] {
+.chat-box .chat-info-box .vendor-chat-text[data-v-3946b8f4] {
     background: #f3f3ff;
     color: #5353bb;
+    white-space: pre-line;
 }
-.chat-box .chat-action-box[data-v-f79966cc] {
+.chat-box .chat-action-box[data-v-3946b8f4] {
     width: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.chat-box .chat-action-box .chat-delete[data-v-f79966cc] {
+.chat-box .chat-action-box .chat-delete[data-v-3946b8f4] {
     margin-top: 15px;
     display: none;
     visibility: hidden;
     color: #e0e6f0;
     cursor: pointer;
 }
-.chat-box .chat-action-box .chat-delete[data-v-f79966cc]:hover {
+.chat-box .chat-action-box .chat-delete[data-v-3946b8f4]:hover {
     color: #f2624d;
 }
-.chat-box:hover .chat-delete[data-v-f79966cc] {
+.chat-box:hover .chat-delete[data-v-3946b8f4] {
     display: block;
     visibility: visible;
 }

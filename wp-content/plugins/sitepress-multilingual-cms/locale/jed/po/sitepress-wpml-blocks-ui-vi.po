@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
@@ -9,11 +11,11 @@ msgstr "Nâng cao"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
-msgstr "Điểm neo HTML"
+msgstr "Neo HTML"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Thêm lối tắt đến khối này khi tải trang bằng cách sử dụng URL <q id=\"q-first-1\">#anchor</q>."
+msgstr "Thêm lối tắt vào khối này khi tải trang bằng URL “#anchor”."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
@@ -21,11 +23,11 @@ msgstr "Lớp CSS bổ sung"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
-msgstr "Phân tách nhiều lớp bằng dấu cách."
+msgstr "Tách nhiều lớp bằng dấu cách."
 
 #: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
 msgid "Color"
-msgstr "Màu sắc"
+msgstr "Màu"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
@@ -79,7 +81,7 @@ msgstr "Hiển thị tên ngôn ngữ"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
 msgid "Display language name in"
-msgstr "Hiển thị tên ngôn ngữ bằng"
+msgstr "Hiển thị tên ngôn ngữ trong"
 
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
 msgid "Style"
@@ -103,11 +105,11 @@ msgstr "Khoảng cách"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
 msgid "Allow wrapping to multiple lines"
-msgstr "Cho phép xuống dòng"
+msgstr "Cho phép xuống nhiều dòng"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "Mở khi nhấp chuột"
+msgstr "Mở khi nhấp"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
@@ -197,7 +199,7 @@ msgstr "Lớn"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
 msgid "X-Large"
-msgstr "Cực lớn"
+msgstr "Rất lớn"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
@@ -217,7 +219,7 @@ msgstr "Nhỏ"
 
 #: src/js/blocks/LanguageSwitcher/index.js:36
 msgid "Displays the WPML Language Switcher."
-msgstr "Hiển thị Bộ chuyển đổi ngôn ngữ WPML."
+msgstr "Hiển thị bộ chuyển đổi ngôn ngữ WPML."
 
 #: src/js/blocks/LanguageSwitcher/index.js:42
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:47

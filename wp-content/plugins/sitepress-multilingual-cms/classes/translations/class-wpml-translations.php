@@ -29,6 +29,22 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
+	 * Check the current user can, returns false for guest users.
+	 *
+	 * @param string $capability
+	 *
+	 * @return bool
+	 */
+	private function check_current_user_can( $capability ) {
+		$user_id = function_exists( 'get_current_user_id' ) ? get_current_user_id() : 0;
+		if ( 0 === $user_id ) {
+			return false;
+		}
+
+		return current_user_can( $capability );
+	}
+
+	/**
 	 * @param int    $trid
 	 * @param string $wpml_element_type
 	 * @param bool $skipPrivilegeChecking
@@ -37,8 +53,22 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	public function get_translations( $trid, $wpml_element_type, $skipPrivilegeChecking = false ) {
 		$cache_key_args = array_filter( array( $trid, $wpml_element_type, $this->skip_empty, $this->all_statuses, $this->skip_recursions ) );
-		$cache_key      = md5( (string) wp_json_encode( $cache_key_args ) );
-		$cache_found    = false;
+
+		// Add the post type capabilities to the cache key.
+		if ( 0 === strpos( $wpml_element_type, 'post_' ) ) {
+			$post_type = substr( $wpml_element_type, 5 );
+			if ( $post_type ) {
+				$post_type_plural = $post_type . 's';
+				// Use a filter hook to allow users to modify the post type plural capability.
+				$post_type_plural = apply_filters( 'wpml_translations_post_type_plural_capability', $post_type_plural, $post_type );
+
+				$cache_key_args[] = $this->check_current_user_can( sprintf( 'edit_%s', $post_type_plural ) );
+				$cache_key_args[] = $this->check_current_user_can( sprintf( 'read_private_%s', $post_type_plural ) );
+			}
+		}
+
+		$cache_key   = md5( (string) wp_json_encode( $cache_key_args ) );
+		$cache_found = false;
 
 		$temp_elements = $this->wpml_cache->get( $cache_key, $cache_found );
 		if ( ! $this->skip_cache && $cache_found ) {

@@ -21,7 +21,7 @@ class WCML_Payment_Method_Filter {
 		if ( ! empty( $title ) && $object->get_id() ) {
 			$payment_gateway = $this->get_payment_gateway( $object->get_id() );
 
-			/* phpcs:ignore WordPress.VIP.SuperGlobalInputUsage.AccessDetected */
+			/* phpcs:ignore WordPress.VIP.SuperGlobalInputUsage.AccessDetected */ /* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 			if ( isset( $_POST['payment_method'] ) && $payment_gateway->id !== $_POST['payment_method'] && WC()->payment_gateways() ) {
 				$payment_gateways = WC()->payment_gateways()->payment_gateways();
 				if ( isset( $payment_gateways[ $_POST['payment_method'] ] ) ) {

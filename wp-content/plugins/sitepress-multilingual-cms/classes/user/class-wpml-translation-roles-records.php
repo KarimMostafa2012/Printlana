@@ -133,7 +133,7 @@ abstract class WPML_Translation_Roles_Records {
 		$useCache = $compare === self::USERS_WITH_CAPABILITY && '' === $search && -1 === $limit;
 
 		$preparedUserQuery = $this->wpdb->prepare(
-			"SELECT u.id FROM {$this->wpdb->users} u INNER JOIN {$this->wpdb->usermeta} c ON c.user_id=u.ID AND CAST(c.meta_key AS BINARY)=%s AND c.meta_value {$compare} %s",
+			"SELECT u.id FROM {$this->wpdb->users} u INNER JOIN {$this->wpdb->usermeta} c ON c.user_id=u.ID AND c.meta_key=%s AND c.meta_value {$compare} %s",
 			"{$this->wpdb->prefix}capabilities",
 			"%" . $this->get_capability() . "%"
 		);
@@ -213,7 +213,7 @@ abstract class WPML_Translation_Roles_Records {
 	}
 
 	/**
-	 * @return array|false
+	 * @return array | false
 	 */
 	private function get_cache() {
 		return get_option( $this->get_cache_key(), false );
@@ -246,7 +246,12 @@ abstract class WPML_Translation_Roles_Records {
 		}
 
 		$translators = $this->get_cache();
-		if ( is_array( $translators ) && array_key_exists( $user->ID, $translators ) ) {
+
+		if ( ! is_array( $translators ) ) {
+			$translators = array();
+		}
+
+		if ( array_key_exists( $user->ID, $translators ) ) {
 			return;
 		}
 

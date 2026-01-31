@@ -21,4 +21,7 @@ class Result {
 
 	/** @var array[wpmlJobId, wpmlStatus, ateStatus, wpmlJobStatus] */
 	public $jobs = [];
+
+	/** @var stdClass|null $ate */
+	public $eta;
 }

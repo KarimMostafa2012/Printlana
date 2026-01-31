@@ -1,8 +1,5 @@
 <?php
 
-use WCML\Options\WPML;
-use WPML\API\Sanitize;
-
 class WCML_Setup {
 	const MULTI_CURRENCY_STATUS_GET_KEY = 'enabled';
 
@@ -12,8 +9,6 @@ class WCML_Setup {
 	private $handlers;
 	/** @var array */
 	private $steps;
-	/** @var string */
-	private $step;
 	/** @var woocommerce_wpml */
 	private $woocommerce_wpml;
 	/** @var SitePress */
@@ -145,7 +140,7 @@ class WCML_Setup {
 			return;
 		}
 
-		$this->step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : current( array_keys( $this->steps ) );
+		$step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : current( array_keys( $this->steps ) );
 
 		wp_enqueue_style( 'otgs-icons' );
 		wp_enqueue_style(
@@ -161,12 +156,12 @@ class WCML_Setup {
 
 		wp_enqueue_script( 'wcml-setup', WCML_PLUGIN_URL . '/res/js/wcml-setup.js', [ 'jquery', OTGS_Assets_Handles::POPOVER_TOOLTIP ], WCML_VERSION, true );
 
-		$this->ui->setup_header( $this->steps, $this->step );
-		$this->ui->setup_steps( $this->steps, $this->step );
-		$this->ui->setup_content( $this->steps[ $this->step ]['view'] );
-		$this->ui->setup_footer( ! empty( $this->steps[ $this->step ]['handler'] ) );
+		$this->ui->setup_header( $this->steps, $step );
+		$this->ui->setup_steps( $this->steps, $step );
+		$this->ui->setup_content( $this->steps[ $step ]['view'] );
+		$this->ui->setup_footer( ! empty( $this->steps[ $step ]['handler'] ) );
 
-		if ( $this->is_setup_complete( $this->step ) ) {
+		if ( $this->is_setup_complete( $step ) ) {
 			$this->complete_setup();
 			$this->redirect_to_tm_dashboard_on_setup_complete();
 		}
@@ -205,6 +200,7 @@ class WCML_Setup {
 
 	public function complete_setup() {
 		$this->save_product_translation_mode();
+		$this->save_term_meta_thumbnail_id_to_copy();
 
 		$this->woocommerce_wpml->settings['set_up_wizard_run']    = 1;
 		$this->woocommerce_wpml->settings['set_up_wizard_splash'] = 1;
@@ -216,6 +212,14 @@ class WCML_Setup {
 		 * @since 5.3.0
 		 */
 		do_action( 'wcml_setup_completed' );
+	}
+
+	public function save_term_meta_thumbnail_id_to_copy() {
+		$tm_settings = $this->sitepress->get_setting( 'translation-management', [] );
+		if ( ! isset( $tm_settings['custom_term_fields_translation']['thumbnail_id'] ) ) {
+			$tm_settings['custom_term_fields_translation']['thumbnail_id'] = "1"; // since WCML 5.5.3
+			$this->sitepress->set_setting( 'translation-management', $tm_settings, true );
+		}
 	}
 
 	public function save_product_translation_mode() {

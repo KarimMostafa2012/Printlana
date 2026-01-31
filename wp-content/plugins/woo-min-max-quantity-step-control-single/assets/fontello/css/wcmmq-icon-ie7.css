@@ -73,6 +73,12 @@
 .wcmmq_icon-home { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe83c;&nbsp;'); }
 .wcmmq_icon-user { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe83d;&nbsp;'); }
 .wcmmq_icon-twitter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe83e;&nbsp;'); }
+.wcmmq_icon-bizzplugin { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe930;&nbsp;'); }
+.wcmmq_icon-bizzplugin-text { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe931;&nbsp;'); }
+.wcmmq_icon-bizzplugin-plug { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe932;&nbsp;'); }
+.wcmmq_icon-bizzplugin-circle { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe933;&nbsp;'); }
+.wcmmq_icon-bizzplugin-full { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe934;&nbsp;'); }
+.wcmmq_icon-bizzplugin-full-2 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe935;&nbsp;'); }
 .wcmmq_icon-globe-inv { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf019;&nbsp;'); }
 .wcmmq_icon-linkedin { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf05c;&nbsp;'); }
 .wcmmq_icon-github-circled { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;'); }

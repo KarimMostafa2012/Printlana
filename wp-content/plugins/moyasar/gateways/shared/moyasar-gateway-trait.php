@@ -58,13 +58,14 @@ trait Moyasar_Gateway_Trait
 
 
     /**
-     * @description Set Title & Description for plugin
+     * @description Set Title, Icon & Description for plugin
      * @param $default_title
      * @param $default_description
      * @return void
      */
     public function set_title_description_plugin($default_title, $default_description)
     {
+        $this->icon = MOYASAR_PAYMENT_URL . '/assets/general/images/moyasar-icon.png';
         $this->plugin_title = $this->get_option('title');
         $this->plugin_description = $this->get_option('description');
         empty($this->plugin_title) ? $this->title = $default_title : $this->title = $this->plugin_title;

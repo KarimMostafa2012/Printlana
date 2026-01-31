@@ -2,16 +2,18 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/ate-cloned-sites/components/CloseButton.js:15
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: src/js/ate-cloned-sites/components/ContactSupport.js:9
 msgid ""
 "Please take a screenshot of this message and report this issue to <a>WPML "
 "support</a>."
-msgstr ""
+msgstr "Vui lòng chụp ảnh màn hình thông báo này và báo cáo sự cố này cho <a>bộ phận hỗ trợ WPML</a>."
 
 #: src/js/ate-cloned-sites/components/UnregistrationInfo.js:7
 msgid ""
@@ -24,7 +26,7 @@ msgstr "WPML đã tự động hủy đăng ký trang web của bạn như một
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:9
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:10
 msgid "You’re all set"
-msgstr ""
+msgstr "Bạn đã sẵn sàng"
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:23
 msgid ""
@@ -36,13 +38,13 @@ msgstr "Trang web này là bản sao của trang web gốc %s và hiện tại k
 msgid ""
 "If you’d like to use automatic translation here in the future, you can "
 "either <a1>add credits</a1> or <a2>share them from the original site</a2>."
-msgstr "Nếu bạn muốn sử dụng dịch tự động ở đây trong tương lai, bạn có thể <a1>thêm tín dụng</a1> hoặc <a2>chia sẻ chúng từ trang web gốc</a2>."
+msgstr "Nếu bạn muốn sử dụng bản dịch tự động ở đây trong tương lai, bạn có thể <a1>thêm tín dụng</a1> hoặc <a2>chia sẻ chúng từ trang web gốc</a2>."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:52
 msgid ""
 "There was an error checking for credits to share. Please take a screenshot "
 "of this message and report it in <a>WPML support</a>."
-msgstr ""
+msgstr "Đã xảy ra lỗi khi kiểm tra tín dụng để chia sẻ. Vui lòng chụp ảnh màn hình thông báo này và báo cáo cho <a>bộ phận hỗ trợ WPML</a>."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:36
 msgid ""
@@ -66,19 +68,19 @@ msgstr "Dán mã bên dưới để hoàn tất kết nối."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:77
 msgid "Migration code"
-msgstr ""
+msgstr "Mã di chuyển"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:79
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:84
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:75
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:76
 msgid "Continue"
-msgstr ""
+msgstr "Tiếp tục"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:82
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:95
 msgid "Go back"
-msgstr ""
+msgstr "Quay lại"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:9
 msgid "Connect Automatic Translation Credits"
@@ -88,11 +90,11 @@ msgstr "Kết nối tín dụng dịch tự động"
 msgid ""
 "WPML was unable to copy your site's translations, translation memory, and "
 "glossary to this new URL."
-msgstr ""
+msgstr "WPML không thể sao chép bản dịch, bộ nhớ dịch và bảng thuật ngữ của trang web của bạn sang URL mới này."
 
 #: src/js/ate-cloned-sites/steps/CopyError.js:7
 msgid "Error with copying translation information to new URL"
-msgstr ""
+msgstr "Lỗi khi sao chép thông tin dịch sang URL mới"
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:12
 msgid "This site and its copy on %s are now sharing automatic translation credits."
@@ -102,46 +104,46 @@ msgstr "Trang web này và bản sao của nó trên %s hiện đang chia sẻ t
 msgid ""
 "Any credits you add to one site will be available on both. If you stop "
 "using this site, your credits will remain safe."
-msgstr "Bất kỳ tín dụng nào bạn thêm vào một trang web sẽ có sẵn trên cả hai. Nếu bạn ngừng sử dụng trang web này, tín dụng của bạn vẫn sẽ an toàn."
+msgstr "Bất kỳ tín dụng nào bạn thêm vào một trang web sẽ có sẵn trên cả hai. Nếu bạn ngừng sử dụng trang web này, tín dụng của bạn sẽ vẫn an toàn."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:15
 msgid ""
 "WPML was unable to connect your old and new URLs to share automatic "
 "translation credits."
-msgstr ""
+msgstr "WPML không thể kết nối URL cũ và mới của bạn để chia sẻ tín dụng dịch tự động."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:7
 msgid "Error with sharing automatic translation credits"
-msgstr ""
+msgstr "Lỗi khi chia sẻ tín dụng dịch tự động"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:12
 msgid ""
 "The site on %s has %d credits for automatic translation. Do you want to "
 "share these credits with this new site %s?"
-msgstr "Trang web trên %s có %d tín dụng cho dịch tự động. Bạn có muốn chia sẻ những tín dụng này với trang web mới %s không?"
+msgstr "Trang web trên %s có %d tín dụng cho bản dịch tự động. Bạn có muốn chia sẻ các tín dụng này với trang web mới này %s không?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:19
 msgid ""
 "The site on %s has a pay-as-you-go subscription for automatic translation. "
 "Do you want to share these credits between %s and this new location (%s)?"
-msgstr ""
+msgstr "Trang web trên %s có gói đăng ký trả theo mức sử dụng cho bản dịch tự động. Bạn có muốn chia sẻ các tín dụng này giữa %s và vị trí mới này (%s) không?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:66
 msgid "Yes (recommended)"
-msgstr ""
+msgstr "Có (khuyên dùng)"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:68
 msgid "In the next step, you’ll approve the use of same credits on both sites."
-msgstr "Trong bước tiếp theo, bạn sẽ phê duyệt việc sử dụng cùng một tín dụng trên cả hai trang web."
+msgstr "Trong bước tiếp theo, bạn sẽ phê duyệt việc sử dụng cùng tín dụng trên cả hai trang web."
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:71
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:61
 msgid "No"
-msgstr ""
+msgstr "Không"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:73
 msgid "You’ll need to assign new credits or set up pay-as-you-go."
-msgstr "Bạn sẽ cần gán tín dụng mới hoặc thiết lập thanh toán theo mức sử dụng."
+msgstr "Bạn sẽ cần chỉ định tín dụng mới hoặc thiết lập gói trả theo mức sử dụng."
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:87
 msgid "What happens when you share credits between sites?"
@@ -149,11 +151,11 @@ msgstr "Điều gì xảy ra khi bạn chia sẻ tín dụng giữa các trang w
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:9
 msgid "Translation credits for this site"
-msgstr ""
+msgstr "Tín dụng dịch cho trang web này"
 
 #: src/js/ate-cloned-sites/steps/Initial.js:10
 msgid "WPML detected a change in your site’s URL"
-msgstr "WPML phát hiện thay đổi trong URL trang web của bạn"
+msgstr "WPML đã phát hiện thay đổi trong URL trang web của bạn"
 
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:21
 msgid "You can now continue translating content on this site as usual."
@@ -163,19 +165,19 @@ msgstr "Bây giờ bạn có thể tiếp tục dịch nội dung trên trang we
 msgid ""
 "Just a reminder: there shouldn’t be another copy of this site running at "
 "%s. If there is, automatic translation won’t work correctly on that site."
-msgstr "Chỉ để nhắc nhở: không nên có bản sao khác của trang web này đang chạy tại %s. Nếu có, dịch tự động sẽ không hoạt động chính xác trên trang web đó."
+msgstr "Chỉ cần nhắc nhở: không nên có một bản sao khác của trang web này đang chạy tại %s. Nếu có, bản dịch tự động sẽ không hoạt động chính xác trên trang web đó."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:33
 msgid "You indicated that the original site at %s is no longer active. This means:"
-msgstr "Bạn đã chỉ ra rằng trang web gốc tại %s không còn hoạt động nữa. Điều này có nghĩa là:"
+msgstr "Bạn đã chỉ ra rằng trang web gốc tại %s không còn hoạt động. Điều này có nghĩa là:"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:37
 msgid "Automatic translation will no longer work on the old site"
-msgstr "Dịch tự động sẽ không còn hoạt động trên trang web cũ"
+msgstr "Bản dịch tự động sẽ không còn hoạt động trên trang web cũ"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:40
 msgid "Accessing the old site may trigger warnings on this site"
-msgstr "Việc truy cập trang web cũ có thể kích hoạt cảnh báo trên trang web này"
+msgstr "Truy cập trang web cũ có thể kích hoạt cảnh báo trên trang web này"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:50
 msgid "Please confirm:"
@@ -183,11 +185,11 @@ msgstr "Vui lòng xác nhận:"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:61
 msgid "I understand and confirm that <b>%s</b> is no longer in use."
-msgstr "Tôi hiểu và xác nhận rằng <b>%s</b> không còn được sử dụng nữa."
+msgstr "Tôi hiểu và xác nhận rằng <b>%s</b> không còn được sử dụng."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:78
 msgid "Back"
-msgstr ""
+msgstr "Quay lại"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:9
 msgid "Please Confirm"
@@ -195,11 +197,11 @@ msgstr "Vui lòng xác nhận"
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:16
 msgid "WPML was unable to update our records with your new URL."
-msgstr ""
+msgstr "WPML không thể cập nhật hồ sơ của chúng tôi với URL mới của bạn."
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:7
 msgid "Error with moving translation information to new URL"
-msgstr ""
+msgstr "Lỗi khi di chuyển thông tin dịch sang URL mới"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:34
 msgid "It looks like this site was previously at %s and is now running on %s."
@@ -207,11 +209,11 @@ msgstr "Có vẻ như trang web này trước đây ở %s và hiện đang ch�
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:42
 msgid "Is the original site still available at %s?"
-msgstr "Trang web gốc vẫn còn khả dụng tại %s?"
+msgstr "Trang web gốc vẫn có sẵn tại %s chứ?"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:54
 msgid "Yes"
-msgstr ""
+msgstr "Có"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:57
 msgid ""
@@ -225,91 +227,91 @@ msgstr "Tôi đã di chuyển trang web đến địa chỉ mới này và đây
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:8
 msgid "WPML Detected a New Site Address"
-msgstr "WPML Phát hiện Địa chỉ Trang web Mới"
+msgstr "WPML đã phát hiện một địa chỉ trang web mới"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:80
 msgid "How to manage translations when migrating from development to production"
-msgstr "Cách quản lý bản dịch khi di chuyển từ môi trường phát triển sang môi trường sản xuất"
+msgstr "Cách quản lý bản dịch khi di chuyển từ phát triển sang sản xuất"
 
 #: src/js/ate-cloned-sites/steps/NoAdmin.js:11
 msgid ""
 "Looks like this site is a copy of a different site, or moved to a different "
 "URL. Please contact your translation manager to update Translation "
 "Management plugin configuration."
-msgstr ""
+msgstr "Có vẻ như trang web này là bản sao của một trang web khác, hoặc đã chuyển sang một URL khác. Vui lòng liên hệ với người quản lý bản dịch của bạn để cập nhật cấu hình plugin Quản lý bản dịch."
 
 #: src/js/ate-cloned-sites/steps/NoAdmin.js:5
 msgid "Site Moved or Copied - Action Required"
-msgstr ""
+msgstr "Trang web đã di chuyển hoặc sao chép - cần hành động"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+#: src/js/ate-cloned-sites/steps/RevertMove.js:36
 msgid "You or someone else moved this site to %s. Please keep in mind that:"
-msgstr ""
+msgstr "Bạn hoặc người khác đã di chuyển trang web này đến %s. Xin lưu ý rằng:"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+#: src/js/ate-cloned-sites/steps/RevertMove.js:50
 msgid "Translations that you do at %s will not appear on this site."
-msgstr ""
+msgstr "Các bản dịch bạn thực hiện tại %s sẽ không xuất hiện trên trang web này."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+#: src/js/ate-cloned-sites/steps/RevertMove.js:56
 msgid "You cannot edit translations on this site."
-msgstr ""
+msgstr "Bạn không thể chỉnh sửa bản dịch trên trang web này."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+#: src/js/ate-cloned-sites/steps/RevertMove.js:67
 msgid ""
 "The site at %s is using the same credits for automatic translation as this "
 "site."
-msgstr ""
+msgstr "Trang web tại %s đang sử dụng cùng tín dụng cho bản dịch tự động với trang web này."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+#: src/js/ate-cloned-sites/steps/RevertMove.js:76
 msgid ""
 "If you didn't intend to move this site to %s, you can <a>indicate that this "
 "site should be at %s</a>."
-msgstr ""
+msgstr "Nếu bạn không có ý định di chuyển trang web này đến %s, bạn có thể <a>chỉ ra rằng trang web này nên ở %s</a>."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+#: src/js/ate-cloned-sites/steps/RevertMove.js:9
 msgid "This site has moved to a new location"
-msgstr ""
+msgstr "Trang web này đã chuyển đến một vị trí mới"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+#: src/js/ate-cloned-sites/steps/RevertMove.js:96
 msgid ""
 "If you prefer not to move this site, you can <a>mark it as a copy</a> and "
 "enable automatic translation for it."
-msgstr ""
+msgstr "Nếu bạn không muốn di chuyển trang web này, bạn có thể <a>đánh dấu nó là một bản sao</a> và bật bản dịch tự động cho nó."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:38
 msgid ""
 "Moving the site back here will mean that you will be able to translate on "
 "this domain again, but you will not be able to update translations at %s."
-msgstr ""
+msgstr "Việc di chuyển trang web trở lại đây có nghĩa là bạn sẽ có thể dịch trên miền này một lần nữa, nhưng bạn sẽ không thể cập nhật bản dịch tại %s."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:50
 msgid "Yes - move back here"
-msgstr ""
+msgstr "Có - di chuyển trở lại đây"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:56
 msgid "No - keep the site on %s"
-msgstr ""
+msgstr "Không - giữ trang web trên %s"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:9
 msgid "Are you sure that this site should run on %s and not %s?"
-msgstr ""
+msgstr "Bạn có chắc chắn rằng trang web này nên chạy trên %s chứ không phải %s không?"
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:16
 msgid ""
 "WPML noticed that your site is being accessed from a different domain or "
 "URL."
-msgstr "WPML nhận thấy rằng trang web của bạn đang được truy cập từ một tên miền hoặc URL khác."
+msgstr "WPML nhận thấy rằng trang web của bạn đang được truy cập từ một miền hoặc URL khác."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:21
 msgid ""
 "To make sure everything continues working correctly, including automatic "
 "translation and site registration, we need to verify and update your site "
 "settings."
-msgstr "Để đảm bảo mọi thứ tiếp tục hoạt động chính xác, bao gồm dịch tự động và đăng ký trang web, chúng tôi cần xác minh và cập nhật cài đặt trang web của bạn."
+msgstr "Để đảm bảo mọi thứ tiếp tục hoạt động chính xác, bao gồm bản dịch tự động và đăng ký trang web, chúng tôi cần xác minh và cập nhật cài đặt trang web của bạn."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:26
 msgid "This will only take a moment."
-msgstr "Điều này sẽ chỉ mất một chút thời gian."
+msgstr "Việc này sẽ chỉ mất một chút thời gian."
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:36
 msgid "Start Migration"
@@ -319,22 +321,22 @@ msgstr "Bắt đầu di chuyển"
 msgid ""
 "If you didn't change your main domain and only logged in through a "
 "secondary domain, select this option."
-msgstr "Nếu bạn không thay đổi tên miền chính và chỉ đăng nhập thông qua một tên miền phụ, hãy chọn tùy chọn này."
+msgstr "Nếu bạn không thay đổi miền chính của mình và chỉ đăng nhập qua một miền phụ, hãy chọn tùy chọn này."
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:23
 msgid "Something went wrong"
 msgstr "Đã xảy ra lỗi"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:38
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:39
 msgid "I just logged in from a secondary domain"
-msgstr "Tôi vừa đăng nhập từ một tên miền phụ"
+msgstr "Tôi vừa đăng nhập từ một miền phụ"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:47
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:48
 msgid "You're all set!"
-msgstr "Bạn đã hoàn tất!"
+msgstr "Bạn đã sẵn sàng!"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:52
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:53
 msgid ""
 "This domain is now registered as a secondary domain and WPML will recognize "
 "it correctly."
-msgstr "Tên miền này hiện đã được đăng ký là tên miền phụ và WPML sẽ nhận diện nó một cách chính xác."
+msgstr "Miền này hiện được đăng ký là miền phụ và WPML sẽ nhận dạng nó một cách chính xác."

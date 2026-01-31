@@ -185,13 +185,15 @@ function wcmmq_social_links(){
         $codeastrology = [
             'ticket'   => ['url' => 'https://codeastrology.com/my-support/?utm=Plugin_Social', 'title' => 'Create Ticket'],
             'web'   => ['url' => 'https://codeastrology.com/?utm=Plugin_Social', 'title' => 'CodeAstrology'],
-            'wpt'   => ['url' => 'https://wooproducttable.com/?utm=Plugin_Social', 'title' => 'Woo Product Table'],
+            'wpt'   => ['url' => 'https://wooproducttable.com/?utm=Plugin_Social', 'title' => 'Woo Product Table - Create Products Table'],
             'min-max'   => ['url' => 'https://codeastrology.com/min-max-quantity/?utm=Plugin_Social', 'title' => 'CodeAstrology Min Max Step'],
             'linkedin'   => ['url' => 'https://www.linkedin.com/company/codeastrology'],
             'youtube'   => ['url' => 'https://www.youtube.com/c/codeastrology'],
             'facebook'   => ['url' => 'https://www.facebook.com/codeAstrology'],
             'twitter'   => ['url' => 'https://www.twitter.com/codeAstrology'],
-            'skype'   => ['url' => '#codersaiful', 'title' => 'codersaiful'],
+            // 'skype'   => ['url' => '#codersaiful', 'title' => 'codersaiful'],
+            'bizzplugin' => ['url' => 'https://bizzplugin.com', 'title' => 'Bizzplugin.com'],
+            'bizzmudra'  => ['url' => 'https://wordpress.org/plugins/bizzmudra/', 'title' => 'Bizzmudra - Multi Currency Switcher']
         ];
         foreach($codeastrology as $key=>$cLogy){
             $image_name = $key . '.png';
@@ -272,3 +274,126 @@ function wcmmq_donate_button($only_free = false){
 </stripe-buy-button>
     <?php
 }
+
+
+function wcmmq_form_submit(){
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field( wp_unslash($_POST['nonce']) ) : '';
+
+    if ( empty($nonce) || ! wp_verify_nonce( $nonce, WC_MMQ_PLUGIN_BASE_FOLDER ) ) {
+        return;
+    }
+
+    /**
+     * RESET
+     */
+    if ( isset($_POST['reset_button']) ) {
+
+        update_option( WC_MMQ_KEY, WC_MMQ::getDefaults() );
+        echo '<div class="updated notice"><p>Settings reset successfully.</p></div>';
+        return;
+    }
+
+    /**
+     * SAVE
+     */
+    if ( ! isset($_POST['configure_submit'], $_POST['data']) ) {
+        return;
+    }
+
+    $data = wp_unslash( $_POST['data'] );
+
+    /**
+     * Keys
+     */
+    $min_key     = WC_MMQ_PREFIX . 'min_quantity';
+    $max_key     = WC_MMQ_PREFIX . 'max_quantity';
+    $step_key    = WC_MMQ_PREFIX . 'product_step';
+    $default_key = WC_MMQ_PREFIX . 'default_quantity';
+    $pm_key      = WC_MMQ_PREFIX . 'qty_plus_minus_btn';
+
+    /**
+     * Sanitize (decimal supported)
+     */
+    $min     = isset($data[$min_key]) ? floatval($data[$min_key]) : 0;
+    $step    = isset($data[$step_key]) ? floatval($data[$step_key]) : 1;
+    $max_raw = isset($data[$max_key]) ? trim($data[$max_key]) : '';
+    $default = isset($data[$default_key]) ? floatval($data[$default_key]) : 0;
+
+    /**
+     * STEP validation (must not be zero)
+     */
+    if ( $step <= 0 ) {
+        $step = 1;
+        echo '<div class="error notice"><p>Step quantity can not be zero. Reset to 1.</p></div>';
+    }
+
+    /**
+     * MAX validation
+     * empty = unlimited
+     * zero NOT allowed
+     */
+    $max = '';
+
+    if ( $max_raw !== '' ) {
+
+        $max = floatval($max_raw);
+
+        if ( $max == 0 ) {
+            $max = '';
+            echo '<div class="error notice"><p>Maximum quantity can not be zero. Treated as unlimited.</p></div>';
+        }
+    }
+
+    /**
+     * Min / Max relation
+     */
+    if ( $max !== '' && $max <= $min ) {
+        $max = $min + $step;
+        echo '<div class="error notice"><p>Maximum quantity must be greater than minimum. It has been adjusted automatically.</p></div>';
+    }
+
+    /**
+     * Default quantity validation
+     */
+    if ( $default < $min ) {
+        $default = $min;
+        echo '<div class="error notice"><p>Default quantity was lower than minimum. Reset to minimum.</p></div>';
+    }
+
+    if ( $max !== '' && $default > $max ) {
+        $default = $min;
+        echo '<div class="error notice"><p>Default quantity exceeded maximum. Reset to minimum.</p></div>';
+    }
+
+    /**
+     * Checkbox normalize
+     */
+    $pm_btn = isset( $data[$pm_key] ) ? 1 : 0;
+
+    /**
+     * Final data
+     */
+
+    $data[$min_key]     = $min;
+    $data[$step_key]    = $step;
+    $data[$max_key]     = $max;
+    $data[$default_key] = $default;
+    $data[$pm_key]      = $pm_btn;
+
+    if( ! defined( 'WC_MMQ_PRO_VERSION' ) ){
+        //min max step will be int, no decimal
+        $data[$min_key]     = ! empty(  $min ) ? intval( $min ) : $min;
+        $data[$step_key]    = ! empty(  $step ) ? intval( $step ) : $step;
+         $data[$max_key]     = ! empty(  $max ) ? intval( $max ) : $max;
+        $data[$default_key] = ! empty(  $default ) ? intval( $default ) : $default;
+
+    }
+
+
+    $final_data = apply_filters( 'wcmmq_before_save_settings', $data );
+
+    update_option( WC_MMQ_KEY, $data );
+    return $final_data;
+    echo '<div class="updated notice"><p>Settings saved successfully.</p></div>';
+
+}   

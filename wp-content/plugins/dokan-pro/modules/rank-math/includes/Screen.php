@@ -7,7 +7,7 @@ use RankMath\Helper;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Locale;
-use MyThemeShop\Helpers\Url;
+use RankMath\Helpers\Url;
 use RankMath\Redirections\DB;
 use RankMath\Redirections\Cache;
 use RankMath\Admin\Admin_Helper;

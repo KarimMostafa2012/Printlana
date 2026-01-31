@@ -32,12 +32,14 @@ final class Modules_Manager {
 			'admin-top-bar',
 			'notes',
 			'announcements',
-			'display-conditions',
 			'element-manager',
 			'checklist',
 
 			// Modules with Widgets.
 			'attributes',
+			'atomic-widgets',
+			'display-conditions',
+			'transitions',
 			'theme-builder',
 			'loop-builder',
 			'off-canvas',
@@ -79,6 +81,7 @@ final class Modules_Manager {
 			'search',
 			'cloud-library',
 			'variables',
+			'editor-one',
 		];
 
 		foreach ( $modules as $module_name ) {

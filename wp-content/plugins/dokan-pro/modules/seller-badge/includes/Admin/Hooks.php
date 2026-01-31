@@ -89,5 +89,12 @@ class Hooks {
             wp_enqueue_script( 'dokan-seller-badge-admin' );
             wp_enqueue_style( 'dokan-seller-badge-admin' );
         }
+
+        wp_enqueue_script( 'dokan-seller-badge-admin-vendor' );
+
+        if ( 'dokan_page_dokan-dashboard' === $hook ) {
+            wp_enqueue_style( 'dokan-seller-badge-vendor-tab' );
+            wp_enqueue_script( 'dokan-seller-badge-vendor-tab' );
+        }
     }
 }

@@ -709,6 +709,10 @@ class WPML_Media_Attachments_Duplication {
 	}
 
 	private function is_original( $post ) {
+		if ( 'revision' === $post->post_type ) {
+			$post = get_post( $post->post_parent );
+		}
+
 		return (int) $post->ID === (int) $this->sitepress->get_original_element_id( $post->ID, 'post_' . $post->post_type, false, false, false, true );
 	}
 
@@ -752,7 +756,7 @@ class WPML_Media_Attachments_Duplication {
 					}
 
 					$this->translate_bricks_media( $item, $lang );
-					update_post_meta( $post->ID, $key, $item );
+					$this->update_post_meta_without_double_escaping_slashes( $post->ID, $key, $item, $value[0] );
 				}
 
 				if ( strpos( $key, 'panels_data' ) === 0 ) {
@@ -762,10 +766,31 @@ class WPML_Media_Attachments_Duplication {
 					}
 
 					$this->translate_siteorigin_media( $item, $lang );
-					update_post_meta( $post->ID, $key, $item );
+					$this->update_post_meta_without_double_escaping_slashes( $post->ID, $key, $item, $value[0] );
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param int    $post_id
+	 * @param string $key
+	 * @param mixed  $item
+	 * @param string $original_serialized_item
+	 */
+	private function update_post_meta_without_double_escaping_slashes( $post_id, $key, $item, $original_serialized_item ) {
+		$new_serialized_item = maybe_serialize( $item );
+		if ( $original_serialized_item === $new_serialized_item ) {
+			return;
+		}
+
+		$this->wpdb->update(
+			$this->wpdb->postmeta,
+			[ 'meta_value' => $new_serialized_item ],
+			[ 'post_id' => $post_id, 'meta_key' => $key ],
+			[ '%s' ],
+			[ '%d', '%s' ]
+		);
 	}
 
 	private function translate_bricks_media( &$data, $lang ) {
@@ -835,6 +860,10 @@ class WPML_Media_Attachments_Duplication {
 	}
 
 	private function get_translated_attachment_id( $id, $lang ) {
+		if ( ! is_string( $lang ) ) {
+			return $id;
+		}
+
 		$key = $id . $lang;
 
 		if ( ! array_key_exists( $key, $this->translated_posts ) ) {

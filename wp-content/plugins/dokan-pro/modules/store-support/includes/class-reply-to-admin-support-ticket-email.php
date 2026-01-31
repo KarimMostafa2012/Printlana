@@ -22,7 +22,14 @@ if ( ! class_exists( 'DokanReplyToAdminSupportTicket' ) ) :
      * @extends     WC_Email
      */
     class DokanReplyToAdminSupportTicket extends WC_Email {
-
+         
+        /**
+         * Email data passed to the template.
+         *
+         * @var array
+         */
+        protected $email_data = [];
+        
         /**
          * Constructor.
          */

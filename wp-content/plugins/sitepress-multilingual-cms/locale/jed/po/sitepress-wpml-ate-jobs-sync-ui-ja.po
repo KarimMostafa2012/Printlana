@@ -2,20 +2,22 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
-msgstr "翻訳に送る"
+msgstr "翻訳のために送信中"
 
 #: src/js/ate/TranslationDashboardJobsActions.js:23
 msgid ""
 "This content is being automatically translated. If you want to do something "
 "different with it cancel translation jobs first."
-msgstr "このコンテンツは自動的に翻訳されています。別の操作を行いたい場合は、まず翻訳ジョブをキャンセルしてください。"
+msgstr "このコンテンツは自動翻訳されています。別の操作を行う場合は、まず翻訳ジョブをキャンセルしてください。"
 
 #: src/js/ate/enable/init.js:53
 msgid "Connecting to WPML’s Advanced Translation Editor"
-msgstr "WPMLのアドバンス翻訳エディターに接続中"
+msgstr "WPMLの高度な翻訳エディターに接続中"
 
 #: src/js/ate/enable/init.js:67
 msgid "Try again"
@@ -23,7 +25,7 @@ msgstr "再試行"
 
 #: src/js/ate/review/init.js:17
 msgid "You don't have the rights to review this language"
-msgstr "あなたにこの言語をレビューする権限はありません"
+msgstr "この言語をレビューする権限がありません"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:33
 msgid "translations"
@@ -35,24 +37,30 @@ msgstr "キューに残っています"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:43
 msgid "Translation on hold"
-msgstr "保留中の翻訳"
+msgstr "翻訳保留中"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:45
 #: src/js/ate/status-bar/components/constants.js:16
 msgid "No translations in the queue"
-msgstr "キューに翻訳がありません"
+msgstr "キューに翻訳はありません"
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:50
 msgid "%d translations left"
-msgstr "%d 翻訳が残っています"
+msgstr "残り%d件の翻訳"
 
 #: src/js/ate/status-bar/components/StatusBar/Notifications.js:38
 msgid "%d min remaining"
-msgstr "残り %d 分"
+msgstr "残り%d分"
 
 #: src/js/ate/status-bar/components/StatusBar/Notifications.js:39
 msgid "less than 1 min remaining"
-msgstr "残り 1 分未満"
+msgstr "残り1分未満"
+
+#: src/js/ate/status-bar/components/constants.js:105
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] "レビュー待ちの翻訳が%d件あります"
 
 #: src/js/ate/status-bar/components/constants.js:14
 #: src/js/ate/translate-everything/components/Status/index.js:50
@@ -61,90 +69,85 @@ msgstr "自動翻訳ステータス"
 
 #: src/js/ate/status-bar/components/constants.js:18
 msgid "Translate Everything Automatically"
-msgstr "すべてを自動で翻訳する"
+msgstr "すべて自動翻訳"
 
 #: src/js/ate/status-bar/components/constants.js:20
 msgid "Translate Everything Automatically is active"
-msgstr "「すべてを自動で翻訳する」が有効です"
-
-#: src/js/ate/status-bar/components/constants.js:22
-msgid "Translate Everything Automatically is paused"
-msgstr "「すべてを自動的に翻訳する」が一時停止されています"
+msgstr "すべて自動翻訳が有効です"
 
 #: src/js/ate/status-bar/components/constants.js:24
-msgid "Translate Everything Automatically is stopped"
-msgstr "自動翻訳がすべて停止しました"
+msgid "Translate Everything Automatically is paused — payment required"
+msgstr "すべて自動翻訳が一時停止されました — 支払いが必要です"
 
 #: src/js/ate/status-bar/components/constants.js:26
-msgid "Out of Credits for Automatic Translation"
-msgstr "自動翻訳のクレジットが不足しています"
+msgid "Automatic translation is paused — payment required"
+msgstr "自動翻訳が一時停止されました — 支払いが必要です"
 
-#: src/js/ate/status-bar/components/constants.js:29
-msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
-msgstr[0] "Wpml.orgアカウントに<b>1</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、このクレジットをサイトに割り当ててください"
-msgstr[1] "Wpml.orgアカウントに<b>%s</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、これらのクレジットをサイトに割り当ててください"
+#: src/js/ate/status-bar/components/constants.js:28
+msgid ""
+"We couldn’t process your payment. Click “Pay now” to complete the "
+"transaction and resume automatic translation."
+msgstr "お支払いを処理できませんでした。「今すぐ支払う」をクリックして取引を完了し、自動翻訳を再開してください。"
 
-#: src/js/ate/status-bar/components/constants.js:41
+#: src/js/ate/status-bar/components/constants.js:32
+msgid "Translate Everything automatically is paused - not enough credits"
+msgstr "すべて自動翻訳が一時停止されました - クレジットが不足しています"
+
+#: src/js/ate/status-bar/components/constants.js:34
+msgid "Automatic translation is paused — not enough credits"
+msgstr "自動翻訳が一時停止されました — クレジットが不足しています"
+
+#: src/js/ate/status-bar/components/constants.js:36
+msgid "Translation will resume automatically once you assign more credits."
+msgstr "クレジットを追加すると、翻訳は自動的に再開されます。"
+
+#: src/js/ate/status-bar/components/constants.js:38
+msgid "You have %s prepaid translation credit in your WPML account. Assign these credits to this site to resume automatic translation"
+msgid_plural "You have %s prepaid translation credits in your WPML account. Assign these credits to this site to resume automatic translation"
+msgstr[0] "WPMLアカウントに%sのプリペイド翻訳クレジットがあります。自動翻訳を再開するには、これらのクレジットをこのサイトに割り当ててください"
+
+#: src/js/ate/status-bar/components/constants.js:72
 #: src/js/ate/status-bar/components/sending/index.js:10
 msgid "Preparing content for translation"
-msgstr "翻訳用のコンテンツを準備中"
+msgstr "翻訳のためにコンテンツを準備中"
 
-#: src/js/ate/status-bar/components/constants.js:43
+#: src/js/ate/status-bar/components/constants.js:74
 #: src/js/ate/status-bar/components/sending/index.js:9
 msgid "Preparing more content for translation"
-msgstr "翻訳用により多くのコンテンツを準備中"
+msgstr "さらにコンテンツを翻訳のために準備中"
 
-#: src/js/ate/status-bar/components/constants.js:45
-msgid "An error occured, fix it to continue."
-msgstr "エラーが発生しています。修正して続行してください。"
-
-#: src/js/ate/status-bar/components/constants.js:47
-msgid ""
-"There is an issue with automatic translation that needs your attention. Fix "
-"it to continue."
-msgstr "自動翻訳に問題が発生しました。継続するには、修正してください。"
-
-#: src/js/ate/status-bar/components/constants.js:50
+#: src/js/ate/status-bar/components/constants.js:77
 #. %s is replaced by the name of the language.
 msgid ""
 "Your default language, %s, must be mapped to a supported language in order "
 "to use automatic translation."
-msgstr "自動翻訳を使用するには、あなたのデフォルト言語、%sを対応言語のマップで示す必要があります。"
+msgstr "自動翻訳を使用するには、デフォルト言語である%sをサポートされている言語にマッピングする必要があります。"
 
-#: src/js/ate/status-bar/components/constants.js:58
+#: src/js/ate/status-bar/components/constants.js:85
 #. %s is replaced by the language(s) name.
 msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
 msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
-msgstr[0] "自動翻訳を使用するには、あなたの言語、%s、をサポートされている言語にマッピングする必要があります。"
-msgstr[1] "自動翻訳を使用するには、あなたのサイトの以下の言語をサポートされている言語にマッピングする必要があります：%s"
+msgstr[0] "自動翻訳を使用するには、サイトの以下の言語をサポートされている言語にマッピングする必要があります：%s"
 
-#: src/js/ate/status-bar/components/constants.js:68
+#: src/js/ate/status-bar/components/constants.js:95
 msgid ""
 "Content in those languages: %s, cannot be automatically translated unless "
 "you map them to a language that's different from the default."
-msgstr "これらの言語のコンテンツ: %s、はこれらをデフォルトと異なる言語に地図を付けなければ、自動翻訳できません。"
-
-#: src/js/ate/status-bar/components/constants.js:78
-#. %d is replaced by the number of jobs to review.
-msgid "%d translation waiting for review"
-msgid_plural "%d translations waiting for review"
-msgstr[0] "%d 件の翻訳がレビュー待ちです"
-msgstr[1] "%d 件の翻訳がレビュー待ちです"
+msgstr "これらの言語（%s）のコンテンツは、デフォルトとは異なる言語にマッピングしない限り、自動翻訳できません。"
 
 #: src/js/ate/status-bar/components/credit/index.js:100
 msgid "Account credits used"
-msgstr "アカウントクレジットを使用しました"
+msgstr "アカウントクレジット使用済み"
 
 #: src/js/ate/status-bar/components/credit/index.js:110
 msgid ""
 "Once you’ve used all your prepaid credits, we’ll invoice you for any "
 "additional credits you use after the end of the month"
-msgstr "プリペイドクレジットをすべて使用すると、月末後に追加分として使用されたクレジットの請求を受け取ります。"
+msgstr "プリペイドクレジットをすべて使い切った場合、月末以降に追加で使用したクレジットは請求されます"
 
 #: src/js/ate/status-bar/components/credit/index.js:115
 msgid "Payment limit:"
-msgstr "支払い限界："
+msgstr "支払い上限："
 
 #: src/js/ate/status-bar/components/credit/index.js:116
 msgid "%s credits"
@@ -156,14 +159,14 @@ msgstr "使用済みクレジット："
 
 #: src/js/ate/status-bar/components/credit/index.js:123
 msgid "Credits left:"
-msgstr "クレジット残高："
+msgstr "残りクレジット："
 
 #: src/js/ate/status-bar/components/credit/index.js:133
 msgid ""
 "The number of credit you will receive an invoice for at the end of the "
 "month. View your pay-as-you-go details in your site’s automatic translation "
 "settings."
-msgstr "月末にご請求させていただくクレジット数です。サイトの自動翻訳設定で、従量課金型の詳細を表示してください。"
+msgstr "月末に請求されるクレジット数。サイトの自動翻訳設定で従量課金制の詳細を表示します。"
 
 #: src/js/ate/status-bar/components/credit/index.js:139
 msgid "Calculating"
@@ -171,36 +174,51 @@ msgstr "計算中"
 
 #: src/js/ate/status-bar/components/credit/index.js:59
 msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
-msgstr "WPML.org.によりこのサイトに割り当てられたプリペイドクレジットの残高"
+msgstr "WPML.orgでこのサイトに割り当てられている残りのプリペイドクレジット。"
 
 #: src/js/ate/status-bar/components/credit/index.js:73
 msgid "Prepaid credits left"
-msgstr "プリペイドクレジットの残高"
+msgstr "残りのプリペイドクレジット"
 
 #: src/js/ate/status-bar/components/credit/index.js:99
 msgid "Pay-as-you-go credits used"
-msgstr "使用済みの従量課金型のクレジット"
+msgstr "従量課金制クレジット使用済み"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:25
 msgid "Your site doesn't meet WPML's minimum requirements"
-msgstr "あなたのサイトがWPMLの最小要件を満たしていません。"
+msgstr "サイトがWPMLの最小要件を満たしていません"
 
 #: src/js/ate/status-bar/components/minimum-requirements/MinimumRequirementsNotification.js:31
-#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
 msgid "Fix it"
-msgstr "修正する"
+msgstr "修正"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:17
 msgid "Stop"
-msgstr "ストップします"
+msgstr "停止"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+#: src/js/ate/status-icons/StatusUpdater.js:133
+msgid "Pay now"
+msgstr "今すぐ支払う"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:34
-msgid "Assign credits now"
-msgstr "今すぐクレジットを割り当てる"
+#: src/js/ate/status-icons/StatusUpdater.js:134
+msgid "Get more credits"
+msgstr "さらにクレジットを取得"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:42
+msgid "Assign credits"
+msgstr "クレジットを割り当てる"
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:8
 msgid "Resume"
-msgstr "再開する"
+msgstr "再開"
+
+#: src/js/ate/status-icons/StatusUpdater.js:159
+msgid ""
+"This translation couldn't be completed due to an unexpected error. Please "
+"try resending it."
+msgstr "予期せぬエラーが発生したため、この翻訳を完了できませんでした。再送信してください。"
 
 #: src/js/ate/status-icons/StatusUpdater.js:80
 msgid "Refreshing translation status"
@@ -210,11 +228,11 @@ msgstr "翻訳ステータスを更新中"
 msgid ""
 "Read more about how to translate your content in the <a>Getting Started "
 "Guide</a>"
-msgstr "コンテンツの翻訳方法については、<a>はじめてのガイド</a>をご覧ください"
+msgstr "コンテンツの翻訳方法については、<a>スタートガイド</a>をご覧ください"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
 msgid "Let's Start Translating!"
-msgstr "翻訳を始めましょう！"
+msgstr "翻訳を開始しましょう！"
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
 msgid ""
@@ -226,15 +244,15 @@ msgstr "以下の翻訳ダッシュボードからコンテンツを選択し、
 msgid ""
 "Change your <a>automatic translation settings</a> (in-progress translation "
 "jobs will be completed with the current settings)."
-msgstr "<a>自動翻訳設定</a>を変更してください（進行中の翻訳ジョブは現在の設定で完了します）。"
+msgstr "<a>自動翻訳設定</a>を変更します（進行中の翻訳ジョブは現在の設定で完了します）。"
 
 #: src/js/ate/translate-everything/components/Status/index.js:115
 msgid "Read more about translating your site automatically."
-msgstr "サイトの自動翻訳についての詳細を読む。"
+msgstr "サイトの自動翻訳について詳しく読む。"
 
 #: src/js/ate/translate-everything/components/Status/index.js:49
 msgid "Your site is being automatically translated!"
-msgstr "あなたのサイトは自動翻訳中です！"
+msgstr "サイトが自動翻訳されています！"
 
 #: src/js/ate/translate-everything/components/Status/index.js:58
 msgid "Calculating..."
@@ -246,4 +264,4 @@ msgstr "WP管理画面を閉じないでください！"
 
 #: src/js/ate/translate-everything/components/Status/index.js:96
 msgid "The number of translations"
-msgstr "翻訳の数"
+msgstr "翻訳数"

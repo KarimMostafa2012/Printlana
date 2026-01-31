@@ -2,15 +2,17 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:116
 msgid "WPML Translation Editor"
-msgstr "WPML Editor für Übersetzungen"
+msgstr "WPML-Übersetzungseditor"
 
 #: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:123
 #: src/js/postEditTranslationEditor/components/SaveModal.js:22
 msgid "WordPress Editor"
-msgstr "WordPress Editor"
+msgstr "WordPress-Editor"
 
 #: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:99
 #: src/js/postEditTranslationEditor/components/SaveModal.js:24
@@ -22,13 +24,13 @@ msgstr "Übersetzungs-Dashboard"
 msgid ""
 "Also, switching back to WPML's Translation Editor later will require "
 "re-translating content that you translated with the WordPress editor."
-msgstr "Beachten Sie auch, dass ein späterer Wechsel zurück zum WPML-Übersetzungseditor eine erneute Übersetzung der Inhalte erfordert, die Sie mit dem WordPress-Editor übersetzt haben."
+msgstr "Außerdem müssen Sie beim späteren Zurückwechseln zum WPML-Übersetzungseditor Inhalte, die Sie mit dem WordPress-Editor übersetzt haben, erneut übersetzen."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:107
 msgid ""
 "This will overwrite content you translated with the WordPress Editor. If "
 "you switch now, you'll have to translate selected content again."
-msgstr "Dies wird Inhalte überschreiben, die Sie mit dem WordPress-Editor übersetzt haben. Wenn Sie jetzt wechseln, müssen Sie ausgewählte Inhalte erneut übersetzen."
+msgstr "Dadurch werden Inhalte überschrieben, die Sie mit dem WordPress-Editor übersetzt haben. Wenn Sie jetzt wechseln, müssen Sie ausgewählte Inhalte erneut übersetzen."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:35
 msgid "You are about to translate with the %s"
@@ -38,7 +40,7 @@ msgstr "Sie sind dabei, mit dem %s zu übersetzen"
 msgid ""
 "Translate with the WordPress Editor if you need different designs per "
 "language or if the content isn't compatible with WPML's Translation Editor."
-msgstr "Übersetzen Sie mit dem WordPress-Editor, wenn Sie unterschiedliche Designs pro Sprache benötigen oder wenn der Inhalt nicht mit WPMLs Übersetzungseditor kompatibel ist."
+msgstr "Übersetzen Sie mit dem WordPress-Editor, wenn Sie unterschiedliche Designs pro Sprache benötigen oder wenn der Inhalt nicht mit dem WPML-Übersetzungseditor kompatibel ist."
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:51
 msgid "What do you want to translate?"
@@ -50,7 +52,7 @@ msgstr "Ich verstehe, zum WordPress-Editor wechseln"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:75
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Anwenden"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:76
 msgid "Cancel"
@@ -58,7 +60,7 @@ msgstr "Abbrechen"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:8
 msgid "I understand, switch to %s"
-msgstr "Ich verstehe, wechseln Sie zu %s"
+msgstr "Ich verstehe, zu %s wechseln"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:85
 msgid "Only this %s"
@@ -74,18 +76,18 @@ msgstr "Alle %s"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:87
 msgid "All the site's content"
-msgstr "Den gesamten Inhalt der Website"
+msgstr "Alle Inhalte der Website"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:9
 msgid "I understand, switch to Translation Dashboard"
-msgstr "Ich verstehe, wechsle zum Übersetzungs-Dashboard"
+msgstr "Ich verstehe, zum Übersetzungs-Dashboard wechseln"
 
 #: src/js/postEditTranslationEditor/components/SaveModal.js:97
 msgid ""
 "The WordPress Editor doesn't offer Automatic Translation, Translation "
 "Memory and other features that make translation easier."
-msgstr "Der WordPress-Editor bietet keine automatische Übersetzung, kein Übersetzungsspeicher und andere Funktionen, die das Übersetzen erleichtern."
+msgstr "Der WordPress-Editor bietet keine automatische Übersetzung, kein Translation Memory und andere Funktionen, die die Übersetzung erleichtern."
 
 #: src/js/postEditTranslationEditor/components/showDashboardEditor.js:9
 msgid "Translate items in batch after reviewing the cost of AI translation"
-msgstr "Übersetze Elemente im Stapel, nachdem du die Kosten für die KI-Übersetzung geprüft hast"
+msgstr "Elemente stapelweise übersetzen, nachdem die Kosten der KI-Übersetzung überprüft wurden"

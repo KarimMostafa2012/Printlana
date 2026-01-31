@@ -3,19 +3,21 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "To display this Custom HTML block in a specific language, first place it inside a Group block.": [
-            "เพื่อแสดงบล็อก HTML แบบกำหนดเองนี้ในภาษาเฉพาะ อันดับแรกให้วางไว้ภายในบล็อกกลุ่ม."
+            "หากต้องการแสดงบล็อก HTML แบบกำหนดเองนี้ในภาษาที่ต้องการ ให้วางไว้ในบล็อกกลุ่มก่อน"
          ],
          "Place inside Group block": [
-            "วางไว้ภายในบล็อกกลุ่ม"
+            "วางในบล็อกกลุ่ม"
          ],
          "All": [
             "ทั้งหมด"
          ],
          "Display on language": [
-            "แสดงตามภาษา"
+            "แสดงผลตามภาษา"
          ]
       }
    }

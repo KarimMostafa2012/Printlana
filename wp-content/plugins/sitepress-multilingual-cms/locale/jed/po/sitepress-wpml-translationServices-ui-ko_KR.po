@@ -2,10 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
-msgstr "%s 계정에 이 사이트 연결"
+msgstr "이 사이트를 %s 계정에 연결"
 
 #: src/js/translationServices/components/AuthorizeModal.js:45
 msgid "Error"
@@ -13,7 +15,7 @@ msgstr "오류"
 
 #: src/js/translationServices/components/AuthorizeModal.js:57
 msgid "« Use a different Translation Service"
-msgstr "« 다른 번역 서비스 제공자 사용"
+msgstr "« 다른 번역 서비스 사용"
 
 #: src/js/translationServices/components/AuthorizeModal.js:62
 msgid "Authenticate"
@@ -23,7 +25,7 @@ msgstr "인증"
 msgid ""
 "Visit <link_to_service /> to request an API Token. This token allows WPML "
 "to connect to <service_name /> to send and receive jobs."
-msgstr "<link_to_service />을(를) 방문하여 API 토큰을 요청하십시오. 이 토큰은 WPML이 <service_name />에 연결하여 작업을 송수신할 수 있도록 합니다."
+msgstr "API 토큰을 요청하려면 <link_to_service />를 방문하세요. 이 토큰을 통해 WPML은 <service_name />에 연결하여 작업을 주고받을 수 있습니다."
 
 #: src/js/translationServices/components/SearchForm.js:10
 msgid "Search translation services"
@@ -43,11 +45,11 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "WPML이 사이트 컨텐츠를 자동 번역하도록 설정된 경우 현재 번역 서비스에 연결할 수 없습니다. 번역 서비스를 이용하려면 <LinkToSettingsPage /> 페이지에서 번역 모드를 변경하십시오."
+msgstr "WPML이 사이트 콘텐츠를 자동으로 번역하도록 설정된 경우 번역 서비스를 연결할 수 없습니다. 번역 서비스를 사용하려면 <LinkToSettingsPage /> 페이지에서 번역 모드를 변경하세요."
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"
-msgstr "설명서"
+msgstr "문서"
 
 #: src/js/translationServices/components/ServicesList.js:57
 msgid "Activate"

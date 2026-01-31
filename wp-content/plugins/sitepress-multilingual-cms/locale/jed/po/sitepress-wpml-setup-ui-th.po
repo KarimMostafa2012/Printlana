@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -13,7 +15,7 @@ msgstr "--เลือกภาษา--"
 
 #: src/js/components/language/LanguagePairs.js:81
 msgid "to:"
-msgstr "ไปยัง:"
+msgstr "ถึง:"
 
 #: src/js/components/language/LanguagePairs.js:93
 msgid "Select %s"
@@ -21,15 +23,15 @@ msgstr "เลือก %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "ตั้งค่าคู่ภาษาสำหรับผู้แปล %s:"
+msgstr "ตั้งค่าคู่ภาษาสำหรับนักแปล %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
-msgstr "+ เพิ่มคู่ภาษาเพิ่มเติมสำหรับผู้แปลนี้"
+msgstr "+ เพิ่มคู่ภาษาเพิ่มเติมสำหรับนักแปลนี้"
 
 #: src/js/components/roles/CreateUser.js:100
 msgid "First Name"
-msgstr "ชื่อ"
+msgstr "ชื่อจริง"
 
 #: src/js/components/roles/CreateUser.js:101
 msgid "Last Name"
@@ -51,15 +53,15 @@ msgstr "เลือกบทบาทสำหรับผู้ใช้"
 msgid ""
 "Make sure that you have provided a correct email address e.g. "
 "name@domain.com"
-msgstr "ตรวจสอบให้แน่ใจว่าคุณได้ให้ที่อยู่อีเมลที่ถูกต้อง เช่น name@domain.com"
+msgstr "ตรวจสอบให้แน่ใจว่าคุณได้ระบุที่อยู่อีเมลที่ถูกต้อง เช่น name@domain.com"
 
 #: src/js/components/roles/CreateUser.js:64
 msgid "This field is required"
-msgstr "ฟิลด์นี้จำเป็น"
+msgstr "ช่องนี้จำเป็นต้องกรอก"
 
 #: src/js/components/roles/CreateUser.js:84
 msgid "A translator can be any WordPress role."
-msgstr "ผู้แปลสามารถเป็นบทบาท WordPress ใดก็ได้."
+msgstr "นักแปลสามารถเป็นบทบาทใดก็ได้ของ WordPress"
 
 #: src/js/components/roles/CreateUser.js:98
 msgid "Username"
@@ -96,11 +98,11 @@ msgstr "บรรณาธิการ"
 
 #: src/js/components/translation-managers/AddManagerDialog.js:71
 msgid "Select an existing %s and set as Translation Manager"
-msgstr "เลือก %s ที่มีอยู่และตั้งเป็นผู้จัดการการแปล"
+msgstr "เลือก %s ที่มีอยู่และตั้งค่าเป็นผู้จัดการการแปล"
 
 #: src/js/components/translation-managers/AddManagerDialog.js:96
 msgid "Create a new %s and set as Translation Manager"
-msgstr "สร้าง %s ใหม่และตั้งเป็นผู้จัดการการแปล"
+msgstr "สร้าง %s ใหม่และตั้งค่าเป็นผู้จัดการการแปล"
 
 #: src/js/components/translation-managers/ManagerSection.js:27
 msgid "Add a Translation Manager"
@@ -108,11 +110,11 @@ msgstr "เพิ่มผู้จัดการการแปล"
 
 #: src/js/components/translators/AddTranslatorDialog.js:101
 msgid "Select an existing user and set as Translator"
-msgstr "เลือกผู้ใช้ที่มีอยู่และตั้งเป็นผู้แปล"
+msgstr "เลือกผู้ใช้ที่มีอยู่และตั้งค่าเป็นนักแปล"
 
 #: src/js/components/translators/AddTranslatorDialog.js:124
 msgid "Create a new user and set as Translator"
-msgstr "สร้างผู้ใช้ใหม่และตั้งเป็นผู้แปล"
+msgstr "สร้างผู้ใช้ใหม่และตั้งค่าเป็นนักแปล"
 
 #: src/js/components/translators/AddTranslatorDialog.js:141
 msgid "Set language pair(s)"
@@ -130,11 +132,11 @@ msgstr "บันทึก"
 #: src/js/components/translators/AddTranslatorDialog.js:65
 #: src/js/components/translators/UserSection.js:45
 msgid "Add a Translator"
-msgstr "เพิ่มผู้แปล"
+msgstr "เพิ่มนักแปล"
 
 #: src/js/components/translators/EditLanguagesDialog.js:55
 msgid "Edit language pair(s) for translator"
-msgstr "แก้ไขคู่ภาษาสำหรับผู้แปล"
+msgstr "แก้ไขคู่ภาษาสำหรับนักแปล"
 
 #: src/js/components/translators/TranslatorsTable.js:136
 #: src/js/setup/components/Steps/AddLanguagesModal.js:346
@@ -148,7 +150,7 @@ msgstr "คู่ภาษา"
 
 #: src/js/components/translators/TranslatorsTable.js:152
 msgid "You can translate to and from all languages"
-msgstr "คุณสามารถแปลไปและจากทุกภาษา"
+msgstr "คุณสามารถแปลได้ทั้งจากและเป็นทุกภาษา"
 
 #: src/js/components/translators/TranslatorsTable.js:59
 msgid "Edit language pair(s)"
@@ -158,9 +160,47 @@ msgstr "แก้ไขคู่ภาษา"
 msgid "Delete language pair(s)"
 msgstr "ลบคู่ภาษา"
 
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:39
+msgid "Failed to enable AI Translation Step"
+msgstr "ไม่สามารถเปิดใช้งานขั้นตอนการแปลด้วย AI ได้"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:44
+msgid "AI Translation Activation Failed"
+msgstr "การเปิดใช้งานการแปลด้วย AI ล้มเหลว"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:48
+msgid "Please contact "
+msgstr "โปรดติดต่อ "
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:50
+msgid "WPML Support"
+msgstr "ฝ่ายสนับสนุน WPML"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:52
+msgid ""
+" and provide a screenshot of this error along with the technical details "
+"below (use the Copy button to copy them)."
+msgstr " และให้ภาพหน้าจอของข้อผิดพลาดนี้พร้อมกับรายละเอียดทางเทคนิคด้านล่าง (ใช้ปุ่มคัดลอกเพื่อคัดลอก)"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:71
+msgid "Technical Details (for WPML Support)"
+msgstr "รายละเอียดทางเทคนิค (สำหรับฝ่ายสนับสนุน WPML)"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:83
+msgid "Copied!"
+msgstr "คัดลอกแล้ว!"
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:83
+msgid "Copy"
+msgstr "คัดลอก"
+
+#: src/js/setup/components/Steps/AITranslation/index.js:68
+msgid "Loading AI Translation..."
+msgstr "กำลังโหลดการแปลด้วย AI..."
+
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
-msgstr "การอัปโหลดไฟล์ %s ล้มเหลว."
+msgstr "การอัปโหลดไฟล์ %s ล้มเหลว"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:69
 msgid "Flag"
@@ -174,7 +214,7 @@ msgstr "ไฟล์ธง"
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "คุณเพิ่งเพิ่มภาษา ต่อไป เลือกเป็นภาษาเริ่มต้นของเว็บไซต์หรือภาษาแปล."
+msgstr "คุณเพิ่งเพิ่มภาษา ถัดไป ให้เลือกเป็นภาษาเริ่มต้นของเว็บไซต์หรือภาษาสำหรับการแปล"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -192,14 +232,14 @@ msgstr "เพิ่มภาษาใหม่"
 msgid ""
 "Create a country-specific language by choosing the general language from "
 "the list below. Then, choose the country it should be localized for."
-msgstr "สร้างภาษาเฉพาะประเทศโดยเลือกภาษาทั่วไปจากรายการด้านล่าง จากนั้นเลือกประเทศที่ควรจะท้องถิ่น."
+msgstr "สร้างภาษาเฉพาะประเทศโดยเลือกภาษาทั่วไปจากรายการด้านล่าง จากนั้นเลือกประเทศที่ควรแปลเป็นภาษาท้องถิ่น"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:229
 msgid ""
 "By choosing a combination that already exists in the database, WPML can "
 "help fill out the necessary fields. Read more about "
 "<AddingACustomLanguageLink />."
-msgstr "โดยการเลือกการรวมกันที่มีอยู่แล้วในฐานข้อมูล WPML สามารถช่วยกรอกฟิลด์ที่จำเป็นได้ อ่านเพิ่มเติมเกี่ยวกับ <AddingACustomLanguageLink />."
+msgstr "โดยการเลือกการรวมกันที่มีอยู่ในฐานข้อมูล WPML สามารถช่วยกรอกข้อมูลในช่องที่จำเป็นได้ อ่านเพิ่มเติมเกี่ยวกับ <AddingACustomLanguageLink />"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:242
 msgid "Cannot find?"
@@ -229,7 +269,7 @@ msgstr "รหัส"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:374
 msgid "The language will not be supported by automatic translations"
-msgstr "ภาษานี้จะไม่รองรับการแปลอัตโนมัติ"
+msgstr "ภาษาจะไม่ได้รับการสนับสนุนโดยการแปลอัตโนมัติ"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:392
 msgid "Language mapping"
@@ -241,7 +281,7 @@ msgstr "ไม่ต้องแมปภาษานี้"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:418
 msgid "Default locale"
-msgstr "ภาษาท้องถิ่นเริ่มต้น"
+msgstr "ภาษาเริ่มต้น"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:423
 msgid ""
@@ -255,7 +295,7 @@ msgstr "hreflang"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:449
 msgid "Encode url?"
-msgstr "เข้ารหัส URL?"
+msgstr "เข้ารหัส URL หรือไม่?"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:45
 msgid "Flags must be:"
@@ -275,7 +315,7 @@ msgstr " (จำเป็น)"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:483
 msgid "Please fill in the field"
-msgstr "กรุณากรอกข้อมูลในฟิลด์"
+msgstr "โปรดกรอกข้อมูลในช่อง"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:49
 msgid "PNG, SVG, or JPG files"
@@ -297,13 +337,13 @@ msgstr "อ่านเพิ่มเติมเกี่ยวกับ "
 msgid ""
 "The name of your language as it will appear on your site's language "
 "switcher."
-msgstr "ชื่อของภาษาของคุณที่จะปรากฏบนตัวสลับภาษาของเว็บไซต์ของคุณ."
+msgstr "ชื่อภาษาของคุณตามที่จะปรากฏในตัวสลับภาษาของเว็บไซต์ของคุณ"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:61
 msgid ""
 "A unique value that identifies the language in the database and URL. Once "
 "saved, the language code cannot be changed."
-msgstr "ค่าเฉพาะที่ระบุภาษาในฐานข้อมูลและ URL เมื่อบันทึกแล้ว รหัสภาษาไม่สามารถเปลี่ยนแปลงได้."
+msgstr "ค่าที่ไม่ซ้ำกันที่ระบุภาษาในฐานข้อมูลและ URL เมื่อบันทึกแล้ว รหัสภาษาจะไม่สามารถเปลี่ยนแปลงได้"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:62
 msgid ""
@@ -313,20 +353,20 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "หากภาษาที่คุณกำหนดเองคล้ายกับภาษาที่มีอยู่ คุณสามารถใช้การตรวจสอบการสะกดคำและการแปลอัตโนมัติของภาษาที่มีอยู่ได้ ตัวอย่างเช่น หากภาษาที่คุณกำหนดเองคือภาษาเยอรมันสวิส คุณสามารถกำหนดให้ใช้ภาษาเยอรมันสำหรับการตรวจสอบการสะกดคำและการแปลอัตโนมัติ หากคุณไม่กำหนดภาษาที่คุณกำหนดเองให้ตรงกับภาษาที่มีอยู่ คุณภาพการตรวจสอบการสะกดคำและการแปลอัตโนมัติจะไม่สามารถใช้งานได้ในภาษานั้น."
+msgstr "หากภาษาที่คุณกำหนดเองคล้ายกับภาษาที่มีอยู่ คุณสามารถใช้การตรวจสอบการสะกดและการแปลอัตโนมัติของภาษาที่มีอยู่ได้ ตัวอย่างเช่น หากภาษาที่คุณกำหนดเองคือ Swiss-German คุณสามารถแมปเป็นภาษาเยอรมันเพื่อใช้สำหรับการตรวจสอบการสะกดและการแปลอัตโนมัติ หากคุณไม่แมปภาษาที่คุณกำหนดเองกับภาษาที่มีอยู่ คุณสมบัติการตรวจสอบการสะกดและการแปลอัตโนมัติจะไม่สามารถใช้งานได้ในภาษานั้น"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
 "The value WPML checks when loading translations from MO and PO files. The "
 "default locale is included in the filenames in your /wp-content/languages/ "
 "folder in your WordPress setup."
-msgstr "ค่าที่ WPML ตรวจสอบเมื่อโหลดการแปลจากไฟล์ MO และ PO โลเคลเริ่มต้นจะรวมอยู่ในชื่อไฟล์ในโฟลเดอร์  /wp-content/languages/ ในการติดตั้ง WordPress ของคุณ."
+msgstr "ค่าที่ WPML ตรวจสอบเมื่อโหลดการแปลจากไฟล์ MO และ PO ภาษาเริ่มต้นจะรวมอยู่ในชื่อไฟล์ในโฟลเดอร์ /wp-content/languages/ ในการตั้งค่า WordPress ของคุณ"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:69
 msgid ""
 "Google uses the hreflang attribute to direct users to sites in their "
 "relevant language and location. Examples:"
-msgstr "Google ใช้แอตทริบิวต์ hreflang เพื่อนำผู้ใช้ไปยังเว็บไซต์ในภาษาและตำแหน่งที่เกี่ยวข้อง ตัวอย่างเช่น:"
+msgstr "Google ใช้แอตทริบิวต์ hreflang เพื่อนำผู้ใช้ไปยังเว็บไซต์ในภาษาและตำแหน่งที่เกี่ยวข้อง ตัวอย่าง:"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:71
 msgid "All English-speaking users: en"
@@ -344,7 +384,7 @@ msgstr "ภาษาอังกฤษสำหรับผู้ใช้ใน
 msgid ""
 "Determines if URLs in this language are encoded or use ASCII characters (if "
 "unsure, leave it as \"No\")."
-msgstr "กำหนดว่า URL ในภาษานี้จะถูกเข้ารหัสหรือใช้อักขระ ASCII หรือไม่ (หากไม่แน่ใจ ให้เลือก “ไม่”)."
+msgstr "กำหนดว่า URL ในภาษานี้จะถูกเข้ารหัสหรือใช้ตัวอักษร ASCII (หากไม่แน่ใจ ให้ปล่อยไว้เป็น “ไม่”)"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:98
 msgid "adding a custom language"
@@ -352,35 +392,35 @@ msgstr "การเพิ่มภาษาที่กำหนดเอง"
 
 #: src/js/setup/components/Steps/Address.js:100
 msgid "A different domain per language"
-msgstr "โดเมนที่แตกต่างกันสำหรับแต่ละภาษา"
+msgstr "โดเมนที่แตกต่างกันต่อภาษา"
 
 #: src/js/setup/components/Steps/Address.js:107
 msgid ""
 "Learn more about required server settings to use a different domain per "
 "language"
-msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็นสำหรับการใช้โดเมนที่แตกต่างกันสำหรับแต่ละภาษา"
+msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็นเพื่อใช้โดเมนที่แตกต่างกันต่อภาษา"
 
 #: src/js/setup/components/Steps/Address.js:117
 msgid "Language name added as a parameter"
 msgstr "ชื่อภาษาที่เพิ่มเป็นพารามิเตอร์"
 
-#: src/js/setup/components/Steps/Address.js:164
+#: src/js/setup/components/Steps/Address.js:178
 msgid "I will set up the domains for my secondary languages later."
-msgstr "ฉันจะตั้งค่าโดเมนสำหรับภาษารองของฉันในภายหลัง."
+msgstr "ฉันจะตั้งค่าโดเมนสำหรับภาษาสำรองของฉันในภายหลัง"
 
-#: src/js/setup/components/Steps/Address.js:213
+#: src/js/setup/components/Steps/Address.js:229
 msgid "The domain you have entered is invalid."
-msgstr "โดเมนที่คุณป้อนไม่ถูกต้อง."
+msgstr "โดเมนที่คุณป้อนไม่ถูกต้อง"
 
-#: src/js/setup/components/Steps/Address.js:215
+#: src/js/setup/components/Steps/Address.js:231
 msgid "The domain you have entered must be unique."
-msgstr "โดเมนที่คุณป้อนต้องไม่ซ้ำกัน."
+msgstr "โดเมนที่คุณป้อนต้องไม่ซ้ำกัน"
 
-#: src/js/setup/components/Steps/Address.js:235
+#: src/js/setup/components/Steps/Address.js:251
 msgid ""
 "Please Note: Your site won't work in your secondary languages until this is "
 "successfully set up or you switch to a different URL option."
-msgstr "โปรดทราบ: เว็บไซต์ของคุณจะไม่ทำงานในภาษารองจนกว่าจะตั้งค่าสำเร็จหรือคุณเปลี่ยนไปใช้ตัวเลือก URL อื่น."
+msgstr "โปรดทราบ: เว็บไซต์ของคุณจะไม่ทำงานในภาษาสำรองของคุณจนกว่าจะตั้งค่านี้สำเร็จหรือคุณเปลี่ยนไปใช้ตัวเลือก URL อื่น"
 
 #: src/js/setup/components/Steps/Address.js:57
 msgid "Learn more about Language URL Options"
@@ -388,7 +428,7 @@ msgstr "เรียนรู้เพิ่มเติมเกี่ยวก
 
 #: src/js/setup/components/Steps/Address.js:64
 msgid "How would you like to format your site's URL?"
-msgstr "คุณต้องการจัดรูปแบบ URL ของเว็บไซต์อย่างไร?"
+msgstr "คุณต้องการจัดรูปแบบ URL ของเว็บไซต์ของคุณอย่างไร?"
 
 #: src/js/setup/components/Steps/Address.js:69
 msgid "Different languages in directories"
@@ -396,25 +436,25 @@ msgstr "ภาษาที่แตกต่างกันในไดเรก
 
 #: src/js/setup/components/Steps/Address.js:78
 msgid "The URL rewrite is not configured in your server."
-msgstr "การเขียน URL ใหม่ไม่ได้ถูกกำหนดค่าในเซิร์ฟเวอร์ของคุณ."
+msgstr "การเขียน URL ใหม่ไม่ได้กำหนดค่าไว้ในเซิร์ฟเวอร์ของคุณ"
 
 #: src/js/setup/components/Steps/Address.js:81
 msgid ""
 "Learn more about required server settings to display languages in "
 "directories"
-msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็นสำหรับการแสดงภาษาในไดเรกทอรี"
+msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็นเพื่อแสดงภาษาในไดเรกทอรี"
 
 #: src/js/setup/components/Steps/Address.js:86
 msgid "I will fix my server settings to display languages in directories later."
-msgstr "ฉันจะแก้ไขการตั้งค่าเซิร์ฟเวอร์เพื่อแสดงภาษาในไดเรกทอรีในภายหลัง."
+msgstr "ฉันจะแก้ไขการตั้งค่าเซิร์ฟเวอร์ของฉันเพื่อแสดงภาษาในไดเรกทอรีในภายหลัง"
 
 #: src/js/setup/components/Steps/Address.js:88
 msgid "Your server settings do not allow for languages in directories. "
-msgstr "การตั้งค่าเซิร์ฟเวอร์ของคุณไม่อนุญาตให้แสดงภาษาในไดเรกทอรี."
+msgstr "การตั้งค่าเซิร์ฟเวอร์ของคุณไม่อนุญาตให้มีภาษาในไดเรกทอรี "
 
 #: src/js/setup/components/Steps/Address.js:91
 msgid "Learn more about the required server settings."
-msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็น."
+msgstr "เรียนรู้เพิ่มเติมเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์ที่จำเป็น"
 
 #: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:108
 msgid "Translate your pages"
@@ -426,15 +466,15 @@ msgstr "แปลโพสต์ของคุณ"
 
 #: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:29
 msgid "Next, you need to set-up your multilingual store."
-msgstr "ต่อไป คุณต้องตั้งค่าร้านค้าหลายภาษาของคุณ."
+msgstr "ถัดไป คุณต้องตั้งค่าร้านค้าหลายภาษาของคุณ"
 
 #: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:46
 msgid "Continue to WooCommerce Multilingual Setup"
-msgstr "ดำเนินการต่อไปยังการตั้งค่า WooCommerce Multilingual"
+msgstr "ดำเนินการต่อเพื่อตั้งค่า WooCommerce หลายภาษา"
 
 #: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:54
 msgid "Start translating your site by visiting the <s>Translation Dashboard</s>."
-msgstr "เริ่มแปลเว็บไซต์ของคุณโดยไปที่ <s>แดชบอร์ดการแปล</s>."
+msgstr "เริ่มแปลเว็บไซต์ของคุณโดยไปที่ <s>แดชบอร์ดการแปล</s>"
 
 #: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:72
 msgid "Go to Translation Dashboard"
@@ -449,7 +489,7 @@ msgid ""
 "To start translating, look for the \"plus\" icons that WPML introduces next "
 "to content lists and editors. Click the \"plus\" icon under each language "
 "to translate."
-msgstr "เพื่อเริ่มการแปล มองหาไอคอน “บวก” ที่ WPML แนะนำถัดจากรายการเนื้อหาและตัวแก้ไข คลิกไอคอน “บวก” ใต้แต่ละภาษาเพื่อแปล."
+msgstr "ในการเริ่มต้นแปล ให้มองหาไอคอน “บวก” ที่ WPML แนะนำถัดจากรายการเนื้อหาและตัวแก้ไข คลิกไอคอน “บวก” ใต้แต่ละภาษาเพื่อแปล"
 
 #: src/js/setup/components/Steps/Finished/CriticalError.js:10
 msgid "support forum"
@@ -459,7 +499,7 @@ msgstr "ฟอรัมสนับสนุน"
 msgid ""
 "There was a critical error setting up WPML. Please contact our "
 "<LinkToSupportForum /> to resolve it."
-msgstr "เกิดข้อผิดพลาดร้ายแรงในการตั้งค่า WPML โปรดติดต่อ <LinkToSupportForum /> ของเราเพื่อแก้ไขปัญหา."
+msgstr "เกิดข้อผิดพลาดร้ายแรงในการตั้งค่า WPML โปรดติดต่อ <LinkToSupportForum /> ของเราเพื่อแก้ไข"
 
 #: src/js/setup/components/Steps/Finished/CriticalError.js:23
 msgid "Hide error message"
@@ -471,17 +511,17 @@ msgstr "แสดงข้อความแสดงข้อผิดพลา
 
 #: src/js/setup/components/Steps/Finished/Header.js:12
 msgid "Congratulations, your website is now multilingual with WPML!"
-msgstr "ยินดีด้วย เว็บไซต์ของคุณตอนนี้เป็นแบบหลายภาษาด้วย WPML แล้ว!"
+msgstr "ขอแสดงความยินดี เว็บไซต์ของคุณเป็นหลายภาษาแล้วด้วย WPML!"
 
 #: src/js/setup/components/Steps/Finished/LanguageSwitcherBox.js:6
 msgid ""
 "For language switcher customization and more language options, navigate to "
 "<a>WPML → Languages</a>."
-msgstr "สำหรับการปรับแต่งตัวสลับภาษาและตัวเลือกภาษาเพิ่มเติม ไปที่ <a>WPML → ภาษา</a>."
+msgstr "สำหรับการปรับแต่งตัวสลับภาษาและตัวเลือกภาษาเพิ่มเติม ให้ไปที่ <a>WPML → ภาษา</a>"
 
 #: src/js/setup/components/Steps/Languages.js:110
 msgid "What are the languages of your site?"
-msgstr "ภาษาของเว็บไซต์คุณคืออะไรบ้าง?"
+msgstr "ภาษาของเว็บไซต์ของคุณคืออะไร?"
 
 #: src/js/setup/components/Steps/Languages.js:120
 msgid "Default language"
@@ -489,18 +529,18 @@ msgstr "ภาษาเริ่มต้น"
 
 #: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
-msgstr "ภาษาปัจจุบันของเว็บไซต์คุณคืออะไร?"
+msgstr "ภาษาปัจจุบันของเว็บไซต์ของคุณคืออะไร?"
 
 #: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
-msgstr "ภาษาที่ต้องการแปล"
+msgstr "ภาษาที่แปล"
 
 #: src/js/setup/components/Steps/Languages.js:135
 msgid "Which languages do you want to translate your site into?"
 msgstr "คุณต้องการแปลเว็บไซต์ของคุณเป็นภาษาใดบ้าง?"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
+msgid "If you cannot find languages that you need in the list,"
 msgstr "หากคุณไม่พบภาษาที่คุณต้องการในรายการ"
 
 #: src/js/setup/components/Steps/Languages.js:150
@@ -513,53 +553,53 @@ msgid ""
 "If you don't have a WPML.org account or a valid subscription, %1$spurchase "
 "one%2$s to get automatic updates, full support, and a 30-day money-back "
 "guarantee."
-msgstr "หากคุณไม่มีบัญชี WPML.org หรือการสมัครสมาชิกที่ถูกต้อง %1$sซื้อหนึ่งรายการ%2$s เพื่อรับการอัปเดตอัตโนมัติ การสนับสนุนเต็มรูปแบบ และการรับประกันคืนเงินภายใน 30 วัน."
+msgstr "หากคุณไม่มีบัญชี WPML.org หรือการสมัครสมาชิกที่ถูกต้อง %1$sซื้อเลย%2$s เพื่อรับการอัปเดตอัตโนมัติ การสนับสนุนเต็มรูปแบบ และการรับประกันคืนเงินภายใน 30 วัน"
 
 #: src/js/setup/components/Steps/License.js:57
 msgid "Already purchased WPML?"
-msgstr "ซื้อ WPML แล้วใช่ไหม?"
+msgstr "ซื้อ WPML แล้วหรือยัง?"
 
 #: src/js/setup/components/Steps/License.js:61
 msgid "Enter your site key from your WPML account to receive automatic updates."
-msgstr "ป้อนคีย์ไซต์จากบัญชี WPML ของคุณเพื่อรับการอัปเดตอัตโนมัติ."
+msgstr "ป้อนคีย์เว็บไซต์ของคุณจากบัญชี WPML เพื่อรับการอัปเดตอัตโนมัติ"
 
 #: src/js/setup/components/Steps/License.js:68
 msgid "Site key"
-msgstr "คีย์ไซต์"
+msgstr "คีย์เว็บไซต์"
 
 #: src/js/setup/components/Steps/License.js:75
 msgid "Get a key for this site"
-msgstr "รับคีย์สำหรับไซต์นี้"
+msgstr "รับคีย์สำหรับเว็บไซต์นี้"
 
-#: src/js/setup/components/Steps/Plugins.js:130
+#: src/js/setup/components/Steps/Plugins.js:123
+msgid "Error in activating plugin."
+msgstr "เกิดข้อผิดพลาดในการเปิดใช้งานปลั๊กอิน"
+
+#: src/js/setup/components/Steps/Plugins.js:125
+msgid "Error in installing plugin."
+msgstr "เกิดข้อผิดพลาดในการติดตั้งปลั๊กอิน"
+
+#: src/js/setup/components/Steps/Plugins.js:167
 msgid "Improve your site’s translations using helpful plugins"
-msgstr "ปรับปรุงการแปลเว็บไซต์ของคุณโดยใช้ปลั๊กอินที่มีประโยชน์"
+msgstr "ปรับปรุงการแปลเว็บไซต์ของคุณโดยใช้ปลั๊กอินที่เป็นประโยชน์"
 
-#: src/js/setup/components/Steps/Plugins.js:135
+#: src/js/setup/components/Steps/Plugins.js:173
 msgid ""
 "Based on the themes and other plugins running on your site, we recommend "
 "that you enable the following WPML components. These are included with your "
 "WPML purchase and allow you to translate strings, media, admin texts, and "
 "more."
-msgstr "ตามธีมและปลั๊กอินอื่น ๆ ที่ทำงานบนเว็บไซต์ของคุณ เราขอแนะนำให้คุณเปิดใช้งานส่วนประกอบ WPML ต่อไปนี้ สิ่งเหล่านี้รวมอยู่ในการซื้อ WPML ของคุณและช่วยให้คุณแปลสตริง สื่อ ข้อความในส่วนผู้ดูแลระบบ และอื่น ๆ."
-
-#: src/js/setup/components/Steps/Plugins.js:97
-msgid "Error in activating plugin."
-msgstr "เกิดข้อผิดพลาดในการเปิดใช้งานปลั๊กอิน."
-
-#: src/js/setup/components/Steps/Plugins.js:99
-msgid "Error in installing plugin."
-msgstr "เกิดข้อผิดพลาดในการติดตั้งปลั๊กอิน."
+msgstr "ตามธีมและปลั๊กอินอื่นๆ ที่ทำงานบนเว็บไซต์ของคุณ เราขอแนะนำให้คุณเปิดใช้งานส่วนประกอบ WPML ต่อไปนี้ ซึ่งรวมอยู่ในการซื้อ WPML ของคุณและช่วยให้คุณสามารถแปลสตริง สื่อ ข้อความผู้ดูแลระบบ และอื่นๆ ได้"
 
 #: src/js/setup/components/Steps/Support.js:22
 msgid ""
-"YES, send this information to wpml.org to improve my site’s maintenance and "
+"Yes, send this information to wpml.org to improve my site’s maintenance and "
 "support"
-msgstr "ใช่ ส่งข้อมูลนี้ไปยัง wpml.org เพื่อปรับปรุงการบำรุงรักษาและการสนับสนุนเว็บไซต์ของฉัน"
+msgstr "ใช่ ส่งข้อมูลนี้ไปที่ wpml.org เพื่อปรับปรุงการบำรุงรักษาและการสนับสนุนเว็บไซต์ของฉัน"
 
 #: src/js/setup/components/Steps/Support.js:25
 msgid "No, don't send this information and skip maintenance alerts"
-msgstr "ไม่ อย่าส่งข้อมูลนี้และข้ามการแจ้งเตือนการบำรุงรักษา"
+msgstr "ไม่ ไม่ต้องส่งข้อมูลนี้และข้ามการแจ้งเตือนการบำรุงรักษา"
 
 #: src/js/setup/components/Steps/Support.js:34
 msgid "Do you want to get better and faster support?"
@@ -569,13 +609,13 @@ msgstr "คุณต้องการรับการสนับสนุน
 msgid ""
 "WPML can send information about your site’s plugins, theme and content "
 "stats to wpml.org."
-msgstr "WPML สามารถส่งข้อมูลเกี่ยวกับปลั๊กอิน ธีม และสถิติเนื้อหาของเว็บไซต์คุณไปยัง wpml.org."
+msgstr "WPML สามารถส่งข้อมูลเกี่ยวกับปลั๊กอิน ธีม และสถิติเนื้อหาของเว็บไซต์ของคุณไปยัง wpml.org ได้"
 
 #: src/js/setup/components/Steps/Support.js:40
 msgid ""
 "This allows our support team to help you much faster and to contact you "
 "about potential problems and their solutions."
-msgstr "สิ่งนี้ช่วยให้ทีมสนับสนุนของเราสามารถช่วยเหลือคุณได้เร็วขึ้นมาก และติดต่อคุณเกี่ยวกับปัญหาที่อาจเกิดขึ้นและวิธีแก้ไข."
+msgstr "สิ่งนี้ช่วยให้ทีมสนับสนุนของเราสามารถช่วยเหลือคุณได้เร็วขึ้นมาก และติดต่อคุณเกี่ยวกับปัญหาที่อาจเกิดขึ้นและวิธีแก้ไข"
 
 #: src/js/setup/components/Steps/Support.js:52
 msgid "Privacy and data usage policy"
@@ -583,11 +623,11 @@ msgstr "นโยบายความเป็นส่วนตัวและ
 
 #: src/js/setup/components/Steps/Support.js:60
 msgid "Full details of the info we’re proposing to share"
-msgstr "รายละเอียดทั้งหมดของข้อมูลที่เราเสนอที่จะแบ่งปัน"
+msgstr "รายละเอียดทั้งหมดของข้อมูลที่เราเสนอให้แบ่งปัน"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:102
 msgid "Translation Contributors"
-msgstr "ผู้แปลภาษา"
+msgstr "ผู้ร่วมแปล"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:116
 msgid "Users of this site"
@@ -598,24 +638,24 @@ msgid ""
 "You will choose or create new users of this WordPress site as the "
 "translators. You can also choose yourself. This allows you to set up a team "
 "of translators working in different language pairs."
-msgstr "คุณสามารถเลือกหรือสร้างผู้ใช้ใหม่ของเว็บไซต์ WordPress นี้เป็นผู้แปล คุณสามารถเลือกตัวคุณเองได้ด้วย ซึ่งช่วยให้คุณสามารถตั้งทีมผู้แปลที่ทำงานในคู่ภาษาต่างๆ ได้."
+msgstr "คุณจะเลือกหรือสร้างผู้ใช้ใหม่ของเว็บไซต์ WordPress นี้เป็นนักแปล คุณยังสามารถเลือกตัวคุณเองได้ ซึ่งจะช่วยให้คุณสามารถตั้งค่าทีมงานนักแปลที่ทำงานในคู่ภาษาที่แตกต่างกันได้"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:129
 msgid "A professional translation service"
-msgstr "บริการแปลภาษามืออาชีพ"
+msgstr "บริการแปลภาษาแบบมืออาชีพ"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:36
 msgid ""
 "You have preselected %s to translate your content. Finish setting it up by "
 "entering the API token they provided to you."
-msgstr "คุณได้เลือก %s ไว้ล่วงหน้าเพื่อแปลเนื้อหาของคุณ เสร็จสิ้นการตั้งค่าโดยป้อนโทเค็น API ที่พวกเขาให้คุณ."
+msgstr "คุณได้เลือก %s ล่วงหน้าเพื่อแปลเนื้อหาของคุณ ทำการตั้งค่าให้เสร็จสิ้นโดยป้อนโทเค็น API ที่พวกเขาให้มา"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:37
 msgid ""
 "WPML offers tight integration with over 70 translation services. You will "
 "choose the translation service that you prefer and enjoy a streamlined "
 "process for sending jobs and receiving completed translations."
-msgstr "WPML มีการผสานรวมอย่างแน่นหนากับบริการแปลมากกว่า 70 แห่ง คุณจะเลือกบริการแปลที่คุณชื่นชอบและเพลิดเพลินกับกระบวนการที่มีประสิทธิภาพในการส่งงานและรับการแปลที่เสร็จสมบูรณ์."
+msgstr "WPML มีการผสานรวมอย่างแน่นหนากับบริการแปลกว่า 70 รายการ คุณจะเลือกบริการแปลที่คุณต้องการและเพลิดเพลินกับกระบวนการที่คล่องตัวในการส่งงานและรับงานแปลที่เสร็จสมบูรณ์"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:67
 #: src/js/setup/store.js:88
@@ -626,30 +666,30 @@ msgstr "การแปลโดยมนุษย์"
 msgid ""
 "Besides the AI translation, you can translate yourself, add your own team "
 "of translators and use professional translation services."
-msgstr "นอกจากการแปลด้วย AI แล้ว คุณสามารถแปลด้วยตัวเอง เพิ่มทีมนักแปลของคุณเอง และใช้บริการแปลมืออาชีพได้."
+msgstr "นอกจากการแปลด้วย AI แล้ว คุณยังสามารถแปลเอง เพิ่มทีมงานนักแปลของคุณเอง และใช้บริการแปลภาษาแบบมืออาชีพได้อีกด้วย"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:80
 msgid "I'd like to set up human translation by:"
-msgstr "ฉันอยากตั้งค่าการแปลโดยมนุษย์โดย:"
+msgstr "ฉันต้องการตั้งค่าการแปลโดยมนุษย์โดย:"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:85
 msgid "Only myself"
-msgstr "เฉพาะตัวฉันเอง"
+msgstr "ตัวฉันเองเท่านั้น"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:86
 msgid "You will be the sole translator for this site."
-msgstr "คุณจะเป็นผู้แปลเพียงคนเดียวสำหรับเว็บไซต์นี้."
+msgstr "คุณจะเป็นนักแปลเพียงคนเดียวสำหรับเว็บไซต์นี้"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:93
-msgid "A \"Translation Manager\" who will setup the translators for my site"
-msgstr "“ผู้จัดการการแปล” ที่จะตั้งค่านักแปลสำหรับเว็บไซต์ของฉัน"
+msgid "A Translation Manager who will setup the translators for my site"
+msgstr "ผู้จัดการการแปลที่จะตั้งค่าผู้แปลสำหรับเว็บไซต์ของฉัน"
 
 #: src/js/setup/components/Steps/TranslationSettings.js:94
 msgid ""
 "You will choose a user of this site and delegate the setup of translators "
 "to him/her. Choose this option when you are building a website for a "
 "client, who will set up translator users or choose a translation service."
-msgstr "คุณจะเลือกผู้ใช้ของเว็บไซต์นี้และมอบหมายการตั้งค่าผู้แปลให้กับเขา/เธอ เลือกตัวเลือกนี้เมื่อคุณกำลังสร้างเว็บไซต์ให้กับลูกค้า ซึ่งจะตั้งค่าผู้ใช้ที่เป็นผู้แปลหรือเลือกบริการแปล."
+msgstr "คุณจะเลือกผู้ใช้ของเว็บไซต์นี้และมอบหมายการตั้งค่านักแปลให้เขา/เธอ เลือกตัวเลือกนี้เมื่อคุณกำลังสร้างเว็บไซต์สำหรับลูกค้า ซึ่งจะตั้งค่าผู้ใช้ที่เป็นนักแปลหรือเลือกบริการแปล"
 
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:16
 msgid "Error: %s"
@@ -663,21 +703,21 @@ msgstr "ยืนยันตัวตน"
 msgid ""
 "To send content and receive translations from <service_name />, enter the "
 "credentials you received from them."
-msgstr "หากต้องการส่งเนื้อหาและรับการแปลจาก <service_name /> ให้ป้อนข้อมูลประจำตัวที่คุณได้รับจากพวกเขา."
+msgstr "หากต้องการส่งเนื้อหาและรับการแปลจาก <service_name /> โปรดป้อนข้อมูลประจำตัวที่คุณได้รับจากพวกเขา"
 
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:30
 msgid "Need credentials? Contact <link_to_service />"
-msgstr "ต้องการข้อมูลประจำตัว? ติดต่อ <link_to_service />"
+msgstr "ต้องการข้อมูลประจำตัวใช่ไหม? ติดต่อ <link_to_service />"
 
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:34
 msgid ""
 "Success! You can start sending content to %s for translation after you "
 "finish the setup wizard."
-msgstr "สำเร็จ! คุณสามารถเริ่มส่งเนื้อหาไปยัง %s เพื่อแปลหลังจากที่คุณตั้งค่าตัวช่วยสร้างเสร็จแล้ว."
+msgstr "สำเร็จ! คุณสามารถเริ่มส่งเนื้อหาไปยัง %s เพื่อแปลได้หลังจากที่คุณทำตามวิซาร์ดการตั้งค่าเสร็จสิ้น"
 
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:58
 msgid "The credentials are invalid. Please, try again."
-msgstr "ข้อมูลประจำตัวไม่ถูกต้อง โปรดลองอีกครั้ง."
+msgstr "ข้อมูลประจำตัวไม่ถูกต้อง โปรดลองอีกครั้ง"
 
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:12
 #: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:84
@@ -730,7 +770,7 @@ msgstr "การแปลด้วย AI"
 
 #: src/js/setup/store.js:93
 msgid "Support"
-msgstr "การสนับสนุน"
+msgstr "สนับสนุน"
 
 #: src/js/setup/store.js:96
 msgid "Plugins"
@@ -754,11 +794,11 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "ขณะนี้ไม่สามารถเชื่อมต่อบริการแปลได้เมื่อตั้งค่า WPML ให้แปลเนื้อหาเว็บไซต์ของคุณโดยอัตโนมัติ หากต้องการใช้บริการแปล โปรดเปลี่ยนโหมดการแปลของคุณในหน้า <LinkToSettingsPage />."
+msgstr "ขณะนี้ไม่สามารถเชื่อมต่อบริการแปลได้เมื่อ WPML ถูกตั้งค่าให้แปลเนื้อหาเว็บไซต์ของคุณโดยอัตโนมัติ หากต้องการใช้บริการแปล โปรดเปลี่ยนโหมดการแปลของคุณในหน้า <LinkToSettingsPage />"
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"
-msgstr "เอกสาร"
+msgstr "เอกสารประกอบ"
 
 #: src/js/translationServices/components/ServicesList.js:57
 msgid "Activate"

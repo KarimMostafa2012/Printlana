@@ -177,13 +177,15 @@ class Min_Max_Controller extends Base
          * asole jokhon block niye kaj korchilam, tokhon problem korchilo.
          * ejonno eta korechi.
          */
-        add_filter('woocommerce_add_to_cart_quantity', [$this, 'quantity_input_min_for_api_store'], 99, 2);
+        //When qty is 1, then problem hoto, tai off korechi
+        // add_filter('woocommerce_add_to_cart_quantity', [$this, 'quantity_input_min_for_api_store'], 99, 2);
 
 
         self::$init = $this;
     }
 
     /**
+     * @disabled ekhon eta disabled kora ache.
      * Specially for block theme and block loop in anywhere
      *
      * @param int|numeric $qty
@@ -432,12 +434,11 @@ style="display:none !important;"></div>
 
     public function checkQtyInCart()
     {
-        global $woocommerce;
-        if( ! is_object($woocommerce->cart)) return 0;
-        if( ! method_exists($woocommerce->cart, 'get_cart')) return 0;
+        // Use WC() instead of global for better performance and reliability
+        if( ! WC()->cart || ! method_exists(WC()->cart, 'get_cart')) return 0;
         $return = 0;
 
-        foreach($woocommerce->cart->get_cart() as $key => $value ) {
+        foreach(WC()->cart->get_cart() as $key => $value ) {
 
             $temp_quantity = $value['quantity'] ?? 0;
             if( $this->variation_id && $this->is_pro && $this->product_id == $value['product_id'] && $this->variation_id == $value['variation_id'] ) {
@@ -757,7 +758,7 @@ style="display:none !important;"></div>
         }
 
         if(isset($args['attributes']['data-product_id']) || isset($args['attributes']['data-product_sku'])){
-            $args['attributes']['title'] = $this->options[$this->key_prefix . 'min_qty_msg_in_loop'] . ' ' . $this->min_value;
+            $args['attributes']['title'] = $this->options[$this->key_prefix . 'min_qty_msg_in_loop'] ? $this->options[$this->key_prefix . 'min_qty_msg_in_loop'] . ' ' . $this->min_value : '';
         }
 
         /**

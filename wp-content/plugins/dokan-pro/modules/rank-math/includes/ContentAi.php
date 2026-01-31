@@ -5,7 +5,7 @@ namespace WeDevs\DokanPro\Modules\RankMath;
 defined( 'ABSPATH' ) || exit;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\WordPress;
 use RankMath\ContentAI\Content_AI;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Url;

@@ -2,29 +2,31 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/ate-cloned-sites/components/CloseButton.js:15
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: src/js/ate-cloned-sites/components/ContactSupport.js:9
 msgid ""
 "Please take a screenshot of this message and report this issue to <a>WPML "
 "support</a>."
-msgstr ""
+msgstr "Tire uma captura de tela desta mensagem e relate este problema ao <a>suporte do WPML</a>."
 
 #: src/js/ate-cloned-sites/components/UnregistrationInfo.js:7
 msgid ""
 "WPML has automatically unregistered your site as part of this wizard. After "
 "you close it, you’ll see a prompt to register the site again. This is "
 "expected, your content and translations are safe."
-msgstr "O WPML cancelou automaticamente o registro do seu site como parte deste assistente. Após fechá-lo, você verá um prompt para registrar o site novamente. Isso é esperado, seu conteúdo e traduções estão seguros."
+msgstr "O WPML desregistrou automaticamente seu site como parte deste assistente. Depois de fechá-lo, você verá um prompt para registrar o site novamente. Isso é esperado, seu conteúdo e traduções estão seguros."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:10
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:9
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:10
 msgid "You’re all set"
-msgstr ""
+msgstr "Tudo pronto"
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:23
 msgid ""
@@ -36,13 +38,13 @@ msgstr "Este site é uma cópia do site original %s e atualmente não possui cr�
 msgid ""
 "If you’d like to use automatic translation here in the future, you can "
 "either <a1>add credits</a1> or <a2>share them from the original site</a2>."
-msgstr "Se você quiser usar a tradução automática aqui no futuro, pode <a1>adicionar créditos</a1> ou <a2>compartilhá-los do site original</a2>."
+msgstr "Se você quiser usar a tradução automática aqui no futuro, você pode <a1>adicionar créditos</a1> ou <a2>compartilhá-los do site original</a2>."
 
 #: src/js/ate-cloned-sites/steps/CopyCompleted.js:52
 msgid ""
 "There was an error checking for credits to share. Please take a screenshot "
 "of this message and report it in <a>WPML support</a>."
-msgstr ""
+msgstr "Ocorreu um erro ao verificar os créditos para compartilhar. Tire uma captura de tela desta mensagem e relate-a ao <a>suporte do WPML</a>."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:36
 msgid ""
@@ -66,19 +68,19 @@ msgstr "Cole o código abaixo para completar a conexão."
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:77
 msgid "Migration code"
-msgstr ""
+msgstr "Código de migração"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:79
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:84
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:75
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:76
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:82
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:95
 msgid "Go back"
-msgstr ""
+msgstr "Voltar"
 
 #: src/js/ate-cloned-sites/steps/CopyCredits.js:9
 msgid "Connect Automatic Translation Credits"
@@ -88,11 +90,11 @@ msgstr "Conectar créditos de tradução automática"
 msgid ""
 "WPML was unable to copy your site's translations, translation memory, and "
 "glossary to this new URL."
-msgstr ""
+msgstr "O WPML não conseguiu copiar as traduções, a memória de tradução e o glossário do seu site para este novo URL."
 
 #: src/js/ate-cloned-sites/steps/CopyError.js:7
 msgid "Error with copying translation information to new URL"
-msgstr ""
+msgstr "Erro ao copiar informações de tradução para o novo URL"
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:12
 msgid "This site and its copy on %s are now sharing automatic translation credits."
@@ -108,27 +110,27 @@ msgstr "Quaisquer créditos que você adicionar a um site estarão disponíveis 
 msgid ""
 "WPML was unable to connect your old and new URLs to share automatic "
 "translation credits."
-msgstr ""
+msgstr "O WPML não conseguiu conectar seus URLs antigo e novo para compartilhar créditos de tradução automática."
 
 #: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:7
 msgid "Error with sharing automatic translation credits"
-msgstr ""
+msgstr "Erro ao compartilhar créditos de tradução automática"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:12
 msgid ""
 "The site on %s has %d credits for automatic translation. Do you want to "
 "share these credits with this new site %s?"
-msgstr "O site em %s tem %d créditos para tradução automática. Deseja compartilhar esses créditos com este novo site %s?"
+msgstr "O site em %s tem %d créditos para tradução automática. Você deseja compartilhar esses créditos com este novo site %s?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:19
 msgid ""
 "The site on %s has a pay-as-you-go subscription for automatic translation. "
 "Do you want to share these credits between %s and this new location (%s)?"
-msgstr ""
+msgstr "O site em %s tem uma assinatura pré-paga para tradução automática. Você deseja compartilhar esses créditos entre %s e este novo local (%s)?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:66
 msgid "Yes (recommended)"
-msgstr ""
+msgstr "Sim (recomendado)"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:68
 msgid "In the next step, you’ll approve the use of same credits on both sites."
@@ -137,7 +139,7 @@ msgstr "Na próxima etapa, você aprovará o uso dos mesmos créditos em ambos o
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:71
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:61
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:73
 msgid "You’ll need to assign new credits or set up pay-as-you-go."
@@ -149,21 +151,21 @@ msgstr "O que acontece quando você compartilha créditos entre sites?"
 
 #: src/js/ate-cloned-sites/steps/CreditDecision.js:9
 msgid "Translation credits for this site"
-msgstr ""
+msgstr "Créditos de tradução para este site"
 
 #: src/js/ate-cloned-sites/steps/Initial.js:10
 msgid "WPML detected a change in your site’s URL"
-msgstr "O WPML detectou uma mudança na URL do seu site"
+msgstr "O WPML detectou uma alteração no URL do seu site"
 
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:21
 msgid "You can now continue translating content on this site as usual."
-msgstr "Agora você pode continuar traduzindo conteúdo neste site normalmente."
+msgstr "Agora você pode continuar traduzindo conteúdo neste site como de costume."
 
 #: src/js/ate-cloned-sites/steps/MoveCompleted.js:32
 msgid ""
 "Just a reminder: there shouldn’t be another copy of this site running at "
 "%s. If there is, automatic translation won’t work correctly on that site."
-msgstr "Apenas um lembrete: não deve haver outra cópia deste site rodando em %s. Se houver, a tradução automática não funcionará corretamente naquele site."
+msgstr "Apenas um lembrete: não deve haver outra cópia deste site em execução em %s. Se houver, a tradução automática não funcionará corretamente nesse site."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:33
 msgid "You indicated that the original site at %s is no longer active. This means:"
@@ -187,7 +189,7 @@ msgstr "Eu entendo e confirmo que <b>%s</b> não está mais em uso."
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:78
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 #: src/js/ate-cloned-sites/steps/MoveConfirmation.js:9
 msgid "Please Confirm"
@@ -195,15 +197,15 @@ msgstr "Por favor, confirme"
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:16
 msgid "WPML was unable to update our records with your new URL."
-msgstr ""
+msgstr "O WPML não conseguiu atualizar nossos registros com seu novo URL."
 
 #: src/js/ate-cloned-sites/steps/MoveError.js:7
 msgid "Error with moving translation information to new URL"
-msgstr ""
+msgstr "Erro ao mover informações de tradução para o novo URL"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:34
 msgid "It looks like this site was previously at %s and is now running on %s."
-msgstr "Parece que este site estava anteriormente em %s e agora está rodando em %s."
+msgstr "Parece que este site estava anteriormente em %s e agora está em execução em %s."
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:42
 msgid "Is the original site still available at %s?"
@@ -211,21 +213,21 @@ msgstr "O site original ainda está disponível em %s?"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:54
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:57
 msgid ""
 "The original site is still running and this is just a copy of the original "
 "site"
-msgstr "O site original ainda está funcionando e este é apenas uma cópia do site original"
+msgstr "O site original ainda está em execução e esta é apenas uma cópia do site original"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:64
 msgid "I moved the site to this new address and this is now the main site"
-msgstr "Eu movi o site para este novo endereço e este agora é o site principal"
+msgstr "Mudei o site para este novo endereço e este é agora o site principal"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:8
 msgid "WPML Detected a New Site Address"
-msgstr "O WPML Detectou um Novo Endereço de Site"
+msgstr "O WPML detectou um novo endereço de site"
 
 #: src/js/ate-cloned-sites/steps/MoveOrCopy.js:80
 msgid "How to manage translations when migrating from development to production"
@@ -236,63 +238,63 @@ msgid ""
 "Looks like this site is a copy of a different site, or moved to a different "
 "URL. Please contact your translation manager to update Translation "
 "Management plugin configuration."
-msgstr ""
+msgstr "Parece que este site é uma cópia de um site diferente ou foi movido para um URL diferente. Entre em contato com seu gerente de tradução para atualizar a configuração do plugin Translation Management."
 
 #: src/js/ate-cloned-sites/steps/NoAdmin.js:5
 msgid "Site Moved or Copied - Action Required"
-msgstr ""
+msgstr "Site movido ou copiado - ação necessária"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+#: src/js/ate-cloned-sites/steps/RevertMove.js:36
 msgid "You or someone else moved this site to %s. Please keep in mind that:"
-msgstr ""
+msgstr "Você ou outra pessoa moveu este site para %s. Lembre-se de que:"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+#: src/js/ate-cloned-sites/steps/RevertMove.js:50
 msgid "Translations that you do at %s will not appear on this site."
-msgstr ""
+msgstr "As traduções que você fizer em %s não aparecerão neste site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+#: src/js/ate-cloned-sites/steps/RevertMove.js:56
 msgid "You cannot edit translations on this site."
-msgstr ""
+msgstr "Você não pode editar traduções neste site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+#: src/js/ate-cloned-sites/steps/RevertMove.js:67
 msgid ""
 "The site at %s is using the same credits for automatic translation as this "
 "site."
-msgstr ""
+msgstr "O site em %s está usando os mesmos créditos para tradução automática que este site."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+#: src/js/ate-cloned-sites/steps/RevertMove.js:76
 msgid ""
 "If you didn't intend to move this site to %s, you can <a>indicate that this "
 "site should be at %s</a>."
-msgstr ""
+msgstr "Se você não pretendia mover este site para %s, você pode <a>indicar que este site deve estar em %s</a>."
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+#: src/js/ate-cloned-sites/steps/RevertMove.js:9
 msgid "This site has moved to a new location"
-msgstr ""
+msgstr "Este site foi movido para um novo local"
 
-#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+#: src/js/ate-cloned-sites/steps/RevertMove.js:96
 msgid ""
 "If you prefer not to move this site, you can <a>mark it as a copy</a> and "
 "enable automatic translation for it."
-msgstr ""
+msgstr "Se você preferir não mover este site, pode <a>marcá-lo como uma cópia</a> e ativar a tradução automática para ele."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:38
 msgid ""
 "Moving the site back here will mean that you will be able to translate on "
 "this domain again, but you will not be able to update translations at %s."
-msgstr ""
+msgstr "Mover o site de volta para cá significará que você poderá traduzir neste domínio novamente, mas não poderá atualizar as traduções em %s."
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:50
 msgid "Yes - move back here"
-msgstr ""
+msgstr "Sim - mover de volta para cá"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:56
 msgid "No - keep the site on %s"
-msgstr ""
+msgstr "Não - manter o site em %s"
 
 #: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:9
 msgid "Are you sure that this site should run on %s and not %s?"
-msgstr ""
+msgstr "Tem certeza de que este site deve ser executado em %s e não em %s?"
 
 #: src/js/ate-cloned-sites/steps/initial/MigrationSection.js:16
 msgid ""
@@ -319,21 +321,21 @@ msgstr "Iniciar migração"
 msgid ""
 "If you didn't change your main domain and only logged in through a "
 "secondary domain, select this option."
-msgstr "Se você não alterou seu domínio principal e apenas fez login através de um domínio secundário, selecione esta opção."
+msgstr "Se você não alterou seu domínio principal e apenas fez login por meio de um domínio secundário, selecione esta opção."
 
 #: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:23
 msgid "Something went wrong"
 msgstr "Algo deu errado"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:38
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:39
 msgid "I just logged in from a secondary domain"
-msgstr "Eu apenas fiz login de um domínio secundário"
+msgstr "Acabei de fazer login de um domínio secundário"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:47
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:48
 msgid "You're all set!"
 msgstr "Tudo pronto!"
 
-#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:52
+#: src/js/ate-cloned-sites/steps/initial/SecondaryDomainSection.js:53
 msgid ""
 "This domain is now registered as a secondary domain and WPML will recognize "
 "it correctly."

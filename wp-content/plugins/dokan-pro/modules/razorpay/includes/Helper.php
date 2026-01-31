@@ -2,10 +2,12 @@
 
 namespace WeDevs\DokanPro\Modules\Razorpay;
 
+use DokanPro\Modules\Subscription\SubscriptionPack;
 use WC_Order;
 use WC_Product;
 use WP_Error;
-use WeDevs\DokanPro\Modules\Razorpay\PaymentMethods\Razorpay;
+use WeDevs\DokanPro\Modules\ProductAdvertisement\Helper as ProductAdvertisementHelper;
+use WeDevs\Dokan\ReverseWithdrawal\Helper as ReverseWithdrawalHelper;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -293,7 +295,7 @@ class Helper {
      *
      * @param bool $is_disbursement. eg: true for disbursement.
      *
-     * @return DateTimeImmutable
+     * @return \DateTimeImmutable
      */
     public static function get_on_hold_until_time( $is_disbursement = false ) {
         $time_now      = dokan_current_datetime();
@@ -667,6 +669,67 @@ class Helper {
         return function_exists( 'dokan_pro' ) && dokan_pro()->module->is_active( 'product_subscription' );
     }
 
+    /**
+     * Check if the product is an advanced product.
+     *
+     * @since 4.2.2
+     *
+     * @param int $product_id Product ID.
+     *
+     * @return bool True if it's an advanced product, false otherwise.
+     */
+    public static function is_adv_product( $product_id ): bool {
+        if ( ! class_exists( ProductAdvertisementHelper::class ) ) {
+            return false;
+        }
+
+        return ProductAdvertisementHelper::get_advertisement_base_product() === (int) $product_id;
+    }
+
+
+    /**
+     * Check if the product is a subscription pack or an advanced product.
+     *
+     * @since 4.2.2
+     *
+     * @param WC_Product|int $product Product object or ID.
+     *
+     * @return bool True if the product should be skipped from Razorpay vendor payment flows, false otherwise.
+     */
+    public static function should_skip_product( $product ): bool {
+        if ( is_numeric( $product ) ) {
+            $product = wc_get_product( $product );
+        }
+        if ( ! $product ) {
+            return false;
+        }
+        $product_id = $product->get_id();
+        $is_reverse_withdrawal_product = ReverseWithdrawalHelper::get_reverse_withdrawal_base_product() === $product_id;
+        return 'product_pack' === $product->get_type() || self::is_adv_product( $product_id ) || $is_reverse_withdrawal_product;
+    }
+
+    /**
+     * Check if the product is a subscription product.
+     *
+     * @since 4.2.2
+     *
+     * @param WC_Product|int $product
+     *
+     * @return bool
+     **/
+    public static function is_vendor_recurring_subscription_product( $product ): bool {
+        if ( is_int( $product ) ) {
+            $product = wc_get_product( $product );
+        }
+
+        if ( ! self::is_vendor_subscription_product( $product ) ) {
+            return false;
+        }
+
+        // Check if the product is a subscription pack and is recurring
+        $subscription = new SubscriptionPack( $product->get_id() );
+        return $subscription->is_recurring();
+    }
     /**
      * Check if the order is a subscription order.
      *

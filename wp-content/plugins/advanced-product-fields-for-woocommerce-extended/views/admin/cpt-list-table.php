@@ -14,7 +14,7 @@
         <?php } ?>
     </h2>
 
-    <?php if($model['is_licensed']) { ?>
+    <?php if( $model['is_licensed'] ) { ?>
     <p style="padding-bottom:22px;margin:0 !important;" class="wapf-description">
         <?php _e('A field group is a collection of fields that belong together.','sw-wapf');?></p>
     <div id="nds-wp-list-table-demo">

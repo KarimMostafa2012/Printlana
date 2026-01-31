@@ -31,6 +31,11 @@ class HybridauthHooks {
     public $e_msg = '';
 
     /**
+     * @var string $callback_url
+     */
+    public static string $callback_url = 'vendor-verification';
+
+    /**
      * Class Constructor.
      *
      * @since 3.11.1
@@ -38,6 +43,20 @@ class HybridauthHooks {
     public function __construct() {
         add_action( 'init', [ $this, 'init_config' ] );
         add_action( 'template_redirect', [ $this, 'monitor_authenticate_requests' ], 99 );
+        add_action( 'woocommerce_api_' . self::$callback_url, [ $this, 'redirect_callback' ] );
+    }
+
+    /**
+     * Redirect callback handler.
+     *
+     * @since 4.2.3
+     *
+     * @return void
+     */
+    public function redirect_callback() {
+        $this->monitor_authenticate_requests();
+        wp_safe_redirect( dokan_get_navigation_url( 'settings/verification' ) );
+        exit();
     }
 
     /**
@@ -46,7 +65,7 @@ class HybridauthHooks {
      * @return void
      */
     public function init_config() {
-        $this->base_url = dokan_get_navigation_url( 'settings/verification' );
+        $this->base_url = WC()->api_request_url( self::$callback_url );
         $this->config = $this->get_provider_config();
     }
 
@@ -109,7 +128,7 @@ class HybridauthHooks {
             if ( ! $user_profile ) {
                 $storage->clear();
                 wc_add_notice( __( 'Something went wrong! please try again', 'dokan' ), 'success' );
-                wp_safe_redirect( $this->base_url );
+                wp_safe_redirect( dokan_get_navigation_url( 'settings/verification' ) );
                 exit();
             }
 

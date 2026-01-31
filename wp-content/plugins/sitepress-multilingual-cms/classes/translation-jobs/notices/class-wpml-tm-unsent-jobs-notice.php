@@ -155,6 +155,10 @@ class WPML_TM_Unsent_Jobs_Notice {
 	 * @return array
 	 */
 	private function get_jobs() {
-		return get_option( self::OPT_JOBS_NOT_NOTIFIED );
+		// Ensure we always return an array. When the option does not exist,
+		// get_option may return false, which triggers deprecation notices when
+		// treated as an array in PHP 8.1+.
+		$jobs = get_option( self::OPT_JOBS_NOT_NOTIFIED, array() );
+		return is_array( $jobs ) ? $jobs : array();
 	}
 }

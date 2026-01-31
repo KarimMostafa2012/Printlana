@@ -36,11 +36,16 @@ class Printlana_Order_Assigner
         add_action('woocommerce_order_status_processing', [$this, 'handle_order_processing'], 20);
     }
 
+
     public function handle_payment_complete($order_id)
     {
         $order = wc_get_order($order_id);
         if (!$order)
             return;
+
+        if ($order->get_parent_id()) {
+            return;
+        }
         $assigner = isset($GLOBALS['pl_assigner_singleton']) ? $GLOBALS['pl_assigner_singleton'] : $this;
         if (!$assigner->has_per_product_children($order)) {
             $default_vendor = (int) get_post_field('post_author', $order_id);
@@ -54,6 +59,11 @@ class Printlana_Order_Assigner
         $order = wc_get_order($order_id);
         if (!$order)
             return;
+
+        if ($order->get_parent_id()) {
+            return;
+        }
+
         $assigner = isset($GLOBALS['pl_assigner_singleton']) ? $GLOBALS['pl_assigner_singleton'] : $this;
         if (!$assigner->has_per_product_children($order)) {
             $default_vendor = (int) get_post_field('post_author', $order_id);
@@ -84,7 +94,13 @@ class Printlana_Order_Assigner
      */
     private function dokan_sync_order(int $order_id): void
     {
-        // Prefer Dokan’s own sync if available
+        // Preferred: official Dokan sync helper (exists in Dokan Lite/Pro)
+        if (function_exists('dokan_sync_insert_order')) {
+            dokan_sync_insert_order($order_id);
+            return;
+        }
+
+        // Fallback to older internal API if present
         if (function_exists('dokan') && isset(dokan()->order)) {
             if (isset(dokan()->order->sync_table) && method_exists(dokan()->order->sync_table, 'sync')) {
                 dokan()->order->sync_table->sync($order_id);
@@ -92,28 +108,175 @@ class Printlana_Order_Assigner
             }
         }
 
-        // Fallback: fire Woo actions with the correct signature
+        // Last resort: fire Woo hooks that Dokan might be listening to
         $order = wc_get_order($order_id);
         if ($order) {
-            do_action('woocommerce_new_order', $order_id, $order);    // pass BOTH
-            do_action('woocommerce_update_order', $order_id, $order); // pass BOTH
+            do_action('woocommerce_new_order', $order_id, $order);
+            do_action('woocommerce_update_order', $order_id, $order);
         }
     }
 
     /**
+     * Force Dokan dokan_orders.seller_id to match our new vendor.
+     */
+    private function update_dokan_orders_vendor(int $order_id, int $vendor_id): void
+    {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'dokan_orders';
+
+        // Make sure the sync row exists first (Dokan will insert if missing)
+        $this->dokan_sync_order($order_id);
+
+        // Check current row
+        $row = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM {$table} WHERE order_id = %d LIMIT 1",
+                $order_id
+            ),
+            ARRAY_A
+        );
+
+        if (!$row) {
+            error_log('[UpdateDokanOrders] No dokan_orders row found for order_id=' . $order_id . ' after sync');
+            return;
+        }
+
+        $old_seller = (int) $row['seller_id'];
+
+        // Only update if it's actually different
+        if ($old_seller === (int) $vendor_id) {
+            error_log(sprintf(
+                '[UpdateDokanOrders] seller_id already %d for order_id=%d, nothing to do',
+                $vendor_id,
+                $order_id
+            ));
+            return;
+        }
+
+        $updated = $wpdb->update(
+            $table,
+            ['seller_id' => (int) $vendor_id],
+            ['order_id' => (int) $order_id],
+            ['%d'],
+            ['%d']
+        );
+
+        error_log(sprintf(
+            '[UpdateDokanOrders] Updated dokan_orders: order_id=%d old_seller=%d new_seller=%d rows=%d',
+            $order_id,
+            $old_seller,
+            $vendor_id,
+            $updated
+        ));
+    }
+
+
+
+    /**
      * Update a child order's vendor (post_author + Dokan meta) and sync Dokan tables.
      */
-    private function update_child_vendor(int $child_id, int $vendor_id): void
+    /**
+     * Update a child order's vendor (post_author + Dokan meta + custom meta)
+     * and sync Dokan tables. HPOS-safe: uses WooCommerce CRUD for order meta.
+     */
+    private function update_child_vendor(int $child_id, int $vendor_id, bool $update_products = false): void
     {
-        if ($vendor_id > 0) {
-            update_post_meta($child_id, '_dokan_vendor_id', $vendor_id);
-            wp_update_post([
-                'ID' => $child_id,
-                'post_author' => $vendor_id,
-            ]);
+        error_log('[UpdateVendorOuter] child=' . $child_id . ' new_vendor=' . $vendor_id);
+
+        if ($vendor_id <= 0) {
+            error_log('[UpdateVendorOuter] invalid vendor id, skipping');
+            return;
         }
+
+        $child_order = wc_get_order($child_id);
+
+        if (!$child_order) {
+            error_log('[UpdateVendorOuter] child order not found: ' . $child_id);
+            return;
+        }
+
+        // --- BEFORE state (for debugging) -----------------------------
+        $before_dokan = $child_order->get_meta('_dokan_vendor_id', true);
+        $before_pl = $child_order->get_meta('_pl_fulfillment_vendor_id', true);
+        $before_author = get_post_field('post_author', $child_id);
+
+        error_log(sprintf(
+            '[UpdateVendor][BEFORE] child=%d _dokan_vendor_id=%s _pl_fulfillment_vendor_id=%s post_author=%s',
+            $child_id,
+            var_export($before_dokan, true),
+            var_export($before_pl, true),
+            var_export($before_author, true)
+        ));
+
+        // --- Order meta (HPOS-safe via CRUD) --------------------------
+        $child_order->update_meta_data('_dokan_vendor_id', (int) $vendor_id);
+        $child_order->update_meta_data('_pl_fulfillment_vendor_id', (int) $vendor_id);
+        $child_order->save(); // important for HPOS / object cache
+
+        // --- Order post_author (for Dokan) ----------------------------
+        wp_update_post([
+            'ID' => $child_id,
+            'post_author' => (int) $vendor_id,
+        ]);
+
+        // --- Optionally update products' vendor -----------------------
+        if ($update_products) {
+            foreach ($child_order->get_items('line_item') as $item) {
+                $product_id = $item->get_product_id();
+                if (!$product_id) {
+                    continue;
+                }
+
+                // Change product author
+                wp_update_post([
+                    'ID' => $product_id,
+                    'post_author' => (int) $vendor_id,
+                ]);
+
+                // Optional: sync Dokan vendor meta on product
+                update_post_meta($product_id, '_dokan_vendor_id', (int) $vendor_id);
+
+                error_log(sprintf(
+                    '[UpdateVendor][Product] product_id=%d new_author=%d',
+                    $product_id,
+                    $vendor_id
+                ));
+            }
+        }
+
+        // --- Clear caches & reload for debugging ----------------------
+        clean_post_cache($child_id);
+        if (function_exists('wc_delete_shop_order_transients')) {
+            wc_delete_shop_order_transients($child_id);
+        }
+
+        $reloaded = wc_get_order($child_id);
+        $after_dokan = $reloaded->get_meta('_dokan_vendor_id', true);
+        $after_pl = $reloaded->get_meta('_pl_fulfillment_vendor_id', true);
+        $after_author = get_post_field('post_author', $child_id);
+
+        error_log(sprintf(
+            '[UpdateVendor][AFTER] child=%d _dokan_vendor_id=%s _pl_fulfillment_vendor_id=%s post_author=%s',
+            $child_id,
+            var_export($after_dokan, true),
+            var_export($after_pl, true),
+            var_export($after_author, true)
+        ));
+        error_log(
+            '[MetaCompare] get_post_meta _pl_fulfillment_vendor_id = ' .
+            var_export(get_post_meta($child_id, '_pl_fulfillment_vendor_id', true), true)
+        );
+
+
+        // --- Sync Dokan order tables ---------------------------------
         $this->dokan_sync_order($child_id);
+        
+        // --- Force Dokan dokan_orders.seller_id to match -------------
+        $this->update_dokan_orders_vendor($child_id, $vendor_id);
+
     }
+
 
     /**
      * Ensure parent shows it has sub orders (used by Dokan UI in some builds).
@@ -144,16 +307,21 @@ class Printlana_Order_Assigner
         if (!$order)
             return;
 
-        echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
-        echo '<h3>' . esc_html__('Assign Order for Fulfillment', 'printlana-order-assigner') . '</h3>';
-        $this->render_vendor_assignment_content($order);
-        echo '</div>';
+        if ($order->get_parent_id()) {
+            echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
+            echo '<h3>' . esc_html__('Assign Order for Fulfillment', 'printlana-order-assigner') . '</h3>';
+            $this->render_vendor_assignment_content($order);
+            echo '</div>';
+        }
 
-        // NEW: Sub-orders panel
-        echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
-        echo '<h3>' . esc_html__('Sub-Orders (Per Product)', 'printlana-order-assigner') . '</h3>';
-        $this->render_suborders_panel($order);
-        echo '</div>';
+        if (!$order->get_parent_id()) {
+            // NEW: Sub-orders panel
+            echo '<div class="order_data_column" style="width:100%;clear:both;margin-top:20px;">';
+            echo '<h3>' . esc_html__('Sub-Orders (Per Product)', 'printlana-order-assigner') . '</h3>';
+            $this->render_suborders_panel($order);
+            echo '</div>';
+        }
+        echo '<style>' . esc_html__('#order_data .order_data_column{width: 100% !important;}', 'printlana-order-assigner') . '</style>';
     }
 
     private function render_suborders_panel(WC_Order $parent): void
@@ -203,13 +371,52 @@ class Printlana_Order_Assigner
             // One-line items summary
             $items_summary = [];
             foreach ($child->get_items('line_item') as $li) {
-                $items_summary[] = sprintf('%s × %d', $li->get_name(), (int) $li->get_quantity());
+
+                $product_id = $li->get_product_id();
+                $product_name = $li->get_name();
+
+                // Get normal edit link
+                $edit_link = get_edit_post_link($product_id);
+
+                // Force WPML Arabic version (change 'ar' if needed)
+                if ($edit_link) {
+                    $edit_link .= '&lang=ar';
+                }
+
+                $items_summary[] = sprintf(
+                    "<a href='%s' target='_blank'>%s × %d</a>",
+                    esc_url($edit_link),
+                    esc_html($product_name),
+                    (int) $li->get_quantity()
+                );
             }
-            $items_txt = $items_summary ? esc_html(implode(', ', $items_summary)) : '—';
+
+            $items_txt = $items_summary
+                ? wp_kses(implode(', ', $items_summary), [
+                    'a' => [
+                        'href' => [],
+                        'target' => [],
+                    ]
+                ])
+                : '—';
+
+            // Get first product in this child order (each child has only one item)
+            $view_link = '';
+            $items = $child->get_items('line_item');
+
+            if (!empty($items)) {
+                $first_item = reset($items);
+                if ($first_item) {
+                    $product = $first_item->get_product();
+                    if ($product) {
+                        $view_link = get_permalink($product->get_id());
+                    }
+                }
+            }
+
 
             // Links
             $edit_link = get_edit_post_link($cid);
-            $view_link = $child->get_view_order_url();
 
             echo '<tr>';
             echo '<td><a href="' . esc_url($edit_link) . '">#' . (int) $cid . '</a></td>';
@@ -220,7 +427,7 @@ class Printlana_Order_Assigner
             echo '<td>' . esc_html($date) . '</td>';
             echo '<td style="text-align:right;">';
             echo '<a class="button" href="' . esc_url($edit_link) . '">' . esc_html__('Edit', 'printlana-order-assigner') . '</a> ';
-            echo '<a class="button" href="' . esc_url($view_link) . '" target="_blank">' . esc_html__('View', 'printlana-order-assigner') . '</a>';
+            echo '<a class="button" href="' . esc_url($view_link) . '" target="_blank">' . esc_html__('View Product', 'printlana-order-assigner') . '</a>';
             echo '</td>';
             echo '</tr>';
         }
@@ -256,6 +463,10 @@ class Printlana_Order_Assigner
 
     private function create_per_product_suborders(WC_Order $parent, int $assign_vendor_id): array
     {
+        if ($parent->get_meta('_pl_per_product_children_done')) {
+            return [];
+        }
+
         $created = [];
         $item_map = []; // parent line_item_id => child_order_id
 
@@ -321,7 +532,8 @@ class Printlana_Order_Assigner
 
             // Tag vendor + author (visibility for Dokan)
             if ($assign_vendor_id > 0) {
-                $child->update_meta_data('_dokan_vendor_id', $assign_vendor_id);
+                $child->update_meta_data('_dokan_vendor_id', (int) $assign_vendor_id);
+                $child->update_meta_data('_pl_fulfillment_vendor_id', (int) $assign_vendor_id);
                 wp_update_post([
                     'ID' => $child->get_id(),
                     'post_author' => $assign_vendor_id,
@@ -384,7 +596,7 @@ class Printlana_Order_Assigner
                 <?php
                 $assigned_vendor_id = (int) $order->get_meta('_pl_fulfillment_vendor_id');
                 $assigned_vendor = $assigned_vendor_id ? get_user_by('id', $assigned_vendor_id) : null;
-                echo '<strong>' . esc_html__('Current Assigned Vendor test:', 'printlana-order-assigner') . "</strong><br>";
+                echo '<strong>' . esc_html__('Current Assigned Vendor:', 'printlana-order-assigner') . "</strong><br>";
                 if ($assigned_vendor) {
                     echo esc_html($assigned_vendor->display_name) . ' (ID: ' . (int) $assigned_vendor_id . ')';
                 } else {
@@ -512,7 +724,7 @@ class Printlana_Order_Assigner
 
                     console.log('Disabling button and showing processing message...');
                     $('#pl_assign_vendor_btn').prop('disabled', true);
-                    $('#vendor_change_message').html('<span style="color: blue;">⏳ Processing...</span>');
+                    $('#pl_vendor_assign_message').html('<span style="color: blue;">⏳ Processing...</span>');
 
                     console.log('=== Sending AJAX Request ===');
                     console.log('AJAX URL:', ajaxurl);
@@ -560,7 +772,7 @@ class Printlana_Order_Assigner
                                     message += '<br><br><strong>Debug Info:</strong><br>';
                                     message += '<pre style="font-size: 11px; background: #fff; padding: 5px;">' + response.data.debug_info + '</pre>';
                                 }
-                                $('#vendor_change_message').html(message);
+                                $('#pl_vendor_assign_message').html(message);
 
                                 console.log('Reloading page now...');
                                 location.reload();
@@ -573,7 +785,7 @@ class Printlana_Order_Assigner
                                     errorMsg += '<br><br><strong>Debug Info:</strong><br>';
                                     errorMsg += '<pre style="font-size: 11px; background: #fff; padding: 5px;">' + response.data.debug_info + '</pre>';
                                 }
-                                $('#vendor_change_message').html(errorMsg);
+                                $('#pl_vendor_assign_message').html(errorMsg);
                                 $('#pl_assign_vendor_btn').prop('disabled', false);
                             }
                         },
@@ -585,7 +797,7 @@ class Printlana_Order_Assigner
                             console.error('Response Text:', xhr.responseText);
                             console.error('Full XHR Object:', xhr);
 
-                            $('#vendor_change_message').html('<span style="color: red;">✗ Ajax error: ' + error + '<br>Check console for details.</span>');
+                            $('#pl_vendor_assign_message').html('<span style="color: red;">✗ Ajax error: ' + error + '<br>Check console for details.</span>');
                             $('#pl_assign_vendor_btn').prop('disabled', false);
                         },
                         complete: function (xhr, status) {
@@ -662,9 +874,10 @@ class Printlana_Order_Assigner
     {
         try {
             // 1) Security & capability
-            if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pl_assign_order_vendor_nonce')) {
+            if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'pl_assign_order_vendor_nonce')) {
                 wp_send_json_error(['message' => __('Security check failed.', 'printlana-order-assigner')]);
             }
+
             if (!current_user_can('manage_woocommerce')) {
                 wp_send_json_error(['message' => __('You do not have permission.', 'printlana-order-assigner')]);
             }
@@ -672,52 +885,43 @@ class Printlana_Order_Assigner
             // 2) Inputs
             $order_id = isset($_POST['order_id']) ? (int) $_POST['order_id'] : 0;
             $new_vendor_id = isset($_POST['new_vendor_id']) ? (int) $_POST['new_vendor_id'] : 0;
+            $update_products = !empty($_POST['update_product']); // NEW
+
             if (!$order_id || !$new_vendor_id) {
                 wp_send_json_error(['message' => __('Invalid order or vendor ID.', 'printlana-order-assigner')]);
             }
 
-            // 3) Load order
+            // 3) Load THIS order (we treat it as the sub-order to be updated)
             $order = wc_get_order($order_id);
             if (!$order) {
                 wp_send_json_error(['message' => __('Order not found.', 'printlana-order-assigner')]);
             }
-            $order_id = $order->get_id(); // normalized
 
-            // 4) Ensure children exist (create once if missing)
-            if (!$this->has_per_product_children($order)) {
-                $this->create_per_product_suborders($order, $new_vendor_id);
-            }
+            // 4) Update vendor on THIS order only (and optionally its products)
+            error_log('[UpdateVendor] ' . $order_id . ' => ' . print_r($new_vendor_id, true));
+            $this->update_child_vendor($order_id, $new_vendor_id, $update_products);
 
-            // 5) Update vendor on ALL child orders (no recreation)
-            $children = wc_get_orders([
-                'parent' => $order_id,
-                'type' => 'shop_order',
-                'limit' => -1,
-                'return' => 'ids',
-                'status' => array_keys(wc_get_order_statuses()),
-            ]);
-
-            foreach ($children as $child_id) {
-                $this->update_child_vendor($child_id, $new_vendor_id);
-            }
-
-            // Optional: store selection on parent for UI
-            $order->update_meta_data('_pl_fulfillment_vendor_id', $new_vendor_id);
-            $this->flag_parent_has_children($order);
-            $order->save();
-
-            // 6) Note on parent
+            // 5) Add a note on the parent for traceability
+            $parent_id = $order->get_parent_id();
             $new_vendor = get_user_by('id', $new_vendor_id);
-            $order->add_order_note(sprintf(
-                __('Per-product suborders assigned to %s (user #%d).', 'printlana-order-assigner'),
-                $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
-                $new_vendor_id
-            ));
 
-            // 7) Respond
+            if ($parent_id) {
+                $parent = wc_get_order($parent_id);
+                if ($parent) {
+                    $parent->add_order_note(sprintf(
+                        /* translators: 1: sub-order ID, 2: vendor name or #id, 3: vendor id */
+                        __('Sub-order #%1$d assigned to vendor %2$s (user #%3$d).', 'printlana-order-assigner'),
+                        $order_id,
+                        $new_vendor ? $new_vendor->display_name : ('#' . $new_vendor_id),
+                        $new_vendor_id
+                    ));
+                    $parent->save();
+                }
+            }
+
             wp_send_json_success([
-                'message' => __('Vendor updated on existing sub-orders.', 'printlana-order-assigner'),
-                'child_ids' => $children,
+                'message' => __('Vendor updated on this sub-order.', 'printlana-order-assigner'),
+                'child_ids' => [$order_id],
             ]);
 
         } catch (\Throwable $e) {
@@ -726,6 +930,9 @@ class Printlana_Order_Assigner
             ], 500);
         }
     }
+
+
+
 
 }
 

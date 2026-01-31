@@ -93,6 +93,10 @@ class AdminPages {
 		return ! isStandAlone() && self::isTmPage( '/menu/main.php' );
 	}
 
+	public static function isWcProductAttributesPage(): bool {
+		return self::isPage( 'product_attributes' ) && Relation::propEq( 'post_type', 'product', $_GET );
+	}
+
 	/**
 	 * @param string $path Path after the TM folder (e.g. '/menu/main.php')
 	 *

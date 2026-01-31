@@ -41,7 +41,7 @@ if( isset( $this->topbar_sub_title ) && ! empty( $this->topbar_sub_title ) ){
                     <img src="<?php echo esc_url( $min_max_img ); ?>" class="wcmmq-brand-logo">
                 </div>
                 <div class="wcmmq-main-title">
-                    <h2 class="wcmmq-ntitle"><?php esc_html__("Min Max Control", 'woo-min-max-quantity-step-control-single');?></h2>
+                    <h2 class="wcmmq-ntitle"><?php echo esc_html__("Min Max Control", 'woo-min-max-quantity-step-control-single');?></h2>
                 </div>
                 
                 <div class="wcmmq-main-title wcmmq-main-title-secondary">
@@ -52,23 +52,23 @@ if( isset( $this->topbar_sub_title ) && ! empty( $this->topbar_sub_title ) ){
         </div>
         <div class="col-lg-5">
             <div class="header-button-wrapper">
-                <?php if( ! $this->is_pro){ ?>
-                    <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
-                        href="https://codeastrology.com/min-max-quantity/pricing/" 
-                        target="_blank">
-                        <i class="wcmmq_icon-spin5 animate-spin"></i>
-                        Get Premium
-                    </a>
-                <?php }else if($license_direct){ ?>
+                <?php if( $this->is_pro && $license_direct  ){ ?>
                     <a class="wcmmq-btn wcmmq-has-icon wcmmq-btn-tiny" 
                         href="<?php esc_attr( admin_url() ) ?>admin.php?page=wcmmq-license">
                         <span><i class="wcmmq_icon-plug"></i></span>
                         License
                     </a>
-                <?php } ?>
+                <?php }else{ ?>
+                    <a class="wcmmq-btn reverse wcmmq-btn-tiny wcmmq-get-premium" 
+                        href="https://codeastrology.com/min-max-quantity/pricing/" 
+                        target="_blank">
+                        <i class="wcmmq_icon-spin5 animate-spin"></i>
+                        Get Premium Features
+                    </a>  
+                    <?php } ?>
                 
                 <a class="wcmmq-btn wcmmq-btn-tiny" 
-                    href="https://codeastrology.com/my-support/?utm=Plugin_Social" 
+                    href="<?php echo esc_url( admin_url('admin.php?page=wcmmq-min-max-control-contact') ) ?>" 
                     target="_blank">
                     <i class="wcmmq_icon-user"></i>Support
                 </a>

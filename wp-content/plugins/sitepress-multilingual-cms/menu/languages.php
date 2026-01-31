@@ -131,7 +131,7 @@ $resource( [
 						'#lang-sec-9'   => __( 'Browser language redirect', 'sitepress' ),
 						'#lang-sec-9-5' => __( 'SEO Options', 'sitepress' ),
 						'#cookie'       => __( 'Language filtering for AJAX operations', 'sitepress' ),
-						'#lang-sec-10'  => __( 'WPML love', 'sitepress' ),
+						'#lang-sec-10'  => __( 'Show your love for WPML', 'sitepress' ),
 					);
 
 					if ( $should_hide_admin_language && array_key_exists( '#lang-sec-4', $navigation_items ) ) {
@@ -814,7 +814,7 @@ $resource( [
 
 	<div class="wpml-section wpml-section-wpml-love" id="lang-sec-10">
         <div class="wpml-section-header">
-            <h3><?php esc_html_e( 'WPML love', 'sitepress' ) ?></h3>
+            <h3><?php esc_html_e( 'Show your love for WPML', 'sitepress' ) ?></h3>
         </div>
         <div class="wpml-section-content">
             <form id="icl_promote_form" name="icl_promote_form" action="">

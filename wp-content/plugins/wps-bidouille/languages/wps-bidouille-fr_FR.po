@@ -1,0 +1,1605 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPS Bidouille\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wps-bidouille\n"
+"POT-Creation-Date: 2024-05-13 16:04+0200\n"
+"PO-Revision-Date: 2024-05-13 16:06+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wps-bidouille.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin_page/remove_from_cache.php:16
+msgid "Réglages de la purge du cache serveur"
+msgstr ""
+
+#: admin_page/remove_from_cache.php:23
+msgid ""
+"Si vous constatez des lenteurs dans votre administration lorsque vous "
+"sauvegardez des modifications, WPServeur vous suggère de désactiver la purge "
+"automatique du cache serveur NGINX."
+msgstr ""
+
+#: admin_page/remove_from_cache.php:24
+msgid ""
+"Vous devrez purger manuellement (via le bouton vert \"Purge du cache\") à "
+"chaque mise à jour de contenus."
+msgstr ""
+
+#: admin_page/remove_from_cache.php:27
+msgid "Désactiver la purge automatique du cache serveur NGINX"
+msgstr ""
+
+#: admin_page/remove_from_cache.php:31
+msgid "Exclude items from the cache server"
+msgstr "Exclure les éléments du serveur de cache"
+
+#: admin_page/remove_from_cache.php:34
+msgid ""
+"This tool allows you to exclude elements of the NGINX cache (server side). "
+"This tool will not replace the settings of the third-party cache plugin such "
+"as W3Total Cache or WP-Rocket."
+msgstr ""
+"Cet outil permet d'exclure des éléments du cache NGINX (côté serveur). Cet "
+"outil ne remplacera pas les paramètres du plugin de cache tiers tel que "
+"W3Total Cache ou WP-Rocket."
+
+#: admin_page/remove_from_cache.php:39
+msgid "Add simple"
+msgstr "Ajouter un élément"
+
+#: admin_page/remove_from_cache.php:40
+msgid "Add mass"
+msgstr "Ajouter un type d’élément"
+
+#: admin_page/remove_from_cache.php:41
+msgid "Add archive"
+msgstr ""
+
+#: admin_page/remove_from_cache.php:61
+msgid ""
+"Start typing the title, select the items and click on the \"Add to list\" "
+"button"
+msgstr ""
+"Commencez à saisir le titre, sélectionnez les éléments puis cliquez sur le "
+"bouton \"Ajouter à la liste\""
+
+#: admin_page/remove_from_cache.php:77 admin_page/remove_from_cache.php:100
+#: admin_page/remove_from_cache.php:127
+msgid "Add to list"
+msgstr "Ajouter à la liste"
+
+#: admin_page/remove_from_cache.php:85 admin_page/remove_from_cache.php:108
+msgid "Check one or more item type, then click on the \"Add to list\" button"
+msgstr ""
+"Cochez un ou plusieurs type d'élément, puis cliquez sur le bouton \"Ajouter "
+"à la liste\""
+
+#: admin_page/remove_from_cache.php:138
+msgid "List of elements excluded from the cache server"
+msgstr "Liste des éléments exclus du serveur de cache"
+
+#: admin_page/remove_from_cache.php:140 admin_page/remove_from_cache.php:143
+msgid "Erase all"
+msgstr "Effacer tout"
+
+#: admin_page/suggest_plugins_themes.php:19
+#: admin_page/suggest_plugins_themes.php:21
+#, fuzzy
+#| msgid "plugins"
+msgid "Plugins"
+msgstr "extensions"
+
+#: admin_page/suggest_plugins_themes.php:20
+#: admin_page/suggest_plugins_themes.php:22
+#, fuzzy
+#| msgid "themes"
+msgid "Themes"
+msgstr "thèmes"
+
+#: admin_page/suggestions.php:13 classes/suggestions.php:26
+#: classes/suggestions.php:27
+msgid "Our suggestions"
+msgstr "Nos suggestions"
+
+#: admin_page/tools.php:13 blocks/menu.php:35
+msgid "Complementary tools"
+msgstr "Outils complémentaires"
+
+#: admin_page/tools.php:19
+msgid "Log out all sessions"
+msgstr "Déconnecter toutes les sessions"
+
+#: admin_page/tools.php:21
+msgid "This tool will disconnect all users except the active user (you)."
+msgstr ""
+"Cet outil déconnectera tous les utilisateurs sauf l'utilisateur actif (vous)."
+
+#: admin_page/tools.php:26
+msgid "Disconnect everyone"
+msgstr "Déconnecter tout le monde"
+
+#: admin_page/tools.php:31
+msgid "Expired temporary data"
+msgstr "Données temporaires expirées"
+
+#: admin_page/tools.php:33
+#, php-format
+msgid ""
+"This tool will clean up ALL expired <a href=\"%s\" target=\"_blank"
+"\">transients</a> from WordPress."
+msgstr ""
+"Cet outil va nettoyer TOUS les <a href=\"%s\" target=\"_blank\">transients</"
+"a> expirés de WordPress."
+
+#: admin_page/tools.php:38
+msgid "Clear temporary data"
+msgstr "Effacer les données temporaires"
+
+#: admin_page/tools.php:43
+msgid "Cleaning up spam comments"
+msgstr "Nettoyage des commentaires indésirables"
+
+#: admin_page/tools.php:45
+msgid "This tool will remove spam comments."
+msgstr "Cet outil va supprimer les commentaires indésirables."
+
+#: admin_page/tools.php:50
+msgid "Delete spam comments"
+msgstr "Effacer les commentaires indésirables"
+
+#: admin_page/tools.php:55
+msgid "Cleaning comments to trash"
+msgstr "Nettoyage des commentaires à la corbeille"
+
+#: admin_page/tools.php:57
+msgid "This tool will delete the comments to the trash."
+msgstr "Cet outil va supprimer les commentaires mis à la corbeille."
+
+#: admin_page/tools.php:62
+msgid "Clear comments from trash"
+msgstr "Effacer les commentaires de la corbeille"
+
+#: admin_page/tools.php:67
+msgid "Cleaning revisions"
+msgstr "Nettoyage des révisions"
+
+#: admin_page/tools.php:69
+msgid "This tool will remove revisions."
+msgstr "Cet outil va supprimer les révisions."
+
+#: admin_page/tools.php:74
+msgid "Delete revisions"
+msgstr "Supprimer les révisions"
+
+#: admin_page/tools.php:79
+msgid "Resetting the plugin"
+msgstr "Remise à zéro de l’extension"
+
+#: admin_page/tools.php:81
+msgid "This resets the settings of the WPS Bidouille extension."
+msgstr "Cela réinitialise les réglages de l'extension WPS Bidouille."
+
+#: admin_page/tools.php:86
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: admin_page/tools.php:91
+msgid "Keep extension settings after deactivation / uninstallation"
+msgstr ""
+"Conserver les réglages de l'extension après désactivation / désinstallation"
+
+#: admin_page/tools.php:93
+msgid ""
+"This tool allows you to retain extension data even if you uninstall or "
+"disable WPS Bidouille."
+msgstr ""
+"Cet outil permet de conserver les données de l'extension même si vous "
+"désinstallez ou désactivez WPS Bidouille."
+
+#: admin_page/white_label.php:15 blocks/menu.php:29 classes/whitelabel.php:31
+#: classes/whitelabel.php:32
+msgid "White Label"
+msgstr "Marque blanche"
+
+#: admin_page/white_label.php:17
+msgid "The white mark tool:"
+msgstr "L'outil marque blanche :"
+
+#: admin_page/white_label.php:17
+msgid "(only for users who are not in the exclusion list)"
+msgstr ""
+"(uniquement pour les utilisateurs ne se trouvant pas dans la liste "
+"d'exclusion)"
+
+#: admin_page/white_label.php:19
+msgid "Removes the \"WPServeur\" widget from the Dashboard"
+msgstr "Supprime le widget \"WPServeur\" du Tableau de bord"
+
+#: admin_page/white_label.php:20
+msgid ""
+"Removes the mention \"This site is hosted by WPServeur :) PF5\" on the "
+"administration login page"
+msgstr ""
+"Supprime la mention \"Ce site est hébergé par WPServeur :)\" sur la page de "
+"connexion à l'administration"
+
+#: admin_page/white_label.php:21
+msgid ""
+"Removes the notion of WPServeur account etc. on the WPS plugin Bidouille"
+msgstr ""
+"Supprime les mentions de compte WPServeur (support, compte ..) sur "
+"l’extension WPS Bidouille"
+
+#: admin_page/white_label.php:25
+msgid "Skip the site in white label?"
+msgstr "Passer le site en marque blanche?"
+
+#: admin_page/white_label.php:25
+msgid ""
+"By default, the user who activates the white mark is in the exclusion list."
+msgstr ""
+"Par défaut l'utilisateur qui active la marque blanche est dans la liste des "
+"exclusions."
+
+#: admin_page/white_label.php:36
+msgid "Yes"
+msgstr "Oui"
+
+#: admin_page/white_label.php:40 blocks/server_information.php:27
+msgid "No"
+msgstr "Non"
+
+#: admin_page/white_label.php:47
+msgid "List of users to exclude from the white label:"
+msgstr "Liste des utilisateurs qui ne seront pas en marque blanche :"
+
+#: admin_page/white_label.php:66 classes/helpers.php:562
+#, fuzzy
+#| msgid "DNS change"
+msgid "Save Changes"
+msgstr "Changement de DNS"
+
+#: blocks/check_cache.php:8
+msgid "Check Cache"
+msgstr "Vérification du cache"
+
+#: blocks/check_cache.php:11
+msgid ""
+"This tool makes it possible to check if the urls tested below are taken into "
+"account by the NGINX cache server"
+msgstr ""
+"Cet outil permet de vérifier si l’url testée ci-dessous est prise en compte "
+"par le serveur de cache NGINX"
+
+#: blocks/check_cache.php:33
+msgid "Scan this URL"
+msgstr "Scanner votre URL"
+
+#: blocks/check_cache.php:36
+msgid "Check this URL"
+msgstr "Vérifier cette URL"
+
+#: blocks/check_cache.php:40
+msgid "Result of the page"
+msgstr "Résultat de la page"
+
+#: blocks/check_old_plugins.php:77
+msgid ""
+"Warning, one or more of your extensions have not been updated for more than "
+"2 years"
+msgstr ""
+"Attention, une ou plusieurs de vos extensions n'ont pas été mises à jour "
+"depuis plus de 2 ans"
+
+#: blocks/check_old_plugins.php:84
+msgid "See the extensions"
+msgstr "Voir les extensions"
+
+#: blocks/db_prefix.php:26
+msgid "The prefix of your database is not the default one"
+msgstr "Le préfixe de votre base de données n'est pas celui par défaut"
+
+#: blocks/db_prefix.php:32
+msgid "Please change the prefix of your database!"
+msgstr "Veuillez modifier le préfixe de votre base de données !"
+
+#: blocks/db_prefix.php:41
+msgid "The wp-config file has been successfully updated with prefix"
+msgstr "Le fichier wp-config a été mis à jour avec succès avec le préfixe"
+
+#: blocks/db_prefix.php:47
+msgid ""
+"The wp-config file could not be updated! You have to manually update the "
+"table_prefix variable to the one you have specified:"
+msgstr ""
+"Le fichier wp-config n'a pas pu être mis à jour! Vous devez mettre à jour "
+"manuellement la variable table_prefix à celle que vous avez spécifiée:"
+
+#: blocks/db_prefix.php:53
+msgid "An error has occurred and the tables could not be updated!"
+msgstr ""
+"Une erreur s'est produite et les tables n'ont pas pu être mises à jour!"
+
+#: blocks/db_prefix.php:59
+msgid "There are no tables to rename!"
+msgstr "Il n'y a pas de tables à renommer!"
+
+#: blocks/db_prefix.php:76
+msgid "Update database prefix"
+msgstr "Mettre à jour ce préfixe"
+
+#: blocks/db_prefix.php:80
+msgid "The prefix is ​​secure"
+msgstr "Le préfixe est sécurisé"
+
+#: blocks/logs.php:15
+msgid "Download Logs"
+msgstr "Télécharger les logs"
+
+#: blocks/logs.php:19
+msgid "Description logs"
+msgstr ""
+
+#: blocks/logs.php:25
+msgid "Download error log"
+msgstr "Télécharger les error log"
+
+#: blocks/logs.php:31
+msgid "Download access log"
+msgstr "Télécharger les access log"
+
+#. Plugin Name of the plugin/theme
+#: blocks/menu.php:11 classes/plugin.php:164 classes/plugin.php:439
+#: classes/plugin.php:689
+msgid "WPS Bidouille"
+msgstr ""
+
+#: blocks/menu.php:20 classes/removefromcache.php:51
+#: classes/removefromcache.php:52
+msgid "Exclude from cache"
+msgstr "Gestion du cache"
+
+#: blocks/menu.php:41 classes/suggest-plugins-themes.php:37
+#: classes/suggest-plugins-themes.php:38
+msgid "Recommended themes and extensions"
+msgstr "Thèmes et extensions conseillés"
+
+#: blocks/mysql.php:16
+msgid "Report MYSQL"
+msgstr "Rapport MYSQL"
+
+#: blocks/mysql.php:26
+msgid "Database :"
+msgstr "Base de données :"
+
+#: blocks/mysql.php:31
+msgid "Found tables:"
+msgstr "Tables trouvées :"
+
+#: blocks/mysql.php:36
+msgid "Details of the tables:"
+msgstr "Détails des tables :"
+
+#: blocks/mysql.php:50
+#, fuzzy
+#| msgid "Database :"
+msgid "Repair Database"
+msgstr "Base de données :"
+
+#: blocks/mysql.php:55
+msgid "Repair and Optimize Database"
+msgstr ""
+
+#: blocks/notifications.php:9
+msgid "Notification center"
+msgstr "Centre de notifications"
+
+#: blocks/optimisations.php:11
+msgid "Optimizations"
+msgstr "Optimisations"
+
+#: blocks/optimisations.php:28
+msgid "Hide connection error"
+msgstr "Masquer les erreurs de connexion"
+
+#: blocks/optimisations.php:29
+msgid "Hide connection error information in"
+msgstr "Masquer les informations d’erreur de connexion dans"
+
+#: blocks/optimisations.php:42
+msgid "Remove special characters from uploaded media"
+msgstr "Retirer les caractères spéciaux des medias téléversées"
+
+#: blocks/optimisations.php:43
+msgid "Automatically remove special characters when uploading media"
+msgstr ""
+"Retire automatiquement les caractères spéciaux lors de l'upload des medias"
+
+#: blocks/optimisations.php:56
+msgid "Remove WordPress version"
+msgstr "Retirer la version de WordPress"
+
+#: blocks/optimisations.php:57
+msgid "Remove the generator tag that is generated"
+msgstr "Retirer la balise créée par le générateur"
+
+#: blocks/optimisations.php:70
+msgid "Remove Windows Live Writer Manifest"
+msgstr "Supprimer le manifeste de Windows Live Writer"
+
+#: blocks/optimisations.php:71
+msgid "Remove Windows Live Writer Manifest Link."
+msgstr "Supprimer le lien du manifeste de Windows Live Writer"
+
+#: blocks/optimisations.php:83
+msgid "Restrict the revision number"
+msgstr "Restreindre le nombre de révision"
+
+#: blocks/optimisations.php:84
+msgid "Restrict the revision number to 5 to avoid cluttering the database"
+msgstr ""
+"Restreint le nombre de révision de chaque article à 5 pour éviter "
+"d'encombrer la base de données"
+
+#: blocks/optimisations.php:95
+msgid "Remove H1 in Tiny MCE"
+msgstr "Retirer H1 dans Tiny MCE"
+
+#: blocks/optimisations.php:96
+msgid "should never be used in the editor"
+msgstr "ne doit jamais être utilisé dans l’éditeur."
+
+#: blocks/optimisations.php:108
+msgid "Disabled emoji WP"
+msgstr "Désactiver les Emoji WordPress"
+
+#: blocks/optimisations.php:109
+msgid ""
+"Reduces resources number loaded on front page. Utilise les emojis du "
+"navigateur de vos visiteurs au lieu de charger celles de WordPress.org"
+msgstr ""
+"Réduit le nombre de ressources chargées sur la première page. Utiliser les "
+"emojis du navigateur de vos visiteurs au lieu de charger ceux de WordPress."
+"org"
+
+#: blocks/optimisations.php:122
+msgid "Deactivate REST-API"
+msgstr "Désactiver l'API REST"
+
+#: blocks/optimisations.php:123
+msgid "This link become not accessible: "
+msgstr "Ce lien devient inaccessible :"
+
+#: blocks/optimisations.php:135
+msgid "Add format <em>Medium Large</em>"
+msgstr "Ajouter le format d’image <em>Medium Large</em>"
+
+#: blocks/optimisations.php:136
+msgid ""
+"Displays the default <em>Medium Wide</em> format (768 pixels) when you "
+"choose a media in an article."
+msgstr ""
+"Affiche le format <em>Moyen large</em> existant par défaut (768 pixels) "
+"quand vous choisissez un média dans un article."
+
+#: blocks/optimisations.php:148
+msgid "Deactivate author page and author link"
+msgstr "Désactiver la page auteur et le lien auteur"
+
+#: blocks/optimisations.php:149
+msgid "The links and pages listing the different author login."
+msgstr ""
+"Les liens et les pages listant les identifiant de connexion différents "
+"auteurs."
+
+#: blocks/optimisations.php:160 blocks/optimisations.php:161
+msgid "Remove RSS feed"
+msgstr "Supprimer le flux RSS"
+
+#: blocks/optimisations.php:172 blocks/optimisations.php:173
+msgid "Remove Comment RSS feed"
+msgstr "Supprimer le flux RSS des commentaires"
+
+#: blocks/optimisations.php:186
+msgid "Load the latest version of jQuery"
+msgstr "Charger la dernière version de jQuery"
+
+#: blocks/optimisations.php:187
+msgid ""
+"Replaces the version of jQuery proposed by WordPress (1.12.4) which contains "
+"a security vulnerability, by version 3.3.1 which is patched on this flaw. "
+"<span class=\"wps-warning\">Be careful, however, this feature may cause "
+"malfunction with some extensions</span>"
+msgstr ""
+"Remplace la version de jQuery proposée par WordPress (1.12.4) qui contient "
+"une faille de sécurité, par la version 3.3.1 qui est patchée. <span class="
+"\"wps-warning\">Attention cette fonctionnalité peut créer des "
+"dysfonctionnements avec certaines extensions</span>"
+
+#: blocks/optimisations.php:200
+msgid "Remove users on WordPress sitemap"
+msgstr "Désactiver les utilisateurs du sitemap WordPress par défaut"
+
+#: blocks/optimisations.php:201
+msgid "Removed users on WordPress sitemap"
+msgstr "Désactiver les utilisateurs du sitemap WordPress par défaut"
+
+#: blocks/optimisations.php:214
+msgid "WooCommerce Speed Drain Repair"
+msgstr "Améliorer la vitesse de WooCommerce"
+
+#: blocks/optimisations.php:215
+msgid ""
+"Stops loading the extra items you do not need inside WooCommerce and speeds "
+"up WordPress core admin-ajax.php file."
+msgstr ""
+"Arrête de charger les éléments supplémentaires dont vous n'avez plus besoin "
+"dans WooCommerce et accélère le fichier core admin-ajax.php de WordPress"
+
+#: blocks/optimisations.php:228
+msgid "Contact Form 7 Speed"
+msgstr "Améliore la vitesse de Contact Form 7"
+
+#: blocks/optimisations.php:229
+msgid "Stops loading the extra items you do not need inside Contact Form 7"
+msgstr ""
+"Arrête de charger les éléments supplémentaires dont vous n'avez plus besoin "
+"dans Contact Form 7"
+
+#: blocks/optimisations.php:241
+msgid "Disable REST API user endpoints"
+msgstr "Désactiver les endpoints utilisateur REST API"
+
+#: blocks/optimisations.php:242
+msgid ""
+"Disable the user endpoint for non connected user (not display the list of "
+"wordpress users)"
+msgstr ""
+"Désactiver le point de terminaison pour un utilisateur non connecté "
+"(n’affiche pas la liste des utilisateurs)"
+
+#: blocks/optimisations.php:246
+msgid "Save"
+msgstr ""
+
+#: blocks/pub.php:23
+msgid "Install WPServeur migration"
+msgstr "Installer WPServeur migration"
+
+#: blocks/pub.php:35
+msgid "Enable WPServeur migration"
+msgstr "Activer WPServeur migration"
+
+#: blocks/pub.php:190
+msgid "Discover the specialized WordPress hosting with WPServeur!"
+msgstr "Découvrez l'hébergement spécialisé WordPress avec WPServeur !"
+
+#: blocks/pub.php:191
+msgid "For fast, secure and efficient hosting."
+msgstr "Pour un hébergement rapide, sécurisé et performant."
+
+#: blocks/pub.php:192
+msgid "We only do WordPress but we do it well!"
+msgstr "Nous ne faisons que du WordPress mais nous le faisons bien !"
+
+#: blocks/pub.php:193
+#, php-format
+msgid ""
+"(-10% discount on your subscription with the promo code <strong>WPSC&T</"
+"strong>)"
+msgstr ""
+"(-10% de remise à vie sur votre abonnement avec le code promo "
+"<strong>WPSC&T</strong>)"
+
+#: blocks/pub.php:195
+msgid "Subscribe to WPServeur"
+msgstr "S'abonner à WPServeur"
+
+#: blocks/pub.php:197
+msgid "More about WPServeur migration"
+msgstr "Plus d'infos sur WPServeur migration"
+
+#: blocks/pub_wpboutik.php:18
+msgid "Install WPBoutik"
+msgstr "Installer WPBoutik"
+
+#: blocks/pub_wpboutik.php:30
+msgid "Enable WPBoutik"
+msgstr "Activer WPBoutik"
+
+#: blocks/pub_wpboutik.php:191
+msgid ""
+"Say goodbye to complications! WPBoutik simplifies online sales with "
+"WordPress."
+msgstr ""
+"Dites adieu aux complications ! WPBoutik simplifie la vente en ligne avec "
+"WordPress."
+
+#: blocks/pub_wpboutik.php:192
+msgid ""
+"Lightness and efficiency: discover the WPBoutik e-commerce plugin for "
+"WordPress."
+msgstr ""
+"Légèreté et efficacité : découvrez le plugin e-commerce WPBoutik pour "
+"WordPress."
+
+#: blocks/pub_wpboutik.php:193
+msgid ""
+"Transform your WordPress site into a seamless sales platform with WPBoutik."
+msgstr ""
+"Transformez votre site WordPress en une plateforme de vente fluide avec "
+"WPBoutik."
+
+#: blocks/pub_wpboutik.php:194
+msgid ""
+"Maximum simplicity, optimal results: adopt WPBoutik for your WordPress e-"
+"commerce."
+msgstr ""
+"Simplicité maximale, résultats optimaux : adoptez WPBoutik pour votre e-"
+"commerce WordPress."
+
+#: blocks/pub_wpboutik.php:195
+msgid ""
+"Your online store deserves the best: choose WPBoutik for a hassle-free "
+"experience."
+msgstr ""
+"Votre boutique en ligne mérite le meilleur : choisissez WPBoutik pour une "
+"expérience sans tracas."
+
+#: blocks/pub_wpboutik.php:196
+msgid ""
+"Ditch the bulky plugins! WPBoutik gives you the simplicity you need to sell "
+"online on WordPress."
+msgstr ""
+"Laissez tomber les plugins encombrants ! WPBoutik vous offre la simplicité "
+"dont vous avez besoin pour vendre en ligne sur WordPress."
+
+#: blocks/pub_wpboutik.php:197 blocks/wpboutik.php:19
+msgid ""
+"WPBoutik: the lightweight and efficient solution for your WordPress e-"
+"commerce"
+msgstr ""
+"WPBoutik : la solution légère et performante pour votre e-commerce WordPress"
+
+#: blocks/pub_wpboutik.php:198
+msgid ""
+"Save time and energy with WPBoutik: the obvious choice for a stress-free "
+"online store."
+msgstr ""
+"Gagnez du temps et de l’énergie avec WPBoutik : le choix évident pour une "
+"boutique en ligne sans stress."
+
+#: blocks/pub_wpboutik.php:199
+msgid ""
+"Online sales without complications? It's possible with WPBoutik on WordPress."
+msgstr ""
+"Des ventes en ligne sans complications ? C’est possible avec WPBoutik sur "
+"WordPress."
+
+#: blocks/pub_wpboutik.php:200
+msgid ""
+"Your online store deserves a simple and effective solution: discover "
+"WPBoutik today."
+msgstr ""
+"Votre boutique en ligne mérite une solution simple et efficace : découvrez "
+"WPBoutik dès aujourd’hui."
+
+#: blocks/pub_wpboutik.php:210
+msgid "Discover WPBoutik"
+msgstr "Découvrir WPBoutik"
+
+#: blocks/pub_wpboutik.php:211
+msgid "More about WPBoutik"
+msgstr "En savoir plus sur WPBoutik"
+
+#: blocks/report_system.php:17
+msgid "Report System"
+msgstr "Rapport système"
+
+#: blocks/report_system.php:20
+msgid ""
+"The system report allows you to generate a usable report on the general "
+"status of your WordPress site."
+msgstr ""
+"Le rapport système vous permet de générer un rapport exploitable sur l'état "
+"général de votre site WordPress."
+
+#: blocks/report_system.php:21
+msgid ""
+"For example, this speeds up requests for WPServeur support because it "
+"provides essential information about your site."
+msgstr ""
+"Par exemple cela permet d'accélérer les demandes de support WPServeur car il "
+"fournit des informations essentielles sur votre site."
+
+#: blocks/report_system.php:22
+msgid "No private information is collected in this report."
+msgstr "Aucune information privée n'est collectée dans ce rapport."
+
+#: blocks/report_system.php:28
+msgid "Download the system report"
+msgstr "Télécharger le rapport système"
+
+#: blocks/report_system.php:34
+msgid "Open a support ticket"
+msgstr "Ouvrir un ticket de support"
+
+#: blocks/server_information.php:11 blocks/server_information.php:46
+msgid "Server information"
+msgstr "Informations du serveur"
+
+#: blocks/server_information.php:31
+msgid "Validity:"
+msgstr "Validité:"
+
+#: blocks/server_information.php:44
+msgid "Environment"
+msgstr "Environnement"
+
+#: blocks/server_information.php:50
+msgid "PHP Version"
+msgstr "Version PHP"
+
+#: blocks/server_information.php:52
+msgid "The version of PHP installed on your hosting server"
+msgstr "La version de PHP installée sur votre serveur d'hébergement"
+
+#: blocks/server_information.php:56
+msgid "Total Memory"
+msgstr "Mémoire Totale"
+
+#: blocks/server_information.php:58
+msgid "The maximum amount of memory (RAM) that your site can use at one time"
+msgstr ""
+"La quantité maximal de mémoire (RAM) que votre site peut utiliser en une fois"
+
+#: blocks/server_information.php:62
+msgid "Used Memory"
+msgstr "Mémoire Utilisée"
+
+#: blocks/server_information.php:66
+msgid "Memory usage"
+msgstr "Utilisation de la mémoire"
+
+#: blocks/server_information.php:70
+msgid "SSL Certificat"
+msgstr "Certificat SSL"
+
+#: blocks/server_information.php:72
+msgid ""
+"An SSL certificate certifies the identity of a company and is used to "
+"encrypt data exchanged over a network"
+msgstr ""
+"Un certificat SSL atteste l'identité d'une entreprise et est utilisé afin de "
+"crypter les données échangées sur un réseau"
+
+#: blocks/server_information.php:76
+msgid "Post Max size"
+msgstr ""
+
+#: blocks/server_information.php:78
+msgid "Sets the maximum size of data received by POST method"
+msgstr "Définit le poids maximale des données reçues par méthode POST"
+
+#: blocks/server_information.php:82
+msgid "Upload Max filesize"
+msgstr ""
+
+#: blocks/server_information.php:84
+msgid "The maximum weight of files sent to the server by a form"
+msgstr "Le poids maximal des fichiers envoyés sur le serveur par un formulaire"
+
+#: blocks/server_information.php:88
+msgid "Max input vars"
+msgstr "Max input vars"
+
+#: blocks/server_information.php:90
+msgid ""
+"The maximum number of variables that your server can use for a single "
+"function to avoid overloads"
+msgstr ""
+"Le nombre maximum de variables que votre serveur peut utiliser pour une "
+"seule fonction pour éviter les surcharges"
+
+#: blocks/server_information.php:95
+msgid "Allow URL fopen"
+msgstr "Allow URL fopen"
+
+#: blocks/server_information.php:97
+msgid "This option enables the file access functions"
+msgstr "Cette option active les fonctions d'accès aux fichiers"
+
+#: blocks/server_information.php:102
+msgid "Allow URL include"
+msgstr "Allow URL include"
+
+#: blocks/server_information.php:104
+msgid "This option allows the use of URL handlers"
+msgstr "Cette option permet l'utilisation des gestionnaires d'URL"
+
+#: blocks/settings_autoupdate.php:43
+msgid "Remember to adjust your automatic update settings"
+msgstr "Pensez à ajuster vos réglages de mises à jour automatiques"
+
+#: blocks/settings_autoupdate.php:47
+msgid "Update my settings"
+msgstr "Mettre à jour mes réglages"
+
+#: blocks/ssl.php:15
+msgid "SSL certificate is active"
+msgstr "Certificat SSL est actif"
+
+#: blocks/ssl.php:18
+msgid "Your site is in HTTPS"
+msgstr "Votre site est en HTTPS"
+
+#: blocks/ssl.php:23
+msgid "You don't have an SSL certificate"
+msgstr "Vous n'avez pas de certificat SSL"
+
+#: blocks/ssl.php:26
+msgid "Your site isn't in HTTPS"
+msgstr "Votre site n'est pas en HTTPS"
+
+#: blocks/ssl.php:32
+msgid "Valid until:"
+msgstr "Valide jusqu'au :"
+
+#: blocks/ssl.php:35
+msgid "Automatic renewal"
+msgstr "Renouvellement automatique"
+
+#: blocks/suggest/plugin_premiums.php:11
+msgid ""
+"Oops, we can not recover the premium extensions, force the refresh of the "
+"page"
+msgstr ""
+"Oups, nous n'arrivons pas à récupérer les extensions premium, forcer le "
+"rafraîchissement de la page"
+
+#: blocks/suggest/plugin_premiums.php:12 blocks/suggest/theme_premiums.php:12
+msgid "Refresh page"
+msgstr "Rafraîchir la page"
+
+#: blocks/suggest/plugin_premiums.php:41 blocks/suggest/theme_premiums.php:41
+#: blocks/suggest/themes.php:44
+#, fuzzy, php-format
+#| msgid "by %s"
+msgid "By %s"
+msgstr "par %s"
+
+#: blocks/suggest/plugin_premiums.php:62 blocks/suggest/theme_premiums.php:62
+#: blocks/suggest/themes.php:65
+#, fuzzy
+#| msgid "PHP Version"
+msgid "Version:"
+msgstr "Version PHP"
+
+#: blocks/suggest/theme_premiums.php:11
+msgid ""
+"Oops, we can not recover the premium themes, force the refresh of the page"
+msgstr ""
+"Oups, nous n'arrivons pas à récupérer les thèmes premium, forcer le "
+"rafraîchissement de la page"
+
+#: blocks/update_traduction.php:22
+msgid "Congratulations, your traductions is up to date!"
+msgstr "Félicitations, toutes vos traductions sont à jour !"
+
+#: blocks/update_traduction.php:27 classes/helpers.php:110
+#: classes/helpers.php:142
+msgid "No update available"
+msgstr "Aucune mise à jour disponible"
+
+#: blocks/update_traduction.php:32
+msgid "One or more of your translations requires an update"
+msgstr "Une ou plusieurs de vos traductions nécessite une mise à jour"
+
+#: blocks/update_traduction.php:37 classes/helpers.php:119
+#: classes/helpers.php:151
+msgid "Update available"
+msgstr "Mise à jour disponible"
+
+#: blocks/user_info.php:17
+msgid "Account WPServeur"
+msgstr "Compte WPServeur"
+
+#: blocks/user_info.php:24
+msgid "Login WPServeur"
+msgstr "Identifiant WPServeur"
+
+#: blocks/user_info.php:28
+msgid "Server"
+msgstr "Serveur WPServeur"
+
+#: blocks/user_info.php:32
+msgid "Path WordPress"
+msgstr "Chemin du WordPress"
+
+#: blocks/user_info.php:46
+msgid "Monitoring"
+msgstr "Statut serveur"
+
+#: blocks/user_info.php:49
+msgid "Console"
+msgstr "Console"
+
+#: blocks/user_info.php:61
+msgid "My Account"
+msgstr "Mon compte"
+
+#: blocks/user_info.php:66
+msgid "WPServeur User Guide"
+msgstr "Mode d'emploi WPServeur"
+
+#: blocks/wpboutik.php:28 blocks/wps_cleaner.php:28
+#: blocks/wps_hide_login.php:28 blocks/wps_limit_login.php:28
+msgid "Install plugin"
+msgstr "Installer l’extension"
+
+#: blocks/wpboutik.php:30
+msgid "You have the WPBoutik plugin, activate it now"
+msgstr "Vous avez l’extension WPBoutik, activez-la dès maintenant"
+
+#: blocks/wpboutik.php:42 blocks/wps_cleaner.php:42
+#: blocks/wps_hide_login.php:42 blocks/wps_limit_login.php:42
+msgid "Activate plugin"
+msgstr "Activer l'extension"
+
+#: blocks/wps_cleaner.php:19
+msgid "Clean up your WordPress site by installing the WPS Cleaner"
+msgstr "Nettoyer votre site WordPress en installant l’extension WPS Cleaner"
+
+#: blocks/wps_cleaner.php:30
+msgid "You have the WPS Cleaner plugin, activate it now"
+msgstr "Vous avez l'extension WPS Cleaner, activez-la dès maintenant"
+
+#: blocks/wps_hide_login.php:19
+msgid ""
+"Secure access to your WordPress administration by installing the WPS Hide "
+"Login"
+msgstr ""
+"Sécuriser l'accès à votre administration WordPress en installant l’extension "
+"WPS Hide Login"
+
+#: blocks/wps_hide_login.php:30
+msgid "You have the WPS Hide Login plugin, activate it now"
+msgstr "Vous avez l’extension WPS Hide Login, activez-la dès maintenant"
+
+#: blocks/wps_limit_login.php:19
+msgid ""
+"Secure the WordPress authentication page by installing the WPS Limit Login"
+msgstr ""
+"Sécuriser la page d'authentification WordPress en installant l’extension WPS "
+"Limit Login"
+
+#: blocks/wps_limit_login.php:30
+msgid "You have the WPS Limit Login plugin, activate it now"
+msgstr "Vous avez l’extension WPS Limit Login, activez-la dès maintenant"
+
+#: classes/disable-rest-api/disable-rest-api.php:28
+msgid "WPS Bidouille: Restrict access the REST API."
+msgstr ""
+
+#: classes/helpers.php:75
+msgid ""
+"Warning, you are currently using a temporary URL, know that the cache is not "
+"active on it."
+msgstr ""
+"Attention, vous utilisez actuellement une URL temporaire, sachez que le "
+"cache n'est pas actif dessus."
+
+#: classes/helpers.php:75
+msgid "How to obtain a domain name"
+msgstr "Comment obtenir un nom de domaine"
+
+#: classes/helpers.php:106
+msgid "Congratulations, your <strong>WordPress</strong> is up to date!"
+msgstr "Félicitations, votre <strong>WordPress</strong> est à jour !"
+
+#: classes/helpers.php:115
+msgid "Your <strong>WordPress</strong> requires an update!"
+msgstr "Votre <strong>WordPress</strong> nécessite une mise à jour !"
+
+#: classes/helpers.php:124
+msgid "themes"
+msgstr "thèmes"
+
+#: classes/helpers.php:126
+msgid "plugins"
+msgstr "extensions"
+
+#: classes/helpers.php:138
+#, php-format
+msgid "Congratulations, all you <strong>%s</strong> are up to date!"
+msgstr "Félicitations, tous vos <strong>%s</strong> sont à jour !"
+
+#: classes/helpers.php:147
+#, php-format
+msgid "One or more of your <strong>%s</strong> require an update!"
+msgstr ""
+"Une ou plusieurs de vos <strong>%s</strong> nécessitent une mise à jour !"
+
+#: classes/helpers.php:181
+msgid "No currently installed plugin"
+msgstr "Aucune extension installée actuellement"
+
+#: classes/helpers.php:182
+msgid "No plugin"
+msgstr "Aucune extension"
+
+#: classes/helpers.php:192
+msgid "You have <strong>1 plugin</strong> installed and activated!"
+msgstr "Vous avez <strong>1 seule extension</strong> installée et activée !"
+
+#: classes/helpers.php:193 classes/helpers.php:209
+msgid "No plugin to delete"
+msgstr "Aucune extension à supprimer"
+
+#: classes/helpers.php:197
+msgid ""
+"You have <strong>1 plugin</strong> installed including <strong>1 plugin</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>1 extension</strong> installée dont <strong>1 extension</"
+"strong> inactive !"
+
+#: classes/helpers.php:198 classes/helpers.php:222
+msgid "Delete plugin"
+msgstr "Supprimer l’inactive"
+
+#: classes/helpers.php:208
+#, php-format
+msgid "You have <strong>%s plugins</strong> installed and activated!"
+msgstr "Vous avez <strong>%s extensions</strong> installées et activées !"
+
+#: classes/helpers.php:215
+#, php-format
+msgid ""
+"You have <strong>%s plugins</strong> installed including <strong>%s plugin</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>%s extensions</strong> installées dont <strong>%s "
+"extension</strong> inactive !"
+
+#: classes/helpers.php:217
+#, php-format
+msgid ""
+"You have <strong>%s plugins</strong> installed including <strong>%s plugins</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>%s extensions</strong> installées dont <strong>%s "
+"extensions</strong> inactives !"
+
+#: classes/helpers.php:224
+msgid "Delete plugins"
+msgstr "Supprimer les inactives"
+
+#: classes/helpers.php:266
+msgid "You have <strong>1 theme</strong> installed and activated!"
+msgstr "Vous avez <strong>1 thème</strong> installé et activé !"
+
+#: classes/helpers.php:267 classes/helpers.php:277
+msgid "No themes to delete"
+msgstr "Aucun thème à supprimer"
+
+#: classes/helpers.php:276
+msgid "You have <strong>2 themes</strong> installed and activated!"
+msgstr "Vous avez <strong>2 thèmes</strong> installés et activés !"
+
+#: classes/helpers.php:281
+msgid ""
+"You have <strong>2 themes</strong> installed including <strong>1 theme</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>2 thèmes</strong> installés dont <strong>1 thème</strong> "
+"inactif !"
+
+#: classes/helpers.php:282 classes/helpers.php:300
+msgid "Delete theme"
+msgstr "Supprimer l’inactif"
+
+#: classes/helpers.php:287 classes/helpers.php:293
+#, php-format
+msgid ""
+"You have <strong>%s themes</strong> installed including <strong>%s themes</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>%s thèmes</strong> installés dont <strong>%s thèmes</"
+"strong> inactifs !"
+
+#: classes/helpers.php:289 classes/helpers.php:295
+#, php-format
+msgid ""
+"You have <strong>%s themes</strong> installed including <strong>%s theme</"
+"strong> inactive!"
+msgstr ""
+"Vous avez <strong>%s thèmes</strong> installés dont <strong>%s thème</"
+"strong> inactif !"
+
+#: classes/helpers.php:300
+msgid "Delete themes"
+msgstr "Supprimer les inactifs"
+
+#: classes/helpers.php:512 classes/removefromcache.php:88
+#: classes/removefromcache.php:114
+msgid "Cached"
+msgstr "En cache"
+
+#: classes/helpers.php:515 classes/removefromcache.php:112
+msgid "Not cached"
+msgstr "Non mis en cache"
+
+#: classes/plugin.php:88
+#, php-format
+msgid "Vous avez %s notifications."
+msgstr ""
+
+#: classes/plugin.php:91
+msgid "Voir les notifications"
+msgstr ""
+
+#: classes/plugin.php:165
+#, php-format
+msgid "WPS Bidouille %s"
+msgstr ""
+
+#: classes/plugin.php:195
+msgid ""
+"All is well, so go take a small coffee ;) We will notify you in case of new "
+"notifications."
+msgstr ""
+"Tout va bien, allez donc prendre un petit café ;) Nous vous préviendrons en "
+"cas de nouvelles notifications."
+
+#: classes/plugin.php:566
+#, php-format
+msgid "This plugin appears to be abandoned (updated %s)."
+msgstr "Ce plugin semble être abandonné (dernière mise à jour le %s)."
+
+#: classes/plugin.php:652
+msgid "Settings"
+msgstr "Réglages"
+
+#: classes/plugin.php:688
+#, php-format
+msgid ""
+"If you like %1$s please leave us a %2$s rating. A huge thanks in advance!"
+msgstr ""
+"Si vous aimez %1$s, n&rsquo;hésitez pas à nous laisser une note de %2$s. Un "
+"grand merci par avance&nbsp;!"
+
+#: classes/plugin.php:690
+msgid "Thanks :)"
+msgstr "Merci :-)"
+
+#: classes/removefromcache.php:72
+msgid "Cache"
+msgstr "Cache"
+
+#: classes/removefromcache.php:85
+msgid "Removed from cache"
+msgstr "Supprimé du cache"
+
+#: classes/removefromcache.php:420
+msgid "WPServeur exclud cache NGINX"
+msgstr "WPServeur exclure du cache NGINX"
+
+#: classes/removefromcache.php:422
+msgid "Exclud cache NGINX"
+msgstr "Exclure du cache NGINX"
+
+#: classes/removefromcache.php:453
+msgid "Remove this post for cache"
+msgstr "Supprimer ce post du cache"
+
+#: classes/removefromcache.php:540
+msgid "ID"
+msgstr "ID"
+
+#: classes/removefromcache.php:541
+msgid "Title"
+msgstr "Titre"
+
+#: classes/removefromcache.php:542
+msgid "Permalink"
+msgstr "Permalien"
+
+#: classes/removefromcache.php:543
+msgid "Post type"
+msgstr "Post type"
+
+#: classes/removefromcache.php:544 classes/removefromcache.php:605
+msgid "Erase"
+msgstr "Effacer"
+
+#: classes/suggest-plugins-themes.php:163
+#: classes/suggest-plugins-themes.php:256
+#: classes/suggest-plugins-themes.php:344
+#, fuzzy, php-format
+#| msgid "Install plugin"
+msgid "Install %s now"
+msgstr "Installer l’extension"
+
+#: classes/suggest-plugins-themes.php:163
+#: classes/suggest-plugins-themes.php:256
+#: classes/suggest-plugins-themes.php:344
+#, fuzzy
+#| msgid "Install WPBoutik"
+msgid "Install Now"
+msgstr "Installer WPBoutik"
+
+#: classes/suggest-plugins-themes.php:164
+#: classes/suggest-plugins-themes.php:191
+#: classes/suggest-plugins-themes.php:216
+#: classes/suggest-plugins-themes.php:257
+#: classes/suggest-plugins-themes.php:281
+#: classes/suggest-plugins-themes.php:302
+#: classes/suggest-plugins-themes.php:351
+#, fuzzy
+#| msgid "Activate plugin"
+msgid "Activate"
+msgstr "Activer l'extension"
+
+#: classes/suggest-plugins-themes.php:166
+#: classes/suggest-plugins-themes.php:193
+#: classes/suggest-plugins-themes.php:218
+#, fuzzy, php-format
+#| msgid "Activate plugin"
+msgctxt "plugin"
+msgid "Activate %s"
+msgstr "Activer l'extension"
+
+#: classes/suggest-plugins-themes.php:174
+#: classes/suggest-plugins-themes.php:201
+#: classes/suggest-plugins-themes.php:226
+#: classes/suggest-plugins-themes.php:263
+#: classes/suggest-plugins-themes.php:287
+#: classes/suggest-plugins-themes.php:308
+#: classes/suggest-plugins-themes.php:357
+msgid "Network Activate"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:176
+#: classes/suggest-plugins-themes.php:203
+#: classes/suggest-plugins-themes.php:228
+#, php-format
+msgctxt "plugin"
+msgid "Network Activate %s"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:188
+#: classes/suggest-plugins-themes.php:277
+#: classes/suggest-plugins-themes.php:347
+#: classes/suggest-plugins-themes.php:565
+#, php-format
+msgid "Update %s now"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:188
+#: classes/suggest-plugins-themes.php:277
+#: classes/suggest-plugins-themes.php:347
+#: classes/suggest-plugins-themes.php:565
+msgid "Update Now"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:190
+#: classes/suggest-plugins-themes.php:214
+#: classes/suggest-plugins-themes.php:279
+#: classes/suggest-plugins-themes.php:300
+#: classes/suggest-plugins-themes.php:349
+#, fuzzy
+#| msgid "Install plugin"
+msgctxt "plugin"
+msgid "Installed"
+msgstr "Installer l’extension"
+
+#: classes/suggest-plugins-themes.php:240
+#: classes/suggest-plugins-themes.php:322
+#: classes/suggest-plugins-themes.php:371
+msgid "More Details"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:259
+#: classes/suggest-plugins-themes.php:283
+#: classes/suggest-plugins-themes.php:304
+#: classes/suggest-plugins-themes.php:353
+#, fuzzy, php-format
+#| msgid "Activate plugin"
+msgctxt "theme"
+msgid "Activate %s"
+msgstr "Activer l'extension"
+
+#: classes/suggest-plugins-themes.php:265
+#: classes/suggest-plugins-themes.php:289
+#: classes/suggest-plugins-themes.php:310
+#: classes/suggest-plugins-themes.php:359
+#, php-format
+msgctxt "theme"
+msgid "Network Activate %s"
+msgstr ""
+
+#: classes/suggest-plugins-themes.php:564
+#, php-format
+msgid "A new version for %s is available."
+msgstr "Une nouvelle version pour %s est disponible."
+
+#: classes/systemreport.php:226 classes/systemreport.php:241
+#, php-format
+msgid "by %s"
+msgstr "par %s"
+
+#: classes/systemreport.php:238
+msgid "Network enabled"
+msgstr ""
+
+#: classes/tools.php:36 classes/tools.php:37
+msgid "Tools"
+msgstr "Outils"
+
+#: classes/tools.php:547
+msgid "Medium Large"
+msgstr "Medium Large"
+
+#. Description of the plugin/theme
+msgid ""
+"WPS Bidouille fournit des informations sur son site WordPress et contient "
+"des outils d'optimisation."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPServeur, NicolasKulka, Benoti, wpformation"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wpserveur.net"
+msgstr "https://wpserveur.net"
+
+#~ msgid ""
+#~ "Do you like plugin WPS Bidouille? <br> Thank you for taking a few seconds "
+#~ "to note us on"
+#~ msgstr ""
+#~ "Vous aimez l'extension WPS Bidouille ?<br>Merci de prendre quelques "
+#~ "secondes pour nous noter su"
+
+#~ msgid ""
+#~ "Replaces the version of jQuery proposed by WordPress (1.12.4) which "
+#~ "contains a security vulnerability, by version 3.3.1 which is patched on "
+#~ "this flaw. Be careful, however, this feature may cause malfunction with "
+#~ "some extensions"
+#~ msgstr ""
+#~ "Remplace la version de jQuery proposé par WordPress (1.12.4) qui contient "
+#~ "une faille de sécurité, par la version 3.3.1 qui est patché sur cette "
+#~ "faille. Attention cependant cette fonctionnalité peut créer des "
+#~ "dysfonctionnement avec certaines extensions"
+
+#~ msgid "WPServeur Remove cache"
+#~ msgstr "WPServeur Remove cache"
+
+#~ msgid "Hosting Remove cache"
+#~ msgstr "Hébergement Remove cache"
+
+#~ msgid "WPServeur, Nicolas KULKA"
+#~ msgstr "WPServeur, Nicolas KULKA"
+
+#~ msgid "Cache purged!"
+#~ msgstr "Cache purgé."
+
+#~ msgid ""
+#~ "WPS Purge requires you to use custom permalinks. Please go to the <a href="
+#~ "\"%1$s\">Permalinks Options Page</a> to configure them."
+#~ msgstr ""
+#~ "Une URL personnalisée ou une structure de permaliens est nécessaire pour "
+#~ "que cette extension fonctionne correctement. Veuillez consulter les <a "
+#~ "href=\"%1$s\">permaliens</ a> de WorPress pour les configurer."
+
+#~ msgid "Purge du Cache"
+#~ msgstr "Purge du Cache"
+
+#~ msgid "Press the button below to force it to purge your entire cache."
+#~ msgstr ""
+#~ "Appuyez sur le bouton ci-dessous pour le forcer à purger tout le cache."
+
+#~ msgid ""
+#~ "You do not have permission to purge the cache for the whole site. Please "
+#~ "contact your administrator."
+#~ msgstr ""
+#~ "Vous n'êtes pas autorisé à purger le cache pour l'ensemble du site. "
+#~ "Veuillez contacter votre administrateur."
+
+#~ msgid "Exclude cache server pages"
+#~ msgstr "Exclure les pages du serveur de cache"
+
+#~ msgid ""
+#~ "This tool will only remove page from NGINX cache (server side). This tool "
+#~ "will not override settings from third party cache plugin like W3Total "
+#~ "Cache or WP-Rocket."
+#~ msgstr ""
+#~ "Cet outil enlèvera seulement la page du cache NGINX (côté serveur). Cet "
+#~ "outil ne remplacera pas les paramètres du plugin de cache tiers tel que "
+#~ "W3Total Cache ou WP-Rocket."
+
+#~ msgid "Add all items to the exclusion list below:"
+#~ msgstr "Ajouter tous les éléments à la liste d'exclusion ci-dessous :"
+
+#~ msgid "Remove page(s) from server cache"
+#~ msgstr "Supprimer les pages du serveur de cache"
+
+#~ msgid "Add plugin WPS Hide Login"
+#~ msgstr "Ajouter le plugin WPS Hide Login"
+
+#~ msgid "No inactive plugin to delete"
+#~ msgstr "Aucune extension inactif à supprimer"
+
+#~ msgid "Delete inactive plugin"
+#~ msgstr "Supprimer l'extension inactive"
+
+#~ msgid "Delete inactive theme"
+#~ msgstr "Supprimer le thème inactif"
+
+#~ msgid "Delete inactive themes"
+#~ msgstr "Supprimer les thèmes inactifs"
+
+#~ msgid "Hosting"
+#~ msgstr "Hébergement"
+
+#~ msgid "Delete inactive plugins"
+#~ msgstr "Supprimer les extensions inactives"
+
+#~ msgid ""
+#~ "If \"Page Cache\" is set to enable, go to the Advanced tab and add the "
+#~ "following cookie trace to the Never cache (cookies) textarea."
+#~ msgstr ""
+#~ "Si \"Cache de page\" est activé, accédez à l'onglet Avancé et ajoutez la "
+#~ "trace de cookie suivante à la zone de texte Ne jamais mettre en cache "
+#~ "(cookies)."
+
+#~ msgid "Name of the cookie to rejected:"
+#~ msgstr "Nom du cookie à rejeter :"
+
+#~ msgid ""
+#~ "If \"Page Cache\" is set to enable, go to the Page Cache tab and add the "
+#~ "following cookie trace to the Rejected cookies textarea."
+#~ msgstr ""
+#~ "Si \"Cache de page\" est activé, accédez à l'onglet Cache de page et "
+#~ "ajoutez la trace de cookie suivante à la zone de texte \"Cookies rejetés"
+#~ "\"."
+
+#~ msgid "We detect that you’re using a third party cache plugin:"
+#~ msgstr "Nous détectons que vous utilisez un plugin de cache tiers :"
+
+#~ msgid "WPS Check & Tools"
+#~ msgstr "WPS Check & Tools"
+
+#~ msgid "Disabled emoji"
+#~ msgstr "Emoji désactivé"
+
+#~ msgid "Reduces resources number loaded on front page"
+#~ msgstr "Réduction du nombre de ressources chargées sur la page d’accueil."
+
+#~ msgid "You are not yet hosted at WPServeur"
+#~ msgstr "Vous n'êtes pas encore héberger chez WPServeur"
+
+#~ msgid "Hosting Check & Tools"
+#~ msgstr "Hébergement Check & Tools"
+
+#~ msgid "WPServeur remove page(s) from server cache"
+#~ msgstr "WPServeur supprime les pages du serveur de cache"
+
+#~ msgid ""
+#~ "You have <strong>1 plugin</strong> installed and <strong>1 plugin</"
+#~ "strong> inactive!"
+#~ msgstr ""
+#~ "Vous avez <strong>1 plugin</strong> installé et <strong>1 plugin</strong> "
+#~ "inactif !"
+
+#~ msgid ""
+#~ "You have <strong>%s plugins</strong> installed and <strong>%s plugins</"
+#~ "strong> inactive!"
+#~ msgstr ""
+#~ "Vous avez <strong>%s plugins</strong> installés et <strong>%s plugins</"
+#~ "strong> inactifs !"
+
+#~ msgid ""
+#~ "You have <strong>2 themes</strong> installed and <strong>1 theme</strong> "
+#~ "inactive!"
+#~ msgstr ""
+#~ "Vous avez <strong>2 thèmes</strong> installés et <strong>1 thème</strong> "
+#~ "inactif !"
+
+#~ msgid ""
+#~ "You have <strong>%s themes</strong> installed and <strong>%s themes</"
+#~ "strong> inactive!"
+#~ msgstr ""
+#~ "Vous avez <strong>%s thèmes</strong> installés et <strong>%s thèmes</"
+#~ "strong> inactifs !"
+
+#~ msgid ""
+#~ "You have <strong>%s themes</strong> installed and <strong>%s theme</"
+#~ "strong> inactive!"
+#~ msgstr ""
+#~ "Vous avez <strong>%s thèmes</strong> installés et <strong>%s thème</"
+#~ "strong> inactif !"
+
+#~ msgid "Useful links"
+#~ msgstr "Liens utiles"
+
+#~ msgid "Support"
+#~ msgstr "Support"
+
+#~ msgid "Log in"
+#~ msgstr "Connexion"
+
+#~ msgid "Forgot your password"
+#~ msgstr "Mot de passe oublié"
+
+#~ msgid "Plugins and themes free"
+#~ msgstr "Plugins et thèmes gratuits"
+
+#~ msgid "My orders"
+#~ msgstr "Mes commandes"
+
+#~ msgid "My subscriptions"
+#~ msgstr "Mes abonnements"
+
+#~ msgid "WordPress Maintenance"
+#~ msgstr "Maintenance WordPress"
+
+#~ msgid "Remove from cache"
+#~ msgstr "Supprimer du cache"
+
+#~ msgid "Server info"
+#~ msgstr "Info serveur"
+
+#~ msgid "Check for cache"
+#~ msgstr "Vérification du cache"
+
+#~ msgid "Account"
+#~ msgstr "Compte"
+
+#~ msgid "Filter by : "
+#~ msgstr "Filtrer par :"
+
+#~ msgid "None"
+#~ msgstr "Aucune"
+
+#~ msgid "Items remove from server cache"
+#~ msgstr "Supprimer du serveur de cache"
+
+#~ msgid "Logs"
+#~ msgstr "Logs"
+
+#~ msgid "Submit"
+#~ msgstr "Envoyer"
+
+#~ msgid ""
+#~ "You have <strong>%s plugins</strong> installed and <strong>%s plugin</"
+#~ "strong> inactive!"
+#~ msgid_plural ""
+#~ "You have <strong>%s plugins</strong> installed and <strong>%s plugins</"
+#~ "strong> inactive!"
+#~ msgstr[0] ""
+#~ "Vous avez <strong>%s plugins</strong> installés et <strong>%s plugin</"
+#~ "strong> inactif !"
+#~ msgstr[1] ""
+#~ "Vous avez <strong>%s plugins</strong> installés et <strong>%s plugins</"
+#~ "strong> inactifs !"
+
+#~ msgid "Memory"
+#~ msgstr "Mémoire"
+
+#~ msgid "Your WordPress"
+#~ msgstr "Votre WordPress"

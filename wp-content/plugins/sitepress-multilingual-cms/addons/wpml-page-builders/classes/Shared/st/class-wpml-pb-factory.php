@@ -8,7 +8,8 @@ class WPML_PB_Factory {
 	private $wpdb;
 	/** @var SitePress */
 	private $sitepress;
-	private $string_translations = array();
+	/** @var array */
+	private $string_translations = [];
 
 	public function __construct( wpdb $wpdb, SitePress $sitepress ) {
 		$this->wpdb      = $wpdb;
@@ -34,7 +35,7 @@ class WPML_PB_Factory {
 
 	/**
 	 * @param WPML_PB_Shortcode_Strategy $strategy
-	 * @param bool $migration_mode
+	 * @param bool                       $migration_mode
 	 *
 	 * @return WPML_PB_Register_Shortcodes
 	 */
@@ -62,11 +63,11 @@ class WPML_PB_Factory {
 		return new WPML_PB_Update_Post( $this->sitepress, $package_data, $strategy );
 	}
 
-	public function get_shortcode_content_updater( IWPML_PB_Strategy $strategy ) {
+	public function get_shortcode_content_updater( WPML_PB_Shortcode_Strategy $strategy ) {
 		return new WPML_PB_Update_Shortcodes_In_Content( $strategy, new WPML_PB_Shortcode_Encoding() );
 	}
 
-	public function get_api_hooks_content_updater( IWPML_PB_Strategy $strategy ) {
+	public function get_api_hooks_content_updater( WPML_PB_API_Hooks_Strategy $strategy ) {
 		return new WPML_PB_Update_API_Hooks_In_Content( $strategy );
 	}
 

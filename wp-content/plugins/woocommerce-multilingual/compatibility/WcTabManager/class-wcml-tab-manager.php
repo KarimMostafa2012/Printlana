@@ -23,11 +23,6 @@ class WCML_Tab_Manager implements \IWPML_Action {
 	private $sitepress;
 
 	/**
-	 * @var WooCommerce
-	 */
-	private $woocommerce;
-
-	/**
 	 * @var woocommerce_wpml
 	 */
 	private $woocommerce_wpml;
@@ -38,17 +33,13 @@ class WCML_Tab_Manager implements \IWPML_Action {
 	private $wpdb;
 
 	/**
-	 * WCML_Tab_Manager constructor.
-	 *
 	 * @param SitePress                        $sitepress
-	 * @param WooCommerce                      $woocommerce
 	 * @param woocommerce_wpml                 $woocommerce_wpml
 	 * @param wpdb                             $wpdb
 	 * @param WPML_Element_Translation_Package $tp
 	 */
-	public function __construct( SitePress $sitepress, WooCommerce $woocommerce, woocommerce_wpml $woocommerce_wpml, wpdb $wpdb, WPML_Element_Translation_Package $tp ) {
+	public function __construct( SitePress $sitepress, woocommerce_wpml $woocommerce_wpml, wpdb $wpdb, WPML_Element_Translation_Package $tp ) {
 		$this->sitepress        = $sitepress;
-		$this->woocommerce      = $woocommerce;
 		$this->woocommerce_wpml = $woocommerce_wpml;
 		$this->wpdb             = $wpdb;
 		$this->tp               = $tp;
@@ -351,10 +342,10 @@ class WCML_Tab_Manager implements \IWPML_Action {
 	}
 
 	/**
-	 * @param array  $data
-	 * @param int    $product_id
-	 * @param object $translation
-	 * @param string $lang
+	 * @param array        $data
+	 * @param int          $product_id
+	 * @param object|mixed $translation
+	 * @param string       $lang
 	 *
 	 * @return mixed
 	 */
@@ -378,7 +369,7 @@ class WCML_Tab_Manager implements \IWPML_Action {
 			}
 		}
 
-		if ( $translation ) {
+		if ( is_object( $translation ) ) {
 			$tr_prod_tabs = $this->get_product_tabs( $translation->ID );
 
 			if ( ! is_array( $tr_prod_tabs ) ) {
@@ -389,7 +380,7 @@ class WCML_Tab_Manager implements \IWPML_Action {
 				if ( in_array( $prod_tab['type'], [ 'product', 'core' ] ) ) {
 					if ( 'core' === $prod_tab['type'] ) {
 						$data[ 'coretab_' . $prod_tab['id'] . '_title' ]['translation']   = $prod_tab['title'];
-						$data[ 'coretab_' . $prod_tab['id'] . '_heading' ]['translation'] = isset( $prod_tab['heading'] ) ? $prod_tab['heading'] : '';
+						$data[ 'coretab_' . $prod_tab['id'] . '_heading' ]['translation'] = $prod_tab['heading'] ?? '';
 					} else {
 						$data[ 'tab_' . $prod_tab['position'] . '_title' ]['translation']   = get_the_title( $prod_tab['id'] );
 						$data[ 'tab_' . $prod_tab['position'] . '_heading' ]['translation'] = get_post( $prod_tab['id'] )->post_content;

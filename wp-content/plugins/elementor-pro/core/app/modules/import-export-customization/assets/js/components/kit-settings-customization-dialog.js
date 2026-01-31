@@ -1,6 +1,6 @@
 import { Stack } from '@elementor/ui';
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as PropTypes from 'prop-types';
 import { SettingSection } from './customization-setting-section';
 import { SubSetting } from './customization-sub-setting';
@@ -8,6 +8,17 @@ import { KitCustomizationDialog } from './kit-customization-dialog';
 import { UpgradeNoticeBanner } from './upgrade-notice-banner';
 import { isHighTier } from '../hooks/use-tier';
 import { UpgradeVersionBanner } from './upgrade-version-banner';
+import { transformValueForAnalytics } from '../utils/analytics-transformer';
+
+const transformAnalyticsData = ( payload ) => {
+	const transformed = {};
+
+	for ( const [ key, value ] of Object.entries( payload ) ) {
+		transformed[ key ] = transformValueForAnalytics( key, value, [] );
+	}
+
+	return transformed;
+};
 
 export function KitSettingsCustomizationDialog( {
 	open,
@@ -71,7 +82,6 @@ export function KitSettingsCustomizationDialog( {
 	}, [ data.includes, data?.uploadedData?.manifest, data?.customization?.settings, isImport, isOldExport ] );
 
 	const initialState = data.includes.includes( 'settings' );
-	const unselectedValues = useRef( data.analytics?.customization?.settings || [] );
 
 	const [ settings, setSettings ] = useState( () => {
 		if ( data.customization.settings ) {
@@ -98,11 +108,7 @@ export function KitSettingsCustomizationDialog( {
 		}
 	}, [ open ] );
 
-	const handleToggleChange = ( settingKey, isChecked ) => {
-		unselectedValues.current = isChecked
-			? unselectedValues.current.filter( ( val ) => settingKey !== val )
-			: [ ...unselectedValues.current, settingKey ];
-
+	const handleToggleChange = ( settingKey ) => {
 		setSettings( ( prev ) => ( {
 			...prev,
 			[ settingKey ]: ! prev[ settingKey ],
@@ -116,7 +122,8 @@ export function KitSettingsCustomizationDialog( {
 			handleClose={ handleClose }
 			handleSaveChanges={ () => {
 				const hasEnabledCustomization = settings.theme || settings.globalColors || settings.globalFonts || settings.themeStyleSettings || settings.generalSettings || settings.experiments || settings.customFonts || settings.customIcons || settings.customCode;
-				handleSaveChanges( 'settings', settings, hasEnabledCustomization, unselectedValues.current );
+				const transformedAnalytics = transformAnalyticsData( settings );
+				handleSaveChanges( 'settings', settings, hasEnabledCustomization, transformedAnalytics );
 			} }
 		>
 			<Stack sx={ { position: 'relative' } } gap={ 2 }>
@@ -199,6 +206,7 @@ export function KitSettingsCustomizationDialog( {
 										checked={ settings.customFonts }
 										disabled={ ( isImport && ! data?.uploadedData?.manifest?.[ 'custom-fonts' ] ) || ! isHighTier() }
 										tooltip={ ! isHighTier() }
+										notExported={ isImport && ! data?.uploadedData?.manifest?.[ 'custom-fonts' ] }
 									/>
 									<SubSetting
 										label={ __( 'Custom icons', 'elementor' ) }
@@ -207,6 +215,7 @@ export function KitSettingsCustomizationDialog( {
 										checked={ settings.customIcons }
 										disabled={ ( isImport && ! data?.uploadedData?.manifest?.[ 'custom-icons' ] ) || ! isHighTier() }
 										tooltip={ ! isHighTier() }
+										notExported={ isImport && ! data?.uploadedData?.manifest?.[ 'custom-icons' ] }
 									/>
 									<SubSetting
 										label={ __( 'Custom code', 'elementor' ) }
@@ -215,6 +224,7 @@ export function KitSettingsCustomizationDialog( {
 										checked={ settings.customCode }
 										disabled={ ( isImport && ! data?.uploadedData?.manifest?.[ 'custom-code' ] ) || ! isHighTier() }
 										tooltip={ ! isHighTier() }
+										notExported={ isImport && ! data?.uploadedData?.manifest?.[ 'custom-code' ] }
 									/>
 								</Stack>
 							</SettingSection>

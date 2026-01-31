@@ -100,10 +100,10 @@ if ( ! class_exists( 'AdminStoreSupportTicketController' ) ) :
                         'callback'            => [ $this, 'create_reply' ],
                         'args'                => [
                             'replay'    => [
-                                'type'        => 'integer',
+                                'type'        => 'string',
                                 'description' => __( 'Topic comment or replay', 'dokan' ),
                                 'required'    => true,
-                                'sanitize_callback' => 'sanitize_text_field',
+                                'sanitize_callback' => 'sanitize_textarea_field',
                             ],
                             'vendor_id'    => [
                                 'type'        => 'integer',

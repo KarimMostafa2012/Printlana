@@ -35,6 +35,31 @@ class Helper {
     }
 
     /**
+     * Get a verified vendor count.
+     *
+     * @since 4.1.0
+     *
+     * @return int The count of verified vendors
+     */
+    public static function get_verified_vendor_count(): int {
+        global $wpdb;
+
+        // Get verified vendors count by checking user meta
+        $verified_vendors = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(DISTINCT user_id)
+                FROM {$wpdb->usermeta}
+                WHERE meta_key = %s
+                AND meta_value = %s",
+                'dokan_verification_status',
+                'approved'
+            )
+        );
+
+        return (int) ( $verified_vendors ?? 0 );
+    }
+
+    /**
      * Get the translated version of approval statuses
      *
      * @since 3.5.4
@@ -54,5 +79,16 @@ class Helper {
             default:
                 return $status;
         }
+    }
+
+    /**
+     * Check if a vendor is verified
+     *
+     * @param int $vendor_id
+     *
+     * @return bool
+     */
+    public static function is_seller_verified( $vendor_id ): bool {
+        return false !== strpos( get_user_meta( $vendor_id, 'dokan_verification_status', true ), 'approved' );
     }
 }

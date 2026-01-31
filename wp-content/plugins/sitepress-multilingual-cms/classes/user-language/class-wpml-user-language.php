@@ -58,6 +58,7 @@ class WPML_User_Language {
 		add_action( 'wpml_switch_language_for_email', array( $this, 'switch_language_for_email_action' ), 10, 1 );
 		add_action( 'wpml_restore_language_from_email', array( $this, 'restore_language_from_email_action' ), 10, 0 );
 		add_action( 'profile_update', array( $this, 'sync_admin_user_language_action' ), 10, 1 );
+		add_action( 'wp_update_user', array( $this, 'clear_user_admin_language_cache_on_wp_update_user' ), 10, 1 );
 		add_action( 'wpml_language_cookie_added', array( $this, 'update_user_lang_on_cookie_update' ) );
 
 		if ( $this->is_editing_current_profile() || $this->is_editing_other_profile() ) {
@@ -134,6 +135,15 @@ class WPML_User_Language {
 		}
 	}
 
+	/**
+	 * Clear user admin language cache when wp_update_user is called
+	 *
+	 * @param int $user_id
+	 */
+	public function clear_user_admin_language_cache_on_wp_update_user( $user_id ) {
+		wp_cache_delete( $user_id, WPML_User_Admin_Language::CACHE_GROUP );
+	}
+
 	public function sync_default_admin_user_languages() {
 		$sql_users   = 'SELECT user_id FROM ' . $this->wpdb->usermeta . ' WHERE meta_key = %s AND meta_value = %s';
 		$query_users = $this->wpdb->prepare( $sql_users, array( 'locale', '' ) );
@@ -146,6 +156,15 @@ class WPML_User_Language {
 			$query = $this->wpdb->prepare( $sql, array( $language, 'icl_admin_language' ) );
 
 			$this->wpdb->query( $query );
+
+			if ( is_array( $user_ids ) ) {
+				foreach ( $user_ids as $user_id ) {
+					$this->flush_user_language_cache( $user_id );
+				}
+			}
+		} else {
+			// Flush the group cache in case there are no users with the "locale" meta.
+			$this->flush_user_language_cache();
 		}
 	}
 
@@ -225,6 +244,8 @@ class WPML_User_Language {
 			               ->getOrElse( null );
 
 			update_user_meta( $user_id, 'locale', $wpLang );
+
+			wp_cache_delete( $user_id, WPML_User_Admin_Language::CACHE_GROUP );
 		}
 	}
 
@@ -364,6 +385,19 @@ class WPML_User_Language {
 				</td>
 			</tr>
 			<?php
+		}
+	}
+
+	private function flush_user_language_cache( $user_id = null ) {
+		if ( $user_id ) {
+			wp_cache_delete( $user_id, 'user_meta' );
+			wp_cache_delete( $user_id, WPML_User_Admin_Language::CACHE_GROUP );
+		} elseif (
+			function_exists( 'wp_cache_supports' )
+			&& wp_cache_supports( 'flush_group' )
+		) {
+			wp_cache_flush_group( 'user_meta' );
+			wp_cache_flush_group( WPML_User_Admin_Language::CACHE_GROUP );
 		}
 	}
 }

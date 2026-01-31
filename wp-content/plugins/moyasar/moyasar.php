@@ -4,7 +4,7 @@
  * Plugin Name: Moyasar
  * Plugin URI: https://www.moyasar.com/
  * Description: Moyasar Payment Gateway, Adds credit card, Apple Pay, and STC Pay payment capabilities to Woocommerce.
- * Version: 7.3.3
+ * Version: 7.3.6
  * Requires at least: 4.6
  * Requires PHP: 5.6
  * WC tested up to: 6.8
@@ -23,7 +23,7 @@ if (defined('MOYASAR_PAYMENT_VERSION')) {
 }
 
 
-define('MOYASAR_PAYMENT_VERSION', '7.3.3');
+define('MOYASAR_PAYMENT_VERSION', '7.3.6');
 define('MOYASAR_PLUGIN_MIN_PHP_VER', '5.6.0');
 define('MOYASAR_PLUGIN_MIN_WC_VER',  '3.0');
 define('MOYASAR_PAYMENT_DIR', untrailingslashit(plugin_dir_path(__FILE__)));

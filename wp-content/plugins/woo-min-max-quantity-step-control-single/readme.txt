@@ -1,18 +1,18 @@
 === Min Max Control - Min Max Quantity & Step Control for WooCommerce ===
-Contributors: codersaiful,codeastrology,mdibrahimk48,unikforce,fazlebari,rafiul17
+Contributors: codersaiful,bizzplugin,codeastrology,mdibrahimk48,unikforce,fazlebari,rafiul17
 Donate link: https://donate.stripe.com/6oE9E33TD92Xav66or
 Tags: woocommerce limit quantities, WC Min Max Quantities, min and max to purchase, limit quantity, customize woocommerce quantity
 Requires at least: 4.0.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.4
-Stable tag: 7.0.2
+Stable tag: 8.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Min Max Control plugin offers to set product's minimum, maximum quantity and step of each product individually.
 
 == Description ==
-[Doc](https://codeastrology.com/min-max-quantity/documentation/) | [Demo](https://codeastrology.com/min-max-quantity/product/hoodie) | [Get Premium](https://codeastrology.com/downloads/min-max-step-control-wc/) | [Try Live](https://wpprincipal.xyz/?site=wcmmq)
+[Doc](https://codeastrology.com/min-max-quantity/documentation/) | [Demo](https://codeastrology.com/min-max-quantity/product/hoodie) | [Get Premium](https://codeastrology.com/min-max-quantity/pricing/)
 
 *Min Max Control*(Min Max Quantity & Step Control for WooCommerce) plugin offers to set product’s 
 
@@ -30,6 +30,8 @@ Min Max Control plugin offers to set product's minimum, maximum quantity and ste
 You can set values for all products globally. The same values will apply to all products.
 You can set values by category. In this case, min, max, and step values will apply only to the chosen categories.<br>
 Also, you can set values for each product individually. Product label values will override global and category values.
+
+https://www.youtube.com/watch?v=9sO9L8joy48
 
 *Go to Dashboard -> Min Max Control* menu
 
@@ -149,7 +151,7 @@ function wcmmq_custom_handle_args( $args, $product, $Min_Max_Controller )
 
 👉 You can add QUANTITY PREFIX/SUFFIX . Show it after and before the quantity. (Example: Per Order $10 KG). [Click here](https://www.youtube.com/watch?v=0wSO8pUupMc&list=PLV1ooYxywkSV84cfl6PKw81Fspy72_KYm&index=7)<br>
 
-**[👉 Purchase Premium Version 👈](https://codeastrology.com/min-max-quantity/pricing/)**
+**[👉 Purchase Premium Version 👈](https://checkout.freemius.com/plugin/21522/plan/35908/licenses/5/)**
 
 **🚩FAST, SECURE AND EASY 🚩**
 *With a Min Max Quantity & Step Control, you can be confident that your business processes will go quickly and easily. User-friendly and adaptable to all popular themes.
@@ -199,9 +201,6 @@ Yes, it is.
 
 = Is it Compabile with WPML? =
 Yes, it is. Min max step need to set only to main product.
-
-= Can I enable ajax add to cart on single product? =
-Yes, use `add_filter('wcmmq_ajax_cart_single_page', '__return_true');` for enable ajax add to cart on single page.
 
 = Can I disable ajax add to cart on archive/shop/taxonomy page? =
 Yes, Disable ajax add to cart from WooCommerce setting. uncheck [WooCommerce -> Products(Tab) -> Enable AJAX add to cart buttons on archives]
@@ -257,10 +256,42 @@ We’ll provide support via [support ticket](https://codeastrology.com/my-suppor
 
 == Changelog ==
 
+= 8.0.1 =
+* Fixed: Min max step setting saving issue has been fixed.
+* Fixed: Textdomain loading issue has been fixed.
+* Bug Fixed.
+
+= 8.0.0 =
+* Vendor library removed.
+* Added: Browse Plugins page added.
+* Tested with latest WooCommerce and WordPress version.
+* Bug Fixed.
+
+
+= 7.0.4 =
+* Fixed: Cart block quantity issue has been fixed.
+* Fixed: Cart page condition issue has been fixed.
+* Fixed: '_load_textdomain_just_in_time' notice issue has been fixed.
+* Added: New filter hook `wcmmq_cart_block_quantity_args` added for cart block quantity args control.
+* Fixed: Cart block quantity issue has been fixed.
+* Optimized Code.
+* Bug Fixed.
+
+= 7.0.3 =
+* Fixed: Data saving issue has been fixed.
+* Optimized Code.
+* Bug Fixed.
+* Tested with latest WooCommerce and WordPress version.
+* Minor change.
+
 = 7.0.2 =
+* ajax add to cart on shop page issue has been fixed.
+* Fixed: Cart page issue on block theme has been fixed.
 * step issue on block has been fixed.
 * Optimized Code.
 * Bug Fixed.
+* Tested with latest WooCommerce and WordPress version.
+* Minor change.
 
 = 7.0.1 =
 * block theme's issue on cart adding - has been fixed.

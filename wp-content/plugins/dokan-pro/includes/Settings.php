@@ -189,7 +189,7 @@ class Settings extends DokanSettings {
         }
 
         if ( $query_vars === 'shipping' ) {
-            $settings_url = dokan_get_navigation_url( 'settings/shipping' ) . '#/settings';
+            $settings_url = dokan_get_navigation_url( 'settings/shipping' ) . '/settings';
             $header = sprintf( '%s <span style="position:absolute; right:0px;"><a href="%s" class="dokan-btn dokan-btn-default"><i class="fas fa-cog"></i> %s</a></span>', __( 'Shipping Settings', 'dokan' ), $settings_url, __( 'Click here to add Shipping Policies', 'dokan' ) );
         }
 
@@ -629,15 +629,6 @@ class Settings extends DokanSettings {
             if ( $dokan_settings['payment']['stripe'] ) {
                 $profile_val         = $profile_val + $payment_method_val;
                 $track_val['stripe'] = $payment_method_val;
-                $payment_method_val  = 0;
-            }
-        }
-
-        // Calculate Payment method val for moip
-        if ( isset( $dokan_settings['payment']['moip'] ) ) {
-            if ( $dokan_settings['payment']['moip'] ) {
-                $profile_val         = $profile_val + $payment_method_val;
-                $track_val['moip']   = $payment_method_val;
                 $payment_method_val  = 0;
             }
         }

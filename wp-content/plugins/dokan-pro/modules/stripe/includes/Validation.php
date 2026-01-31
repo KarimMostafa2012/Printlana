@@ -6,6 +6,7 @@ use WC_Subscriptions;
 use WC_Subscriptions_Admin;
 use WC_Subscriptions_Cart;
 use WC_Subscriptions_Product;
+use WeDevs\DokanPro\Modules\ProductAdvertisement\Helper as ProductAdvertisementHelper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,7 +34,22 @@ class Validation {
         add_action( 'woocommerce_after_checkout_validation', [ $this, 'check_vendor_configure_stripe' ], 15, 2 );
         add_filter( 'woocommerce_add_to_cart_validation', [ $this, 'cart_validation_with_multiple_products' ], 10, 2 );
     }
+    /**
+     * Check if the product is an advertisement product
+     *
+     * @since 4.1.4
+     *
+     * @param int $product_id
+     *
+     * @return bool
+     */
+    public static function is_adv_product( $product_id ): bool {
+        if ( ! class_exists( ProductAdvertisementHelper::class ) ) {
+            return false;
+        }
 
+        return ProductAdvertisementHelper::get_advertisement_base_product() === (int) $product_id;
+    }
     /**
      * Cart validation with multiple subscription products
      *
@@ -104,6 +120,10 @@ class Validation {
         $subscription_product = wc_get_product( $product_id );
 
         if ( $subscription_product && 'product_pack' === $subscription_product->get_type() ) {
+            return;
+        }
+        // if adv product then return early
+        if ( self::is_adv_product( $product_id ) ) {
             return;
         }
 

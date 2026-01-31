@@ -4,6 +4,7 @@ use \WPML\Collect\Support\Traits\Macroable;
 use function \WPML\FP\curryN;
 use \WPML\LIB\WP\Cache;
 use \WPML\FP\Logic;
+use \WPML\TM\Jobs\JobLog;
 
 /**
  * Class TranslationProxy_Batch
@@ -23,13 +24,22 @@ class TranslationProxy_Batch {
 			: ( ( (bool) $tp_id === false || $tp_id === 'local' )
 				? self::get_generic_batch_name() : TranslationProxy_Basket::get_basket_name() );
 		if ( ! $batch_name ) {
+			JobLog::add('Batch name not found `' . $batch_name . '`' );
 			return null;
 		}
 
 		$getBatchId = function( $batch_name, $tp_id ) {
 			$batch_id = self::getBatchId( $batch_name );
 
-			return $batch_id ?: self::createBatchRecord( $batch_name, $tp_id );
+			if ( $batch_id ) {
+				JobLog::add('Found existing batch with id `' . $batch_id . '` and name `' . $batch_name . '`' );
+				return $batch_id;
+			}
+
+			$batch_id = self::createBatchRecord( $batch_name, $tp_id );
+			JobLog::add('Created new batch with id `' . $batch_id . '` and name `' . $batch_name . '`' );
+
+			return $batch_id;
 		};
 
 		$cache = Cache::memorizeWithCheck( 'update_translation_batch', Logic::isNotNull(), 0, $getBatchId );

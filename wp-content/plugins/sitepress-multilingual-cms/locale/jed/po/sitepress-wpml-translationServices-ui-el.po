@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/translationServices/components/AuthorizeModal.js:22
 msgid "Connect this site to your %s account"
@@ -13,17 +15,17 @@ msgstr "Σφάλμα"
 
 #: src/js/translationServices/components/AuthorizeModal.js:57
 msgid "« Use a different Translation Service"
-msgstr "« Χρησιμοποιήστε διαφορετική Υπηρεσία Μετάφρασης"
+msgstr "« Χρησιμοποιήστε μια διαφορετική υπηρεσία μετάφρασης"
 
 #: src/js/translationServices/components/AuthorizeModal.js:62
 msgid "Authenticate"
-msgstr "Πιστοποίηση"
+msgstr "Έλεγχος ταυτότητας"
 
 #: src/js/translationServices/components/Connect.js:22
 msgid ""
 "Visit <link_to_service /> to request an API Token. This token allows WPML "
 "to connect to <service_name /> to send and receive jobs."
-msgstr "Επισκεφθείτε το <link_to_service /> για να ζητήσετε ένα API Token. Αυτό το token επιτρέπει στο WPML να συνδεθεί με το <service_name /> για την αποστολή και λήψη εργασιών."
+msgstr "Επισκεφθείτε το <link_to_service /> για να ζητήσετε ένα διακριτικό API. Αυτό το διακριτικό επιτρέπει στο WPML να συνδεθεί με το <service_name /> για να στέλνει και να λαμβάνει εργασίες."
 
 #: src/js/translationServices/components/SearchForm.js:10
 msgid "Search translation services"
@@ -43,7 +45,7 @@ msgid ""
 "set to translate your site’s content automatically. To use a translation "
 "service, please change your translation mode on the <LinkToSettingsPage /> "
 "page."
-msgstr "Προς το παρόν δεν είναι δυνατή η σύνδεση μιας υπηρεσίας μετάφρασης όταν το WPML έχει ρυθμιστεί να μεταφράζει αυτόματα το περιεχόμενο του ιστότοπού σας. Για να χρησιμοποιήσετε μια υπηρεσία μετάφρασης, παρακαλούμε αλλάξτε τη λειτουργία μετάφρασης στη σελίδα <LinkToSettingsPage />."
+msgstr "Δεν είναι δυνατή η σύνδεση μιας υπηρεσίας μετάφρασης όταν το WPML έχει ρυθμιστεί να μεταφράζει αυτόματα το περιεχόμενο του ιστότοπού σας. Για να χρησιμοποιήσετε μια υπηρεσία μετάφρασης, αλλάξτε τη λειτουργία μετάφρασης στη σελίδα <LinkToSettingsPage />."
 
 #: src/js/translationServices/components/ServicesList.js:41
 msgid "Documentation"

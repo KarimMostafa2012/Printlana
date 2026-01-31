@@ -41,6 +41,7 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 
 	const NOTICE_GROUP = 'wpml-requirements';
 	const NOTICE_ID = 'wpml-requirements-notice';
+	const SUCCESS_NOTICE_ID = 'wpml-requirements-met-notice';
 
 
 	public function __construct() {
@@ -62,7 +63,7 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 		global $wpml_dic;
 		try {
 			$requirements_service = $wpml_dic->make( RequirementsService::class );
-			$useCache             = $screens[0] && $screens[0]->id !== 'sitepress-multilingual-cms/menu/support';
+			$useCache             = $this->userIsNotVisitingSupportPage( $screens[0] );
 
 			return $requirements_service->getInvalidRequirements( $useCache );
 		} catch ( Throwable $e ) {
@@ -78,9 +79,12 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 	public function display_wordpress_notice_if_needed( $invalid_requirements ) {
 		try {
 			if ( empty( $invalid_requirements ) ) {
-				$this->remove_wordpress_notice_if_exists();
+				$isRemoved = $this->remove_requirements_are_not_met_notice_if_exists();
+				if ( $isRemoved ) {
+					$this->display_requirements_met_success_notice();
+				}
 			} else {
-				$this->display_wordpress_notice();
+				$this->display_requirements_are_not_met_notice();
 			}
 		} catch ( Throwable $e ) {
 			error( 'Failed to get InvalidRequirements: ' . $e->getMessage() . ' ' . $e->getTraceAsString() );
@@ -112,12 +116,12 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 	/**
 	 * Add the notice to the admin notices system
 	 */
-	private function display_wordpress_notice() {
+	private function display_requirements_are_not_met_notice() {
 		$admin_notices = wpml_get_admin_notices();
 
 		$notice = new WPML_Notice(
 			self::NOTICE_ID,
-			$this->get_notice_text(),
+			$this->get_requirements_are_not_met_text(),
 			self::NOTICE_GROUP
 		);
 
@@ -136,17 +140,15 @@ class Display_Notice_Minimum_Requirements_If_Needed implements IWPML_Backend_Act
 	 *
 	 * @return string
 	 */
-	private function get_notice_text() {
+	private function get_requirements_are_not_met_text() {
 		$support_url = esc_url( admin_url( 'admin.php?page=sitepress-multilingual-cms/menu/support.php' ) );
-		$message     = esc_html__( 'Your site doesn\'t meet WPML\'s minimum requirements.', 'sitepress' );
-		$button_text = esc_html__( 'Fix now', 'sitepress' );
+		$message     = __( 'Your site doesn\'t meet WPML\'s minimum requirements.', 'sitepress' );
+		$button_text = __( 'Fix now', 'sitepress' );
 
 		$notice_text = <<<HTML
-<div style="display: flex; align-items: center;" data-testid="wpml-minimum-requirements-notice">
+<div class="wpml-minimum-requirements-notice" data-testid="wpml-minimum-requirements-notice">
     <span>{$message}</span>
-    <a href="{$support_url}" style="margin-left: 15px;
-	     background-color: #373737; color: white; text-decoration: none;
-	     padding: 5px 10px; border-radius: 3px;">{$button_text}
+    <a href="{$support_url}" class="wpml-button base-btn gray-dark-btn">{$button_text}
     </a>
 </div>
 HTML;
@@ -154,7 +156,40 @@ HTML;
 		return $notice_text;
 	}
 
-	private function remove_wordpress_notice_if_exists() {
+	private function get_all_requirements_are_met_notice() {
+		$message = __( 'Great! All WPML requirements are now met. Your site is ready to use WPML.', 'sitepress' );
+
+		$notice_text = <<<HTML
+<div style="display: flex; align-items: center;min-height:32px;" data-testid="wpml-minimum-requirements-are-met">
+    <span>{$message}</span>
+</div>
+HTML;
+
+		return $notice_text;
+	}
+
+	/**
+	 * Display a success notice when all requirements are met (only once)
+	 */
+	private function display_requirements_met_success_notice() {
+		$admin_notices = wpml_get_admin_notices();
+
+		$notice = new WPML_Notice(
+			self::SUCCESS_NOTICE_ID,
+			$this->get_all_requirements_are_met_notice(),
+			self::NOTICE_GROUP
+		);
+
+		$notice->set_css_class_types( [ 'success' ] );
+		$notice->add_capability_check( [ 'manage_options' ] );
+		$notice->set_dismissible( true );
+		$notice->add_user_restriction( User::getCurrentId() );
+		$notice->set_flash( true ); // This makes the notice show only once
+
+		$admin_notices->add_notice( $notice );
+	}
+
+	private function remove_requirements_are_not_met_notice_if_exists() {
 		$service = wpml_get_admin_notices();
 
 		$notice = $service->get_notice( self::NOTICE_ID, self::NOTICE_GROUP );
@@ -166,5 +201,14 @@ HTML;
 		$service->remove_notice( $notice->get_group(), $notice->get_id() );
 
 		return true;
+	}
+
+	/**
+	 * @param $screen
+	 *
+	 * @return bool
+	 */
+	private function userIsNotVisitingSupportPage( $screen ): bool {
+		return $screen && $screen->id !== 'sitepress-multilingual-cms/menu/support';
 	}
 }

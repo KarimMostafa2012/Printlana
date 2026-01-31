@@ -4,11 +4,14 @@ use WPML\PB\BeaverBuilder\BeaverThemer\HooksFactory as BeaverThemer;
 
 class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Settings {
 
+	const META_FIELD_KEY       = '_fl_builder_data';
+	const META_FIELD_DRAFT_KEY = '_fl_builder_draft';
+
 	/**
 	 * @return string
 	 */
 	public function get_meta_field() {
-		return '_fl_builder_data';
+		return self::META_FIELD_KEY;
 	}
 
 	/**
@@ -71,7 +74,7 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 	 * @return array
 	 */
 	public function get_fields_to_save() {
-		return array( '_fl_builder_data', '_fl_builder_draft' );
+		return [ self::META_FIELD_KEY, self::META_FIELD_DRAFT_KEY ];
 	}
 
 	public function add_hooks() {}

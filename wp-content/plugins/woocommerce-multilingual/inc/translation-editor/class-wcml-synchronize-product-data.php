@@ -3,7 +3,6 @@
 use WCML\Terms\SuspendWpmlFiltersFactory;
 use WCML\Utilities\DB;
 use WCML\Utilities\SyncHash;
-use WPML\FP\Fns;
 use function WCML\functions\isCli;
 
 class WCML_Synchronize_Product_Data {
@@ -20,8 +19,6 @@ class WCML_Synchronize_Product_Data {
 	private $post_translations;
 	/** @var wpdb */
 	private $wpdb;
-	/** @var SyncHash */
-	private $syncHashManager;
 
 	/**
 	 * WCML_Synchronize_Product_Data constructor.
@@ -30,14 +27,12 @@ class WCML_Synchronize_Product_Data {
 	 * @param SitePress             $sitepress
 	 * @param WPML_Post_Translation $post_translations
 	 * @param wpdb                  $wpdb
-	 * @param SyncHash              $syncHashManager
 	 */
-	public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, WPML_Post_Translation $post_translations, wpdb $wpdb, SyncHash $syncHashManager ) {
+	public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, WPML_Post_Translation $post_translations, wpdb $wpdb ) {
 		$this->woocommerce_wpml  = $woocommerce_wpml;
 		$this->sitepress         = $sitepress;
 		$this->post_translations = $post_translations;
 		$this->wpdb              = $wpdb;
-		$this->syncHashManager   = $syncHashManager;
 	}
 
 	public function add_hooks() {
@@ -53,26 +48,6 @@ class WCML_Synchronize_Product_Data {
 		add_action( 'woocommerce_variation_set_stock_status', [ $this, 'sync_stock_status_for_translations' ], 10, 2 );
 
 		add_filter( 'future_product', [ $this, 'set_schedule_for_translations' ], 10, 2 );
-	}
-
-	/**
-	 * @param int     $variationId
-	 * @param WP_Post $variation
-	 */
-	private function setVariationLanguageDetails( $variationId, $variation ) {
-		$productId                  = (int) $variation->post_parent;
-		$productLanguage            = $this->sitepress->get_language_for_element( $productId, 'post_product' );
-		if ( ! $productLanguage ) {
-			return;
-		}
-		$productInOriginalLanguage = $this->woocommerce_wpml->products->is_original_product( $productId );
-		if ( ! $productInOriginalLanguage ) {
-			return;
-		}
-		$variationLanguageDetails = $this->sitepress->get_element_language_details( $variationId, 'post_product_variation' );
-		if ( ! $variationLanguageDetails ) {
-			$this->sitepress->set_element_language_details( $variationId, 'post_product_variation', false, $productLanguage );
-		}
 	}
 
 	/**
@@ -274,24 +249,6 @@ class WCML_Synchronize_Product_Data {
 
 	/**
 	 * @param WC_Product $product
-	 * @param int        $stock_quantity
-	 */
-	private function update_stock_value( $product, $stock_quantity ) {
-
-		$product_id_with_stock = $product->get_stock_managed_by_id();
-
-		/** @var WC_Product_Data_Store_CPT */
-		$data_store            = WC_Data_Store::load( 'product' );
-		$data_store->update_product_stock( $product_id_with_stock, $stock_quantity, 'set' );
-
-		delete_transient( 'wc_low_stock_count' );
-		delete_transient( 'wc_outofstock_count' );
-		delete_transient( 'wc_product_children_' . ( $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id() ) );
-		wp_cache_delete( 'product-' . $product_id_with_stock, 'products' );
-	}
-
-	/**
-	 * @param WC_Product $product
 	 *
 	 * @deprecated Use \WCML\Synchronization\Hooks::syncProductStock
 	 */
@@ -463,10 +420,12 @@ class WCML_Synchronize_Product_Data {
 	}
 
 	/**
-	 * Duplicate the postmeta of a product into one of its translaitons
+	 * Duplicate the postmeta of a product into one of its translaitons.
 	 *
-	 * Since WCML 5.4.2, fired only when saving a translation from CTE, which will include the translation $data.
-	 * Before that, fired instead of sync_downloadable_files(), keeping $data as optional for backward compatibility.
+	 * The name here is missleading, since it does more than just duplicating.
+	 * When provided with extra $data, it applies it as the new translation.
+	 *
+	 * Keeping the logic, and $data as optional for backward compatibility.
 	 *
 	 * @param int         $original_product_id
 	 * @param int         $translated_product_id
@@ -482,38 +441,32 @@ class WCML_Synchronize_Product_Data {
 			return;
 		}
 
-		$custom_fields = get_post_custom( $original_product_id );
+		global $iclTranslationManagement;
+		$custom_fields    = get_post_custom( $original_product_id );
+		$post_fields      = null;
+		$settings_factory = new WPML_Custom_Field_Setting_Factory( $iclTranslationManagement );
+
+		unset( $custom_fields['_thumbnail_id'] );
 		unset( $custom_fields[ SyncHash::META_KEY ] );
-		$currentHash = md5( serialize( $custom_fields ) );
 
-		if ( $this->syncHashManager->isNewGroupValue( $translated_product_id, SyncHash::GROUP_FIELDS, $currentHash ) ) {
-			global $iclTranslationManagement;
-			$all_meta    = get_post_custom( $original_product_id );
-			$post_fields = null;
+		foreach ( $custom_fields as $key => $meta ) {
+			$setting = $settings_factory->post_meta_setting( $key );
 
-			$settings_factory = new WPML_Custom_Field_Setting_Factory( $iclTranslationManagement );
-			unset( $custom_fields['_thumbnail_id'] );
-
-			foreach ( $custom_fields as $key => $meta ) {
-				$setting = $settings_factory->post_meta_setting( $key );
-
-				if ( WPML_IGNORE_CUSTOM_FIELD === $setting->status() ) {
-					continue;
-				}
-
-				if ( '_downloadable_files' === $key ) {
-					$this->woocommerce_wpml->downloadable->sync_files_to_translations( $original_product_id, $translated_product_id, $data );
-				} elseif ( WPML_TRANSLATE_CUSTOM_FIELD === $setting->status() ) {
-					$post_fields = $this->sync_custom_field_value( $key, $data, $translated_product_id, $post_fields, $original_product_id );
-				}
+			if ( WPML_IGNORE_CUSTOM_FIELD === $setting->status() ) {
+				continue;
 			}
 
-			self::syncDeletedCustomFields( $original_product_id, $translated_product_id );
-			$this->syncHashManager->updateGroupValue( $translated_product_id, SyncHash::GROUP_FIELDS, $currentHash );
-
-			$wcml_data_store = wcml_product_data_store_cpt();
-			$wcml_data_store->update_lookup_table_data( $translated_product_id );
+			if ( '_downloadable_files' === $key ) {
+				$this->woocommerce_wpml->downloadable->sync_files_to_translations( $original_product_id, $translated_product_id, $data );
+			} elseif ( WPML_TRANSLATE_CUSTOM_FIELD === $setting->status() ) {
+				$post_fields = $this->sync_custom_field_value( $key, $data, $translated_product_id, $post_fields, $original_product_id );
+			}
 		}
+
+		self::syncDeletedCustomFields( $original_product_id, $translated_product_id );
+
+		$wcml_data_store = wcml_product_data_store_cpt();
+		$wcml_data_store->update_lookup_table_data( $translated_product_id );
 
 		do_action( 'wcml_after_duplicate_product_post_meta', $original_product_id, $translated_product_id, $data );
 	}
@@ -634,7 +587,7 @@ class WCML_Synchronize_Product_Data {
 			? $value
 			: $this->insert_under_keys(
 				array_slice( $keys, 1 ),
-				( isset( $array[ $keys[0] ] ) ? $array[ $keys[0] ] : [] ),
+				( $array[ $keys[0] ] ?? [] ),
 				$value
 			);
 
@@ -668,7 +621,7 @@ class WCML_Synchronize_Product_Data {
 				$terms[] = 'outofstock';
 			}
 
-			$rating = min( 5, round( $product->get_average_rating(), 0 ) );
+			$rating = min( 5, round( $product->get_average_rating() ) );
 
 			if ( $rating > 0 ) {
 				$terms[] = 'rated-' . $rating;

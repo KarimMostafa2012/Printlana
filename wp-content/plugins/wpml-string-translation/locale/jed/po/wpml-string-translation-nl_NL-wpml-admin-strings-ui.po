@@ -2,10 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/admin-strings/texts.js:10
 msgid "Not included in String Translation"
-msgstr "Niet opgenomen in String Vertaling"
+msgstr "Niet opgenomen in String Translation"
 
 #: src/js/admin-strings/texts.js:11
 msgid "Registered and locked"
@@ -21,7 +23,7 @@ msgstr "Numeriek"
 
 #: src/js/admin-strings/texts.js:15
 msgid "All Types"
-msgstr "Alle soorten"
+msgstr "Alle types"
 
 #: src/js/admin-strings/texts.js:17
 msgid "Search"
@@ -41,15 +43,15 @@ msgstr "Alle (%d)"
 
 #: src/js/admin-strings/texts.js:23
 msgid "Included in String Translation (%d)"
-msgstr "Opgenomen in String Vertaling (%d)"
+msgstr "Opgenomen in String Translation (%d)"
 
 #: src/js/admin-strings/texts.js:24
 msgid "Not included in String Translation (%d)"
-msgstr "Niet opgenomen in String Vertaling (%d)"
+msgstr "Niet opgenomen in String Translation (%d)"
 
 #: src/js/admin-strings/texts.js:26
 msgid "This setting is locked by a WPML configuration file."
-msgstr "Deze instelling wordt vergrendeld door een WPML configuratiebestand."
+msgstr "Deze instelling is vergrendeld door een WPML-configuratiebestand."
 
 #: src/js/admin-strings/texts.js:28
 msgid "Option"
@@ -65,11 +67,11 @@ msgstr "Type"
 
 #: src/js/admin-strings/texts.js:31
 msgid "State"
-msgstr "Land"
+msgstr "Status"
 
 #: src/js/admin-strings/texts.js:34
 msgid "Export as a WPML configuration file"
-msgstr "Exporteren als een WPML configuratiebestand"
+msgstr "Exporteren als een WPML-configuratiebestand"
 
 #: src/js/admin-strings/texts.js:35
 msgid "Cancel"
@@ -77,7 +79,7 @@ msgstr "Annuleren"
 
 #: src/js/admin-strings/texts.js:36
 msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr "Sla het volgende op in een wpml-config.xml in de root van je thema of plugin."
+msgstr "Sla het volgende op in een wpml-config.xml in de hoofdmap van uw thema of plug-in."
 
 #: src/js/admin-strings/texts.js:38
 msgid "No options found."
@@ -88,16 +90,16 @@ msgid ""
 "Make sure you saved your theme options at least once. Some themes only add "
 "these to the wp_options table after the user explicitly saves changes to "
 "the theme defaults."
-msgstr "Zorg ervoor dat je je thema-opties minstens één keer hebt opgeslagen. Sommige thema's voegen deze pas toe aan de wp_options tabel nadat de gebruiker expliciet wijzigingen in de standaardinstellingen van het thema heeft opgeslagen."
+msgstr "Zorg ervoor dat u uw thema-opties minstens één keer hebt opgeslagen. Sommige thema's voegen deze pas toe aan de wp_options tabel nadat de gebruiker expliciet wijzigingen in de standaardinstellingen van het thema heeft opgeslagen."
 
 #: src/js/admin-strings/texts.js:6
 msgid "Add to String Translation"
-msgstr "Toevoegen aan stringvertaling"
+msgstr "Toevoegen aan String Translation"
 
 #: src/js/admin-strings/texts.js:7
 msgid "Remove from String Translation"
-msgstr "Verwijderen uit stringvertaling"
+msgstr "Verwijderen uit String Translation"
 
 #: src/js/admin-strings/texts.js:9
 msgid "Included in String Translation"
-msgstr "Opgenomen in stringvertaling"
+msgstr "Opgenomen in String Translation"

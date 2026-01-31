@@ -25,17 +25,32 @@ class Job {
 	/** @var int */
 	public $status = ICL_TM_IN_PROGRESS;
 
+	/** @var bool  if true the job is unsolvable and need to be resent */
+	public $isUnsolvable = false;
+
+	/** @var string  */
+	public $message = '';
+
+	/** @var string|null  */
+	public $errorType = null;
+
 	/**
 	 * @param \stdClass $item
 	 *
 	 * @return Job
 	 */
 	public static function fromAteResponse( \stdClass $item ) {
-		$job            = new self();
-		$job->ateJobId  = $item->ate_id;
-		$job->url       = $item->download_link;
+		$job               = new self();
+		$job->ateJobId     = $item->ate_id;
+		$job->url          = $item->download_link;
 		$job->ateStatus    = (int) $item->status;
-		$job->jobId = (int) $item->id;
+		$job->isUnsolvable = (bool) ( $item->is_unsolvable ?? false );
+		$job->message      = $item->message ?? '';
+		$job->jobId        = (int) $item->id;
+		
+		if ( $job->isUnsolvable ) {
+			$job->errorType = 'SyncError';
+		}
 
 		return $job;
 	}

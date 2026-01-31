@@ -1,46 +1,17 @@
 <?php
 
-$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
-if ( ! empty($nonce) && wp_verify_nonce( $nonce, WC_MMQ_PLUGIN_BASE_FOLDER ) ) {
-    
-    if( isset( $_POST['reset_button'] ) ){
-        $data = WC_MMQ::getDefaults();
-        update_option( WC_MMQ_KEY, $data );
-        ?><div class="updated"><p>Reset Successfully</p></div><?php 
-    }elseif( isset( $_POST['configure_submit'] ) && filter_input_array(INPUT_POST) ){
-        $full_data = filter_input_array( INPUT_POST );
-        $data = $full_data['data'] ?? array();
 
-        $_min_quantity_name = WC_MMQ_PREFIX . 'min_quantity';
-        $_max_quantity_name = WC_MMQ_PREFIX . 'max_quantity';
-        $_product_step_name = WC_MMQ_PREFIX . 'product_step';
-        $_default_quantity_name = WC_MMQ_PREFIX . 'default_quantity';
-        $_qty_plus_minus_btn_name = WC_MMQ_PREFIX . 'qty_plus_minus_btn';
-
-
-        if( !$data[$_min_quantity_name] && $data[$_min_quantity_name] != 0 &&  $data[$_min_quantity_name] !=1 && $data[WC_MMQ_PREFIX . 'max_quantity'] <= $data[$_min_quantity_name] ){
-            $data[$_max_quantity_name] = $data[$_min_quantity_name] + 5;
-            echo '<div class="error notice"><p>Maximum Quantity can not be smaller, So we have added 5</p></div>';
-        }
-        if( !$data[$_product_step_name] || $data[$_product_step_name] == '0' || $data[$_product_step_name] == 0 ){
-        $data[$_product_step_name] = 1; 
-        }
-        
-        if( !$data[$_min_quantity_name] || $data[$_min_quantity_name] == '0' || $data[$_min_quantity_name] == 0 ){
-        $data[$_min_quantity_name] = '0'; 
-        }
-        $data[$_default_quantity_name] = isset( $data[$_default_quantity_name] ) && $data[$_default_quantity_name] >= $data[$_min_quantity_name] && ( empty( $data[$_max_quantity_name] ) || $data[$_default_quantity_name] <= $data[$_max_quantity_name] ) ? $data[$_default_quantity_name] : false;
-        
-        //plus minus checkbox data fixer
-        $data[ $_qty_plus_minus_btn_name ] = !isset( $data[ $_qty_plus_minus_btn_name ] ) ? 0 : 1;
-        
-
-        update_option( WC_MMQ_KEY, $data);
-        ?><div class="updated"><p>Successfully Updated</p></div><?php
-    }
-}
 
 $saved_data = WC_MMQ::getOptions();
+
+if( ! empty( $_POST ) && ( isset( $_POST['configure_submit'] ) || isset( $_POST['reset_button'] ) ) ){
+    $submit_form = wcmmq_form_submit();
+    if( is_array( $submit_form ) && ! empty( $submit_form ) ){
+        $saved_data = $submit_form;
+    }
+
+}
+
 
 
 

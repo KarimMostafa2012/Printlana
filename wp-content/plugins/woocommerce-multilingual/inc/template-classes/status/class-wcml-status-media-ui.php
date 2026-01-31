@@ -3,18 +3,14 @@
 class WCML_Status_Media_UI extends WCML_Templates_Factory {
 
 	/**
-	 * @var SitePress
+	 * @var \SitePress
 	 */
 	private $sitepress;
 
-	/**
-	 * WCML_Status_Media_UI constructor.
-	 *
-	 * @param SitePress $sitepress
-	 */
 	public function __construct( \WPML\Core\ISitePress $sitepress ) {
 		parent::__construct();
 
+		/** @phpstan-ignore assign.propertyType */
 		$this->sitepress = $sitepress;
 	}
 

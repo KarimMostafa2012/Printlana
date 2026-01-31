@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/translationReview/components/AcceptedMessage.js:8
 msgid "Accepted"
@@ -24,11 +26,11 @@ msgstr "Tillbaka"
 msgid ""
 "Turn off to not automatically load the next translation after finishing "
 "this review."
-msgstr "Stäng av för att inte automatiskt ladda nästa översättning efter att du avslutat denna granskning."
+msgstr "Stäng av för att inte automatiskt ladda nästa översättning efter att ha avslutat denna granskning."
 
 #: src/js/translationReview/components/ContinueReviewToggle.js:18
 msgid "Turn on to automatically load the next translation after finishing this  ."
-msgstr "Slå på för att automatiskt ladda nästa översättning efter att du avslutat denna granskning."
+msgstr "Slå på för att automatiskt ladda nästa översättning efter att ha avslutat denna."
 
 #: src/js/translationReview/components/EditButton.js:10
 msgid "Edit"
@@ -56,12 +58,12 @@ msgstr "Publicerad!"
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Vänligen vänta, tillämpar översättning.."
+msgstr "Vänta, tillämpar översättning.."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Det uppstod ett fel vid tillämpningen av översättningen."
+msgstr "Ett fel uppstod vid tillämpning av översättning."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
-msgstr "Någon granskar redan denna översättning. Vänligen försök igen senare."
+msgstr "Någon granskar redan denna översättning. Försök igen senare."

@@ -18,5 +18,4 @@ class Arguments {
 
 	/** @var boolean $includeManualAndLongstandingJobs */
 	public $includeManualAndLongstandingJobs;
-
 }

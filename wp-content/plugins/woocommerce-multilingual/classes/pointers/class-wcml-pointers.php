@@ -19,8 +19,8 @@ class WCML_Pointers{
 			return;
 		}
 
-		$tab        = isset( $_GET['tab'] ) ? $_GET['tab'] : '';
-		$section    = isset( $_GET['section'] ) ? $_GET['section'] : '';
+		$tab        = $_GET['tab'] ?? '';
+		$section    = $_GET['section'] ?? '';
 		$isFullMode = ! isStandAlone();
 		wp_register_style( 'wcml-pointers', WCML_PLUGIN_URL . '/res/css/wcml-pointers.css' );
 
@@ -46,6 +46,10 @@ class WCML_Pointers{
 	}
 
 	public function add_shipping_classes_translation_link() {
+		if ( ! WCML_Terms::wpml_is_product_shipping_class_set_as_translated() ) {
+			return;
+		}
+
 		$link   = \WCML\Utilities\AdminUrl::getWPMLTaxonomyTranslation( 'product_shipping_class' );
 		$name   = __( 'Translate shipping classes', 'woocommerce-multilingual' );
 		$anchor = '<a class="button button-small button-wpml wcml-pointer-shipping_classes_translation" href="{{ url }}">{{ text }}</a>';

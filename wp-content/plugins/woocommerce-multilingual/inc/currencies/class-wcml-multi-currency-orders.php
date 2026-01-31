@@ -177,15 +177,14 @@ class WCML_Multi_Currency_Orders {
 				</select>
 			</li>
 			<?php
-			$wcml_order_set_currency_nonce = wp_create_nonce( 'set_order_currency' );
-
-			wc_enqueue_js(
-				"
+			$wcml_set_order_currency_nonce   = esc_js( wp_create_nonce( 'set_order_currency' ) );
+			$wcml_set_order_currency_message = esc_js( __( 'All the products will be removed from the current order in order to change the currency', 'woocommerce-multilingual' ) );
+			$wcml_set_order_currency_script  = <<<JS
                 var order_currency_current_value = jQuery('#dropdown_shop_order_currency option:selected').val();
 
                 jQuery('#dropdown_shop_order_currency').on('change', function(){
 
-                    if(confirm('" . esc_js( __( 'All the products will be removed from the current order in order to change the currency', 'woocommerce-multilingual' ) ) . "')){
+                    if(confirm('$wcml_set_order_currency_message')){
                         jQuery.ajax({
                             url: ajaxurl,
                             type: 'post',
@@ -193,7 +192,7 @@ class WCML_Multi_Currency_Orders {
                             data: {
                                 action: 'wcml_order_set_currency',
                                 currency: jQuery('#dropdown_shop_order_currency option:selected').val(),
-                                wcml_nonce: '" . $wcml_order_set_currency_nonce . "'
+                                wcml_nonce: '$wcml_set_order_currency_nonce'
                                 },
                             success: function( response ){
                                 if(typeof response.error !== 'undefined'){
@@ -210,8 +209,12 @@ class WCML_Multi_Currency_Orders {
 
                 });
 
-            "
-			);
+JS;
+
+			$handle = 'wcml_show_order_currency_dropdown';
+			wp_register_script( $handle, '', [ 'jquery' ], WCML_VERSION, true );
+			wp_enqueue_script( $handle );
+			wp_add_inline_script( $handle, $wcml_set_order_currency_script );
 
 		}
 
@@ -341,20 +344,12 @@ class WCML_Multi_Currency_Orders {
 	 * @param array $coupons
 	 * @param int|bool $order_id
 	 * @param string|bool $order_currency
+	 * @deprecated since WCML 4.11.0
 	 */
 	public function set_converted_totals_for_item( $item, $coupons, $order_id = false, $order_currency = false ) {
 			// Add a deprecation notice?
 	}
-	
-	/**
-	 * @param WC_Order_Item_Product $item
-	 *
-	 * @return bool
-	 */
-	private function total_is_changed( $item ) {
-		return (int) $item->get_product()->get_price() * (int) $item->get_quantity() !== (int) $item->get_total();
-	}
-	
+
 	/**
 	 * @param string $key
 	 *
@@ -421,10 +416,8 @@ class WCML_Multi_Currency_Orders {
 
 		if ( isset( $_COOKIE['_wcml_order_currency'] ) ) {
 			return $_COOKIE['_wcml_order_currency'];
-		} else {
-			return wcml_get_woocommerce_currency_option();
 		}
-
+		return wcml_get_woocommerce_currency_option();
 	}
 
 	/**

@@ -157,6 +157,7 @@ function wpml_tm_load( $sitepress = null ) {
 			'WPML_TM_Reset_Options_Filter_Factory',
 			\WPML\TM\User\Hooks::class,
 			\WPML\TM\Jobs\ExtraFieldDataInEditorFactory::class,
+			\WPML\TM\ATE\Sitekey\DirectSync::class,
 			\WPML\TM\ATE\Sitekey\Sync::class,
 			\WPML\TM\ATE\Review\ReviewCompletedNotice::class,
 			\WPML\TM\Settings\CustomFieldChangeDetector::class,
@@ -192,6 +193,7 @@ function wpml_tm_load( $sitepress = null ) {
 			'WPML_TM_ATE_Translator_Message_Classic_Editor_Factory',
 			'WPML_TM_Old_Editor_Factory',
 			\WPML\TM\ATE\Log\Hooks::class,
+			\WPML\TM\Jobs\Log\Hooks::class,
 			\WPML\TM\ATE\Hooks\ReturnedJobActionsFactory::class,
 			WPML\TM\ATE\ClonedSites\Loader::class,
 			\WPML\TM\ATE\Loader::class,
@@ -203,6 +205,7 @@ function wpml_tm_load( $sitepress = null ) {
 			\WPML\TM\Editor\ManualJobCreationErrorNotice::class,
 			\WPML\ICLToATEMigration\Loader::class,
 			\WPML\Support\ATE\Hooks::class,
+			\WPML\Support\TmJobs\Hooks::class,
 			\WPML\TM\ATE\AutoTranslate\Hooks\JobsCountCacheInvalidateAction::class,
 			\WPML\TranslationManagement\Dashboard\Loader::class,
 		];

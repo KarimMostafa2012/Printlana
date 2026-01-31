@@ -7,7 +7,6 @@ use WPML\TM\Jobs\Query\OrderQueryHelper;
 use WPML\TM\Jobs\Query\PackageQuery;
 use WPML\TM\Jobs\Query\PostQuery;
 use WPML\TM\Jobs\Query\QueryBuilder;
-use WPML\TM\Jobs\Query\StringQuery;
 use WPML\TM\Jobs\Query\StringsBatchQuery;
 use WPML\FP\Obj;
 use function WPML\Container\make;
@@ -492,7 +491,9 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 			wpml_tm_load_job_factory()->update_job_data( $job_id, array( 'editor' => WPML_TM_Editors::ATE ) );
 			$job->existing_ate_id = make( \WPML\TM\ATE\JobRecords::class )->get_ate_job_id( $job_id );
 		} else {
-			$apply_memory = $previousStatus && (int) $previousStatus['status'] === ICL_TM_COMPLETE && ! $previousStatus['needs_update'] ? $applyTranslationMemoryForCompletedJobs : true;
+			$completedTranslationService = ( new \WPML\Translation\CompletedTranslationServiceFactory() )->create();
+
+	    $apply_memory = $completedTranslationService->hasJobBeenCompletedBeforeResending( $job_id ) ? $applyTranslationMemoryForCompletedJobs : true;
 
 			$job->source_language->code = $translation_job->get_source_language_code();
 			$job->source_language->name = $translation_job->get_source_language_code( true );
@@ -686,12 +687,11 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	 * It returns a single instance of the class.
 	 *
 	 * @param bool $forceReload
-	 * @param bool $loadObsoleteStringQuery
 	 * @param bool $dontCache
 	 *
 	 * @return \WPML_TM_Jobs_Repository
 	 */
-	function wpml_tm_get_jobs_repository( $forceReload = false, $loadObsoleteStringQuery = true, $dontCache = false ) {
+	function wpml_tm_get_jobs_repository( $forceReload = false, $dontCache = false ) {
 		static $repository;
 
 		if ( ! $repository || $forceReload ) {
@@ -708,13 +708,6 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 					$wpdb,
 					new QueryBuilder( $limit_helper, $order_helper )
 				);
-
-				if ( $loadObsoleteStringQuery ) {
-					$subqueries[] = new StringQuery(
-						$wpdb,
-						new QueryBuilder( $limit_helper, $order_helper )
-					);
-				}
 				$subqueries[] = new StringsBatchQuery(
 					$wpdb,
 					new QueryBuilder( $limit_helper, $order_helper )

@@ -2,9 +2,9 @@
 
 namespace WCML\Media\Wrapper;
 
-use SitePress;
-use woocommerce_wpml;
+use WCML\Options\WPML;
 use wpdb;
+use WPML\Media\Option;
 use WPML_Media_Attachments_Duplication_Factory;
 
 class Translatable implements IMedia {
@@ -12,8 +12,6 @@ class Translatable implements IMedia {
 	const META_KEY_THUMBNAIL_ID          = '_thumbnail_id';
 	const META_KEY_PRODUCT_IMAGE_GALLERY = '_product_image_gallery';
 
-	/** @var woocommerce_wpml */
-	private $woocommerce_wpml;
 	/** @var \SitePress */
 	private $sitepress;
 	/** @var wpdb */
@@ -25,10 +23,13 @@ class Translatable implements IMedia {
 	/** @var array */
 	private $products_being_synced = [];
 
-	public function __construct( $woocommerce_wpml, $sitepress, $wpdb ) {
-		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->sitepress        = $sitepress;
-		$this->wpdb             = $wpdb;
+	/**
+	 * @param \SitePress $sitepress
+	 * @param \wpdb      $wpdb
+	 */
+	public function __construct( \SitePress $sitepress, $wpdb ) {
+		$this->sitepress = $sitepress;
+		$this->wpdb      = $wpdb;
 	}
 
 	public function add_hooks() {
@@ -36,21 +37,39 @@ class Translatable implements IMedia {
 		add_action( 'wpml_media_create_duplicate_attachment', [ $this, 'sync_product_gallery_duplicate_attachment' ], 11, 2 );
 	}
 
+	private function is_wpml_media_translation_adds_media_automatically(): bool {
+		if ( ! WPML::useAte() ) {
+			return false;
+		}
+
+		if ( ! class_exists( \WPML\Media\Option::class ) ) {
+			return false;
+		}
+		/** @phpstan-ignore staticMethod.notFound  */
+		if ( Option::getTranslateMediaLibraryTexts() || Option::shouldHandleMediaAuto() ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function product_images_ids( $product_id ) {
 		$product_images_ids = [];
 
-		// thumbnail image.
-		$tmb = get_post_meta( $product_id, self::META_KEY_THUMBNAIL_ID, true );
-		if ( $tmb ) {
-			$product_images_ids[] = $tmb;
-		}
+		if ( ! $this->is_wpml_media_translation_adds_media_automatically() ) {
+			// thumbnail image.
+			$tmb = get_post_meta( $product_id, self::META_KEY_THUMBNAIL_ID, true );
+			if ( $tmb ) {
+				$product_images_ids[] = $tmb;
+			}
 
-		// product gallery.
-		$product_gallery = get_post_meta( $product_id, self::META_KEY_PRODUCT_IMAGE_GALLERY, true );
-		if ( $product_gallery ) {
-			$product_gallery = explode( ',', $product_gallery );
-			foreach ( $product_gallery as $img ) {
-				$product_images_ids[] = $img;
+			// product gallery.
+			$product_gallery = get_post_meta( $product_id, self::META_KEY_PRODUCT_IMAGE_GALLERY, true );
+			if ( $product_gallery ) {
+				$product_gallery = explode( ',', $product_gallery );
+				foreach ( $product_gallery as $img ) {
+					$product_images_ids[] = $img;
+				}
 			}
 		}
 

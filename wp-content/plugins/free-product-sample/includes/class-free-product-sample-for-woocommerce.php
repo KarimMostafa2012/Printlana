@@ -64,12 +64,7 @@ if ( !class_exists( 'DSFPS_Free_Product_Sample_Pro' ) ) {
             $this->define_admin_hooks();
             $this->define_public_hooks();
             $prefix = ( is_network_admin() ? 'network_admin_' : '' );
-            add_filter(
-                "{$prefix}plugin_action_links_" . DSFPS_PLUGIN_BASENAME,
-                array($this, 'dsfps_plugin_action_links'),
-                10,
-                4
-            );
+            add_filter( "{$prefix}plugin_action_links_" . DSFPS_PLUGIN_BASENAME, array($this, 'dsfps_plugin_action_links'), 10 );
             add_filter(
                 'plugin_row_meta',
                 array($this, 'dsfps_plugin_row_meta_action_links'),

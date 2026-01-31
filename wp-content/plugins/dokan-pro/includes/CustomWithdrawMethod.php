@@ -23,6 +23,7 @@ class CustomWithdrawMethod {
      */
     public function __construct() {
         add_filter( 'dokan_withdraw_methods', [ $this, 'register_custom_withdraw_method' ], 99 );
+        add_filter( 'dokan_vendor_payment_withdraw_methods', [ $this, 'add_description_for_custom_method' ], 10, 2 );
 
         // Hooks for admin dashboard
         add_filter( 'dokan_settings_fields', array( $this, 'custom_withdraw_method_admin_settings' ), 10, 2 );
@@ -31,6 +32,7 @@ class CustomWithdrawMethod {
         // Hooks for vendor dashboard
         add_filter( 'dokan_payment_method_title', [ $this, 'custom_payment_method_title' ], 10, 2 );
         add_action( 'dokan_store_profile_saved', [ $this, 'save_custom_withdraw_method_vendor_settings' ], 10, 2 );
+        add_action( 'dokan_rest_store_settings_after_update', [ $this, 'save_custom_withdraw_method_vendor_settings_via_api' ], 10, 2 );
         add_filter( 'dokan_get_seller_active_withdraw_methods', [ $this, 'seller_active_withdraw_methods' ], 10, 2 );
         // remove custom withdraw method if required fields is not provided
         add_filter( 'dokan_get_active_withdraw_methods', [ $this, 'remove_custom_withdraw_method' ], 10, 1 );
@@ -277,6 +279,33 @@ class CustomWithdrawMethod {
     }
 
     /**
+     * Save Skrill data.
+     *
+     * @param \WeDevs\Dokan\Vendor\Vendor $store
+     * @param \WP_REST_Request            $request
+     *
+     * @return void
+     */
+    public function save_custom_withdraw_method_vendor_settings_via_api( $store, $request ) {
+        $params = $request->get_params();
+        $dokan_profile_settings = $store->get_meta( 'dokan_profile_settings', true );
+
+        $upcomming_payment = $params['payment'];
+        $saved_payment = $dokan_profile_settings['payment'];
+
+        if ( empty( $upcomming_payment['dokan_custom'] ) ) {
+            return;
+        }
+
+        $saved_payment['dokan_custom'] = [
+            'value' => $upcomming_payment['dokan_custom']['value'] ?? '',
+        ];
+        $dokan_profile_settings['payment'] = $saved_payment;
+
+        update_user_meta( $store->get_id(), 'dokan_profile_settings', $dokan_profile_settings );
+    }
+
+    /**
      * Add custom withdraw method in vendor withdraw request dropdown
      *
      * @since 3.5.0
@@ -396,5 +425,20 @@ class CustomWithdrawMethod {
         $payment_methods[] = 'dokan_custom';
 
         return $payment_methods;
+    }
+
+    /**
+     * Add description.
+     *
+     * @param $methods
+     * @param $gateways
+     *
+     * @return array
+     */
+    public function add_description_for_custom_method( $methods, $gateways ) {
+        if ( isset( $methods['dokan_custom'] ) ) {
+            $methods['dokan_custom']['description'] = __( 'Dokan custom withdraw payment method.', 'dokan' );
+        }
+        return $methods;
     }
 }

@@ -24,8 +24,8 @@ class WCML_Reports{
 
         if( isset($_GET['page']) && $_GET['page']==='wc-reports' ) {
 
-            $this->tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'orders';
-            $this->report = isset( $_GET['report'] ) ? $_GET['report'] : '';
+            $this->tab = $_GET['tab'] ?? 'orders';
+            $this->report = $_GET['report'] ?? '';
 
             add_filter( 'woocommerce_reports_get_order_report_query', [ $this, 'filter_reports_query' ], 0 );
 
@@ -127,7 +127,7 @@ class WCML_Reports{
 
 
     public function combine_report_by_languages($results){
-        global $sitepress, $wpdb;
+        global $sitepress;
 
         if(is_array($results) && isset($results['0']->order_item_qty)){
             $mode = 'top_sellers';
@@ -145,7 +145,7 @@ class WCML_Reports{
 
         $combined_results = [];
 
-        foreach($results as $k => $row){
+        foreach($results as $row){
 
             switch($mode){
                 case 'top_sellers':
@@ -164,7 +164,7 @@ class WCML_Reports{
             }
         }
 
-        foreach($results as $k => $row){
+        foreach($results as $row){
 
             if($row->order_language != $current_language){
 
@@ -228,11 +228,9 @@ class WCML_Reports{
         switch($mode){
             case 'top_sellers':
                 usort($combined_results, [ __CLASS__, 'order_by_quantity' ] );
-                array_slice($combined_results, 0, 12);
                 break;
             case 'top_earners':
                 usort($combined_results, [ __CLASS__, 'order_by_total' ] );
-                array_slice($combined_results, 0, 12);
                 break;
             case 'top_sellers_spark':
                 break;

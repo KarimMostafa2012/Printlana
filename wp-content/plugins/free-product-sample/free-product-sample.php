@@ -1,19 +1,28 @@
 <?php
 
 /**
+ * Free Product Samples for WooCommerce – Try Before You Buy, Request Samples by Mail
+ *
+ * @link              https://www.thedotstore.com/
+ * @since             1.0.0
+ * @package           DSFPS_Free_Product_Sample_Pro
+ *
+ * @wordpress-plugin
  * Plugin Name: Advanced Product Sample for WooCommerce
- * Plugin URI: https://www.thedotstore.com/product-sample-woocommerce/
- * Description: Advanced Product Sample for WooCommerce is a plugin that provides a simple interface. It lets you order a product as a product sample.
- * Version: 1.4.1
+ * Plugin URI: https://www.thedotstore.com/free-product-samples-for-woocommerce/
+ * Description: Allows your customers to order and try out samples before buying the product.
+ * Version: 1.4.2
  * Author: theDotstore
- * Author URI: https://www.thedotstore.com
+ * Author URI: https://www.thedotstore.com/
+ * License: GPL-3.0+
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: free-product-sample
  * Domain Path: /languages/
  * Requires Plugins: woocommerce
- * 
+ *
  * WC requires at least: 4.5
- * WP tested up to: 6.7.1
- * WC tested up to: 9.5.1
+ * WP tested up to: 6.8.3
+ * WC tested up to: 10.2.2
  * Requires PHP: 5.6
  * Requires at least: 5.0
  */
@@ -69,7 +78,7 @@ if ( function_exists( 'fps_fs' ) ) {
     }
 }
 if ( !defined( 'DSFPS_PLUGIN_VERSION' ) ) {
-    define( 'DSFPS_PLUGIN_VERSION', '1.4.1' );
+    define( 'DSFPS_PLUGIN_VERSION', '1.4.2' );
 }
 if ( !defined( 'DSFPS_PLUGIN_URL' ) ) {
     define( 'DSFPS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

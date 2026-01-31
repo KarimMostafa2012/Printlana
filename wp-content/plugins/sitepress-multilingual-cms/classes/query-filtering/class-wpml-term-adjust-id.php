@@ -79,8 +79,16 @@ class WPML_Term_Adjust_Id {
 
 		if ( $translated_id && (int) $translated_id !== (int) $term->term_taxonomy_id ) {
 
+			if ( has_filter( 'get_term', [ $this->sitepress, 'get_term_adjust_id' ] ) ) {
+				$should_add_filter = remove_filter( 'get_term', [ $this->sitepress, 'get_term_adjust_id' ], 1 );
+			}
+
 			/** @var \WP_Term|\stdClass $term Declared also as \stdClass because we are setting `object_id`, which is not a property of \WP_Term. */
 			$term = get_term_by( 'term_taxonomy_id', $translated_id, $term->taxonomy );
+
+			if ( ! empty( $should_add_filter ) ) {
+				add_filter( 'get_term', [ $this->sitepress, 'get_term_adjust_id' ], 1, 1 );
+			}
 
 			if ( $object_id ) {
 				$translated_object_id = $this->post_translation->element_id_in( $object_id, $this->sitepress->get_current_language() );

@@ -34,6 +34,9 @@ final class TranslationDetailsDto {
 	/** @var int|null */
 	private $translatorId;
 
+	/** @var int|null */
+	private $editorJobId;
+
 
 	public function __construct(
 		string $languageCode,
@@ -45,7 +48,8 @@ final class TranslationDetailsDto {
 		string $editor = null,
 		string $translationService = null,
 		string $reviewStatus = null,
-		int $translatorId = null
+		int $translatorId = null,
+		int $editorJobId = null
 	) {
 		$this->languageCode       = $languageCode;
 		$this->translationId      = $translationId;
@@ -57,6 +61,7 @@ final class TranslationDetailsDto {
 		$this->translationService = $translationService;
 		$this->reviewStatus       = $reviewStatus;
 		$this->translatorId       = $translatorId;
+		$this->editorJobId        = $editorJobId;
 	}
 
 	public function getLanguageCode(): string {
@@ -104,5 +109,10 @@ final class TranslationDetailsDto {
 	/** @return int|null */
 	public function getTranslatorId() {
 		return $this->translatorId;
+	}
+
+	/** @return int|null */
+	public function getEditorJobId() {
+		return $this->editorJobId;
 	}
 }

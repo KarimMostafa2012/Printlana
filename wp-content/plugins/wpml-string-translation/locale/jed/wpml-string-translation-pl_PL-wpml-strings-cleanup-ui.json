@@ -3,16 +3,18 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "pl_PL"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
             "Wyczyść tabelę tłumaczeń ciągów, usuwając nieprzetłumaczone ciągi według domeny."
          ],
          "Remove strings by domain": [
-            "Usuń ciągi znaków według domeny"
+            "Usuń ciągi według domeny"
          ],
          "Remove strings": [
-            "Usuń ciągi znaków"
+            "Usuń ciągi"
          ],
          "Cancel": [
             "Anuluj"
@@ -21,25 +23,25 @@
             "Usuń"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "Tabela tłumaczeń ciągów znaków zawiera obecnie ciągi znaków z domen wymienionych poniżej. Jeśli nie planujesz tłumaczyć ciągów z określonej domeny, wybierz ją poniżej, aby usunąć nieprzetłumaczone ciągi z tabeli tłumaczeń ciągów. Wszystkie ciągi, które mają już tłumaczenia, będą nadal dostępne."
+            "Tabela tłumaczeń ciągów zawiera obecnie ciągi z domen wymienionych poniżej. Jeśli nie planujesz tłumaczyć ciągów z konkretnej domeny, wybierz ją poniżej, aby usunąć jej nieprzetłumaczone ciągi z tabeli tłumaczeń ciągów. Wszystkie ciągi, które już mają tłumaczenia, będą nadal dostępne."
          ],
          "Search": [
             "Szukaj"
          ],
          "Removing strings from String Translation table": [
-            "Usuwanie ciągów znaków z tabeli tłumaczeń ciągów znaków"
+            "Usuwanie ciągów z tabeli tłumaczeń ciągów"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "Aby dodać ciągi z powrotem do tabeli tłumaczeń ciągów, może być konieczne ponowne przeskanowanie plików tłumaczeń lub zarejestrowanie ciągów jako przetłumaczalnych."
+            "Aby ponownie dodać ciągi do tabeli tłumaczeń ciągów, może być konieczne ponowne skanowanie plików tłumaczeń lub zarejestrowanie ciągów jako możliwe do przetłumaczenia."
          ],
          "Read more about ": [
             "Przeczytaj więcej o "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "skanuje Twoją witrynę w poszukiwaniu ciągów znaków i rejestruje je jako przetłumaczalne."
+            "skanowaniu witryny w poszukiwaniu ciągów i rejestrowaniu ich jako możliwe do przetłumaczenia."
          ],
          "Successfully removed strings": [
-            "Pomyślnie usunięto ciągi znaków"
+            "Ciągi usunięte pomyślnie"
          ],
          "OK, Great": [
             "OK, świetnie"
@@ -48,10 +50,10 @@
             "Domena"
          ],
          "Strings count": [
-            "Liczenie ciągów znaków"
+            "Liczba ciągów"
          ],
          "Translated strings": [
-            "Przetłumaczone ciągi znaków"
+            "Przetłumaczone ciągi"
          ]
       }
    }

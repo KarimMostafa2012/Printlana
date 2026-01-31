@@ -170,7 +170,7 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 			}
 		}
 
-		return array_filter( $instances );
+		return $instances;
 	}
 
 	/**
@@ -215,7 +215,7 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 	private function conditions_ok( $node_data, $element ) {
 		$conditions_meet = true;
 		foreach ( $node_data['conditions'] as $field_key => $field_value ) {
-			if ( ! isset( $element[ $field_key ] ) || $element[ $field_key ] !== $field_value ) {
+			if ( Obj::prop( $field_key, $element ) !== $field_value && Obj::prop( 'elType', $element ) !== $field_value ) {
 				$conditions_meet = false;
 				break;
 			}
@@ -794,17 +794,17 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 					'\WPML\PB\Elementor\Modules\Reviews',
 				],
 			),
-			'galleries'            => array(
+			'gallery'              => array(
 				'conditions'        => array( self::TYPE => 'gallery' ),
 				'fields'            => array(
 					array(
 						'field'       => 'show_all_galleries_label',
-						'type'        => __( 'Galleries: All Label', 'sitepress' ),
+						'type'        => __( 'Gallery: All Label', 'sitepress' ),
 						'editor_type' => 'LINE',
 					),
 					'url' => array(
 						'field'       => 'url',
-						'type'        => __( 'Galleries: Gallery custom link', 'sitepress' ),
+						'type'        => __( 'Gallery: Gallery custom link', 'sitepress' ),
 						'editor_type' => 'LINK',
 					),
 				),

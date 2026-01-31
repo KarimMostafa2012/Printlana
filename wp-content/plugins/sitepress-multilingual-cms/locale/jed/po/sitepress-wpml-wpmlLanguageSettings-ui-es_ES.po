@@ -2,20 +2,22 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:30
 msgid "Choose the image file type for flags"
-msgstr "Seleccione el tipo de archivo de imagen para los marcadores"
+msgstr "Elija el tipo de archivo de imagen para las banderas"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:32
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "Esta opción solo afecta a los marcadores integrados de WPML, no a los marcadores personalizados cargados."
+msgstr "Esta opción solo afecta a las banderas integradas de WPML, no a las personalizadas subidas."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"
-msgstr "Formato de %s"
+msgstr "Formato %s"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:63
 msgid "Save"
@@ -23,7 +25,7 @@ msgstr "Guardar"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:20
 msgid "The new format has been saved."
-msgstr "Se ha guardado el nuevo formato."
+msgstr "El nuevo formato se ha guardado."
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:25
 msgid "Failed to save the new format"

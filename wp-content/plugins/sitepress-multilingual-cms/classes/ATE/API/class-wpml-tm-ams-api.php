@@ -11,6 +11,7 @@ use WPML\FP\Relation;
 use WPML\FP\Either;
 use WPML\TM\ATE\API\ErrorMessages;
 use WPML\FP\Fns;
+use WPML\TM\Jobs\JobLog;
 use function WPML\FP\pipe;
 use WPML\FP\Logic;
 use WPML\TM\ATE\API\CachedAMSAPI;
@@ -249,7 +250,12 @@ class WPML_TM_AMS_API {
 		} );
 
 		$handleErrorResponse = $this->handleErrorResponse( $logErrorResponse, $getErrors );
-		$handleGeneralError  = $handleErrorResponse( Fns::identity(), pipe( [ ErrorMessages::class, 'invalidResponse' ], Either::left() ) );
+		$handleGeneralError  = $handleErrorResponse(
+			Fns::identity(),
+			function( $uuid, $response ) {
+				return Either::left( ErrorMessages::invalidResponse( $uuid, $response ) );
+			}
+		);
 		$handle409Error      = $this->handle409Error( $handleErrorResponse, $makeRequest );
 
 		return Either::of( $uuid )
@@ -286,7 +292,9 @@ class WPML_TM_AMS_API {
 					ErrorMessages::serverUnavailableHeader(),
 					[ 'responseError' => $response->get_error_message(), 'website_uuid' => $uuid ]
 				);
-				$msg = $this->ping_healthy_wpml_endpoint() ? ErrorMessages::serverUnavailable( $uuid ) : ErrorMessages::offline( $uuid );
+				$msg = $this->ping_healthy_wpml_endpoint()
+					? ErrorMessages::serverUnavailable( $uuid, $response )
+					: ErrorMessages::offline( $uuid, $response );
 
 				return Either::left( $msg );
 			}
@@ -322,7 +330,7 @@ class WPML_TM_AMS_API {
 			if ( $shouldHandleError( $error ) ) {
 				$logErrorResponse( $error, $uuid );
 
-				return $errorHandler( $uuid );
+				return $errorHandler( $uuid, $response );
 			}
 
 			return Either::of( $data );
@@ -332,7 +340,7 @@ class WPML_TM_AMS_API {
 	private function handle409Error($handleErrorResponse, $makeRequest) {
 		$is409Error = Logic::both( Fns::identity(), pipe( invoke( 'get_error_code' ), Relation::equals( 409 ) ) );
 
-		return $handleErrorResponse($is409Error, function ( $uuid ) use ( $makeRequest ) {
+		return $handleErrorResponse($is409Error, function ( $uuid, $response ) use ( $makeRequest ) {
 			$uuid = wpml_get_site_id( WPML_TM_ATE::SITE_ID_SCOPE, true );
 
 			return $makeRequest( $uuid );
@@ -349,7 +357,7 @@ class WPML_TM_AMS_API {
 					[ 'responseError' => ErrorMessages::bodyWithoutRequiredFields(), 'response' => json_encode( $response ), 'website_uuid' => $uuid ]
 				);
 
-				return Either::left( ErrorMessages::invalidResponse( $uuid ) );
+				return Either::left( ErrorMessages::invalidResponse( $uuid, $response ) );
 			}
 
 			return Either::of( $data );
@@ -377,25 +385,87 @@ class WPML_TM_AMS_API {
 	/**
 	 * Gets the data required by AMS to register a user.
 	 *
+	 * Ensures that critical user fields (email and display_name) are never empty.
+	 * If they are empty, generates fallback values and persists them to the database.
+	 *
 	 * @param WP_User $wp_user           The user from which data should be extracted.
 	 * @param bool    $with_name_details True if name details should be included.
 	 *
-	 * @return array
+	 * @return array User data array with 'email' and 'name' or detailed name fields.
 	 */
 	private function get_user_data( WP_User $wp_user, $with_name_details = false ) {
 		$data = array();
 
-		$data['email'] = $wp_user->user_email;
+		// wpmldev-5943
+		$data['email'] = $this->ensure_user_email_is_not_empty( $wp_user );
+		// wpmldev-5943
+		$display_name = $this->ensure_display_name_is_not_empty( $wp_user, $data['email'] );
 
+		// Add name fields based on requirements.
 		if ( $with_name_details ) {
-			$data['display_name'] = $wp_user->display_name;
+			$data['display_name'] = $display_name;
 			$data['first_name']   = $wp_user->first_name;
 			$data['last_name']    = $wp_user->last_name;
 		} else {
-			$data['name'] = $wp_user->display_name;
+			$data['name'] = $display_name;
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Ensures user has a valid email address.
+	 *
+	 * If the user's email is empty, generates a placeholder email
+	 * and updates the user in the database.
+	 *
+	 * @param WP_User $wp_user The user object.
+	 *
+	 * @return string The user's email (real or generated).
+	 */
+	private function ensure_user_email_is_not_empty( WP_User $wp_user ) {
+		if ( ! empty( $wp_user->user_email ) ) {
+			return $wp_user->user_email;
+		}
+
+		$fake_email = 'noreply-user-' . $wp_user->ID . '@placeholder.test';
+
+		wp_update_user(
+			array(
+				'ID'         => $wp_user->ID,
+				'user_email' => $fake_email,
+			)
+		);
+
+		return $fake_email;
+	}
+
+	/**
+	 * Ensures user has a valid display name.
+	 *
+	 * If the user's display name is empty, uses user_login as fallback,
+	 * or the email if user_login is also empty. Updates the user in the database.
+	 *
+	 * @param WP_User $wp_user       The user object.
+	 * @param string  $default_value The default value (used as final fallback).
+	 *
+	 * @return string The user's display name (real or generated).
+	 */
+	private function ensure_display_name_is_not_empty( WP_User $wp_user, string $default_value ) {
+		if ( ! empty( $wp_user->display_name ) ) {
+			return $wp_user->display_name;
+		}
+
+		$display_name = ! empty( $wp_user->user_login ) ? $wp_user->user_login : $default_value;
+
+		wp_update_user(
+			array(
+				'ID'           => $wp_user->ID,
+				'display_name' => $display_name,
+			)
+		);
+
+		return $display_name;
 	}
 
 	private function prepareClonedSiteArguments( $method ) {
@@ -777,6 +847,14 @@ class WPML_TM_AMS_API {
 	private function request( $method, $url, array $params = null ) {
 		$lock = $this->clonedSitesHandler->checkCloneSiteLock( $url );
 		if ( $lock ) {
+			JobLog::add(
+				'WPML_TM_AMS_API request lock check failed',
+				[
+					'method' => $method,
+					'url'    => $url,
+					'params' => $params,
+				]
+			);
 			return $lock;
 		}
 
@@ -801,7 +879,27 @@ class WPML_TM_AMS_API {
 			$args['body'] = $body ?: '';
 		}
 
-		$response = $this->wp_http->request( $this->add_versions_to_url( $url ), $args );
+		$versioned_url = $this->add_versions_to_url( $url );
+
+		JobLog::addExtraLogData( 'apiCall', $url );
+		JobLog::add(
+			'WPML_TM_AMS_API request',
+			[
+				'method'        => $method,
+				'url'           => $url,
+				'params'        => $params,
+				'versioned_url' => $versioned_url,
+				'args'          => $args,
+			]
+		);
+		$response = $this->wp_http->request( $versioned_url, $args );
+		JobLog::add(
+			'WPML_TM_AMS_API request response',
+			[
+				'response' => $response,
+			]
+		);
+		JobLog::removeExtraLogData( 'apiCall' );
 
 		if ( ! is_wp_error( $response ) ) {
 			$response = $this->clonedSitesHandler->handleClonedSiteError( $response );

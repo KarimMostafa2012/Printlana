@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/main-ui/components/Actions.js:46
 msgid "Edit"
@@ -9,7 +11,7 @@ msgstr "Bewerken"
 
 #: src/js/main-ui/components/Actions.js:57
 msgid "Shift+Tab"
-msgstr "Shift+tab"
+msgstr "Shift+Tab"
 
 #: src/js/main-ui/components/Actions.js:62
 msgid "Tab"
@@ -21,7 +23,7 @@ msgstr "Vertaling naar:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
-msgstr "Kopie van origineel"
+msgstr "Kopiëren van origineel"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
@@ -33,7 +35,7 @@ msgstr "Origineel:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "%s vertaling toevoegen"
+msgstr "Voeg %s vertaling toe"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
@@ -41,23 +43,23 @@ msgstr "Bewerk %s vertaling"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "%s vertaling toevoegen (de string verschijnt op de site en wordt niet vertaald)"
+msgstr "Voeg %s vertaling toe (de string verschijnt op de site en is niet vertaald)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
-msgstr "Originele taal %s"
+msgstr "Oorspronkelijke taal %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "Wachten op vertaler om %s"
+msgstr "Wachten op vertaler voor %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
-msgstr "Vertaling in uitvoering naar %s"
+msgstr "Vertaling bezig naar %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
-msgstr "In mand voor vertaling naar %s"
+msgstr "In winkelmandje voor vertaling naar %s"
 
 #: src/js/main-ui/components/notification.js:13
 msgid "Translation saved."
@@ -65,4 +67,4 @@ msgstr "Vertaling opgeslagen."
 
 #: src/js/main-ui/components/notification.js:17
 msgid "Translation update failed."
-msgstr "Vertaalupdate mislukt."
+msgstr "Vertaling bijwerken mislukt."

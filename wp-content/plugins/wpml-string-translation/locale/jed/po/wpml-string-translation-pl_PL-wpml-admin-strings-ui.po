@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/admin-strings/texts.js:10
 msgid "Not included in String Translation"
@@ -9,7 +11,7 @@ msgstr "Nie uwzględniono w tłumaczeniu ciągów znaków"
 
 #: src/js/admin-strings/texts.js:11
 msgid "Registered and locked"
-msgstr "Zarejestrowany i zablokowany"
+msgstr "Zarejestrowano i zablokowano"
 
 #: src/js/admin-strings/texts.js:13
 msgid "Text"
@@ -17,7 +19,7 @@ msgstr "Tekst"
 
 #: src/js/admin-strings/texts.js:14
 msgid "Numeric"
-msgstr "Numeryczny"
+msgstr "Liczbowy"
 
 #: src/js/admin-strings/texts.js:15
 msgid "All Types"
@@ -41,7 +43,7 @@ msgstr "Wszystkie (%d)"
 
 #: src/js/admin-strings/texts.js:23
 msgid "Included in String Translation (%d)"
-msgstr "Uwzględnione w tłumaczeniu ciągów znaków (%d)"
+msgstr "Uwzględniono w tłumaczeniu ciągów znaków (%d)"
 
 #: src/js/admin-strings/texts.js:24
 msgid "Not included in String Translation (%d)"
@@ -77,18 +79,18 @@ msgstr "Anuluj"
 
 #: src/js/admin-strings/texts.js:36
 msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr "Zapisz poniższe ustawienia w pliku wpml-config.xml w katalogu głównym motywu lub wtyczki."
+msgstr "Zapisz poniższe do pliku wpml-config.xml w katalogu głównym swojego motywu lub wtyczki."
 
 #: src/js/admin-strings/texts.js:38
 msgid "No options found."
-msgstr "Nie znaleziono żadnych opcji."
+msgstr "Nie znaleziono opcji."
 
 #: src/js/admin-strings/texts.js:39
 msgid ""
 "Make sure you saved your theme options at least once. Some themes only add "
 "these to the wp_options table after the user explicitly saves changes to "
 "the theme defaults."
-msgstr "Upewnij się, że przynajmniej raz zapisałeś opcje motywu. Niektóre motywy dodają je do tabeli wp_options dopiero po tym, jak użytkownik wyraźnie zapisze zmiany w domyślnych ustawieniach motywu."
+msgstr "Upewnij się, że przynajmniej raz zapisano opcje motywu. Niektóre motywy dodają je do tabeli wp_options dopiero po tym, jak użytkownik wyraźnie zapisze zmiany w domyślnych ustawieniach motywu."
 
 #: src/js/admin-strings/texts.js:6
 msgid "Add to String Translation"
@@ -96,8 +98,8 @@ msgstr "Dodaj do tłumaczenia ciągów znaków"
 
 #: src/js/admin-strings/texts.js:7
 msgid "Remove from String Translation"
-msgstr "Usuń z tłumaczenia ciąg znaków"
+msgstr "Usuń z tłumaczenia ciągów znaków"
 
 #: src/js/admin-strings/texts.js:9
 msgid "Included in String Translation"
-msgstr "Uwzględnione w tłumaczeniu ciągów znaków"
+msgstr "Uwzględniono w tłumaczeniu ciągów znaków"

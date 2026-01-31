@@ -11,6 +11,8 @@ class SettingsRepository implements SettingsRepositoryInterface {
 
 	const STRING_TRACKING_SETTINGS_KEY = 'track_strings';
 
+	const DETECT_JS_STRINGS = 'detect_js_strings';
+
 	/**
 	 * Some plugin in the frontend can contain bug and output random string, example:
 	 * echo __( 'Some string from plugin' . rand(1, X), 'Y');
@@ -494,5 +496,17 @@ class SettingsRepository implements SettingsRepositoryInterface {
 
 		$settings['visible_columns'] = $filteredColumns;
 		$this->saveSettings( $settings );
+	}
+
+	public function setDetectStringsInJS( int $detectStringsInJS ) {
+		$settings = $this->getSettings();
+		$settings[ self::DETECT_JS_STRINGS ] = $detectStringsInJS;
+		$this->saveSettings( $settings );
+	}
+
+	public function getDetectStringsInJS(): bool {
+		$settings = $this->getSettings();
+
+		return (bool) ( $settings[ self::DETECT_JS_STRINGS ] ?? false );
 	}
 }

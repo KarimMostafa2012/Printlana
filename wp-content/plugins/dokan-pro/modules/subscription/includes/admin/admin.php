@@ -54,6 +54,11 @@ class DPS_Admin {
 
         add_action( 'woocommerce_product_data_tabs', [ $this, 'add_commission_tab_in_product' ] );
         add_action( 'woocommerce_product_data_panels', [ $this, 'product_pack_commission_html' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_scripts' ] );
+
+        // Add a vendor subscription filter option.
+        add_filter( 'dokan_order_type_filter_options', [ $this, 'add_vendor_subscription_filter_option' ] );
+        add_filter( 'dokan_order_type_filter_query_args', [ $this, 'filter_vendor_subscription_orders' ], 10, 2 );
     }
 
     /**
@@ -349,11 +354,27 @@ class DPS_Admin {
         wp_register_script( 'dps-subscription', DPS_URL . '/assets/js/subscription' . $suffix . '.js', array( 'jquery', 'dokan-vue-vendor', 'dokan-vue-bootstrap' ), $version, true );
         wp_register_script( 'dps-product-commission', DPS_URL . '/assets/js/product-commission' . $suffix . '.js', array( 'jquery' ), $version, true );
         wp_register_style( 'dps-product-commission', DPS_URL . '/assets/js/style-product-commission' . $suffix . '.css', [], $version );
+
+        $script_assets_path = DPS_PATH . '/assets/js/dokan-subscription-admin-vendor.asset.php';
+        if ( file_exists( $script_assets_path ) ) {
+            $vendor_asset = require $script_assets_path;
+            $dependencies = $vendor_asset['dependencies'] ?? [];
+            $version      = $vendor_asset['version'] ?? '';
+            wp_register_script(
+                'dokan-subscription-admin-vendor',
+                DPS_URL . '/assets/js/dokan-subscription-admin-vendor' . $suffix . '.js',
+                $dependencies,
+                $version,
+                true
+            );
+        }
     }
 
     public function admin_enqueue_scripts( $hook ) {
         wp_enqueue_style( 'dps-custom-style' );
         wp_enqueue_script( 'dps-custom-admin-js' );
+        // Vendor list filter (React) similar to Seller Badge module
+        wp_enqueue_script( 'dokan-subscription-admin-vendor' );
 
         wp_localize_script(
             'dps-custom-admin-js', 'dokanSubscription', array(
@@ -1167,6 +1188,85 @@ class DPS_Admin {
             [],
             DOKAN_PLUGIN_VERSION
         );
+    }
+
+    /**
+     * Enqueue admin scripts.
+     *
+     * @since 4.1.3
+     *
+     * @return void
+     */
+    public function enqueue_admin_scripts() {
+        $admin_dashboard_file = DPS_PATH . '/assets/js/vendor-single.asset.php';
+        if ( file_exists( $admin_dashboard_file ) ) {
+            $dashboard_script = require $admin_dashboard_file;
+            $dependencies     = $dashboard_script['dependencies'] ?? [];
+            $version          = $dashboard_script['version'] ?? '';
+
+            wp_enqueue_script(
+                'dokan-admin-dashboard-vendor-single-subscription',
+                DPS_URL . '/assets/js/vendor-single.js',
+                $dependencies,
+                $version,
+                true
+            );
+
+            wp_enqueue_style(
+                'dokan-admin-dashboard-vendor-single-subscription',
+                DPS_URL . '/assets/js/vendor-single.css',
+                ['dokan-react-components'],
+                $version
+            );
+        }
+    }
+
+    /**
+     * Add Vendor Subscription filter option to order type filter dropdown.
+     *
+     * @since 4.2.1
+     *
+     * @param array $filter_options Array of filter options
+     *
+     * @return array
+     */
+    public function add_vendor_subscription_filter_option( $filter_options ) {
+        $filter_options['vendor_subscription'] = esc_html__( 'Vendor Subscription', 'dokan' );
+        return $filter_options;
+    }
+
+    /**
+     * Filter orders by Vendor Subscription type.
+     *
+     * @since 4.2.1
+     *
+     * @param array  $query_args  Original query arguments.
+     * @param string $filter_type The selected filter type.
+     *
+     * @return array|null
+     */
+    public function filter_vendor_subscription_orders( $query_args, $filter_type ) {
+        // Only handle the vendor_subscription filter type.
+        if ( 'vendor_subscription' !== $filter_type ) {
+            return $query_args;
+        }
+
+        // @codingStandardsIgnoreStart
+        // Filter orders by vendor subscription meta - works for both HPOS and legacy.
+        $query_args['meta_query'] = $query_args['meta_query'] ?? [];
+        $query_args['meta_query']['relation'] = 'OR';
+        $query_args['meta_query'][] = [
+            'key'     => '_dokan_vendor_subscription_order',
+            'value'   => 'yes',
+            'compare' => '=',
+        ];
+        $query_args['meta_query'][] = [
+            'key'     => '_pack_validity',
+            'compare' => 'EXISTS',
+        ];
+        // @codingStandardsIgnoreEnd
+
+        return $query_args;
     }
 }
 

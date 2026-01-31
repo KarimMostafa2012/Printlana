@@ -104,6 +104,7 @@ class Vendor {
                 'icon'        => '<i class="fas fa-undo-alt" aria-hidden="true"></i>',
                 'url'         => dokan_get_navigation_url( 'return-request' ),
                 'pos'         => 170,
+                'icon_name'   => 'IterationCw',
                 'permission'  => 'dokan_view_store_rma_menu',
                 'counts'      => $counts['new'] ?? 0,
                 'react_route' => 'return-request',

@@ -65,8 +65,8 @@ class Variations extends SynchronizerForMeta {
 					unset( $storedVariations[ $translationId ][ $variationTranslationId ] );
 					$this->syncHashManager->initialize( $variationTranslationId, SyncHash::SOURCE_META );
 				} else {
-					$translationGui         = str_replace( $product->ID, $translationId, $productVariation->guid );
-					$translationSlug        = str_replace( $product->ID, $translationId, $productVariation->post_name );
+					$translationGui         = str_replace( (string) $product->ID, (string) $translationId, $productVariation->guid );
+					$translationSlug        = str_replace( (string) $product->ID, (string) $translationId, $productVariation->post_name );
 					$variationTranslationId = wp_insert_post(
 						[
 							'post_author'           => $productVariation->post_author,
@@ -214,7 +214,7 @@ class Variations extends SynchronizerForMeta {
 			$translationMinMaxVariationsData = $storedData[ $translationId ] ?? [];
 			foreach ( $productMinMaxVariationsData as $minMaxKey => $minMaxVariationId ) {
 				$minMaxVariationTranslations           = $variationsTranslations[ $minMaxVariationId ] ?? [];
-				$minMaxVariationTranslationsByLanguage = array_flip( $minMaxVariationTranslations );;
+				$minMaxVariationTranslationsByLanguage = array_flip( $minMaxVariationTranslations );
 				if ( ! Obj::prop( $language, $minMaxVariationTranslationsByLanguage ) ) {
 					continue;
 				}

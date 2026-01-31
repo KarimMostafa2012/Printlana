@@ -176,6 +176,9 @@ class VendorStoreSettingsApi extends DokanBaseVendorController {
         $time_slot_minutes            = isset( $data['time_slot_minutes'] ) ? sanitize_text_field( $data['time_slot_minutes'] ) : '';
         $delivery_prep_date           = isset( $data['delivery_prep_date'] ) ? sanitize_text_field( $data['delivery_prep_date'] ) : 0;
         $enable_delivery_notification = isset( $data['enable_delivery_notification'] ) ? sanitize_text_field( $data['enable_delivery_notification'] ) : 'off';
+        // New vendor buffer settings
+        $delivery_buffer_unit         = isset( $data['delivery_buffer_unit'] ) ? sanitize_text_field( $data['delivery_buffer_unit'] ) : 'days';
+        $delivery_buffer_value        = isset( $data['delivery_buffer_value'] ) ? absint( $data['delivery_buffer_value'] ) : 0;
 
         if ( empty( $delivery_day ) ) {
             return new WP_Error( 'empty_delivery_day', __( 'Delivery day is required.', 'dokan' ), [ 'status' => 400 ] );
@@ -185,6 +188,15 @@ class VendorStoreSettingsApi extends DokanBaseVendorController {
         }
         if ( null === $order_per_slot || (int) $order_per_slot < 0 ) {
             return new WP_Error( 'invalid_order_per_slot', __( 'Order per slot must be 0 or greater.', 'dokan' ), [ 'status' => 400 ] );
+        }
+
+        // Validate buffer unit/value
+        $allowed_units = [ 'days', 'hours' ];
+        if ( ! in_array( $delivery_buffer_unit, $allowed_units, true ) ) {
+            return new WP_Error( 'invalid_delivery_buffer_unit', __( 'Invalid delivery buffer unit. Please select Days or Hours.', 'dokan' ), [ 'status' => 400 ] );
+        }
+        if ( 'hours' === $delivery_buffer_unit && ( null === $delivery_buffer_value || (int) $delivery_buffer_value < 0 ) ) {
+            return new WP_Error( 'invalid_delivery_buffer_value', __( 'Delivery buffer hours can not be empty or less than 0', 'dokan' ), [ 'status' => 400 ] );
         }
 
         // Handle opening/closing times and time slots
@@ -229,6 +241,9 @@ class VendorStoreSettingsApi extends DokanBaseVendorController {
             'enable_delivery_notification' => $enable_delivery_notification,
             'opening_time'                 => $opening_time,
             'closing_time'                 => $closing_time,
+            // Persist new buffer settings
+            'delivery_buffer_unit'         => $delivery_buffer_unit,
+            'delivery_buffer_value'        => $delivery_buffer_value,
         ];
 
         update_user_meta( $vendor_id, '_dokan_vendor_delivery_time_settings', $save_data );

@@ -11,7 +11,8 @@ class Recommeded
     public static function check()
     {
 
-        $this_plugin = __( 'Min Max Control', 'woo-min-max-quantity-step-control-single' );
+        // return;
+        $this_plugin = 'Min Max Control';
         $mmp_req_slug = 'product-sync-master-sheet/product-sync-master-sheet.php';
         $mmp_tar_slug = WC_MMQ_PLUGIN_BASE_FILE;
         $req_sync = new Require_Control($mmp_req_slug,$mmp_tar_slug);
@@ -33,7 +34,6 @@ class Recommeded
             $req_sync->set_location('wcmmq_plugin_recommend_here'); //wpt_premium_image_bottom
             $req_sync->run();
         }
-        $this_plugin = __( 'Min Max Control', 'woo-min-max-quantity-step-control-single' );
         
         $mmp_req_slug = 'woo-product-table/woo-product-table.php';
         $mmp_tar_slug = WC_MMQ_PLUGIN_BASE_FILE;

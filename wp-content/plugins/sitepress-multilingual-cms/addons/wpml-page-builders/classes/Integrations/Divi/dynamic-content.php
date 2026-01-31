@@ -10,7 +10,7 @@ class DynamicContent extends BaseDynamicContent {
 	const ENCODED_CONTENT_END   = '@';
 
 	/** @var array */
-	protected $positions = [ 'before', 'after' ];
+	protected $positions = [ 'before', 'after', 'custom_text' ];
 
 	/**
 	 * Sets $positions dynamic content to be translatable.

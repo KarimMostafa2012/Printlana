@@ -3,6 +3,7 @@
 use WPML\FP\Obj;
 use WPML\TM\API\Job\Map;
 use WPML\TM\API\Jobs;
+use WPML\TM\Jobs\JobLog;
 
 abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_Job_Helper_With_API {
 
@@ -31,14 +32,18 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 	 * @param array    $translation_package
 	 * @param array    $batch_options
 	 * @param int|null $sendFrom
+	 * @param bool     $addJobLogs
 	 *
 	 * @return bool|int
 	 */
-	function add_translation_job( $rid, $translator_id, array $translation_package, array $batch_options, $sendFrom = null ) {
+	function add_translation_job( $rid, $translator_id, array $translation_package, array $batch_options, $sendFrom = null, $addJobLogs = false ) {
 		global $wpdb, $current_user;
 
 		$jobId = $this->maybeRestoreATECancelledJobDueToInsufficientBalance( $rid );
 		if ( $jobId ) {
+			if ( $addJobLogs ) {
+				JobLog::add( 'icl_translate_job record restored from the previous state with jobId `' . $jobId . '` from rid `' . $rid . '`' );
+			}
 			return $jobId;
 		}
 
@@ -73,7 +78,14 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 		$wpdb->insert( $wpdb->prefix . 'icl_translate_job', $translate_job_insert_data );
 		$job_id = $wpdb->insert_id;
 
-		$this->package_helper->save_package_to_job( $translation_package, $job_id, $prev_translation );
+		if ( $addJobLogs ) {
+			JobLog::add(
+				'New icl_translate_job record created with jobId `' . $job_id . '` from rid `' . $rid . '`',
+				$translate_job_insert_data
+			);
+		}
+
+		$this->package_helper->save_package_to_job( $translation_package, $job_id, $prev_translation, $addJobLogs );
 		$this->maybeRemovedElementsBelongingToOldCompletedJobsToKeepTheTableClean( $rid );
 		if ( (int) $translation_status->status !== ICL_TM_DUPLICATE ) {
 			$this->fire_notification_actions( $job_id, $translation_status, $translator_id, $sendFrom );

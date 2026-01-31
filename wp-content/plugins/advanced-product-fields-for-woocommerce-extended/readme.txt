@@ -3,10 +3,10 @@ Contributors: studiowombat,maartenbelmans
 Tags: woocommerce, custom fields, product, addon, acf
 Requires at least: 6.0
 Requires PHP: 7.0
-Tested up to: 6.8.2
+Tested up to: 6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 3.0.9
+Stable tag: 3.1.2
 Build: 23779
 
 Customize WooCommerce product pages with extra form fields ( = product add-ons). This is the premium version.
@@ -16,6 +16,32 @@ Customize WooCommerce product pages with extra form fields ( = product add-ons).
 The premium version of Advanced Product Fields for WooCommerce.
 
 == Changelog ==
+
+= version 3.1.2 =
+ * Improvement: remove "label" from the repeated field title for accessibility improvements. Note this means you may have to re-style the element if you've applied custom CSS styles.
+ * Fix: fixed a repeater conflict that occurred when a button-repeater was followed by a quantity-repeater.
+ * Fix: fixed an issue with the calculation field sometimes calculating too late.
+ * Fix: fixed an issue with the "cost calculation" field sometimes counting double tax.
+ * Fix: fixed an issue where informational calculations would sometimes show different results than their cost variants ( mostly when using [options_total] in the formula).
+ * Fix: fixed an issue where the default value of the "URL" field required an @-symbol in the backend.
+ * Other: upgrading the minimum PHP version from 7.0 to 7.3 a few releases from now.
+
+= version 3.1.1 =
+ * Fix: fixed an issue with addon pricing not always counting in the cart. 
+
+= version 3.1 = 
+ * New: cards can now also change the main product image.
+ * New: calculation fields can now be used in conditional settings of other fields.
+ * Improvement: minor performance improvements on the "Shop" page.
+ * Improvement: loading field groups is now faster for stores with an unusually large number of fields - up to 20% faster.
+ * Improvement: improved integration with Yith Request a Quote.
+ * Improvement: improved and simplified UI for field group conditional logic, field conditional logic, and the variable builder.
+ * Fix: fixed an issue where some combinations of rules (regarding product variations) were not possible as field group conditions.
+ * Fix: fixed an issue with the "lookuptable" formula in combination with repeating fields.
+ * Fix: fixed an issue where clearing the default value on the number field would set it to zero.
+ * Fix: fixed an issue where setting zero as the conditional logic value wouldn't properly save.
+ * Other: removed unused "is_field_group_valid" function.
+ * Other: removed legacy code from version 2.0 and less.
 
 = version 3.0.9 = 
  * Improvement: mark "private" field groups appropriately in the backend list.

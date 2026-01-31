@@ -42,9 +42,8 @@ class SavePostActions implements \IWPML_REST_Action, \IWPML_DIC_Action {
 		$this->sitepress->set_element_language_details(
 			$post->ID,
 			$type,
-			false,
+			null,
 			$this->sitepress->get_current_language()
 		);
 	}
-
 }

@@ -91,7 +91,8 @@ class WPML_TM_ATE_Jobs {
 		} catch ( Exception $e ) {
 			throw new Exception(
 				'The XLIFF file could not be applied to the content of the job ID: ' . $wpml_job_id,
-				$e->getCode()
+				$e->getCode(),
+				$e // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			);
 		}
 

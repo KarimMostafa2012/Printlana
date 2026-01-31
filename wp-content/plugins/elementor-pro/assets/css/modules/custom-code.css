@@ -6,13 +6,16 @@
     opacity: 1;
   }
 }
-.wrap.elementor-admin-page-license .elementor-license-box {
+#wpcontent .wrap.elementor-admin-page-license.elementor-admin-page-license-editor-one {
+  display: block;
+}
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box {
   max-width: 600px;
   background: white;
   margin: 20px 0;
   padding: 20px;
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,56 +24,56 @@
   padding-block-end: 20px;
   border-block-end: 1px solid #eee;
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 span {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 span {
   flex-grow: 1;
   padding-inline-start: 5px;
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 small {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 small {
   font-size: 13px;
   font-weight: normal;
 }
-.wrap.elementor-admin-page-license .elementor-license-box label {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box label {
   display: block;
   font-size: 1.3em;
   font-weight: 600;
   margin: 1em 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .button {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .button {
   height: 30px;
   margin-inline-start: 15px;
   margin-block-end: 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box p.description {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box p.description {
   margin: 10px 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, #wpcontent .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .e-row-divider-bottom {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-divider-bottom {
   padding-block-end: 15px;
   border-block-end: 1px solid #eee;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link {
   color: #93003f;
   border-color: #93003f;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link:hover {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link:hover {
   color: #fff;
   background-color: #93003f;
 }
-.wrap.elementor-admin-page-license .elementor-box-action {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   margin-block-start: 30px;
 }
-.wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link {
   color: #72777c;
   margin-inline-end: 15px;
 }
-.wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link:hover {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link:hover {
   color: inherit;
 }
 
@@ -96,15 +99,21 @@
 .fixed .column-instances {
   width: 10%;
 }
-.fixed .elementor-shortcode-input {
-  min-width: 235px;
+.fixed .elementor-shortcode-textarea {
+  background-color: var(--e-one-palette-background-default);
+  max-width: 235px;
+  width: 100%;
+  min-height: 28px;
+  resize: none;
+}
+@media (max-width: 782px) {
+  .fixed .elementor-shortcode-textarea {
+    min-height: 55px;
+  }
 }
 @media (min-width: 768px) and (max-width: 1440px) {
   .fixed .column-shortcode {
     width: 25%;
-  }
-  .fixed .elementor-shortcode-input {
-    min-width: 100%;
   }
 }
 
@@ -1562,7 +1571,7 @@ span.font-variations-count {
 }
 .e-site-editor-conditions__remove-condition {
   color: #818A96;
-  font-size: 1.125rem;
+  font-size: type(size, "18");
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1621,7 +1630,7 @@ span.font-variations-count {
 .e-site-editor-conditions__input-wrapper select {
   appearance: none;
   -webkit-appearance: none;
-  font-size: 0.75rem;
+  font-size: type(size, "12");
   height: 2.5rem;
   border-width: 0;
   padding: 0 0.625rem;
@@ -1634,7 +1643,7 @@ span.font-variations-count {
 .e-site-editor-conditions__input-wrapper::after {
   font-family: eicons;
   content: "\e8ad";
-  font-size: 0.75rem;
+  font-size: type(size, "12");
   pointer-events: none;
   position: absolute;
   inset-block-start: 50%;
@@ -1647,7 +1656,7 @@ span.font-variations-count {
 }
 .e-site-editor-conditions__input-wrapper .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: 2.5rem;
-  font-size: 0.75rem;
+  font-size: type(size, "12");
 }
 .e-site-editor-conditions__input-wrapper .select2-selection {
   outline: none;
@@ -1666,7 +1675,7 @@ span.font-variations-count {
   transform: translateY(-50%);
   inset-block-start: 50%;
   inset-inline-start: 0.75rem;
-  font-size: 0.9375rem;
+  font-size: type(size, "15");
   pointer-events: none;
   z-index: 1000;
 }
@@ -1674,7 +1683,7 @@ span.font-variations-count {
   text-transform: uppercase;
   padding-inline-start: 2.125rem;
   width: 7.5rem;
-  font-size: 0.75rem;
+  font-size: type(size, "12");
   border-inline-end: 1px solid;
   border-color: var(--e-site-editor-input-wrapper-border-color);
 }

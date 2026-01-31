@@ -142,13 +142,13 @@ class WCML_Troubleshooting {
 		$this->setRemainingVariableProducts( $variableProducts );
 
 		$wcml_settings = get_option( '_wcml_settings' );
-		if ( isset( $wcml_settings['notifications'] ) && isset( $wcml_settings['notifications']['varimages'] ) ) {
+		if ( isset( $wcml_settings['notifications']['varimages'] ) ) {
 			$wcml_settings['notifications']['varimages']['show'] = 0;
 			update_option( '_wcml_settings', $wcml_settings );
 		}
 
 		$response['processed'] = count( $variableProductsForRound );
-		$response['complete']  = empty( $variableProducts ) ? true : false;
+		$response['complete']  = empty( $variableProducts );
 		wp_send_json_success( $response );
 	}
 
@@ -322,7 +322,7 @@ class WCML_Troubleshooting {
 		$this->setRemainingProductsAndVariationsForStockSync( $itemsForStockSync );
 
 		$response['processed'] = count( $itemsForStockSyncInRound );
-		$response['complete']  = empty( $itemsForStockSync ) ? true : false;
+		$response['complete']  = empty( $itemsForStockSync );
 
 		wp_send_json_success( $response );
 	}
@@ -453,7 +453,7 @@ class WCML_Troubleshooting {
 		$this->setRemainingVariationsForLanguageAssignment( $translatedVariations );
 
 		$response['processed'] = count( $translatedVariationsInRound );
-		$response['complete']  = empty( $translatedVariations ) ? true : false;
+		$response['complete']  = empty( $translatedVariations );
 
 		wp_send_json_success( $response );
 	}
@@ -478,12 +478,11 @@ class WCML_Troubleshooting {
 	public function trbl_duplicate_terms() {
 		self::checkNonce( 'trbl_duplicate_terms' );
 
-		$attr  = isset( $_POST['attr'] ) ? $_POST['attr'] : false;
+		$attr  = $_POST['attr'] ?? false;
 		$terms = [];
 
 		if ( $attr ) {
 			$terms     = get_terms( $attr, 'hide_empty=0' );
-			$i         = 0;
 			$languages = $this->sitepress->get_active_languages();
 			foreach ( $terms as $term ) {
 				foreach ( $languages as $language ) {
@@ -502,14 +501,14 @@ class WCML_Troubleshooting {
 							}
 						}
 
-						// TODO JUAN It seems that WPMl supports now using the same slug in multiple languages. Check, and adjust.
+						// TODO It seems that WPML supports now using the same slug in multiple languages. Check, and adjust.
 						$term_name         = $term->name;
 						$slug              = $term->name . '-' . $language['code'];
 						$slug              = WPML_Terms_Translations::term_unique_slug( $slug, $attr, $language['code'] );
 						$term_args['slug'] = $slug;
 
 						$new_term = wp_insert_term( $term_name, $attr, $term_args );
-						if ( $new_term && ! is_wp_error( $new_term ) ) {
+						if ( is_wp_error( $new_term ) ) {
 							$tt_id = $this->sitepress->get_element_trid( $term->term_taxonomy_id, 'tax_' . $attr );
 							$this->sitepress->set_element_language_details( $new_term['term_taxonomy_id'], 'tax_' . $attr, $tt_id, $language['code'] );
 						}
@@ -610,7 +609,7 @@ class WCML_Troubleshooting {
 		$this->setRemainingItemsForMetaCleanup( $itemsForMetaCleanup );
 
 		$response['processed'] = count( $getItemsForMetaCleanupInRound );
-		$response['complete'] = empty( $itemsForMetaCleanup ) ? true : false;
+		$response['complete'] = empty( $itemsForMetaCleanup );
 
 		wp_send_json_success( $response );
 	}

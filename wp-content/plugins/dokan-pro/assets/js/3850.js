@@ -1,1 +1,1 @@
-"use strict";(globalThis.webpackChunkdokan_pro=globalThis.webpackChunkdokan_pro||[]).push([[3850],{3850:(a,k,o)=>{o.r(k)}}]);
+"use strict";(globalThis.webpackChunkdokan_pro=globalThis.webpackChunkdokan_pro||[]).push([[3850],{3850(a,k,o){o.r(k)}}]);

@@ -39,8 +39,8 @@ class ProductSaveActions extends \WPML_Post_Translation {
 	 */
 	public function run( $product, $trid, $langCode, $translationOf, $wpRestRequest = null ) {
 		$productId      = getId( $product );
-		$trid           = $trid ? $trid : $this->get_save_post_trid( $productId, null );
-		$langCode       = $langCode ? $langCode : parent::get_save_post_lang( $productId, $this->sitepress );
+		$trid           = $trid ?: $this->get_save_post_trid( $productId, null );
+		$langCode       = $langCode ?: parent::get_save_post_lang( $productId, $this->sitepress );
 		$sourceLangCode = $this->get_element_lang_code( $translationOf );
 
 		if ( ! $this->synchronize_product_stock_only( $wpRestRequest ) ) {

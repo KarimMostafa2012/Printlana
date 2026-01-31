@@ -199,6 +199,24 @@ class Module {
                 $assets['version'],
                 true
             );
+
+            wp_set_script_translations(
+                'delivery-time-dashboard',
+                'dokan'
+            );
+
+            $delivery_time_data = apply_filters(
+                'dokan_delivery_time_dashboard_scripts_data',
+                [
+                    'vendorCanOverrideSettings' => Helper::vendor_can_override_settings(),
+                ]
+            );
+
+            wp_add_inline_script(
+                'delivery-time-dashboard',
+                'const dokanDeliveryTime = ' . wp_json_encode( $delivery_time_data ),
+                'before'
+            );
         }
 
         wp_register_script( 'dokan-delivery-time-main-script', DOKAN_DELIVERY_TIME_ASSETS_DIR . '/js/script-main' . $suffix . '.js', [ 'jquery' ], $version, true );

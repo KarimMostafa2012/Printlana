@@ -2,6 +2,7 @@
 
 namespace WeDevs\DokanPro\Modules\StoreReviews;
 
+use WeDevs\DokanPro\Modules\StoreReviews\Admin\StoreReview;
 use WeDevs\DokanPro\Modules\StoreReviews\Emails\Manager as EmailManager;
 use WeDevs\DokanPro\Modules\StoreReviews\Manager as StoreReviewsManager;
 
@@ -94,6 +95,7 @@ class Module {
     public function instances() {
         new \DSR_SPMV();
         new EmailManager();
+        ( new StoreReview() )->register_hooks();
     }
 
     /**

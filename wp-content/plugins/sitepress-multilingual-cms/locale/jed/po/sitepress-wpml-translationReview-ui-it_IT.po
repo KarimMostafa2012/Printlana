@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/translationReview/components/AcceptedMessage.js:8
 msgid "Accepted"
@@ -14,7 +16,7 @@ msgstr "Approvato!"
 #: src/js/translationReview/components/AcceptedText.js:9
 #: src/js/translationReview/components/PublishedText.js:9
 msgid "Loading the next translation for review..."
-msgstr "Caricamento della prossima traduzione da revisionare..."
+msgstr "Caricamento della prossima traduzione per la revisione..."
 
 #: src/js/translationReview/components/BackButton.js:7
 msgid "Back"
@@ -56,12 +58,12 @@ msgstr "Pubblicato!"
 
 #: src/js/updateTranslationFrontend/components/InProgressText.js:8
 msgid "Please wait, applying translation.."
-msgstr "Attendere prego, applicazione della traduzione in corso.."
+msgstr "Attendere, applicazione della traduzione in corso..."
 
 #: src/js/updateTranslationFrontend/store.js:29
 msgid "There was an error in applying translation."
-msgstr "Si è verificato un errore nell'applicazione della traduzione."
+msgstr "Si è verificato un errore durante l'applicazione della traduzione."
 
 #: src/js/updateTranslationFrontend/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
-msgstr "Qualcuno sta già revisionando questa traduzione. Si prega di riprovare più tardi."
+msgstr "Qualcuno sta già revisionando questa traduzione. Riprova più tardi."

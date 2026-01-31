@@ -82,7 +82,7 @@ class WCML_Dynamic_Pricing implements \IWPML_Action {
 	 * @return bool|WP_Error
 	 */
 	public function woocommerce_dynamic_pricing_is_applied_to( $process_discounts, WC_Product $_product, $module_id, $dynamic_pricing, $cat_ids ) {
-		if ( ! $_product || ! $cat_ids || ! $this->has_requirements( $dynamic_pricing ) ) {
+		if ( ! $cat_ids || ! $this->has_requirements( $dynamic_pricing ) ) {
 			return $process_discounts;
 		}
 		$taxonomy   = $this->get_taxonomy( $dynamic_pricing );
@@ -96,13 +96,12 @@ class WCML_Dynamic_Pricing implements \IWPML_Action {
 	}
 
 	/**
-	 * @param WC_Dynamic_Pricing_Simple_Base|WC_Dynamic_Pricing_Advanced_Base $dynamic_pricing
-	 *
-	 * @return string
+	 * @param WC_Dynamic_Pricing_Simple_Base|WC_Dynamic_Pricing_Advanced_Base|mixed $dynamic_pricing
 	 */
-	private function get_taxonomy( $dynamic_pricing ) {
+	private function get_taxonomy( $dynamic_pricing ): string {
 		$taxonomy = 'product_cat';
 		if ( $dynamic_pricing instanceof WC_Dynamic_Pricing_Simple_Taxonomy || $dynamic_pricing instanceof WC_Dynamic_Pricing_Advanced_Taxonomy ) {
+			/* @phpstan-ignore property.notFound */
 			$taxonomy = $dynamic_pricing->taxonomy;
 		}
 
@@ -142,6 +141,7 @@ class WCML_Dynamic_Pricing implements \IWPML_Action {
 		$class_name = wpml_collect( array_keys( $requirements ) )
 			->first(
 				function ( $class_name ) use ( $dynamic_pricing ) {
+						/* @phpstan-ignore booleanOr.alwaysTrue */
 						return get_class( $dynamic_pricing ) === $class_name || is_subclass_of( $dynamic_pricing, $class_name );
 				}
 			);

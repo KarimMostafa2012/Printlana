@@ -2,12 +2,6 @@
 
 namespace WCML\AdminNotices;
 
-use WPML\FP\Fns;
-use WPML\FP\Logic;
-use WPML\FP\Obj;
-use WPML\FP\Str;
-use function WPML\FP\pipe;
-
 class ExportImport implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 
 	// Cascade of priorities before 10.
@@ -47,7 +41,6 @@ class ExportImport implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 		}
 		$exportNotices = self::getExportNotices();
 		$importNotices = self::getImportNotices();
-		$noticeIds     = array_keys( array_merge( $exportNotices, $importNotices ) );
 
 		array_walk( $exportNotices, function( $path, $id ) {
 			$this->maybeAddNotice(

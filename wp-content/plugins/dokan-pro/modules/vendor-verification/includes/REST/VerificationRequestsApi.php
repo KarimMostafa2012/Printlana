@@ -106,6 +106,41 @@ class VerificationRequestsApi extends \WP_REST_Controller {
                 ],
             ]
         );
+
+        // Bulk operations endpoint
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->rest_base . '/batch',
+            [
+                'methods'             => WP_REST_Server::EDITABLE,
+                'callback'            => [ $this, 'batch_items' ],
+                'permission_callback' => [ $this, 'batch_items_permissions_check' ],
+                'args'                => [
+                    'update' => [
+                        'type'        => 'array',
+                        'description' => esc_html__( 'Array of verification requests to update.', 'dokan' ),
+                        'items'       => [
+                            'type'       => 'object',
+                            'properties' => [
+                                'id'     => [
+                                    'type'        => 'integer',
+                                    'description' => esc_html__( 'Verification request ID.', 'dokan' ),
+                                ],
+                                'status' => [
+                                    'type'        => 'string',
+                                    'description' => esc_html__( 'Verification request status.', 'dokan' ),
+                                    'enum'        => [ 'pending', 'approved', 'rejected', 'cancelled' ],
+                                ],
+                                'note'   => [
+                                    'type'        => 'string',
+                                    'description' => esc_html__( 'Admin note for the verification request.', 'dokan' ),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
@@ -666,5 +701,73 @@ class VerificationRequestsApi extends \WP_REST_Controller {
                 $documents
             )
         );
+    }
+
+    /**
+     * Batch items operation.
+     *
+     * @since 4.1.4
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     *
+     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function batch_items( $request ) {
+        $items_to_update = $request->get_param( 'update' );
+        $results = [
+            'update' => [],
+        ];
+
+        if ( ! empty( $items_to_update ) && is_array( $items_to_update ) ) {
+            foreach ( $items_to_update as $item_data ) {
+                if ( empty( $item_data['id'] ) ) {
+                    continue;
+                }
+
+                $id = absint( $item_data['id'] );
+
+                try {
+                    $item = new VerificationRequest( $id );
+                } catch ( Exception $e ) {
+                    $results['update'][] = new WP_Error( 'dokan_pro_rest_no_resource', $e->getMessage(), [ 'status' => 404 ] );
+                    continue;
+                }
+
+                // Update status if provided
+                if ( ! empty( $item_data['status'] ) ) {
+                    $item->set_status( $item_data['status'] );
+                }
+
+                // Update note if provided
+                if ( isset( $item_data['note'] ) ) {
+                    $item->set_note( $item_data['note'] );
+                }
+
+                // Set checked_by to current admin user
+                $item->set_checked_by( get_current_user_id() );
+
+                try {
+                    $item->update();
+                    $results['update'][] = $this->prepare_item_for_response( $item, $request );
+                } catch ( Exception $e ) {
+                    $results['update'][] = new WP_Error( 'dokan_pro_rest_cannot_update', $e->getMessage(), [ 'status' => 500 ] );
+                }
+            }
+        }
+
+        return rest_ensure_response( $results );
+    }
+
+    /**
+     * Check if a given request has access to batch items.
+     *
+     * @since 4.1.4
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     *
+     * @return bool|WP_Error True if the request has access, WP_Error object otherwise.
+     */
+    public function batch_items_permissions_check( $request ) {
+        return current_user_can( 'manage_options' );
     }
 }

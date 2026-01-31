@@ -1,0 +1,556 @@
+/* --- Homeland Carousel Refined Styles --- */
+
+/* Highlighted Elements Shared Styles */
+.h-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 40px auto;
+    font-family: 'Beiruti', sans-serif !important;
+    background: transparent;
+    padding: 20px;
+    box-sizing: border-box;
+    direction: ltr !important;
+}
+
+.h-card {
+    background: #F1F5FD;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    height: 544px;
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+.h-img {
+    max-width: 80%;
+    max-height: 60%;
+    object-fit: contain;
+    transition: transform 0.3s;
+    margin-top: 40px;
+}
+
+.h-card:hover .h-img {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.h-text-group {
+    position: absolute;
+    bottom: 40px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+html[lang="ar"] body .h-wrapper .h-promo,
+html[lang="ar"] .h-wrapper p.h-promo,
+.h-wrapper .h-promo,
+.h-promo {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: #000014 !important;
+    line-height: 1.2 !important;
+    font-family: 'Beiruti', sans-serif !important;
+    margin: 0 !important;
+}
+
+.h-mid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.h-small-card {
+    background: #F1F5FD;
+    border-radius: 16px;
+    height: 256px;
+    position: relative;
+    padding: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+.h-small-img {
+    max-width: 50%;
+    max-height: 55%;
+    object-fit: contain;
+    transition: transform 0.3s;
+    margin-top: 10px;
+}
+
+.h-small-card:hover .h-small-img {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.h-small-text-group {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+html[lang="ar"] body .h-wrapper .h-small-promo,
+html[lang="ar"] .h-wrapper p.h-small-promo,
+.h-wrapper .h-small-promo,
+.h-small-promo {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #000014 !important;
+    line-height: 1.2 !important;
+    font-family: 'Beiruti', sans-serif !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 1024px) {
+    .h-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .h-card,
+    .h-mid-col {
+        width: 100%;
+        max-width: 405px;
+        flex: none;
+    }
+}
+
+/* --- Carousel Refined Styles --- */
+
+.homeland-carousel-wrapper {
+    direction: rtl;
+    width: 100%;
+    overflow-x: clip;
+    /* Fix for horizontal scroll on hover */
+}
+
+.homeland-carousel-wrapper .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 70px;
+    margin: 0 auto;
+}
+
+.homeland-carousel-wrapper h1 {
+    color: #1a1a2e;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'Beiruti', sans-serif !important;
+}
+
+/* Primary viewport for the 1-2-3-2-1 overlapping layout */
+.homeland-carousel-wrapper .product-showcase {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* Outer wrapper used for GSAP positioning/scaling */
+.homeland-carousel-wrapper .card-wrapper {
+    position: absolute;
+    width: 290px;
+    height: 371px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    /* remove link underlines */
+    color: inherit;
+    will-change: transform, opacity;
+}
+
+/* Visual Card Component */
+.homeland-carousel-wrapper .card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #FAFAFA 30%, #C1D5F8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    /* Hardware acceleration to prevent sub-pixel shaking */
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* The Blue Gradient Circle - Interacts on Hover */
+.homeland-carousel-wrapper .blue-gradient-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -134px;
+    background: linear-gradient(180deg, #B7CBFF 0%, #0044F0 60%);
+    z-index: 2;
+    pointer-events: none;
+
+    transition: transform 0.4s ease-out;
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.homeland-carousel-wrapper .card-wrapper:hover .blue-gradient-circle {
+    transform: translateX(-50%) scale(1.05);
+}
+
+/* Product Media */
+.homeland-carousel-wrapper .product-image {
+    position: relative;
+    z-index: 3;
+    width: 107%;
+    max-height: 87%;
+    margin-top: 10px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+
+    /* Strict stability enforcement */
+    transition: none !important;
+    backface-visibility: hidden;
+    transform: translateZ(0) !important;
+}
+
+/* Explicitly lock image during hover */
+.homeland-carousel-wrapper .card-wrapper:hover .product-image {
+    transform: translateZ(0) !important;
+}
+
+/* Card Content Overlay (Text + Action) */
+.homeland-carousel-wrapper .card-text-wrapper {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    z-index: 4;
+
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.homeland-carousel-wrapper .card-text-wrapper span {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-family: 'Beiruti', sans-serif !important;
+}
+
+/* Circle Action Button (Link Arrow) */
+.homeland-carousel-wrapper .arrow-button {
+    width: 35px;
+    height: 35px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+/* Directional Arrow Icon */
+.homeland-carousel-wrapper .arrow-icon {
+    width: 21px;
+    height: 21px;
+    transform: rotate(-135deg);
+    /* Point Top-Left (RTL) */
+}
+
+.homeland-carousel-wrapper .arrow-icon path {
+    stroke: #141B34;
+    stroke-width: 1.5px;
+}
+
+/* Navigation Controls (Sidebar Arrows) */
+.homeland-carousel-wrapper .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 1px solid #0044F0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.homeland-carousel-wrapper .nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+    background: rgba(0, 68, 240, 0.05);
+}
+
+.homeland-carousel-wrapper .nav-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.homeland-carousel-wrapper .nav-arrow:focus {
+    outline: none;
+    background: transparent;
+}
+
+.homeland-carousel-wrapper .nav-arrow:focus:hover {
+    background: rgba(0, 68, 240, 0.05);
+}
+
+
+
+.homeland-carousel-wrapper .nav-arrow-left {
+    left: 10px;
+}
+
+.homeland-carousel-wrapper .nav-arrow-right {
+    right: 10px;
+}
+
+.homeland-carousel-wrapper .nav-arrow svg {
+    width: 24px;
+    height: 24px;
+    fill: #0044F0;
+}
+
+/* Responsive Scaling Viewport */
+@media (max-width: 1200px) {
+    .homeland-carousel-wrapper .product-showcase {
+        transform: scale(0.85);
+        transform-origin: center center;
+    }
+}
+
+@media (max-width: 1000px) {
+    .homeland-carousel-wrapper .product-showcase {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 800px) {
+    .homeland-carousel-wrapper .product-showcase {
+        transform: scale(0.55);
+    }
+
+    .homeland-carousel-wrapper .slider-container {
+        padding: 0 50px;
+    }
+
+    .homeland-carousel-wrapper .nav-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .homeland-carousel-wrapper .nav-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .homeland-carousel-wrapper .product-showcase {
+        transform: scale(0.4);
+    }
+
+    .homeland-carousel-wrapper .nav-arrow {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* --- Discount Card Styles --- */
+.discount-card .percentage-display text {
+    font-family: 'CustomNumbers', Cairo, Arial, sans-serif !important;
+}
+
+.discount-card {
+    width: 250px;
+    height: 380px;
+    border-radius: 16px;
+    position: relative;
+    font-family: 'Beiruti', sans-serif !important;
+    background-color: var(--card-bg-color, #F9B110);
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    -webkit-mask:
+        radial-gradient(circle 18px at 0 280px, transparent 18px, black 18px),
+        radial-gradient(circle 18px at 100% 280px, transparent 18px, black 18px);
+    -webkit-mask-composite: source-in;
+    mask:
+        radial-gradient(circle 18px at 0 280px, transparent 18px, black 18px),
+        radial-gradient(circle 18px at 100% 280px, transparent 18px, black 18px);
+    mask-composite: intersect;
+    background-image: url('./assets/bg.svg');
+    background-size: cover;
+    background-position: center;
+    margin: 20px auto;
+}
+
+.discount-card .top-section {
+    height: 280px;
+    position: relative;
+    padding: 20px 10px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 16px 16px 0 0;
+}
+
+.discount-card .header {
+    font-family: 'Beiruti', sans-serif !important;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #1A1A1A;
+    text-align: center;
+    direction: rtl;
+}
+
+.discount-card .up-to {
+    width: 100%;
+    text-align: center;
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 150%;
+    text-transform: uppercase;
+    color: #000014;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 20;
+}
+
+.discount-card .percentage-group {
+    height: 160px;
+    margin: 0 auto;
+    padding-right: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.discount-card .off-text {
+    position: absolute;
+    right: 25px;
+    bottom: -2px;
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 150%;
+    text-transform: uppercase;
+    color: #000014;
+    text-align: right;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.discount-card .divider-line {
+    position: absolute;
+    top: 280px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(to right,
+            white 0,
+            white 8px,
+            transparent 8px,
+            transparent 16px);
+    z-index: 50;
+}
+
+.discount-card .bottom-section {
+    height: 100px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    z-index: 10;
+    padding: 20px 20px;
+}
+
+.discount-card .redeem-button {
+    font-family: 'Beiruti', sans-serif !important;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+    direction: rtl;
+    padding: 0;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.discount-card .redeem-button:hover {
+    transform: scale(1.02);
+}
+
+/* --- Discount Cards Multi-Container --- */
+.discount-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+    .discount-cards-container {
+        gap: 20px;
+        padding: 20px 0;
+    }
+}

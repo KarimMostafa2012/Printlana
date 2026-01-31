@@ -48,15 +48,21 @@ class QueryFilter implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	public function translateQueryIds( $value, $object_id, $meta_key, $single ) {
 		if ( WPML_Elementor_Data_Settings::META_KEY_DATA === $meta_key && $single ) {
 			return Maybe::of( get_post_meta( $object_id, WPML_Elementor_Data_Settings::META_KEY_DATA, true ) )
-				->map( function ( $data ) {
-					return DataConvert::unserialize( $data, false );
-				} )
-				->map( function( $data ) {
-					return $this->recursivelyTranslateQueryIds( $data ); }
+				->map(
+					function ( $data ) {
+						return DataConvert::unserialize( $data, false );
+					}
 				)
-				->map( function ( $data ) {
-					return DataConvert::serialize( $data, false );
-				} )
+				->map(
+					function ( $data ) {
+						return $this->recursivelyTranslateQueryIds( $data );
+					}
+				)
+				->map(
+					function ( $data ) {
+						return DataConvert::serialize( $data, false );
+					}
+				)
 				->getOrElse( $value );
 		}
 
@@ -85,6 +91,15 @@ class QueryFilter implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 			}
 			if ( ! empty( $data->settings->post_query_posts_ids ) ) {
 				$data->settings->post_query_posts_ids = Ids::convert( $data->settings->post_query_posts_ids, Ids::ANY_POST );
+			}
+			if ( ! empty( $data->settings->query_include_term_ids ) ) {
+				$data->settings->query_include_term_ids = $this->convertTermTaxonomyIds( $data->settings->query_include_term_ids );
+			}
+			if ( ! empty( $data->settings->query_exclude_term_ids ) ) {
+				$data->settings->query_exclude_term_ids = $this->convertTermTaxonomyIds( $data->settings->query_exclude_term_ids );
+			}
+			if ( ! empty( $data->settings->query_posts_ids ) ) {
+				$data->settings->query_posts_ids = Ids::convert( $data->settings->query_posts_ids, Ids::ANY_POST );
 			}
 		}
 

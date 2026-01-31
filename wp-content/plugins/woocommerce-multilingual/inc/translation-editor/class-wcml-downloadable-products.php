@@ -93,7 +93,7 @@ class WCML_Downloadable_Products {
 			$is_variation = true;
 		}
 
-		$download_options = new WCML_Custom_Files_UI( $this->woocommerce_wpml, $product_id, $is_variation );
+		$download_options = new WCML_Custom_Files_UI( $product_id, $is_variation );
 		$download_options->show();
 
 	}

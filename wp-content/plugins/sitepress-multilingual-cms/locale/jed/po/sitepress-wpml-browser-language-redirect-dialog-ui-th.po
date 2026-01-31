@@ -2,22 +2,24 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/browser-language-redirect-dialog/texts.js:11
 msgid "How Browser Language Redirect Affects Google Indexing"
-msgstr "การเปลี่ยนเส้นทางภาษาเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีของ Google อย่างไร"
+msgstr "การเปลี่ยนเส้นทางภาษาของเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีของ Google อย่างไร"
 
 #: src/js/browser-language-redirect-dialog/texts.js:12
 msgid "Documentation"
-msgstr "เอกสาร"
+msgstr "เอกสารประกอบ"
 
 #: src/js/browser-language-redirect-dialog/texts.js:3
 msgid "Browser redirect affects Google indexing and search results"
-msgstr "การเปลี่ยนเส้นทางเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีและผลการค้นหาของ Google"
+msgstr "การเปลี่ยนเส้นทางของเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีและผลการค้นหาของ Google"
 
 #: src/js/browser-language-redirect-dialog/texts.js:4
 msgid "Got it, activate anyway"
-msgstr "เข้าใจแล้ว เปิดใช้งานได้เลย"
+msgstr "เข้าใจแล้ว เปิดใช้งานต่อไป"
 
 #: src/js/browser-language-redirect-dialog/texts.js:5
 msgid "Cancel"
@@ -28,14 +30,14 @@ msgid ""
 "When you redirect visitors based on their language, you also redirect "
 "Google. Google wants to see your site exactly like visitors see it, "
 "including any redirects that you apply."
-msgstr "การเปลี่ยนเส้นทางภาษามีผลต่อ Google เช่นกัน"
+msgstr "เมื่อคุณเปลี่ยนเส้นทางผู้เยี่ยมชมตามภาษาของพวกเขา คุณก็เปลี่ยนเส้นทาง Google ด้วย Google ต้องการเห็นเว็บไซต์ของคุณเหมือนที่ผู้เยี่ยมชมเห็นทุกประการ รวมถึงการเปลี่ยนเส้นทางใด ๆ ที่คุณใช้"
 
 #: src/js/browser-language-redirect-dialog/texts.js:8
 msgid ""
 "It is OK to redirect visitors based on their language, but you need to "
 "realize that this feature affects SEO."
-msgstr "การเปลี่ยนเส้นทางภาษามีผลต่อ SEO"
+msgstr "การเปลี่ยนเส้นทางผู้เยี่ยมชมตามภาษาของพวกเขาเป็นสิ่งที่ยอมรับได้ แต่คุณต้องตระหนักว่าคุณสมบัตินี้ส่งผลต่อ SEO"
 
 #: src/js/browser-language-redirect-dialog/texts.js:9
 msgid "Before proceeding, we recommend that you read these two pages:"
-msgstr "อ่านสองหน้านี้ก่อน:"
+msgstr "ก่อนดำเนินการต่อ เราขอแนะนำให้คุณอ่านสองหน้านี้:"

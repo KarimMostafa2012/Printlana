@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -21,7 +23,7 @@ msgstr "Välj %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "Ställ in språkpar för översättare %s:"
+msgstr "Ange språkpar för översättare %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
@@ -114,7 +116,7 @@ msgstr "Skapa en ny användare och ange som översättare"
 
 #: src/js/components/translators/AddTranslatorDialog.js:141
 msgid "Set language pair(s)"
-msgstr "Ställ in språkpar"
+msgstr "Ange språkpar"
 
 #: src/js/components/translators/AddTranslatorDialog.js:156
 msgid "Previous"
@@ -157,7 +159,7 @@ msgstr "Ta bort språkpar"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
-msgstr "%s-filuppladdningen misslyckades."
+msgstr "%s filuppladdning misslyckades."
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:69
 msgid "Flag"
@@ -165,13 +167,13 @@ msgstr "Flagga"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:87
 msgid "Flag file"
-msgstr "Flaggfil"
+msgstr "Flagga fil"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:160
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "Du har just lagt till språk. Välj det nu som webbplatsens standardspråk eller ett översättningsspråk."
+msgstr "Du har precis lagt till språk. Välj det sedan som webbplatsens standardspråk eller ett översättningsspråk."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -189,7 +191,7 @@ msgstr "Lägg till ett nytt språk"
 msgid ""
 "Create a country-specific language by choosing the general language from "
 "the list below. Then, choose the country it should be localized for."
-msgstr "Skapa ett landsspecifikt språk genom att välja det allmänna språket från listan nedan. Välj sedan landet det ska lokaliseras för."
+msgstr "Skapa ett landsspecifikt språk genom att välja det allmänna språket från listan nedan. Välj sedan det land det ska lokaliseras för."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:229
 msgid ""
@@ -200,7 +202,7 @@ msgstr "Genom att välja en kombination som redan finns i databasen kan WPML hj�
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:242
 msgid "Cannot find?"
-msgstr "Kan inte hitta?"
+msgstr "Hittar du inte?"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:244
 msgid "Click here"
@@ -230,11 +232,11 @@ msgstr "Språket kommer inte att stödjas av automatiska översättningar"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:392
 msgid "Language mapping"
-msgstr "Språkmappning"
+msgstr "Språkkartläggning"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:404
 msgid "Don't map this language"
-msgstr "Mappa inte detta språk"
+msgstr "Karta inte detta språk"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:418
 msgid "Default locale"
@@ -294,13 +296,13 @@ msgstr "Läs mer om "
 msgid ""
 "The name of your language as it will appear on your site's language "
 "switcher."
-msgstr "Namnet på ditt språk som det kommer att visas i din webbplats språkväljare."
+msgstr "Namnet på ditt språk som det kommer att visas i din webbplats språkbytare."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:61
 msgid ""
 "A unique value that identifies the language in the database and URL. Once "
 "saved, the language code cannot be changed."
-msgstr "Ett unikt värde som identifierar språket i databasen och URL:en. När det sparats kan språkkoden inte ändras."
+msgstr "Ett unikt värde som identifierar språket i databasen och URL:en. När det väl har sparats kan språkkoden inte ändras."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:62
 msgid ""
@@ -310,14 +312,14 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatisk översättning. Till exempel, om ditt anpassade språk är schweizisk-tyska kan du mappa till tyska som språk att använda för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk kommer funktioner för stavningskontroll och automatisk översättning inte att vara tillgängliga på det språket."
+msgstr "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatiska översättning. Om ditt anpassade språk till exempel är schweizertyska kan du mappa till tyska som språk att använda för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk kommer stavningskontroll och automatiska översättningsfunktioner inte att vara tillgängliga på det språket."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
 "The value WPML checks when loading translations from MO and PO files. The "
 "default locale is included in the filenames in your /wp-content/languages/ "
 "folder in your WordPress setup."
-msgstr "Det värde WPML kontrollerar vid inläsning av översättningar från MO- och PO-filer. Standardlokalen ingår i filnamnen i mappen /wp-content/languages/ i din WordPress-installation."
+msgstr "Värdet WPML kontrollerar när översättningar laddas från MO- och PO-filer. Standardlokalen ingår i filnamnen i din /wp-content/languages/-mapp i din WordPress-installation."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:69
 msgid ""
@@ -341,7 +343,7 @@ msgstr "Engelska för amerikanska användare: en-us"
 msgid ""
 "Determines if URLs in this language are encoded or use ASCII characters (if "
 "unsure, leave it as \"No\")."
-msgstr "Avgör om URL:er på detta språk är kodade eller använder ASCII-tecken (om osäker, lämna det som “Nej”)."
+msgstr "Avgör om URL:er på detta språk är kodade eller använder ASCII-tecken (om du är osäker, lämna det som “Nej”)."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:98
 msgid "adding a custom language"
@@ -357,7 +359,7 @@ msgstr "Standardspråk"
 
 #: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
-msgstr "Vad är det nuvarande språket på din webbplats?"
+msgstr "Vilket är det aktuella språket på din webbplats?"
 
 #: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
@@ -368,8 +370,8 @@ msgid "Which languages do you want to translate your site into?"
 msgstr "Vilka språk vill du översätta din webbplats till?"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
-msgstr "Om du inte kan hitta språk du behöver i listan"
+msgid "If you cannot find languages that you need in the list,"
+msgstr "Om du inte hittar de språk du behöver i listan,"
 
 #: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"
@@ -381,7 +383,7 @@ msgid ""
 "your site. %sTranslation Managers%s can add new local translators or "
 "professional translation services, create and assign translation jobs, "
 "review completed translations, and change translation-related settings."
-msgstr "Du kan lägga till en dedikerad person för att övervaka allt översättningsrelaterat på din webbplats. %sÖversättningsansvariga%s kan lägga till nya lokala översättare eller professionella översättningstjänster, skapa och tilldela översättningsjobb, granska färdiga översättningar och ändra översättningsrelaterade inställningar."
+msgstr "Du kan lägga till en dedikerad person för att övervaka allt översättningsrelaterat på din webbplats. %sÖversättningsansvariga%s kan lägga till nya lokala översättare eller professionella översättningstjänster, skapa och tilldela översättningsjobb, granska slutförda översättningar och ändra översättningsrelaterade inställningar."
 
 #: src/js/translation-roles-ui/components/Managers.js:22
 msgid "Translation Managers"
@@ -391,14 +393,14 @@ msgstr "Översättningsansvariga"
 msgid ""
 "Note: All Administrators are automatically given Translation Manager "
 "privileges."
-msgstr "Obs: Alla administratörer får automatiskt översättningsansvarigs behörigheter."
+msgstr "Obs: Alla administratörer får automatiskt behörighet som översättningsansvarig."
 
 #: src/js/translation-roles-ui/components/Users.js:14
 msgid ""
 "%sLocal translators%s are users of your site that can log in and add, edit, "
 "and review your site's translations. Add a translator and their associated "
 "translation pairs to assign them translation jobs."
-msgstr "%sLokala översättare%s är användare på din webbplats som kan logga in och lägga till, redigera och granska webbplatsens översättningar. Lägg till en översättare och deras tillhörande översättningspar för att tilldela dem översättningsjobb."
+msgstr "%sLokala översättare%s är användare av din webbplats som kan logga in och lägga till, redigera och granska din webbplats översättningar. Lägg till en översättare och deras associerade översättningspar för att tilldela dem översättningsjobb."
 
 #: src/js/translation-roles-ui/components/Users.js:23
 msgid ""

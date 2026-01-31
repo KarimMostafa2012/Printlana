@@ -57,7 +57,7 @@ namespace SW_WAPF_PRO\Includes\Classes {
 
         public static function get( $key, $default = false ) {
 
-            if( !isset( self::$cache[ $key ] ) ) {
+            if( ! isset( self::$cache[ $key ] ) ) {
                 return $default;
             }
 

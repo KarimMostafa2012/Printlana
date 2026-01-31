@@ -31,6 +31,7 @@ class JobActions implements \IWPML_Action {
 		add_action( 'wpml_tm_jobs_cancelled', [ $this, 'cancelJobsInATE' ] );
 		add_action( 'wpml_set_translate_everything', [ $this, 'onTranslateEverythingModeChanged' ], 10, 2 );
 		add_action( 'wpml_update_active_languages', [ $this, 'hideJobsAfterRemoveLanguage' ] );
+		add_action( 'wpml_cancel_all_automatic_jobs', [ $this, 'cancelAllAutomaticJobs' ], 10 );
 	}
 
 	public function cancelJobInATE( \WPML_TM_Post_Job_Entity $job ) {
@@ -40,7 +41,7 @@ class JobActions implements \IWPML_Action {
 	}
 
 	/**
-	 * @param \WPML_TM_Post_Job_Entity[]|\WPML_TM_Post_Job_Entity  $jobs
+	 * @param \WPML_TM_Post_Job_Entity[]|\WPML_TM_Post_Job_Entity|\stdClass[]|\stdClass  $jobs
 	 *
 	 * @return void
 	 */
@@ -54,11 +55,30 @@ class JobActions implements \IWPML_Action {
 			$jobs = [ $jobs ];
 		}
 
-		$getIds = pipe(
-			Fns::filter( invoke( 'is_ate_editor' ) ),
-			Fns::map( invoke( 'get_editor_job_id' ) )
-		);
-		$this->apiClient->cancelJobs( $getIds( $jobs ) );
+		// Normalize to stdObjects for backward compatibility
+		/** @var \stdClass[] $normalizedJobs */
+		$normalizedJobs = array_map( function( $job ) {
+			// Legacy WPML_TM_Post_Job_Entity -> stdClass
+			if ( $job instanceof \WPML_TM_Post_Job_Entity ) {
+				return (object) [
+					'editor'        => $job->get_editor(),
+					'editor_job_id' => $job->get_editor_job_id(),
+				];
+			}
+
+			return $job;
+		}, $jobs );
+
+		// Filter ATE jobs and extract editor_job_ids
+		$ateJobIds = array_values( array_filter( array_map( function( $job ) {
+			return ( isset( $job->editor ) && $job->editor === 'ate' && isset( $job->editor_job_id ) )
+				? $job->editor_job_id
+				: null;
+		}, $normalizedJobs ) ) );
+
+		if ( ! empty( $ateJobIds ) ) {
+			$this->apiClient->cancelJobs( $ateJobIds );
+		}
 	}
 
 	/**
@@ -95,8 +115,12 @@ class JobActions implements \IWPML_Action {
 				$this->translateEverything->markEverythingAsCompleted();
 			}
 		} else {
-			$this->hideJobs( self::getInProgressSearch() );
+			$this->cancelAllAutomaticJobs();
 		}
+	}
+
+	public function cancelAllAutomaticJobs() {
+		$this->hideJobs( self::getInProgressSearch() );
 	}
 
 	private static function getInProgressSearch() {

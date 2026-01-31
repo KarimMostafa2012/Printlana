@@ -3,11 +3,11 @@
  * Plugin Name: Dokan Pro
  * Plugin URI: https://dokan.co/wordpress/
  * Description: An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs.
- * Version: 4.0.10
+ * Version: 4.2.3
  * Author: Dokan Inc.
  * Author URI: https://dokan.co/wordpress/
  * WC requires at least: 8.5.0
- * WC tested up to: 10.2.1
+ * WC tested up to: 10.4.3
  * License: GPL2
  * Text Domain: dokan
  * Domain Path: /languages
@@ -16,6 +16,7 @@
 
 use Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema;
 use Automattic\WooCommerce\StoreApi\StoreApi;
+use WeDevs\Dokan\Assets;
 use WeDevs\DokanPro\Shipping\Blocks\ExtendEndpoint;
 
 /**
@@ -60,7 +61,7 @@ class Dokan_Pro {
      *
      * @var string
      */
-    public $version = '4.0.10';
+    public $version = '4.2.3';
 
     /**
      * Database version key
@@ -449,6 +450,8 @@ class Dokan_Pro {
         $this->container['vendor_discount']          = new \WeDevs\DokanPro\VendorDiscount\Controller();
         $this->container['menu_manager']             = new \WeDevs\DokanPro\MenuManager\Controller();
         $this->container['product_rejection']        = new \WeDevs\DokanPro\ProductRejection\Manager();
+        $this->container['ai']                       = new \WeDevs\DokanPro\Intelligence\Manager();
+        $this->container['payment_gateway_fee']      = new \WeDevs\DokanPro\Payments\GatewayFeeHandler();
 
         if ( is_user_logged_in() ) {
             new \WeDevs\DokanPro\Dashboard\Dashboard();
@@ -501,6 +504,7 @@ class Dokan_Pro {
      */
     public function register_scripts() {
         [ $suffix, $version ] = dokan_get_script_suffix_and_version();
+        $jquery_blockui = Assets::get_wc_handler( 'jquery-blockui' );
 
         wp_register_style( 'dokan-pro-style', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro' . $suffix . '.css', false, $version, 'all' );
         wp_register_style( 'dokan_pro_admin_style', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin-style' . $suffix . '.css', [], $version, 'all' );
@@ -508,9 +512,9 @@ class Dokan_Pro {
         // Register all js
         wp_register_script( 'serializejson', WC()->plugin_url() . '/assets/js/jquery-serializejson/jquery.serializejson' . $suffix . '.js', [ 'jquery' ], $version, true );
         wp_register_script( 'dokan-product-shipping', plugins_url( 'assets/js/dokan-single-product-shipping' . $suffix . '.js', __FILE__ ), false, $version, true );
-        wp_register_script( 'jquery-blockui', WC()->plugin_url() . '/assets/js/jquery-blockui/jquery.blockUI.min.js', [ 'jquery' ], $version, true );
+        wp_register_script( $jquery_blockui, WC()->plugin_url() . '/assets/js/jquery-blockui/jquery.blockUI.min.js', [ 'jquery' ], $version, true );
         wp_register_script( 'dokan-pro-script', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro' . $suffix . '.js', [ 'jquery', 'dokan-script' ], $version, true );
-        wp_register_script( 'dokan_pro_admin', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin' . $suffix . '.js', [ 'jquery', 'jquery-blockui' ], $version );
+        wp_register_script( 'dokan_pro_admin', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-pro-admin' . $suffix . '.js', [ 'jquery', $jquery_blockui ], $version, true );
         wp_register_script( 'dokan_admin_coupon', DOKAN_PRO_PLUGIN_ASSEST . '/js/dokan-admin-coupon' . $suffix . '.js', [ 'jquery' ], $version, true );
     }
 
@@ -546,10 +550,11 @@ class Dokan_Pro {
             ) {
             // Load dokan pro styles
             wp_enqueue_style( 'dokan-pro-style' );
+            $jquery_blockui = Assets::get_wc_handler( 'jquery-blockui' );
 
             // Load accounting scripts
             wp_enqueue_script( 'serializejson' );
-            wp_enqueue_script( 'jquery-blockui' );
+            wp_enqueue_script( $jquery_blockui );
 
             //localize script for refund and dashboard image options
             $dokan_refund = dokan_get_refund_localize_data();
@@ -575,7 +580,8 @@ class Dokan_Pro {
      * @return void
      * */
     public function admin_enqueue_scripts( $hook ) {
-        wp_enqueue_script( 'jquery-blockui' );
+        $jquery_blockui = Assets::get_wc_handler( 'jquery-blockui' );
+        wp_enqueue_script( $jquery_blockui );
         wp_enqueue_script( 'dokan_pro_admin' );
 
         $screen = dokan_pro_is_hpos_enabled() ? wc_get_page_screen_id( 'shop_order' ) : 'shop_order';

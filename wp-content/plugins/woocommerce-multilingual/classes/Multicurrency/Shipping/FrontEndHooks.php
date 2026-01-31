@@ -35,7 +35,7 @@ class FrontEndHooks implements IWPML_Action, IStandAloneAction {
 			if ( $shippingMode->isManualPricingEnabled( $wcShippingMethod ) ) {
 				if ( 'cost' === $key ) {
 					$rate = $shippingMode->getShippingCostValue( $wcShippingMethod, $this->getClientCurrency() );
-					$wcShippingMethod->wcml_shipping_cost_in_mc = true;
+					do_action( 'wcml_shipping_cost_in_mc', $wcShippingMethod );
 				} elseif ( $shippingMode instanceof ShippingClassesMode ) {
 					if ( $this->isShippingClass( $key ) ) {
 						$rate = $shippingMode->getShippingClassCostValue( $wcShippingMethod, $this->getClientCurrency(), $key );

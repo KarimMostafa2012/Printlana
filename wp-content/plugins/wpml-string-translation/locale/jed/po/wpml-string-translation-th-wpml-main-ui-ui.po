@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/main-ui/components/Actions.js:46
 msgid "Edit"
@@ -9,11 +11,11 @@ msgstr "แก้ไข"
 
 #: src/js/main-ui/components/Actions.js:57
 msgid "Shift+Tab"
-msgstr "Shift+แท็บ"
+msgstr "Shift+Tab"
 
 #: src/js/main-ui/components/Actions.js:62
 msgid "Tab"
-msgstr "แท็บ"
+msgstr "Tab"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
@@ -21,7 +23,7 @@ msgstr "แปลเป็น:"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
-msgstr "คัดลอกมาจากต้นฉบับ"
+msgstr "คัดลอกจากต้นฉบับ"
 
 #: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
@@ -33,15 +35,15 @@ msgstr "ต้นฉบับ:"
 
 #: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
-msgstr "เพิ่ม %s การแปล"
+msgstr "เพิ่มการแปล %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
-msgstr "แก้ไข %s การแปล"
+msgstr "แก้ไขการแปล %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:198
 msgid "Add %s translation (the string appears on the site and is not translated)"
-msgstr "เพิ่ม%s การแปล (สตริงปรากฎอยู่ในเว็บไซต์และไม่ได้รับการแปล)"
+msgstr "เพิ่มการแปล %s (สตริงปรากฏบนไซต์และไม่ได้แปล)"
 
 #: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
@@ -49,20 +51,20 @@ msgstr "ภาษาต้นฉบับ %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
-msgstr "รอคนแปลอยู่. %s"
+msgstr "กำลังรอผู้แปลเพื่อ %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
-msgstr "อยู่ระหว่างการแปลถึง %s"
+msgstr "กำลังแปลเป็น %s"
 
 #: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
-msgstr "ในตะกร้าสำหรับการแปลไปที่ %s"
+msgstr "อยู่ในตะกร้าสำหรับการแปลเป็น %s"
 
 #: src/js/main-ui/components/notification.js:13
 msgid "Translation saved."
-msgstr "บันทึกคำแปลแล้ว"
+msgstr "บันทึกการแปลแล้ว"
 
 #: src/js/main-ui/components/notification.js:17
 msgid "Translation update failed."
-msgstr "การอัปเดตการแปลล้มเหลว"
+msgstr "อัปเดตการแปลล้มเหลว"

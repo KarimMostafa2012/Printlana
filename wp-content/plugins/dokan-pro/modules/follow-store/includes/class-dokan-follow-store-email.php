@@ -31,7 +31,6 @@ class Dokan_Follow_Store_Email extends WC_Email {
         $this->placeholders   = array(
             '{follower_name}' => '',
         );
-
         // Call parent constructor
         parent::__construct();
 
@@ -82,6 +81,17 @@ class Dokan_Follow_Store_Email extends WC_Email {
                 'default'     => $this->get_default_additional_content(),
                 'desc_tip'    => true,
             ),
+            'frequency' => array(
+                'title'       => __( 'Frequency', 'dokan' ),
+                'type'        => 'select',
+                'description' => __( 'Choose the delivery schedule for this notification.', 'dokan' ),
+                'default'     => 'daily',
+                'options' => array(
+                    'daily'  => __( 'Daily', 'dokan' ),
+                    'weekly' => __( 'Weekly', 'dokan' ),
+                ),
+            'desc_tip'    => true,
+            ),
             'email_type' => array(
                 'title'       => __( 'Email type', 'dokan' ),
                 'type'        => 'select',
@@ -92,6 +102,21 @@ class Dokan_Follow_Store_Email extends WC_Email {
                 'desc_tip'    => true,
             ),
         );
+    }
+
+    public function process_admin_options() {
+        parent::process_admin_options();
+
+        // do stuff the unschedule event
+        $frequency = $this->get_option( 'frequency' );
+        // Clear existing schedule
+        $timestamp = wp_next_scheduled( 'dokan_follow_store_send_updates' );
+        if ( $timestamp ) {
+            wp_unschedule_event( $timestamp, 'dokan_follow_store_send_updates' );
+        }
+
+        // Always reschedule after clearing
+        wp_schedule_event( time(), $frequency, 'dokan_follow_store_send_updates' );
     }
 
     /**
@@ -205,4 +230,5 @@ class Dokan_Follow_Store_Email extends WC_Email {
             $this->template_base
         );
     }
+
 }

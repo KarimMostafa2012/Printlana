@@ -261,6 +261,7 @@ function dokan_follow_store_get_vendor_followers( $vendor_id ) {
     $followers   = Cache::get( $cache_key, $cache_group );
 
     if ( false === $followers ) {
+        $followers = [];
         $dokan_followers = $wpdb->get_results(
             $wpdb->prepare(
                 "select follower_id, followed_at from {$wpdb->prefix}dokan_follow_store_followers

@@ -18,6 +18,7 @@ use WPML\TM\Editor\Editor;
 use WPML\TM\API\Jobs;
 use WPML\TM\Menu\TranslationQueue\PostTypeFilters;
 use function WPML\FP\pipe;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
 
 class WPML_Translations_Queue {
 
@@ -53,16 +54,12 @@ class WPML_Translations_Queue {
 
 			/** try to capture custom event for posthog */
 			\WPML\PostHog\Event\CaptureEvent::capture(
-				'wpml_open_translation_editor',
-				[
-					'editor' => Obj::prop( 'editor', $response ),
-					'job_id' => Obj::prop( 'job_id', $_GET )
-				],
-				[
-					'wp_email' => \WPML\LIB\WP\User::getCurrent()->user_email,
-					'site_key' => function_exists( 'OTGS_Installer' ) ? OTGS_Installer()->get_site_key( 'wpml' ) : '',
-					'site_url' => get_site_url(),
-				]
+				( new EventInstanceService() )->getOpenTranslationEditorEvent(
+					[
+						'editor' => Obj::prop( 'editor', $response ),
+						'job_id' => Obj::prop( 'job_id', $_GET )
+					]
+				)
 			);
 
 			if ( in_array( Obj::prop( 'editor', $response ), [ \WPML_TM_Editors::ATE, \WPML_TM_Editors::WP ] ) ) {
@@ -76,6 +73,10 @@ class WPML_Translations_Queue {
 
 	private function openClassicTranslationEditor( $job_object ) {
 		global $wpdb;
+
+		// Check for missing zlib and add notice if needed
+		\WPML\Translation\TranslationElements\MissingZlibNotice::maybeAddNotice( $job_object->get_id() );
+
 		$this->must_render_the_editor = true;
 		$this->translation_editor     = new WPML_Translation_Editor_UI(
 			$wpdb,
@@ -94,10 +95,19 @@ class WPML_Translations_Queue {
 			return;
 		}
 
+		$jobs_url = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=jobs' );
 		?>
 		<div class="wrap">
-			<h2><?php echo __( 'Translations queue', 'wpml-translation-management' ); ?></h2>
-
+			<h2><?php echo __( 'Translations queue', 'sitepress' ); ?></h2>
+			<p class="wpml-jobs-page-description translations-queue-description"><?php echo esc_html__( 'Content waiting for your review or translation. Use it to start or continue your work.', 'wpml-translation-management' ); ?></p>
+			<p class="wpml-jobs-page-description">
+				<?php
+				printf(
+					esc_html__( 'Need the full list for monitoring or troubleshooting? Go to %s.', 'sitepress' ),
+					'<a href="' . esc_url( $jobs_url ) . '">' . esc_html__( 'Translation Jobs', 'sitepress' ) . '</a>'
+				);
+				?>
+			</p>
 			<div class="js-wpml-abort-review-dialog"></div>
 			<div id='wpml-remote-jobs-container'></div>
 		</div>

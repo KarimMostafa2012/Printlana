@@ -21,7 +21,7 @@ use function WPML\FP\spreadArgs;
  */
 class AutomaticTranslationJobCreationFailureNotice implements \IWPML_Action {
 	const OPTION_KEY = 'auto-translation-job-creation-error';
-	const NOTICE_ID = 'automatic-job-creation-failed';
+	const NOTICE_ID  = 'automatic-job-creation-failed';
 
 	/** @var array */
 	private $jobFailedElements;
@@ -34,18 +34,22 @@ class AutomaticTranslationJobCreationFailureNotice implements \IWPML_Action {
 
 	public function __construct( \WPML_Translation_Element_Factory $translationElementFactory, \WPML_Notices $wpmlNotices ) {
 		$optionVal                           = Option::get( self::OPTION_KEY );
-		$this->jobFailedElements             = $optionVal ? json_decode( stripslashes( $optionVal ), true ) : [];
+		$this->jobFailedElements             = $optionVal ? json_decode( $optionVal, true ) : [];
 		$this->wpmlNotices                   = $wpmlNotices;
 		$this->wpmlTranslationElementFactory = $translationElementFactory;
-
-		// Update notice when class is constructed so that when user reloads a page or navigates to any other page ...
-		// We check for content that has job created and remove it from 'auto-translation-job-creation-error' in options table
-		$this->updateNotice();
 	}
 
 	public function add_hooks() {
+		// Update notice when class is constructed so that when user reloads a page or navigates to any other page ...
+		// We check for content that has job created and remove it from 'auto-translation-job-creation-error' in options table.
+		Hooks::onAction( 'admin_init' )->then( spreadArgs( [ $this, 'updateNotice' ] ) );
+
 		Hooks::onAction( 'wpml_update_failed_jobs_notice' )
-		     ->then( spreadArgs( [ $this, 'updateNotice' ] ) );
+			->then(
+				spreadArgs(
+					[ $this, 'updateNotice' ]
+				)
+			);
 	}
 
 	/**
@@ -103,7 +107,7 @@ class AutomaticTranslationJobCreationFailureNotice implements \IWPML_Action {
 	public function addFailedJobPostElement( $postElement ) {
 		$this->jobFailedElements[ $postElement->get_id() ] = [
 			'title' => $postElement->get_wp_object()->post_title,
-			'lang'  => $postElement->get_language_code()
+			'lang'  => $postElement->get_language_code(),
 		];
 
 		$encodedContent = $this->encodedContent( $this->jobFailedElements );
@@ -141,7 +145,7 @@ class AutomaticTranslationJobCreationFailureNotice implements \IWPML_Action {
 	 * @return string
 	 */
 	private function constructMessage() {
-		$message = '<h2 id="job_creation_fail_notice">' . __( 'WPML experienced an issue while trying to automatically translating some of your content:', 'sitepress' ) . '</h2>';
+		$message  = '<h2 id="job_creation_fail_notice">' . __( 'WPML experienced an issue while trying to automatically translating some of your content:', 'sitepress' ) . '</h2>';
 		$message .= '<ul>';
 		foreach ( $this->jobFailedElements as $contentInfo ) {
 			$message .= '<li class="job_creation_fail_element">' . $contentInfo['title'] . '</li>';

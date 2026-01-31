@@ -27,6 +27,7 @@ if(FILEORGANIZER_DEV){
 if(!class_exists('FileOrganizer')){
 class FileOrganizer{
 	public $options = array();
+	public $default_path = '';
 }
 }
 
@@ -143,8 +144,8 @@ function fileorganizer_recursive_indexphp($trash_dir, $depth){
 // Add action to load FileOrganizer
 add_action('plugins_loaded', 'fileorganizer_load_plugin');
 function fileorganizer_load_plugin(){
-	global $fileorganizer;
-	
+	global $fileorganizer, $sitepad;
+			
 	if(empty($fileorganizer)){
 		$fileorganizer = new FileOrganizer();
 	}
@@ -154,8 +155,9 @@ function fileorganizer_load_plugin(){
 	
 	$options = get_option('fileorganizer_options');
 	$fileorganizer->options = empty($options) ? array() : $options;
+	$fileorganizer->default_path = !defined('SITEPAD') ? ABSPATH : $sitepad['path'];
 	
-	if(is_admin() && !defined('FILEORGANIZER_PRO') && current_user_can('activate_plugins')){
+	if(!defined('SITEPAD') && is_admin() && !defined('FILEORGANIZER_PRO') && current_user_can('activate_plugins')){
 		// The promo time
 		$promo_time = get_option('fileorganizer_promo_time');
 		if(empty($promo_time)){
@@ -167,6 +169,26 @@ function fileorganizer_load_plugin(){
 		if(!empty($promo_time) && $promo_time > 0 && $promo_time < (time() - (7 * 86400))){
 			add_action('admin_notices', 'fileorganizer_promo');
 		}
+	}
+	
+	if(!defined('SITEPAD') && is_admin() && current_user_can('manage_options')){
+		// === Plugin Update Notice === //
+		$plugin_update_notice = get_option('softaculous_plugin_update_notice', []);
+		$available_update_list = get_site_transient('update_plugins'); 
+		$plugin_path_slug = 'fileorganizer/fileorganizer.php';
+
+		if(
+			!empty($available_update_list) &&
+			is_object($available_update_list) && 
+			!empty($available_update_list->response) &&
+			!empty($available_update_list->response[$plugin_path_slug]) && 
+			(empty($plugin_update_notice) || empty($plugin_update_notice[$plugin_path_slug]) || (!empty($plugin_update_notice[$plugin_path_slug]) &&
+			version_compare($plugin_update_notice[$plugin_path_slug], $available_update_list->response[$plugin_path_slug]->new_version, '<')))
+		){
+			add_action('admin_notices', 'fileorganizer_plugin_update_notice_handle');
+			add_filter('softaculous_plugin_update_notice', 'fileorganizer_plugin_update_notice_filter');
+		}
+		// === Plugin Update Notice === //
 	}
 }
 
@@ -199,9 +221,10 @@ function fileorganizer_admin_menu() {
 		// Restrictins by  user role
 		add_submenu_page( 'fileorganizer', __('User Role Restrictions'), __('User Role Restrictions'), $manu_capability, 'fileorganizer-user-role-restrictions', 'fileorganizer_role_restrictions_handler');
 		
-		// Add License Page
-		add_submenu_page( 'fileorganizer', __('License'), __('License'), $manu_capability, 'fileorganizer-license', 'fileorganizer_license_handler');
-		
+		if(!defined('SITEPAD')){
+			// Add License Page
+			add_submenu_page( 'fileorganizer', __('License'), __('License'), $manu_capability, 'fileorganizer-license', 'fileorganizer_license_handler');
+		}
 	}
 }
 
@@ -247,6 +270,19 @@ function fileorganizer_settings_handler(){
 function fileorganizer_restrictions_handler(){
 	include_once FILEORGANIZER_PRO_DIR .'/main/user_restrictions.php';
 	fileorganizer_user_restriction_render();
+}
+
+function fileorganizer_plugin_update_notice_filter($plugins = []){
+	$plugins['fileorganizer/fileorganizer.php'] = 'FileOrganizer';
+	return $plugins;
+}
+
+function fileorganizer_plugin_update_notice_handle(){
+	if(!function_exists('fileorganizer_plugin_update_notice')){
+		include_once(FILEORGANIZER_DIR.'/main/promo.php');		
+	}
+	
+	fileorganizer_plugin_update_notice();
 }
 
 function fileorganizer_role_restrictions_handler(){
@@ -344,7 +380,9 @@ function fileorganizer_notify($message, $type = 'updated', $dismissible = true){
 
 // Check we are outside installtion directory ?
 function fileorganizer_validate_path($path) {
-	$currentDirectory = fileorganizer_cleanpath(realpath(ABSPATH));
+	global $fileorganizer;
+	
+	$currentDirectory = fileorganizer_cleanpath(realpath($fileorganizer->default_path)); // change
 	$absolutePath = fileorganizer_cleanpath(realpath($path));
 	
 	if($currentDirectory === $absolutePath){

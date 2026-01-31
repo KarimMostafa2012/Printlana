@@ -1,0 +1,169 @@
+/* Highlighted Elements Settings */
+.homeland-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    border: 1px solid #ccd0d4;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+}
+
+.homeland-preview-header p {
+    margin: 0;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.homeland-preview-container {
+    background: #fcfcfc;
+    padding: 30px;
+    border: 1px solid #ccd0d4;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.homeland-preview-container .h-wrapper {
+    transform: scale(0.85);
+    transform-origin: top center;
+    margin-bottom: -60px;
+    direction: ltr !important;
+}
+
+/* Local-style Text Properties for Admin Preview */
+.homeland-preview-container .h-card,
+.homeland-preview-container .h-small-card {
+    font-family: 'Beiruti', sans-serif !important;
+}
+
+.homeland-preview-container .h-promo {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #000014 !important;
+}
+
+.homeland-preview-container .h-small-promo {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #000014 !important;
+}
+
+.homeland-preview-container .h-text-group {
+    bottom: 40px !important;
+    left: 24px !important;
+    right: 24px !important;
+}
+
+.homeland-preview-container .h-small-text-group {
+    bottom: 24px !important;
+    left: 24px !important;
+    right: 24px !important;
+}
+
+/* Modal Styling */
+.homeland-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.homeland-modal-content {
+    background-color: #fff;
+    padding: 40px;
+    border: none;
+    width: 550px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.homeland-modal-close {
+    color: #64748b;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 32px;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.homeland-modal-close:hover {
+    color: #0f172a;
+}
+
+.homeland-modal h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #1e293b;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.homeland-field {
+    margin-bottom: 24px;
+}
+
+.homeland-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #475569;
+}
+
+/* Standardized Shortcode Box */
+.homeland-shortcode-box {
+    margin: 40px 0;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-left: 5px solid #2271b1;
+    border-radius: 6px;
+    clear: both;
+}
+
+.homeland-shortcode-box h3 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.homeland-code-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.homeland-shortcode-box code {
+    padding: 10px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 16px;
+    border-radius: 6px;
+    font-family: monospace;
+}
+
+/* Carousel Page Actions */
+.homeland-carousel-actions {
+    margin: 10px 0;
+    display: inline-block;
+}
+
+.homeland-carousel-actions .button.action {
+    height: 30px;
+    line-height: 28px;
+    margin-right: 5px;
+}

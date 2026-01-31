@@ -8,37 +8,19 @@ class WCML_Multi_Currency_Reports {
 
 	/** @var woocommerce_wpml */
 	private $woocommerce_wpml;
-	/** @var SitePress */
-	private $sitepress;
 	/** @var wpdb */
 	private $wpdb;
-	/** @var WPML_WP_Cache */
-	private $wpml_cache;
 
 	/** @var string $reports_currency */
 	protected $reports_currency;
 
 	/**
-	 * WCML_Multi_Currency_Reports constructor.
-	 *
 	 * @param woocommerce_wpml $woocommerce_wpml
-	 * @param SitePress $sitepress
 	 * @param wpdb $wpdb
-	 * @param WPML_WP_Cache $wpml_cache
 	 */
-	public function __construct( woocommerce_wpml $woocommerce_wpml, \WPML\Core\ISitePress $sitepress, wpdb $wpdb, $wpml_cache = null ) {
-
+	public function __construct( woocommerce_wpml $woocommerce_wpml, wpdb $wpdb ) {
 		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->sitepress        = $sitepress;
 		$this->wpdb             = $wpdb;
-
-		$cache_group      = 'WCML_Multi_Currency_Reports';
-		$this->wpml_cache = $wpml_cache;
-		if ( null === $wpml_cache ) {
-			$this->wpml_cache = new WPML_WP_Cache( $cache_group );
-		}
-
-
 	}
 
 	public function add_hooks() {
@@ -88,19 +70,16 @@ class WCML_Multi_Currency_Reports {
 
 		if ( $isReportsPage ) { //wc-reports - 2.1.x, woocommerce_reports 2.0.x
 
-			$wcml_reports_set_currency_nonce = wp_create_nonce( 'reports_set_currency' );
-
-			wc_enqueue_js( "
+			$wcml_reports_set_currency_nonce  = esc_js( wp_create_nonce( 'reports_set_currency' ) );
+			$wcml_reports_set_currency_script = <<<JS
                 jQuery('#dropdown_shop_report_currency').on('change', function(){
-                    jQuery('#dropdown_shop_report_currency_chosen').after('&nbsp;' + icl_ajxloaderimg);
-                    jQuery('#dropdown_shop_report_currency_chosen a.chosen-single').css('color', '#aaa');
                     jQuery.ajax({
                         url: ajaxurl,
                         type: 'post',
                         data: {
                             action: 'wcml_reports_set_currency',
                             currency: jQuery('#dropdown_shop_report_currency').val(),
-                            wcml_nonce: '" . $wcml_reports_set_currency_nonce . "'
+                            wcml_nonce: '$wcml_reports_set_currency_nonce'
                             },
                         success: function( response ){
                             if(typeof response.error !== 'undefined'){
@@ -111,9 +90,14 @@ class WCML_Multi_Currency_Reports {
                         }
                     })
                 });
-            " );
+JS;
 
-			$this->reports_currency = isset( $_COOKIE['_wcml_reports_currency'] ) ? $_COOKIE['_wcml_reports_currency'] : wcml_get_woocommerce_currency_option();
+			$handle = 'wcml_reports_set_currency_dropdown';
+			wp_register_script( $handle, '', [ 'jquery' ], WCML_VERSION, true );
+			wp_enqueue_script( $handle );
+			wp_add_inline_script( $handle, $wcml_reports_set_currency_script );
+
+			$this->reports_currency = $_COOKIE['_wcml_reports_currency'] ?? wcml_get_woocommerce_currency_option();
 
 			add_filter( 'woocommerce_currency_symbol', [ $this, '_set_reports_currency_symbol' ] );
 		}
@@ -219,6 +203,7 @@ class WCML_Multi_Currency_Reports {
 	 */
 	public function filterDashboardstatusWidgetTopSellerQuery( $query ) {
 		// Before WooCommerce 8.8.0, the table alias was posts.
+		/* @phpstan-ignore booleanAnd.rightAlwaysTrue */
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, self::TOP_SELLER_QUERY_USE_SELECT_ORDERS_FROM, '<' ) ) {
 			return $this->filterOrdersAsPostsByCurrencyPostmeta( $query );
 		}

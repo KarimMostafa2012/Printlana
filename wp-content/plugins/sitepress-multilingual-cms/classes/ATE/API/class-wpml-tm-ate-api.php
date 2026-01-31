@@ -13,6 +13,7 @@ use WPML\FP\Str;
 use WPML\Element\API\Entity\LanguageMapping;
 use WPML\LIB\WP\WordPress;
 use WPML\TM\Editor\ATEDetailedErrorMessage;
+use WPML\TM\Jobs\JobLog;
 use function WPML\FP\invoke;
 use function WPML\FP\pipe;
 use WPML\Element\API\Languages;
@@ -28,9 +29,6 @@ class WPML_TM_ATE_API {
 	const TRANSLATED = 6;
 	const DELIVERING = 7;
 	const NOT_ENOUGH_CREDIT_STATUS = 31;
-	const CANCELLED_STATUS = 20;
-	const SHOULD_HIDE_STATUS = 42;
-
 	private $wp_http;
 	private $auth;
 	private $endpoints;
@@ -682,7 +680,7 @@ class WPML_TM_ATE_API {
 			$this->endpoints->get_sync_all(),
 			[
 				'method' => 'POST',
-				'body'   => [ 'ids' => $ateJobIds ],
+				'body'   => [ 'ids' => $ateJobIds,'wpml_version' => '4.9.0' ],
 			]
 		);
 	}
@@ -709,6 +707,13 @@ class WPML_TM_ATE_API {
 	private function request( $url, array $requestArgs = [] ) {
 		$lock = $this->clonedSitesHandler->checkCloneSiteLock( $url );
 		if ( $lock ) {
+			JobLog::add(
+				'ATE WPML_TM_ATE_API request lock check failed',
+				[
+					'url'         => $url,
+					'requestArgs' => $requestArgs,
+				]
+			);
 			return $lock;
 		}
 
@@ -741,7 +746,23 @@ class WPML_TM_ATE_API {
 			$requestArgs['body'] = $this->encode_body_args( $bodyArgs );
 		}
 
+		JobLog::addExtraLogData( 'apiCall', $url );
+		JobLog::add(
+			'WPML_TM_ATE_API request',
+			[
+				'url'         => $url,
+				'signedUrl'   => $signedUrl,
+				'requestArgs' => $requestArgs,
+			]
+		);
 		$result = $this->wp_http->request( $signedUrl, $requestArgs );
+		JobLog::add(
+			'WPML_TM_ATE_API request response',
+			[
+				'result'  => $result,
+			]
+		);
+		JobLog::removeExtraLogData( 'apiCall' );
 
 		if ( ! is_wp_error( $result ) ) {
 			$result = $this->clonedSitesHandler->handleClonedSiteError( $result );

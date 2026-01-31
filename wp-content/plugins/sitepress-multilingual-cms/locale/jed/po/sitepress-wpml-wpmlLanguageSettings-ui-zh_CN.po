@@ -2,16 +2,18 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:30
 msgid "Choose the image file type for flags"
-msgstr "选择标志的图像文件类型"
+msgstr "选择用于标志的图像文件类型"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:32
 msgid ""
 "This option affects only the built-in WPML flags, not the custom uploaded "
 "ones."
-msgstr "该选项只影响内置的 WPML 标志，不影响自定义上传的标志。"
+msgstr "此选项仅影响内置的 WPML 标志，而不影响自定义上传的标志。"
 
 #: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:46
 msgid "%s format"

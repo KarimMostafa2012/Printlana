@@ -146,3 +146,5 @@ li#toplevel_page_wcmmq-min-max-control ul.wp-submenu li:hover a[href='https://co
 .notice.wcmmq-discount-notice {padding: 5px 7px;background: white;border-top: 0 none;border-bottom: 0;border-right: 0 none;}
 .notice.wcmmq-discount-notice img {max-height: 25px;max-width: 25px;}
 .wcmmq-discount-notice a {text-decoration: none;padding: 0 5px;font-weight: 500;}
+
+.wpt-offer-notice .wpt-offer-message h3 {color: #060606;font-size: 16px;font-weight: bold;}

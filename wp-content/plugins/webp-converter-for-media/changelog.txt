@@ -1,5 +1,39 @@
 == Changelog ==
 
+= 6.5.3 (2026-01-24) =
+* `[Changed]` The Pass Thru loading mode is now restricted to standard WordPress directory structures only
+
+= 6.5.2 (2026-01-24) =
+* `[Security]` Replaced cURL-based fetching with native readfile(), implemented a whitelist of trusted website URLs and stricter extension validation in the Pass Thru loading mode to prevent unauthorized server-side requests (CVE-2026-1356)
+* `[Security]` Implemented physical path identity verification for the Pass Thru loading mode using realpath() to provide extra protection against Directory Traversal
+* `[Security]` Added X-Content-Type-Options: nosniff header for browser-side protection in the Pass Thru loading mode
+* `[Fixed]` Priority logic for loading next-generation image formats (AVIF/WebP)
+* `[Added]` Automatic refresh of an image loading mode after a plugin update
+* `[Added]` Significant performance boost for the Pass Thru loading mode by direct filesystem access instead of cURL requests
+* `[Added]` Support for Content-Length headers to optimize image delivery in the Pass Thru loading mode
+
+= 6.5.1 (2026-01-23) =
+* Version superseded by 6.5.2
+
+= 6.5.0 (2026-01-11) =
+* `[Fixed]` Rewrite rules to handle environments where RewriteRule may receive an absolute filesystem path
+* `[Changed]` Field to select the format to which the images should be converted
+* `[Added]` Settings field to modify the prefix used in RewriteRule to fix the absolute filesystem path issue
+
+= 6.4.0 (2025-12-08) =
+* `[Security]` Added permission check to ensure the user can edit the post before manually converting an image in the Media Library (CVE-2025-13750)
+* `[Security]` Added stricter permission checks to REST API endpoints for authenticated users
+
+= 6.3.2 (2025-11-24) =
+* `[Added]` Support for WordPress 6.9
+
+= 6.3.1 (2025-11-09) =
+* `[Fixed]` Support for Bunny CDN and BunnyCDN plugin
+* `[Fixed]` Support for QUIC.cloud CDN
+
+= 6.3.0 (2025-10-28) =
+* `[Changed]` Message about rewrites_uploads_blocked server configuration error
+
 = 6.2.4 (2025-09-09) =
 * `[Fixed]` Deprecated notice for implicitly nullable parameter when converting images
 
@@ -406,7 +440,7 @@
 * `[Changed]` Message after successfully completing conversion of images
 
 = 4.0.3 (2021-12-20) =
-* `[Security]` Added URL validation for Pass Thru loading mode ([CVE-2021-25074](https://wpscan.com/vulnerability/f3c0a155-9563-4533-97d4-03b9bac83164/))
+* `[Security]` Added URL validation for Pass Thru loading mode (CVE-2021-25074)
 * `[Fixed]` Auto-conversion images with unsupported extensions when uploading files
 * `[Fixed]` Generating directory paths when ABSPATH constant is invalid
 
@@ -677,7 +711,7 @@
 * `[Changed]` Limits of maximum execution time
 
 = 1.0.3 (2019-06-26) =
-* `[Security]` Fixed CSRF vulnerability when saving plugin settings ([CVE-2019-15834](https://wpscan.com/vulnerability/65483794-f22f-41c7-b286-fd70c38ae160/))
+* `[Security]` Fixed CSRF vulnerability when saving plugin settings (CVE-2019-15834)
 
 = 1.0.2 (2019-06-25) =
 * `[Changed]` Error messages

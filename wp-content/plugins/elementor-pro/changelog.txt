@@ -1,5 +1,73 @@
 # Elementor Pro - by Elementor.com
 
+#### 3.34.4 - 2026-01-29
+
+* Fix: Shortcodes overflow the screen on Saved Templates screen in WordPress Admin
+* Fix: Avoid Multiple Popups control does not work in Popups
+
+#### 3.34.3 - 2026-01-26
+
+* Fix: Theme Builder WordPress view does not work as expected
+* Fix: Submissions menu appears even when the setting is disabled
+
+#### 3.34.2 - 2026-01-22
+
+* Tweak: Updated notification behavior in Elementor menu in WordPress admin
+
+#### 3.34.1 - 2026-01-20
+
+* Tweak: Unified the Elementor interface into a single place to manage, optimize, and configure Elementor capabilities in WordPress admin
+
+#### 3.34.0 - 2025-12-22
+
+* New: Added support for Display Conditions for Atomic Elements - Editor V4
+* Tweak: Enabled media queries for the Desktop breakpoint only in Custom CSS - Editor V4
+* Tweak: Added support for ACF field in Dynamic Tags - Editor V4
+* Tweak: Added support for Google Calendar in Contact URL Dynamic Tag - Editor V4
+* Tweak: Added support for Tel link in Contact URL Dynamic Tag - Editor V4
+* Tweak: Added support for ACF Image field in Dynamic Tags - Editor V4
+* Tweak: Removed icon from the accessibility tree in Flip Box widget
+* Tweak: Applied CSS logical properties in text-align controls and improved RTL rendering in the Editor
+* Fix: Website Template library displayed in English instead of the translated language
+* Fix: Custom CSS field breaks when using certain characters - Editor V4
+
+#### 3.33.2 - 2025-12-03
+
+* Fix: Incorrect status shown for Custom Code, Fonts, and Icons after importing a Website Template
+* Fix: Display Conditions window appears empty in the editor
+
+#### 3.33.1 - 2025-11-11
+
+* Fix: Styles not loading correctly in Custom Fonts and Custom Icons admin screens ([#33396](https://github.com/elementor/elementor/issues/33396))
+
+#### 3.33.0 - 2025-11-10
+
+* New: Introducing Custom CSS for element-level styling with full isolation and responsive control - Editor V4
+* New: Introducing media save to cloud in Website Templates, enabling users to store media assets directly in the cloud for easier access and management.
+* Tweak: Added support for Post Excerpt dynamic tag - Editor V4
+* Tweak: Added support for Internal URL dynamic tag - Editor V4
+* Tweak: Added support for Post Terms dynamic tag - Editor V4
+* Tweak: Added support for Shortcode dynamic tag - Editor V4
+* Tweak: Added support for Popup dynamic tag - Editor V4
+* Tweak: Added support for Off-Canvas dynamic tag - Editor V4
+* Tweak: Added support for Lightbox dynamic tag - Editor V4
+* Tweak: Added support for Add To Cart dynamic tag - Editor V4
+* Tweak: Added support for ACF URL dynamic tag - Editor V4
+* Tweak: Added support for Archive Title dynamic tag - Editor V4
+* Tweak: Added support for the Email Contact URL dynamic tag - Editor V4
+* Tweak: Added support for reduced-motion preferences in Flip Box widget
+* Tweak: Updated minimum supported versions for Chrome, Firefox, and Safari
+* Tweak: Updated Notes button location in the Editor Top Bar
+
+#### 3.32.3 - 2025-10-21
+
+* Fix: Website Template fails to apply when Custom Code or Custom Icons are included
+
+#### 3.32.2 - 2025-09-29
+
+* Fix: Exported taxonomies are not displayed correctly on the summary page in Website Templates export
+* Fix: Certain taxonomies are not exported as expected in Website Templates export
+
 #### 3.32.1 - 2025-09-16
 
 * Fix: Theme Builder fails to load when containers are disabled

@@ -34,6 +34,7 @@ class Actions {
 			\WPML\ST\StringsCleanup\UI::class,
 			\WPML\ST\DisplayAsTranslated\CheckRedirect::class,
 			\WPML\ST\TranslationJob\AdminTextHooks::class,
+			StringsScanning\JS\HooksFactory::class,
 		);
 	}
 }

@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
-msgstr "Commencer la synchronisation par lots"
+msgstr "Démarrer la synchronisation par lot"
 
 #: src/js/jobs/components/Actions/Cancel.js:35
 msgid "Cancel job"
-msgstr "Annuler le travail"
+msgstr "Annuler la tâche"
 
 #: src/js/jobs/components/Actions/ContinieReview.js:44
 msgid "Continue reviewing"
@@ -17,7 +19,7 @@ msgstr "Continuer la révision"
 
 #: src/js/jobs/components/Actions/DownloadXLIFF.js:33
 msgid "Start downloading XLIFF file"
-msgstr "Commencer le téléchargement du fichier XLIFF"
+msgstr "Démarrer le téléchargement du fichier XLIFF"
 
 #: src/js/jobs/components/Actions/Edit.js:38
 msgid "Edit"
@@ -29,7 +31,7 @@ msgstr "Obtenir la traduction"
 
 #: src/js/jobs/components/Actions/Resign.js:35
 msgid "Resign"
-msgstr "Démissionner"
+msgstr "Abandonner"
 
 #: src/js/jobs/components/Actions/Review.js:46
 #: src/js/jobs/components/Actions/ReviewInATE.js:35
@@ -46,7 +48,7 @@ msgstr "Prendre et traduire"
 
 #: src/js/jobs/components/Actions/View.js:22
 msgid "View"
-msgstr "Voir"
+msgstr "Afficher"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:48
 msgid "Delete Translations"
@@ -58,7 +60,7 @@ msgstr "Conserver les traductions comme brouillon"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
 msgid "Never mind. I want to review these translations."
-msgstr "Peu importe. Je veux réviser ces traductions."
+msgstr "Tant pis. Je veux réviser ces traductions."
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
 #: src/js/jobs/components/Filters/ActionFilters.js:60
@@ -69,7 +71,7 @@ msgstr "Annuler"
 msgid ""
 "This will remove the selected jobs from the Translations Queue without "
 "publishing them. What would you like to do with the translations?"
-msgstr "Cela supprimera les travaux sélectionnés de la File d'attente des traductions sans les publier. Que voulez-vous faire avec les traductions ?"
+msgstr "Cela supprimera les tâches sélectionnées de la file d’attente des traductions sans les publier. Que souhaitez-vous faire des traductions ?"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
 msgid "Cancel Translation Review"
@@ -88,21 +90,21 @@ msgstr "Appliquer"
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "Les actions appliquées à plusieurs travaux de traduction peuvent prendre quelques secondes. Veuillez ne pas quitter la page."
+msgstr "Les actions appliquées à plusieurs tâches de traduction peuvent prendre quelques secondes. Veuillez ne pas quitter la page."
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "Les actions appliquées à plusieurs travaux de traduction peuvent prendre quelques minutes. Veuillez ne pas quitter la page."
+msgstr "Les actions appliquées à plusieurs tâches de traduction peuvent prendre quelques minutes. Veuillez ne pas quitter la page."
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
-msgstr "Sélectionner le traducteur"
+msgstr "Sélectionner un traducteur"
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:41
 msgid "Assign"
-msgstr "Assigner"
+msgstr "Affecter"
 
 #: src/js/jobs/components/Cells/StatusCell.js:11
 msgid "Cancelled"
@@ -121,7 +123,7 @@ msgstr "En cours"
 #: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
-msgstr "Traduction prête à télécharger"
+msgstr "Traduction prête à être téléchargée"
 
 #: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
@@ -131,7 +133,7 @@ msgstr "Terminé"
 #: src/js/jobs/components/Cells/StatusCell.js:25
 #. placeholder is the string package type. Could be WP Forms, ACF Field Groups.
 msgid "%s are immediately published because they don't support draft mode."
-msgstr "Les %s sont publiés immédiatement car ils ne prennent pas en charge le mode brouillon."
+msgstr "%s sont immédiatement publiés car ils ne prennent pas en charge le mode brouillon."
 
 #: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
@@ -143,7 +145,7 @@ msgstr "Brouillon — En attente de révision"
 
 #: src/js/jobs/components/Cells/StatusCell.js:43
 msgid "Review in progress"
-msgstr "Examen en cours"
+msgstr "Révision en cours"
 
 #: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
@@ -160,11 +162,11 @@ msgstr "Fonds insuffisants"
 #: src/js/jobs/components/Cells/StatusCell.js:57
 #: src/js/jobs/model/store/columnsManagement.js:42
 msgid "Needs update"
-msgstr "Mise à jour nécessaire"
+msgstr "Nécessite une mise à jour"
 
 #: src/js/jobs/components/Cells/TitleCell.js:14
 msgid "View original"
-msgstr "Voir l'original"
+msgstr "Afficher l’original"
 
 #: src/js/jobs/components/Cells/TitleCell.js:9
 msgid "(no title)"
@@ -178,7 +180,7 @@ msgstr "Traduction automatique"
 
 #: src/js/jobs/components/Cells/TranslatorCell.js:42
 msgid "TP ID: %d"
-msgstr "TP ID : %d"
+msgstr "ID TP : %d"
 
 #: src/js/jobs/components/Filters/Buttons.js:8
 msgid "Reset"
@@ -218,7 +220,7 @@ msgstr "Traduit par (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:117
 msgid "Sent date (%s)"
-msgstr "Date d'envoi (%s)"
+msgstr "Date d’envoi (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:119
 msgid "Deadline (%s)"
@@ -231,12 +233,12 @@ msgstr "Effacer tous les filtres"
 #: src/js/jobs/components/Filters/FiltersList.js:55
 #: src/js/jobs/components/Filters/TranslatedBy.js:37
 msgid "Any Translation Service"
-msgstr "N'importe quel service de traduction"
+msgstr "Tout service de traduction"
 
 #: src/js/jobs/components/Filters/FiltersList.js:59
 #: src/js/jobs/components/Filters/TranslatedBy.js:42
 msgid "Any WordPress Translator"
-msgstr "N'importe quel traducteur WordPress"
+msgstr "Tout traducteur WordPress"
 
 #: src/js/jobs/components/Filters/Languages.js:72
 msgid "From"
@@ -248,11 +250,11 @@ msgstr "À"
 
 #: src/js/jobs/components/Filters/TranslatedBy.js:28
 msgid "Anyone"
-msgstr "N'importe qui"
+msgstr "N’importe qui"
 
 #: src/js/jobs/components/Filters/TranslationServiceJobsSwitcher.js:7
 msgid "Include jobs from translation services"
-msgstr "Inclure les travaux des services de traduction"
+msgstr "Inclure les tâches des services de traduction"
 
 #: src/js/jobs/components/Filters/TypeFilter.js:33
 msgid "All types"
@@ -276,31 +278,31 @@ msgstr "Annuler le tri"
 
 #: src/js/jobs/components/Table.js:97
 msgid "The bulk action is running..."
-msgstr "L'action groupée est en cours d'exécution..."
+msgstr "L’action groupée est en cours..."
 
 #: src/js/jobs/components/XliffBox/Export.js:54
 msgid "Export all jobs to XLIFF 1.0"
-msgstr "Exporter tous les travaux vers XLIFF 1.0"
+msgstr "Exporter toutes les tâches vers XLIFF 1.0"
 
 #: src/js/jobs/components/XliffBox/Export.js:55
 msgid "Export all filtered jobs to XLIFF 1.0"
-msgstr "Exporter tous les travaux filtrés vers XLIFF 1.0"
+msgstr "Exporter toutes les tâches filtrées vers XLIFF 1.0"
 
 #: src/js/jobs/components/XliffBox/Export.js:61
 msgid "Export all jobs to XLIFF 1.1"
-msgstr "Exporter tous les travaux vers XLIFF 1.1"
+msgstr "Exporter toutes les tâches vers XLIFF 1.1"
 
 #: src/js/jobs/components/XliffBox/Export.js:62
 msgid "Export all filtered jobs to XLIFF 1.1"
-msgstr "Exporter tous les travaux filtrés vers XLIFF 1.1"
+msgstr "Exporter toutes les tâches filtrées vers XLIFF 1.1"
 
 #: src/js/jobs/components/XliffBox/Export.js:68
 msgid "Export all jobs to XLIFF 1.2"
-msgstr "Exporter tous les travaux vers XLIFF 1.2"
+msgstr "Exporter toutes les tâches vers XLIFF 1.2"
 
 #: src/js/jobs/components/XliffBox/Export.js:69
 msgid "Export all filtered jobs to XLIFF 1.2"
-msgstr "Exporter tous les travaux filtrés vers XLIFF 1.2"
+msgstr "Exporter toutes les tâches filtrées vers XLIFF 1.2"
 
 #: src/js/jobs/components/XliffBox/Export.js:81
 msgid "Export"
@@ -316,7 +318,7 @@ msgstr ".xliff .zip"
 
 #: src/js/jobs/components/XliffBox/Import.js:52
 msgid "Importing"
-msgstr "Importation en cours"
+msgstr "Importation"
 
 #: src/js/jobs/components/XliffBox/Import.js:53
 msgid "Import"
@@ -324,7 +326,7 @@ msgstr "Importer"
 
 #: src/js/jobs/components/XliffBox/XliffBox.js:19
 msgid "Import / Export XLIFF"
-msgstr "Importer / Exporter XLIFF"
+msgstr "Importer/exporter XLIFF"
 
 #: src/js/jobs/components/actionColumn.js:13
 msgid "Actions"
@@ -350,7 +352,7 @@ msgstr "Approuver les révisions de traduction"
 
 #: src/js/jobs/hooks/BulkActions/useCreateCancelAction.js:20
 msgid "Cancel jobs"
-msgstr "Annuler les travaux"
+msgstr "Annuler les tâches"
 
 #: src/js/jobs/hooks/BulkActions/useCreateCancelTranslationReviewsAction.js:16
 msgid "Cancel translation reviews"
@@ -366,7 +368,7 @@ msgstr "Obtenir les traductions"
 
 #: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
 msgid "This action does not apply to any of the selected translation jobs"
-msgstr "Cette action ne s'applique à aucun des travaux de traduction sélectionnés"
+msgstr "Cette action ne s’applique à aucune des tâches de traduction sélectionnées"
 
 #: src/js/jobs/model/store/applyTranslations.js:30
 msgid "Translations have been downloaded"
@@ -378,52 +380,52 @@ msgstr "La traduction a été téléchargée"
 
 #: src/js/jobs/model/store/applyTranslations.js:36
 msgid "Translations could not be downloaded"
-msgstr "Les traductions n'ont pas pu être téléchargées"
+msgstr "Les traductions n’ont pas pu être téléchargées"
 
 #: src/js/jobs/model/store/applyTranslations.js:37
 msgid "Translation could not be downloaded"
-msgstr "La traduction n'a pas pu être téléchargée"
+msgstr "La traduction n’a pas pu être téléchargée"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:10
 msgid "Approving translations reviews failed!"
-msgstr "L'approbation des révisions de traductions a échoué!"
+msgstr "L’approbation des révisions de traduction a échoué!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:38
 msgid "Failed approving translations for the following posts: "
-msgstr "Échec de l'approbation des traductions pour les articles suivants : "
+msgstr "L’approbation des traductions pour les articles suivants a échoué : "
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
-msgstr "Les révisions de traductions ont été approuvées avec succès !"
+msgstr "Révisions de traduction approuvées avec succès !"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:57
 msgid "No valid jobs selected to approve translations reviews!"
-msgstr "Aucun travail valide sélectionné pour approuver les révisions de traductions !"
+msgstr "Aucune tâche valide sélectionnée pour approuver les révisions de traduction !"
 
 #: src/js/jobs/model/store/assignTranslator.js:17
 msgid "The translator has been assigned to the job"
-msgstr "Le traducteur a été assigné au travail"
+msgstr "Le traducteur a été affecté à la tâche"
 
 #: src/js/jobs/model/store/assignTranslator.js:22
 #: src/js/jobs/model/store/openEditor.js:37
 msgid "The translator could not be assigned to the job"
-msgstr "Le traducteur n'a pas pu être assigné au travail"
+msgstr "Le traducteur n’a pas pu être affecté à la tâche"
 
 #: src/js/jobs/model/store/cancelJobs.js:22
 msgid "The jobs have been cancelled"
-msgstr "Les travaux ont été annulés"
+msgstr "Les tâches ont été annulées"
 
 #: src/js/jobs/model/store/cancelJobs.js:23
 msgid "The job has been cancelled"
-msgstr "Le travail a été annulé"
+msgstr "La tâche a été annulée"
 
 #: src/js/jobs/model/store/cancelJobs.js:30
 msgid "The jobs could not be cancelled"
-msgstr "Les travaux n'ont pas pu être annulés"
+msgstr "Les tâches n’ont pas pu être annulées"
 
 #: src/js/jobs/model/store/cancelJobs.js:31
 msgid "The job could not be cancelled"
-msgstr "Le travail n'a pas pu être annulé"
+msgstr "La tâche n’a pas pu être annulée"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:26
 msgid "Translation reviews have been canceled"
@@ -435,11 +437,11 @@ msgstr "La révision de traduction a été annulée"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:33
 msgid "Translation reviews could not be canceled"
-msgstr "Les révisions de traduction n'ont pas pu être annulées"
+msgstr "Les révisions de traduction n’ont pas pu être annulées"
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:34
 msgid "Translation review could not be canceled"
-msgstr "La révision de traduction n'a pas pu être annulée"
+msgstr "La révision de traduction n’a pas pu être annulée"
 
 #: src/js/jobs/model/store/columnsManagement.js:106
 msgid "Sent on"
@@ -475,82 +477,82 @@ msgstr "Traduit par"
 
 #: src/js/jobs/model/store/downloadXliff.js:11
 msgid "Download XLIFF file couldn't be finished"
-msgstr "Le téléchargement du fichier XLIFF n'a pas pu être terminé"
+msgstr "Le téléchargement du fichier XLIFF n’a pas pu être terminé"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:20
 msgid "Could not load jobs for export"
-msgstr "Impossible de charger les travaux pour l'exportation"
+msgstr "Impossible de charger les tâches pour l’exportation"
 
 #: src/js/jobs/model/store/exportToXLIFF.js:44
 msgid "The export to XLIFF failed"
-msgstr "L'exportation vers XLIFF a échoué"
+msgstr "L’exportation vers XLIFF a échoué"
 
 #: src/js/jobs/model/store/importXLIFF.js:26
 msgid "Imported %d jobs"
-msgstr "Importé %d travaux"
+msgstr "%d tâches importées"
 
 #: src/js/jobs/model/store/importXLIFF.js:27
 msgid "Imported one job"
-msgstr "Importé un travail"
+msgstr "Une tâche importée"
 
 #: src/js/jobs/model/store/importXLIFF.js:41
 msgid "Could not import any job"
-msgstr "Impossible d'importer un travail"
+msgstr "Aucune tâche n’a pu être importée"
 
 #: src/js/jobs/model/store/importXLIFF.js:45
 msgid "Import failed!"
-msgstr "L'importation a échoué!"
+msgstr "L’importation a échoué!"
 
 #: src/js/jobs/model/store/jobs.js:18
 msgid "Loading translations queue"
-msgstr "Chargement de la file d'attente des traductions"
+msgstr "Chargement de la file d’attente des traductions"
 
 #: src/js/jobs/model/store/jobs.js:19
 msgid "Loading translation jobs"
-msgstr "Chargement des travaux de traduction"
+msgstr "Chargement des tâches de traduction"
 
 #: src/js/jobs/model/store/jobs.js:82
 msgid "Jobs could not be loaded"
-msgstr "Les travaux n'ont pas pu être chargés"
+msgstr "Les tâches n’ont pas pu être chargées"
 
 #: src/js/jobs/model/store/resign.js:12
 msgid "Specify some jobs to resign"
-msgstr "Spécifiez des travaux à abandonner"
+msgstr "Spécifiez des tâches à démissionner"
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
-msgstr "Nous n'avons pas pu abandonner les travaux : %s"
+msgstr "Nous n’avons pas pu démissionner des tâches : %s"
 
 #: src/js/jobs/model/store/resign.js:34
 msgid "Resigned from jobs"
-msgstr "Démission des travaux effectuée"
+msgstr "Démissionné des tâches"
 
 #: src/js/jobs/model/store/resign.js:35
 msgid "Resigned from job"
-msgstr "Démission du travail effectuée"
+msgstr "Démissionné de la tâche"
 
 #: src/js/jobs/model/store/resign.js:39
 msgid "Failed to resign from jobs"
-msgstr "Échec de la démission des travaux"
+msgstr "Échec de la démission des tâches"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
-msgstr "La synchronisation des travaux de l'Éditeur Avancé a échoué"
+msgstr "La synchronisation des tâches de l’éditeur avancé a échoué"
 
 #: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
 msgid "Synchronization with the Professional Translation service has failed"
-msgstr "La synchronisation avec le service de Traduction Professionnelle a échoué"
+msgstr "La synchronisation avec le service de traduction professionnelle a échoué"
 
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
 msgid_plural "%d translations have been downloaded"
-msgstr[0] "%d La traduction a été téléchargée"
-msgstr[1] "%d traductions téléchargées"
+msgstr[0] "%d traduction a été téléchargée"
+msgstr[1] "%d traductions ont été téléchargées"
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"
-msgstr "La synchronisation par lots s'est terminée avec succès !"
+msgstr "Synchronisation par lot terminée avec succès !"
 
 #: src/js/jobs/model/store/translationBatchSync.js:88
 msgid "Batch sync couldn't be finished"
-msgstr "La synchronisation par lots n'a pas pu être terminée"
+msgstr "La synchronisation par lot n’a pas pu être terminée"

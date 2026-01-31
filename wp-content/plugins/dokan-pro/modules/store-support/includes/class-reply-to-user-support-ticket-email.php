@@ -23,6 +23,8 @@ if ( ! class_exists( 'Dokan_Reply_To_User_Support_Ticket' ) ) :
      */
     class Dokan_Reply_To_User_Support_Ticket extends WC_Email {
 
+        protected $email_data;
+
         /**
          * Constructor.
          */
@@ -76,6 +78,16 @@ if ( ! class_exists( 'Dokan_Reply_To_User_Support_Ticket' ) ) :
          */
         public function trigger( $store_id, $email_data ) {
             if ( ! $this->is_enabled() ) {
+                return;
+            }
+
+            $result = StoreSupportHelper::get_single_topic(
+                array(
+                    'id'        => $email_data['ticket_id'],
+                    'vendor_id' => $store_id,
+                )
+            );
+            if ( $result['dokan_admin_email_notification'] === 'off' ) {
                 return;
             }
 

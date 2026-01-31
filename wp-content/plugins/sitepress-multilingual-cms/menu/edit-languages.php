@@ -13,6 +13,7 @@ use WPML\Setup\Option;
 use WPML\TM\API\ATE\CachedLanguageMappings;
 use WPML\TM\API\ATE\LanguageMappings;
 use function WPML\FP\pipe;
+use WPML\Core\Component\PostHog\Application\Service\Event\EventInstanceService;
 
 class SitePress_EditLanguages {
 	const ACCEPTED_MIME_TYPES = [
@@ -66,6 +67,13 @@ class SitePress_EditLanguages {
 	 * @var array|null
 	 */
 	public static $newlySavedMapping;
+
+	/**
+	 * Stores the ID of the last inserted language to avoid extra DB queries.
+	 *
+	 * @var int|null
+	 */
+	private $last_inserted_language_id;
 
 	/**
 	 * @param \WPML_Flags $wpml_flags
@@ -171,7 +179,7 @@ class SitePress_EditLanguages {
 						?>
 					</li>
 					<li>
-						<strong><?php echo esc_html_x( 'Default locale:', 'Edit languages page: subtitle #4', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'This determines the locale value for this language. You should check the name of WordPress localization file to set this correctly.', 'Edit languages page: subtitle #4, description', 'sitepress' ); ?>
+						<strong><?php echo esc_html_x( 'Default locale:', 'Edit languages page: subtitle #4', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'this determines the locale value for this language. You should check the name of WordPress localization file to set this correctly.', 'Edit languages page: subtitle #4, description', 'sitepress' ); ?>
 					</li>
 					<li>
 						<strong><?php echo esc_html_x( 'Encode URLs:', 'Edit languages page: subtitle #5', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'yes/no, determines if URLs in this language are encoded or use ASCII characters (leave ‘no’ if you are not sure).', 'Edit languages page: subtitle #5, description', 'sitepress' ); ?>
@@ -185,7 +193,7 @@ class SitePress_EditLanguages {
                         $link = 'https://wpml.org/documentation/automatic-translation/using-automatic-translation-with-custom-languages/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore';
 
                         echo sprintf( _x(
-	                        'To use automatic translation with a custom or country-specific language, you must map it to a supported language. Read more about <a href="%s" target="_blank" rel="noopener noreferrer">using automatic translation with custom languages</a>.',
+	                        'to use automatic translation with a custom or country-specific language, you must map it to a supported language. Read more about <a href="%s" target="_blank" rel="noopener noreferrer">using automatic translation with custom languages</a>.',
 	                        'Edit languages page: subtitle #7, description',
 	                        'sitepress'
                         ), $link );
@@ -367,6 +375,11 @@ class SitePress_EditLanguages {
                                     class="wpml_edit_languages_name"
                                     name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]"
                                     value="<?php echo esc_attr( $lang['english_name'] ); ?>"/>
+                            <input type="hidden"
+                                    class="wpml_edit_languages_initial_value"
+                                    name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][english_name]"
+                                    value="<?php echo esc_attr( $lang['english_name'] ); ?>"
+                                    readonly/>
 					</div>
 					<?php
 				}
@@ -386,6 +399,11 @@ class SitePress_EditLanguages {
                                class="wpml_edit_languages_code"
                                value="<?php echo esc_attr( $lang['code'] ); ?>"
                                style="width:30px;"/>
+                        <input type="hidden"
+                               class="wpml_edit_languages_initial_value"
+                               name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][code]"
+                               value="<?php echo esc_attr( $lang['code'] ); ?>"
+                               readonly/>
 					</div>
 					<?php
 				}
@@ -403,9 +421,19 @@ class SitePress_EditLanguages {
 			</td>
 			<?php
 			foreach ( self::get_active_languages() as $translation ) {
+				$translation_value = $this->get_translations_data( $lang, $translation );
 				?>
-				<td><input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][translations][<?php echo esc_attr( $translation['code'] ); ?>]"
-						   value="<?php echo esc_attr( $this->get_translations_data( $lang, $translation ) ); ?>"/></td>
+				<td>
+					<input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][translations][<?php echo esc_attr( $translation['code'] ); ?>]"
+						   value="<?php echo esc_attr( $translation_value ); ?>"/>
+					<?php if ( ! $add ) { ?>
+						<input type="hidden"
+							   class="wpml_edit_languages_initial_value"
+							   name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][translations][<?php echo esc_attr( $translation['code'] ); ?>]"
+							   value="<?php echo esc_attr( $translation_value ); ?>"
+							   readonly/>
+					<?php } ?>
+				</td>
 				<?php
 			}
 			?>
@@ -513,6 +541,13 @@ class SitePress_EditLanguages {
 						   value="<?php echo esc_attr( $lang['default_locale'] ); ?>"
 						   maxlength="<?php echo esc_attr( $this->max_locale_length ); ?>"
 						   style="width: auto; max-width: 5em;"/>
+					<?php if ( ! $add ) { ?>
+						<input type="hidden"
+							   class="wpml_edit_languages_initial_value"
+							   name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][default_locale]"
+							   value="<?php echo esc_attr( $lang['default_locale'] ); ?>"
+							   readonly/>
+					<?php } ?>
 				</div>
 			</td>
 			<td>
@@ -536,10 +571,26 @@ class SitePress_EditLanguages {
 						?>
 					><?php esc_html_e( 'Yes', 'sitepress' ); ?></option>
 				</select>
+				<?php if ( ! $add ) { ?>
+					<input type="hidden"
+						   class="wpml_edit_languages_initial_value"
+						   name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][encode_url]"
+						   value="<?php echo esc_attr( $lang['encode_url'] ); ?>"
+						   readonly/>
+				<?php } ?>
 			</td>
 
-			<td><input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][tag]" maxlength="<?php echo esc_attr( $this->max_locale_length ); ?>" value="<?php echo esc_html( $lang['tag'] ); ?>"
-					   style="width: auto; max-width: 5em;"/></td>
+			<td>
+				<input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][tag]" maxlength="<?php echo esc_attr( $this->max_locale_length ); ?>" value="<?php echo esc_html( $lang['tag'] ); ?>"
+					   style="width: auto; max-width: 5em;"/>
+				<?php if ( ! $add ) { ?>
+					<input type="hidden"
+						   class="wpml_edit_languages_initial_value"
+						   name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][tag]"
+						   value="<?php echo esc_attr( $lang['tag'] ); ?>"
+						   readonly/>
+				<?php } ?>
+			</td>
 
 		    <?php
 		    if ( \WPML_TM_ATE_Status::is_enabled_and_activated() ) {
@@ -798,6 +849,9 @@ class SitePress_EditLanguages {
 
 		$this->saveLanguageMapping( $_POST['icl_edit_languages'] );
 
+		// Capture PostHog event for language form submission.
+		$this->capture_language_form_posthog_event( $_POST['icl_edit_languages'], $_POST['icl_edit_languages_initial'] ?? [] );
+
 		// Refresh cache.
 		$sitepress->get_language_name_cache()->clear();
 		$sitepress->clear_flags_cache();
@@ -868,12 +922,17 @@ class SitePress_EditLanguages {
 		global $sitepress, $wpdb;
 
 		$data = stripslashes_deep( stripslashes_deep( $data ) );
+
 		// Insert main table.
-		if ( ! Languages::add( $data['code'], $data['english_name'], $data['default_locale'], 0, 1, $data['encode_url'], $data['tag'] ) ) {
+		$new_language_id = Languages::add( $data['code'], $data['english_name'], $data['default_locale'], 0, 1, $data['encode_url'], $data['tag'] );
+		if ( !$new_language_id ) {
 			$this->set_errors( __( 'Adding language failed.', 'sitepress' ) );
 
 			return false;
 		}
+
+		// Store the inserted language ID for PostHog event tracking.
+		$this->last_inserted_language_id = $new_language_id;
 
 		// add locale map
 		$locale_exists = $wpdb->get_var(
@@ -1415,6 +1474,15 @@ class SitePress_EditLanguages {
                         </option>
                     <?php } ?>
                 </select>
+				<?php if ( ! $add ) {
+					$mappingValue = $targetId ? ($targetId === LanguageMappings::IGNORE_MAPPING_ID ? $targetId : Obj::pathOr('', ['mapping', 'targetId'], $lang) . '###' . Obj::pathOr('', ['mapping', 'targetCode'], $lang)) : '';
+					?>
+					<input type="hidden"
+						   class="wpml_edit_languages_initial_value"
+						   name="icl_edit_languages_initial[<?php echo esc_attr( $lang['id'] ); ?>][mapping]"
+						   value="<?php echo esc_attr( (string) $mappingValue ); ?>"
+						   readonly/>
+				<?php } ?>
                 <br/>
 
                     <?php if (Obj::prop('code', $lang) === Languages::getDefaultCode()) { ?>
@@ -1438,5 +1506,108 @@ class SitePress_EditLanguages {
                     <?php } ?>
             </td>
         <?php
+	}
+
+	/**
+	 * Capture PostHog event for language form submission.
+	 * Compares initial values with submitted values and tracks changes.
+	 *
+	 * @param array $submitted_data Submitted language data from form.
+	 * @param array $initial_data Initial language data from hidden fields.
+	 */
+	private function capture_language_form_posthog_event( $submitted_data, $initial_data ) {
+		// Skip if PostHog is not enabled.
+		if ( ! \WPML\PostHog\State\PostHogState::isEnabled() ) {
+			return;
+		}
+
+		$event_props       = [];
+		$changed_languages = [];
+		$new_languages     = [];
+
+		foreach ( $submitted_data as $lang_id => $lang_data ) {
+			// Skip the 'add' entry if it's empty or ignore flag is set.
+			if ( $lang_id === 'add' ) {
+				if ( isset( $_POST['icl_edit_languages_ignore_add'] ) && $_POST['icl_edit_languages_ignore_add'] === 'true' ) {
+					continue;
+				}
+				// This is a new language - use the stored ID from insert_one().
+				$new_languages[] = [
+					'id'             => $this->last_inserted_language_id ?? $lang_id,
+					'code'           => $lang_data['code'] ?? '',
+					'english_name'   => $lang_data['english_name'] ?? '',
+					'default_locale' => $lang_data['default_locale'] ?? '',
+					'encode_url'     => ! empty( $lang_data['encode_url'] ),
+					'tag'            => $lang_data['tag'] ?? '',
+					'mapping'        => $lang_data['mapping'] ?? '',
+				];
+				continue;
+			}
+
+			// Check if this language was edited.
+			if ( isset( $initial_data[ $lang_id ] ) ) {
+				$changes = [];
+				$initial = $initial_data[ $lang_id ];
+
+				// Compare each field.
+				$fields_to_compare = [ 'english_name', 'code', 'default_locale', 'encode_url', 'tag', 'mapping' ];
+				foreach ( $fields_to_compare as $field ) {
+					$initial_value   = $initial[ $field ] ?? '';
+					$submitted_value = $lang_data[ $field ] ?? '';
+
+					// Convert encode_url to boolean for comparison and event data.
+					if ( $field === 'encode_url' ) {
+						$initial_value   = ! empty( $initial_value );
+						$submitted_value = ! empty( $submitted_value );
+					}
+
+					if ( (string) $initial_value !== (string) $submitted_value ) {
+						$changes[ $field ] = [
+							'from' => $initial_value,
+							'to'   => $submitted_value,
+						];
+					}
+				}
+
+				// Compare translations.
+				if ( isset( $initial['translations'] ) && isset( $lang_data['translations'] ) ) {
+					foreach ( $lang_data['translations'] as $trans_code => $trans_value ) {
+						$initial_trans = $initial['translations'][ $trans_code ] ?? '';
+						if ( (string) $initial_trans !== (string) $trans_value ) {
+							$changes['translations'][ $trans_code ] = [
+								'from' => $initial_trans,
+								'to'   => $trans_value,
+							];
+						}
+					}
+				}
+
+				// If there are changes, add to changed languages.
+				if ( ! empty( $changes ) ) {
+					$changed_languages[] = [
+						'id'      => $lang_id,
+						'code'    => $lang_data['code'] ?? '',
+						'changes' => $changes,
+					];
+				}
+			}
+		}
+
+		// Prepare event properties.
+		$event_props['new_languages_count']       = count( $new_languages );
+		$event_props['changed_languages_count']   = count( $changed_languages );
+
+		if ( ! empty( $new_languages ) ) {
+			$event_props['new_languages'] = $new_languages;
+		}
+
+		if ( ! empty( $changed_languages ) ) {
+			$event_props['changed_languages'] = $changed_languages;
+		}
+
+		// Capture the event.
+		\WPML\PostHog\Event\CaptureEvent::capture(
+			( new EventInstanceService() )->getEditLanguagesFormSubmittedEvent( $event_props )
+		);
 	}
 }

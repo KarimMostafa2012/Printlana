@@ -22,9 +22,11 @@ function fileorganizer_page_header($title = 'FileOrganizer'){
 				<td class="fileorganizer-td" valign="top">
 					<img src="'.esc_url(FILEORGANIZER_URL) .'/images/logo.png">
 					<h3 class="fileorganizer-heading">'.esc_html($title).'</h3>
-				</td>
-				<td align="right"><a target="_blank" class="button button-primary" href="https://wordpress.org/support/view/plugin-reviews/fileorganizer">Review FileOrganizer</a></td>
-				<td align="right" width="40"><a target="_blank" href="https://twitter.com/fileorganizer"><img src="'.esc_url(FILEORGANIZER_URL).'/images/twitter.png" /></a></td>
+				</td>';
+			if(!defined('SITEPAD')){
+				echo '<td align="right"><a target="_blank" class="button button-primary" href="https://wordpress.org/support/view/plugin-reviews/fileorganizer">Review FileOrganizer</a></td>';
+			}
+			echo '<td align="right" width="40"><a target="_blank" href="https://twitter.com/fileorganizer"><img src="'.esc_url(FILEORGANIZER_URL).'/images/twitter.png" /></a></td>
 				<td align="right" width="40"><a target="_blank" href="https://www.facebook.com/fileorganizer/"><img src="'.esc_url(FILEORGANIZER_URL).'/images/facebook.png" /></a></td>
 			</tr>
 		</table>
@@ -101,7 +103,8 @@ function fileorganizer_page_footer($no_twitter = 0){
 
 // fileorganizer Setting page
 function fileorganizer_settings_page(){
-
+	global $fileorganizer;
+	
 	$options = get_option('fileorganizer_options');
 	$options = empty($options) || !is_array($options) ? array() : $options;
 
@@ -117,7 +120,7 @@ function fileorganizer_settings_page(){
 		
 		if(!defined('FILEORGANIZER_PRO') || empty($disable_path_restriction)){
 			$verify = fileorganizer_validate_path($path);
-			$path =  $verify ? $path : ABSPATH;
+			$path =  $verify ? $path : $fileorganizer->default_path;
 			if(!$verify){
 				fileorganizer_notify(__('Invalid File Manager Path Detected!'), 'error');
 			}
@@ -157,7 +160,10 @@ function fileorganizer_settings_page(){
 				<h2 class="nav-tab-wrapper fileorganizer-wrapper">
 					<a href="#fileorganizer-general" class="fileorganizer-nav-tab nav-tab nav-tab-active"><?php esc_html_e('General'); ?></a>
 					<a href="#fileorganizer-advanced" class="fileorganizer-nav-tab nav-tab"><?php esc_html_e('Advanced'); ?></a>
+
+					<?php if(!defined('SITEPAD')) : ?>
 					<a href="#fileorganizer-support" class="fileorganizer-nav-tab nav-tab "><?php esc_html_e('Support'); ?></a>
+					<?php endif ; ?>
 				</h2>
 
 				<!-- General settings start -->
@@ -167,11 +173,11 @@ function fileorganizer_settings_page(){
 							<th scope="row"><?php esc_html_e('File Manager Path'); ?></th>
 							<td>
 								<div class="fileorganizer-form-input">
-									<input name="root_path" type="text" class="regular-text always_active" placeholder="<?php echo esc_attr(fileorganizer_cleanpath(ABSPATH)); ?>"  value="<?php if(!empty($settings['root_path'])){
+									<input name="root_path" type="text" class="regular-text always_active" placeholder="<?php echo esc_attr(fileorganizer_cleanpath($fileorganizer->default_path)); ?>"  value="<?php if(!empty($settings['root_path'])){
 										echo esc_attr($settings['root_path']);
 									}?>"> 
 									<p class="description">
-										<?php echo wp_kses_post(__( 'Set file manager root path.<br> Default path is:').'<code>'.fileorganizer_cleanpath(ABSPATH).__('</code><br>Please change the path carefully. an incorrect path can cause the FileOrganizer plugin to goes down.'));
+										<?php echo wp_kses_post(__( 'Set file manager root path.<br> Default path is:').'<code>'.fileorganizer_cleanpath($fileorganizer->default_path).__('</code><br>Please change the path carefully. an incorrect path can cause the FileOrganizer plugin to goes down.'));
 										?>
 									</p>
 									<?php 
@@ -436,7 +442,9 @@ function fileorganizer_settings_page(){
 				<!-- Support tab end -->
 			</div>
 		</form>
-	<?php fileorganizer_page_footer(); ?>
+		<?php if(!defined('SITEPAD')): ?>
+			<?php fileorganizer_page_footer(); ?>
+		<?php endif; ?>
 <script>
 jQuery(document).ready(function(){
 	

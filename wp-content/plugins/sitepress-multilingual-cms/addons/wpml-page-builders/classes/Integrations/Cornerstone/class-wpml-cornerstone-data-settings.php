@@ -34,6 +34,10 @@ class WPML_Cornerstone_Data_Settings implements IWPML_Page_Builders_Data_Setting
 			$converted_data = $data[0];
 		}
 
+		if ( is_array( $converted_data ) ) {
+			return $converted_data;
+		}
+
 		return json_decode( $converted_data, true );
 	}
 

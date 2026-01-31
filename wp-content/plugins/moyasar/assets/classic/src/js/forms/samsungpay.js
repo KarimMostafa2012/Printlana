@@ -197,7 +197,7 @@ class moyasarSamsungPayClassic {
             jQuery(document.body).on('checkout_error', moyasarSamsungPayClassic.samsungPayHandleCheckoutError);
         }
 
-        if (setDetection) {
+        if (setDetection && isSamsungPaySupported === true) {
 
             MoyasarTriggers.detectSelectedPaymentMethod(moyasarSamsungPayClassic.id, (isSelected) => {
                 if (isSelected) {

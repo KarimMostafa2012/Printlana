@@ -51,16 +51,13 @@ class WPML_Translation_Jobs_Migration_Hooks {
 
 	/**
 	 * @see
-	 * `WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Core_Status`
 	 * `WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Translation_Status`
 	 * `WPML_TM_Add_TP_ID_Column_To_Translation_Status`
 	 *
 	 * @return bool
 	 */
 	private function new_columns_are_not_added_yet() {
-		$has_columns = $this->schema->does_column_exist( 'icl_core_status', 'tp_revision' )
-			&& $this->schema->does_column_exist( 'icl_core_status', 'ts_status' )
-			&& $this->schema->does_column_exist( 'icl_translation_status', 'tp_revision' )
+		$has_columns = $this->schema->does_column_exist( 'icl_translation_status', 'tp_revision' )
 			&& $this->schema->does_column_exist( 'icl_translation_status', 'ts_status' )
 			&& $this->schema->does_column_exist( 'icl_translation_status', 'tp_id' );
 

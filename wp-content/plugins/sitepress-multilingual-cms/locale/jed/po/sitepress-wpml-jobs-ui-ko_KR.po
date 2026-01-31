@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
@@ -13,7 +15,7 @@ msgstr "작업 취소"
 
 #: src/js/jobs/components/Actions/ContinieReview.js:44
 msgid "Continue reviewing"
-msgstr "계속 검토하기"
+msgstr "계속 검토"
 
 #: src/js/jobs/components/Actions/DownloadXLIFF.js:33
 msgid "Start downloading XLIFF file"
@@ -25,7 +27,7 @@ msgstr "편집"
 
 #: src/js/jobs/components/Actions/GetTranslation.js:31
 msgid "Get translation"
-msgstr "번역 받기"
+msgstr "번역 가져오기"
 
 #: src/js/jobs/components/Actions/Resign.js:35
 msgid "Resign"
@@ -42,7 +44,7 @@ msgstr "번역"
 
 #: src/js/jobs/components/Actions/TakeAndTranslate.js:33
 msgid "Take and Translate"
-msgstr "가져와서 번역하기"
+msgstr "가져와서 번역"
 
 #: src/js/jobs/components/Actions/View.js:22
 msgid "View"
@@ -58,7 +60,7 @@ msgstr "번역을 초안으로 유지"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
 msgid "Never mind. I want to review these translations."
-msgstr "괜찮습니다. 이 번역들을 검토하고 싶습니다."
+msgstr "괜찮습니다. 이 번역을 검토하고 싶습니다."
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
 #: src/js/jobs/components/Filters/ActionFilters.js:60
@@ -69,7 +71,7 @@ msgstr "취소"
 msgid ""
 "This will remove the selected jobs from the Translations Queue without "
 "publishing them. What would you like to do with the translations?"
-msgstr "이 작업은 선택된 작업들을 게시하지 않고 번역 대기열에서 제거할 것입니다. 번역물을 어떻게 처리하시겠습니까?"
+msgstr "이렇게 하면 선택한 작업이 게시되지 않고 번역 대기열에서 제거됩니다. 번역을 어떻게 하시겠습니까?"
 
 #: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
 msgid "Cancel Translation Review"
@@ -88,13 +90,13 @@ msgstr "적용"
 msgid ""
 "Actions applied to multiple translation jobs can take a few seconds. Please "
 "do not leave the page."
-msgstr "여러 번역 작업에 적용된 작업은 몇 초가 걸릴 수 있습니다. 페이지를 떠나지 마세요."
+msgstr "여러 번역 작업에 적용되는 작업은 몇 초가 걸릴 수 있습니다. 페이지를 떠나지 마십시오."
 
 #: src/js/jobs/components/BulkActions/Info.js:9
 msgid ""
 "Actions applied to multiple translation jobs can take a few minutes. Please "
 "do not leave the page."
-msgstr "여러 번역 작업에 적용된 작업은 몇 분이 걸릴 수 있습니다. 페이지를 떠나지 마세요."
+msgstr "여러 번역 작업에 적용되는 작업은 몇 분이 걸릴 수 있습니다. 페이지를 떠나지 마십시오."
 
 #: src/js/jobs/components/Cells/AssignTranslator.js:35
 msgid "Select translator"
@@ -121,7 +123,7 @@ msgstr "진행 중"
 #: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
-msgstr "다운로드 준비된 번역"
+msgstr "번역 다운로드 준비 완료"
 
 #: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
@@ -131,7 +133,7 @@ msgstr "완료됨"
 #: src/js/jobs/components/Cells/StatusCell.js:25
 #. placeholder is the string package type. Could be WP Forms, ACF Field Groups.
 msgid "%s are immediately published because they don't support draft mode."
-msgstr "%s은(는) 초안 모드를 지원하지 않기 때문에 즉시 게시됩니다."
+msgstr "%s은(는) 초안 모드를 지원하지 않으므로 즉시 게시됩니다."
 
 #: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
@@ -155,7 +157,7 @@ msgstr "초안 — 검토 진행 중"
 
 #: src/js/jobs/components/Cells/StatusCell.js:51
 msgid "Insufficient funds"
-msgstr "자금 부족"
+msgstr "잔액 부족"
 
 #: src/js/jobs/components/Cells/StatusCell.js:57
 #: src/js/jobs/model/store/columnsManagement.js:42
@@ -182,7 +184,7 @@ msgstr "TP ID: %d"
 
 #: src/js/jobs/components/Filters/Buttons.js:8
 msgid "Reset"
-msgstr "초기화"
+msgstr "재설정"
 
 #: src/js/jobs/components/Filters/Buttons.js:9
 msgid "Filter"
@@ -206,7 +208,7 @@ msgstr "언어 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:111
 msgid "Batch name (%s)"
-msgstr "배치 이름 (%s)"
+msgstr "일괄 처리 이름 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:113
 msgid "Status (%s)"
@@ -218,7 +220,7 @@ msgstr "번역자 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:117
 msgid "Sent date (%s)"
-msgstr "전송 날짜 (%s)"
+msgstr "보낸 날짜 (%s)"
 
 #: src/js/jobs/components/Filters/FiltersList.js:119
 msgid "Deadline (%s)"
@@ -276,31 +278,31 @@ msgstr "정렬 취소"
 
 #: src/js/jobs/components/Table.js:97
 msgid "The bulk action is running..."
-msgstr "일괄 작업 실행 중..."
+msgstr "일괄 작업이 실행 중입니다..."
 
 #: src/js/jobs/components/XliffBox/Export.js:54
 msgid "Export all jobs to XLIFF 1.0"
-msgstr "모든 작업을 XLIFF 1.0으로 내보내기."
+msgstr "모든 작업을 XLIFF 1.0으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:55
 msgid "Export all filtered jobs to XLIFF 1.0"
-msgstr "필터링된 모든 작업을 XLIFF 1.0으로 내보내기."
+msgstr "필터링된 모든 작업을 XLIFF 1.0으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:61
 msgid "Export all jobs to XLIFF 1.1"
-msgstr "모든 작업을 XLIFF 1.1로 내보내기."
+msgstr "모든 작업을 XLIFF 1.1으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:62
 msgid "Export all filtered jobs to XLIFF 1.1"
-msgstr "필터링된 모든 작업을 XLIFF 1.1로 내보내기."
+msgstr "필터링된 모든 작업을 XLIFF 1.1으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:68
 msgid "Export all jobs to XLIFF 1.2"
-msgstr "모든 작업을 XLIFF 1.2로 내보내기."
+msgstr "모든 작업을 XLIFF 1.2으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:69
 msgid "Export all filtered jobs to XLIFF 1.2"
-msgstr "필터링된 모든 작업을 XLIFF 1.2로 내보내기."
+msgstr "필터링된 모든 작업을 XLIFF 1.2으로 내보내기"
 
 #: src/js/jobs/components/XliffBox/Export.js:81
 msgid "Export"
@@ -333,11 +335,11 @@ msgstr "작업"
 #: src/js/jobs/components/columns.js:113
 #: src/js/jobs/model/store/columnsManagement.js:90
 msgid "Batch name"
-msgstr "배치 이름"
+msgstr "일괄 처리 이름"
 
 #: src/js/jobs/components/columns.js:184
 msgid "Filter by %s"
-msgstr "%s로 필터링"
+msgstr "%s별로 필터링"
 
 #: src/js/jobs/components/columns.js:66
 #: src/js/jobs/model/store/columnsManagement.js:71
@@ -362,35 +364,35 @@ msgstr "XLIFF %s로 내보내기"
 
 #: src/js/jobs/hooks/BulkActions/useGetTranslationsAction.js:13
 msgid "Get translations"
-msgstr "번역 받기"
+msgstr "번역 가져오기"
 
 #: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
 msgid "This action does not apply to any of the selected translation jobs"
-msgstr "이 작업은 선택된 번역 작업 중 어느 것에도 적용되지 않습니다"
+msgstr "이 작업은 선택한 번역 작업에 적용되지 않습니다."
 
 #: src/js/jobs/model/store/applyTranslations.js:30
 msgid "Translations have been downloaded"
-msgstr "번역이 다운로드되었습니다"
+msgstr "번역이 다운로드되었습니다."
 
 #: src/js/jobs/model/store/applyTranslations.js:31
 msgid "Translation has been downloaded"
-msgstr "번역이 다운로드되었습니다"
+msgstr "번역이 다운로드되었습니다."
 
 #: src/js/jobs/model/store/applyTranslations.js:36
 msgid "Translations could not be downloaded"
-msgstr "번역을 다운로드할 수 없습니다"
+msgstr "번역을 다운로드할 수 없습니다."
 
 #: src/js/jobs/model/store/applyTranslations.js:37
 msgid "Translation could not be downloaded"
-msgstr "번역을 다운로드할 수 없습니다"
+msgstr "번역을 다운로드할 수 없습니다."
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:10
 msgid "Approving translations reviews failed!"
-msgstr "번역 검토 승인에 실패했습니다!"
+msgstr "번역 검토 승인 실패!"
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:38
 msgid "Failed approving translations for the following posts: "
-msgstr "다음 게시물의 번역 승인에 실패했습니다: "
+msgstr "다음 게시물에 대한 번역 승인 실패: "
 
 #: src/js/jobs/model/store/approveTranslationsReviews.js:51
 msgid "Translations reviews approved successfully!"
@@ -402,48 +404,48 @@ msgstr "번역 검토를 승인할 유효한 작업이 선택되지 않았습니
 
 #: src/js/jobs/model/store/assignTranslator.js:17
 msgid "The translator has been assigned to the job"
-msgstr "번역가가 작업에 할당되었습니다"
+msgstr "번역가가 작업에 할당되었습니다."
 
 #: src/js/jobs/model/store/assignTranslator.js:22
 #: src/js/jobs/model/store/openEditor.js:37
 msgid "The translator could not be assigned to the job"
-msgstr "번역가를 작업에 할당할 수 없습니다"
+msgstr "번역가를 작업에 할당할 수 없습니다."
 
 #: src/js/jobs/model/store/cancelJobs.js:22
 msgid "The jobs have been cancelled"
-msgstr "작업이 취소되었습니다"
+msgstr "작업이 취소되었습니다."
 
 #: src/js/jobs/model/store/cancelJobs.js:23
 msgid "The job has been cancelled"
-msgstr "작업이 취소되었습니다"
+msgstr "작업이 취소되었습니다."
 
 #: src/js/jobs/model/store/cancelJobs.js:30
 msgid "The jobs could not be cancelled"
-msgstr "작업을 취소할 수 없습니다"
+msgstr "작업을 취소할 수 없습니다."
 
 #: src/js/jobs/model/store/cancelJobs.js:31
 msgid "The job could not be cancelled"
-msgstr "작업을 취소할 수 없습니다"
+msgstr "작업을 취소할 수 없습니다."
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:26
 msgid "Translation reviews have been canceled"
-msgstr "번역 검토가 취소되었습니다"
+msgstr "번역 검토가 취소되었습니다."
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:27
 msgid "Translation review has been canceled"
-msgstr "번역 검토가 취소되었습니다"
+msgstr "번역 검토가 취소되었습니다."
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:33
 msgid "Translation reviews could not be canceled"
-msgstr "번역 검토를 취소할 수 없습니다"
+msgstr "번역 검토를 취소할 수 없습니다."
 
 #: src/js/jobs/model/store/cancelTranslationReviews.js:34
 msgid "Translation review could not be canceled"
-msgstr "번역 검토를 취소할 수 없습니다"
+msgstr "번역 검토를 취소할 수 없습니다."
 
 #: src/js/jobs/model/store/columnsManagement.js:106
 msgid "Sent on"
-msgstr "전송일"
+msgstr "보낸 날짜"
 
 #: src/js/jobs/model/store/columnsManagement.js:114
 msgid "Deadline"
@@ -475,82 +477,81 @@ msgstr "번역자"
 
 #: src/js/jobs/model/store/downloadXliff.js:11
 msgid "Download XLIFF file couldn't be finished"
-msgstr "XLIFF 파일 다운로드를 완료할 수 없습니다"
+msgstr "XLIFF 파일 다운로드를 완료할 수 없습니다."
 
 #: src/js/jobs/model/store/exportToXLIFF.js:20
 msgid "Could not load jobs for export"
-msgstr "내보내기 위한 작업을 불러올 수 없습니다"
+msgstr "내보낼 작업을 로드할 수 없습니다."
 
 #: src/js/jobs/model/store/exportToXLIFF.js:44
 msgid "The export to XLIFF failed"
-msgstr "XLIFF로 내보내기에 실패했습니다"
+msgstr "XLIFF로 내보내기 실패"
 
 #: src/js/jobs/model/store/importXLIFF.js:26
 msgid "Imported %d jobs"
-msgstr "%d 작업을 가져왔습니다"
+msgstr "%d개 작업 가져옴"
 
 #: src/js/jobs/model/store/importXLIFF.js:27
 msgid "Imported one job"
-msgstr "하나의 작업을 가져왔습니다"
+msgstr "작업 하나 가져옴"
 
 #: src/js/jobs/model/store/importXLIFF.js:41
 msgid "Could not import any job"
-msgstr "어떤 작업도 가져올 수 없습니다"
+msgstr "어떤 작업도 가져올 수 없습니다."
 
 #: src/js/jobs/model/store/importXLIFF.js:45
 msgid "Import failed!"
-msgstr "가져오기에 실패했습니다!"
+msgstr "가져오기 실패!"
 
 #: src/js/jobs/model/store/jobs.js:18
 msgid "Loading translations queue"
-msgstr "번역 대기열 불러오는 중"
+msgstr "번역 대기열 로드 중"
 
 #: src/js/jobs/model/store/jobs.js:19
 msgid "Loading translation jobs"
-msgstr "번역 작업 불러오는 중"
+msgstr "번역 작업 로드 중"
 
 #: src/js/jobs/model/store/jobs.js:82
 msgid "Jobs could not be loaded"
-msgstr "작업을 불러올 수 없습니다"
+msgstr "작업을 로드할 수 없습니다."
 
 #: src/js/jobs/model/store/resign.js:12
 msgid "Specify some jobs to resign"
-msgstr "사임할 작업을 지정하세요"
+msgstr "사임할 작업을 지정하세요."
 
 #: src/js/jobs/model/store/resign.js:22
 msgid "We could not resign jobs: %s"
-msgstr "다음 작업을 사임할 수 없습니다: %s"
+msgstr "작업을 사임할 수 없습니다: %s"
 
 #: src/js/jobs/model/store/resign.js:34
 msgid "Resigned from jobs"
-msgstr "직장에서 사직함"
+msgstr "작업에서 사임했습니다."
 
 #: src/js/jobs/model/store/resign.js:35
 msgid "Resigned from job"
-msgstr "직장에서 사직함"
+msgstr "작업에서 사임했습니다."
 
 #: src/js/jobs/model/store/resign.js:39
 msgid "Failed to resign from jobs"
-msgstr "직장에서 사직하지 못함"
+msgstr "작업에서 사임 실패"
 
 #: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
-msgstr "고급 편집기 작업 동기화에 실패함"
+msgstr "고급 편집기 작업 동기화 실패"
 
 #: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
 msgid "Synchronization with the Professional Translation service has failed"
-msgstr "전문 번역 서비스와의 동기화에 실패함"
+msgstr "전문 번역 서비스와의 동기화 실패"
 
 #: src/js/jobs/model/store/translationBatchSync.js:68
 msgid "%d translation has been downloaded"
 msgid_plural "%d translations have been downloaded"
-msgstr[0] "%d 번역이 다운로드되었습니다"
-msgstr[1] "%d 번역이 다운로드되었습니다"
+msgstr[0] "%d개의 번역이 다운로드되었습니다."
 
 #: src/js/jobs/model/store/translationBatchSync.js:83
 msgid "Batch sync finished successfully!"
-msgstr "일괄 동기화가 성공적으로 완료됨!"
+msgstr "일괄 동기화가 성공적으로 완료되었습니다!"
 
 #: src/js/jobs/model/store/translationBatchSync.js:88
 msgid "Batch sync couldn't be finished"
-msgstr "일괄 동기화를 완료할 수 없음"
+msgstr "일괄 동기화를 완료할 수 없습니다."

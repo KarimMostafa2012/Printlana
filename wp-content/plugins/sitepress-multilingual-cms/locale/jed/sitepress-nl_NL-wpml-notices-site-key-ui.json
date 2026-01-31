@@ -3,34 +3,36 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "nl_NL"
          },
          "Get a key for this site": [
-            "Verkrijg een sleutel voor deze site"
+            "Vraag een sleutel aan voor deze site"
          ],
          "Site key:": [
             "Sitesleutel:"
          ],
          "Enter your site key here": [
-            "Voer hier je sitesleutel in"
+            "Voer hier uw sitesleutel in"
          ],
          "Registering...": [
-            "Bezig met registreren..."
+            "Registreren..."
          ],
          "Register": [
             "Registreren"
          ],
          "A New Site Key Is Required": [
-            "Er is een nieuwe sitesleutel vereist"
+            "Een nieuwe sitesleutel is vereist"
          ],
          "To continue using WPML features like automatic translation and plugin updates, please register your site again. Don’t worry, your existing content and translations are safe.": [
-            "Om WPML-functies zoals automatische vertaling en plugin-updates te blijven gebruiken, moet je je site opnieuw registreren. Maak je geen zorgen, je bestaande inhoud en vertalingen blijven veilig."
+            "Om WPML-functies zoals automatische vertaling en plugin-updates te blijven gebruiken, moet u uw site opnieuw registreren. Maak u geen zorgen, uw bestaande inhoud en vertalingen zijn veilig."
          ],
          "Site key registered successfully!": [
             "Sitesleutel succesvol geregistreerd!"
          ],
          "Page will reload in %d seconds...": [
-            "De pagina wordt over %d seconden herladen..."
+            "Pagina wordt opnieuw geladen over %d seconden..."
          ],
          "Registration failed. Please try again.": [
             "Registratie mislukt. Probeer het opnieuw."

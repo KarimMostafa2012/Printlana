@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Advanced Product Sample for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://www.multidots.com/contact/\n"
 "POT-Creation-Date: 2022-09-30 12:25:31+00:00\n"
-"PO-Revision-Date: 2024-09-23 11:47+0000\n"
+"PO-Revision-Date: 2025-10-15 04:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Loco-Version: 2.5.8; wp-5.9\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: public/class-free-product-sample-for-woocommer-public.php:2147
+#: public/class-free-product-sample-for-woocommer-public.php:2241
 msgid " - Sample"
 msgstr ""
 
@@ -37,27 +37,27 @@ msgstr ""
 msgid " to view license and terms of use."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:2726
+#: public/class-free-product-sample-for-woocommer-public.php:2848
 msgid "#000"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:2725
+#: public/class-free-product-sample-for-woocommer-public.php:2847
 msgid "#fff"
 msgstr ""
 
-#: free-product-sample.php:285
+#: free-product-sample.php:293
 msgid "%1$s requires %2$s to be installed & activated!"
 msgstr ""
 
 #. translators: %s: product name
-#: public/class-free-product-sample-for-woocommer-public.php:2172
+#: public/class-free-product-sample-for-woocommer-public.php:2266
 msgid "%s has been added to your cart."
 msgid_plural "%s have been added to your cart."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: Attribute name.
-#: public/class-free-product-sample-for-woocommer-public.php:1175
+#: public/class-free-product-sample-for-woocommer-public.php:1255
 msgid "%s is a required field"
 msgid_plural "%s are required fields"
 msgstr[0] ""
@@ -189,15 +189,15 @@ msgstr ""
 #: admin/partials/dsfps-admin-settings-page.php:1461
 #: admin/partials/dsfps-admin-settings-page.php:1468
 #: admin/partials/dsfps-admin-settings-page.php:1476
-#: public/class-free-product-sample-for-woocommer-public.php:2734
+#: public/class-free-product-sample-for-woocommer-public.php:2856
 msgid "_self"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
+#: follow-up-email/templates/emails/partials/sample-product-list.php:37
 msgid "Action"
 msgstr ""
 
-#: free-product-sample.php:158
+#: free-product-sample.php:166
 msgid "Activate Plugin"
 msgstr ""
 
@@ -346,11 +346,13 @@ msgstr ""
 msgid "Button Padding (px)"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:57
+#: follow-up-email/templates/emails/partials/sample-product-list.php:72
+#: follow-up-email/templates/emails/partials/sample-product-list.php:98
 msgid "Buy Now"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:72
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:58
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:73
 msgid "Buy Now - "
 msgstr ""
 
@@ -506,9 +508,9 @@ msgstr ""
 msgid "Dimensions (L×W×H) (%s)"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:3138
-#: public/class-free-product-sample-for-woocommer-public.php:3146
-#: public/class-free-product-sample-for-woocommer-public.php:3150
+#: public/class-free-product-sample-for-woocommer-public.php:3273
+#: public/class-free-product-sample-for-woocommer-public.php:3281
+#: public/class-free-product-sample-for-woocommer-public.php:3285
 msgid "Dimensions - [Sample]"
 msgstr ""
 
@@ -524,7 +526,7 @@ msgstr ""
 msgid "Do you offer support for the plugin? What’s it like?"
 msgstr ""
 
-#: includes/class-free-product-sample-for-woocommerce.php:274
+#: includes/class-free-product-sample-for-woocommerce.php:279
 msgid "Docs"
 msgstr ""
 
@@ -533,7 +535,7 @@ msgid "Done"
 msgstr ""
 
 #: admin/partials/dsfps-admin-settings-page.php:690
-#: public/class-free-product-sample-for-woocommer-public.php:2942
+#: public/class-free-product-sample-for-woocommer-public.php:3077
 msgid "Done!"
 msgstr ""
 
@@ -683,7 +685,7 @@ msgstr ""
 #: admin/partials/dsfps-admin-settings-page.php:1357
 #: admin/partials/dsfps-admin-settings-page.php:1361
 #: admin/partials/dsfps-admin-settings-page.php:1366
-#: public/class-free-product-sample-for-woocommer-public.php:2724
+#: public/class-free-product-sample-for-woocommer-public.php:2846
 msgid "Exclusive Offers"
 msgstr ""
 
@@ -743,7 +745,7 @@ msgid "Get Premium"
 msgstr ""
 
 #: admin/partials/dots-upgrade-dashboard.php:227
-#: admin/partials/dots-upgrade-dashboard.php:327
+#: admin/partials/dots-upgrade-dashboard.php:326
 msgid "Get The Premium Version"
 msgstr ""
 
@@ -858,7 +860,7 @@ msgstr ""
 msgid "https://www.google.com/"
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:310
+#: admin/partials/dots-upgrade-dashboard.php:309
 msgid "I have more questions…"
 msgstr ""
 
@@ -891,15 +893,15 @@ msgid "Introduce a 10% sample cost applicable to all guest users."
 msgstr ""
 
 #. translators: %s: Attribute name.
-#: public/class-free-product-sample-for-woocommer-public.php:1167
+#: public/class-free-product-sample-for-woocommer-public.php:1247
 msgid "Invalid value posted for %s"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:2142
-#: public/class-free-product-sample-for-woocommer-public.php:2150
-#: public/class-free-product-sample-for-woocommer-public.php:2154
-#: public/class-free-product-sample-for-woocommer-public.php:2159
-#: public/class-free-product-sample-for-woocommer-public.php:2164
+#: public/class-free-product-sample-for-woocommer-public.php:2236
+#: public/class-free-product-sample-for-woocommer-public.php:2244
+#: public/class-free-product-sample-for-woocommer-public.php:2248
+#: public/class-free-product-sample-for-woocommer-public.php:2253
+#: public/class-free-product-sample-for-woocommer-public.php:2258
 msgctxt "Item name in quotes"
 msgid "&ldquo;%s&rdquo;"
 msgstr ""
@@ -1041,12 +1043,12 @@ msgstr ""
 msgid "Never miss an important update"
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:316
+#: admin/partials/dots-upgrade-dashboard.php:315
 msgid "No problem, we’re happy to help! Please reach out at %s."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:3536
-#: public/class-free-product-sample-for-woocommer-public.php:3544
+#: public/class-free-product-sample-for-woocommer-public.php:3671
+#: public/class-free-product-sample-for-woocommer-public.php:3679
 msgid "No product matching your criteria."
 msgstr ""
 
@@ -1089,7 +1091,7 @@ msgid ""
 "the most traction."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:1802
+#: public/class-free-product-sample-for-woocommer-public.php:1892
 msgid ""
 "Oops! It seems that you've added both samples and actual products to your "
 "cart. To proceed with your checkout, please remove either the samples or the "
@@ -1104,9 +1106,9 @@ msgid ""
 "No personal data is tracked or stored."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:72
-#: public/class-free-product-sample-for-woocommer-public.php:117
-#: public/class-free-product-sample-for-woocommer-public.php:258
+#: public/class-free-product-sample-for-woocommer-public.php:74
+#: public/class-free-product-sample-for-woocommer-public.php:123
+#: public/class-free-product-sample-for-woocommer-public.php:278
 msgid "Order a Sample"
 msgstr ""
 
@@ -1166,7 +1168,7 @@ msgstr ""
 msgid "Personal Plan"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:1136
+#: public/class-free-product-sample-for-woocommer-public.php:1216
 msgid "Please choose product options&hellip;"
 msgstr ""
 
@@ -1192,11 +1194,12 @@ msgstr ""
 msgid "Prevent Sample & Real Products to Ordered"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
+#: follow-up-email/templates/emails/partials/sample-product-list.php:36
 msgid "Price"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:69
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:55
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:70
 msgid "Price - "
 msgstr ""
 
@@ -1212,13 +1215,21 @@ msgstr ""
 msgid "Pro"
 msgstr ""
 
+#: follow-up-email/templates/emails/partials/sample-product-list.php:35
+msgid "Product"
+msgstr ""
+
 #: admin/partials/dsfps-information-page.php:41
-#: follow-up-email/templates/emails/sample-email-html-template__premium_only.php:31
 msgid "Product Name"
 msgstr ""
 
-#: follow-up-email/templates/emails/sample-email-plain-template__premium_only.php:66
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:52
+#: follow-up-email/templates/emails/partials/sample-product-list-plain.php:67
 msgid "Product Name - "
+msgstr ""
+
+#: public/class-free-product-sample-for-woocommer-public.php:1006
+msgid "Product name with sample prefix if applicable"
 msgstr ""
 
 #: admin/class-free-product-sample-for-woocommer-admin.php:159
@@ -1317,22 +1328,22 @@ msgstr ""
 msgid "Sample"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:2139
-#: public/class-free-product-sample-for-woocommer-public.php:2152
-#: public/class-free-product-sample-for-woocommer-public.php:2157
-#: public/class-free-product-sample-for-woocommer-public.php:2162
+#: public/class-free-product-sample-for-woocommer-public.php:2233
+#: public/class-free-product-sample-for-woocommer-public.php:2246
+#: public/class-free-product-sample-for-woocommer-public.php:2251
+#: public/class-free-product-sample-for-woocommer-public.php:2256
 msgid "Sample - "
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:300
-#: public/class-free-product-sample-for-woocommer-public.php:306
-#: public/class-free-product-sample-for-woocommer-public.php:309
-#: public/class-free-product-sample-for-woocommer-public.php:570
-#: public/class-free-product-sample-for-woocommer-public.php:576
-#: public/class-free-product-sample-for-woocommer-public.php:579
-#: public/class-free-product-sample-for-woocommer-public.php:2843
-#: public/class-free-product-sample-for-woocommer-public.php:2849
-#: public/class-free-product-sample-for-woocommer-public.php:2852
+#: public/class-free-product-sample-for-woocommer-public.php:320
+#: public/class-free-product-sample-for-woocommer-public.php:326
+#: public/class-free-product-sample-for-woocommer-public.php:329
+#: public/class-free-product-sample-for-woocommer-public.php:596
+#: public/class-free-product-sample-for-woocommer-public.php:602
+#: public/class-free-product-sample-for-woocommer-public.php:605
+#: public/class-free-product-sample-for-woocommer-public.php:2965
+#: public/class-free-product-sample-for-woocommer-public.php:2971
+#: public/class-free-product-sample-for-woocommer-public.php:2974
 msgid "Sample - Out of stock"
 msgstr ""
 
@@ -1382,7 +1393,7 @@ msgstr ""
 msgid "Sample Product Type Title"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:2502
+#: public/class-free-product-sample-for-woocommer-public.php:2623
 msgid "Sample Products"
 msgstr ""
 
@@ -1518,7 +1529,7 @@ msgid ""
 "dynamically display the sample price."
 msgstr ""
 
-#: includes/class-free-product-sample-for-woocommerce.php:273
+#: includes/class-free-product-sample-for-woocommerce.php:278
 msgid "Settings"
 msgstr ""
 
@@ -1552,8 +1563,8 @@ msgid "Social Media"
 msgstr ""
 
 #: admin/partials/dsfps-admin-settings-page.php:942
-#: public/class-free-product-sample-for-woocommer-public.php:1427
-#: public/class-free-product-sample-for-woocommer-public.php:1616
+#: public/class-free-product-sample-for-woocommer-public.php:1507
+#: public/class-free-product-sample-for-woocommer-public.php:1701
 msgid "Sorry! you reached maximum sample limit for this product!"
 msgstr ""
 
@@ -1622,7 +1633,7 @@ msgid "Suggest"
 msgstr ""
 
 #: admin/partials/header/plugin-header.php:52
-#: includes/class-free-product-sample-for-woocommerce.php:275
+#: includes/class-free-product-sample-for-woocommerce.php:280
 msgid "Support"
 msgstr ""
 
@@ -1665,10 +1676,10 @@ msgid ""
 "incredible</strong>."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:1704
+#: public/class-free-product-sample-for-woocommer-public.php:1789
 msgid ""
-"The maximum allows order quantity is %s for sample product and you have %s "
-"in your cart."
+"The maximum allows order quantity is %1$s for sample product and you have "
+"%2$s in your cart."
 msgstr ""
 
 #: admin/partials/dsfps-admin-settings-page.php:962
@@ -1677,10 +1688,10 @@ msgid ""
 "have {CART_QTY} in your cart."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:1496
-#: public/class-free-product-sample-for-woocommer-public.php:1783
+#: public/class-free-product-sample-for-woocommer-public.php:1581
+#: public/class-free-product-sample-for-woocommer-public.php:1873
 msgid ""
-"The maximum order limit for the \"%s\" sample is %s and you have already "
+"The maximum order limit for the \"%1$s\" sample is %2$s and you have already "
 "ordered it."
 msgstr ""
 
@@ -1842,14 +1853,14 @@ msgstr ""
 msgid "Verified Customer"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:78
-#: public/class-free-product-sample-for-woocommer-public.php:100
-#: public/class-free-product-sample-for-woocommer-public.php:124
-#: public/class-free-product-sample-for-woocommer-public.php:2175
+#: public/class-free-product-sample-for-woocommer-public.php:80
+#: public/class-free-product-sample-for-woocommer-public.php:106
+#: public/class-free-product-sample-for-woocommer-public.php:130
+#: public/class-free-product-sample-for-woocommer-public.php:2269
 msgid "View cart"
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:305
+#: admin/partials/dots-upgrade-dashboard.php:304
 msgid "We have a 14-day money-back guarantee."
 msgstr ""
 
@@ -1870,9 +1881,9 @@ msgstr ""
 msgid "Weight (kg)"
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:3137
-#: public/class-free-product-sample-for-woocommer-public.php:3145
-#: public/class-free-product-sample-for-woocommer-public.php:3149
+#: public/class-free-product-sample-for-woocommer-public.php:3272
+#: public/class-free-product-sample-for-woocommer-public.php:3280
+#: public/class-free-product-sample-for-woocommer-public.php:3284
 msgid "Weight - [Sample]"
 msgstr ""
 
@@ -1893,11 +1904,11 @@ msgstr ""
 msgid "Welcome! 🤗"
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:294
+#: admin/partials/dots-upgrade-dashboard.php:293
 msgid "What payment methods do you accept?"
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:302
+#: admin/partials/dots-upgrade-dashboard.php:301
 msgid "What’s your refund policy?"
 msgstr ""
 
@@ -1915,8 +1926,8 @@ msgid ""
 "quantities of a sample product, the subtotal will still be $1 instead of $2."
 msgstr ""
 
-#: public/class-free-product-sample-for-woocommer-public.php:958
-msgid "Whether a product was added via at checkout bump."
+#: public/class-free-product-sample-for-woocommer-public.php:1001
+msgid "Whether this is a sample product"
 msgstr ""
 
 #: admin/class-free-product-sample-for-woocommer-admin.php:727
@@ -1935,7 +1946,7 @@ msgstr ""
 msgid "Winning Order Auto Follow-Up Emails"
 msgstr ""
 
-#: free-product-sample.php:280
+#: free-product-sample.php:288
 msgid "WooCommerce"
 msgstr ""
 
@@ -1965,8 +1976,8 @@ msgstr ""
 
 #: admin/partials/dots-upgrade-dashboard.php:283
 msgid ""
-"Yes! You can read our %s or submit a %s. We are very responsive and strive "
-"to do our best to help you."
+"Yes! You can read our %1$s or submit a %2$s. We are very responsive and "
+"strive to do our best to help you."
 msgstr ""
 
 #: admin/partials/dots-plugin-setup-wizard.php:42
@@ -1997,7 +2008,7 @@ msgid ""
 "for access by user role types, such as shop manager, customer, etc."
 msgstr ""
 
-#: admin/partials/dots-upgrade-dashboard.php:297
+#: admin/partials/dots-upgrade-dashboard.php:296
 msgid ""
 "You can pay with your credit card using Stripe checkout. Or your PayPal "
 "account."

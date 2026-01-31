@@ -2,10 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
 msgid "Advanced"
-msgstr "Расширенные"
+msgstr "Дополнительно"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
 msgid "HTML anchor"
@@ -13,11 +15,11 @@ msgstr "HTML-якорь"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
 msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
-msgstr "Добавьте ярлык для этого блока при загрузке страницы, используя URL “#anchor”."
+msgstr "Добавьте ярлык к этому блоку при загрузке страницы, используя URL-адрес «#anchor»."
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
 msgid "Additional CSS class(es)"
-msgstr "Дополнительный CSS-класс(ы)"
+msgstr "Дополнительный класс(ы) CSS"
 
 #: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
 msgid "Separate multiple classes with spaces."
@@ -30,7 +32,7 @@ msgstr "Цвет"
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
 msgid "px"
-msgstr "px"
+msgstr "пикс."
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
 #: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
@@ -59,11 +61,11 @@ msgstr "ЯЗЫК"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
 msgid "Language spacing"
-msgstr "Интервал языка"
+msgstr "Межъязыковой интервал"
 
 #: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
 msgid "Language padding"
-msgstr "Отступ языка"
+msgstr "Внутренний отступ языка"
 
 #: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
 msgid "Display"
@@ -107,7 +109,7 @@ msgstr "Разрешить перенос на несколько строк"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
 msgid "Open on click"
-msgstr "Открыть при нажатии"
+msgstr "Открыть по клику"
 
 #: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
 msgid "Show arrow"
@@ -127,7 +129,7 @@ msgstr "Ориентация"
 
 #: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
-msgstr "Типография"
+msgstr "Типографика"
 
 #: src/js/blocks/LanguageSwitcher/attributes/color.js:116
 #: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
@@ -153,7 +155,7 @@ msgstr "Фон текущего языка"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:5
 msgid "Full name"
-msgstr "Полное название"
+msgstr "Полное имя"
 
 #: src/js/blocks/LanguageSwitcher/attributes/display.js:9
 msgid "Code"
@@ -173,15 +175,15 @@ msgstr "Выровнять элементы по правому краю"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
 msgid "Justify items space between"
-msgstr "Выровнять элементы с пространством между"
+msgstr "Выровнять элементы с равномерным распределением"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
 msgid "Horizontal"
-msgstr "Горизонтальный"
+msgstr "Горизонтально"
 
 #: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
 msgid "Vertical"
-msgstr "Вертикальный"
+msgstr "Вертикально"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
 msgid "Normal"
@@ -201,15 +203,15 @@ msgstr "Очень большой"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
 msgid "Ab"
-msgstr "Ab"
+msgstr "Аб"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
 msgid "AB"
-msgstr "AB"
+msgstr "АБ"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
 msgid "ab"
-msgstr "ab"
+msgstr "аб"
 
 #: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
 msgid "Small"
@@ -237,7 +239,7 @@ msgstr "Отображает переключатель языков WPML. <br/>
 
 #: src/js/blocks/NavigationLanguageSwitcher/index.js:38
 msgid "Navigation Language Switcher"
-msgstr "Навигационный переключатель языков"
+msgstr "Переключатель языков навигации"
 
 #: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
 msgid "Reset all"

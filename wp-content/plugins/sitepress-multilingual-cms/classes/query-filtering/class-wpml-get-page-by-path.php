@@ -62,9 +62,14 @@ class WPML_Get_Page_By_Path {
 	 * @see get_page_by_path where the cache key is built
 	 */
 	private function clear_cache( $page_name, $post_type ) {
-		$last_changed = wp_cache_get_last_changed( 'posts' );
-		$hash         = md5( $page_name . serialize( $post_type ) );
-		$cache_key    = "get_page_by_path:$hash:$last_changed";
+		$hash = md5( $page_name . serialize( $post_type ) );
+		// For WP 6.8.3 or lower, use $last_changed in the cache key.
+		$last_changed             = wp_cache_get_last_changed( 'posts' );
+		$cache_key_with_timestamp = "get_page_by_path:$hash:$last_changed";
+		wp_cache_delete( $cache_key_with_timestamp, 'posts' );
+		wp_cache_delete( $cache_key_with_timestamp, 'post-queries' );
+		// For WP 6.9, remove $last_changed in the cache key.
+		$cache_key = "get_page_by_path:$hash";
 		wp_cache_delete( $cache_key, 'posts' );
 		wp_cache_delete( $cache_key, 'post-queries' );
 	}

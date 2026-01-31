@@ -2,6 +2,8 @@
 
 namespace WeDevs\DokanPro\Modules\TableRateShipping;
 
+use WeDevs\DokanPro\Modules\TableRate\Models\DistanceRateShipping;
+
 class Module {
 
     /**
@@ -164,9 +166,10 @@ class Module {
 
         $script_assets = DOKAN_TABLE_RATE_SHIPPING_DIR . '/assets/js/table-rate-shipping-vendor.asset.php';
         if ( file_exists( $script_assets ) ) {
-            $vendor_asset = require $script_assets;
-            $dependencies = $vendor_asset['dependencies'] ?? [];
-            $version      = $vendor_asset['version'] ?? '';
+            $vendor_asset     = require $script_assets;
+            $dependencies     = $vendor_asset['dependencies'] ?? [];
+            $version          = $vendor_asset['version'] ?? '';
+	        $dokan_appearance = get_option( 'dokan_appearance', [] );
 
             wp_register_style(
                 'dokan-table-rate-shipping-app',
@@ -190,6 +193,7 @@ class Module {
 	                'enable_woo_shipping' => wc_shipping_enabled(),
                     'shipping_class'      => WC()->shipping->get_shipping_classes(),
                     'weight_unit'         => get_option( 'woocommerce_weight_unit' ),
+	                'map_api_key'         => $dokan_appearance['gmap_api_key'] ?? '',
                 ]
             );
         }
@@ -286,16 +290,10 @@ class Module {
      * @return array $results
      */
     public function get_distance_rate_info( $id = 0, $seller_id = 0 ) {
-        global $wpdb;
-
+        // Get the rate info by seller id.
         $seller_id = empty( $seller_id ) ? dokan_get_current_user_id() : $seller_id;
-        $query     = $wpdb->prepare( "SELECT * from {$wpdb->prefix}dokan_distance_rate_shipping WHERE seller_id = %d", $seller_id );
 
-        if ( $id ) {
-            $query .= $wpdb->prepare( ' AND id = %d', $id );
-        }
-
-        return $wpdb->get_results( $query ); //phpcs:ignore
+        return DistanceRateShipping::get_rate_info_by_seller( $id, $seller_id );
     }
 
     /**
@@ -402,10 +400,12 @@ class Module {
      *
      * @since 3.4.2
      *
+     * @param int $instance_id
+     *
      * @return void
      */
-    public function get_normalized_shipping_distance_rates() {
-        $instance_id = isset( $_GET['instance_id'] ) ? intval( wp_unslash( $_GET['instance_id'] ) ) : 0; // phpcs:ignore
+    public function get_normalized_shipping_distance_rates( int $instance_id = 0 ) {
+        $instance_id = isset( $_GET['instance_id'] ) ? intval( wp_unslash( $_GET['instance_id'] ) ) : $instance_id; // phpcs:ignore
 
         if ( ! $instance_id ) {
             return;
@@ -442,11 +442,10 @@ class Module {
      * @return mixed
      */
     public function get_shipping_distance_rates( $output = OBJECT, $instance_id = null ) {
-        global $wpdb;
-
-        $rates = $wpdb->get_results( $wpdb->prepare( "SELECT * from {$wpdb->prefix}dokan_distance_rate_shipping WHERE instance_id = %d ORDER BY rate_order ASC", $instance_id ), $output );
-
-        return apply_filters( 'dokan_distance_rate_get_shipping_rates', $rates );
+        return apply_filters(
+            'dokan_distance_rate_get_shipping_rates',
+            DistanceRateShipping::get_shipping_rates( $output, $instance_id )
+        );
     }
 
     /**
@@ -528,17 +527,58 @@ class Module {
     public function distance_rate_delete() {
         check_ajax_referer( 'dokan-delete-table-rate', 'security' );
 
-        $rate_ids = array();
+	    if ( isset( $_POST['rate_id'] ) && is_array( $_POST['rate_id'] ) ) {
+		    $rate_ids = array_map( 'intval', wp_unslash( $_POST['rate_id'] ) );
+	    } else {
+		    $rate_ids = array( intval( wp_unslash( $_POST['rate_id'] ) ) );
+	    }
 
-        if ( isset( $_POST['rate_id'] ) ) {
-            $rate_ids = is_array( $_POST['rate_id'] ) ? array_map( 'intval', wp_unslash( $_POST['rate_id'] ) ) : array( intval( wp_unslash( $_POST['rate_id'] ) ) );
-        }
-
-        if ( ! empty( $rate_ids ) ) {
-            global $wpdb;
-            $wpdb->query( "DELETE FROM {$wpdb->prefix}dokan_distance_rate_shipping WHERE rate_id IN (" . implode( ',', $rate_ids ) . ')' );
-        }
+	    $this->delete_distance_rates( $rate_ids );
     }
+
+	/**
+	 * Delete distance rates by IDs
+	 *
+	 * @since 3.4.2
+	 *
+	 * @param array $rate_ids
+	 * @param int   $zone_id     Zone ID
+	 * @param int   $instance_id Instance ID
+	 *
+	 * @return bool|int|null|void
+	 */
+	public function delete_distance_rates( array $rate_ids, int $zone_id = 0, int $instance_id = 0 ) {
+		if ( ! $rate_ids ) {
+			return;
+		}
+
+		/**
+		 * Filter distance rate IDs before deletion
+		 *
+		 * @since 4.1.3
+		 *
+		 * @param array $rate_ids
+		 * @param int   $zone_id
+		 * @param int   $instance_id
+		 */
+		$rate_ids = apply_filters( 'dokan_distance_rate_shipping_delete_args', $rate_ids, $zone_id, $instance_id );
+
+		// Delete distance rate shipping rates.
+		$delete_distance_rates = DistanceRateShipping::delete_rates( $rate_ids );
+
+		/**
+		 * Fires after distance rate shipping rates are deleted
+		 *
+		 * @since 4.1.3
+		 *
+		 * @param array $rate_ids    Array of deleted rate IDs
+		 * @param int   $zone_id     Zone ID
+		 * @param int   $instance_id Instance ID
+		 */
+		do_action( 'dokan_distance_rate_shipping_rates_deleted', $rate_ids, $zone_id, $instance_id );
+
+		return $delete_distance_rates;
+	}
 
     /**
      * Validated zone data
@@ -594,7 +634,10 @@ class Module {
      * @return array
      */
     public function rest_api_class_map( $classes ) {
-        $class[ DOKAN_TABLE_RATE_SHIPPING_INC_DIR . '/REST/TableRateController.php' ] = '\WeDevs\DokanPro\Modules\TableRate\REST\TableRateController';
+        $class[ DOKAN_TABLE_RATE_SHIPPING_INC_DIR . '/REST/TableRateController.php' ]    = '\WeDevs\DokanPro\Modules\TableRate\REST\TableRateController';
+        $class[ DOKAN_TABLE_RATE_SHIPPING_INC_DIR . '/REST/DistanceRateController.php' ] = '\WeDevs\DokanPro\Modules\TableRate\REST\DistanceRateController';
+
+        $class[ DOKAN_TABLE_RATE_SHIPPING_INC_DIR . '/REST/DistanceRateSettingsController.php' ]      = '\WeDevs\DokanPro\Modules\TableRate\REST\DistanceRateSettingsController';
         $class[ DOKAN_TABLE_RATE_SHIPPING_INC_DIR . '/REST/TableRateShippingSettingsController.php' ] = '\WeDevs\DokanPro\Modules\TableRate\REST\TableRateShippingSettingsController';
 
         return array_merge( $classes, $class );
@@ -672,47 +715,47 @@ class Module {
 	 *
 	 * @return array The modified array with additional dependencies.
 	 */
-	public function add_dashboard_settings_template_dependency ( array $dependencies ) {
+	public function add_dashboard_settings_template_dependency( array $dependencies ) {
 		$dependencies['settings/shipping'] = [
 			[
 				'slug' => 'rows-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'classes-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'general-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'header-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'rows-classes-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'rows-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'distance-rate/settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'distance-rate/general-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 			[
 				'slug' => 'distance-rate/rows-settings',
-				'args' => [ 'is_table_rate_shipping' => true, ],
+				'args' => [ 'is_table_rate_shipping' => true ],
 			],
 		];
 

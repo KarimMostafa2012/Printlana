@@ -114,14 +114,17 @@ export default {
             .admin-chat-text {
                 background: rgba(242, 250, 255, 1);
                 color: rgba(26, 158, 212, 1);
+                white-space: pre-line;
             }
             .customer-chat-text {
                 background: rgba(246, 246, 246, 1);
                 color: rgba(113, 113, 113, 1);
+                white-space: pre-line;
             }
             .vendor-chat-text {
                 background: rgba(243, 243, 255, 1);
                 color: rgba(83, 83, 187, 1);
+                white-space: pre-line;
             }
         }
         .chat-action-box {
@@ -202,14 +205,17 @@ export default {
                 .admin-chat-text {
                     background: rgba(242, 250, 255, 1);
                     color: rgba(26, 158, 212, 1);
+                    white-space: pre-line;
                 }
                 .customer-chat-text {
                     background: rgba(246, 246, 246, 1);
                     color: rgba(113, 113, 113, 1);
+                    white-space: pre-line;
                 }
                 .vendor-chat-text {
                     background: rgba(243, 243, 255, 1);
                     color: rgba(83, 83, 187, 1);
+                    white-space: pre-line;
                 }
             }
             .chat-action-box {

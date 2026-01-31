@@ -4,7 +4,6 @@ namespace WCML\Reviews\Translations;
 
 use IWPML_Action;
 use WPML\FP\Obj;
-use WPML\FP\Relation;
 
 class FrontEndHooks implements IWPML_Action {
 

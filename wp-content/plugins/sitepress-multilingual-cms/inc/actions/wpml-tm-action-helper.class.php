@@ -13,10 +13,10 @@ class WPML_TM_Action_Helper {
 		return $package_helper->create_translation_package( $post );
 	}
 
-	public function add_translation_job( $rid, $translator_id, $translation_package, $batch_options = array(), $sendFrom = null ) {
+	public function add_translation_job( $rid, $translator_id, $translation_package, $batch_options = array(), $sendFrom = null, $addJobLogs = false ) {
 
 		return $this->get_update_translation_action( $translation_package )
-					->add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom );
+					->add_translation_job( $rid, $translator_id, $translation_package, $batch_options, $sendFrom, $addJobLogs );
 	}
 
 	/**

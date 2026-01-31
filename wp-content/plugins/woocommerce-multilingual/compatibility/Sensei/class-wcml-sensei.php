@@ -4,21 +4,15 @@ class WCML_Sensei implements \IWPML_Action {
 
 	/** @var SitePress */
 	private $sitepress;
-	/** @var wpdb */
-	private $wpdb;
 	/** WPML_Custom_Columns $wpml_custom_columns */
 	private $custom_columns;
 
 	/**
-	 * WCML_Sensei constructor.
-	 *
 	 * @param SitePress           $sitepress
-	 * @param wpdb                $wpdb
 	 * @param WPML_Custom_Columns $custom_columns
 	 */
-	public function __construct( SitePress $sitepress, wpdb $wpdb, WPML_Custom_Columns $custom_columns ) {
+	public function __construct( SitePress $sitepress, WPML_Custom_Columns $custom_columns ) {
 		$this->sitepress      = $sitepress;
-		$this->wpdb           = $wpdb;
 		$this->custom_columns = $custom_columns;
 	}
 

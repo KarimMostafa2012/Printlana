@@ -3,13 +3,14 @@
 namespace WeDevs\DokanPro\Modules\RMA;
 
 use WeDevs\DokanPro\Modules\RMA\Api\CouponController;
+use WeDevs\DokanPro\Modules\RMA\Api\CustomerWarrantyRequestController;
 use WeDevs\DokanPro\Modules\RMA\Api\RefundController;
 use WeDevs\DokanPro\Modules\RMA\Api\WarrantyRequestController;
 use WeDevs\DokanPro\Modules\RMA\Api\WarrantyConversationController;
 use WeDevs\DokanPro\Modules\RMA\Emails\ConversationNotification;
 use WeDevs\DokanPro\Modules\RMA\Emails\SendCouponEmail;
 use WeDevs\DokanPro\Modules\RMA\Emails\SendWarrantyRequest;
-
+use WeDevs\DokanPro\Modules\RMA\Emails\WarrantyRequestStatusChanged;
 class Module {
 
     /**
@@ -25,6 +26,8 @@ class Module {
 
         add_action( 'dokan_activated_module_rma', [ $this, 'activate' ] );
         add_filter( 'dokan_rest_api_class_map', [ $this, 'rest_api_class_map' ] );
+        add_filter( 'dokan_rest_admin_dashboard_todo_data', [ $this, 'load_pending_return_request_count' ] );
+        add_filter( 'dokan_rest_admin_dashboard_monthly_overview_data', [ $this, 'load_monthly_return_request_count' ], 10, 2 );
     }
 
     /**
@@ -98,6 +101,7 @@ class Module {
         new Frontend();
         new Product();
         new Order();
+        new Hooks();
     }
 
     /**
@@ -130,9 +134,89 @@ class Module {
         $class_map[ DOKAN_RMA_INC_DIR . '/Api/CouponController.php' ] = CouponController::class;
         $class_map[ DOKAN_RMA_INC_DIR . '/Api/RefundController.php' ] = RefundController::class;
         $class_map[ DOKAN_RMA_INC_DIR . '/Api/WarrantyConversationController.php' ] = WarrantyConversationController::class;
+        $class_map[ DOKAN_RMA_INC_DIR . '/Api/CustomerWarrantyRequestController.php' ] = CustomerWarrantyRequestController::class;
 
         return $class_map;
     }
+
+	/**
+	 * Load pending return request count in the admin dashboard to-do data.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param array $data The existing to-do data.
+	 *
+	 * @return array The modified to-do data with pending quotes count.
+	 */
+	public function load_pending_return_request_count( array $data ): array {
+		$counts = dokan_get_refund_count();
+		$data['return_requests'] = [
+			'icon'         => 'Undo2',
+			'count'        => $counts['pending'] ?? 0,
+			'title'        => esc_html__( 'Return Requests', 'dokan' ),
+            'redirect_url' => admin_url( 'admin.php?page=dokan#/refund?status=pending' ),
+            'position'     => 60,
+		];
+
+		return $data;
+	}
+
+	/**
+	 * Load the monthly return request count for the dashboard.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param array $data
+	 * @param array $date_rage
+	 *
+	 * @return mixed
+	 */
+	public function load_monthly_return_request_count( $data, $date_rage ) {
+		global $wpdb;
+
+		$results = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT
+                    SUM(CASE WHEN wos.date_created BETWEEN %s AND %s THEN ABS(wos.total_sales) ELSE 0 END) as current_amount,
+                    SUM(CASE WHEN wos.date_created BETWEEN %s AND %s THEN ABS(wos.total_sales) ELSE 0 END) as previous_amount,
+                    COUNT(CASE WHEN wos.date_created BETWEEN %s AND %s THEN 1 END) as current_count,
+                    COUNT(CASE WHEN wos.date_created BETWEEN %s AND %s THEN 1 END) as previous_count
+                FROM {$wpdb->prefix}wc_order_stats wos
+                INNER JOIN $wpdb->posts p ON wos.order_id = p.ID
+                WHERE p.post_type = 'shop_order_refund'
+                AND wos.total_sales < 0
+                AND wos.date_created BETWEEN %s AND %s",
+	            $date_rage['current_month_start'],
+	            $date_rage['current_month_end'],
+	            $date_rage['previous_month_start'],
+	            $date_rage['previous_month_end'],
+	            $date_rage['current_month_start'],
+	            $date_rage['current_month_end'],
+                $date_rage['previous_month_start'],
+                $date_rage['previous_month_end'],
+                $date_rage['previous_month_start'],
+                $date_rage['current_month_end']
+            )
+        );
+
+        $refund_current  = $results->current_amount ?? 0;
+        $refund_previous = $results->previous_amount ?? 0;
+
+		// Apply filters to modify the return request data.
+		$data['refund'] = apply_filters(
+			'dokan_dashboard_monthly_return_request_count',
+			[
+				'icon'     => 'BanknoteArrowDown',
+				'current'  => (int) $refund_current,
+				'previous' => (int) $refund_previous,
+				'title'    => esc_html__( 'Refunds', 'dokan' ),
+				'tooltip'  => esc_html__( 'Total refunded amount in the time period', 'dokan' ),
+                'position' => 60,
+			]
+		);
+
+		return $data;
+	}
 
     /**
      * Load emails
@@ -163,7 +247,7 @@ class Module {
         $wc_emails['Dokan_Send_Coupon_Email']             = new SendCouponEmail();
         $wc_emails['Dokan_Rma_Send_Warranty_Request']     = new SendWarrantyRequest();
         $wc_emails['Dokan_RMA_Conversation_Notification'] = new ConversationNotification();
-
+        $wc_emails['Dokan_Rma_Status_Changed']           = new WarrantyRequestStatusChanged();
         return $wc_emails;
     }
 

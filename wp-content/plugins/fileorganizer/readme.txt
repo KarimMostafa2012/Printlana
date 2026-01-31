@@ -1,17 +1,17 @@
-=== FileOrganizer - Manage WordPress and Website Files ===
+=== FileOrganizer - WordPress File Manager ===
 Contributors: softaculous
 Tags: FileOrganizer, file manager, wordpress file manager, file explorer, upload files, File Manage, Edit Files, Delete Files, elfinder, ftp, file transfer, update, create, delete, view, edit, rename, editor, explorer, softaculous, webuzo, Control Panel, Admin
 Requires at least: 5.5
-Tested up to: 6.8.2
+Tested up to: 6.9
 Requires PHP: 5.5
-Stable tag: 1.1.6
+Stable tag: 1.1.8
 License: LGPL v2.1
 License URI: http://www.gnu.org/licenses/lgpl-2.1.html
 
-FileOrganizer is a plugin that helps you to manage all files in your WordPress Site. FileOrganizer provides you the ability to edit, delete, upload, download, copy and paste files and folders.
+FileOrganizer is an intuitive file manager to easily edit, delete, upload, download, and manage all your WordPress files and folders right from the dashboard.
 
 == Description ==
-FileOrganizer is a lightweight and easy-to-use file management plugin for WordPress. Organize and manage your WordPress files with FileOrganizer without any control panel or FTP access. You can access, upload, download, edit, delete, zip, cut, copy, and paste files even outside the WordPress root directory.
+FileOrganizer is a lightweight and easy-to-use WordPress file manager. Organize and manage your WordPress files with FileOrganizer without any control panel or FTP access. You can access, upload, download, edit, delete, zip, cut, copy, and paste files even outside the WordPress root directory.
 
 ==Free Features==
 * **Files and directory Management:** Supports all file operations on a remote server such as create files or directory, upload, download, rename, copy, etc.
@@ -49,6 +49,12 @@ Go To your WordPress install -> Plugins -> Add New Button -> In Search Box, Look
 6. File archive as ZIP
 
 == Changelog ==
+
+= 1.1.8 (Dec 03, 2025) =
+* [Task] Tested with WordPress 6.9.
+
+= 1.1.7 (Aug 01, 2025) =
+* [Task] Tested with PHP 8.4
 
 = 1.1.6 (Jul 18, 2025) =
 * [Task] Tested with WordPress 6.8.2.

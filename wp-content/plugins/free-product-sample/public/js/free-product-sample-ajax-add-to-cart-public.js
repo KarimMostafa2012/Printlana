@@ -161,6 +161,7 @@
             $('.dsfps-free-sample-ajax-btn').on('click', function(e){
                 e.preventDefault();
                 e.stopPropagation();
+                e.stopImmediatePropagation();
                 
                 var $thisbutton = $(this);
 

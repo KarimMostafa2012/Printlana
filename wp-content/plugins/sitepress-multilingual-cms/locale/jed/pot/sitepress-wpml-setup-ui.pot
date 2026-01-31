@@ -158,6 +158,44 @@ msgstr ""
 msgid "Delete language pair(s)"
 msgstr ""
 
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:39
+msgid "Failed to enable AI Translation Step"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:44
+msgid "AI Translation Activation Failed"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:48
+msgid "Please contact "
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:50
+msgid "WPML Support"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:52
+msgid ""
+" and provide a screenshot of this error along with the technical details "
+"below (use the Copy button to copy them)."
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:71
+msgid "Technical Details (for WPML Support)"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:83
+msgid "Copied!"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/ErrorInfo.js:83
+msgid "Copy"
+msgstr ""
+
+#: src/js/setup/components/Steps/AITranslation/index.js:68
+msgid "Loading AI Translation..."
+msgstr ""
+
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:48
 msgid "%s file upload failed."
 msgstr ""
@@ -364,19 +402,19 @@ msgstr ""
 msgid "Language name added as a parameter"
 msgstr ""
 
-#: src/js/setup/components/Steps/Address.js:164
+#: src/js/setup/components/Steps/Address.js:178
 msgid "I will set up the domains for my secondary languages later."
 msgstr ""
 
-#: src/js/setup/components/Steps/Address.js:213
+#: src/js/setup/components/Steps/Address.js:229
 msgid "The domain you have entered is invalid."
 msgstr ""
 
-#: src/js/setup/components/Steps/Address.js:215
+#: src/js/setup/components/Steps/Address.js:231
 msgid "The domain you have entered must be unique."
 msgstr ""
 
-#: src/js/setup/components/Steps/Address.js:235
+#: src/js/setup/components/Steps/Address.js:251
 msgid ""
 "Please Note: Your site won't work in your secondary languages until this is "
 "successfully set up or you switch to a different URL option."
@@ -500,7 +538,7 @@ msgid "Which languages do you want to translate your site into?"
 msgstr ""
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
+msgid "If you cannot find languages that you need in the list,"
 msgstr ""
 
 #: src/js/setup/components/Steps/Languages.js:150
@@ -531,11 +569,19 @@ msgstr ""
 msgid "Get a key for this site"
 msgstr ""
 
-#: src/js/setup/components/Steps/Plugins.js:130
+#: src/js/setup/components/Steps/Plugins.js:123
+msgid "Error in activating plugin."
+msgstr ""
+
+#: src/js/setup/components/Steps/Plugins.js:125
+msgid "Error in installing plugin."
+msgstr ""
+
+#: src/js/setup/components/Steps/Plugins.js:167
 msgid "Improve your site’s translations using helpful plugins"
 msgstr ""
 
-#: src/js/setup/components/Steps/Plugins.js:135
+#: src/js/setup/components/Steps/Plugins.js:173
 msgid ""
 "Based on the themes and other plugins running on your site, we recommend "
 "that you enable the following WPML components. These are included with your "
@@ -543,17 +589,9 @@ msgid ""
 "more."
 msgstr ""
 
-#: src/js/setup/components/Steps/Plugins.js:97
-msgid "Error in activating plugin."
-msgstr ""
-
-#: src/js/setup/components/Steps/Plugins.js:99
-msgid "Error in installing plugin."
-msgstr ""
-
 #: src/js/setup/components/Steps/Support.js:22
 msgid ""
-"YES, send this information to wpml.org to improve my site’s maintenance and "
+"Yes, send this information to wpml.org to improve my site’s maintenance and "
 "support"
 msgstr ""
 
@@ -641,7 +679,7 @@ msgid "You will be the sole translator for this site."
 msgstr ""
 
 #: src/js/setup/components/Steps/TranslationSettings.js:93
-msgid "A \"Translation Manager\" who will setup the translators for my site"
+msgid "A Translation Manager who will setup the translators for my site"
 msgstr ""
 
 #: src/js/setup/components/Steps/TranslationSettings.js:94

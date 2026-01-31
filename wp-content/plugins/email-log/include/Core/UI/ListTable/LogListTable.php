@@ -1,6 +1,7 @@
 <?php namespace EmailLog\Core\UI\ListTable;
 
 use EmailLog\Util;
+use EmailLog\Util\EmailHeaderParser;
 use function EmailLog\Util\get_display_format_for_log_time;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -19,7 +20,7 @@ class LogListTable extends \WP_List_Table {
 	 * @since 2.0
 	 */
 	protected $page;
-
+    protected $parsed_headers = [];
 	/**
 	 * Set up a constructor that references the parent constructor.
 	 *
@@ -39,6 +40,14 @@ class LogListTable extends \WP_List_Table {
 		) );
 
 		parent::__construct( $args );
+
+		add_action( 'admin_body_class', array( $this, 'add_body_class' ) );
+
+		add_action( 'el_display_log_columns', array( $this, 'display_column_data_in_log_list_table' ), 10, 2 );
+		add_action( 'el_view_log_after_headers', array( $this, 'add_headers_in_view_log_modal' ) );
+
+		add_filter( 'el_export_column_list', array( $this, 'add_columns_to_export_list' ) );
+		add_filter( 'el_export_raw_log', [ $this, 'add_columns_to_exported_raw_log' ] );
 	}
 
 	/**
@@ -79,7 +88,7 @@ class LogListTable extends \WP_List_Table {
 			'cb' => '<input type="checkbox" />',
 		);
 
-		foreach ( array( 'sent_date', 'result', 'to_email', 'subject' ) as $column ) {
+		foreach ( array( 'sent_date', 'result', 'to_email', 'subject', 'cc', 'bcc', 'reply_to', 'attachments', 'ip_address' ) as $column ) {
 			$columns[ $column ] = Util\get_column_label( $column );
 		}
 
@@ -297,6 +306,10 @@ class LogListTable extends \WP_List_Table {
 		$actions = array(
 			'el-log-list-delete'     => __( 'Delete', 'email-log' ),
 			'el-log-list-delete-all' => __( 'Delete All Logs', 'email-log' ),
+            'el-log-export'     => __( 'Export - PRO', 'email-log' ),
+			'el-log-export-all' => __( 'Export All Logs - PRO', 'email-log' ),
+            'el-log-resend'     => __( 'Resend - PRO', 'email-log' ),
+			'el-log-resend-all' => __( 'Resend All Logs - PRO', 'email-log' ),
 		);
 		$actions = apply_filters( 'el_bulk_actions', $actions );
 
@@ -359,10 +372,115 @@ class LogListTable extends \WP_List_Table {
 		?>
 		<p class="search-box">
 			<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_html($text); ?>:</label>
-			<input type="search" id="<?php echo esc_attr( $input_date_id ); ?>" name="d" value="<?php echo esc_attr( $input_date_val ); ?>" placeholder="<?php esc_html_e( 'Search by date', 'email-log' ); ?>" />
+			<input type="search" id="<?php echo esc_attr( $input_date_id ); ?>" name="d" value="<?php echo esc_attr( $input_date_val ); ?>" placeholder="<?php esc_html_e( 'Filter by date', 'email-log' ); ?>" />
 			<input type="search" id="<?php echo esc_attr( $input_text_id ); ?>" name="s" value="<?php _admin_search_query(); ?>" placeholder="<?php esc_html_e( 'Search by term', 'email-log' ); ?>" />
 			<?php submit_button( $text, '', '', false, array( 'id' => 'search-submit' ) ); ?>
 		</p>
 		<?php
+	}
+
+    /**
+	 * Adds additional Column headers to in the exported CSV.
+	 *
+	 * @param array $columns List of Columns.
+	 *
+	 * @return array List of all Columns.
+	 */
+	public function add_columns_to_export_list( $columns ) {
+		return array_merge( $columns, array_keys( $this->get_columns() ) );
+	}
+
+	/**
+	 * Display content for additional columns
+	 *
+	 * @param string $column_name Column Name.
+	 * @param object $item        Data object.
+	 */
+	public function display_column_data_in_log_list_table( $column_name, $item ) {
+		if ( ! isset( $this->parsed_headers[ $item->id ] ) ) {
+			$parser = new EmailHeaderParser();
+			$this->parsed_headers[ $item->id ] = $parser->parse_headers( $item->headers );
+		}
+		$header = $this->parsed_headers[ $item->id ];
+
+		switch ( $column_name ) {
+			case 'cc':
+                echo '<a href="#" class="open-pro-dialog pro-feature" data-pro-feature="email-log-cc">PRO</a>';
+				break;
+			case 'bcc':
+                echo '<a href="#" class="open-pro-dialog pro-feature" data-pro-feature="email-log-bcc">PRO</a>';
+				break;
+			case 'reply_to':
+                echo '<a href="#" class="open-pro-dialog pro-feature" data-pro-feature="email-log-reply-to">PRO</a>';
+				break;
+			case 'attachments':
+				echo '<a href="#" class="open-pro-dialog pro-feature" data-pro-feature="email-log-attachment">PRO</a>';
+				break;
+			case 'ip_address':
+				echo '<a href="#" class="open-pro-dialog pro-feature" data-pro-feature="email-log-ip-address">PRO</a>';
+				break;
+		}
+	}
+
+	/**
+	 * Adds additional column values to the log item that is getting exported to CSV.
+	 *
+	 * @param array $raw_log The raw log item.
+	 *
+	 * @return array The raw log with additional columns.
+	 */
+	public function add_columns_to_exported_raw_log( $raw_log ) {
+		$raw_headers = '';
+		if ( isset( $raw_log[ 'headers' ] ) ) {
+			$raw_headers = $raw_log['headers'];
+		}
+
+		$parser = new EmailHeaderParser();
+		$header = $parser->parse_headers( $raw_headers );
+
+		$raw_log['from']        = ( isset( $header['from'] ) ? esc_attr( $header['from'] ) : '' );
+		$raw_log['cc']          = ( isset( $header['cc'] ) ? esc_attr( $header['cc'] ) : '' );
+		$raw_log['bcc']         = ( isset( $header['bcc'] ) ? esc_attr( $header['bcc'] ) : '' );
+		$raw_log['reply-to']    = ( isset( $header['reply-to'] ) ? esc_attr( $header['reply-to'] ) : '' );
+		$raw_log['attachments'] = 'true' === $raw_log['attachments'] ? 'Yes' : 'No';
+
+		return $raw_log;
+	}
+
+	/**
+	 * Add additional headers to view message in thickbox.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $log_item Log item that is getting displayed.
+	 */
+	public function add_headers_in_view_log_modal( $log_item ) {
+		$parser  = new EmailHeaderParser();
+		$headers = $parser->parse_headers( $log_item['headers'] );
+		$columns = $this->get_columns();
+
+		foreach ( $columns as $key => $column ) {
+			if ( ! empty( $headers[ $key ] ) ) {
+				?>
+				<tr style="background: #eee;">
+					<td style="padding: 5px;"><?php echo esc_html( $column ) . ':'; ?></td>
+					<td style="padding: 5px;"><?php echo esc_html( stripslashes( $headers[ $key ] ) ); ?></td>
+				</tr>
+				<?php
+			}
+		}
+	}
+
+	/**
+	 * Adds the Class to the <body> tag in the Admin end.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string $classes Body classes.
+	 *
+	 * @return string Modified body classes.
+	 */
+	public function add_body_class( $classes ) {
+		return "$classes more-fields-addon";
 	}
 }

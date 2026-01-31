@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/components/language/LanguagePairs.js:57
 msgid "From:"
@@ -21,7 +23,7 @@ msgstr "Välj %s"
 
 #: src/js/components/language/SelectLanguagePairs.js:39
 msgid "Set language pair(s) for Translator %s:"
-msgstr "Ställ in språkpar för översättare %s:"
+msgstr "Ange språkpar för översättare %s:"
 
 #: src/js/components/language/SelectLanguagePairs.js:69
 msgid "+ Add more language pairs for this translator"
@@ -29,21 +31,21 @@ msgstr "+ Lägg till fler språkpar för denna översättare"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
 msgid "Translation Memory was successfully copied to Advanced Translation Editor."
-msgstr "Översättningsminnet har framgångsrikt kopierats till Avancerad översättningsredigerare."
+msgstr "Översättningsminnet kopierades till Avancerad översättningsredigerare."
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
 msgid "Deactivate ICanLocalize.com as Translation Service on this site"
-msgstr "Inaktivera ICanLocalize.com som översättningstjänst på denna webbplats"
+msgstr "Avaktivera ICanLocalize.com som översättningstjänst på denna webbplats"
 
 #: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
 msgid ""
 "Missing a translator? Or were new jobs since the last copy of the "
 "Translation Memory?"
-msgstr "Saknas en översättare? Eller har det tillkommit nya jobb sedan den senaste kopieringen av översättningsminnet?"
+msgstr "Saknar du en översättare? Eller har det tillkommit nya jobb sedan senaste kopieringen av översättningsminnet?"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:25
 msgid "Enter here your ICanLocalize authentication details."
-msgstr "Ange dina autentiseringsuppgifter för ICanLocalize här."
+msgstr "Ange dina ICanLocalize-autentiseringsuppgifter här."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:33
 msgid "API Token:"
@@ -51,7 +53,7 @@ msgstr "API-token:"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:43
 msgid "Please enter valid value for ICL token."
-msgstr "Vänligen ange ett giltigt värde för ICL-token."
+msgstr "Ange ett giltigt värde för ICL-token."
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:50
 msgid "Enter ICL API token here"
@@ -59,7 +61,7 @@ msgstr "Ange ICL API-token här"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:62
 msgid "Submit"
-msgstr "Skicka in"
+msgstr "Skicka"
 
 #: src/js/icl-to-ate-migration/components/ICLToken.js:78
 msgid "Sign up"
@@ -87,17 +89,17 @@ msgstr "Importera översättningsminne"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
 msgid "ICanLocalize is already deactivated on this site"
-msgstr "ICanLocalize är redan inaktiverat på denna webbplats"
+msgstr "ICanLocalize är redan avaktiverat på denna webbplats"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
 msgid ""
 "You can still import Translators or Copy Translation Memory to Advanced "
 "Translator Editor"
-msgstr "Du kan fortfarande importera översättare eller kopiera översättningsminnet till Avancerad översättningsredigerare"
+msgstr "Du kan fortfarande importera översättare eller kopiera översättningsminne till Avancerad översättningsredigerare"
 
 #: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
 msgid "Move from ICanLocalize.com to Advanced Translation Editor"
-msgstr "Flytta från ICanLocalize.com till Avancerad översättningsredigerare"
+msgstr "Flytta från ICanLocalize.com till avancerad översättningsredigerare"
 
 #: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
 #: src/js/icl-to-ate-migration/components/Translators/Button.js:21
@@ -107,7 +109,7 @@ msgstr "Importera översättare"
 
 #: src/js/icl-to-ate-migration/components/Translators/EditLanguages.js:53
 msgid "Come back"
-msgstr "Kom tillbaka"
+msgstr "Gå tillbaka"
 
 #: src/js/icl-to-ate-migration/components/Translators/Modal.js:36
 #: src/js/setup/components/Steps/AddLanguagesModal.js:496
@@ -129,15 +131,15 @@ msgstr "Språkpar"
 
 #: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
 msgid "Not supported pairs:"
-msgstr "Icke-stödda par:"
+msgstr "Ej stödda par:"
 
 #: src/js/icl-to-ate-migration/model/deactivateICL.js:18
 msgid "ICanLocalize.com deactivated"
-msgstr "ICanLocalize.com inaktiverat"
+msgstr "ICanLocalize.com avaktiverat"
 
 #: src/js/icl-to-ate-migration/model/translationMemory.js:12
 msgid "Translate memory is imported"
-msgstr "Översättningsminnet är importerat"
+msgstr "Översättningsminne är importerat"
 
 #: src/js/icl-to-ate-migration/model/translators.js:26
 msgid "There is no translators in ICL"
@@ -157,13 +159,13 @@ msgstr "Flagga"
 
 #: src/js/setup/components/Steps/AddLanguages/Flag.js:87
 msgid "Flag file"
-msgstr "Flaggfil"
+msgstr "Flagga fil"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:160
 msgid ""
 "You just added  language. Next, select it as the site's default language or "
 "a translation language."
-msgstr "Du har just lagt till språk. Välj det nu som webbplatsens standardspråk eller som ett översättningsspråk."
+msgstr "Du har precis lagt till ett språk. Välj det nu som webbplatsens standardspråk eller ett översättningsspråk."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:162
 msgid "Language added"
@@ -188,11 +190,11 @@ msgid ""
 "By choosing a combination that already exists in the database, WPML can "
 "help fill out the necessary fields. Read more about "
 "<AddingACustomLanguageLink />."
-msgstr "Genom att välja en kombination som redan finns i databasen kan WPML hjälpa till att fylla i de nödvändiga fälten. Läs mer om <AddingACustomLanguageLink />."
+msgstr "Genom att välja en kombination som redan finns i databasen kan WPML hjälpa till att fylla i nödvändiga fält. Läs mer om <AddingACustomLanguageLink />."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:242
 msgid "Cannot find?"
-msgstr "Kan inte hitta?"
+msgstr "Hittar du inte?"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:244
 msgid "Click here"
@@ -222,11 +224,11 @@ msgstr "Språket kommer inte att stödjas av automatiska översättningar"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:392
 msgid "Language mapping"
-msgstr "Språkmappning"
+msgstr "Språkkartläggning"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:404
 msgid "Don't map this language"
-msgstr "Mappa inte detta språk"
+msgstr "Karta inte detta språk"
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:418
 msgid "Default locale"
@@ -286,7 +288,7 @@ msgstr "Läs mer om "
 msgid ""
 "The name of your language as it will appear on your site's language "
 "switcher."
-msgstr "Namnet på ditt språk som det kommer att visas på din webbplats språkväljare."
+msgstr "Namnet på ditt språk som det kommer att visas i din webbplats språkbytare."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:61
 msgid ""
@@ -302,14 +304,14 @@ msgid ""
 "to use for spellcheck and automatic translation. If you don't map your "
 "custom language to an existing language, spellcheck and automatic "
 "translation features will be unavailable in that language."
-msgstr "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatiska översättning. Till exempel, om ditt anpassade språk är schweizisk-tyska kan du mappa till tyska som språk att använda för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk kommer funktioner för stavningskontroll och automatisk översättning inte att vara tillgängliga på det språket."
+msgstr "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatiska översättning. Till exempel, om ditt anpassade språk är schweizertyska kan du mappa till tyska som det språk som ska användas för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk kommer stavningskontroll och automatiska översättningsfunktioner inte att vara tillgängliga på det språket."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:66
 msgid ""
 "The value WPML checks when loading translations from MO and PO files. The "
 "default locale is included in the filenames in your /wp-content/languages/ "
 "folder in your WordPress setup."
-msgstr "Värdet som WPML kontrollerar när översättningar laddas från MO- och PO-filer. Standardlokalen ingår i filnamnen i din /wp-content/languages/ mapp i din WordPress-installation."
+msgstr "Värdet WPML kontrollerar när översättningar laddas från MO- och PO-filer. Standardlokalen ingår i filnamnen i din /wp-content/languages/-mapp i din WordPress-installation."
 
 #: src/js/setup/components/Steps/AddLanguagesModal.js:69
 msgid ""
@@ -349,7 +351,7 @@ msgstr "Standardspråk"
 
 #: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
-msgstr "Vad är det nuvarande språket på din webbplats?"
+msgstr "Vilket är det aktuella språket på din webbplats?"
 
 #: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
@@ -360,8 +362,8 @@ msgid "Which languages do you want to translate your site into?"
 msgstr "Vilka språk vill du översätta din webbplats till?"
 
 #: src/js/setup/components/Steps/Languages.js:149
-msgid "If you cannot find languages that you need in the list"
-msgstr "Om du inte kan hitta språk som du behöver i listan"
+msgid "If you cannot find languages that you need in the list,"
+msgstr "Om du inte hittar de språk du behöver i listan,"
 
 #: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"

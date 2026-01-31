@@ -1,6 +1,7 @@
 <?php
 
 use WPML\ST\Gettext\AutoRegisterSettings;
+use WPML\ST\StringsScanning\JS\SettingsHooks as JSScanSettingsHooks;
 use function WPML\Container\make;
 use WPML\UIPage;
 
@@ -330,6 +331,9 @@ wp_enqueue_style( 'wpml-tooltip', WPML_ST_URL . '/res/css/tooltip/tooltip.css', 
 								?>
 								<p class="link-wrap">
 									<a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER; ?>/menu/theme-localization.php" class="external-link"><?php esc_html_e( 'Strings in the theme and plugins', 'wpml-string-translation' ); ?></a>
+								</p>
+								<p class="link-wrap">
+									<a href="<?php echo JSScanSettingsHooks::getSettingsURL(); ?>" class="external-link"><?php esc_html_e( 'Strings in JavaScript files', 'wpml-string-translation' ); ?></a>
 								</p>
 								<p class="link-wrap">
 									<a

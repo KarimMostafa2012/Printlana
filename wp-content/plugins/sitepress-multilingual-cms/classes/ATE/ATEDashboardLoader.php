@@ -66,4 +66,21 @@ class ATEDashboardLoader {
 	private function getATEDashboardUrl() {
 		return $this->endpoints->get_ate_dashboard_url();
 	}
+
+	/**
+	 * Get the URL of the registered ATE Dashboard script
+	 * This retrieves the actual URL from WordPress script registry,
+	 * regardless of whether it was registered with or without proxy
+	 *
+	 * @return string|false Returns the script URL if registered, false otherwise
+	 */
+	public function getRegisteredScriptUrl() {
+		$wp_scripts = wp_scripts();
+
+		if ( isset( $wp_scripts->registered[ self::ATE_DASHBOARD_ID ] ) ) {
+			return $wp_scripts->registered[ self::ATE_DASHBOARD_ID ]->src;
+		}
+
+		return false;
+	}
 }

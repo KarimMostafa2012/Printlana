@@ -703,11 +703,8 @@ class MulticurrencyHooks implements \IWPML_Action {
 
 		<?php
 
-		$wcml_booking_set_currency_nonce = wp_create_nonce( 'booking_set_currency' );
-
-		wc_enqueue_js(
-			"
-
+		$wcml_booking_set_currency_nonce  = esc_js( wp_create_nonce( 'booking_set_currency' ) );
+		$wcml_booking_set_currency_script = <<<JS
 		jQuery(document).on('change', '#dropdown_booking_currency', function(){
 		   jQuery.ajax({
 				url: ajaxurl,
@@ -715,7 +712,7 @@ class MulticurrencyHooks implements \IWPML_Action {
 				data: {
 					action: 'wcml_booking_set_currency',
 					currency: jQuery('#dropdown_booking_currency').val(),
-					wcml_nonce: '" . $wcml_booking_set_currency_nonce . "'
+					wcml_nonce: '$wcml_booking_set_currency_nonce'
 				},
 				success: function( response ){
 					if(typeof response.error !== 'undefined'){
@@ -726,8 +723,12 @@ class MulticurrencyHooks implements \IWPML_Action {
 				}
 			})
 		});
-	"
-		);
+JS;
+
+		$handle = 'wcml_booking_set_currency_dropdown';
+		wp_register_script( $handle, '', [ 'jquery' ], WCML_VERSION, true );
+		wp_enqueue_script( $handle );
+		wp_add_inline_script( $handle, $wcml_booking_set_currency_script );
 	}
 
 	public function set_booking_currency_ajax() {

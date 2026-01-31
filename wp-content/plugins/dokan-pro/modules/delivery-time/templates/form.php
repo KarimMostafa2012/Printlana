@@ -22,6 +22,11 @@ $delivery_order_per_slot      = isset( $vendor_delivery_time_settings['order_per
 $delivery_time_slot_minutes   = is_array( $delivery_time_slot_minutes ) ? max( $delivery_time_slot_minutes ) : $delivery_time_slot_minutes;
 $delivery_order_per_slot      = is_array( $delivery_order_per_slot ) ? max( $delivery_order_per_slot ) : $delivery_order_per_slot;
 $enable_delivery_notification = isset( $vendor_delivery_time_settings['enable_delivery_notification'] ) ? $vendor_delivery_time_settings['enable_delivery_notification'] : 'off';
+
+// New buffer settings (unit and value)
+$delivery_buffer_unit  = isset( $vendor_delivery_time_settings['delivery_buffer_unit'] ) ? $vendor_delivery_time_settings['delivery_buffer_unit'] : 'days';
+$delivery_buffer_value = isset( $vendor_delivery_time_settings['delivery_buffer_value'] ) ? $vendor_delivery_time_settings['delivery_buffer_value'] : 0;
+
 $vendor_can_override_settings = isset( $vendor_can_override_settings ) ? $vendor_can_override_settings : 'off';
 $all_delivery_days            = isset( $all_delivery_days ) ? $all_delivery_days : [];
 $all_delivery_time_slots      = isset( $all_delivery_time_slots ) ? $all_delivery_time_slots : [];
@@ -68,15 +73,44 @@ $all_delivery_time_slots      = isset( $all_delivery_time_slots ) ? $all_deliver
 
         <div id="dokan-delivery-time-vendor-settings">
             <div class="dokan-form-group">
-                <label class="dokan-w3 dokan-control-label delivery-time-label" for="pre_order_date">
-                    <?php esc_html_e( 'Delivery blocked buffer', 'dokan' ); ?>
+                <label class="dokan-w3 dokan-control-label delivery-time-label" for="delivery_buffer_unit">
+                    <?php esc_html_e( 'Delivery Blocked Buffer Units', 'dokan' ); ?>
                 </label>
                 <div class="dokan-w5 dokan-text-left">
-                    <input min="0" required type="number" id="pre_order_date" name="preorder_date"
+                    <select id="delivery_buffer_unit" name="delivery_buffer_unit" class="dokan-form-control">
+                        <option value="days" <?php selected( $delivery_buffer_unit, 'days' ); ?>><?php esc_html_e( 'Days', 'dokan' ); ?></option>
+                        <option value="hours" <?php selected( $delivery_buffer_unit, 'hours' ); ?>><?php esc_html_e( 'Hours', 'dokan' ); ?></option>
+                    </select>
+                    <span class="dokan-page-help">
+                        <?php esc_html_e( 'Select the time unit for the delivery buffer. Choose "Days" for full calendar days or "Hours" for more precise same-day delivery control.', 'dokan' ); ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="dokan-form-group pre_order_date_container">
+                <label class="dokan-w3 dokan-control-label delivery-time-label" for="pre_order_date">
+                    <?php esc_html_e( 'Buffer Duration', 'dokan' ); ?>
+                </label>
+                <div class="dokan-w5 dokan-text-left">
+                    <input min="0" type="number" id="pre_order_date" name="preorder_date"
                         class="dokan-form-control" value="<?php echo esc_attr( $delivery_preorder_date ); ?>"
-                        placeholder="<?php esc_attr_e( 'Delivery blocked buffer count', 'dokan' ); ?>" />
+                        placeholder="<?php esc_attr_e( 'Minimum number of days between order and delivery. Set to 0 for same-day delivery, 1 for next-day delivery, etc.', 'dokan' ); ?>" />
                     <span class="dokan-page-help">
                         <?php esc_html_e( 'How many days the delivery date is blocked from current date? 0 for no block buffer', 'dokan' ); ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="dokan-form-group delivery_buffer_value_container">
+                <label class="dokan-w3 dokan-control-label delivery-time-label" for="delivery_buffer_value">
+                    <?php esc_html_e( 'Buffer Duration', 'dokan' ); ?>
+                </label>
+                <div class="dokan-w5 dokan-text-left">
+                    <input min="0" type="number" id="delivery_buffer_value" name="delivery_buffer_value"
+                        class="dokan-form-control" value="<?php echo esc_attr( $delivery_buffer_value ); ?>"
+                        placeholder="<?php esc_attr_e( 'Delivery blocked buffer (hours)', 'dokan' ); ?>" />
+                    <span class="dokan-page-help">
+                        <?php esc_html_e( 'Minimum number of hours between order and delivery. If the time exceeds today\'s store hours, delivery starts from the next business day.', 'dokan' ); ?>
                     </span>
                 </div>
             </div>
@@ -211,6 +245,21 @@ $all_delivery_time_slots      = isset( $all_delivery_time_slots ) ? $all_deliver
                     class="dokan-btn dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Update Settings', 'dokan' ); ?>" />
             </div>
         </div>
+        <script>
+            // Adding script here because we wount maintain this template, we have react page this setting page.
+            function show_or_hide_buffar_inputs() {
+                let selectedUnit = document.querySelector( '#delivery_buffer_unit' ).value;
 
+                if ( 'days' === selectedUnit ) {
+                    document.querySelector( '.delivery_buffer_value_container' ).style.display = 'none';
+                    document.querySelector( '.pre_order_date_container' ).style.display = 'block';
+                } else {
+                    document.querySelector( '.delivery_buffer_value_container' ).style.display = 'block';
+                    document.querySelector( '.pre_order_date_container' ).style.display = 'none';
+                }
+            }
+            document.querySelector( '#delivery_buffer_unit' ).addEventListener( 'change', show_or_hide_buffar_inputs );
+            window.addEventListener( 'load', show_or_hide_buffar_inputs );
+        </script>
     </form>
 </div>

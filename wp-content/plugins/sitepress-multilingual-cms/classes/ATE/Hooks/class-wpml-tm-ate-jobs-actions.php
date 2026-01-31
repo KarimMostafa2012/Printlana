@@ -19,6 +19,7 @@ use function WPML\FP\partialRight;
 use function WPML\FP\pipe;
 use WPML\TM\API\ATE\LanguageMappings;
 use WPML\Element\API\Languages;
+use WPML\TM\Jobs\JobLog;
 
 /**
  * @author OnTheGo Systems
@@ -614,6 +615,13 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	 * @return void
 	 */
 	private function maybeLogRuntimeError( string $message ) {
+		JobLog::addError(
+			'WPML_TM_ATE_Jobs_Actions error',
+			[
+				'message' => $message,
+			]
+		);
+
 		if ( $this->wp_api->constant( 'WP_DEBUG' ) ) {
 			$this->wp_api->error_log( $message );
 		}

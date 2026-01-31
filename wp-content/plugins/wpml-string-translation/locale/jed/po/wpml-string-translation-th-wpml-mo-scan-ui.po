@@ -2,38 +2,40 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/js/mo-scan/LocalizationPageUI.js:20
 msgid "WPML has detected changed or new MO files"
-msgstr "WPML ตรวจพบการเปลี่ยนแปลงหรือใหม่ เดือน ไฟล์"
+msgstr "WPML ตรวจพบไฟล์ MO ที่เปลี่ยนแปลงหรือใหม่"
 
 #: src/js/mo-scan/LocalizationPageUI.js:26
 msgid ""
 "There are new or updated .mo files. WPML needs to scan them to find strings "
 "for translation."
-msgstr "มีไฟล์ .mo ใหม่หรือที่อัปเดต WPML จำเป็นต้องสแกนเพื่อค้นหาสตริงสำหรับการแปล."
+msgstr "มีไฟล์.mo ใหม่หรือที่อัปเดตแล้ว WPML จำเป็นต้องสแกนไฟล์เหล่านี้เพื่อค้นหาสตริงสำหรับแปล"
 
 #: src/js/mo-scan/LocalizationPageUI.js:30
 #: src/js/mo-scan/texts.js:14
 msgid "Scan translation files"
-msgstr "สแกนไฟล์การแปล"
+msgstr "สแกนไฟล์แปล"
 
 #: src/js/mo-scan/LocalizationPageUI.js:31
 #: src/js/mo-scan/texts.js:15
 msgid "Scanned %1$d of %2$d files..."
-msgstr "สแกนแล้ว %1$d ของ %2$d ไฟล์..."
+msgstr "สแกน %1$d จาก %2$d ไฟล์..."
 
 #: src/js/mo-scan/pre-generate/UI.js:41
 msgid "Generated files for %1$d of %2$d sites..."
-msgstr "ไฟล์ที่สร้างขึ้นสำหรับ %1$d ของ %2$d เว็บไซต์..."
+msgstr "สร้างไฟล์สำหรับ %1$d จาก %2$d ไซต์..."
 
 #: src/js/mo-scan/pre-generate/UI.js:42
 msgid "Generated %1$d of %2$d files..."
-msgstr "สร้างขึ้น %1$d ของ %2$d ไฟล์..."
+msgstr "สร้าง %1$d จาก %2$d ไฟล์..."
 
 #: src/js/mo-scan/pre-generate/UI.js:46
 msgid "WPML needs to generate .mo files"
-msgstr "WPML จำเป็นต้องสร้างไฟล์ .mo"
+msgstr "WPML จำเป็นต้องสร้างไฟล์.mo"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:10
 msgid ""
@@ -41,7 +43,7 @@ msgid ""
 "needs to generate these .mo files in order for translations to appear on "
 "the front-end. However, the folder that should hold these .mo files is not "
 "open for writing."
-msgstr "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า อย่างไรก็ตาม โฟลเดอร์ที่ควรเก็บไฟล์ .mo เหล่านี้ไม่ได้เปิดไว้สำหรับเขียน."
+msgstr "WPML String Translation ใช้ไฟล์.mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์.mo เหล่านี้เพื่อให้การแปลปรากฏบนส่วนหน้า อย่างไรก็ตาม โฟลเดอร์ที่ควรเก็บไฟล์.mo เหล่านี้ไม่สามารถเขียนได้"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:13
 msgid ""
@@ -51,33 +53,33 @@ msgstr "โปรดใช้แผงควบคุมผู้ดูแลร
 
 #: src/js/mo-scan/pre-generate/textProvider.js:23
 msgid "There was a problem creating the .mo files"
-msgstr "เกิดปัญหาในการสร้างไฟล์ .mo"
+msgstr "เกิดปัญหาในการสร้างไฟล์.mo"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:26
 msgid "You can try again now or try again later by going to "
-msgstr "คุณสามารถลองอีกครั้งตอนนี้หรือลองอีกครั้งในภายหลังโดยไปที่ "
+msgstr "คุณสามารถลองอีกครั้งตอนนี้ หรือลองอีกครั้งในภายหลังโดยไปที่ "
 
 #: src/js/mo-scan/pre-generate/textProvider.js:34
 msgid "Translations are missing from the front-end until you generate .mo files"
-msgstr "การแปลหายไปจากส่วนหน้าจนกว่าคุณจะสร้างไฟล์ .mo"
+msgstr "การแปลหายไปจากส่วนหน้าจนกว่าคุณจะสร้างไฟล์.mo"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:37
 msgid ""
 "Your site doesn't have the .mo files that WPML needs in order to display "
 "translated strings on the front-end. To generate these .mo files, remember "
 "to go to "
-msgstr "เว็บไซต์ของคุณไม่มีไฟล์ .mo ที่ WPML ต้องใช้เพื่อแสดงสตริงที่แปลแล้วที่ส่วนหน้า หากต้องการสร้างไฟล์ .mo เหล่านี้ อย่าลืมไปที่ "
+msgstr "ไซต์ของคุณไม่มีไฟล์.mo ที่ WPML ต้องการเพื่อแสดงสตริงที่แปลแล้วบนส่วนหน้า หากต้องการสร้างไฟล์.mo เหล่านี้ โปรดจำไว้ว่าให้ไปที่ "
 
 #: src/js/mo-scan/pre-generate/textProvider.js:38
 msgid "WPML->Theme and plugins localization."
-msgstr "WPML->การแปลธีมและปลั๊กอิน."
+msgstr "WPML->การแปลธีมและปลั๊กอิน"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:43
 msgid ""
 "WPML String Translation uses .mo files instead of database calls. WPML "
 "needs to generate these .mo files in order for translations to appear on "
 "the front-end."
-msgstr "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า."
+msgstr "WPML String Translation ใช้ไฟล์.mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์.mo เหล่านี้เพื่อให้การแปลปรากฏบนส่วนหน้า"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:51
 msgid "Try again"
@@ -85,7 +87,7 @@ msgstr "ลองอีกครั้ง"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:54
 msgid "Generate .mo files"
-msgstr "สร้างไฟล์ .mo"
+msgstr "สร้างไฟล์.mo"
 
 #: src/js/mo-scan/pre-generate/textProvider.js:59
 msgid "Close this message"
@@ -95,11 +97,11 @@ msgstr "ปิดข้อความนี้"
 msgid ""
 "Find additional texts that WordPress, the theme and plugins created and "
 "choose which ones to translate"
-msgstr "ค้นหาข้อความเพิ่มเติมที่ WordPress ธีมและปลั๊กอินสร้างขึ้น และเลือกข้อความที่จะแปล"
+msgstr "ค้นหาข้อความเพิ่มเติมที่ WordPress, ธีม และปลั๊กอินสร้างขึ้น และเลือกข้อความที่จะแปล"
 
 #: src/js/mo-scan/texts.js:11
 msgid "Choose texts for translation"
-msgstr "เลือกข้อความสำหรับการแปล"
+msgstr "เลือกข้อความสำหรับแปล"
 
 #: src/js/mo-scan/texts.js:12
 msgid "Some of the translations have changed"
@@ -107,7 +109,7 @@ msgstr "การแปลบางส่วนมีการเปลี่ย
 
 #: src/js/mo-scan/texts.js:13
 msgid "Scan the selected components to make new texts available for translation."
-msgstr "สแกนส่วนประกอบที่เลือกเพื่อให้ข้อความใหม่พร้อมสำหรับการแปล."
+msgstr "สแกนส่วนประกอบที่เลือกเพื่อให้ข้อความใหม่พร้อมสำหรับการแปล"
 
 #: src/js/mo-scan/texts.js:3
 msgid "Select all"
@@ -119,19 +121,19 @@ msgstr "ปลั๊กอิน:"
 
 #: src/js/mo-scan/texts.js:5
 msgid "Themes:"
-msgstr "ธีมส์:"
+msgstr "ธีม:"
 
 #: src/js/mo-scan/texts.js:6
 msgid "Core:"
-msgstr "แกนหลัก:"
+msgstr "หลัก:"
 
 #: src/js/mo-scan/texts.js:7
 msgid "Can't find the strings you're looking to translate?"
-msgstr "ไม่พบสตริงที่คุณต้องการแปลใช่ไหม?"
+msgstr "ไม่พบสตริงที่คุณต้องการแปลใช่หรือไม่"
 
 #: src/js/mo-scan/texts.js:8
 msgid "Most likely you cannot see the strings you want to translate because:"
-msgstr "เป็นไปได้มากว่าคุณจะไม่เห็นสตริงที่คุณต้องการแปลเนื่องจาก:"
+msgstr "เป็นไปได้มากว่าคุณไม่เห็นสตริงที่คุณต้องการแปลเนื่องจาก:"
 
 #: src/js/mo-scan/texts.js:9
 msgid "Texts are not selected for translation"

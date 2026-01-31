@@ -15,7 +15,6 @@ class Variation implements Translator {
 			return;
 		}
 
-		$wasTranslated       = false;
 		$productId           = $item->get_product_id();
 		$translatedProductId = apply_filters( 'wpml_object_id', $productId, 'product', true, $targetLanguage );
 		if ( $productId && $productId !== $translatedProductId ) {
@@ -57,7 +56,7 @@ class Variation implements Translator {
 				}
 
 				if ( $attributeValue ) {
-					$item->update_meta_data( $data['key'], $attributeValue, isset( $data['id'] ) ? $data['id'] : 0 );
+					$item->update_meta_data( $data['key'], $attributeValue, $data['id'] ?? 0 );
 				}
 			}
 		}

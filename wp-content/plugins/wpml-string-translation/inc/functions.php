@@ -373,13 +373,15 @@ function icl_unregister_string( $context, $name ) {
 
 	if ( $string_id ) {
 		/**
-		 * This action is is fired before several strings are deleted at once.
+		 * This action is fired before several strings are deleted at once.
 		 *
 		 * @param array $string_ids Here containing only the single string that is deleted.
 		 *
 		 * @since 3.0.0
 		 */
 		do_action( 'wpml_st_before_remove_strings', [ $string_id ] );
+
+		wpml_st_flush_string_cache_for_ids( [ $string_id ] );
 
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_strings WHERE id=%d", $string_id ) );
 		$wpdb->query(
@@ -415,14 +417,20 @@ function icl_unregister_string( $context, $name ) {
 function wpml_unregister_string_multi( array $string_ids ) {
 	global $wpdb;
 
+	if ( empty( $string_ids ) ) {
+		return;
+	}
+
 	/**
-	 * This action is is fired before several strings are deleted at once.
+	 * This action is fired before several strings are deleted at once.
 	 *
 	 * @param array $string_ids
 	 *
 	 * @since 3.0.0
 	 */
 	do_action( 'wpml_st_before_remove_strings', $string_ids );
+
+	wpml_st_flush_string_cache_for_ids( $string_ids );
 
 	$str = wpml_prepare_in( $string_ids, '%d' );
 	$wpdb->query(
@@ -445,6 +453,31 @@ function wpml_unregister_string_multi( array $string_ids ) {
 	 * Action that fires after strings are unregistered
 	 */
 	do_action( 'wpml_st_string_unregistered' );
+}
+
+/**
+ * Flushes the string cache for the given string IDs
+ *
+ * @param array $string_ids
+ */
+function wpml_st_flush_string_cache_for_ids( array $string_ids ) {
+	global $wpdb;
+
+	if ( empty( $string_ids ) ) {
+		return;
+	}
+
+	$str      = wpml_prepare_in( $string_ids, '%d' );
+	$contexts = $wpdb->get_col(
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		"SELECT DISTINCT context FROM {$wpdb->prefix}icl_strings WHERE id IN ( {$str} ) AND context != ''"
+	);
+
+	foreach ( $contexts as $context ) {
+		$group = 'WPML_Register_String_Filter--' . $context;
+		$cache = new WPML_WP_Cache( $group );
+		$cache->flush_group_cache();
+	}
 }
 
 /**

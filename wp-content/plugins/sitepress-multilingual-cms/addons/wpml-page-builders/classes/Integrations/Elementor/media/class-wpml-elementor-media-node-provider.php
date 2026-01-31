@@ -1,5 +1,6 @@
 <?php
 
+use WPML\PB\Elementor\Media\Modules\EImage;
 use WPML\PB\Elementor\Media\Modules\Gallery;
 
 class WPML_Elementor_Media_Node_Provider {
@@ -22,6 +23,10 @@ class WPML_Elementor_Media_Node_Provider {
 	public function get( $type ) {
 		if ( ! array_key_exists( $type, $this->nodes ) ) {
 			switch ( $type ) {
+				case 'e-image':
+					$node = new EImage( $this->media_translate );
+					break;
+
 				case 'image':
 					$node = new WPML_Elementor_Media_Node_Image( $this->media_translate );
 					break;

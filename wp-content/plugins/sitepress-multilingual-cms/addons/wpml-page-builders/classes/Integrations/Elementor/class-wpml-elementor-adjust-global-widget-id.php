@@ -130,17 +130,20 @@ class WPML_Elementor_Adjust_Global_Widget_ID implements IWPML_Action {
 	 * @return string
 	 */
 	public function duplicate_css_class_with_original_id( $content ) {
-		$classPrefixes = wpml_collect( [
-			'elementor-',
-			'elementor-global-',
-		] )->implode( '|' );
+		$classPrefixes = implode( '|', [ 'elementor-', 'elementor-global-' ] );
+		$pattern       = '/(class="[^"]*?((?:' . $classPrefixes . ')))(\d+)/';
+		$result        = preg_replace_callback( $pattern, [ $this, 'convert_id_to_original' ], $content );
 
-		return preg_replace_callback( '/(class=".*(' . $classPrefixes . '))(\d+)/', array( $this, 'convert_id_to_original' ), $content );
+		if ( null === $result ) {
+			return $content;
+		}
+
+		return $result;
 	}
 
 	private function convert_id_to_original( array $matches ) {
 		$class_prefix = $matches[2];
-		$id           = (int)$matches[3];
+		$id           = (int) $matches[3];
 		$element      = $this->translation_element_factory->create_post( $id );
 		$source       = $element->get_source_element();
 

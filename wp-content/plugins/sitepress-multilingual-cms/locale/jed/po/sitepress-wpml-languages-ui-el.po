@@ -2,10 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:22
 msgid "hide the translations instead."
-msgstr "αποκρύψτε τις μεταφράσεις αντ' αυτού."
+msgstr "αντί να αποκρύψετε τις μεταφράσεις."
 
 #: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:84
 msgid "Error happened! Please try again."
@@ -17,15 +19,15 @@ msgstr "Ακύρωση"
 
 #: src/js/languages/components/ConfirmEditLanguageSave.js:34
 msgid "Choose Content to Automatically Translate into"
-msgstr "Επιλέξτε Περιεχόμενο για Αυτόματη Μετάφραση σε"
+msgstr "Επιλέξτε περιεχόμενο για αυτόματη μετάφραση σε"
 
 #: src/js/languages/components/ConfirmEditLanguageSave.js:37
 msgid "Save Changes and Enable Automatic Translation"
-msgstr "Αποθήκευση Αλλαγών και Ενεργοποίηση Αυτόματης Μετάφρασης"
+msgstr "Αποθήκευση αλλαγών και ενεργοποίηση αυτόματης μετάφρασης"
 
 #: src/js/languages/components/ConfirmEditLanguageSave.js:38
 msgid "Cancel Language Changes"
-msgstr "Ακύρωση Αλλαγών Γλώσσας"
+msgstr "Ακύρωση αλλαγών γλώσσας"
 
 #: src/js/languages/components/ConfirmEditLanguageSave.js:42
 #: src/js/languages/components/ConfirmNewLanguage.js:114
@@ -42,11 +44,11 @@ msgstr "Προσθήκη νέας γλώσσας"
 
 #: src/js/languages/components/ConfirmNewLanguage.js:105
 msgid "Never mind - don't add new languages"
-msgstr "Άκυρο - μην προσθέσετε νέες γλώσσες"
+msgstr "Δεν πειράζει - μην προσθέσετε νέες γλώσσες"
 
 #: src/js/languages/components/ConfirmNewLanguage.js:106
 msgid "Never mind - don't add new language"
-msgstr "Άκυρο - μην προσθέσετε νέα γλώσσα"
+msgstr "Δεν πειράζει - μην προσθέσετε νέα γλώσσα"
 
 #: src/js/languages/components/ConfirmNewLanguage.js:98
 msgid "Choose which content to translate into the new language"
@@ -60,17 +62,17 @@ msgstr "Αυτόματη μετάφραση όλων των αναρτήσεων
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:24
 msgid "Only automatically translate new content."
-msgstr "Αυτόματη μετάφραση μόνο του νέου περιεχομένου."
+msgstr "Αυτόματη μετάφραση μόνο νέου περιεχομένου."
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:26
 msgid "Which content do you want to translate into the new language?"
-msgstr "Ποιο περιεχόμενο θέλετε να μεταφράσετε στη νέα γλώσσα;?"
+msgstr "Ποιο περιεχόμενο θέλετε να μεταφράσετε στη νέα γλώσσα;"
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:29
 msgid ""
 "When you unpause automatic translation, this content will be <a>translated "
 "automatically</a>."
-msgstr "Όταν ξεπαγώσετε την αυτόματη μετάφραση, αυτό το περιεχόμενο θα <a>μεταφραστεί αυτόματα</a>."
+msgstr "Όταν επανεκκινήσετε την αυτόματη μετάφραση, αυτό το περιεχόμενο θα <a>μεταφραστεί αυτόματα</a>."
 
 #: src/js/languages/components/ConfirmNewLanguageDialog.js:62
 msgid ""

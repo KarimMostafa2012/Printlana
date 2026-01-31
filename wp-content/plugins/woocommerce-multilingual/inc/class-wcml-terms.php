@@ -4,6 +4,8 @@ use function WCML\functions\getSetting;
 use WCML\Utilities\WCTaxonomies;
 
 class WCML_Terms {
+	/** @see \WC_Cache_Helper::init */
+	const PRIORITY_AFTER_WC_CACHE_HELPER = 20;
 
 	const PRODUCT_SHIPPING_CLASS           = 'product_shipping_class';
 	private $ALL_TAXONOMY_TERMS_TRANSLATED = 0;
@@ -67,6 +69,9 @@ class WCML_Terms {
 		add_action( 'created_term_translation', [ $this, 'set_flag_to_sync' ], 10, 3 );
 
 		add_filter( 'woocommerce_get_product_subcategories_cache_key', [ $this, 'add_lang_parameter_to_cache_key' ] );
+
+		add_action( 'clean_term_cache', [ $this, 'flush_term_cache_added_by_wc_and_wcml' ], self::PRIORITY_AFTER_WC_CACHE_HELPER, 2 );
+		add_action( 'edit_terms', [ $this, 'flush_term_cache_added_by_wc_and_wcml' ], self::PRIORITY_AFTER_WC_CACHE_HELPER, 2 );
 	}
 
 	public function admin_menu_setup() {
@@ -75,7 +80,7 @@ class WCML_Terms {
 			add_action( 'admin_notices', [ $this, 'show_term_translation_screen_notices' ] );
 		}
 
-		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
+		$page = $_GET['page'] ?? '';
 		if ( $page === WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php' ) {
 			WCML_Resources::load_management_css();
 			WCML_Resources::load_taxonomy_translation_scripts();
@@ -88,7 +93,7 @@ class WCML_Terms {
 		$taxonomies = array_keys( get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' ) );
 		$taxonomies = $taxonomies + array_keys( get_taxonomies( [ 'object_type' => [ 'product_variations' ] ], 'objects' ) );
 		$taxonomies = array_unique( $taxonomies );
-		$taxonomy   = isset( $_GET['taxonomy'] ) ? $_GET['taxonomy'] : false;
+		$taxonomy   = $_GET['taxonomy'] ?? false;
 		if ( $taxonomy && in_array( $taxonomy, $taxonomies ) ) {
 			$taxonomy_obj = get_taxonomy( $taxonomy );
 			$message      = sprintf(
@@ -237,7 +242,7 @@ class WCML_Terms {
 
 	public function is_original_category( $tt_id, $taxonomy ) {
 		$is_original = $this->wpdb->get_var( $this->wpdb->prepare( "SELECT source_language_code IS NULL FROM {$this->wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s", $tt_id, $taxonomy ) );
-		return $is_original ? true : false;
+		return (bool) $is_original;
 	}
 
 	public function update_terms_translated_status( $taxonomy ) {
@@ -499,7 +504,7 @@ class WCML_Terms {
 
 			foreach ( $object_types as $object_type ) {
 
-				$html .= $this->render_assignment_status( $object_type, $_POST['taxonomy'], $preview = true );
+				$html .= $this->render_assignment_status( $object_type, $_POST['taxonomy'] );
 
 			}
 		} else {
@@ -528,10 +533,10 @@ class WCML_Terms {
 
 		global $wp_taxonomies;
 
-		$html = $message = $errors = '';
+		$html = $errors = '';
 
 		if ( isset( $wp_taxonomies[ $_POST['taxonomy'] ] ) ) {
-			$html .= $this->render_assignment_status( $_POST['post'], $_POST['taxonomy'], $preview = false );
+			$html .= $this->render_assignment_status( $_POST['post'], $_POST['taxonomy'], false );
 
 		} else {
 			$errors .= sprintf(
@@ -550,6 +555,13 @@ class WCML_Terms {
 		exit;
 	}
 
+	/**
+	 * @param string|mixed $object_type
+	 * @param string|mixed $taxonomy
+	 * @param bool         $preview
+	 *
+	 * @return string
+	 */
 	public function render_assignment_status( $object_type, $taxonomy, $preview = true ) {
 		global $wp_post_types, $wp_taxonomies;
 
@@ -593,7 +605,7 @@ class WCML_Terms {
 								if ( $cterm->term_id != $term->term_id ) {
 									$updated_terms[] = $is_taxonomy_translatable ? $term->term_id : $term->name;
 								}
-								if ( ! $preview ) {
+								{
 
 									if ( $is_taxonomy_translatable && ! is_taxonomy_hierarchical( $taxonomy ) ) {
 										$updated_terms = array_unique( array_map( 'intval', $updated_terms ) );
@@ -632,11 +644,10 @@ class WCML_Terms {
 								)
 							);
 
-							if ( $translated_term ) {
+							if ( is_object( $translated_term ) ) {
 								$terms_array[] = $translated_term->term_id;
 							}
-
-							if ( ! $preview ) {
+							{
 
 								if ( $is_taxonomy_translatable && ! is_taxonomy_hierarchical( $taxonomy ) ) {
 									$terms_array = array_unique( array_map( 'intval', $terms_array ) );
@@ -994,7 +1005,8 @@ class WCML_Terms {
 	* Use custom query, because get_term_by function return false for terms with "0" slug      *
 	*/
 	public function wcml_get_term_id_by_slug( $taxonomy, $slug ) {
-
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return $this->wpdb->get_var(
 			$this->wpdb->prepare(
 				"SELECT tt.term_id FROM {$this->wpdb->terms} AS t
@@ -1005,10 +1017,12 @@ class WCML_Terms {
 				sanitize_title( $slug )
 			)
 		);
+		// phpcs:enable
 	}
 
 	public function wcml_get_term_by_id( $term_id, $taxonomy ) {
-
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return $this->wpdb->get_row(
 			$this->wpdb->prepare(
 				"
@@ -1020,6 +1034,53 @@ class WCML_Terms {
 				$taxonomy
 			)
 		);
+		// phpcs:enable
+	}
+
+	/**
+	 * @param int    $term_taxonomy_id
+	 * @param string $taxonomy
+	 *
+	 * @return object|null
+	 */
+	public function wcml_get_term_by_taxonomy_id( $term_taxonomy_id, $taxonomy ) {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return $this->wpdb->get_row(
+			$this->wpdb->prepare(
+				"
+                        SELECT * FROM {$this->wpdb->terms} t
+                        JOIN {$this->wpdb->term_taxonomy} x
+                        ON x.term_id = t.term_id
+                        WHERE x.term_taxonomy_id = %d AND x.taxonomy = %s",
+				$term_taxonomy_id,
+				$taxonomy
+			)
+		);
+		// phpcs:enable
+	}
+
+	/**
+	 * @param string $slug
+	 * @param string $taxonomy
+	 *
+	 * @return object|null
+	 */
+	public function wcml_get_term_by_slug( $slug, $taxonomy ) {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return $this->wpdb->get_row(
+			$this->wpdb->prepare(
+				"
+                        SELECT * FROM {$this->wpdb->terms} t
+                        JOIN {$this->wpdb->term_taxonomy} x
+                        ON x.term_id = t.term_id
+                        WHERE t.slug = %s AND x.taxonomy = %s LIMIT 1",
+				$slug,
+				$taxonomy
+			)
+		);
+		// phpcs:enable
 	}
 
 	public function wcml_get_translated_term( $term_id, $taxonomy, $language ) {
@@ -1033,6 +1094,11 @@ class WCML_Terms {
 		return $this->wcml_get_term_by_id( $term_id, $taxonomy );
 	}
 
+	/**
+	 * @param string $taxonomy
+	 *
+	 * @return bool
+	 */
 	public function is_translatable_wc_taxonomy( $taxonomy ) {
 		if ( in_array( $taxonomy, [ 'product_type', 'product_visibility' ], true ) ) {
 			return false;
@@ -1049,6 +1115,8 @@ class WCML_Terms {
 		$wcml_settings = $this->woocommerce_wpml->get_settings();
 		$ttid          = isset( $wcml_settings['default_categories'][ $lang ] ) ? (int) $wcml_settings['default_categories'][ $lang ] : 0;
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return $ttid === 0
 			? false : $this->wpdb->get_var(
 				$this->wpdb->prepare(
@@ -1059,6 +1127,7 @@ class WCML_Terms {
 					$ttid
 				)
 			);
+		// phpcs:enable
 	}
 
 	public function update_option_default_product_cat( $oldvalue, $new_value ) {
@@ -1083,5 +1152,38 @@ class WCML_Terms {
 	 */
 	public function add_lang_parameter_to_cache_key( $key ) {
 		return $key . '-' . $this->sitepress->get_current_language();
+	}
+
+	/**
+	 * Flush the term cache added by WooCommerce and WCML.
+	 *
+	 * @see WC_Cache_Helper::clean_term_cache(), WCML_Terms::add_lang_parameter_to_cache_key()
+	 * @param array|int $ids
+	 * @param string    $taxonomy
+	 * @return void
+	 */
+	public function flush_term_cache_added_by_wc_and_wcml( $ids, $taxonomy ) {
+		if ( 'product_cat' === $taxonomy ) {
+			$ids = is_array( $ids ) ? $ids : [ $ids ];
+
+			$clear_ids = [ 0 ];
+
+			foreach ( $ids as $id ) {
+				$clear_ids[] = $id;
+				$clear_ids   = array_merge( $clear_ids, get_ancestors( $id, 'product_cat', 'taxonomy' ) );
+			}
+
+			$clear_ids = array_unique( $clear_ids );
+
+			$lang = apply_filters( 'wpml_current_language', null );
+
+			foreach ( $clear_ids as $id ) {
+				wp_cache_delete( "product-category-hierarchy-{$id}-{$lang}", 'product_cat' );
+			}
+		}
+	}
+
+	public static function wpml_is_product_shipping_class_set_as_translated() {
+		return apply_filters( 'wpml_is_translated_taxonomy', false, self::PRODUCT_SHIPPING_CLASS );
 	}
 }

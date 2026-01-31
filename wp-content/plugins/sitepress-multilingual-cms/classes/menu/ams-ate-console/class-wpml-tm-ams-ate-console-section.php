@@ -28,7 +28,16 @@ class WPML_TM_AMS_ATE_Console_Section extends WPML_TM_AMS_Translation_Abstract_C
 	 * @return string
 	 */
 	public function get_caption() {
-		return __( 'Translation Tools', 'sitepress' );
+		return __( 'Payments & Maintenance', 'sitepress' );
+	}
+
+	/**
+	 * Returns the description to display below the tab.
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return '<p class="wpml-tab-description">' . __( 'Balance, invoices and tools', 'sitepress' ) . '</p>';
 	}
 
 	/**
