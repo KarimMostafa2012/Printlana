@@ -240,8 +240,9 @@ function homeland_render_dc_meta_box($post) {
         .homeland-dc-field { margin-bottom: 20px; }
         .homeland-dc-field label { display: block; font-weight: bold; margin-bottom: 5px; }
         .homeland-dc-warning { padding: 10px; border-radius: 4px; margin-top: 5px; display: none; }
-        .homeland-dc-warning.yellow { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
-        .homeland-dc-warning.red { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .homeland-dc-warning.yellow { background: #fff3cd !important; border: 1px solid #ffeeba; color: #856404; }
+        .homeland-dc-warning.red { background: #f8d7da !important; border: 1px solid #f5c6cb; color: #721c24; }
+        .homeland-dc-warning.green { background: #d4edda !important; border: 1px solid #c3e6cb; color: #155724; }
     </style>
     <div class="homeland-dc-settings">
         <div class="homeland-dc-field">
@@ -273,14 +274,14 @@ function homeland_render_dc_meta_box($post) {
                 var $box = $('#dc_warning_box');
                 if (!val) { $box.hide(); return; }
                 var lastDigit = parseInt(val.toString().split('').pop());
-                $box.removeClass('yellow red').hide();
+                $box.removeClass('yellow red green').hide();
                 
                 if ([1, 2, 9].includes(lastDigit)) {
                     $box.text('Yellow Warning: This unit digit is acceptable but not recommended.').addClass('yellow').show();
                 } else if (lastDigit === 4) {
                     $box.text('Red Warning: This unit digit is extremely not recommended!').addClass('red').show();
                 } else {
-                    $box.text('Recommended: This digit is good to go.').css({'background':'#d4edda', 'border':'1px solid #c3e6cb', 'color':'#155724'}).show();
+                    $box.text('Recommended: This digit is good to go.').addClass('green').show();
                 }
             }
             $('#dc_percentage_input').on('input', checkPercentage);
