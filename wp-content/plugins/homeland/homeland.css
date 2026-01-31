@@ -8,7 +8,7 @@
     width: 100%;
     max-width: 1280px;
     margin: 40px auto;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     background: transparent;
     padding: 20px;
     box-sizing: border-box;
@@ -163,7 +163,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     margin-bottom: 40px;
     text-align: center;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
 }
 
 /* Primary viewport for the 1-2-3-2-1 overlapping layout */
@@ -272,7 +272,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
     font-size: 32px;
     font-weight: 600;
     white-space: nowrap;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
 }
 
 /* Circle Action Button (Link Arrow) */
@@ -402,12 +402,8 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 }
 
 /* --- Discount Card Styles --- */
-@font-face {
-    font-family: 'CustomNumbers';
-    src: url('./assets/SocialGothic-Demibold.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+.discount-card .percentage-display text {
+    font-family: 'CustomNumbers', Cairo, Arial, sans-serif !important;
 }
 
 .discount-card {

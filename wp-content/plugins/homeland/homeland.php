@@ -369,8 +369,20 @@ add_action('admin_init', 'homeland_handle_dc_toggle');
 function homeland_enqueue_assets() {
     wp_enqueue_style('homeland-fonts', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Inter:wght@700&display=swap', array(), null);
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.1');
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.2');
     wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '2.3.0', true);
+
+    $font_url = plugin_dir_url(__FILE__) . 'assets/SocialGothic-Demibold.woff';
+    $custom_font_css = "
+        @font-face {
+            font-family: 'CustomNumbers';
+            src: url('$font_url') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+    ";
+    wp_add_inline_style('homeland-carousel-style', $custom_font_css);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
 
@@ -383,8 +395,21 @@ function homeland_admin_assets($hook) {
 
     wp_enqueue_media();
     wp_enqueue_style('homeland-fonts', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Inter:wght@700&display=swap', array(), null);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.1');
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.2');
     wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.3.0');
+    
+    $font_url = plugin_dir_url(__FILE__) . 'assets/SocialGothic-Demibold.woff';
+    $custom_font_css = "
+        @font-face {
+            font-family: 'CustomNumbers';
+            src: url('$font_url') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+    ";
+    wp_add_inline_style('homeland-carousel-style', $custom_font_css);
+
     wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.3.0', true);
     wp_localize_script('homeland-admin-script', 'homeland_admin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
