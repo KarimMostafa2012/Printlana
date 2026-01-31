@@ -367,9 +367,9 @@ add_action('admin_init', 'homeland_handle_dc_toggle');
 
 // 4. Assets
 function homeland_enqueue_assets() {
-    wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
+    wp_enqueue_style('homeland-fonts', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Inter:wght@700&display=swap', array(), null);
     wp_enqueue_script('gsap-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), null, true);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.0');
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.1');
     wp_register_script('homeland-carousel-script', plugin_dir_url(__FILE__) . 'homeland.js', array('gsap-cdn'), '2.3.0', true);
 }
 add_action('wp_enqueue_scripts', 'homeland_enqueue_assets');
@@ -382,8 +382,8 @@ function homeland_admin_assets($hook) {
     if (!$is_homeland_page && !$is_carousel_post_type) return;
 
     wp_enqueue_media();
-    wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
-    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.0');
+    wp_enqueue_style('homeland-fonts', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Inter:wght@700&display=swap', array(), null);
+    wp_enqueue_style('homeland-carousel-style', plugin_dir_url(__FILE__) . 'homeland.css', array(), '2.3.1');
     wp_enqueue_style('homeland-admin-style', plugin_dir_url(__FILE__) . 'admin.css', array(), '2.3.0');
     wp_enqueue_script('homeland-admin-script', plugin_dir_url(__FILE__) . 'admin.js', array('jquery'), '2.3.0', true);
     wp_localize_script('homeland-admin-script', 'homeland_admin', array(
@@ -515,30 +515,40 @@ function homeland_render_discount_card($args) {
                     
                     <div class="percentage-group">
                         <?php 
-                        $count = count($digits);
-                        foreach ($digits as $i => $digit) : 
-                            $is_last = ($i === $count - 1);
-                            if ($is_last) : 
+                        $numStr = str_pad($percentage, 2, '0', STR_PAD_LEFT);
+                        $is_single = intval($percentage) < 10;
+                        $numberX = $is_single ? 110 : 100;
+                        
+                        $PERCENT_PATHS = array(
+                            'M61.5208 4.23339L14.3891 86.9256H4.79338L54.1829 0L61.5208 4.23339Z',
+                            'M9.31346 35.2781C4.2334 35.2781 0 39.5114 0 44.5915V51.9294C0 57.0094 4.2334 61.2428 9.31346 61.2428C14.3935 61.2428 18.6269 57.0094 18.6269 51.9294V44.5915C18.6269 39.5114 14.3935 35.2781 9.31346 35.2781ZM13.2646 51.9294C13.2646 54.1872 11.5713 55.5983 9.59571 55.5983C7.62012 55.5983 5.92676 53.905 5.92676 51.9294V44.5915C5.92676 42.6159 7.62012 40.9226 9.59571 40.9226C11.5713 40.9226 13.2646 42.6159 13.2646 44.5915V51.9294Z',
+                            'M38.9473 60.6787C33.8672 60.6787 29.6338 64.9121 29.6338 69.9921V77.33C29.6338 82.4101 33.8672 86.6434 38.9473 86.6434C44.0273 86.6434 48.2607 82.4101 48.2607 77.33V69.9921C48.2607 64.9121 44.0273 60.6787 38.9473 60.6787ZM42.6162 77.6123C42.6162 79.5878 40.9228 81.2812 38.9473 81.2812C36.9717 81.2812 35.2783 79.5878 35.2783 77.6123V70.2744C35.2783 68.2988 36.9717 66.6054 38.9473 66.6054C40.9228 66.6054 42.6162 68.2988 42.6162 70.2744V77.6123Z'
+                        );
+                        ?>
+                        <svg class="percentage-display" viewBox="0 0 200 160" width="200" height="160" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                            <text x="<?php echo $numberX; ?>" y="125"
+                                  font-family="CustomNumbers, Cairo, Arial, sans-serif"
+                                  font-weight="900"
+                                  font-size="140"
+                                  fill="black"
+                                  text-anchor="middle"
+                                  letter-spacing="-2" 
+                                  transform="scale(1, 1.2)"
+                                  transform-origin="<?php echo $numberX; ?> 100">
+                                <?php echo $numStr; ?>
+                            </text>
+                            <g transform="translate(135, 45)">
+                                <?php foreach ($PERCENT_PATHS as $idx => $d) : 
+                                    $sw = ($idx === 0) ? "18" : "14";
+                                    $lj = ($idx === 0) ? "miter" : "round";
                                 ?>
-                                <div class="digit-container last-digit" style="position: relative; display: inline-block;">
-                                    <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                                        <defs>
-                                            <mask id="percentMask-<?php echo $post_id; ?>">
-                                                <rect width="100" height="150" fill="white" />
-                                                <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="black" transform="scale(1, 1.2)" transform-origin="75 115">%</text>
-                                            </mask>
-                                        </defs>
-                                        <text x="10" y="120" font-family="CustomNumbers" font-size="120" font-weight="900" fill="black" mask="url(#percentMask-<?php echo $post_id; ?>)" transform="scale(1, 1.2)" transform-origin="10 120"><?php echo esc_html($digit); ?></text>
-                                        <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="none" stroke="black" stroke-width="2" transform="scale(1, 1.2)" transform-origin="75 115" style="opacity: 0.15;">%</text>
-                                    </svg>
-                                </div>
-                                <?php
-                            else :
-                                ?>
-                                <span class="digit" style="font-family: 'CustomNumbers'; font-size: 120px; font-weight: 900; transform: scale(1, 1.2); display: inline-block; transform-origin: center bottom; margin: 0 -2px;"><?php echo esc_html($digit); ?></span>
-                                <?php
-                            endif;
-                        endforeach; ?>
+                                    <path d="<?php echo $d; ?>" stroke="<?php echo esc_attr($color); ?>" stroke-width="<?php echo $sw; ?>" fill="none" stroke-linejoin="<?php echo $lj; ?>" />
+                                <?php endforeach; ?>
+                                <?php foreach ($PERCENT_PATHS as $d) : ?>
+                                    <path d="<?php echo $d; ?>" fill="black" />
+                                <?php endforeach; ?>
+                            </g>
+                        </svg>
                     </div>
                     
                     <div class="off-text"><?php echo esc_html($subscript); ?></div>
