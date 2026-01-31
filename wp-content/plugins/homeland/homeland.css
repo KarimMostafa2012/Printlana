@@ -400,6 +400,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
         height: 35px;
     }
 }
+
 /* --- Discount Card Styles --- */
 @font-face {
     font-family: 'CustomNumbers';
@@ -414,7 +415,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
     height: 380px;
     border-radius: 16px;
     position: relative;
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     background-color: var(--card-bg-color, #F9B110);
     overflow: visible;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -442,7 +443,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 }
 
 .discount-card .header {
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     font-weight: 700;
     font-size: 28px;
     line-height: 1.2;
@@ -454,7 +455,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 .discount-card .up-to {
     width: 100%;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
@@ -479,7 +480,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
     position: absolute;
     right: 25px;
     bottom: -15px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
@@ -518,7 +519,7 @@ html[lang="ar"] .h-wrapper p.h-small-promo,
 }
 
 .discount-card .redeem-button {
-    font-family: 'Beiruti', sans-serif;
+    font-family: 'Beiruti', sans-serif !important;
     font-weight: 700;
     font-size: 18px;
     line-height: 24px;
