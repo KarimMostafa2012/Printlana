@@ -40,6 +40,29 @@ function homeland_register_carousel_slide_cpt()
         'capability_type' => 'post',
     );
     register_post_type('hp_carousel_slide', $args);
+
+    // Register Discount Card CPT
+    $dc_labels = array(
+        'name' => _x('Discount Cards', 'Post Type General Name', 'homeland'),
+        'singular_name' => _x('Discount Card', 'Post Type Singular Name', 'homeland'),
+        'menu_name' => __('Discount Cards', 'homeland'),
+        'all_items' => __('All Discount Cards', 'homeland'),
+        'add_new_item' => __('Add New Card', 'homeland'),
+        'add_new' => __('Add New', 'homeland'),
+        'edit_item' => __('Edit Card', 'homeland'),
+    );
+    $dc_args = array(
+        'labels' => $dc_labels,
+        'supports' => array('title'),
+        'hierarchical' => false,
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => false,
+        'show_in_rest' => true,
+        'has_archive' => false,
+        'capability_type' => 'post',
+    );
+    register_post_type('discount_card', $dc_args);
 }
 add_action('init', 'homeland_register_carousel_slide_cpt');
 
@@ -71,6 +94,14 @@ function homeland_admin_menu()
         'manage_options',
         'homeland_highlights',
         'homeland_render_highlights_page'
+    );
+
+    add_submenu_page(
+        'edit.php?post_type=hp_carousel_slide',
+        'Discount Cards',
+        'Discount Cards',
+        'manage_options',
+        'edit.php?post_type=discount_card'
     );
 }
 add_action('admin_menu', 'homeland_admin_menu');
@@ -191,6 +222,87 @@ function homeland_save_link_meta_box_data($post_id)
 }
 add_action('save_post', 'homeland_save_link_meta_box_data');
 
+// 3.1 Meta Boxes for Discount Cards
+function homeland_add_discount_card_meta_boxes() {
+    add_meta_box('homeland_dc_settings', 'Card Settings', 'homeland_render_dc_meta_box', 'discount_card', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'homeland_add_discount_card_meta_boxes');
+
+function homeland_render_dc_meta_box($post) {
+    wp_nonce_field('homeland_save_dc_meta', 'homeland_dc_meta_nonce');
+    $title = get_post_meta($post->ID, '_dc_title', true);
+    $percentage = get_post_meta($post->ID, '_dc_percentage', true);
+    $color = get_post_meta($post->ID, '_dc_color', true) ?: '#F9B110';
+    $superscript = get_post_meta($post->ID, '_dc_superscript', true) ?: 'UP TO';
+    $subscript = get_post_meta($post->ID, '_dc_subscript', true) ?: 'OFF';
+    ?>
+    <style>
+        .homeland-dc-field { margin-bottom: 20px; }
+        .homeland-dc-field label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .homeland-dc-warning { padding: 10px; border-radius: 4px; margin-top: 5px; display: none; }
+        .homeland-dc-warning.yellow { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
+        .homeland-dc-warning.red { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+    </style>
+    <div class="homeland-dc-settings">
+        <div class="homeland-dc-field">
+            <label>Title (Beiruti font):</label>
+            <input type="text" name="dc_title" value="<?php echo esc_attr($title); ?>" style="width:100%;" placeholder="e.g. خصومات هوم لاند">
+        </div>
+        <div class="homeland-dc-field">
+            <label>Percentage:</label>
+            <input type="number" name="dc_percentage" id="dc_percentage_input" value="<?php echo esc_attr($percentage); ?>" style="width:100px;">
+            <div id="dc_warning_box" class="homeland-dc-warning"></div>
+        </div>
+        <div class="homeland-dc-field">
+            <label>Background Color:</label>
+            <input type="color" name="dc_color" value="<?php echo esc_attr($color); ?>">
+        </div>
+        <div class="homeland-dc-field">
+            <label>Superscript Text:</label>
+            <input type="text" name="dc_superscript" value="<?php echo esc_attr($superscript); ?>" style="width:100%;">
+        </div>
+        <div class="homeland-dc-field">
+            <label>Subscript Text:</label>
+            <input type="text" name="dc_subscript" value="<?php echo esc_attr($subscript); ?>" style="width:100%;">
+        </div>
+    </div>
+    <script>
+        jQuery(document).ready(function($) {
+            function checkPercentage() {
+                var val = $('#dc_percentage_input').val();
+                var $box = $('#dc_warning_box');
+                if (!val) { $box.hide(); return; }
+                var lastDigit = parseInt(val.toString().split('').pop());
+                $box.removeClass('yellow red').hide();
+                
+                if ([1, 2, 9].includes(lastDigit)) {
+                    $box.text('Yellow Warning: This unit digit is acceptable but not recommended.').addClass('yellow').show();
+                } else if (lastDigit === 4) {
+                    $box.text('Red Warning: This unit digit is extremely not recommended!').addClass('red').show();
+                } else {
+                    $box.text('Recommended: This digit is good to go.').css({'background':'#d4edda', 'border':'1px solid #c3e6cb', 'color':'#155724'}).show();
+                }
+            }
+            $('#dc_percentage_input').on('input', checkPercentage);
+            checkPercentage();
+        });
+    </script>
+    <?php
+}
+
+function homeland_save_dc_meta($post_id) {
+    if (!isset($_POST['homeland_dc_meta_nonce']) || !wp_verify_nonce($_POST['homeland_dc_meta_nonce'], 'homeland_save_dc_meta')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    
+    $fields = ['dc_title', 'dc_percentage', 'dc_color', 'dc_superscript', 'dc_subscript'];
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
+        }
+    }
+}
+add_action('save_post', 'homeland_save_dc_meta');
+
 // 4. Assets
 function homeland_enqueue_assets() {
     wp_enqueue_style('homeland-beiruti-font', 'https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap', array(), null);
@@ -291,6 +403,77 @@ function homeland_carousel_shortcode() {
     <?php return ob_get_clean();
 }
 add_shortcode('homeland_carousel', 'homeland_carousel_shortcode');
+
+// 7.1 Discount Card Shortcode & Rendering
+function homeland_render_discount_card($args) {
+    $attr = shortcode_atts(array('id' => 0), $args);
+    $post_id = $attr['id'];
+    if (!$post_id) return '';
+
+    $title = get_post_meta($post_id, '_dc_title', true);
+    $percentage = get_post_meta($post_id, '_dc_percentage', true);
+    $color = get_post_meta($post_id, '_dc_color', true) ?: '#F9B110';
+    $superscript = get_post_meta($post_id, '_dc_superscript', true) ?: 'UP TO';
+    $subscript = get_post_meta($post_id, '_dc_subscript', true) ?: 'OFF';
+
+    // Parse percentage digits for special rendering
+    $p_str = (string)$percentage;
+    $digits = str_split($p_str);
+    
+    // SVG Knockout Effect for % (mimicking local JS logic in PHP)
+    // We'll generate the HTML/SVG directly here
+    ob_start();
+    ?>
+    <div class="discount-card" style="--card-bg-color: <?php echo esc_attr($color); ?>;">
+        <div class="top-section">
+            <div class="content">
+                <div class="header"><?php echo esc_html($title); ?></div>
+                <div class="up-to"><?php echo esc_html($superscript); ?></div>
+                
+                <div class="percentage-group">
+                    <?php 
+                    $count = count($digits);
+                    foreach ($digits as $i => $digit) : 
+                        $is_last = ($i === $count - 1);
+                        if ($is_last) : 
+                            // Final digit with % knockout
+                            ?>
+                            <div class="digit-container last-digit" style="position: relative; display: inline-block;">
+                                <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <mask id="percentMask-<?php echo $post_id; ?>">
+                                            <rect width="100" height="150" fill="white" />
+                                            <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="black" transform="scale(1, 1.2)" transform-origin="75 115">%</text>
+                                        </mask>
+                                    </defs>
+                                    <text x="10" y="120" font-family="CustomNumbers" font-size="120" font-weight="900" fill="black" mask="url(#percentMask-<?php echo $post_id; ?>)" transform="scale(1, 1.2)" transform-origin="10 120"><?php echo esc_html($digit); ?></text>
+                                    <text x="75" y="115" font-family="CustomNumbers" font-size="50" font-weight="900" fill="none" stroke="black" stroke-width="2" transform="scale(1, 1.2)" transform-origin="75 115" style="opacity: 0.15;">%</text>
+                                </svg>
+                            </div>
+                            <?php
+                        else :
+                            // Normal digit
+                            ?>
+                            <span class="digit" style="font-family: 'CustomNumbers'; font-size: 120px; font-weight: 900; transform: scale(1, 1.2); display: inline-block; transform-origin: center bottom; margin: 0 -2px;"><?php echo esc_html($digit); ?></span>
+                            <?php
+                        endif;
+                    endforeach; ?>
+                </div>
+                
+                <div class="off-text"><?php echo esc_html($subscript); ?></div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <div class="bottom-section">
+            <button class="redeem-button">احصل على العرض</button>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('discount_card', 'homeland_render_discount_card');
 
 // 8. Carousel Admin UI
 function homeland_carousel_admin_buttons() {
